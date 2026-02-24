@@ -83,7 +83,7 @@ export GMAIL_FROM="sender@gmail.com"
 export GMAIL_TO="recipient@example.com"
 ```
 
-**Important:** Cron jobs do not source `~/.bashrc`. The `run_mikecast.sh` wrapper script has the environment variables hardcoded directly, so cron will always have access to them.
+**Important:** Cron jobs do not source `~/.bashrc`. The `run_mikecast.sh` wrapper script explicitly sources `~/.profile` at startup, so cron will always have access to the variables.
 
 *   `NYTAPIKEY`: Get from the [NYT Developer Portal](https://developer.nytimes.com/).
 *   `OPENAI_API_KEY`: Get from your [OpenAI account](https://platform.openai.com/api-keys).
@@ -165,14 +165,41 @@ Use the `mikes_picks_ingest.py` utility to queue content for the next briefing.
 
 ### Viewing the Dashboard
 
-The dashboard is automatically updated on GitHub Pages after each run. To browse it locally:
+There are two ways to host the dashboard. Each has different trade-offs:
 
+---
+
+#### Option A: GitHub Pages (Remote, Auto-Updated)
+
+After each daily run, `run_mikecast.sh` commits and pushes new data to GitHub, which automatically updates the public GitHub Pages site.
+
+**URL:** `https://schwim23.github.io/mikecast/`
+
+No setup required — it just works as long as the cron job is running and pushing.
+
+> **Limitation:** The archive date-picker dropdown relies on a `/api/manifest` API call that GitHub Pages (a static host) cannot serve. Browsing by date via the dropdown will not work on GitHub Pages. All other dashboard features (today's briefing, audio player, article links) work fine.
+
+---
+
+#### Option B: Local Server (Full Functionality)
+
+Run `server.py`, a lightweight Flask server that serves the dashboard and exposes the `/api/manifest` endpoint, enabling full archive navigation.
+
+**Setup** (one time):
 ```bash
 cd ~/mikecast
-.venv/bin/python3 -m http.server 8080
+.venv/bin/pip install flask
+```
+
+**Run:**
+```bash
+cd ~/mikecast
+.venv/bin/python3 server.py
 ```
 
 Then open `http://localhost:8080/dashboard/` in your browser.
+
+This gives you full functionality: the date-picker archive dropdown, audio playback, and article links all work. Run it in a `screen` or `tmux` session to keep it persistent, or wrap it in a systemd service for auto-start on boot.
 
 ### Monitoring
 
