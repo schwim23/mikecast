@@ -1,180 +1,166 @@
 {
   "date": "2026-02-24",
   "date_display": "February 24, 2026",
-  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — February 24, 2026</p>\n</div>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights critical developments across technology, business, and sports. Intel's strategic partnership with SambaNova Systems showcases the ongoing race for AI supremacy, while escalating geopolitical tensions threaten global chip supply chains. In business, market volatility is driven by fears of AI disruption and trade policies. Meanwhile, Apple's new wearable technology and Meta's encryption controversy are stirring the corporate landscape.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI & TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Intel has formed a strategic partnership with AI chip start-up SambaNova Systems, a move that underscores the intensifying focus on advanced computing capabilities. This alliance reflects Intel's ambition to enhance its AI prowess, particularly as its CEO, Lip-Bu Tan, plays a dual role as both an investor and chairman of SambaNova. The partnership is expected to accelerate innovation in AI chip development. <a href=\"https://www.nytimes.com/2026/02/24/technology/intel-sambanova-ceo-lip-bu-tan.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The tech industry faces a potential crisis if geopolitical tensions between China and Taiwan escalate to conflict, threatening the supply of critical semiconductors. Silicon Valley's reliance on Taiwanese chips could lead to severe disruptions in the U.S. economy. This scenario highlights the urgent need for diversification of supply chains and strategic stockpiling. <a href=\"https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">China's latest move to impose export bans on 20 Japanese defense-linked entities marks an escalation in its ongoing tensions with Japan. This development could lead to broader economic consequences, affecting global supply chains and trade relationships. The situation warrants close monitoring as it unfolds. <a href=\"https://www.nytimes.com/2026/02/24/world/asia/china-japan-export-ban.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI's enterprise push is gaining momentum with new partnerships with consulting giants like McKinsey, BCG, Accenture, and Capgemini. This strategic expansion aims to leverage AI for business process optimization, signaling a significant shift in how AI can be integrated into corporate structures. <a href=\"https://www.cnbc.com\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS & MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The IRS is challenging Meta's valuation of offshore intellectual property, a move that could redefine how corporate taxes are assessed for multinational tech giants. This case is part of the broader struggle to ensure that tech companies pay their fair share of taxes in their home countries, potentially influencing future tax policies. <a href=\"https://www.nytimes.com/2026/02/24/business/irs-meta-corporate-taxes.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The stock market is experiencing significant volatility, with the Dow dropping 800 points amid fears of new Trump tariffs and AI-related sell-offs. Investors are jittery over the potential economic impacts of these developments, reflecting broader uncertainties in global trade and technological advancements. <a href=\"https://finance.yahoo.com\" style=\"color:#81d4fa;text-decoration:none;\">Yahoo Finance</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Despite market turbulence, futures have shown slight improvement, indicating investor optimism about potential resolutions to tariff uncertainties and AI disruption concerns. Upcoming earnings reports from companies like Home Depot and Workday could provide further market direction. <a href=\"https://www.investopedia.com\" style=\"color:#81d4fa;text-decoration:none;\">Investopedia</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple has announced plans for a 'BodyNet' of wearable sensors, signaling its continued investment in health technology. This innovation aims to integrate seamlessly with existing Apple devices, offering users enhanced health tracking capabilities and potentially setting new standards in wearable tech. <a href=\"https://nationaltoday.com\" style=\"color:#81d4fa;text-decoration:none;\">National Today</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In a recent court filing, a Meta executive criticized the company's plan to encrypt Facebook Messenger as \"irresponsible,\" highlighting internal disagreements over user security versus regulatory compliance. This controversy could have implications for how tech companies balance privacy with legal obligations. <a href=\"https://www.tradingview.com\" style=\"color:#81d4fa;text-decoration:none;\">TradingView</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Netflix CEO Ted Sarandos has dismissed calls from former President Trump to fire Susan Rice, emphasizing that the decision is not politically motivated. This statement comes amidst ongoing political pressures faced by media companies, reflecting the complex interplay between politics and entertainment. <a href=\"https://www.hollywoodreporter.com\" style=\"color:#81d4fa;text-decoration:none;\">The Hollywood Reporter</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees faced the Pittsburgh Pirates in a spring training matchup, offering fans a glimpse of the team's potential for the upcoming season. The game provided valuable insights into player performance and team dynamics as they prepare for the regular season. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Jalen Brunson of the New York Knicks has made headlines with a significant statement about his future with the team. His comments could influence contract negotiations and affect the Knicks' strategy as they seek to build a competitive roster. <a href=\"https://heavy.com\" style=\"color:#81d4fa;text-decoration:none;\">heavy.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS & INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">The tech industry's reliance on Taiwanese semiconductors highlights the critical need for diversified supply chains amid geopolitical tensions. - AI's integration into corporate structures is accelerating, as evidenced by OpenAI's new partnerships with consulting firms. - Market volatility driven by geopolitical and technological disruptions underscores the interconnectedness of global trade and innovation. - Apple's continued investment in health technology reinforces the growing consumer demand for integrated health monitoring solutions.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor developments in the China-Taiwan situation, as any escalation could have widespread implications for the tech industry. - Pay attention to IRS actions against other tech giants, as they may signal shifts in corporate tax enforcement. - Watch for further volatility in the stock market as investors react to ongoing trade and AI disruption concerns. - Keep an eye on Apple's forthcoming product releases and their impact on the wearable technology market.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated February 24, 2026<br>\n  Powered by NYT API, Google News &amp; OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — February 24, 2026</p>\n</div>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's headlines are dominated by strategic shifts and competitive maneuvers across industries. In AI & Tech, Meta's deal with AMD signals a bold move in the AI chip market, while OpenAI's partnerships underscore its foothold in enterprise solutions. Meanwhile, the business world grapples with tariffs and potential mergers, reflecting broader economic uncertainties. In the corporate sector, scrutiny and internal challenges weigh on tech giants like Meta and Nvidia.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI & TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta's substantial chips-for-stock deal with AMD marks a significant stride in the AI chip race, positioning AMD as a more formidable competitor to Nvidia. This partnership aims to bolster both companies' capabilities in artificial intelligence, a field where Nvidia has traditionally dominated. The alliance highlights the increasing importance of AI in driving technological innovation and market competition. <a href=\"https://www.nytimes.com/2026/02/24/business/meta-amd-chips-ai.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">A Pew Research Center study reveals that over half of teenagers now use chatbots for schoolwork, indicating a growing reliance on AI tools in education. This trend raises ethical concerns about academic integrity as chatbot-assisted cheating becomes increasingly common. The findings suggest a need for educational institutions to adapt and address the implications of AI in learning environments. <a href=\"https://www.nytimes.com/2026/02/24/technology/schoolwork-chatbot-cheating-pew.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Russia's potential ban on the Telegram app, citing terrorism concerns, marks another step in its crackdown on digital freedoms. The investigation into Telegram's founder, Pavel Durov, underscores the tensions between state control and digital privacy. This move could further isolate Russia's internet landscape from global platforms. <a href=\"https://www.nytimes.com/2026/02/24/world/europe/russia-telegram-pavel-durov-terrorism.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI's recent deals with consulting giants like Deloitte and PwC reflect its aggressive push into the enterprise sector. These partnerships aim to integrate AI more deeply into business operations, highlighting the growing demand for AI-driven solutions in corporate strategy and operations. <a href=\"https://www.cnbc.com\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS & MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Supreme Court's decision to revive a lawsuit against Whole Foods over tainted baby food underscores the ongoing scrutiny of food safety standards. This case could set a precedent for consumer rights and corporate accountability in the food industry. <a href=\"https://www.nytimes.com/2026/02/24/us/politics/supreme-court-whole-foods.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">President Trump's tariffs, which took effect at 10% instead of the expected 15%, have caught business leaders and foreign governments off guard. This move signals a potential shift in U.S. trade policy, impacting global markets and trade relations. <a href=\"https://www.nytimes.com/2026/02/24/us/politics/trump-tariffs-global-trade.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Paramount's revised bid for Warner Bros. Discovery could trigger a bidding war with Netflix. This potential merger reflects the intense competition in the entertainment industry, as companies vie for content and market dominance. <a href=\"https://www.nytimes.com/2026/02/24/business/paramount-warner-bros-discovery.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Federal Reserve's stance on interest rates, opting to hold steady while signaling economic improvement, suggests a cautious approach to monetary policy amid ongoing economic uncertainties. <a href=\"https://www.nytimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">A court filing reveals internal dissent within Meta over its Facebook Messenger encryption plans, which some executives deemed \"irresponsible.\" This disclosure could fuel ongoing debates about privacy and security in digital communications. <a href=\"https://www.reuters.com\" style=\"color:#81d4fa;text-decoration:none;\">Reuters</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Documents showing Facebook researchers considered studying the \"addictive\" nature of its platform highlight ongoing concerns about tech ethics and user well-being. These revelations may intensify calls for regulation and corporate accountability. <a href=\"https://www.cnn.com\" style=\"color:#81d4fa;text-decoration:none;\">CNN</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia's recent earnings report, closely watched by investors, shows the company's continued strength in the AI market. However, the broader competitive landscape, especially with AMD's new deal with Meta, could pose challenges. <a href=\"https://www.kiplinger.com\" style=\"color:#81d4fa;text-decoration:none;\">Kiplinger</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Yankees sluggers Aaron Judge and Spencer Jones made a strong start to spring training, each hitting home runs. Their performance sets an optimistic tone for the team's upcoming season, bolstering hopes among fans and analysts alike. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The struggles of a Knicks G League star have raised questions about his future with the team. This development points to the volatility and unpredictability inherent in professional sports careers. <a href=\"https://heavy.com\" style=\"color:#81d4fa;text-decoration:none;\">heavy.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS & INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">The intersection of AI and enterprise is expanding, with major deals and partnerships shaping the future business landscape. - Tariff policies and international trade dynamics remain volatile, affecting corporate strategies and market expectations. - Privacy concerns and ethical considerations continue to challenge tech companies, influencing public perception and regulatory scrutiny. - The entertainment industry is poised for consolidation, as major players seek to strengthen their content portfolios.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor developments in the Meta-AMD partnership and its impact on the AI chip market dynamics. - Follow potential responses from Netflix regarding Paramount's bid for Warner Bros. Discovery. - Keep an eye on the Federal Reserve's next moves, as economic indicators influence monetary policy decisions. - Watch for further revelations from Meta's internal documents and their implications for tech regulation and privacy debates.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated February 24, 2026<br>\n  Powered by NYT API, Google News &amp; OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
   "articles": {
     "AI & Tech": [
       {
-        "title": "Intel Strikes Deal With a Chip Start-Up Its C.E.O. Invested In",
-        "url": "https://www.nytimes.com/2026/02/24/technology/intel-sambanova-ceo-lip-bu-tan.html",
-        "description": "A technical partnership embraces SambaNova Systems, which Intel’s chief, Lip-Bu Tan, helps lead as an investor and chairman.",
+        "title": "Meta Announces Major Chips-for-Stock Deal With AMD",
+        "url": "https://www.nytimes.com/2026/02/24/business/meta-amd-chips-ai.html",
+        "description": "The multibillion-dollar deal is AMD’s latest move to catch up to Nvidia in the lucrative world of selling artificial intelligence chips.",
         "source": "The New York Times",
-        "published": "2026-02-24T06:00:19-05:00"
+        "published": "2026-02-24T08:20:57-05:00"
       },
       {
-        "title": "The Looming Taiwan Chip Disaster That Silicon Valley Has Long Ignored",
-        "url": "https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html",
-        "description": "If China invades Taiwan and cuts off its chip exports to American companies, the tech industry and the U.S. economy would be crippled.",
+        "title": "More Than Half of Teens Use Chatbots for Schoolwork, Survey Finds",
+        "url": "https://www.nytimes.com/2026/02/24/technology/schoolwork-chatbot-cheating-pew.html",
+        "description": "A new study from the Pew Research Center finds teens think chatbot-assisted cheating has become “a regular feature of student life.”",
         "source": "The New York Times",
-        "published": "2026-02-24T00:00:18-05:00"
+        "published": "2026-02-24T10:00:10-05:00"
       },
       {
-        "title": "China Amps Up Pressure on Japan With Export Bans",
-        "url": "https://www.nytimes.com/2026/02/24/world/asia/china-japan-export-ban.html",
-        "description": "Beijing placed the restrictions on 20 Japanese entities with ties to the defense industry, the latest ratcheting up of its monthslong feud with Tokyo.",
+        "title": "Russia Moves Closer to Banning Telegram App, Saying It Foments Terrorism",
+        "url": "https://www.nytimes.com/2026/02/24/world/europe/russia-telegram-pavel-durov-terrorism.html",
+        "description": "News of an investigation into Pavel Durov, the app’s billionaire founder, deepened a crackdown on what remains of the free Russian internet.",
         "source": "The New York Times",
-        "published": "2026-02-24T05:31:49-05:00"
+        "published": "2026-02-24T09:40:10-05:00"
       },
       {
-        "title": "ICE Whistle-Blower Says Training Is ‘Broken,’ and OpenAI Faces Questions About Mass Shooter",
-        "url": "https://www.nytimes.com/2026/02/24/podcasts/the-headlines/ice-whistleblower-openai-mass-shooter.html",
-        "description": "Plus, how Mexico tracked its most-wanted cartel leader.",
+        "title": "Mexico Is Caught Between Trump and the Cartels",
+        "url": "https://www.nytimes.com/2026/02/24/world/americas/trump-sheinbaum-us-mexico-cartel.html",
+        "description": "President Trump has demanded President Claudia Sheinbaum confront the cartels. The killing of “El Mencho” suggests it might be working — but could come at a cost.",
         "source": "The New York Times",
-        "published": "2026-02-24T06:00:12-05:00"
-      },
-      {
-        "title": "How Russia Put Its Future at Risk by Remaking Its Economy for War",
-        "url": "https://www.nytimes.com/2026/02/24/world/europe/russia-ukraine-war-future.html",
-        "description": "About half of the country’s federal budget goes toward the fight in Ukraine, money that does little to support its long-term development.",
-        "source": "The New York Times",
-        "published": "2026-02-24T00:01:17-05:00"
-      },
-      {
-        "title": "These Ukrainians Don’t Want to Be Traded to Russia for Peace",
-        "url": "https://www.nytimes.com/2026/02/24/world/europe/ukraine-war-donetsk.html",
-        "description": "Four years into the war, a major sticking point in talks is control of the eastern Donetsk region. Residents could face an agonizing choice if Ukraine gives up the territory.",
-        "source": "The New York Times",
-        "published": "2026-02-24T00:01:43-05:00"
-      },
-      {
-        "title": "After Six Decades of the War on Drugs, What Works?",
-        "url": "https://www.nytimes.com/2026/02/24/world/americas/mexico-war-on-drugs.html",
-        "description": "The U.S. and its allies have spilled blood and treasure to kill drug lords and defeat cartels, but the drugs keep coming and the new groups are more violent than ever.",
-        "source": "The New York Times",
-        "published": "2026-02-24T00:01:31-05:00"
+        "published": "2026-02-24T09:28:07-05:00"
       },
       {
         "title": "[Updated] OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
         "url": "https://www.cnbc.com",
-        "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBCOpenAI partners with McKinsey, BCG, Accenture, and Capgemini to push its Frontier AI agent platformFortuneIBM gets a taste of the Anthropic treatment (or, vibe coding panic comes for the Cobol cowboys)Fortune",
+        "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBC",
         "source": "CNBC",
         "published": ""
       },
       {
-        "title": "[Updated] Canada to Probe What OpenAI Knew About Tumbler Ridge Shooter - The New York Times",
-        "url": "https://www.nytimes.com",
-        "description": "Canada to Probe What OpenAI Knew About Tumbler Ridge ShooterThe New York TimesCanada seeks answers from OpenAI for failing to alert police after suspending school shooter’s accountThe GuardianICE Whistle-Blower Says Training Is ‘Broken,’ and OpenAI Faces Questions About Mass ShooterThe New York Times",
-        "source": "The New York Times",
-        "published": ""
-      },
-      {
-        "title": "Head of OpenAI's Codex explains the kind of email that gets his attention — and his advice to young engineers - Business Insider",
-        "url": "https://www.businessinsider.com",
-        "description": "Head of OpenAI's Codex explains the kind of email that gets his attention — and his advice to young engineersBusiness Insider",
-        "source": "Business Insider",
-        "published": ""
-      },
-      {
-        "title": "Anthropic Accuses Chinese Companies of Siphoning Data From Claude - WSJ",
-        "url": "https://www.wsj.com",
-        "description": "Anthropic Accuses Chinese Companies of Siphoning Data From ClaudeWSJChinese AI companies 'distilled' Claude to improve own models, Anthropic saysNBC NewsDetecting and preventing distillation attacksAnthropic",
-        "source": "WSJ",
-        "published": ""
-      },
-      {
-        "title": "[Updated] IBM posts steepest daily drop since 2000 after Anthropic says AI can modernize COBOL - Reuters",
-        "url": "https://www.reuters.com",
-        "description": "IBM posts steepest daily drop since 2000 after Anthropic says AI can modernize COBOLReuters",
-        "source": "Reuters",
+        "title": "[Updated] IBM Sinks Most Since 2000 as Anthropic Touts Cobol Tool - Yahoo Finance",
+        "url": "https://finance.yahoo.com",
+        "description": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol ToolYahoo Finance",
+        "source": "Yahoo Finance",
         "published": ""
       }
     ],
     "Business & Markets": [
       {
-        "title": "I.R.S. Tactics Against Meta Open a New Front in the Corporate Tax Fight",
-        "url": "https://www.nytimes.com/2026/02/24/business/irs-meta-corporate-taxes.html",
-        "description": "The agency is using real-world profit data to challenge how big companies value offshore intellectual property.",
+        "title": "Supreme Court Sides With Couple in Case Involving Baby Food Sold at Whole Foods",
+        "url": "https://www.nytimes.com/2026/02/24/us/politics/supreme-court-whole-foods.html",
+        "description": "The court agreed to revive a lawsuit by a Texas couple who claimed that tainted baby food purchased at Whole Foods had sickened their young son.",
         "source": "The New York Times",
-        "published": "2026-02-24T05:00:35-05:00"
+        "published": "2026-02-24T10:21:55-05:00"
       },
       {
-        "title": "[Updated] Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade' - Yahoo Finance",
-        "url": "https://finance.yahoo.com",
-        "description": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade'Yahoo FinanceStock Market Today: Dow Futures Inch Up; Trump's New Tariffs Kick In at 10% — Live UpdatesWSJDow drops 800 points as AI disruption fears and tariff woes weigh on markets: Live updatesCNBC",
-        "source": "Yahoo Finance",
+        "title": "Storm Leads to a First for The Boston Globe: A Day Without a Paper",
+        "url": "https://www.nytimes.com/2026/02/24/business/media/boston-globe-storm.html",
+        "description": "The company said the blizzard had made it too treacherous for workers to make it to the printing press on Monday.",
+        "source": "The New York Times",
+        "published": "2026-02-24T09:27:22-05:00"
+      },
+      {
+        "title": "Trump’s Tariff Goes Into Effect at 10 Percent, Not the 15 Threatened",
+        "url": "https://www.nytimes.com/2026/02/24/us/politics/trump-tariffs-global-trade.html",
+        "description": "The change surprised executives and foreign leaders, who had been expecting the 15 percent rate the president announced on Saturday.",
+        "source": "The New York Times",
+        "published": "2026-02-24T09:19:34-05:00"
+      },
+      {
+        "title": "Corporate America’s Growing Quest for Tariff Refunds",
+        "url": "https://www.nytimes.com/2026/02/24/business/dealbook/fex-tariff-refund.html",
+        "description": "Thousands of companies are expected to follow FedEx’ in suing the government to recoup levy payments, after the Supreme Court overturned the tariffs.",
+        "source": "The New York Times",
+        "published": "2026-02-24T08:43:09-05:00"
+      },
+      {
+        "title": "Paramount Revises Its Bid for Warner Bros. Discovery",
+        "url": "https://www.nytimes.com/2026/02/24/business/paramount-warner-bros-discovery.html",
+        "description": "If Warner Bros. deems Paramount’s latest bid superior, Netflix would have four days to make a counteroffer.",
+        "source": "The New York Times",
+        "published": "2026-02-24T08:36:05-05:00"
+      },
+      {
+        "title": "Agile Space Industries raises $17 million in oversubscribed funding round - The Durango Herald",
+        "url": "https://www.durangoherald.com",
+        "description": "Agile Space Industries raises $17 million in oversubscribed funding roundThe Durango Herald",
+        "source": "The Durango Herald",
         "published": ""
       },
       {
-        "title": "Stock Market Today: Dow, S&P 500 and Nasdaq struggle to rally after another AI-disruption sell-off; investors eye Anthropic briefing; Home Depot earnings on tap; Workday results to shine light on software sector. - MarketWatch",
-        "url": "https://www.marketwatch.com",
-        "description": "Stock Market Today: Dow, S&P 500 and Nasdaq struggle to rally after another AI-disruption sell-off; investors eye Anthropic briefing; Home Depot earnings on tap; Workday results to shine light on software sector.MarketWatch",
-        "source": "MarketWatch",
+        "title": "Federal Reserve Official Calls March Interest Rate Cut a ‘Coin Flip’ - Fine Day 102.3",
+        "url": "https://www.finedayradio.com",
+        "description": "Federal Reserve Official Calls March Interest Rate Cut a ‘Coin Flip’Fine Day 102.3",
+        "source": "Fine Day 102.3",
         "published": ""
       },
       {
-        "title": "Stock Market Today: Futures Edge Higher After Indexes Tumble on Tariff Uncertainty, AI Disruption Concerns - Investopedia",
-        "url": "https://www.investopedia.com",
-        "description": "Stock Market Today: Futures Edge Higher After Indexes Tumble on Tariff Uncertainty, AI Disruption ConcernsInvestopedia",
-        "source": "Investopedia",
+        "title": "The Warsh Doctrine: Federal Reserve Nomination Signals a Paradigm Shift in Monetary Policy - FinancialContent",
+        "url": "https://markets.financialcontent.com",
+        "description": "The Warsh Doctrine: Federal Reserve Nomination Signals a Paradigm Shift in Monetary PolicyFinancialContent",
+        "source": "FinancialContent",
+        "published": ""
+      },
+      {
+        "title": "[Updated] Fed Holds Rates Steady as It Points to an Improving Economy - The New York Times",
+        "url": "https://www.nytimes.com",
+        "description": "Fed Holds Rates Steady as It Points to an Improving EconomyThe New York Times",
+        "source": "The New York Times",
         "published": ""
       }
     ],
     "Companies": [
       {
-        "title": "Apple Unveils Plans for 'BodyNet' of Wearable Sensors - National Today",
-        "url": "https://nationaltoday.com",
-        "description": "Apple Unveils Plans for 'BodyNet' of Wearable SensorsNational Today",
-        "source": "National Today",
+        "title": "[Updated] Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - Reuters",
+        "url": "https://www.reuters.com",
+        "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingReuters",
+        "source": "Reuters",
         "published": ""
       },
       {
-        "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - TradingView",
-        "url": "https://www.tradingview.com",
-        "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingTradingView",
-        "source": "TradingView",
+        "title": "[Updated] Facebook researchers previously proposed studying whether features were ‘addictive,’ documents show - CNN",
+        "url": "https://www.cnn.com",
+        "description": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents showCNN",
+        "source": "CNN",
         "published": ""
       },
       {
-        "title": "Most affordable unlocked iPhone 16 Pro you can buy is $300 off at Amazon today (Renewed Premium) - 9to5Toys",
-        "url": "https://9to5toys.com",
-        "description": "Most affordable unlocked iPhone 16 Pro you can buy is $300 off at Amazon today (Renewed Premium)9to5Toys",
-        "source": "9to5Toys",
+        "title": "[Updated] Nvidia Earnings: Live Updates and Commentary February 2026 - Kiplinger",
+        "url": "https://www.kiplinger.com",
+        "description": "Nvidia Earnings: Live Updates and Commentary February 2026Kiplinger",
+        "source": "Kiplinger",
         "published": ""
       },
       {
-        "title": "Ted Sarandos Responds to Trump Telling Netflix to Fire Susan Rice: “It’s Not a Political Deal” - The Hollywood Reporter",
-        "url": "https://www.hollywoodreporter.com",
-        "description": "Ted Sarandos Responds to Trump Telling Netflix to Fire Susan Rice: “It’s Not a Political Deal”The Hollywood Reporter",
-        "source": "The Hollywood Reporter",
+        "title": "[Updated] Netflix Stock Drops as Trump Sets Sights on Director Susan Rice - Investopedia",
+        "url": "https://www.investopedia.com",
+        "description": "Netflix Stock Drops as Trump Sets Sights on Director Susan RiceInvestopedia",
+        "source": "Investopedia",
         "published": ""
       }
     ],
     "NY Sports": [
       {
-        "title": "New York Yankees at Pittsburgh Pirates Game Story, Scores/Highlights - 02/23/2026 - MLB.com",
+        "title": "[Updated] Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRs - MLB.com",
         "url": "https://www.mlb.com",
-        "description": "New York Yankees at Pittsburgh Pirates Game Story, Scores/Highlights - 02/23/2026MLB.com",
+        "description": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRsMLB.com",
         "source": "MLB.com",
         "published": ""
       },
       {
-        "title": "Spring Training Game #4: New York Yankees vs. Pittsburgh Pirates - Bucs Dugout",
-        "url": "https://www.bucsdugout.com",
-        "description": "Spring Training Game #4: New York Yankees vs. Pittsburgh PiratesBucs Dugout",
-        "source": "Bucs Dugout",
-        "published": ""
-      },
-      {
-        "title": "Knicks’ Jalen Brunson Drops Major Quote on His Future - heavy.com",
+        "title": "[Updated] Knicks G League Star Faces Uncertain Future Amid Sudden Struggles - heavy.com",
         "url": "https://heavy.com",
-        "description": "Knicks’ Jalen Brunson Drops Major Quote on His Futureheavy.com",
+        "description": "Knicks G League Star Faces Uncertain Future Amid Sudden Strugglesheavy.com",
         "source": "heavy.com",
         "published": ""
       }
     ]
   },
   "mikes_picks": [],
-  "podcast_script": "Hey, hey, hey! It’s February 24th, 2026, and you’re tuning into MikeCast. I’m your host, Mike, here to keep you in the loop with today’s top stories. We’re diving into some big moves in AI and tech, a turbulent stock market, and what’s going down in the corporate world. Plus, a quick spin through New York sports. So grab that coffee, and let’s get into it!\n\nAlright, kicking things off with AI & Tech. Intel just inked a deal with SambaNova Systems, a chip start-up that’s been catching some eyes, especially Intel CEO Lip-Bu Tan’s. He’s got skin in the game as an investor and chairman. This could be huge, folks. With the chip industry being such a hotbed of innovation and competition, partnerships like this one might set the stage for the next big leap in AI tech.\n\nSpeaking of chips, let’s chat about the looming crisis that’s been a quiet storm in Silicon Valley — the Taiwan chip situation. If China were to invade Taiwan and cut off chip exports, the ripple effects could be catastrophic for the tech sector and, frankly, the entire U.S. economy. Most of the world’s semiconductors come from Taiwan, and any disruption could spell disaster for everything from smartphones to cars. It’s a stark reminder of how interconnected and fragile our global supply chains really are.\n\nAnd China’s flexing more than just its chip muscles. They’ve slapped export bans on 20 Japanese entities linked to defense. This is the latest in a series of escalating tensions between China and Japan. It’s another chess move in the complex game of geopolitics that could have far-reaching effects on international trade and diplomatic relations.\n\nSwitching gears to Business & Markets. The market’s been on a rollercoaster, with the Dow dropping 800 points. Investors are jittery about new tariffs from Trump and this whole AI scare trade. Basically, people are worried about AI’s potential to disrupt industries, which sounds a bit sci-fi, but it’s very real in the trading world. It’s a time for keeping a close eye on those investment portfolios, folks.\n\nThe IRS is stepping up its game, targeting Meta in a new corporate tax fight. They’re using real-world profit data to challenge how companies like Meta value offshore intellectual property. This could set a precedent for how other tech giants handle their taxes. For consumers and taxpayers, it’s a peek behind the curtain at how these mega-corporations manage their finances.\n\nNow let's talk companies. Apple’s making waves with their plans for a 'BodyNet' of wearable sensors. Imagine a network of devices that track your health metrics in real time. This could be a game-changer for personal health tech, making our fitness trackers and smartwatches look like old news.\n\nMeta’s in the spotlight again, this time over Facebook Messenger’s encryption plans. A court filing shows a Meta exec called the plan ‘so irresponsible.’ It highlights the ongoing debate between privacy and security — a balance that’s becoming trickier with every tech advancement.\n\nAnd in more lighthearted news, if you’re in the market for an iPhone 16 Pro, Amazon’s got a sweet deal. You can snag one for $300 off! It’s the little things, right?\n\nAlright, now onto New York sports. The Yankees are in spring training action against the Pirates. It’s that exciting time of year when we get a first glimpse of what the season might hold. Meanwhile, Knicks’ Jalen Brunson dropped a major quote about his future, and it’s got fans buzzing. Could we see some big moves from the Knicks this year? Only time will tell.\n\nAlright, before we wrap up, here’s Big Mike's hand-picked read for today: “How Russia Put Its Future at Risk by Remaking Its Economy for War.” It’s a fascinating look at the long-term impacts of the Ukraine conflict on Russia’s economy. Worth a read if you’re curious about global economics and politics.\n\nAnd that’s a wrap for today’s MikeCast! Thanks for hanging out with me. Don’t forget to hit that subscribe button and leave a review if you’re loving the pod. I’ll catch you tomorrow with all the latest. Until then, stay curious, stay informed, and have an awesome day!",
+  "podcast_script": "Hey there, it's February 24th, 2026, and you're tuned into MikeCast, your daily catch-up on all the latest. I'm Mike, your friendly guide through today's top stories. We've got a lot to chat about, from a big chip deal that's shaking up the tech world to some interesting moves in the entertainment industry. Plus, a surprising twist in the weather that left Boston without its beloved Globe for a day. And don't worry, sports fans, I've got some exciting spring training updates for you too. Let's dive in!\n\nKicking things off in AI & Tech, Meta just announced a major chips-for-stock deal with AMD. This is a huge move, folks. AMD has been playing catch-up to Nvidia in the AI chip market, and this deal could give them the boost they need. So why does this matter? AI is powering everything these days, from self-driving cars to personalized recommendations on your favorite streaming service. The companies that dominate this space have a lot of influence over tech's future direction. Keep an eye on how this shakes up the competition.\n\nSpeaking of AI, a new study from the Pew Research Center caught my eye. More than half of teens are using chatbots for schoolwork. Yep, chatbot-assisted cheating is apparently a \"regular feature\" of student life now. I mean, we all know kids are tech-savvy, but this raises some big questions about education and ethics. How do we balance tech's benefits with the need to teach students fundamental skills? It's a conversation worth having.\n\nAnd over in Europe, Russia's moving closer to banning Telegram, claiming it foments terrorism. Pavel Durov, the app's billionaire founder, is under investigation. This is part of a broader crackdown on the free internet in Russia. The stakes here are high. Telegram's been a platform for free speech, especially in places with strict media controls. Banning it could have significant implications for Russian citizens' access to uncensored information.\n\nAlright, switching gears to Business & Markets. The Supreme Court sided with a Texas couple in a case involving tainted baby food from Whole Foods. This decision revives their lawsuit, and it's a big one. It could set a precedent for how food safety cases are handled moving forward, not to mention the potential financial implications for Whole Foods and other retailers.\n\nAnd in a stormy twist, The Boston Globe missed a day of printing due to a blizzard — a first in its long history. It's a reminder of how vulnerable traditional media can be to the forces of nature. It also highlights the ongoing shift to digital news consumption, especially when paper delivery just isn't possible.\n\nNow let's talk companies. Meta's in the news again, and not in a good way. A court filing revealed that a Meta executive warned their Facebook Messenger encryption plan was \"so irresponsible.\" It's a peek behind the curtain at how decisions that affect user security are made. With privacy being such a hot topic, these kinds of revelations can really sway public opinion.\n\nAlso, documents show that Facebook researchers once proposed studying whether their features were addictive. This isn't entirely surprising — we've all felt the pull of endless scrolling. But it's important because it suggests an awareness within the company of the potential downsides of their products, which could influence future regulations.\n\nAnd over at Netflix, the stock took a hit after President Trump set his sights on Director Susan Rice. This isn't just about one person; it's part of a broader narrative where political actions can directly impact corporate fortunes. It's a reminder of how interconnected politics and business have become.\n\nAlright, sports fans, let's get into NY Sports. The Yankees are off to an exciting start with Aaron Judge smashing not one, but two home runs in spring training. Fellow slugger Jones also joined the party with a homer. It's a promising start for the Yanks, and fans are buzzing with excitement for the upcoming season.\n\nMeanwhile, over in basketball, a Knicks G League star is facing some struggles. It's always tough to see promising talent hit a rough patch, but here's hoping he can turn things around and make a big impact.\n\nAlright, let's wrap things up with Big Mike's hand-picked reads. No special picks today, but you know I'll keep you posted with anything must-read that comes my way.\n\nThat's a wrap for today's MikeCast. Thanks for hanging out with me. Don't forget to subscribe so you never miss an episode. And if you liked what you heard, give us a rating or share with a friend. I'm Mike, and I'll catch you on the next one. Stay curious!",
   "audio_file": "MikeCast_2026-02-24.mp3",
-  "generated_at": "2026-02-24T11:53:20.925525+00:00"
+  "generated_at": "2026-02-24T15:49:50.534741+00:00"
 }

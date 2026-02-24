@@ -54,9 +54,16 @@ def load_picks() -> list:
 
 
 def save_picks(picks: list) -> None:
-    """Persist the picks list to disk."""
-    with open(PICKS_FILE, "w", encoding="utf-8") as fh:
-        json.dump(picks, fh, indent=2, ensure_ascii=False)
+    """Persist the picks list to disk atomically."""
+    tmp = PICKS_FILE + ".tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(picks, fh, indent=2, ensure_ascii=False)
+        os.replace(tmp, PICKS_FILE)
+    except Exception:
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+        raise
     logger.info("Saved %d pick(s) to %s", len(picks), PICKS_FILE)
 
 

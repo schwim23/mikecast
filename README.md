@@ -2,8 +2,6 @@
 
 MikeCast is an automated daily news briefing system designed for "Big Mike." It generates a comprehensive and personalized news package covering AI/Tech, Business, major companies, and NY sports. The system fetches the latest news, integrates user-submitted content, and delivers the briefing as an HTML email, a podcast, and a static dashboard website.
 
-This project is an enhanced version of a previous Manus scheduled task, now with NYT API integration, content deduplication, a user-submission system, and a web-based dashboard for browsing past briefings.
-
 ## Features
 
 1.  **Multi-Source News Aggregation**: Collects articles from:
@@ -30,11 +28,13 @@ This project is an enhanced version of a previous Manus scheduled task, now with
 mikecast/
 ├── mikecast_briefing.py      # Main script to generate and send the briefing
 ├── mikes_picks_ingest.py     # Utility to add items to "Mike's Picks"
+├── run_mikecast.sh           # Cron wrapper: sets env vars, runs script, pushes to GitHub
 ├── mikes_picks.json          # Queue for user-submitted content
 ├── briefing_history.json     # Rolling 7-day history of processed articles
 ├── requirements.txt          # Python dependencies
 ├── README.md                 # This file
-├── task_prompt.md            # Updated Manus scheduled task prompt
+├── task_prompt.md            # Original Manus scheduled task prompt
+├── .venv/                    # Python virtual environment (not committed)
 ├── data/                     # Directory for daily JSON and audio files
 │   └── YYYY-MM-DD.json
 └── dashboard/                # Static website files
@@ -43,85 +43,141 @@ mikecast/
     └── app.js
 ```
 
-## Setup and Installation
+## Setup and Installation (Local Linux)
 
-1.  **Clone the Project:**
-    Place the `mikecast` directory in your desired location (e.g., `/home/ubuntu/`).
+This project runs locally on a Linux machine (Ubuntu/Debian) with Python 3.12+.
 
-2.  **Install Dependencies:**
-    Install the required Python libraries using pip.
-    ```bash
-    pip install -r requirements.txt
-    ```
+### 1. Clone the Repository
 
-3.  **Set Environment Variables:**
-    This system uses environment variables for all secrets and configuration. **Do not hardcode them.**
+```bash
+cd ~
+git clone https://github.com/schwim23/mikecast.git
+cd mikecast
+```
 
-    ```bash
-    export NYTAPIKEY="your_new_york_times_api_key"
-    export OPENAI_API_KEY="your_openai_api_key"
-    export GMAIL_APP_PASSWORD="your_gmail_app_password"
+### 2. Install System Dependencies
 
-    # Optional: Override default email addresses
-    export GMAIL_FROM="sender@gmail.com"
-    export GMAIL_TO="recipient@example.com"
-    ```
+```bash
+sudo apt install -y python3.12-venv python3-pip poppler-utils
+```
 
-    *   `NYTAPIKEY`: Get from the [NYT Developer Portal](https://developer.nytimes.com/).
-    *   `OPENAI_API_KEY`: Get from your [OpenAI account](https://platform.openai.com/api-keys).
-    *   `GMAIL_APP_PASSWORD`: This is a 16-digit "App Password" generated from your Google Account settings, not your regular password. See [Google's documentation](https://support.google.com/accounts/answer/185833) for instructions.
+`poppler-utils` provides `pdftotext`, which is required for PDF ingestion in Mike's Picks.
+
+### 3. Create a Virtual Environment and Install Python Dependencies
+
+```bash
+cd ~/mikecast
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+```
+
+### 4. Set Environment Variables
+
+Add the following to both `~/.bashrc` (interactive terminals) and `~/.profile` (login shells and cron):
+
+```bash
+export NYTAPIKEY="your_new_york_times_api_key"
+export OPENAI_API_KEY="your_openai_api_key"
+export GMAIL_APP_PASSWORD="your_16_digit_gmail_app_password"
+export GMAIL_FROM="sender@gmail.com"
+export GMAIL_TO="recipient@example.com"
+```
+
+**Important:** Cron jobs do not source `~/.bashrc`. The `run_mikecast.sh` wrapper script has the environment variables hardcoded directly, so cron will always have access to them.
+
+*   `NYTAPIKEY`: Get from the [NYT Developer Portal](https://developer.nytimes.com/).
+*   `OPENAI_API_KEY`: Get from your [OpenAI account](https://platform.openai.com/api-keys).
+*   `GMAIL_APP_PASSWORD`: A 16-digit App Password from your Google Account (not your regular password). See [Google's documentation](https://support.google.com/accounts/answer/185833).
+
+### 5. Configure Git Credentials (for GitHub Pages auto-push)
+
+After each run, the script automatically commits and pushes updated data to GitHub. To enable non-interactive pushes:
+
+```bash
+git -C ~/mikecast config credential.helper store
+```
+
+Then do one manual push (entering your GitHub username and a Personal Access Token as the password). Credentials will be stored in `~/.git-credentials` for all future automated pushes.
+
+### 6. Test a Manual Run
+
+```bash
+source ~/.profile   # load env vars in current shell
+cd ~/mikecast
+.venv/bin/python3 mikecast_briefing.py
+```
+
+Verify: email is received, `data/YYYY-MM-DD.json` is created, and the GitHub repo is updated.
+
+### 7. Schedule the Daily Cron Job
+
+The cron job is already configured. To view or edit it:
+
+```bash
+crontab -e
+```
+
+Current entry (runs at **6:45 AM ET** daily):
+
+```
+45 6 * * * /home/mike-schwimmer/mikecast/run_mikecast.sh >> /home/mike-schwimmer/mikecast/mikecast.log 2>&1
+```
+
+The `run_mikecast.sh` wrapper:
+- Sets all required environment variables
+- `cd`s to the project directory
+- Runs `mikecast_briefing.py` using the virtual environment
+- Commits and pushes updated data to GitHub (which updates the GitHub Pages dashboard)
 
 ## Usage
 
 ### Generating the Daily Briefing
 
-To run the main briefing process, simply execute the `mikecast_briefing.py` script. This is typically done via a scheduled task (see `task_prompt.md`).
+The briefing runs automatically via cron. To run manually:
 
 ```bash
-python3 /path/to/mikecast/mikecast_briefing.py
+cd ~/mikecast && .venv/bin/python3 mikecast_briefing.py
 ```
-
-The script will perform all steps automatically: fetching news, generating content, saving files to the `data/` directory, and sending the final email.
 
 ### Adding to "Mike's Picks"
 
-Use the `mikes_picks_ingest.py` utility to add content to the next briefing.
+Use the `mikes_picks_ingest.py` utility to queue content for the next briefing.
 
 *   **Add a URL:**
     ```bash
-    python3 mikes_picks_ingest.py --url "https://www.theverge.com/2024/2/21/24079459/google-gemini-ai-image-generation-people"
+    .venv/bin/python3 mikes_picks_ingest.py --url "https://example.com/article"
     ```
 
 *   **Add a local PDF file:**
     ```bash
-    python3 mikes_picks_ingest.py --pdf "/home/ubuntu/Documents/research_paper.pdf"
+    .venv/bin/python3 mikes_picks_ingest.py --pdf "/home/mike-schwimmer/Documents/paper.pdf"
     ```
 
-*   **Add raw text (e.g., from a newsletter):**
+*   **Add raw text:**
     ```bash
-    python3 mikes_picks_ingest.py --text "This is some interesting analysis I read..."
+    .venv/bin/python3 mikes_picks_ingest.py --text "Some interesting analysis..."
     ```
 
-*   **Add an item with a custom title:**
+*   **Add with a custom title:**
     ```bash
-    python3 mikes_picks_ingest.py --url "https://example.com" --title "An Interesting Article I Found"
+    .venv/bin/python3 mikes_picks_ingest.py --url "https://example.com" --title "My Custom Title"
     ```
 
 ### Viewing the Dashboard
 
-To view the dashboard, you need to serve the `mikecast` directory from a simple web server. The dashboard files in `dashboard/` are designed to fetch data from the sibling `data/` directory.
+The dashboard is automatically updated on GitHub Pages after each run. To browse it locally:
 
-1.  **Navigate to the project root:**
-    ```bash
-    cd /path/to/mikecast
-    ```
+```bash
+cd ~/mikecast
+.venv/bin/python3 -m http.server 8080
+```
 
-2.  **Start a simple Python web server:**
-    ```bash
-    python3 -m http.server 8000
-    ```
+Then open `http://localhost:8080/dashboard/` in your browser.
 
-3.  **Access the dashboard:**
-    Open your web browser and go to `http://localhost:8000/dashboard/`.
+### Monitoring
 
-    The dashboard will load the current day's briefing by default. Use the date picker to browse previous days.
+Check the cron log after each run:
+
+```bash
+cat ~/mikecast/mikecast.log
+```

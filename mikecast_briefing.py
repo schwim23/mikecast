@@ -142,6 +142,18 @@ def resolve_google_news_url(url: str) -> str:
         return url
 
 
+def _atomic_write_json(path: Path, data, **json_kwargs) -> None:
+    """Write JSON atomically via a temp file + rename to avoid corruption on crash."""
+    tmp = path.with_suffix(".tmp")
+    try:
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump(data, fh, **json_kwargs)
+        tmp.rename(path)
+    except Exception:
+        tmp.unlink(missing_ok=True)
+        raise
+
+
 def title_similarity(a: str, b: str) -> float:
     """Return 0-1 similarity ratio between two titles."""
     a_clean = re.sub(r"[^a-z0-9 ]", "", a.lower().strip())
@@ -307,6 +319,8 @@ def collect_all_news() -> dict[str, list[dict]]:
             logger.info("Web [%s] '%s': %d articles", cat, q, len(results))
             time.sleep(0.3)
 
+    total_raw = sum(len(v) for v in categorised.values())
+    logger.info("Collection complete: %d raw articles across %d categories.", total_raw, len(categorised))
     return categorised
 
 
@@ -330,8 +344,7 @@ def save_history(history: list[dict]) -> None:
     """Persist history, pruning entries older than 7 days."""
     cutoff = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
     pruned = [h for h in history if h.get("date", "") >= cutoff]
-    with open(HISTORY_FILE, "w", encoding="utf-8") as fh:
-        json.dump(pruned, fh, indent=2, ensure_ascii=False)
+    _atomic_write_json(HISTORY_FILE, pruned, indent=2, ensure_ascii=False)
 
 
 def deduplicate(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
@@ -448,10 +461,9 @@ def mark_picks_processed() -> None:
             data = json.load(fh)
         for item in data:
             item["processed"] = True
-        with open(PICKS_FILE, "w", encoding="utf-8") as fh:
-            json.dump(data, fh, indent=2, ensure_ascii=False)
+        _atomic_write_json(PICKS_FILE, data, indent=2, ensure_ascii=False)
     except (json.JSONDecodeError, IOError) as exc:
-        logger.warning("Could not mark picks processed: %s", exc)
+        logger.error("Could not mark picks processed: %s — picks may repeat next run", exc)
 
 
 def summarise_pick(pick: dict) -> dict:
@@ -474,7 +486,8 @@ def summarise_pick(pick: dict) -> dict:
             # Extract first ~500 chars of body text
             body_text = soup.get_text(separator=" ", strip=True)[:1500]
             summary = body_text[:500] + ("..." if len(body_text) > 500 else "")
-        except Exception:
+        except Exception as exc:
+            logger.warning("Could not fetch URL %s: %s", content, exc)
             summary = f"Submitted URL: {content}"
             if not title:
                 title = content
@@ -492,8 +505,8 @@ def summarise_pick(pick: dict) -> dict:
             if result.returncode == 0 and result.stdout.strip():
                 extracted = result.stdout.strip()[:1500]
                 summary = extracted[:500] + ("..." if len(extracted) > 500 else "")
-        except Exception:
-            pass
+        except Exception as exc:
+            logger.warning("pdftotext failed for %s: %s", content, exc)
         if not title:
             title = os.path.basename(content)
         return {"title": title, "summary": summary, "url": "", "type": "pdf"}
@@ -911,9 +924,7 @@ def generate_manifest() -> None:
         reverse=True,
     )
     manifest = {"dates": dates}
-    manifest_path = DATA_DIR / "manifest.json"
-    with open(manifest_path, "w", encoding="utf-8") as fh:
-        json.dump(manifest, fh, indent=2)
+    _atomic_write_json(DATA_DIR / "manifest.json", manifest, indent=2)
     logger.info("Manifest updated: %d dates", len(dates))
 
 
@@ -936,8 +947,7 @@ def save_daily_data(
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
     out_path = DATA_DIR / f"{TODAY}.json"
-    with open(out_path, "w", encoding="utf-8") as fh:
-        json.dump(data, fh, indent=2, ensure_ascii=False)
+    _atomic_write_json(out_path, data, indent=2, ensure_ascii=False)
     logger.info("Daily data saved: %s", out_path)
     return out_path
 
@@ -947,13 +957,30 @@ def save_daily_data(
 # ===================================================================
 
 def main() -> None:
+    force = "--force" in sys.argv
+
     logger.info("=" * 60)
     logger.info("MikeCast Daily Briefing — %s", TODAY_DISPLAY)
     logger.info("=" * 60)
 
+    # Idempotency guard: don't overwrite a completed briefing unless --force
+    daily_path = DATA_DIR / f"{TODAY}.json"
+    if daily_path.exists() and not force:
+        logger.warning(
+            "Today's briefing (%s) already exists. Re-run with --force to regenerate. Exiting.",
+            TODAY,
+        )
+        sys.exit(0)
+
     # 1. Collect news
     logger.info("Step 1/7: Collecting news…")
     raw_news = collect_all_news()
+    raw_total = sum(len(v) for v in raw_news.values())
+    if raw_total == 0:
+        logger.critical("No articles collected from any source — aborting.")
+        sys.exit(1)
+    if raw_total < 5:
+        logger.warning("Very few articles collected (%d) — possible widespread API failure.", raw_total)
 
     # 2. Deduplicate
     logger.info("Step 2/7: Deduplicating…")
@@ -964,6 +991,8 @@ def main() -> None:
     top_articles = select_top_articles(deduped, total=25)
     total = sum(len(v) for v in top_articles.values())
     logger.info("Selected %d articles across %d categories.", total, len(top_articles))
+    if total == 0:
+        logger.warning("All articles were duplicates — briefing will have no new stories.")
 
     # 4. Process Mike's Picks
     logger.info("Step 4/7: Processing Mike's Picks…")
@@ -978,14 +1007,24 @@ def main() -> None:
     script = generate_podcast_script(top_articles, picks)
     audio_path = DATA_DIR / f"MikeCast_{TODAY}.mp3"
     audio_ok = generate_podcast_audio(script, audio_path)
+    if not audio_ok and audio_path.exists():
+        audio_path.unlink()
+        logger.warning("Removed partial/stale audio file: %s", audio_path)
     audio_filename = audio_path.name if audio_ok else None
 
     # 7. Save & send
     logger.info("Step 7/7: Saving data & sending email…")
     save_daily_data(html, top_articles, picks, script, audio_filename)
     generate_manifest()
-    send_email(html, script, audio_path if audio_ok else None)
+    email_ok = send_email(html, script, audio_path if audio_ok else None)
 
+    logger.info(
+        "Run summary — articles: %d | picks: %d | audio: %s | email: %s",
+        total,
+        len(picks),
+        "ok" if audio_ok else "FAILED",
+        "ok" if email_ok else "FAILED",
+    )
     logger.info("MikeCast briefing complete.")
 
 

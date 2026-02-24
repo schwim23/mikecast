@@ -1,3 +1,6 @@
+from pathlib import Path
+SCRIPT_DIR = Path(__file__).resolve().parent
+
 js = """/**
  * MikeCast Dashboard — Client-side application
  * Loads briefing JSON from /data/ via the Flask server.
@@ -242,6 +245,6 @@ js = """/**
 })();
 """
 
-with open('/home/ubuntu/mikecast/dashboard/app.js', 'w') as f:
+with open(SCRIPT_DIR / 'dashboard' / 'app.js', 'w') as f:
     f.write(js)
 print("app.js written, length:", len(js))
