@@ -54,7 +54,7 @@ PICKS_FILE = SCRIPT_DIR / "mikes_picks.json"
 # ---------------------------------------------------------------------------
 NYT_API_KEY = os.environ.get("NYTAPIKEY", "")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
-GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "")
+GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "").replace("\\n", "").replace("\n", "").strip()
 GMAIL_FROM = os.environ.get("GMAIL_FROM", "prometheusagent23@gmail.com")
 GMAIL_TO = os.environ.get("GMAIL_TO", "Michael.schwimmer@gmail.com")
 
@@ -486,49 +486,180 @@ def process_picks() -> list[dict]:
 # 4. HTML BRIEFING GENERATION
 # ===================================================================
 
+def _build_articles_context(categorised: dict[str, list[dict]]) -> str:
+    """Flatten all articles into a structured text block for the GPT prompt."""
+    lines = []
+    for cat, arts in categorised.items():
+        if not arts:
+            continue
+        lines.append(f"\n=== {cat.upper()} ===")
+        for i, art in enumerate(arts, 1):
+            title = art.get("title", "").replace("[Updated] ", "")
+            desc = art.get("description", "")
+            url = art.get("url", "")
+            source = art.get("source", "")
+            updated = "[Updated] " in art.get("title", "")
+            prefix = "[UPDATE] " if updated else ""
+            lines.append(f"{i}. {prefix}{title}")
+            if desc:
+                lines.append(f"   Summary: {desc[:300]}")
+            if source:
+                lines.append(f"   Source: {source}")
+            if url:
+                lines.append(f"   URL: {url}")
+    return "\n".join(lines)
+
+
+def _gpt_call(system_prompt: str, user_prompt: str, max_tokens: int = 2500) -> str:
+    """Call GPT and return the response text, with a plain-text fallback."""
+    if not OPENAI_API_KEY:
+        logger.warning("OPENAI_API_KEY not set — returning empty GPT response.")
+        return ""
+    try:
+        from openai import OpenAI
+        client = OpenAI()
+        resp = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
+            ],
+            max_tokens=max_tokens,
+            temperature=0.7,
+        )
+        return resp.choices[0].message.content.strip()
+    except Exception as exc:
+        logger.error("GPT call failed: %s", exc)
+        return ""
+
+
 def generate_html_briefing(
     categorised: dict[str, list[dict]],
     picks: list[dict],
 ) -> str:
-    """Build a professional HTML briefing email."""
+    """Build a professional HTML briefing email using GPT for rich prose."""
 
+    articles_context = _build_articles_context(categorised)
     total_articles = sum(len(v) for v in categorised.values())
 
-    # --- Executive Summary ---
-    exec_lines = []
-    for cat, arts in categorised.items():
-        if arts:
-            top = arts[0]
-            exec_lines.append(f"<strong>{cat}:</strong> {top['title']}")
+    picks_context = ""
+    if picks:
+        picks_context = "\n\n=== MIKE'S PICKS ==="
+        for p in picks:
+            picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
 
-    exec_summary = " | ".join(exec_lines) if exec_lines else "No major stories today."
+    system_prompt = (
+        "You are MikeCast, a sharp, well-informed daily briefing writer. "
+        "Write in a professional yet engaging tone — like a smart friend who reads everything so you don't have to. "
+        "Be concise but substantive. Use active voice. Avoid filler phrases."
+    )
 
-    # --- Build category sections ---
-    category_html = ""
-    for cat, arts in categorised.items():
-        if not arts:
-            continue
-        category_html += f'<h2 style="color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;">{cat}</h2>\n<ul>\n'
-        for art in arts:
-            title = art.get("title", "Untitled")
-            url = art.get("url", "#")
-            desc = art.get("description", "")
-            source = art.get("source", "")
-            updated_tag = ""
-            if title.startswith("[Updated]"):
-                updated_tag = '<span style="background:#ff9800;color:#000;padding:1px 6px;border-radius:3px;font-size:0.8em;margin-right:4px;">Updated</span>'
-                title = title.replace("[Updated] ", "")
-            source_badge = f' <span style="color:#888;font-size:0.85em;">— {source}</span>' if source else ""
-            category_html += f'<li style="margin-bottom:10px;">{updated_tag}<a href="{url}" style="color:#81d4fa;text-decoration:none;font-weight:600;">{title}</a>{source_badge}'
-            if desc:
-                category_html += f'<br><span style="color:#bbb;font-size:0.9em;">{desc[:200]}</span>'
-            category_html += "</li>\n"
-        category_html += "</ul>\n"
+    user_prompt = f"""Today is {TODAY_DISPLAY}. You have collected {total_articles} news articles across 4 categories.
+
+Here are today's articles:
+{articles_context}
+{picks_context}
+
+Write a professional daily briefing (800-1200 words) with these exact sections:
+
+1. EXECUTIVE SUMMARY (2-3 sentences capturing the most important themes of the day)
+
+2. TOP STORIES — organized by category (AI & Tech, Business & Markets, Companies, NY Sports). For each story:
+   - Write 2-4 sentences of analysis/context, not just a restatement of the headline
+   - Include the clickable source URL at the end of each story item
+   - Cover at least 3-4 stories per category that has content
+
+3. KEY TRENDS & INSIGHTS (3-5 bullet points identifying patterns, themes, or connections across today's stories)
+
+4. WHAT TO WATCH (3-4 forward-looking items — what developments to monitor in the coming days)
+
+Format rules:
+- Return ONLY the briefing text sections (no HTML, no markdown headers with #)
+- Use plain section headers like: EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS, KEY TRENDS & INSIGHTS, WHAT TO WATCH
+- Each story should be on its own paragraph
+- URLs should appear as: [Source Name](URL) at the end of each story paragraph
+- Keep it tight and informative — this is a busy executive's morning read"""
+
+    briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=2500)
+    if not briefing_text:
+        # Fallback: simple concatenation
+        briefing_text = "Unable to generate GPT briefing. See articles below."
+
+    # --- Convert the GPT plain-text briefing into styled HTML ---
+    def text_to_html_sections(text: str) -> str:
+        """Convert the structured plain-text briefing into HTML."""
+        section_headers = [
+            "EXECUTIVE SUMMARY", "AI & TECH", "BUSINESS & MARKETS",
+            "COMPANIES", "NY SPORTS", "KEY TRENDS & INSIGHTS", "WHAT TO WATCH",
+        ]
+        html_parts = []
+        current_section = None
+        buffer = []
+
+        def flush_buffer(section, buf):
+            if not buf:
+                return ""
+            color = "#ffb74d" if section in ("KEY TRENDS & INSIGHTS", "WHAT TO WATCH") else "#4fc3f7"
+            out = f'<h2 style="color:{color};border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;">{section}</h2>\n'
+            combined = " ".join(buf).strip()
+            # Convert [Source](URL) markdown links to HTML
+            combined = re.sub(
+                r'\[([^\]]+)\]\((https?://[^)]+)\)',
+                r'<a href="\2" style="color:#81d4fa;text-decoration:none;">\1</a>',
+                combined,
+            )
+            # Split into paragraphs on double newline or sentence-ending period followed by capital
+            paragraphs = re.split(r'\n{2,}', combined)
+            for para in paragraphs:
+                para = para.strip()
+                if not para:
+                    continue
+                # Bullet points
+                if para.startswith("- ") or para.startswith("• "):
+                    items = re.split(r'\n[-•] ', para)
+                    out += '<ul style="color:#ccc;line-height:1.7;">'
+                    for item in items:
+                        item = item.lstrip("- •").strip()
+                        if item:
+                            out += f'<li style="margin-bottom:8px;">{item}</li>'
+                    out += '</ul>\n'
+                else:
+                    out += f'<p style="color:#ccc;line-height:1.7;margin-bottom:12px;">{para}</p>\n'
+            return out
+
+        for line in text.splitlines():
+            stripped = line.strip()
+            matched_header = None
+            for h in section_headers:
+                if stripped.upper().startswith(h):
+                    matched_header = h
+                    break
+            if matched_header:
+                if current_section is not None:
+                    html_parts.append(flush_buffer(current_section, buffer))
+                current_section = matched_header
+                buffer = []
+                # Remainder of the line after the header
+                remainder = stripped[len(matched_header):].lstrip(":- ").strip()
+                if remainder:
+                    buffer.append(remainder)
+            else:
+                if stripped:
+                    buffer.append(stripped)
+                else:
+                    buffer.append("\n\n")
+
+        if current_section is not None:
+            html_parts.append(flush_buffer(current_section, buffer))
+
+        return "\n".join(html_parts)
+
+    briefing_html_sections = text_to_html_sections(briefing_text)
 
     # --- Mike's Picks ---
     picks_html = ""
     if picks:
-        picks_html = '<h2 style="color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;">🎯 Mike\'s Picks</h2>\n<ul>\n'
+        picks_html = '<h2 style="color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;">🎯 Mike\'s Picks</h2>\n<ul>\n'
         for p in picks:
             title = p.get("title", "Untitled")
             summary = p.get("summary", "")
@@ -542,56 +673,24 @@ def generate_html_briefing(
             picks_html += "</li>\n"
         picks_html += "</ul>\n"
 
-    # --- Trends & What to Watch ---
-    trends_html = '<h2 style="color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;">Key Trends &amp; Insights</h2>\n'
-    trends_html += '<p style="color:#ccc;">Today\'s briefing covers <strong>{}</strong> stories across {} categories. '.format(total_articles, len([c for c in categorised if categorised[c]]))
-
-    ai_count = len(categorised.get("AI & Tech", []))
-    biz_count = len(categorised.get("Business & Markets", []))
-    if ai_count > 5:
-        trends_html += "AI and technology continue to dominate headlines. "
-    if biz_count > 3:
-        trends_html += "Markets and business activity remain active. "
-    trends_html += "</p>\n"
-
-    watch_html = '<h2 style="color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;">What to Watch</h2>\n'
-    watch_items = []
-    if categorised.get("AI & Tech"):
-        watch_items.append("AI sector developments and regulatory moves")
-    if categorised.get("Business & Markets"):
-        watch_items.append("Market reactions and earnings reports")
-    if categorised.get("Companies"):
-        watch_items.append("Big Tech product launches and strategic shifts")
-    if categorised.get("NY Sports"):
-        watch_items.append("Upcoming NY sports matchups and trade rumours")
-    if watch_items:
-        watch_html += "<ul>" + "".join(f'<li style="color:#ccc;">{w}</li>' for w in watch_items) + "</ul>\n"
-
     # --- Full HTML ---
     html = f"""\
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
-<body style="background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:700px;margin:auto;padding:20px;">
-<div style="text-align:center;padding:20px 0;border-bottom:2px solid #4fc3f7;">
-  <h1 style="color:#4fc3f7;margin:0;font-size:2em;">🎙️ MikeCast</h1>
-  <p style="color:#888;margin:4px 0 0;">Daily Briefing — {TODAY_DISPLAY}</p>
+<body style="background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;">
+<div style="text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;">
+  <h1 style="color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;">🎙️ MikeCast</h1>
+  <p style="color:#888;margin:6px 0 0;font-size:1.05em;">Daily Briefing — {TODAY_DISPLAY}</p>
 </div>
 
-<h2 style="color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;">Executive Summary</h2>
-<p style="color:#ccc;line-height:1.6;">{exec_summary}</p>
-
-{category_html}
+{briefing_html_sections}
 
 {picks_html}
 
-{trends_html}
-
-{watch_html}
-
-<div style="text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:30px;">
+<div style="text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;">
   <p style="color:#666;font-size:0.85em;">MikeCast Daily Briefing • Generated {TODAY_DISPLAY}<br>
-  Powered by NYT API, Google News &amp; OpenAI</p>
+  Powered by NYT API, Google News &amp; OpenAI GPT-4o</p>
 </div>
 </body>
 </html>"""
@@ -606,38 +705,65 @@ def generate_podcast_script(
     categorised: dict[str, list[dict]],
     picks: list[dict],
 ) -> str:
-    """Create a conversational 5-10 minute podcast script."""
-    lines: list[str] = []
-    lines.append(f"[INTRO MUSIC FADES IN]\n")
-    lines.append(f"Hey everyone, welcome to MikeCast — your daily news briefing. It's {TODAY_DISPLAY}, and I've got a packed show for you today. Let's dive right in.\n")
+    """Create a conversational 5-10 minute podcast script using GPT."""
 
-    for cat, arts in categorised.items():
-        if not arts:
-            continue
-        lines.append(f"\n--- {cat.upper()} ---\n")
-        lines.append(f"Starting with {cat}.\n")
-        for i, art in enumerate(arts[:4]):
-            title = art["title"].replace("[Updated] ", "")
-            desc = art.get("description", "")
-            updated = "[Updated] " in art.get("title", "")
-            if updated:
-                lines.append(f"We have an update on a story we've been tracking: {title}. {desc}\n")
-            elif i == 0:
-                lines.append(f"The big story here is: {title}. {desc}\n")
-            else:
-                lines.append(f"Also worth noting: {title}. {desc}\n")
-
+    articles_context = _build_articles_context(categorised)
+    picks_context = ""
     if picks:
-        lines.append(f"\n--- MIKE'S PICKS ---\n")
-        lines.append("Now for Mike's Picks — stories that Big Mike flagged as must-reads.\n")
+        picks_context = "\n\n=== MIKE'S PICKS ==="
         for p in picks:
-            lines.append(f"First up: {p['title']}. {p.get('summary', '')[:200]}\n")
+            picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
 
-    lines.append(f"\n--- WRAP-UP ---\n")
-    lines.append("That's your MikeCast for today. Stay sharp, stay informed, and I'll catch you tomorrow. Peace.\n")
-    lines.append("[OUTRO MUSIC]\n")
+    system_prompt = (
+        "You are the host of MikeCast, a daily news podcast. "
+        "Your style is smart, conversational, and energetic — like a knowledgeable friend catching you up over coffee. "
+        "You speak directly to the listener. You add context, opinion, and insight — not just headlines. "
+        "You're concise but never dry. You use natural spoken language, not written prose."
+    )
 
-    return "\n".join(lines)
+    user_prompt = f"""Today is {TODAY_DISPLAY}. Write a full podcast script for today's MikeCast episode.
+
+Here are today's news articles:
+{articles_context}
+{picks_context}
+
+Script requirements:
+- Total length: 5-10 minutes of spoken audio (approximately 800-1500 words)
+- Structure:
+  1. Warm, engaging INTRO (welcome listeners, tease the top stories, ~30 seconds)
+  2. AI & TECH segment — cover the top 3-4 stories with context and insight
+  3. BUSINESS & MARKETS segment — cover top 2-3 stories, explain what it means for listeners
+  4. COMPANIES segment — cover top 3-4 company stories with personality
+  5. NY SPORTS segment — quick, energetic rundown of sports news
+  6. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads"
+  7. OUTRO — brief wrap-up, call to action, sign-off (~20 seconds)
+
+- Write in natural spoken language — use contractions, rhetorical questions, transitions
+- Add brief commentary or "why this matters" for major stories
+- Use natural transitions between segments (e.g., "Alright, switching gears...", "Now let's talk money...")
+- Do NOT include stage directions like [MUSIC] or [PAUSE] — write only the spoken words
+- Do NOT include URLs in the script — this is audio only
+- Write the full script, not an outline"""
+
+    script = _gpt_call(system_prompt, user_prompt, max_tokens=2000)
+
+    if not script:
+        # Fallback to simple script
+        logger.warning("GPT podcast script generation failed — using simple fallback.")
+        lines: list[str] = []
+        lines.append(f"Hey everyone, welcome to MikeCast. It's {TODAY_DISPLAY}. Let's get into it.")
+        for cat, arts in categorised.items():
+            if not arts:
+                continue
+            lines.append(f"In {cat}:")
+            for art in arts[:3]:
+                title = art["title"].replace("[Updated] ", "")
+                desc = art.get("description", "")
+                lines.append(f"{title}. {desc}")
+        lines.append("That's your MikeCast for today. Stay sharp, catch you tomorrow.")
+        script = " ".join(lines)
+
+    return script
 
 
 # ===================================================================
