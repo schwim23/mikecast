@@ -824,5 +824,243 @@
     "url_fp": "ae1c68a5c52b27903e77058b3455d355",
     "description": "Here’s how much it costs to see Olympic gold medalist Jack Hughes return to the Devils WednesdayNJ.com",
     "date": "2026-02-24T03:00:50.850107+00:00"
+  },
+  {
+    "title": "Intel Strikes Deal With a Chip Start-Up Its C.E.O. Invested In",
+    "url": "https://www.nytimes.com/2026/02/24/technology/intel-sambanova-ceo-lip-bu-tan.html",
+    "url_fp": "8bde13516155fc9e4b35764e792adb31",
+    "description": "A technical partnership embraces SambaNova Systems, which Intel’s chief, Lip-Bu Tan, helps lead as an investor and chairman.",
+    "date": "2026-02-24T11:51:29.012440+00:00"
+  },
+  {
+    "title": "The Looming Taiwan Chip Disaster That Silicon Valley Has Long Ignored",
+    "url": "https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html",
+    "url_fp": "3952789ade2cccff93b5947651b04d2f",
+    "description": "If China invades Taiwan and cuts off its chip exports to American companies, the tech industry and the U.S. economy would be crippled.",
+    "date": "2026-02-24T11:51:29.030224+00:00"
+  },
+  {
+    "title": "China Amps Up Pressure on Japan With Export Bans",
+    "url": "https://www.nytimes.com/2026/02/24/world/asia/china-japan-export-ban.html",
+    "url_fp": "b57b0aadc177a2762f3a853d8cc207ab",
+    "description": "Beijing placed the restrictions on 20 Japanese entities with ties to the defense industry, the latest ratcheting up of its monthslong feud with Tokyo.",
+    "date": "2026-02-24T11:51:29.044179+00:00"
+  },
+  {
+    "title": "ICE Whistle-Blower Says Training Is ‘Broken,’ and OpenAI Faces Questions About Mass Shooter",
+    "url": "https://www.nytimes.com/2026/02/24/podcasts/the-headlines/ice-whistleblower-openai-mass-shooter.html",
+    "url_fp": "6c8cc992dbbd50742b7e2c5375235123",
+    "description": "Plus, how Mexico tracked its most-wanted cartel leader.",
+    "date": "2026-02-24T11:51:29.066840+00:00"
+  },
+  {
+    "title": "How Russia Put Its Future at Risk by Remaking Its Economy for War",
+    "url": "https://www.nytimes.com/2026/02/24/world/europe/russia-ukraine-war-future.html",
+    "url_fp": "cce7de9b3e4ddd654cc31847e5bb0d64",
+    "description": "About half of the country’s federal budget goes toward the fight in Ukraine, money that does little to support its long-term development.",
+    "date": "2026-02-24T11:51:29.084797+00:00"
+  },
+  {
+    "title": "These Ukrainians Don’t Want to Be Traded to Russia for Peace",
+    "url": "https://www.nytimes.com/2026/02/24/world/europe/ukraine-war-donetsk.html",
+    "url_fp": "c7732713515faec1d2142564bcfcc21e",
+    "description": "Four years into the war, a major sticking point in talks is control of the eastern Donetsk region. Residents could face an agonizing choice if Ukraine gives up the territory.",
+    "date": "2026-02-24T11:51:29.101795+00:00"
+  },
+  {
+    "title": "After Six Decades of the War on Drugs, What Works?",
+    "url": "https://www.nytimes.com/2026/02/24/world/americas/mexico-war-on-drugs.html",
+    "url_fp": "ca87f65a1377109cdbc508ba0b995c62",
+    "description": "The U.S. and its allies have spilled blood and treasure to kill drug lords and defeat cartels, but the drugs keep coming and the new groups are more violent than ever.",
+    "date": "2026-02-24T11:51:29.115646+00:00"
+  },
+  {
+    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBCOpenAI partners with McKinsey, BCG, Accenture, and Capgemini to push its Frontier AI agent platformFortuneIBM gets a taste of the Anthropic treatment (or, vibe coding panic comes for the Cobol cowboys)Fortune",
+    "date": "2026-02-24T11:51:29.118996+00:00"
+  },
+  {
+    "title": "Canada to Probe What OpenAI Knew About Tumbler Ridge Shooter - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "Canada to Probe What OpenAI Knew About Tumbler Ridge ShooterThe New York TimesCanada seeks answers from OpenAI for failing to alert police after suspending school shooter’s accountThe GuardianICE Whistle-Blower Says Training Is ‘Broken,’ and OpenAI Faces Questions About Mass ShooterThe New York Times",
+    "date": "2026-02-24T11:51:29.119085+00:00"
+  },
+  {
+    "title": "Head of OpenAI's Codex explains the kind of email that gets his attention — and his advice to young engineers - Business Insider",
+    "url": "https://www.businessinsider.com",
+    "url_fp": "04220288456435753371c3e6a38ca102",
+    "description": "Head of OpenAI's Codex explains the kind of email that gets his attention — and his advice to young engineersBusiness Insider",
+    "date": "2026-02-24T11:51:29.151511+00:00"
+  },
+  {
+    "title": "Anthropic Accuses Chinese Companies of Siphoning Data From Claude - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "Anthropic Accuses Chinese Companies of Siphoning Data From ClaudeWSJChinese AI companies 'distilled' Claude to improve own models, Anthropic saysNBC NewsDetecting and preventing distillation attacksAnthropic",
+    "date": "2026-02-24T11:51:29.170110+00:00"
+  },
+  {
+    "title": "IBM posts steepest daily drop since 2000 after Anthropic says AI can modernize COBOL - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "IBM posts steepest daily drop since 2000 after Anthropic says AI can modernize COBOLReuters",
+    "date": "2026-02-24T11:51:29.170488+00:00"
+  },
+  {
+    "title": "Google just doubled its AI reasoning power with the surprise launch of Gemini 3.1 Pro - Android Central",
+    "url": "https://www.androidcentral.com",
+    "url_fp": "0ba6407ad018bc5ca1396e2733978093",
+    "description": "Google just doubled its AI reasoning power with the surprise launch of Gemini 3.1 ProAndroid Central",
+    "date": "2026-02-24T11:51:29.204694+00:00"
+  },
+  {
+    "title": "Microsoft crowns Copilot as the #1 productivity tool in Windows 11 - Windows Central",
+    "url": "https://www.windowscentral.com",
+    "url_fp": "1cc701f7fd9e99895a96c83b5b39f3a5",
+    "description": "Microsoft crowns Copilot as the #1 productivity tool in Windows 11Windows Central",
+    "date": "2026-02-24T11:51:29.226378+00:00"
+  },
+  {
+    "title": "Microsoft Dragon Copilot can help clinicians save time - Microsoft Source",
+    "url": "https://news.microsoft.com",
+    "url_fp": "d66c29155c0d8df0755b40a37da2eadf",
+    "description": "Microsoft Dragon Copilot can help clinicians save timeMicrosoft Source",
+    "date": "2026-02-24T11:51:29.246016+00:00"
+  },
+  {
+    "title": "Microsoft’s Copilot push irks customers, stirs FTC - InfoWorld",
+    "url": "https://www.infoworld.com",
+    "url_fp": "20f6574a3e9bf4c52ec364b95ebc0960",
+    "description": "Microsoft’s Copilot push irks customers, stirs FTCInfoWorld",
+    "date": "2026-02-24T11:51:29.261849+00:00"
+  },
+  {
+    "title": "Presight–Shorooq’s $100 Million AI Fund Deploys Capital Into Five Startups in First Quarter - waya.media",
+    "url": "https://waya.media",
+    "url_fp": "72ba58e1a19b738f70ca8ab2d92ffa2e",
+    "description": "Presight–Shorooq’s $100 Million AI Fund Deploys Capital Into Five Startups in First Quarterwaya.media",
+    "date": "2026-02-24T11:51:29.286859+00:00"
+  },
+  {
+    "title": "I.R.S. Tactics Against Meta Open a New Front in the Corporate Tax Fight",
+    "url": "https://www.nytimes.com/2026/02/24/business/irs-meta-corporate-taxes.html",
+    "url_fp": "2660d3eadcfd91e7f13f2d87a5b8def4",
+    "description": "The agency is using real-world profit data to challenge how big companies value offshore intellectual property.",
+    "date": "2026-02-24T11:51:29.339884+00:00"
+  },
+  {
+    "title": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade' - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade'Yahoo FinanceStock Market Today: Dow Futures Inch Up; Trump's New Tariffs Kick In at 10% — Live UpdatesWSJDow drops 800 points as AI disruption fears and tariff woes weigh on markets: Live updatesCNBC",
+    "date": "2026-02-24T11:51:29.351236+00:00"
+  },
+  {
+    "title": "Stock Market Today: Dow, S&P 500 and Nasdaq struggle to rally after another AI-disruption sell-off; investors eye Anthropic briefing; Home Depot earnings on tap; Workday results to shine light on software sector. - MarketWatch",
+    "url": "https://www.marketwatch.com",
+    "url_fp": "5b80a053b8f3f5b09a0e2b665ba6d444",
+    "description": "Stock Market Today: Dow, S&P 500 and Nasdaq struggle to rally after another AI-disruption sell-off; investors eye Anthropic briefing; Home Depot earnings on tap; Workday results to shine light on software sector.MarketWatch",
+    "date": "2026-02-24T11:51:29.402516+00:00"
+  },
+  {
+    "title": "Stock Market Today: Futures Edge Higher After Indexes Tumble on Tariff Uncertainty, AI Disruption Concerns - Investopedia",
+    "url": "https://www.investopedia.com",
+    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
+    "description": "Stock Market Today: Futures Edge Higher After Indexes Tumble on Tariff Uncertainty, AI Disruption ConcernsInvestopedia",
+    "date": "2026-02-24T11:51:29.431070+00:00"
+  },
+  {
+    "title": "AI software start-up Jump pockets $80m Series B - FinTech Futures",
+    "url": "https://www.fintechfutures.com",
+    "url_fp": "08c85f0537d79bc1fb840edd6890994a",
+    "description": "AI software start-up Jump pockets $80m Series BFinTech Futures",
+    "date": "2026-02-24T11:51:29.473702+00:00"
+  },
+  {
+    "title": "Who Is Paying for the 2025 U.S. Tariffs? - Liberty Street Economics",
+    "url": "https://libertystreeteconomics.newyorkfed.org",
+    "url_fp": "a2ec6cfb0a8e83dcab97a684aee916c1",
+    "description": "Who Is Paying for the 2025 U.S. Tariffs?Liberty Street Economics",
+    "date": "2026-02-24T11:51:29.529372+00:00"
+  },
+  {
+    "title": "Apple Unveils Plans for 'BodyNet' of Wearable Sensors - National Today",
+    "url": "https://nationaltoday.com",
+    "url_fp": "a13df8b91a7375f0569dc626d64998db",
+    "description": "Apple Unveils Plans for 'BodyNet' of Wearable SensorsNational Today",
+    "date": "2026-02-24T11:51:29.556853+00:00"
+  },
+  {
+    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - TradingView",
+    "url": "https://www.tradingview.com",
+    "url_fp": "84ea80fab7315a2f6446f2aedca0019f",
+    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingTradingView",
+    "date": "2026-02-24T11:51:29.595027+00:00"
+  },
+  {
+    "title": "Most affordable unlocked iPhone 16 Pro you can buy is $300 off at Amazon today (Renewed Premium) - 9to5Toys",
+    "url": "https://9to5toys.com",
+    "url_fp": "7229e8b9792290e7482145ca1a02a7c8",
+    "description": "Most affordable unlocked iPhone 16 Pro you can buy is $300 off at Amazon today (Renewed Premium)9to5Toys",
+    "date": "2026-02-24T11:51:29.631905+00:00"
+  },
+  {
+    "title": "Ted Sarandos Responds to Trump Telling Netflix to Fire Susan Rice: “It’s Not a Political Deal” - The Hollywood Reporter",
+    "url": "https://www.hollywoodreporter.com",
+    "url_fp": "89e3065b8fbc5e8ef0cd1c93bc6894f5",
+    "description": "Ted Sarandos Responds to Trump Telling Netflix to Fire Susan Rice: “It’s Not a Political Deal”The Hollywood Reporter",
+    "date": "2026-02-24T11:51:29.730952+00:00"
+  },
+  {
+    "title": "Microsoft applications the topic of upcoming training sessions - Nebraska Today",
+    "url": "https://news.unl.edu",
+    "url_fp": "507f54eae1dfa528cf3de03cd571e921",
+    "description": "Microsoft applications the topic of upcoming training sessionsNebraska Today",
+    "date": "2026-02-24T11:51:29.764316+00:00"
+  },
+  {
+    "title": "Meet the Most Profitable Company in America (It’s Not Apple or Microsoft) - 24/7 Wall St.",
+    "url": "https://247wallst.com",
+    "url_fp": "5174185651b0be54b91403adb571059b",
+    "description": "Meet the Most Profitable Company in America (It’s Not Apple or Microsoft)24/7 Wall St.",
+    "date": "2026-02-24T11:51:29.798506+00:00"
+  },
+  {
+    "title": "New York Yankees at Pittsburgh Pirates Game Story, Scores/Highlights - 02/23/2026 - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "New York Yankees at Pittsburgh Pirates Game Story, Scores/Highlights - 02/23/2026MLB.com",
+    "date": "2026-02-24T11:51:29.836309+00:00"
+  },
+  {
+    "title": "Spring Training Game #4: New York Yankees vs. Pittsburgh Pirates - Bucs Dugout",
+    "url": "https://www.bucsdugout.com",
+    "url_fp": "d65b62781def35278f3785ac82253575",
+    "description": "Spring Training Game #4: New York Yankees vs. Pittsburgh PiratesBucs Dugout",
+    "date": "2026-02-24T11:51:29.855051+00:00"
+  },
+  {
+    "title": "Knicks’ Jalen Brunson Drops Major Quote on His Future - heavy.com",
+    "url": "https://heavy.com",
+    "url_fp": "374bf1bb8fee633961da067e5c478089",
+    "description": "Knicks’ Jalen Brunson Drops Major Quote on His Futureheavy.com",
+    "date": "2026-02-24T11:51:29.886632+00:00"
+  },
+  {
+    "title": "2026 NFL Combine: New York Giants' hierarchy on display for first time - Giants Wire",
+    "url": "https://giantswire.usatoday.com",
+    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
+    "description": "2026 NFL Combine: New York Giants' hierarchy on display for first timeGiants WireJoe Schoen and John Harbaugh’s Giants vision will begin to take shape at NFL combineNew York PostNew York Giants receive massive trade haul for the No. 2 pick, remake the secondary and WR room in 7-round 2026 NFL mock draftA to Z Sports",
+    "date": "2026-02-24T11:51:29.907909+00:00"
+  },
+  {
+    "title": "As Devils Players Return From Olympics, What Can We Learn About The Core Of This Team? - All About The Jersey",
+    "url": "https://www.allaboutthejersey.com",
+    "url_fp": "247a96d3a8bbfeafd183ae1a03525854",
+    "description": "As Devils Players Return From Olympics, What Can We Learn About The Core Of This Team?All About The Jersey",
+    "date": "2026-02-24T11:51:29.967914+00:00"
   }
 ]
