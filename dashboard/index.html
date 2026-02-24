@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MikeCast — Daily News Briefing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">🎙️</span>
+        <h1 class="brand-name">MikeCast</h1>
+      </div>
+      <p class="brand-tagline">Daily News Briefing for Big Mike</p>
+    </div>
+  </header>
+
+  <!-- Controls -->
+  <section class="controls">
+    <div class="controls-inner">
+      <label for="date-picker" class="date-label">Select Date:</label>
+      <input type="date" id="date-picker" class="date-input">
+      <button id="btn-today" class="btn btn-today">Today</button>
+      <button id="btn-prev" class="btn btn-nav" title="Previous day">◀</button>
+      <button id="btn-next" class="btn btn-nav" title="Next day">▶</button>
+    </div>
+  </section>
+
+  <!-- Loading / Error -->
+  <div id="loading" class="status-msg" style="display:none;">Loading briefing…</div>
+  <div id="error" class="status-msg error" style="display:none;"></div>
+
+  <!-- Main Content -->
+  <main id="content" class="content" style="display:none;">
+
+    <!-- Briefing HTML -->
+    <section id="briefing-section" class="card">
+      <div id="briefing-html"></div>
+    </section>
+
+    <!-- Podcast Player -->
+    <section id="podcast-section" class="card">
+      <h2 class="section-title">🎧 Podcast</h2>
+      <audio id="podcast-player" controls class="audio-player">
+        Your browser does not support the audio element.
+      </audio>
+      <p id="no-audio" class="muted" style="display:none;">No audio available for this date.</p>
+    </section>
+
+    <!-- Article Links by Category -->
+    <section id="articles-section" class="card">
+      <h2 class="section-title">📰 Article Links</h2>
+      <div id="articles-list"></div>
+    </section>
+
+    <!-- Podcast Script (collapsible) -->
+    <section id="script-section" class="card">
+      <button id="script-toggle" class="collapsible-toggle">
+        📝 Podcast Script <span id="script-arrow" class="arrow">▶</span>
+      </button>
+      <div id="script-content" class="collapsible-body" style="display:none;">
+        <pre id="script-text" class="script-text"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>MikeCast © 2026 — Powered by NYT API, Google News &amp; OpenAI</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
