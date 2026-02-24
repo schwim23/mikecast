@@ -19,6 +19,10 @@ import sys
 import time
 import hashlib
 from datetime import datetime, timedelta, timezone
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:
+    from backports.zoneinfo import ZoneInfo  # type: ignore
 from difflib import SequenceMatcher
 from email import encoders
 from email.mime.audio import MIMEAudio
@@ -58,8 +62,10 @@ GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "").replace("\\n", "")
 GMAIL_FROM = os.environ.get("GMAIL_FROM", "prometheusagent23@gmail.com")
 GMAIL_TO = os.environ.get("GMAIL_TO", "Michael.schwimmer@gmail.com")
 
-TODAY = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-TODAY_DISPLAY = datetime.now(timezone.utc).strftime("%B %d, %Y")
+# Use Eastern Time so file names match what the browser (in EST/EDT) expects
+_ET = ZoneInfo("America/New_York")
+TODAY = datetime.now(_ET).strftime("%Y-%m-%d")
+TODAY_DISPLAY = datetime.now(_ET).strftime("%B %d, %Y")
 
 # ---------------------------------------------------------------------------
 # Search categories
@@ -110,6 +116,30 @@ def _safe_request(url: str, params: dict | None = None, timeout: int = 15) -> re
             logger.warning("Request failed (attempt %d): %s", attempt + 1, exc)
             time.sleep(1)
     return None
+
+
+def resolve_google_news_url(url: str) -> str:
+    """
+    Google News RSS links are redirect URLs.  Follow the redirect chain
+    (up to 5 hops) to get the real article URL.  Falls back to the
+    original URL on any error.
+    """
+    if not url or "news.google.com" not in url:
+        return url
+    try:
+        resp = requests.head(
+            url,
+            allow_redirects=True,
+            timeout=8,
+            headers={"User-Agent": "Mozilla/5.0 (compatible; MikeCast/1.0)"},
+        )
+        final = resp.url
+        # Sometimes Google returns a consent page — keep original in that case
+        if "google.com" in final or "consent" in final:
+            return url
+        return final
+    except Exception:
+        return url
 
 
 def title_similarity(a: str, b: str) -> float:
@@ -218,9 +248,13 @@ def search_news_web(query: str, max_results: int = 5) -> list[dict]:
             desc_tag = item.find("description")
             source_tag = item.find("source")
             pub_tag = item.find("pubdate")
+            # Use the publisher's domain URL from <source url='...'> as the article link.
+            # Google News RSS redirect URLs cannot be resolved server-side (consent wall).
+            source_url = source_tag.get("url", "") if source_tag else ""
+            article_url = source_url if source_url else (link_tag.get_text(strip=True) if link_tag else "")
             articles.append({
                 "title": title_tag.get_text(strip=True) if title_tag else "",
-                "url": link_tag.get_text(strip=True) if link_tag else "",
+                "url": article_url,
                 "description": BeautifulSoup(desc_tag.get_text(), "html.parser").get_text(strip=True) if desc_tag else "",
                 "source": source_tag.get_text(strip=True) if source_tag else "Google News",
                 "published": pub_tag.get_text(strip=True) if pub_tag else "",
@@ -577,7 +611,8 @@ Format rules:
 - Return ONLY the briefing text sections (no HTML, no markdown headers with #)
 - Use plain section headers like: EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS, KEY TRENDS & INSIGHTS, WHAT TO WATCH
 - Each story should be on its own paragraph
-- URLs should appear as: [Source Name](URL) at the end of each story paragraph
+- IMPORTANT: End every story paragraph with a clickable source link in this exact format: [Source Name](URL)
+  Use the exact URL provided in the article data above — do not make up or omit URLs
 - Keep it tight and informative — this is a busy executive's morning read"""
 
     briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=2500)

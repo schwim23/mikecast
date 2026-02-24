@@ -170,7 +170,22 @@
 
   datePicker.addEventListener("change", function () { loadBriefing(this.value); });
   btnToday.addEventListener("click", function () {
-    const t = todayStr(); datePicker.value = t; loadBriefing(t);
+    // On "Today" click, re-fetch manifest to get latest, then load most recent
+    (async () => {
+      try {
+        const resp = await fetch("/api/manifest");
+        if (resp.ok) {
+          const data = await resp.json();
+          const latest = (data.dates || [])[0] || todayStr();
+          datePicker.value = latest;
+          loadBriefing(latest);
+        } else {
+          const t = todayStr(); datePicker.value = t; loadBriefing(t);
+        }
+      } catch (e) {
+        const t = todayStr(); datePicker.value = t; loadBriefing(t);
+      }
+    })();
   });
   btnPrev.addEventListener("click", function () {
     const prev = shiftDate(datePicker.value || todayStr(), -1);
@@ -193,9 +208,35 @@
   });
 
   const today = todayStr();
-  datePicker.value = today;
-  datePicker.max   = today;
-  loadManifest();
-  loadBriefing(today);
+  datePicker.max = today;
+
+  // Load manifest first, then default to the most recent available date
+  (async () => {
+    try {
+      const resp = await fetch("/api/manifest");
+      if (resp.ok) {
+        const data = await resp.json();
+        const dates = data.dates || [];
+        // Populate archive dropdown
+        archiveSelect.innerHTML = '<option value="">Archive &#9662;</option>';
+        for (const d of dates) {
+          const opt = document.createElement("option");
+          opt.value = d;
+          opt.textContent = formatDisplayDate(d);
+          archiveSelect.appendChild(opt);
+        }
+        // Use the most recent date that exists
+        const latestDate = dates.length > 0 ? dates[0] : today;
+        datePicker.value = latestDate;
+        loadBriefing(latestDate);
+      } else {
+        datePicker.value = today;
+        loadBriefing(today);
+      }
+    } catch (e) {
+      datePicker.value = today;
+      loadBriefing(today);
+    }
+  })();
 
 })();
