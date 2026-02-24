@@ -869,6 +869,19 @@ def send_email(
 # 8. DATA PERSISTENCE (for dashboard)
 # ===================================================================
 
+def generate_manifest() -> None:
+    """Write a manifest.json listing all available briefing dates (newest first)."""
+    dates = sorted(
+        [p.stem for p in DATA_DIR.glob("????-??-??.json")],
+        reverse=True,
+    )
+    manifest = {"dates": dates}
+    manifest_path = DATA_DIR / "manifest.json"
+    with open(manifest_path, "w", encoding="utf-8") as fh:
+        json.dump(manifest, fh, indent=2)
+    logger.info("Manifest updated: %d dates", len(dates))
+
+
 def save_daily_data(
     html_briefing: str,
     categorised: dict[str, list[dict]],
@@ -935,6 +948,7 @@ def main() -> None:
     # 7. Save & send
     logger.info("Step 7/7: Saving data & sending email…")
     save_daily_data(html, top_articles, picks, script, audio_filename)
+    generate_manifest()
     send_email(html, script, audio_path if audio_ok else None)
 
     logger.info("MikeCast briefing complete.")
