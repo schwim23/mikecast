@@ -1,1 +1,646 @@
-[]
+[
+  {
+    "title": "Binance Employees Find $1.7 Billion in Crypto Was Sent to Iranian Entities",
+    "url": "https://www.nytimes.com/2026/02/23/technology/binance-employees-iran-firings.html",
+    "url_fp": "da5a1718187d57328456d46f134e93f3",
+    "description": "Binance pledged to crack down on crime. But internal investigators at the world’s largest crypto exchange continued to find evidence of potential legal violations on the platform.",
+    "date": "2026-02-24T02:23:58.099223+00:00"
+  },
+  {
+    "title": "The Lesson of A.I. Literacy Class: Don’t Let the Chatbot Think for You",
+    "url": "https://www.nytimes.com/2026/02/23/technology/ai-literacy-newark-school-chatbots.html",
+    "url_fp": "6d691dd622336a5eb8cb0d70eca89bc1",
+    "description": "Teachers say they want to equip high school students to drive artificial intelligence, rather than be mere passengers steered by chatbots.",
+    "date": "2026-02-24T02:23:58.099276+00:00"
+  },
+  {
+    "title": "Anthropic Accuses 3 Chinese Companies of Harvesting Its Data",
+    "url": "https://www.nytimes.com/2026/02/23/technology/anthropic-chinese-startups-distillation.html",
+    "url_fp": "4945131389dfa8fa30aa5386b1dd08f1",
+    "description": "The San Francisco start-up claimed that DeepSeek, Moonshot and MiniMax used approximately 24,000 fraudulent accounts to train their own chatbots.",
+    "date": "2026-02-24T02:23:58.099295+00:00"
+  },
+  {
+    "title": "Backed by Anthropic, a Super PAC Group Begins an Ad Blitz in Support of A.I. Regulation",
+    "url": "https://www.nytimes.com/2026/02/23/technology/ai-pac-ad-blitz.html",
+    "url_fp": "ba366028a9c4d5b2eb2ff0b7c8b304a4",
+    "description": "The ads by Public First Action, which started airing on Monday, are part of an escalating political war over artificial intelligence before the midterm elections.",
+    "date": "2026-02-24T02:23:58.099314+00:00"
+  },
+  {
+    "title": "Pentagon Summons Anthropic Chief in Dispute Over A.I. Limits",
+    "url": "https://www.nytimes.com/2026/02/23/us/politics/pentagon-anthropic-ai.html",
+    "url_fp": "e9eecf7bef6efa6f0094f1c2003d69a7",
+    "description": "The artificial intelligence company has demanded that some guardrails be put in place as it negotiates a contract with the Defense Department.",
+    "date": "2026-02-24T02:23:58.099330+00:00"
+  },
+  {
+    "title": "Jeff and Lauren Sánchez Bezos Will Be Honorary Chairs of the Met Gala",
+    "url": "https://www.nytimes.com/2026/02/23/style/jeff-and-lauren-sanchez-bezos-honorary-chairs-met-gala.html",
+    "url_fp": "1a8ae5b43fb258edcb84a1302a13c995",
+    "description": "The news came tucked into the second page of a recent news release.",
+    "date": "2026-02-24T02:23:58.099345+00:00"
+  },
+  {
+    "title": "In a Clothing Pickle? There’s an App for That",
+    "url": "https://www.nytimes.com/2026/02/23/style/pickle-app-clothing-rental.html",
+    "url_fp": "a99adddc3210eeb85c4f910e3515cb1b",
+    "description": "Pickle, a new peer-to-peer apparel-rental app, helps users stay on trend without having to go into debt or rely on climate-unfriendly fast fashion.",
+    "date": "2026-02-24T02:23:58.099361+00:00"
+  },
+  {
+    "title": "People Loved the Dot-Com Boom. The A.I. Boom, Not So Much.",
+    "url": "https://www.nytimes.com/2026/02/21/technology/ai-boom-backlash.html",
+    "url_fp": "04a2180c0d758d8c57a2a51ea48226e7",
+    "description": "Tech leaders are beginning to worry about the public’s underwhelming enthusiasm for their plans to remake the world with artificial intelligence. Will that burst the bubble?",
+    "date": "2026-02-24T02:23:58.099389+00:00"
+  },
+  {
+    "title": "Trump Administration Scrambles to Pick Up the Pieces of Broken Tariffs",
+    "url": "https://www.nytimes.com/2026/02/23/us/politics/trump-tariffs-supreme-court.html",
+    "url_fp": "27459eb6a45684521c1aea19772b2d8c",
+    "description": "President Trump is already working to piece his tariff program back together, after a Supreme Court ruling ruptured a centerpiece of his economic agenda.",
+    "date": "2026-02-24T02:23:58.099407+00:00"
+  },
+  {
+    "title": "FedEx Sues for Refund of Trump Tariffs Rejected by Supreme Court",
+    "url": "https://www.nytimes.com/2026/02/23/business/fedex-lawsuit-tariffs-refund.html",
+    "url_fp": "78d4f638c3c27cd11009d7af0ec6bebf",
+    "description": "The company, which did not specify how much it was seeking, is expected to be one of many demanding compensation for levies ruled unlawful.",
+    "date": "2026-02-24T02:23:58.099424+00:00"
+  },
+  {
+    "title": "Judges Grow Angry Over Trump Administration Violating Their Orders",
+    "url": "https://www.nytimes.com/2026/02/23/us/politics/judges-contempt-immigration-trump.html",
+    "url_fp": "115fdef7c8aa3c36629e2d1176afe48d",
+    "description": "At least 35 times since August, federal judges have ordered the administration to explain why it should not be punished for violating their orders in immigration cases.",
+    "date": "2026-02-24T02:23:58.099439+00:00"
+  },
+  {
+    "title": "‘Angel Families’ Return to Washington to Back Up Trump Ahead of State of the Union",
+    "url": "https://www.nytimes.com/2026/02/23/us/politics/trump-angel-families-undocumented-immigrants.html",
+    "url_fp": "c4aa7fa704f3348742b42a42bb617dc4",
+    "description": "The families of people killed by undocumented immigrants have forged a bond with the president, who has invited some of them to his address on Tuesday.",
+    "date": "2026-02-24T02:23:58.099455+00:00"
+  },
+  {
+    "title": "Mexican Forces Say They Tracked El Mencho to Cabin by Following His Lover",
+    "url": "https://www.nytimes.com/2026/02/23/world/americas/el-mencho-mexico-cartel-military-raid.html",
+    "url_fp": "a08837234a7bcfcf63a48a82b78f475a",
+    "description": "Top security officials revealed details of the operation that led to the death of Mexico’s most wanted drug cartel leader.",
+    "date": "2026-02-24T02:23:58.099470+00:00"
+  },
+  {
+    "title": "After Chaos Rips Across Mexico, the Remnants of Cartel Violence Haunts Residents",
+    "url": "https://www.nytimes.com/2026/02/23/world/americas/mexico-cartel-guadalajara.html",
+    "url_fp": "e1c57a3f6e3cfd4d69680ea382fd094f",
+    "description": "Charred vehicles cluttered deserted streets as residents started to emerge from their homes in Guadalajara, which was hit hard by violence after the death of a cartel leader.",
+    "date": "2026-02-24T02:23:58.099485+00:00"
+  },
+  {
+    "title": "What Travelers Need to Know as Cartel Violence Rattles Mexico",
+    "url": "https://www.nytimes.com/2026/02/23/travel/cartel-violence-mexico-el-mencho-travel-flights.html",
+    "url_fp": "65aaef44c712c1ab6ce19e0aa807bdcf",
+    "description": "The killing of a drug lord and the unrest that followed have prompted flight cancellations, roadblocks, cruise disruptions and “shelter in place” alerts.",
+    "date": "2026-02-24T02:23:58.099499+00:00"
+  },
+  {
+    "title": "Even in a Blizzard, Food Delivery in New York City Continues",
+    "url": "https://www.nytimes.com/2026/02/23/nyregion/nyc-winter-storm-deliverista.html",
+    "url_fp": "82dfee892c775f0d49af1fd435591eb2",
+    "description": "On Monday, Mayor Zohran Mamdani banned nearly all traffic from the streets. Among the exceptions were emergency vehicles and electric delivery bikes.",
+    "date": "2026-02-24T02:23:58.099513+00:00"
+  },
+  {
+    "title": "Is A.I. Changing the Way You Teach Writing? Tell Us.",
+    "url": "https://www.nytimes.com/2026/02/23/us/ai-writing-assignments-classrooms-callout.html",
+    "url_fp": "89010e0a2c289011bc9ba9dbdff1affd",
+    "description": "We want to hear from high school teachers and college professors who assign writing.",
+    "date": "2026-02-24T02:23:58.099541+00:00"
+  },
+  {
+    "title": "Canada Presses OpenAI for Answers on Mass Shooter’s Chatbot Use",
+    "url": "https://www.nytimes.com/2026/02/23/world/canada/canada-shooting-openai.html",
+    "url_fp": "9e9620a7fff3b4e0a75a0957e01b0979",
+    "description": "The company suspended the killer’s ChatGPT account over a policy violation in June, eight months before the attacks in Tumbler Ridge, British Columbia.",
+    "date": "2026-02-24T02:23:58.099558+00:00"
+  },
+  {
+    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPMU5jZktoc2FUcnVjb01iU2d3MHNHM3FLS2thWEtHdGp5UEN6aHcyWDhjb2R5RjJkcG9XdVVwWWtTTFgydWVkalF2MXhuLUl4SnctWTIyTmNDM1ROemdmWk5Zbi1rYjYweFRzNG5fdGduOGxvYlAydWYzNjlTUk5MN1Q5SUZVNEEySkJZaENGd0lYMjNxSEN0NEI2dVVPOGt4aWfSAacBQVVfeXFMUGU3LVhOcjR5OW53eWc2amVSZmNDMkljR3MxRDg4Y19ybzVrOXhIQ2k2TmpFdHB5S1hoTGFZNmFHSnIwTmdjMFRkajdvN2poM00zVURlVkVTeE9OdzJZWmh0Q0tyN2J5enpCb3Voa2VJdndfWlJBTVIwa2w4WlpmSVZJcTg0OWx4ams4c1NTbjlxVk05ellkek9ZRXVRLVIxanB0aVh6MFE?oc=5",
+    "url_fp": "f18644c78fd34842013aaf86032be62e",
+    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBC",
+    "date": "2026-02-24T02:23:58.099614+00:00"
+  },
+  {
+    "title": "OpenAI deepens partnerships with consulting giants to push enterprise AI beyond pilot - Reuters",
+    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQanFFNzJCemxpSk1wNkpwZUMzS1NfNnY5Q0xWdDlJWjZnZ1FkUVoxQnJlZTliU1lsR0hNc3FBdWszZnllUnpEbmtWSVAzWVJqczk1NUNuSDN5ekJtRGJ2QW50a3J3UGYyVmltRVBXd0pRRmZnajhEekFOd05PLW5HUkVYeEpVNG5jT05kZVFoZC1CdkJHbUY3SnRMMkRoYVdWTy1BTnE2WkEyZmFQRVROYjYxWC1kUWNra2ZuZ2pn?oc=5",
+    "url_fp": "977dd92889ca386722c7c57c1571c546",
+    "description": "OpenAI deepens partnerships with consulting giants to push enterprise AI beyond pilotReuters",
+    "date": "2026-02-24T02:23:58.099633+00:00"
+  },
+  {
+    "title": "McKinsey and OpenAI scale AI-driven transformations with new Frontier Alliance - McKinsey & Company",
+    "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxOLTNQMWdIMDBlTEUyeTZxRmdoRXRjcGR5V0RtSjB1OGpNcTZrZXBLX0owTjBPcDdldlQtNE91cWEybjFMNTZ0RXo3bjJ5QkE3b0pYNTRrVzdGbmNXYXI4T1NmVnZpTDBWYnpLNUJxaTloMS0xbzFmQ0k3NzNyckxBZm42YmE5aExGN1pjQXZWZmdXWlNGWU8yVVgyaTFGQWpkbmFLb3ZzYm02a0N4ZC00Y3FWbWdDTWhqR1l4QnVPTzFwaF9mRUFSU19PSVdxQQ?oc=5",
+    "url_fp": "09aedfaab200a802601e7d7f09784904",
+    "description": "McKinsey and OpenAI scale AI-driven transformations with new Frontier AllianceMcKinsey & Company",
+    "date": "2026-02-24T02:23:58.099649+00:00"
+  },
+  {
+    "title": "Detecting and preventing distillation attacks - Anthropic",
+    "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNOUxlWTM0OXZ3cENhMEpobm5TWEM4cVRLOXRpRHlYSUZ3bThyNE1wcXhFY2ZCSkNHYUJEV1YtZ0VkSWxfVW9tc0lkVExFSFBhRUFPZENhNFNZQk5MNjJxQTdhT3dJYjl6ZUJseVplanY4R2NDcHdSU2RJWlV2MzlGYVhR?oc=5",
+    "url_fp": "604656eecc0c6b10fbce7fa7d8220720",
+    "description": "Detecting and preventing distillation attacksAnthropicAnthropic accuses Chinese AI labs of mining Claude as US debates AI chip exportsTechCrunchAnthropic Accuses Chinese Companies of Siphoning Data From ClaudeWSJ",
+    "date": "2026-02-24T02:23:58.099674+00:00"
+  },
+  {
+    "title": "IBM is the latest AI casualty. Shares tank 13% on Anthropic programming language threat - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNYm9SRjNud21IalZUT1Rwd1dZMndKRWZZLXdvMTd2T3ZMdWplQ3RreDZPbFgzRTNPSjl1aUVQbnl5YXJNb213U24wWDR6TVc0aUV2RktqTGtHMTZscHl3X2JfZ2Q5SGs2OWhsZlA0bUJUYnRpX09HWEtJQkpacTJlQVloejBaRGwzQ1ZWMFN0SFBZdndhUTJWdW9UU2cyYlJia2pOV3hiTmF1S2w4ZWVXcdIBtgFBVV95cUxNNFZRc1MySXAySlBsR25vRjlRdFN1VlZ1UjB6b0p6VWFkT1NUSEpaQjRsUGlBU0ZRRnV4Ri0zSnMtZVlPLThfS0NJeXBiZWZHTmxhUWZkU2RvT1R4bGkwNG52ODd5cTNDdHVLUFA3eE9sM0FWQS1VeDFhTng0Y2F1MldrcW1NSFBaSmljSDRmMTNmWldob09qX3NRSjRWQTJqY2YxZ2E2NmM0WG0xcGlBRkp5TEU3dw?oc=5",
+    "url_fp": "4b301428b5c2fc65a469ca4374152291",
+    "description": "IBM is the latest AI casualty. Shares tank 13% on Anthropic programming language threatCNBC",
+    "date": "2026-02-24T02:23:58.099696+00:00"
+  },
+  {
+    "title": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol Tool - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9MeE1BNmtXcVNOZEduX05yWml2V0c3ME9GeWh6Z2YxdXJXS3QtdW9LT2JfTFlQbUp5NHJMeUpmQVdBZUo4cG0xM3RiVUxPdXE0WVk3VjgtVWFVTThBdld1R3gwc0Z3T2ZzWkRPdlM3M3hFbmw1ZWlhR1pqVQ?oc=5",
+    "url_fp": "fdc0edc752a9708f72c4177b2f5caa43",
+    "description": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol ToolYahoo Finance",
+    "date": "2026-02-24T02:23:58.099712+00:00"
+  },
+  {
+    "title": "I Signed Up for Google's Gemini AI Pro Plan. 5 Reasons It's Worth the Upgrade - PCMag",
+    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNamZyaVJMY3RlNUw5aU5BNlVpM1YxZ2pjNERPZ2pEcXF6bVhJSlVQSkM1MFpLbjFyQlVuSk4xZ2VnY0xfY21HeGNGMjMwODlZSkJzaGJ0MlFXeWZjR08zX0loVmFUSl9EcWxVa1ZiVzRUV1N4b19QYk5hWUp0VWZXbHNJRlBNU1haRjlSU0FQQTRSMGRyeDBxWnFlU1NiRXdlMlhtQ2R3?oc=5",
+    "url_fp": "b8d4c1a64eb8c0a0df8521853fa51997",
+    "description": "I Signed Up for Google's Gemini AI Pro Plan. 5 Reasons It's Worth the UpgradePCMag",
+    "date": "2026-02-24T02:23:58.099730+00:00"
+  },
+  {
+    "title": "Apple, Google Gemini add music-focused generative AI features - The Seattle Times",
+    "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxORFJmTmt5eTh0UWlzZTdJUkhsM3FZcER2Sng5dmtkVERWXzZFdERpU2RONGFyeGJzZzVzU1ZUdHBTdzBSVWN2cEZSWmRCam1JcGVSeWIybWRoMlhMYmhuQ2ZBUzBoOTRGcjFDTmlTWVFnRUcxRUJWOXN1a2RDOTg1WmZnR0FUemQ0Ny1kcmhIc3J2VkxPaXo1X2RHaXRJMjhk?oc=5",
+    "url_fp": "d19bffe3eb36b8e53ce2e765b59693cf",
+    "description": "Apple, Google Gemini add music-focused generative AI featuresThe Seattle Times",
+    "date": "2026-02-24T02:23:58.099747+00:00"
+  },
+  {
+    "title": "Why Google Gemini Is Emerging as a Hot New AI Tool for Startups - inc.com",
+    "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQZjkwTG1BcDlzbnpRYWJFTHZDTXctSlVsemFmb2VPaHA4VFRJU1RpSGVCQkw0VGVVQ0p1OUJ2WTNxTXItQUhvaG5zVTFIUllyb2F4N01ZRHg1QXRiWE43bjd4Q0tCb2JiSm1KX0tnWFgybHB0d1BFWnBrM0g0RjhVZkxlZ25YaVJxNVpndjJZeTU5WEU1OC03bWttYU5MZi1XZWVGd1lB?oc=5",
+    "url_fp": "7f1489d8d38922a98ab9f40f0018c430",
+    "description": "Why Google Gemini Is Emerging as a Hot New AI Tool for Startupsinc.com",
+    "date": "2026-02-24T02:23:58.099762+00:00"
+  },
+  {
+    "title": "Microsoft Copilot is the best productivity app on Windows, says Microsoft - XDA",
+    "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOZG1hQ0RPWmxOS25qY0lkVjJHem5tMGNkY25wNXNKSWx1X2ZsbFRkOEdnYzhwS18xYlN0eWFyLVUyQlVTRW9XZ1pnRkZoZjJvOS1BSkFWcW1xaEpsZld6cVNFVkFWVmFNZ3Vibm1SblU1UERrOXF6REdORXgyU1hoWExCRVB1UU1RbmxlSFNqUmREWnRSWUZTQW14dFN4eVE0Q0VscWMtbw?oc=5",
+    "url_fp": "77d2fb58ccd7cd2918d6f391f77952f7",
+    "description": "Microsoft Copilot is the best productivity app on Windows, says MicrosoftXDA",
+    "date": "2026-02-24T02:23:58.099778+00:00"
+  },
+  {
+    "title": "Microsoft’s AI ambitions could bring trouble - InfoWorld",
+    "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOcXJ2RTdYV1dZWTFDREtuVXh1OEkyYnlRclhXZ01lSXIwTFBhcFpzZEVBZkpQd1dMSzlYTTNaR25CcTNsVE43VTMwSmY5ZV81QjdtNlNRZEx1bnZLRko2TTk1T3ZCTENNNFR6ZkRlQlQ3YWxWbmo4MDNkd1NOb2FkZFpLWUhyTDdZeS03ZnRfRmJHZTg5?oc=5",
+    "url_fp": "572242ed73ce7545f10d0deff7247856",
+    "description": "Microsoft’s AI ambitions could bring troubleInfoWorld",
+    "date": "2026-02-24T02:23:58.099793+00:00"
+  },
+  {
+    "title": "Does Microsoft Deserve Its Decade-Low Multiple? - 24/7 Wall St.",
+    "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPSmlIUEU3d05QQW96UV9aMWxUWDJBaWMySVFGLW5COFZ5RmRpYVhIRTQyVng3V3B4Q1hlX0F2UjRnbWptckM2S0hUWEd3T1BjVzlZbWNqemtyZ2NMYmQ2V29pUjZmeS1ZM3htaklMNlNhdXduZFlJUVFOWGhqbnZLLVM5TGtob0xPNHpyZm53WXhpODVf?oc=5",
+    "url_fp": "1b78a60832c5b6a5bcae7699194c4ab2",
+    "description": "Does Microsoft Deserve Its Decade-Low Multiple?24/7 Wall St.",
+    "date": "2026-02-24T02:23:58.099808+00:00"
+  },
+  {
+    "title": "The Weekly Notable Startup Funding Report: 2/23/26 - AlleyWatch",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNVWlESWtKa09NYmZmLUlxdWZDRWJ2QXJjeW13SkFFZ0l0azk3Q1V3ZjV3bFR4ZVpMeWF0eHdFbUFoLUVDUWtkajY2eDl5M1gxRXFaOVlMOUd5T2d1RVhMQnJ6dW1IYVBtaUk1ckV6Tkl0QzI1cnZsWUhzR0NGYld6dVU4Q2dHM09m?oc=5",
+    "url_fp": "4d13e815a300e60c92966cb3eabf0081",
+    "description": "The Weekly Notable Startup Funding Report: 2/23/26AlleyWatch",
+    "date": "2026-02-24T02:23:58.099823+00:00"
+  },
+  {
+    "title": "US AI startups see record $100m rounds - MSN",
+    "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNZ2VMRUhTM09lNlVjMk9FNklxbWQ3SzRZZl9fbi1pM0Fsei1ZT0Z0M2xnc182OHRsRXYzTWc5UmF2ODB3WjVOVnJOaG92NVBqbFBJQVh0VDFxcGJfc0RJdmNqVTc0SlN6MC05OE9iQ2tvcEdqRjdpdUlBMDlVZ3J6V0tVU3RFZHRvdi1rLUZKSjBueEt5VnRlRnJ1TFJuZlhBQ1U3X2o2NXRTeHZBVWh1Sm5yM01LTGljVDdkUjc4N0FITTBnVlNuODVHTmtXNEtGcEZ5ZkZR?oc=5",
+    "url_fp": "357c8f3b3e5fa60e86a53f1632314b06",
+    "description": "US AI startups see record $100m roundsMSN",
+    "date": "2026-02-24T02:23:58.099840+00:00"
+  },
+  {
+    "title": "Crunchbase Data: The AI Boom Has Drastically Changed Who’s Funding The Hottest Companies In 2025 Vs. 2021 - Crunchbase News",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOSGhMNXpxb2Z0a0RPSDB5MG9GZDRWN1hTQmtELXBTWFZ4cjgxTjROQ2pUWTBoQTlzZHBwbTZmODdIMFF1MS0yVzI5eEJ2aGVHUEYtYzJOUGplc2tPTmtuX3lTbDZLTnlpX2FlZHVoSUhpbGstQ0cxU2xzekh0N0xDOVlUOWlVMXRIUF80?oc=5",
+    "url_fp": "eedb59b2d2a61f83504dfad94e343555",
+    "description": "Crunchbase Data: The AI Boom Has Drastically Changed Who’s Funding The Hottest Companies In 2025 Vs. 2021Crunchbase News",
+    "date": "2026-02-24T02:23:58.099854+00:00"
+  },
+  {
+    "title": "AI-Driven Research Team Accelerates Breakthroughs in Sustainable Ammonia Production - Bioengineer.org",
+    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQeHdxSkFQR0p6b054MGRFMHdBNjFlSkxpX01IOF9VZEJ4WkNZSlFjdjhlOER2eXVQd0pCOFVaVThrV1d4bGRPOUU0WHBvZDZ3dW5NUHRyOXI5RTU3aXVvSmNxSlVRZDlUbHV0S3AxYVFqUFU2UTdUUDlrTFR0S0pHRFdtcGJ3X0FwSGFtcV9xUl9mTlZKdGMySFNKMHVfQmFwVmlOYVZGb3lfWWN6?oc=5",
+    "url_fp": "2f779e1c4e2d21006b4e8193dcfcd2fe",
+    "description": "AI-Driven Research Team Accelerates Breakthroughs in Sustainable Ammonia ProductionBioengineer.org",
+    "date": "2026-02-24T02:23:58.099870+00:00"
+  },
+  {
+    "title": "DeepMind’s Demis Hassabis Warns AGI Remains Years Away Despite A.I. Breakthroughs - observer.com",
+    "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQbUs4UG14dG1oeTBPUkktd1JiMUR5SDluR1QwVnBKa3NLdng3blROOGdLZ1JPdWx3VlY1ZUpVSmt5ZmJaQU5MMUVXek1OY2lDdVVaODROX0ZwT1FlaUJrUk9JNzZBd3h1NW1CRnZPRHRhLTR2bFJSNl9sY3llN3h3eVdxeWRILTJiUzExc2F6MDI?oc=5",
+    "url_fp": "99ab96667119ba55cd3e29dbe863b882",
+    "description": "DeepMind’s Demis Hassabis Warns AGI Remains Years Away Despite A.I. Breakthroughsobserver.com",
+    "date": "2026-02-24T02:23:58.099886+00:00"
+  },
+  {
+    "title": "Nine Breakthroughs Made Possible by AI - UC San Diego Today",
+    "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFByRlEyZ3hSY0VJLUFfMXNSYzhkMXgwU01ZUTM5NTRzR0owNnNlZnhzNTB1TF9FdkVUaDlnaHlBcS1GWHotYVVXcUdpSkd6eHZ6WGVqWi1KVUJOZTllNjJ5WDk1TVZtMGFseF9UMVMxSnBXWHhxLVE?oc=5",
+    "url_fp": "feb7fa4213fb72d30444d486f587d2d5",
+    "description": "Nine Breakthroughs Made Possible by AIUC San Diego Today",
+    "date": "2026-02-24T02:23:58.099900+00:00"
+  },
+  {
+    "title": "Saks Owner Says He Saved Department Stores. Never Mind the Bankruptcy.",
+    "url": "https://www.nytimes.com/2026/02/23/business/richard-baker-saks-neiman-marcus-bankruptcy.html",
+    "url_fp": "38622a8c0fec8d55f963629bc8d51040",
+    "description": "Richard Baker wanted to create a retail empire when he combined Saks Fifth Avenue and Neiman Marcus. About a year later, it filed for bankruptcy.",
+    "date": "2026-02-24T02:23:58.099931+00:00"
+  },
+  {
+    "title": "More Than Half a Million Customers Have Lost Power on East Coast",
+    "url": "https://www.nytimes.com/2026/02/23/business/winter-storm-power-outages-east-coast.html",
+    "url_fp": "3027fe843ad491ed737c4560146c3e7d",
+    "description": "The outages were mostly caused by problems with local power lines, and coastal Massachusetts was particularly hard hit.",
+    "date": "2026-02-24T02:23:58.099945+00:00"
+  },
+  {
+    "title": "Tariff Turmoil Returns to Global Markets",
+    "url": "https://www.nytimes.com/2026/02/23/business/dealbook/tariffs-trump-markets.html",
+    "url_fp": "1a7b180e68bf64f062aabafdd8dbb846",
+    "description": "Businesses and U.S. trade partners are again grappling with the uncertainty of President Trump’s trade war, even as he imposes new levies.",
+    "date": "2026-02-24T02:23:58.099969+00:00"
+  },
+  {
+    "title": "Top Fed Official Sees Little Effect on Rate Outlook From Supreme Court’s Tariff Ruling",
+    "url": "https://www.nytimes.com/2026/02/23/business/economy/waller-fed-supreme-court-tariffs-rates.html",
+    "url_fp": "a24b915d72ebf57f3a9a9ef1d86eaf82",
+    "description": "Christopher J. Waller, a Federal Reserve governor, said he would support a pause in rate cuts in March if the labor market continued to show signs of stabilizing.",
+    "date": "2026-02-24T02:23:58.099980+00:00"
+  },
+  {
+    "title": "For Many Cash-Strapped Americans, ‘Basic Living Has Become a Burden’",
+    "url": "https://www.nytimes.com/2026/02/23/us/trump-affordability-inflation-families.html",
+    "url_fp": "b03f049068e63222b2d6ac489d8f0c21",
+    "description": "President Trump says that he has brought down inflation, but families are still struggling to pay bills and plan for the future.",
+    "date": "2026-02-24T02:23:58.099992+00:00"
+  },
+  {
+    "title": "Stock market today: Dow, S&P 500, Nasdaq slide as Trump's latest tariff salvo reverberates through markets - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQdE5VOVdSWkE2aDNfNE5iLXdiTjJvYV9PWEtWZG9SWjJuUGdtY3ZSTzBySWNUS3BYc0tGdl85dDYwZHNQcUZVZEVmc3ExTzFjcVk2cGk1c0lRU09NTWxqTm52Rl9RVWtQMTJLOEpEMW15cWNOWDk0RXYwQmZlNzBUSVVyUS1Ca0dacml2cTAxUVUwbEhmd2VJX0dTVTlIMlkwSVRxeGM0TV9JVU5FNkxGMXE5SmlUaXRueUNBZ0RHa2E4UlYxUGl3R1FRbUFYY2JBTFVnaFhUeEtDWjd4MkNwTVdiN1gtTHc?oc=5",
+    "url_fp": "d363aac41b934577698cb901c6b17bef",
+    "description": "Stock market today: Dow, S&P 500, Nasdaq slide as Trump's latest tariff salvo reverberates through marketsYahoo FinanceStock Market Today: Dow, Dollar Fall on Tariff Uncertainty — Live UpdatesWSJDow drops 800 points as AI disruption fears and tariff woes weigh on markets: Live updatesCNBCDow Falls Sharply. AI Worries Are Hitting Financial Stocks.Barron'sDow Jones Futures: Trump Tariffs Spark Stock Market Sell-Off; Apple, Nvidia, Tesla Are Key MoversInvestor's Business DailyStock Market Today: Dow logs worst day in a month, S&P 500 and Nasdaq end lower after Trump hikes global tariffs and investors worry about private creditMarketWatchMarkets News, Feb. 23, 2026: U.S. Indexes End Lower Amid Tariff Uncertainty, AI Disruption; Dow Sheds 800 PointsInvestopediaStock Market Today, Feb. 23: Nvidia Earnings Loom as Tariff Concerns Drive Dow 800 Points LowerThe Motley FoolStock Market Today, Feb. 23: Stocks fall after Trump bumps up new global tariffthestreet.com",
+    "date": "2026-02-24T02:23:58.100016+00:00"
+  },
+  {
+    "title": "Stock market to burst in 2027, and current rotation warns ‘of trouble ahead,’ Capital Economics says - Fortune",
+    "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPLU8tYXhPbXZfX1ppUUpxLUpGcWl4bWxWNXZkcFU2X0doMjV5YldDUTdZZzN0UGhQd3pVRF9Oc2ZBVzhHSS0yclA2djFqNlVRYUI1UnNSVS1NWlVLLVlyNXVjVFRKUDdxSkY0bVlhREhWNEtNeFZDQmpkVGRrWEFFcl9vZFVaR0piLTFlNlhxZk5qUWRJ?oc=5",
+    "url_fp": "9229fd859f5a77dacb60ea7114ea8cad",
+    "description": "Stock market to burst in 2027, and current rotation warns ‘of trouble ahead,’ Capital Economics saysFortune",
+    "date": "2026-02-24T02:23:58.100031+00:00"
+  },
+  {
+    "title": "Stocks drop after Trump ramps up new tariffs and investors dump potential AI losers - PBS",
+    "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQbTl6WjNOSHZKdXFPbG5BZE5OcTRXaUpna2VCNXdpbVZwX3Y3YnFMOXBHR0tXSDcwc0xEWjVGYnR6VFBjUjRldmk4QnNpRE9TV2pYeVNOZ1BFUlB1Vi1PSDRDOThCQ21obHNMVl9VX2t5c1JMUE5oODZLWnh2VEtSZlNTX0k3UjdBb2FYX1pwSm5LNUV5QVBESUczd0dNUEtxQmRVQnEtRTJNc2oyRGlFWDZhMjVVMnNrVWxQN9IBwgFBVV95cUxPQlIwUTdGd0ZVVmw0MXg2WTY1R2lfelZKdUZlazBtM2F6T3pENDhZUnJqM2s5eFJmNXJXNG1zc1llRXhldGVQSE5aYzlGcjg0eVlGcS11YjFhaVVrcHoweUo2d0dJM19wOVJoZ0FtSVYzcDhMakVjUlhNT3FfTGNGUkphYkZtZXhrWmlFM2dMMXZJNC1TZE1CLTdobnVvQUh5RzF2SjhvcGRrazVrSEw0RkdPbUxRNjF2RWhHUVVSM3lGUQ?oc=5",
+    "url_fp": "898e9c03546d414de7a57b88f643add2",
+    "description": "Stocks drop after Trump ramps up new tariffs and investors dump potential AI losersPBS",
+    "date": "2026-02-24T02:23:58.100053+00:00"
+  },
+  {
+    "title": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade' - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQOUEzaHViRHpGS0txMUhlU1JnSkVIOWZOV19adUV6WGs3RzdJelpmX1NIRTBuRm1MNG84Z2UtRV9PV3lRSXhNWTIwZ3RuS3Q5VS1PSlA3YXhZZVB3dlZ0RTIxY3hrd0pObzVYYzZVM2U2cWtVcldlLVhyY0ZzZkRpTEtnbTVCTVUwMUpzM0tuOUJ4TmFLMnZCay04Z1hEbW10VWFvVWxkN190aVNRU0pyakVWaXlMNlFxRUFXWnFRM25EdXU2SExraGhsQ2lCNFRnekZqeWt3THR6RzgxS0Q4MlpGUVM?oc=5",
+    "url_fp": "4b864e88915f007747d79fce3bc2cb5e",
+    "description": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade'Yahoo Finance",
+    "date": "2026-02-24T02:23:58.100069+00:00"
+  },
+  {
+    "title": "Dow drops 800 points as AI disruption fears and tariff woes weigh on markets: Live updates - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1SYWhnTDBmNVdEWXc1eGRGbWw4a3B3RGJDVTM0Und0Qm55R2VockhlcFpNaVAybGVSRzRVZFp4cGFyRVYxMmZCQlZ5M3EteF9Jb2ZpQjNwX1gzOWJOQk1sX0x6SE01cmUxS3BqVUVta2VxNFJkdTNB0gF8QVVfeXFMTnotN0RrZ0szeTdEdUpwUklxdG5RdHE4Z1pEWVNRdEw4V21pQmhnYXFFZ1NtN1JRWnBrcWowLUlvV1Q5YXk1dFNIdnY4TEp6YzcwcFNDd1gxZmREWUI1b1g0X2FpaWRQR3NXMVN0NGxIbHR3ZGRzNGtjQ1lnaQ?oc=5",
+    "url_fp": "fea945fc0de3b61fd96348607687aa45",
+    "description": "Dow drops 800 points as AI disruption fears and tariff woes weigh on markets: Live updatesCNBC",
+    "date": "2026-02-24T02:23:58.100087+00:00"
+  },
+  {
+    "title": "Dow Falls Sharply. AI Worries Are Hitting Financial Stocks. - Barron's",
+    "url": "https://news.google.com/rss/articles/CBMi-wJBVV95cUxQblplVEE3WVdDcTJsU1FaTDF3Y0Q1QklKU1Y4dm85SEp0ZTFvUGE2QlJibkpBLVhVYmlLdGI3SE1PYlVPTmZUVmNOTjIzcnYyTTJKUExZLU9ZQnNFaXl3N0JBQ19pLUtzTU5KOGxmWGNmeGQtcHNjQnVqaVNGUVFBS2VpM3lOZVVlbzhTcDc1bk0zY3M5Q3JXcFV2aVBQbHpMcUtqQ0NpRGZndkIyYWo0aV9rTHhvLVBtb1JRUm41eVpaMGNILWtNMFc1Tk1Fb0s0by1LNnk1dnlUeHpKMFU0SGxSNmozX2R4eXFBT2tiM2hSQXowMUpva0lqU0tVeDhwT2VBTEpHQUdZWmwyVlNNdlFwUEM1amJMYlJhenVLS3RXelI2TXo2amJmeEhnMUV1b3NWRVBSX2huS2F6bU1CVkduWnFGUWZfXzBDbzVVeE83NjFpbmJPSzFKdVNKOVpEVWtQWVczdHlrUHFVVU5rcmI2RFc3VlJHaWpN?oc=5",
+    "url_fp": "0504e13d77d3b6cd1de044b02068bba9",
+    "description": "Dow Falls Sharply. AI Worries Are Hitting Financial Stocks.Barron's",
+    "date": "2026-02-24T02:23:58.100107+00:00"
+  },
+  {
+    "title": "On theCUBEPod: AI spending frenzy kicks off the year of enterprise ROI - SiliconANGLE",
+    "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOYlBDdW9EYWtucXk1d19NOXRkWWxzaUJTLXA0ZERPQ2xhaTItaXZHdHJzMEhYQVUwbEtNYU9yS0JBVFU0M19DZHozQWh1cThncVFhZ1V1NUJEaDNYbFJqbXlOcUtnRWF2dVR4R2VWVFpQQTFzSDN2bzRmMjRlQzBVMzNQQjBqNGM?oc=5",
+    "url_fp": "53c0fc2afd8ebc173b48c65768445f7d",
+    "description": "On theCUBEPod: AI spending frenzy kicks off the year of enterprise ROISiliconANGLE",
+    "date": "2026-02-24T02:23:58.100121+00:00"
+  },
+  {
+    "title": "SAP Business AI Q4 2025 Update Embeds Intelligence into Enterprise Workflows - ERP Today",
+    "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOYi0tYUdxSE1lemZzVjJKdXc0eWtzYXFySUxvalkyVm5HbnpRS0p3Ql9tVWx1bGpnRXc5dGpzZUhqb09FSkdaWXlsZ0QxNnJYcTB5Xy1UWl8wM2hCUllIdmN1SVh4ekJCajJ2YmNPOENsa2RxdUdhMWJkSXJNd3pONFpST1pWd2xZNGxVOHdLMm1icFJxYVFHLW5oMA?oc=5",
+    "url_fp": "53b147e9789a42c923b32c35dd7681d6",
+    "description": "SAP Business AI Q4 2025 Update Embeds Intelligence into Enterprise WorkflowsERP Today",
+    "date": "2026-02-24T02:23:58.100136+00:00"
+  },
+  {
+    "title": "Cybersecurity Stocks Crater on AI Fears - But Hold On - The Tech Buzz",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOcGdsWmNIZ1c2aXJSS2ZhVVo2RHE5QXRzNzF6bWJNVkR4WlBQOXBwUzZ6aDg1azd1eHdaZjdVcEJvZVZNSHV6LWNKRDBvZC1JanFWaXAyXzBNMmxxTE1yNGpJUGtoSXdFNVdJVXltYVU2ZnRzeFdobHR6SGNZYzlGQ2s1ZkdBMXN0dGxMTQ?oc=5",
+    "url_fp": "9021e0aa7a6f7b4fb77e22001265c6f9",
+    "description": "Cybersecurity Stocks Crater on AI Fears - But Hold OnThe Tech Buzz",
+    "date": "2026-02-24T02:23:58.100150+00:00"
+  },
+  {
+    "title": "South Africa’s richest woman is launching a VC fund to stop local AI startups moving overseas - Business Insider Africa",
+    "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQSkhyb21idWtMa083ZkZiRGlweF9FS3VmdUpaSW44a095eDhFSWd1ZW5PSjZidEhJWDZ6bml0QkhNdE5LQkRFTTJOYnd2dEplcFp4d3hCZEEzc3JoUTY2VENENGlNMUt4RFNXTVQ1X2tXaHcyQ1VFaVM5ckNiTE0tZGlzLThpeXZLNXBlbTVkaU8xYnFwVjBJNU9zUnpQa3QxVTZIb0lLN3Mwbk1lNkxoMm1MTnYzeEo1?oc=5",
+    "url_fp": "c5337331c2137b35675d73f55278eb53",
+    "description": "South Africa’s richest woman is launching a VC fund to stop local AI startups moving overseasBusiness Insider Africa",
+    "date": "2026-02-24T02:23:58.100169+00:00"
+  },
+  {
+    "title": "The 29-year old investor who went from selling fake IDs to backing Poppi raises a $75 million fund - Fortune",
+    "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNVXotRHNOMjFqZXVpV0dNVS1lYlRJTkhUQ1Q4V256ODFxS1BNMW1mRV9LOVdzbWlmT19oU3cxQWN6cUlIMkFiNUVtME1RbFNMNHgxWGNRcll2cmxQTmxNc04wakRtUWhNYWdkNnNERFpxRXNxQkE3a0tGUmdUWGltTHgwcGVpWmpORkxFS2NEV2Z4YTJaaTd4WWQyYXMydGwtUWpGYWY5aGhFUTRkRk5GWl8wUTJSUWM?oc=5",
+    "url_fp": "0042c5c23ed93f78d0fc68586bc3f917",
+    "description": "The 29-year old investor who went from selling fake IDs to backing Poppi raises a $75 million fundFortune",
+    "date": "2026-02-24T02:23:58.100185+00:00"
+  },
+  {
+    "title": "DFIs scale back as Africa’s VC fundraising falls to four-year low - TechCabal",
+    "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPdWJHSHNBZExyREJNNEpJQks5WFluS01zRUl3VUNHdDdPRHpDaFhpNThXWlRXMFYyYVdkUU5UU09SaGdEcFhkemtiVHRZMEtZYVBMY3JJbE9tZzM1bEFXSFBxbjZxcUNGQTVwZnZBdUJnYW1Zekp0cmxjRW9mU0lpNGUxYUx1c2tzekExLVY2S3ViNTVBZE1IbUNBRVV6ejF1?oc=5",
+    "url_fp": "24a935839cdf97728cc96375ac1cef46",
+    "description": "DFIs scale back as Africa’s VC fundraising falls to four-year lowTechCabal",
+    "date": "2026-02-24T02:23:58.100200+00:00"
+  },
+  {
+    "title": "Understanding the Fed: Five Things You Should Know About Payment Systems - Federal Reserve Bank of Atlanta",
+    "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPWXJJSFVoZFA0X0Q2WDNoNE9KcEtZWlFJdnBibmI1ZHVCSFQ5OW1rRG80ZjBCbnhuUF9KTHc4SEJJNDZfMGRuN1RqVkJTX1RSdzJvcEJqalRjUEFGRG9mYWwzeXZoM3FSbkNuYXNwQkJ5OGJVVWRiUS1MTTlaekU5ejdiUExObmliM3Y4N0dxbU5OZjBkbm5Sb3BMNTJORWdReXVYQXBlY240UWdOS2MtNGl3N0pISVNGN1gxVnFRSmZHMTVjLUtiNnM3LU4?oc=5",
+    "url_fp": "65f04b6613fcfd4d4ca06919e0e42b55",
+    "description": "Understanding the Fed: Five Things You Should Know About Payment SystemsFederal Reserve Bank of Atlanta",
+    "date": "2026-02-24T02:23:58.100217+00:00"
+  },
+  {
+    "title": "Top Fed Official Sees Little Effect on Rate Outlook From Supreme Court’s Tariff Ruling - The New York Times",
+    "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNSkJTdUxMWHR4SXYtUjlTM2pfM09HSURBc3pFZUNYSEVlQzJzY1kybUhXemRQYmZ2Nm9adUtuNzZLRjhvTFdVNmFFeUJmR1pyMnYwejdvNy1tcU8wWVdrT0hPeE84Q2R0bzJaSlBGUk9vRUlwWW8xU3ZTN05xeGI2bFdmWTBGUXhBbnR1aktLRjVIWWtEYnBJRWhMMA?oc=5",
+    "url_fp": "0e55e0b8d987845fdf98f32a338f8be9",
+    "description": "Top Fed Official Sees Little Effect on Rate Outlook From Supreme Court’s Tariff RulingThe New York Times",
+    "date": "2026-02-24T02:23:58.100232+00:00"
+  },
+  {
+    "title": "Fed’s Waller calls March interest-rate cut ‘a coin flip’ - thestreet.com",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZW9peU9NLUtaWnZpYjJEUExleEtTX2VVbTNhMU8yNVhLWTNFUnZYTGVkZU9KczVIUVpSX19mbS1VTlZkRVBDWHdPX2x2bmdYUkhxUjNaZWQ5TFkyR2Y1ejJ3ZkNXVzZkOVZWekRfZkJnVGtLS045YUhiT3RQa1NTRzBVLTVRQV9yMF93?oc=5",
+    "url_fp": "ca086723f1b054bd62ff3e8d3735755a",
+    "description": "Fed’s Waller calls March interest-rate cut ‘a coin flip’thestreet.com",
+    "date": "2026-02-24T02:23:58.100247+00:00"
+  },
+  {
+    "title": "PSEi, NY Post & Apple News: Today's Top Market Updates - thedetroitbureau.com",
+    "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNSGl5WjlCZjVROEV1aTA0blZZZS1qS1BhN1hzS0RyZ2E5ZlFDalMzS1RVX245cW9iODYxMHEyMGc2ODB5VFJ3WUNpdTV2OVktWWo0YkVTRndIR0dfTTNLODJXYUZ4Z1ZKOW4yRnU4ZDEtdHJHenVpbmxxVWE2OVZsNU9tZEtXLWptMnRNcWh4NFpaYmtuVDN3YnNiMUFkWXZBVEVlbTVidkdPZHFmLU5Z?oc=5",
+    "url_fp": "5226c6b722de091afc9286cc398d30ac",
+    "description": "PSEi, NY Post & Apple News: Today's Top Market Updatesthedetroitbureau.com",
+    "date": "2026-02-24T02:23:58.100263+00:00"
+  },
+  {
+    "title": "AAPL Stock Quote Price and Forecast - CNN",
+    "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE00U3JoRzhkckt5aVFxb1NVNnBndWhrcDM5N0NqUzZGUk8xQk04OF9jVWRULXh2RmlJaGpTS1FJWEREaUlNUnhfSHk2cm53NllX?oc=5",
+    "url_fp": "cd13ddcabf6d3aed9a223b851676e4df",
+    "description": "AAPL Stock Quote Price and ForecastCNN",
+    "date": "2026-02-24T02:23:58.100276+00:00"
+  },
+  {
+    "title": "Apple Music kicks off Bad Bunny’s Road to Halftime ahead of Super Bowl LX - Apple",
+    "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPUU1qUHhzVGpELW1wQWc2SE1vUkpEc2NoLUtlMDZvRnc0VkdQWDhEajJQd3V1TDZ6SGNqNWVWcjFENzNYNVlPa2xUQ285bUt3YVFSbkExUjd3bS1ndWYydExQR3RzUTlCQUtSajdVeVExV2FQTmoyVFJrdEFZc0JsNGU3YzZlUUM3Mjd1UTRwdnpYQXVFNzE0YjVkVWJvaU1haS1YUG54OGg4YnlIYVBDZTVB?oc=5",
+    "url_fp": "0a65da3c6b16d98ba424b2d95f2e4e07",
+    "description": "Apple Music kicks off Bad Bunny’s Road to Halftime ahead of Super Bowl LXApple",
+    "date": "2026-02-24T02:23:58.100290+00:00"
+  },
+  {
+    "title": "Meta’s own study reveals parents’ struggle over kids’ social media use - Albuquerque Journal",
+    "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQTVl2d0luVFR2SjBvUWdxZGFlQkR3aFNZOFZxcWxBLVJWU0hGcFdfNTBfc19paVIwc2NhU3Z1RXJHbHFuWlV4OHhHTjM5c0hiT2FnMXdOMUZ0WGNSRGFZQkw2NE1xeGJfQjBCRkZkdjdwc05lMVg3UjVTSzNfa0kwN3FiSVFRdHc4Zi16YmV5SEJDTmdPTzBNSWJ3?oc=5",
+    "url_fp": "84a53d390669f2c626e4e6f825739b52",
+    "description": "Meta’s own study reveals parents’ struggle over kids’ social media useAlbuquerque Journal",
+    "date": "2026-02-24T02:23:58.100309+00:00"
+  },
+  {
+    "title": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents show - CNN",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxORVdhVnpVZXZJZFpFdWE4SmNTOTAxVVB1WGY5RFBBZV9jQ2FoRTlJZ0JNY2tDQjJKdzR3dGNWWUl3bjNrczlpTlpCTXVIWk1pN0hJdmxVYjRGdkVQa1REdnYtMkRmeUpNaVlaTGQ2N1Atc1p2aUpJeTNUNjBQaTlkUjBrSjNmRW4x?oc=5",
+    "url_fp": "95ea5035f6ef34a4ca49ca2cf2bb576d",
+    "description": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents showCNN",
+    "date": "2026-02-24T02:23:58.100323+00:00"
+  },
+  {
+    "title": "Facebook designed an app for teens called Bell but never launched it, court records reveal - NBC News",
+    "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOUzVUUUlYZDluTjRkZFdoTGxqcUlpSU9TMUNaUUdUdTYxQnFMUjFIcVRHcS1CTU0zX1hGVFZBUDh3Qzdmd3RCdjQ0ektSSUpWOWppeXpzWWg4RmxYV1ViSXdUMmRDazU4Zi1FaDUxdHBuWUYwQ21nQ2xyV2VBbGQ0ZWFnd2NfY05hSG1IOUluUEl5THJLVmllaW5TYy1jUlhqMHBOYmNfc0I3Zw?oc=5",
+    "url_fp": "28f85d29e563d9a3fbef0d5a62d53ff7",
+    "description": "Facebook designed an app for teens called Bell but never launched it, court records revealNBC News",
+    "date": "2026-02-24T02:23:58.100338+00:00"
+  },
+  {
+    "title": "Amazon to invest $12 billion in first data center campuses in Louisiana - About Amazon",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOTHlrallQSGJ5UllJa1pWa09uSjlQcDU0T0kwbXMwdk8xbzJtQVBubm1hamhvN3JVdk9sQXc3eENqV3g0TTlTU1RhVlRGSXM2T1BkV1Z6TXRRUXJUX1BmTTd4a1JjQ1kxZXUxbFhfaUh1bUY4U2ZsM1plYnVCdlJXLWN3Z2pZZm84dzVV?oc=5",
+    "url_fp": "e3f87400c8c9a1c9887aa08e82eaf9e0",
+    "description": "Amazon to invest $12 billion in first data center campuses in LouisianaAbout Amazon",
+    "date": "2026-02-24T02:23:58.100349+00:00"
+  },
+  {
+    "title": "A message from Amazon on recent layoff - About Amazon",
+    "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPMXlMcUZaVHVEUHJ1UTdlMUNFMjJiZzBsQW03bUgyMnpxSzdoaTFPdWpCc0hQQThTX1E2WGlELWhYb0Q4QW9mVVREUVFDZ1d5b0Z0Z2RLSU1Vb0dUOUNmQjZOQXM1RmZHVE5ZNnFCVDFTY18yaksxcUZDS3VxdjdXZ1JGcTFmZw?oc=5",
+    "url_fp": "ac41103784c764eecdab8bdd9c266701",
+    "description": "A message from Amazon on recent layoffAbout Amazon",
+    "date": "2026-02-24T02:23:58.100362+00:00"
+  },
+  {
+    "title": "Amazon invests $12B in Louisiana AI data center in Caddo-Bossier - Shreveport Times",
+    "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQcEhOaXFqc05RcjN1Uloydmg5WjZFQVZaRU9xZ2N4SFUyS3VZQ3QxaUU4ZWFxdUI3YlVUNEJ2LXBNUkliX0Z0clRrSmV2TlRGRXNWNzlDZ21Ld0haY2VsQnlqZEFCUGtscDdhLVZfa0tXVy1HVHpKR2IzVDBDaUJtTHZoamM3MjRkbE1qcGJLckZ0VmxTSGszV25hRG1PdnlUTXlNUTJOUmpzTWgxc1BKRFV1aWliMkN5ZHFXa2RsekN0bFJqZWFxclRURzloa2t4bmJCTE1CWUdXRGFWeXE4R1AxcTQ?oc=5",
+    "url_fp": "a6b080538fa1ea83883f4f4c6b515402",
+    "description": "Amazon invests $12B in Louisiana AI data center in Caddo-BossierShreveport Times",
+    "date": "2026-02-24T02:23:58.100380+00:00"
+  },
+  {
+    "title": "Nvidia Stock Is Rising Ahead of Earnings. Why the Move Means Less Than You Think. - Barron's",
+    "url": "https://news.google.com/rss/articles/CBMihgNBVV95cUxNM00wc29wa2l2a3ZrZ3dKX3owZ3dYcy1RZFkxcWgyNkVsQ3FSVkVRMkJyaEkxTUJFY1ZONl9qSGxVakV4UUVvanJUczFEMV93WjJwbWtTWVBLa21kQ3doQkJMbDBwRmtnd3RzMDU3cG1rMVhPNXZyOVREUDJJb0E5ZEVrcjk2cURzUmRCTDNia29aRHNuQlIySm5LQ0lZU1FiZWZhalNWdjQxUEpOcWdmb2NRYkVaTkMzQVBJNHlOUU1TSnhuLXVaMVpPSGRHeGhnTmYxa2Y3S0gxT3ZQeVAzTnVWQ1dJNTRyODc3QS1pVUpJM2lHaWR3VUpkRUlUU0hMaTNZYUg3aVpONXg1TTBwWEpnTG0temJFMkM3UjFmbWlWV3JCWVppNnV4MWJuZ0cyU2VNOTFfRVJ3d01LbXlybXNoU0RPd0NGQXVoOEFfUHJVT2tUR2JsR1laVXIxSnd5bFdSY1JrckFybFVKYmlYOXpGYlAzdXAxTVEzd2xnZmlCWU1Denc?oc=5",
+    "url_fp": "b1cd808d530455a3caa1a99dccf1a0db",
+    "description": "Nvidia Stock Is Rising Ahead of Earnings. Why the Move Means Less Than You Think.Barron's",
+    "date": "2026-02-24T02:23:58.100398+00:00"
+  },
+  {
+    "title": "Dow Jones Futures: Trump Tariffs Spark Stock Market Sell-Off; Apple, Nvidia, Tesla Are Key Movers - Investor's Business Daily",
+    "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNd1RZazByNVdlU2hvNGtTTlBqNjFPRm9fb1pqOTdUQnVwZ1JYZDRKLW5JZEFzcklxb1UzSC1oR2paWWIwX0RvNFdZWE1zQXVjallfaUdqRTBVLXB6dFpNMElIVjJGaHgtT1lnYmJ6aGlfT1R2bkxEWGZWNTZZY1BidG03SXJUYlg1a3pLdXBVVjdmcFBhSnh6WGNKV3ZUeG1CeURrYVB4X1Bnb1FHdXZ1ZnN1dnVkdzAwWmxtSnd4aTd4NXFGQ3lUeg?oc=5",
+    "url_fp": "06145522d18d71a52945ce98e0e11fda",
+    "description": "Dow Jones Futures: Trump Tariffs Spark Stock Market Sell-Off; Apple, Nvidia, Tesla Are Key MoversInvestor's Business Daily",
+    "date": "2026-02-24T02:23:58.100416+00:00"
+  },
+  {
+    "title": "Here's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the Stock - Investopedia",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNNVJHYUNNRzI5V3BLenZhZGNCeWczYTVydWxTYXJ2bnBpSUJxQWktMW9kalZNT1Njb3dmb1cyTmVWQ3huZWxkOUlnRklVcXo5ZEtsRWI0Sjl4TU94cWlwXzhtRjFFSnJkbVVsajQzdjZWV0NOR19BVC1oMVdzM3pBTExyMTg5VEIwbWdvdnBaV250ZmRpSDZ5VVBXSnAxdUtOUHNNOTdUNHY0d0s2VVpDVGwxV1ZoUDJIc190ZXFnaGgzd2YyTEFzSWN3?oc=5",
+    "url_fp": "9f9f6accd4d2188238367c83be937576",
+    "description": "Here's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the StockInvestopedia",
+    "date": "2026-02-24T02:23:58.100434+00:00"
+  },
+  {
+    "title": "Uber's CEO Just Delivered Disappointing News for Tesla Stock Investors - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxOcEhoN3lkLTg0cWJvZXo4Mi1Jd2NvMmlUaU51UmRFU2tDTUJlZFRKWkx5LTFlMGplOWNNSDItZDJXT1l6dTZFb2phbW5PY1dkQkdMYmk3bkRGUHVfOWNfR0NhZGVja0d5WWEyY25qVDQxU3NqZjZVRU5aQmg3NGVuYnJPMkxya1JybUtCSw?oc=5",
+    "url_fp": "17f9175eefa1f3e3d9960301ad513b6a",
+    "description": "Uber's CEO Just Delivered Disappointing News for Tesla Stock InvestorsYahoo Finance",
+    "date": "2026-02-24T02:23:58.100450+00:00"
+  },
+  {
+    "title": "Tesla Stock (NASDAQ:TSLA) Plunges With FSD Data Issues - TipRanks",
+    "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxObENBamtLckk4aHpDNmV4MEZCdGpsMVQwN19zWEpNVkF3YTdyQzhGckN4Q1prTy0tYnZGUDdCY2hjN2RoaDBFdXZ1SFBwM0FaUkdXT2dfMkVCVF9UNHQxVFpNem5ISlVsWC03Tm5mbnM4Q21WbkV6elVmaW9TamVJVEViT01tclNx?oc=5",
+    "url_fp": "bf031c21127a5b8027badd4a4e628bd4",
+    "description": "Tesla Stock (NASDAQ:TSLA) Plunges With FSD Data IssuesTipRanks",
+    "date": "2026-02-24T02:23:58.100473+00:00"
+  },
+  {
+    "title": "Why Tesla stock is down over 2% on Monday - TradingView",
+    "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPWGwyRm5GX2FJVnRyOXJPX2RHTndpTjBFZnVEbmJYOVJhY08yVE82dmNNd0s4bnZ1T3lfVzdtTVFNQ3QtN3FyRjNmWWNMREVQaFQ2VExoaUR6Z3VaV3VGSGdiTUx3NHJsRWVfQzA4UVFVYUhIdGdLODJfRDZrUk5keHFoR0FEYjFhX1BHQTFRTUk4cEhJeW85eWh1RURNQQ?oc=5",
+    "url_fp": "783fe14616fd138e567f9c4982791b32",
+    "description": "Why Tesla stock is down over 2% on MondayTradingView",
+    "date": "2026-02-24T02:23:58.100490+00:00"
+  },
+  {
+    "title": "Paramount submits higher offer for Warner Bros Discovery in bid to block Netflix, source says - Yahoo Finance",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPOGZEZzktMTRKNDRScGRqZ3ZYTTR6czZ6d2k2VWd5RExBT1JNWThsUkNHQWtscGY1Z0p6RFBSdFhRdHktTUN3dTUwYmRfUWxOUDVMZnJocHJ3aFFMYUs5R0hnaVpoRmNvMEdrTWhxM2FVOHVDNWMwS0I0MTNCM3prVUxoRUloN2p5X0dn?oc=5",
+    "url_fp": "ead0b00348ece52b30f7681a7b453638",
+    "description": "Paramount submits higher offer for Warner Bros Discovery in bid to block Netflix, source saysYahoo Finance",
+    "date": "2026-02-24T02:23:58.100506+00:00"
+  },
+  {
+    "title": "Netflix boss defends bid for Warner Bros as Paramount deadline looms - BBC",
+    "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTFBlSExNSW1NYXl0VGJseGotbzZnRno1d1o2TlhzbHVpUUhoZnRMS1ozOVZZMDJQSXJyTWpwNURyMDBtbHVkaDZpZlJMRmlEd3dGQXFvYVF3a1lBUQ?oc=5",
+    "url_fp": "bb96c84c2387d9113a3b680c5f15d0d5",
+    "description": "Netflix boss defends bid for Warner Bros as Paramount deadline loomsBBC",
+    "date": "2026-02-24T02:23:58.100522+00:00"
+  },
+  {
+    "title": "Paramount Is Expected to Raise Price of Warner Bros. Discovery Bid. Will Netflix Walk Away? - Variety",
+    "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOT29ZUUxOdE5XU08yd0xlQlFFdENhVE9nM1hEN0M3UDYxOUYyVGk3a014VW54VjFQblZMU3RHLWhaT2FWQV9BYUM4eWlDZUpZLU1vUGN6dHp6emNHNDJzOVhwVHZMSUZ0UzhuU3h2MnN0ZDBWcVZGRFlUdDlsVnZKRjUtem9yMXVkVzkxWHZneFJjVGNva2ZsZVh6WERabUUyZUlVdmNjRDIxRjR1STFMMDR3?oc=5",
+    "url_fp": "4181155b440a3543e9c94c1cd82db611",
+    "description": "Paramount Is Expected to Raise Price of Warner Bros. Discovery Bid. Will Netflix Walk Away?Variety",
+    "date": "2026-02-24T02:23:58.100540+00:00"
+  },
+  {
+    "title": "Asha Sharma named EVP and CEO, Microsoft Gaming - The Official Microsoft Blog",
+    "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQS1VtZm12R2hDWHFNYnRMVUhMNEppdFIwV1laVUZuNmNVb1VKdmh6dThBbGV2Z0RnanNTekNxZ1JXMHB0bEtleWN6RElmNkdQQnFPUjlvbC1JM0NWV2dEd0pSUDNhbVZ4b05ENHlZQi1ocTVQVnl1MUpZdlNnUDVwczVwR2N4dkIxWGtTMWdwVmlNZ25MU3c?oc=5",
+    "url_fp": "9e4732418a6bfba912939781083a9457",
+    "description": "Asha Sharma named EVP and CEO, Microsoft GamingThe Official Microsoft Blog",
+    "date": "2026-02-24T02:23:58.100557+00:00"
+  },
+  {
+    "title": "Could Buying Microsoft Stock Today Set You Up for Life? - The Motley Fool",
+    "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNb29HVC1idHRGbzYyd0xvelFTYUhZX2FtN0xCdlZuaGFYV1lacnhHNmlOODRRR21YRzNnYnBJdnMxajFlOGdLcWQ1YjV5eU1OUFBYQUVLSzdhLW1JQWxrRzJ3NzFjY1F0Zld5NzBPbi1YS09mdmgxaXJmQW8tY05QY2h5amJPN1pNNm9EOU1kdGs2ZVdNaHg0?oc=5",
+    "url_fp": "df24904a99658d1894ba44bb3d562e93",
+    "description": "Could Buying Microsoft Stock Today Set You Up for Life?The Motley Fool",
+    "date": "2026-02-24T02:23:58.100574+00:00"
+  },
+  {
+    "title": "VIDEO: Microsoft's return to office policy starts today - KIRO 7 News Seattle",
+    "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOWTVkMnU5UTRRM211R1VmcllVUmdwNkxZdEV4WEdHS2F4ZVg0eTVoZml3RFdMYVZiZjR2bFYtcVEtQllXMHA1LXhfbHpGTjlNcVVDaGxVNk8yZ052d28wZ091dnNqRFV1akpVU2pWOTd5cU9GV0o1UG5ET2g0a09FbEowazRMZWNXd2VrQ1ZCOWRLdHlncHNFTDNHZUFWWkNEeS1aUUZRUGx0YUxpWmluak11NkEtdnlmTnIxc1Z3?oc=5",
+    "url_fp": "016b83a7b983e36b277f787a623444e3",
+    "description": "VIDEO: Microsoft's return to office policy starts todayKIRO 7 News Seattle",
+    "date": "2026-02-24T02:23:58.100597+00:00"
+  },
+  {
+    "title": "Alphabet's Fastest-Growing Segment Makes the \"Magnificent Seven\" Stock an AI Leader - The Motley Fool",
+    "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPY2lNbXFxeERmbllmcFY4OGlnT21idmJCcHljcnFTUGdTN0xRQUNkVk16dkpsSmczblJrajVOS1V1djdvZk8wS3d1OUN3WEhYRGhkQUc0MU1ocHFtTFZmWllIeDVHaXBuZ0JFV005SEJfTGxFQ2dWeU9NanlaU0U2NWFFNlpBYnFmVWktcGpEbmpfWXFXeFE?oc=5",
+    "url_fp": "40253aeaaa72d0ab9ec12d10e5eb640a",
+    "description": "Alphabet's Fastest-Growing Segment Makes the \"Magnificent Seven\" Stock an AI LeaderThe Motley Fool",
+    "date": "2026-02-24T02:23:58.100615+00:00"
+  },
+  {
+    "title": "3 Good Reasons to Buy Google Right Now - Benzinga",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNQVg0V3JEdEI2RTllQzhaMll4SXhTZGRSRG93N2ZGNlU4QmhQUHhJcGVUM04wQjZqVThhOWc1OXkxUTgwZHdpbTMzMVdOQ3IxRURlRTZncHRKVmYzSUFHNDAxOXByRm9wd3NFXzYzcWxVMDNoNFJQZmptb0ZVZjR6LUpUUmxDX2NiZDhv?oc=5",
+    "url_fp": "79c439d4eb51e3146e412d11457bb7da",
+    "description": "3 Good Reasons to Buy Google Right NowBenzinga",
+    "date": "2026-02-24T02:23:58.100631+00:00"
+  },
+  {
+    "title": "Wells Fargo upgrades Google parent Alphabet, says it has '3 key traits of AI winner' - CNBC",
+    "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNRHpEdnRfalBzYk1QZkRSVDB6NlRDYUVpemMyX0xybjJfQU5PTHRzVkQ1bzMwenduWVlBbWd4ZGtabW5PRHh6NDRiTDZsbHRqNW1OWGFUbGVTZDhBMWsyQk1GM3pnQzNTN3pvb0NWZ21US2dUNGpSLWM0Nk4zRG9UR0hhZjV4NkRxNXBvYld1WmF5TGV2ajZodGdZcVpxdW1RYVkwX1ZNM3hUZXQxNXFDQlVvTTczc3V5UXc?oc=5",
+    "url_fp": "eb9e669f6bdca4e4169e7260b51bab1d",
+    "description": "Wells Fargo upgrades Google parent Alphabet, says it has '3 key traits of AI winner'CNBC",
+    "date": "2026-02-24T02:23:58.100647+00:00"
+  },
+  {
+    "title": "Yankees can force Aaron Boone to make pitching decisions Joe Torre didn’t need to - New York Post",
+    "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOeTJOc25WMjNUbTMyMVZWRm9iZE1QenViUEo0TlFmQ2pCQmEzbHIyQ3MzMWw0SXFteVZhU3pCSkpxOF9CS3Z2b2VGQmpvcUlnSGJwNVl5Zy1zbnNWdWRWbFk1ZEh0a1EwSjVGaWRhVkc2MW00dEszaFlhdHBvWnpScTRtR1Z4TEtiZHZVMU45SVlDMEVmQ0lZQ3UtMjlrb3M0bHc?oc=5",
+    "url_fp": "9bb8be228b13368e078b23fb01fa2817",
+    "description": "Yankees can force Aaron Boone to make pitching decisions Joe Torre didn’t need toNew York Post",
+    "date": "2026-02-24T02:23:58.100686+00:00"
+  },
+  {
+    "title": "Yankees Biggest Losers From First Two Spring Training Games - Sports Illustrated",
+    "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNVDZla0hmTXVMQXpZdTRBZ1ZWZTNnTElVckVYUlpzRFd2bk1sZ0MtQTNDeWFGOUVNTHNIeHhNMGdsM2FWeGZURkh6WlJZbEwyMHZLTDBsNlpCcERVd0ZsZjFSaWlURTJTd3RCUEJkenJ0clNQeVdyakhRWF9JNC1ZbmdEN3NMSzNDT2VaNzk1c2trMjhXRHZuVHF0d2dNLWt4TGZ2V0tlMA?oc=5",
+    "url_fp": "b4a1f199720d19b1864d7618c8fa886f",
+    "description": "Yankees Biggest Losers From First Two Spring Training GamesSports Illustrated",
+    "date": "2026-02-24T02:23:58.100705+00:00"
+  },
+  {
+    "title": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRs - MLB.com",
+    "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE10a0x0UDZidjJfRzR3SXpNSjdVb0d3YzJjbWlrcVBoY0dWRllZUUVJU1d3bnU2Nmp0aDNOb2RvU0dMMFRDcENNMm1tRGlOcGJXdXhDVWEwNHNyNThYYlU2S1N0WEg0TnRhaUhaWUF3TXAzaWdYNjJMbDFYcDc?oc=5",
+    "url_fp": "a0e747a7a5c988c22dd1abfd7c9676dc",
+    "description": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRsMLB.comAaron Judge destroys Tigers in 20-3 loss to Yankees in 1st spring gameDetroit Free PressYankees news: Judge, Jones homer in spring routPinstripe Alley",
+    "date": "2026-02-24T02:23:58.100724+00:00"
+  },
+  {
+    "title": "Knicks Roster Is Full, But Moves Might Not Be Done - Sports Illustrated",
+    "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNQUFPaXVJdDRNWnZTaHVJby1iU2N0cnNZLTI3UkExSXMtR18yTGczeEJNeHUxVkE2M2JkdXZFY3l0emIwRE1xUy1YUlFzOTJGQzYwSWdfay1Fajk3eFVOSzhfdzFQQUdHSVBkM0lUdnVZNXlfbDJsai1OOUdJdC1DMU9YdWNoSkdKOHJpZVFTdnVmUQ?oc=5",
+    "url_fp": "5b92f5fdd6876067ee6edf39f8e7fa62",
+    "description": "Knicks Roster Is Full, But Moves Might Not Be DoneSports Illustrated",
+    "date": "2026-02-24T02:23:58.100737+00:00"
+  },
+  {
+    "title": "New York Knicks vs. Chicago Bulls Live Score and Stats - February 22, 2026 Gametracker - CBS Sports",
+    "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFB0XzdYdjFXZkFwSV9pTmtuYWVhOGFXSHE4WDJMQndveHR0MGs2NzlVNklEYkpFVVAtU19mN1duVWppTkV3UFh1YmZIWHJYQlVpSUlKeUo5T3Z2OEkzMFJmLXM4RHAxRUd0Q21zVm5wcVBDMm5mTjdIbHVOaw?oc=5",
+    "url_fp": "b68b0007991d5ad05f552ff6dce4f96b",
+    "description": "New York Knicks vs. Chicago Bulls Live Score and Stats - February 22, 2026 GametrackerCBS SportsKnicks didn’t have minutes for Bulls’ Guerschon Yabusele to thrive where he’s ‘best’New York PostKnicks Fend Off Former Teammate Guerschon Yabusele's BullsSports Illustrated",
+    "date": "2026-02-24T02:23:58.100750+00:00"
+  },
+  {
+    "title": "Knicks star Jalen Brunson clarifies 'do right by me' comments regarding future contract - Yahoo Sports",
+    "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNODAxTU9idkM2QWxaTFMzWHd5Tm40WTFKZU9fTGxwcXNPSl9uc3Y5NXFtQ0VCWEhWX0VLYkZqdmpqdEVNTWJET0laTTFpQ3VHQWFKNXJ6X2kyaUQyYWVtM3FOTkZsSlYyNE9hbHExR0Mxa3FTWVhTa3NqRVlXMmNBbWhCX1Z4WTVjUHdMQw?oc=5",
+    "url_fp": "9994139cde836758bff4dbff0f2b3324",
+    "description": "Knicks star Jalen Brunson clarifies 'do right by me' comments regarding future contractYahoo Sports",
+    "date": "2026-02-24T02:23:58.100767+00:00"
+  },
+  {
+    "title": "Giants have cap casualty, pre-free agency decisions to weigh at NFL scouting combine - New York Post",
+    "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOb195eFhadWdFRnVVNzFFLUNzTU1lTGtYUXYyZHdLa0xvb09Dc1pxWVU0WXZuTnhLR2g4N05BMlJCdmlPMERpVk96R3VBaWZMQUtzd0ZNZ3RkcFV5Yy1JYXQwdUtoRmJYTUN3dUpfcDlxcFdUa2dETzVqUURZemdLMkhhU2FhWTRCYXpVOFY0QU5FdlBPakhfWjZ1Ulg5UQ?oc=5",
+    "url_fp": "a2ac69b356a2da482d2e5e047e2a35be",
+    "description": "Giants have cap casualty, pre-free agency decisions to weigh at NFL scouting combineNew York PostNew York Giants receive massive trade haul for the No. 2 pick, remake the secondary and WR room in 7-round 2026 NFL mock draftA to Z SportsJoe Schoen and John Harbaugh’s Giants vision will begin to take shape at NFL combineNew York Post",
+    "date": "2026-02-24T02:23:58.100785+00:00"
+  },
+  {
+    "title": "Giants, Harbaugh Highlighted as Fit for $41 Million Cut Candidate in Free Agency - heavy.com",
+    "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOZ25XSmowUnBhY3VSS25PU2plZ3ZxMDB2TnA4T0tIbTNqaWQ1NzU3Uzc3UTRnYVI2dGluWS1FLU1ydWtzZVYtanhkeS1CcUdBbFFCaFF3cE1XUDZfQjh4V0dpNkNPRlZRWWw1cG9uWVIyRjBYSWpEckFWR3NVbzV3czhXSWdBV0I2QkZN?oc=5",
+    "url_fp": "c5431a029e7aec66261a4cd0eadcb009",
+    "description": "Giants, Harbaugh Highlighted as Fit for $41 Million Cut Candidate in Free Agencyheavy.com",
+    "date": "2026-02-24T02:23:58.100803+00:00"
+  },
+  {
+    "title": "New York Giants mailbag: John Harbaugh, retirement plans, Carnell Tate, more - Big Blue View",
+    "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNM2gyckgwSWlIeVZEeEJmbUpUNEhtVzFRMU0wTEM0MkhzemRyalByWnpQdTItZ3lMRUZvVUVMTWRaaDU0dVBma1RtM0F5aVBVUXFPQjd4b1k2S1YyU19Qa0l3RE1PR2dzWmJPUFd5cUFCOFlLaXczWXhQekFhNUZWLVpKa2dfUTZOOWFMQ0ZGa2VtckhhZVFJYl8wdnQ4Z09wLWlQWTRWT3hxSFBSQjZZZkRPNWQ4azNBUzlzdjZHdnI2cW1JZUhQdExB?oc=5",
+    "url_fp": "38d0665066319afb36b26e75772cc246",
+    "description": "New York Giants mailbag: John Harbaugh, retirement plans, Carnell Tate, moreBig Blue View",
+    "date": "2026-02-24T02:23:58.100821+00:00"
+  },
+  {
+    "title": "Devils teammates thrilled watching Jack Hughes clinch gold medal for U.S. - NHL.com",
+    "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPd3FEb3IyekU5b2FSNlhFN1ZVVGk5clpQbXM3REQ5TUFzTW1sbDdTTVZvckQ2alNCSTd0cG1nXzZBQ3ZQdlEtSWhZV1kydHhDVkVzQ3hCbUY5djJtRFZ0dWxCLVkyQXc2ZE9uSHJCR25tTjhLcnQ3Z3dzN1VHWVpTTExJTFJkY1FuN0wzYXc1SXJiWjh6OTI4eGI1V29rWGVXR3hwaA?oc=5",
+    "url_fp": "9e49b6ad1686dbf2cd93bfa167f6a8ad",
+    "description": "Devils teammates thrilled watching Jack Hughes clinch gold medal for U.S.NHL.com",
+    "date": "2026-02-24T02:23:58.100840+00:00"
+  },
+  {
+    "title": "Hockey gave the Hughes family everything decades before Olympic glory — and then they conquered the world - New York Post",
+    "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxPZDN0LUgzdS03ZzdRdW1FTmIzbzNTak1CUXBRS1JPZE5tcUEzU2FuTUt3M1NmVTN4YVQwZEk5d2pnbUQ2dTJxVFhVNkNkcXVRajc3RlBEQi1XcktfY1dWTTJYYlV3TDMwRWVYTkVkMHNvMGhNTDFqeGZYRUpMbVI4MkpSRXpEUDNTOHQtOGU1cnF3RGZlbHZrbUdEazk4ZVpUc0V1d2VZYi1fWDQ?oc=5",
+    "url_fp": "0a53a7710143fb69e957de7536df02cd",
+    "description": "Hockey gave the Hughes family everything decades before Olympic glory — and then they conquered the worldNew York Post",
+    "date": "2026-02-24T02:23:58.100856+00:00"
+  },
+  {
+    "title": "Jack Hughes Predicted He'd Win Olympic Gold with His Brother in Resurfaced Letter from 2019 - People.com",
+    "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOTlJLNlBDbkFNdGo3cjRMX1RfNHpPRkRjS0UwZmNRZHltWHhueXhSSXdMNmY2ZHNoZVlMdzU5ODR1Rm5GLUZrUE1rS1I2dXFhVFpPYWJaLUEzYkFobjcyV19PQVFrTzRPQVFxVUUybjFSVzQyTXE2UzJta09KZDN6dk9fb05iY1hxZVFGb0RMOEFsSk05OVJwOHpiYjgyc3dWWnR1bXVZZ2JPYmZI?oc=5",
+    "url_fp": "7436df3057e2bf1ecb23d2b83f7f2079",
+    "description": "Jack Hughes Predicted He'd Win Olympic Gold with His Brother in Resurfaced Letter from 2019People.com",
+    "date": "2026-02-24T02:23:58.100871+00:00"
+  }
+]
