@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MikeCast — Daily Briefing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">🎙️</span>
+        <h1 class="brand-name">MikeCast</h1>
+      </div>
+      <p class="brand-tagline">Your daily AI-powered news briefing</p>
+    </div>
+  </header>
+
+  <!-- Controls -->
+  <nav class="controls">
+    <div class="controls-inner">
+      <span class="date-label">Edition:</span>
+      <button class="btn" id="btn-prev" title="Previous day">&#8592; Prev</button>
+      <input type="date" class="date-input" id="date-picker" />
+      <button class="btn" id="btn-next" title="Next day">Next &#8594;</button>
+      <button class="btn btn-today" id="btn-today">Today</button>
+      <select class="date-input" id="archive-select" title="Jump to a past edition">
+        <option value="">Archive &#9662;</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Loading / Error -->
+  <p class="status-msg" id="loading">Loading briefing…</p>
+  <p class="status-msg error" id="error" style="display:none;"></p>
+
+  <!-- Main Content -->
+  <main id="content" class="content" style="display:none;">
+
+    <!-- Podcast player card -->
+    <div class="card podcast-card">
+      <div class="podcast-header">
+        <span class="section-title">🎧 Today's Podcast</span>
+        <span class="podcast-meta" id="podcast-meta"></span>
+      </div>
+      <audio class="audio-player" id="podcast-player" controls preload="metadata" style="display:none;"></audio>
+      <p class="muted" id="no-audio" style="display:none;">No audio available for this edition.</p>
+    </div>
+
+    <!-- Briefing content card -->
+    <div class="card">
+      <div class="section-title">📰 Daily Briefing</div>
+      <div id="briefing-html"></div>
+    </div>
+
+    <!-- Article links card -->
+    <div class="card" id="articles-card">
+      <div class="section-title">🔗 Source Articles</div>
+      <div id="articles-list"></div>
+    </div>
+
+    <!-- Podcast Script (collapsible) -->
+    <section id="script-section" class="card">
+      <button id="script-toggle" class="collapsible-toggle">
+        📝 Podcast Script <span id="script-arrow" class="arrow">▶</span>
+      </button>
+      <div id="script-content" class="collapsible-body" style="display:none;">
+        <pre id="script-text" class="script-text"></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>MikeCast &bull; Powered by NYT API, Google News &amp; OpenAI GPT-4o &bull; <span id="footer-date"></span></p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
