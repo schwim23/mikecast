@@ -2819,5 +2819,432 @@
     "url_fp": "d3ce7f6297b01ad89f11c5c255b0545c",
     "description": "NJ Gov. Mikie Sherrill booed at Devils game honoring US Olympic hockey hero Jack HughesFox News",
     "date": "2026-02-27T11:45:37.707717+00:00"
+  },
+  {
+    "title": "Crypto’s Richest Man Details His Secret Talks, Prison Time and Humbling Comedown",
+    "url": "https://www.nytimes.com/2026/02/27/technology/cz-changpeng-zhao-binance-memoir-prison.html",
+    "url_fp": "0105bd515fce64830abbf74491946efa",
+    "description": "In a draft of his memoir, Changpeng Zhao, the founder of Binance, laid out the secret negotiations that led to his imprisonment and a run-in with ICE.",
+    "date": "2026-02-28T11:45:35.891950+00:00"
+  },
+  {
+    "title": "Silicon Valley Rallies Behind Anthropic in A.I. Clash With Trump",
+    "url": "https://www.nytimes.com/2026/02/27/technology/anthropic-trump-pentagon-silicon-valley.html",
+    "url_fp": "60d09d8e5d7f6a8ec1652d211ebc62b8",
+    "description": "Actions by the president and the Pentagon appeared to drive a wedge between Washington and the tech industry, whose leaders and workers spoke out for the start-up.",
+    "date": "2026-02-28T11:45:35.950406+00:00"
+  },
+  {
+    "title": "Pentagon Standoff Is a Decisive Moment for How A.I. Will Be Used in War",
+    "url": "https://www.nytimes.com/2026/02/27/technology/defense-department-anthropic-ai-safety.html",
+    "url_fp": "2d7e873c001eeb01b4880ccb85993fe6",
+    "description": "The Pentagon’s contract dispute with Anthropic is part of a wider clash about the use of artificial intelligence for national security and who decides on any safeguards.",
+    "date": "2026-02-28T11:45:36.020651+00:00"
+  },
+  {
+    "title": "Adapting the Principles of Engineering to Make Watches",
+    "url": "https://www.nytimes.com/2026/02/28/fashion/watches-apiar-3d-printing.html",
+    "url_fp": "848540cb93c701ee6e6f573a3dc70c0b",
+    "description": "The tech-focused leaders of the British brand Apiar aim to stretch beyond watchmaking’s traditional material and manufacturing constraints.",
+    "date": "2026-02-28T11:45:36.075092+00:00"
+  },
+  {
+    "title": "OpenAI Reaches A.I. Agreement With Defense Dept. After Anthropic Clash",
+    "url": "https://www.nytimes.com/2026/02/27/technology/openai-agreement-pentagon-ai.html",
+    "url_fp": "172fb976feff94c1287562fe793a29b6",
+    "description": "The deal came hours after President Trump had ordered federal agencies to stop using artificial intelligence technology made by Anthropic, an OpenAI rival.",
+    "date": "2026-02-28T11:45:36.142802+00:00"
+  },
+  {
+    "title": "Instagram to Alert Parents to Teens’ Self-Harm Searches",
+    "url": "https://www.nytimes.com/2026/02/27/technology/meta-self-harm-notifications-parents.html",
+    "url_fp": "ebac33e912a5eb92f60250396b965fe7",
+    "description": "Parents will receive notifications if a child has used the platform repeatedly to search for terms related to suicide or self-harm, but users must opt in to get them.",
+    "date": "2026-02-28T11:45:36.197047+00:00"
+  },
+  {
+    "title": "Is A.I. Eating the Labor Market? + The Latest on the Pentagon, OpenClaw and Alpha School",
+    "url": "https://www.nytimes.com/2026/02/27/podcasts/is-ai-eating-the-labor-market-the-latest-on-the-pentagon-openclaw-and-alpha-school.html",
+    "url_fp": "0770af736cbb9e4d1ba84479230eec07",
+    "description": "“I think the mere fact that the markets can move so much, based on almost nothing, underscores how high anxiety is right now.”",
+    "date": "2026-02-28T11:45:36.275898+00:00"
+  },
+  {
+    "title": "Chaos and Panic Grip Tehran as Airstrikes Shake City",
+    "url": "https://www.nytimes.com/2026/02/28/world/middleeast/iran-reaction-us-attack-tehran.html",
+    "url_fp": "76ddc2917a8bc76f77cdff2867722648",
+    "description": "Iranians were beginning their workweek as U.S. and Israeli strikes sent people fleeing parts of the capital and parents racing to collect children from schools.",
+    "date": "2026-02-28T11:45:36.329566+00:00"
+  },
+  {
+    "title": "What to Know About the U.S. Attacks on Iran",
+    "url": "https://www.nytimes.com/2026/02/28/world/middleeast/iran-attacks-what-to-know.html",
+    "url_fp": "b6ad326cce318f8a193ec3b91c9f9bda",
+    "description": "The United States, joined by Israel, launched an attack on major cities in Iran, as President Trump called on Iranians to overthrow the government.",
+    "date": "2026-02-28T11:45:36.372726+00:00"
+  },
+  {
+    "title": "Trump Orders Government to Stop Using Anthropic After Pentagon Standoff",
+    "url": "https://www.nytimes.com/2026/02/27/us/politics/anthropic-military-ai.html",
+    "url_fp": "910c6b26374d27495b8f5268e42c6e69",
+    "description": "The company had clashed with the military over how officials wanted to use its cutting-edge A.I. model. The order could vastly complicate intelligence analysis and defense work.",
+    "date": "2026-02-28T11:45:36.442107+00:00"
+  },
+  {
+    "title": "Taiwan Arms Sale Approved by Congress Is Delayed as Trump Plans Visit to Beijing",
+    "url": "https://www.nytimes.com/2026/02/27/us/politics/trump-taiwan-arms-sale.html",
+    "url_fp": "bf4fdccd9bf8183ea1d38ac2ef50aee6",
+    "description": "The package worth billions of dollars and endorsed by lawmakers is stalled at the State Department as the U.S. and China plan an April summit.",
+    "date": "2026-02-28T11:45:36.515558+00:00"
+  },
+  {
+    "title": "Pentagon Watchdog Stalls Proposal to Review Targeting in Trump’s Boat Strikes",
+    "url": "https://www.nytimes.com/2026/02/28/us/politics/trump-boat-strikes-pentagon.html",
+    "url_fp": "4a2a3436a38c42629e527f7124c50e10",
+    "description": "A new inspector general delayed a decision on whether to approve the project and is said to have raised its potential political ramifications, in a test of the watchdog system in President Trump’s second term.",
+    "date": "2026-02-28T11:45:36.586253+00:00"
+  },
+  {
+    "title": "The Bloody Rise and Fall of Mexico’s Top Crime Boss",
+    "url": "https://www.nytimes.com/2026/02/28/world/americas/mexico-mencho-career-death.html",
+    "url_fp": "db1ae0860d8a51e0df33306650cc379f",
+    "description": "El Mencho’s brutality and business acumen put him atop the cartel world, until he made a fatal mistake.",
+    "date": "2026-02-28T11:45:36.619275+00:00"
+  },
+  {
+    "title": "‘You Accept the Risk and the Fear’: What It Takes to Report on the Mexican Cartels",
+    "url": "https://www.nytimes.com/2026/02/28/insider/times-reporters-mexico-el-mencho-cartels.html",
+    "url_fp": "7882012957569daf43bae52edd245a06",
+    "description": "Cultivating sources. Verifying claims. Staying safe. After the death of El Mencho, four journalists share their approach to this difficult, dangerous work.",
+    "date": "2026-02-28T11:45:36.671202+00:00"
+  },
+  {
+    "title": "Trump Said the Government Will No Longer Use Anthropic’s A.I.",
+    "url": "https://www.nytimes.com/2026/02/27/briefing/trump-pentagon-anthropic-ai.html",
+    "url_fp": "2dd27ac5a5aa6f202c2df97bc3ea70ab",
+    "description": "Also, the president said he is “not happy” with Iran’s negotiators. Here’s the latest at the end of Friday.",
+    "date": "2026-02-28T11:45:36.707611+00:00"
+  },
+  {
+    "title": "OpenAI Reaches A.I. Agreement With Defense Dept. After Anthropic Clash - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "OpenAI Reaches A.I. Agreement With Defense Dept. After Anthropic ClashThe New York Times",
+    "date": "2026-02-28T11:45:36.707861+00:00"
+  },
+  {
+    "title": "OpenAI strikes deal with Pentagon after Trump orders government to stop using Anthropic - NBC News",
+    "url": "https://www.nbcnews.com",
+    "url_fp": "99d6a0a7648e1732ab4f22f38bc30078",
+    "description": "OpenAI strikes deal with Pentagon after Trump orders government to stop using AnthropicNBC News",
+    "date": "2026-02-28T11:45:36.708008+00:00"
+  },
+  {
+    "title": "Amazon And OpenAI Forge US$50b AI Deal Centered On AWS Growth - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Amazon And OpenAI Forge US$50b AI Deal Centered On AWS GrowthYahoo Finance",
+    "date": "2026-02-28T11:45:36.708342+00:00"
+  },
+  {
+    "title": "Trump moves to blacklist Anthropic AI from all government work - Axios",
+    "url": "https://www.axios.com",
+    "url_fp": "749087a4a2a5ca3de610717b8a354a82",
+    "description": "Trump moves to blacklist Anthropic AI from all government workAxios",
+    "date": "2026-02-28T11:45:36.708648+00:00"
+  },
+  {
+    "title": "Anthropic says it ‘cannot in good conscience’ allow Pentagon to remove AI checks - The Guardian",
+    "url": "https://www.theguardian.com",
+    "url_fp": "b49674329b31ee735fa4368cd1a19ba8",
+    "description": "Anthropic says it ‘cannot in good conscience’ allow Pentagon to remove AI checksThe Guardian",
+    "date": "2026-02-28T11:45:36.708828+00:00"
+  },
+  {
+    "title": "Trump orders government to stop using Anthropic in battle over AI use - BBC",
+    "url": "https://www.bbc.com",
+    "url_fp": "290ccda0deea6083ee613d358446103e",
+    "description": "Trump orders government to stop using Anthropic in battle over AI useBBC",
+    "date": "2026-02-28T11:45:36.754418+00:00"
+  },
+  {
+    "title": "Nano Banana 2: Combining Pro capabilities with lightning-fast speed - blog.google",
+    "url": "https://blog.google",
+    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
+    "description": "Nano Banana 2: Combining Pro capabilities with lightning-fast speedblog.google",
+    "date": "2026-02-28T11:45:36.754579+00:00"
+  },
+  {
+    "title": "Hands-On With Nano Banana 2, the Latest Version of Google’s AI Image Generator - WIRED",
+    "url": "https://www.wired.com",
+    "url_fp": "c72d08405dc30e25e7627843e8a5d3ac",
+    "description": "Hands-On With Nano Banana 2, the Latest Version of Google’s AI Image GeneratorWIRED",
+    "date": "2026-02-28T11:45:36.805496+00:00"
+  },
+  {
+    "title": "Copilot Tasks: From Answers to Actions - Microsoft",
+    "url": "https://www.microsoft.com",
+    "url_fp": "c439589400212f33bcef65939bd8c69f",
+    "description": "Copilot Tasks: From Answers to ActionsMicrosoftMicrosoft’s Copilot Enters Its ‘Second Chapter’ With Autonomous Task ExecutioneWeekMicrosoft’s Copilot Tasks AI uses its own computer to get things doneThe Verge",
+    "date": "2026-02-28T11:45:36.805587+00:00"
+  },
+  {
+    "title": "Microsoft is considering a new AI-loaded software bundle for Microsoft 365, sources say - Business Insider",
+    "url": "https://www.businessinsider.com",
+    "url_fp": "04220288456435753371c3e6a38ca102",
+    "description": "Microsoft is considering a new AI-loaded software bundle for Microsoft 365, sources sayBusiness Insider",
+    "date": "2026-02-28T11:45:36.805927+00:00"
+  },
+  {
+    "title": "Microsoft to auto-launch Copilot in Edge whenever you click a link from Outlook - theregister.com",
+    "url": "https://www.theregister.com",
+    "url_fp": "0b490fcfb212fb4542fa6ad143edd5f3",
+    "description": "Microsoft to auto-launch Copilot in Edge whenever you click a link from Outlooktheregister.com",
+    "date": "2026-02-28T11:45:36.806069+00:00"
+  },
+  {
+    "title": "Jensen Huang’s A.I. Bets Beyond GPUs: 10 High-Flying Startups Backed by Nvidia - observer.com",
+    "url": "https://observer.com",
+    "url_fp": "2e59c440f7b5b4a04a68f652f5b5333b",
+    "description": "Jensen Huang’s A.I. Bets Beyond GPUs: 10 High-Flying Startups Backed by Nvidiaobserver.com",
+    "date": "2026-02-28T11:45:36.856786+00:00"
+  },
+  {
+    "title": "Cyber Startups Ride AI Wave to Funding Highs - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "Cyber Startups Ride AI Wave to Funding HighsWSJ",
+    "date": "2026-02-28T11:45:36.857058+00:00"
+  },
+  {
+    "title": "Exclusive: Startup aiming to break Nvidia’s stranglehold on AI data center workloads raises $10.25 million - Fortune",
+    "url": "https://fortune.com",
+    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
+    "description": "Exclusive: Startup aiming to break Nvidia’s stranglehold on AI data center workloads raises $10.25 millionFortune",
+    "date": "2026-02-28T11:45:36.857342+00:00"
+  },
+  {
+    "title": "Netflix Lost Warner. Maybe That’s a Good Thing.",
+    "url": "https://www.nytimes.com/2026/02/28/business/media/netflix-lost-warner-maybe-thats-a-good-thing.html",
+    "url_fp": "2d3d8a2951f622b6ae357563218d2fe4",
+    "description": "It is entirely possible, analysts say, that Netflix will be better off by bailing from its $83 billion deal with Warner Bros. Discovery.",
+    "date": "2026-02-28T11:45:36.889890+00:00"
+  },
+  {
+    "title": "Abrupt Change for Warner Bros. Prompts Many Grim Faces",
+    "url": "https://www.nytimes.com/2026/02/28/business/warner-bros-paramount-reaction.html",
+    "url_fp": "77045c49b755a07f44c79f588603f815",
+    "description": "Employees at the company had started to warm to the idea of Netflix as its corporate owner. Now they face the prospect of major cuts under Paramount.",
+    "date": "2026-02-28T11:45:36.923577+00:00"
+  },
+  {
+    "title": "QAnon Faithful See Validation in the Epstein Files",
+    "url": "https://www.nytimes.com/2026/02/28/business/media/epstein-qanon-pizzagate.html",
+    "url_fp": "f85f0c61a41d6aedd1a21164936a2edd",
+    "description": "The nearly decade-old conspiracy theory does not align neatly with the facts emerging from the documents. That does not seem to matter.",
+    "date": "2026-02-28T11:45:36.956494+00:00"
+  },
+  {
+    "title": "4 Ways to Enjoy Your Savings in Retirement Without Going Broke",
+    "url": "https://www.nytimes.com/2026/02/28/business/retirement-savings-spending-finances.html",
+    "url_fp": "be721ac3a1900e4ac0e93303bb1edf92",
+    "description": "Once paychecks stop, it can be frightening to shift out of the savings habit. But there are strategies to enjoy your nest egg and make it last.",
+    "date": "2026-02-28T11:45:36.995289+00:00"
+  },
+  {
+    "title": "To Extract Hot Water From the Earth, a Plan to Pipe It In First",
+    "url": "https://www.nytimes.com/2026/02/28/business/germany-geothermal-renewable-energy.html",
+    "url_fp": "81dad76cd18806d44de41ee7e8c83748",
+    "description": "Developers are using a new geothermal technology in Germany to produce clean energy.",
+    "date": "2026-02-28T11:45:37.036643+00:00"
+  },
+  {
+    "title": "Justice Dept. Tries to Slow Down Legal Battle Over Tariff Refunds",
+    "url": "https://www.nytimes.com/2026/02/27/business/trump-tariffs-refunds-supreme-court.html",
+    "url_fp": "06b4ee6f71c43a203f418e83b496bbda",
+    "description": "Earlier, President Trump suggested on social media that he could try to persuade the Supreme Court to reconsider its rejection of his tariffs.",
+    "date": "2026-02-28T11:45:37.077044+00:00"
+  },
+  {
+    "title": "The Warning Signs Flashing From the Tech-Heavy Bloat of the S&P 500",
+    "url": "https://www.nytimes.com/interactive/2026/02/26/business/stock-market-sp-500-nvidia-tech-bubble-crises.html",
+    "url_fp": "8b0a95b33b3c3b751d9f5746a668f7fb",
+    "description": "The shifting composition of big public companies in the stock index shows how lopsided and less dynamic the American economy has become.",
+    "date": "2026-02-28T11:45:37.115946+00:00"
+  },
+  {
+    "title": "Dow closes more than 500 points lower after hot inflation report, mounting concerns about AI impact - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Dow closes more than 500 points lower after hot inflation report, mounting concerns about AI impactCNBC",
+    "date": "2026-02-28T11:45:37.116663+00:00"
+  },
+  {
+    "title": "A VC and some big-name programmers are trying to solve open source's funding problem, permanently - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "A VC and some big-name programmers are trying to solve open source's funding problem, permanentlyTechCrunch",
+    "date": "2026-02-28T11:45:37.123381+00:00"
+  },
+  {
+    "title": "February 2026: Top five fintech funding rounds of the month - FinTech Futures",
+    "url": "https://www.fintechfutures.com",
+    "url_fp": "08c85f0537d79bc1fb840edd6890994a",
+    "description": "February 2026: Top five fintech funding rounds of the monthFinTech Futures",
+    "date": "2026-02-28T11:45:37.123491+00:00"
+  },
+  {
+    "title": "Odds of early Warsh-led Fed rate cuts slide with bullish outlook - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "Odds of early Warsh-led Fed rate cuts slide with bullish outlookReuters",
+    "date": "2026-02-28T11:45:37.123819+00:00"
+  },
+  {
+    "title": "What is behind Apple recent drop in value today - Traders Union",
+    "url": "https://tradersunion.com",
+    "url_fp": "dab72c5c6063b5282ee09005d24a59ac",
+    "description": "What is behind Apple recent drop in value todayTraders Union",
+    "date": "2026-02-28T11:45:37.163739+00:00"
+  },
+  {
+    "title": "Meta Takes Legal Action Against Scam Advertisers - meta.com",
+    "url": "https://about.fb.com",
+    "url_fp": "419dcbb1bdd3096e4ff2ebdab9a204fb",
+    "description": "Meta Takes Legal Action Against Scam Advertisersmeta.com",
+    "date": "2026-02-28T11:45:37.163981+00:00"
+  },
+  {
+    "title": "How Meta Executives Talked About Child Safety Behind the Scenes - The Atlantic",
+    "url": "https://www.theatlantic.com",
+    "url_fp": "bc87bcb1058721e7f5c8ae772b0916d7",
+    "description": "How Meta Executives Talked About Child Safety Behind the ScenesThe Atlantic",
+    "date": "2026-02-28T11:45:37.212711+00:00"
+  },
+  {
+    "title": "OpenAI and Amazon announce strategic partnership - OpenAI",
+    "url": "https://openai.com",
+    "url_fp": "4047152196ffb4aa9c9cfcf4e208158d",
+    "description": "OpenAI and Amazon announce strategic partnershipOpenAI",
+    "date": "2026-02-28T11:45:37.248998+00:00"
+  },
+  {
+    "title": "Why Nvidia Stock is Dragging the Stock Market Lower Today - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Why Nvidia Stock is Dragging the Stock Market Lower TodayThe Motley FoolNVIDIA Announces Financial Results for Fourth Quarter and Fiscal 2026NVIDIA NewsroomNvidia reports earnings and guidance beat as AI boom pushes data center revenue up 75%CNBCNvidia Stock: Why Shares Are Down Today After EarningsBarron'sStock Market Today: Nasdaq Drops As Nvidia Plunges; Chip Spinoff Soars (Live Coverage)Investor's Business DailyStock Market News, Feb. 26, 2026: Nvidia Stock Falls After Earnings, Dragging Nasdaq LowerWSJHere's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the StockInvestopediaNvidia Q4 Earnings: Jensen's Half-A-Trillion Dollar Revenue Explosion Starts TodaySeeking AlphaWhy Nvidia Stock is Dragging the Stock Market Lower TodayNasdaq",
+    "date": "2026-02-28T11:45:37.249249+00:00"
+  },
+  {
+    "title": "Elon Musk: Tesla FSD Coming To Europe, Alongside Cybercab, Optimus Production - Investor's Business Daily",
+    "url": "https://www.investors.com",
+    "url_fp": "545362646854336a3463a9033e71efc5",
+    "description": "Elon Musk: Tesla FSD Coming To Europe, Alongside Cybercab, Optimus ProductionInvestor's Business Daily",
+    "date": "2026-02-28T11:45:37.249425+00:00"
+  },
+  {
+    "title": "Cathie Wood: Tesla Stock Forecast, Bitcoin Bull Case, AI Outlook - Morningstar Canada",
+    "url": "https://global.morningstar.com",
+    "url_fp": "b15eeb823132b595514e2a16eb4e8398",
+    "description": "Cathie Wood: Tesla Stock Forecast, Bitcoin Bull Case, AI OutlookMorningstar Canada",
+    "date": "2026-02-28T11:45:37.249584+00:00"
+  },
+  {
+    "title": "Microsoft and OpenAI joint statement on continuing partnership - The Official Microsoft Blog",
+    "url": "https://blogs.microsoft.com",
+    "url_fp": "fec2db4129d1d87600e1ed88b2da78fd",
+    "description": "Microsoft and OpenAI joint statement on continuing partnershipThe Official Microsoft Blog",
+    "date": "2026-02-28T11:45:37.249981+00:00"
+  },
+  {
+    "title": "Microsoft stock price today: MSFT steadies after Wayve funding, Japan antitrust raid - TechStock²",
+    "url": "https://ts2.tech",
+    "url_fp": "0a8eedd2ceabbf4d74bc2561d9ffc053",
+    "description": "Microsoft stock price today: MSFT steadies after Wayve funding, Japan antitrust raidTechStock²",
+    "date": "2026-02-28T11:45:37.250190+00:00"
+  },
+  {
+    "title": "Microsoft Cloud and AI strength drives second quarter results - Microsoft Source",
+    "url": "https://news.microsoft.com",
+    "url_fp": "d66c29155c0d8df0755b40a37da2eadf",
+    "description": "Microsoft Cloud and AI strength drives second quarter resultsMicrosoft Source",
+    "date": "2026-02-28T11:45:37.250334+00:00"
+  },
+  {
+    "title": "Google just sold a 100‑year bond to fund its AI future - USA Today",
+    "url": "https://www.usatoday.com",
+    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
+    "description": "Google just sold a 100‑year bond to fund its AI futureUSA Today",
+    "date": "2026-02-28T11:45:37.250489+00:00"
+  },
+  {
+    "title": "The most interesting players on the new ABS challenge leaderboard - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "The most interesting players on the new ABS challenge leaderboardMLB.com",
+    "date": "2026-02-28T11:45:37.250656+00:00"
+  },
+  {
+    "title": "Yankees see ‘real opportunity’ for Randal Grichuk with roster battle taking shape - New York Post",
+    "url": "https://nypost.com",
+    "url_fp": "6a3bd587d57d5503a436b77127565c5b",
+    "description": "Yankees see ‘real opportunity’ for Randal Grichuk with roster battle taking shapeNew York Post",
+    "date": "2026-02-28T11:45:37.250859+00:00"
+  },
+  {
+    "title": "Yankees bring fireworks to Fort Myers in drubbing of the Twins - Pinstripe Alley",
+    "url": "https://www.pinstripealley.com",
+    "url_fp": "4cc498be01e5472bc3227b3ef1e0469e",
+    "description": "Yankees bring fireworks to Fort Myers in drubbing of the TwinsPinstripe Alley",
+    "date": "2026-02-28T11:45:37.251057+00:00"
+  },
+  {
+    "title": "Former Knicks center has found new life as a budding star with conference rival - Daily Knicks",
+    "url": "https://dailyknicks.com",
+    "url_fp": "fc37127339619a423c05ae0e84af1232",
+    "description": "Former Knicks center has found new life as a budding star with conference rivalDaily Knicks",
+    "date": "2026-02-28T11:45:37.306845+00:00"
+  },
+  {
+    "title": "Mike Brown Could Be One-and-Done with Knicks - Sports Illustrated",
+    "url": "https://www.si.com",
+    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
+    "description": "Mike Brown Could Be One-and-Done with KnicksSports Illustrated",
+    "date": "2026-02-28T11:45:37.307001+00:00"
+  },
+  {
+    "title": "Combine rumors: The Giants are looking at top running backs - Big Blue View",
+    "url": "https://www.bigblueview.com",
+    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
+    "description": "Combine rumors: The Giants are looking at top running backsBig Blue ViewCaleb Downs a tantalizing — if unlikely — Giants NFL draft possibilityNew York PostGiants news, 2/28: NFL Combine, Kayvon Thibodeaux, Giants in RB marketYahoo Sports",
+    "date": "2026-02-28T11:45:37.307108+00:00"
+  },
+  {
+    "title": "Will Giants ownership ignore players’ failing D+ grade for Joe Schoen? - New York Daily News",
+    "url": "https://www.nydailynews.com",
+    "url_fp": "8b0b63fa78d617b1ee89794d52bc2748",
+    "description": "Will Giants ownership ignore players’ failing D+ grade for Joe Schoen?New York Daily News",
+    "date": "2026-02-28T11:45:37.360017+00:00"
+  },
+  {
+    "title": "Game Preview: 02.26.26 vs. New Jersey Devils - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Game Preview: 02.26.26 vs. New Jersey DevilsNHL.com",
+    "date": "2026-02-28T11:45:37.360160+00:00"
+  },
+  {
+    "title": "Late goals by Clifton and Chinakhov push the Penguins past Jack Hughes and the Devils 4-1 - AP News",
+    "url": "https://apnews.com",
+    "url_fp": "025300132ecca16373d0e23fc525908b",
+    "description": "Late goals by Clifton and Chinakhov push the Penguins past Jack Hughes and the Devils 4-1AP News",
+    "date": "2026-02-28T11:45:37.415717+00:00"
+  },
+  {
+    "title": "Very Special Teams; Penguins Put Foot Down on Devils - Pittsburgh Hockey Now",
+    "url": "https://pittsburghhockeynow.com",
+    "url_fp": "cf81f5b94dcc422cf0cd25fe9f3e98d6",
+    "description": "Very Special Teams; Penguins Put Foot Down on DevilsPittsburgh Hockey Now",
+    "date": "2026-02-28T11:45:37.459765+00:00"
   }
 ]
