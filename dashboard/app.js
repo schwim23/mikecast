@@ -102,10 +102,12 @@
       podcastPlayer.style.display = "block";
       noAudioEl.style.display = "none";
       if (podcastMeta) podcastMeta.textContent = "tts-1-hd \u00b7 alloy \u00b7 OpenAI";
+      document.getElementById("episode-subscribe").style.display = "flex";
     } else {
       podcastPlayer.style.display = "none";
       noAudioEl.style.display = "block";
       if (podcastMeta) podcastMeta.textContent = "";
+      document.getElementById("episode-subscribe").style.display = "none";
     }
 
     // 3. Article links

@@ -247,6 +247,32 @@ body {
 
 .muted { color: var(--text-muted); font-size: .9rem; }
 
+.subscribe-buttons {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: .75rem;
+}
+
+.btn-subscribe {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .35rem .85rem;
+  border-radius: 20px;
+  font-size: .78rem;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: .01em;
+  transition: opacity .15s;
+}
+.btn-subscribe:hover { opacity: .8; }
+
+.btn-apple   { background: #a855f7; color: #fff; }
+.btn-spotify { background: #1db954; color: #fff; }
+.btn-rss     { background: #f97316; color: #fff; }
+
 @media (max-width: 600px) {
   .brand-name  { font-size: 1.6rem; }
   .brand-icon  { font-size: 1.6rem; }

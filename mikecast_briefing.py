@@ -928,6 +928,83 @@ def generate_manifest() -> None:
     logger.info("Manifest updated: %d dates", len(dates))
 
 
+SITE_BASE_URL = "https://schwim23.github.io/mikecast/"
+
+
+def generate_rss_feed() -> None:
+    """Generate a podcast-compatible RSS 2.0 feed at data/feed.xml."""
+    from email.utils import formatdate
+    import calendar
+
+    items = []
+    for json_path in sorted(DATA_DIR.glob("????-??-??.json"), reverse=True):
+        try:
+            with open(json_path) as f:
+                data = json.load(f)
+        except Exception:
+            continue
+
+        date_str = data.get("date", json_path.stem)
+        date_display = data.get("date_display", date_str)
+        audio_file = data.get("audio_file")
+        if not audio_file:
+            continue
+
+        audio_url = f"{SITE_BASE_URL}data/{audio_file}"
+        audio_path = DATA_DIR / audio_file
+        file_size = audio_path.stat().st_size if audio_path.exists() else 0
+
+        # Build pubDate in RFC 2822 format (6:45 AM ET → 11:45 UTC)
+        try:
+            dt = datetime.strptime(date_str, "%Y-%m-%d").replace(
+                hour=11, minute=45, tzinfo=timezone.utc
+            )
+            pub_date = formatdate(calendar.timegm(dt.timetuple()), usegmt=True)
+        except ValueError:
+            pub_date = formatdate(usegmt=True)
+
+        description = data.get("podcast_script", f"MikeCast daily news briefing for {date_display}.")
+        if len(description) > 4000:
+            description = description[:3997] + "..."
+
+        def _esc(s):
+            return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+        items.append(f"""  <item>
+    <title>MikeCast — {_esc(date_display)}</title>
+    <description>{_esc(description)}</description>
+    <pubDate>{pub_date}</pubDate>
+    <guid isPermaLink="false">{audio_url}</guid>
+    <enclosure url="{audio_url}" type="audio/mpeg" length="{file_size}"/>
+    <itunes:title>MikeCast — {_esc(date_display)}</itunes:title>
+    <itunes:duration>0</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>""")
+
+    feed_url = f"{SITE_BASE_URL}data/feed.xml"
+    rss = f"""<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MikeCast — Daily Briefing</title>
+    <link>{SITE_BASE_URL}</link>
+    <description>Your daily AI-powered news briefing. Personalized news across AI &amp; Tech, Business &amp; Markets, Companies, and NY Sports.</description>
+    <language>en-us</language>
+    <atom:link href="{feed_url}" rel="self" type="application/rss+xml"/>
+    <itunes:author>MikeCast</itunes:author>
+    <itunes:summary>Your daily AI-powered news briefing.</itunes:summary>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:category text="News"/>
+{chr(10).join(items)}
+  </channel>
+</rss>"""
+
+    out_path = DATA_DIR / "feed.xml"
+    out_path.write_text(rss, encoding="utf-8")
+    logger.info("RSS feed written: %s (%d episodes)", out_path, len(items))
+
+
 def save_daily_data(
     html_briefing: str,
     categorised: dict[str, list[dict]],
@@ -1016,6 +1093,7 @@ def main() -> None:
     logger.info("Step 7/7: Saving data & sending email…")
     save_daily_data(html, top_articles, picks, script, audio_filename)
     generate_manifest()
+    generate_rss_feed()
     email_ok = send_email(html, script, audio_path if audio_ok else None)
 
     logger.info(
