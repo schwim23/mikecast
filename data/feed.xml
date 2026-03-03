@@ -9,6 +9,16 @@
     <language>en-us</language>
     <atom:link href="https://schwim23.github.io/mikecast/data/feed.xml" rel="self" type="application/rss+xml"/>
     <itunes:author>MikeCast</itunes:author>
+    <itunes:owner>
+      <itunes:name>MikeCast</itunes:name>
+      <itunes:email>michael.schwimmer@gmail.com</itunes:email>
+    </itunes:owner>
+    <itunes:image href="https://schwim23.github.io/mikecast/data/cover.png"/>
+    <image>
+      <url>https://schwim23.github.io/mikecast/data/cover.png</url>
+      <title>MikeCast — Daily Briefing</title>
+      <link>https://schwim23.github.io/mikecast/</link>
+    </image>
     <itunes:summary>Your daily AI-powered news briefing.</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
