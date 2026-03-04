@@ -1,1083 +1,5 @@
 [
   {
-    "title": "Intel Strikes Deal With a Chip Start-Up Its C.E.O. Invested In",
-    "url": "https://www.nytimes.com/2026/02/24/technology/intel-sambanova-ceo-lip-bu-tan.html",
-    "url_fp": "8bde13516155fc9e4b35764e792adb31",
-    "description": "A technical partnership embraces SambaNova Systems, which Intel’s chief, Lip-Bu Tan, helps lead as an investor and chairman.",
-    "date": "2026-02-24T11:51:29.012440+00:00"
-  },
-  {
-    "title": "The Looming Taiwan Chip Disaster That Silicon Valley Has Long Ignored",
-    "url": "https://www.nytimes.com/2026/02/24/technology/taiwan-china-chips-silicon-valley-tsmc.html",
-    "url_fp": "3952789ade2cccff93b5947651b04d2f",
-    "description": "If China invades Taiwan and cuts off its chip exports to American companies, the tech industry and the U.S. economy would be crippled.",
-    "date": "2026-02-24T11:51:29.030224+00:00"
-  },
-  {
-    "title": "China Amps Up Pressure on Japan With Export Bans",
-    "url": "https://www.nytimes.com/2026/02/24/world/asia/china-japan-export-ban.html",
-    "url_fp": "b57b0aadc177a2762f3a853d8cc207ab",
-    "description": "Beijing placed the restrictions on 20 Japanese entities with ties to the defense industry, the latest ratcheting up of its monthslong feud with Tokyo.",
-    "date": "2026-02-24T11:51:29.044179+00:00"
-  },
-  {
-    "title": "ICE Whistle-Blower Says Training Is ‘Broken,’ and OpenAI Faces Questions About Mass Shooter",
-    "url": "https://www.nytimes.com/2026/02/24/podcasts/the-headlines/ice-whistleblower-openai-mass-shooter.html",
-    "url_fp": "6c8cc992dbbd50742b7e2c5375235123",
-    "description": "Plus, how Mexico tracked its most-wanted cartel leader.",
-    "date": "2026-02-24T11:51:29.066840+00:00"
-  },
-  {
-    "title": "How Russia Put Its Future at Risk by Remaking Its Economy for War",
-    "url": "https://www.nytimes.com/2026/02/24/world/europe/russia-ukraine-war-future.html",
-    "url_fp": "cce7de9b3e4ddd654cc31847e5bb0d64",
-    "description": "About half of the country’s federal budget goes toward the fight in Ukraine, money that does little to support its long-term development.",
-    "date": "2026-02-24T11:51:29.084797+00:00"
-  },
-  {
-    "title": "These Ukrainians Don’t Want to Be Traded to Russia for Peace",
-    "url": "https://www.nytimes.com/2026/02/24/world/europe/ukraine-war-donetsk.html",
-    "url_fp": "c7732713515faec1d2142564bcfcc21e",
-    "description": "Four years into the war, a major sticking point in talks is control of the eastern Donetsk region. Residents could face an agonizing choice if Ukraine gives up the territory.",
-    "date": "2026-02-24T11:51:29.101795+00:00"
-  },
-  {
-    "title": "After Six Decades of the War on Drugs, What Works?",
-    "url": "https://www.nytimes.com/2026/02/24/world/americas/mexico-war-on-drugs.html",
-    "url_fp": "ca87f65a1377109cdbc508ba0b995c62",
-    "description": "The U.S. and its allies have spilled blood and treasure to kill drug lords and defeat cartels, but the drugs keep coming and the new groups are more violent than ever.",
-    "date": "2026-02-24T11:51:29.115646+00:00"
-  },
-  {
-    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBCOpenAI partners with McKinsey, BCG, Accenture, and Capgemini to push its Frontier AI agent platformFortuneIBM gets a taste of the Anthropic treatment (or, vibe coding panic comes for the Cobol cowboys)Fortune",
-    "date": "2026-02-24T11:51:29.118996+00:00"
-  },
-  {
-    "title": "Canada to Probe What OpenAI Knew About Tumbler Ridge Shooter - The New York Times",
-    "url": "https://www.nytimes.com",
-    "url_fp": "55878905590e5ea6136f9730d218c235",
-    "description": "Canada to Probe What OpenAI Knew About Tumbler Ridge ShooterThe New York TimesCanada seeks answers from OpenAI for failing to alert police after suspending school shooter’s accountThe GuardianICE Whistle-Blower Says Training Is ‘Broken,’ and OpenAI Faces Questions About Mass ShooterThe New York Times",
-    "date": "2026-02-24T11:51:29.119085+00:00"
-  },
-  {
-    "title": "Head of OpenAI's Codex explains the kind of email that gets his attention — and his advice to young engineers - Business Insider",
-    "url": "https://www.businessinsider.com",
-    "url_fp": "04220288456435753371c3e6a38ca102",
-    "description": "Head of OpenAI's Codex explains the kind of email that gets his attention — and his advice to young engineersBusiness Insider",
-    "date": "2026-02-24T11:51:29.151511+00:00"
-  },
-  {
-    "title": "Anthropic Accuses Chinese Companies of Siphoning Data From Claude - WSJ",
-    "url": "https://www.wsj.com",
-    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
-    "description": "Anthropic Accuses Chinese Companies of Siphoning Data From ClaudeWSJChinese AI companies 'distilled' Claude to improve own models, Anthropic saysNBC NewsDetecting and preventing distillation attacksAnthropic",
-    "date": "2026-02-24T11:51:29.170110+00:00"
-  },
-  {
-    "title": "IBM posts steepest daily drop since 2000 after Anthropic says AI can modernize COBOL - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "IBM posts steepest daily drop since 2000 after Anthropic says AI can modernize COBOLReuters",
-    "date": "2026-02-24T11:51:29.170488+00:00"
-  },
-  {
-    "title": "Google just doubled its AI reasoning power with the surprise launch of Gemini 3.1 Pro - Android Central",
-    "url": "https://www.androidcentral.com",
-    "url_fp": "0ba6407ad018bc5ca1396e2733978093",
-    "description": "Google just doubled its AI reasoning power with the surprise launch of Gemini 3.1 ProAndroid Central",
-    "date": "2026-02-24T11:51:29.204694+00:00"
-  },
-  {
-    "title": "Microsoft crowns Copilot as the #1 productivity tool in Windows 11 - Windows Central",
-    "url": "https://www.windowscentral.com",
-    "url_fp": "1cc701f7fd9e99895a96c83b5b39f3a5",
-    "description": "Microsoft crowns Copilot as the #1 productivity tool in Windows 11Windows Central",
-    "date": "2026-02-24T11:51:29.226378+00:00"
-  },
-  {
-    "title": "Microsoft Dragon Copilot can help clinicians save time - Microsoft Source",
-    "url": "https://news.microsoft.com",
-    "url_fp": "d66c29155c0d8df0755b40a37da2eadf",
-    "description": "Microsoft Dragon Copilot can help clinicians save timeMicrosoft Source",
-    "date": "2026-02-24T11:51:29.246016+00:00"
-  },
-  {
-    "title": "Microsoft’s Copilot push irks customers, stirs FTC - InfoWorld",
-    "url": "https://www.infoworld.com",
-    "url_fp": "20f6574a3e9bf4c52ec364b95ebc0960",
-    "description": "Microsoft’s Copilot push irks customers, stirs FTCInfoWorld",
-    "date": "2026-02-24T11:51:29.261849+00:00"
-  },
-  {
-    "title": "Presight–Shorooq’s $100 Million AI Fund Deploys Capital Into Five Startups in First Quarter - waya.media",
-    "url": "https://waya.media",
-    "url_fp": "72ba58e1a19b738f70ca8ab2d92ffa2e",
-    "description": "Presight–Shorooq’s $100 Million AI Fund Deploys Capital Into Five Startups in First Quarterwaya.media",
-    "date": "2026-02-24T11:51:29.286859+00:00"
-  },
-  {
-    "title": "I.R.S. Tactics Against Meta Open a New Front in the Corporate Tax Fight",
-    "url": "https://www.nytimes.com/2026/02/24/business/irs-meta-corporate-taxes.html",
-    "url_fp": "2660d3eadcfd91e7f13f2d87a5b8def4",
-    "description": "The agency is using real-world profit data to challenge how big companies value offshore intellectual property.",
-    "date": "2026-02-24T11:51:29.339884+00:00"
-  },
-  {
-    "title": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade' - Yahoo Finance",
-    "url": "https://finance.yahoo.com",
-    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
-    "description": "Stock market today: Dow drops 800 points as S&P 500, Nasdaq slide on Trump tariff fears, AI 'scare trade'Yahoo FinanceStock Market Today: Dow Futures Inch Up; Trump's New Tariffs Kick In at 10% — Live UpdatesWSJDow drops 800 points as AI disruption fears and tariff woes weigh on markets: Live updatesCNBC",
-    "date": "2026-02-24T11:51:29.351236+00:00"
-  },
-  {
-    "title": "Stock Market Today: Dow, S&P 500 and Nasdaq struggle to rally after another AI-disruption sell-off; investors eye Anthropic briefing; Home Depot earnings on tap; Workday results to shine light on software sector. - MarketWatch",
-    "url": "https://www.marketwatch.com",
-    "url_fp": "5b80a053b8f3f5b09a0e2b665ba6d444",
-    "description": "Stock Market Today: Dow, S&P 500 and Nasdaq struggle to rally after another AI-disruption sell-off; investors eye Anthropic briefing; Home Depot earnings on tap; Workday results to shine light on software sector.MarketWatch",
-    "date": "2026-02-24T11:51:29.402516+00:00"
-  },
-  {
-    "title": "Stock Market Today: Futures Edge Higher After Indexes Tumble on Tariff Uncertainty, AI Disruption Concerns - Investopedia",
-    "url": "https://www.investopedia.com",
-    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
-    "description": "Stock Market Today: Futures Edge Higher After Indexes Tumble on Tariff Uncertainty, AI Disruption ConcernsInvestopedia",
-    "date": "2026-02-24T11:51:29.431070+00:00"
-  },
-  {
-    "title": "AI software start-up Jump pockets $80m Series B - FinTech Futures",
-    "url": "https://www.fintechfutures.com",
-    "url_fp": "08c85f0537d79bc1fb840edd6890994a",
-    "description": "AI software start-up Jump pockets $80m Series BFinTech Futures",
-    "date": "2026-02-24T11:51:29.473702+00:00"
-  },
-  {
-    "title": "Who Is Paying for the 2025 U.S. Tariffs? - Liberty Street Economics",
-    "url": "https://libertystreeteconomics.newyorkfed.org",
-    "url_fp": "a2ec6cfb0a8e83dcab97a684aee916c1",
-    "description": "Who Is Paying for the 2025 U.S. Tariffs?Liberty Street Economics",
-    "date": "2026-02-24T11:51:29.529372+00:00"
-  },
-  {
-    "title": "Apple Unveils Plans for 'BodyNet' of Wearable Sensors - National Today",
-    "url": "https://nationaltoday.com",
-    "url_fp": "a13df8b91a7375f0569dc626d64998db",
-    "description": "Apple Unveils Plans for 'BodyNet' of Wearable SensorsNational Today",
-    "date": "2026-02-24T11:51:29.556853+00:00"
-  },
-  {
-    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - TradingView",
-    "url": "https://www.tradingview.com",
-    "url_fp": "84ea80fab7315a2f6446f2aedca0019f",
-    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingTradingView",
-    "date": "2026-02-24T11:51:29.595027+00:00"
-  },
-  {
-    "title": "Most affordable unlocked iPhone 16 Pro you can buy is $300 off at Amazon today (Renewed Premium) - 9to5Toys",
-    "url": "https://9to5toys.com",
-    "url_fp": "7229e8b9792290e7482145ca1a02a7c8",
-    "description": "Most affordable unlocked iPhone 16 Pro you can buy is $300 off at Amazon today (Renewed Premium)9to5Toys",
-    "date": "2026-02-24T11:51:29.631905+00:00"
-  },
-  {
-    "title": "Ted Sarandos Responds to Trump Telling Netflix to Fire Susan Rice: “It’s Not a Political Deal” - The Hollywood Reporter",
-    "url": "https://www.hollywoodreporter.com",
-    "url_fp": "89e3065b8fbc5e8ef0cd1c93bc6894f5",
-    "description": "Ted Sarandos Responds to Trump Telling Netflix to Fire Susan Rice: “It’s Not a Political Deal”The Hollywood Reporter",
-    "date": "2026-02-24T11:51:29.730952+00:00"
-  },
-  {
-    "title": "Microsoft applications the topic of upcoming training sessions - Nebraska Today",
-    "url": "https://news.unl.edu",
-    "url_fp": "507f54eae1dfa528cf3de03cd571e921",
-    "description": "Microsoft applications the topic of upcoming training sessionsNebraska Today",
-    "date": "2026-02-24T11:51:29.764316+00:00"
-  },
-  {
-    "title": "Meet the Most Profitable Company in America (It’s Not Apple or Microsoft) - 24/7 Wall St.",
-    "url": "https://247wallst.com",
-    "url_fp": "5174185651b0be54b91403adb571059b",
-    "description": "Meet the Most Profitable Company in America (It’s Not Apple or Microsoft)24/7 Wall St.",
-    "date": "2026-02-24T11:51:29.798506+00:00"
-  },
-  {
-    "title": "New York Yankees at Pittsburgh Pirates Game Story, Scores/Highlights - 02/23/2026 - MLB.com",
-    "url": "https://www.mlb.com",
-    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
-    "description": "New York Yankees at Pittsburgh Pirates Game Story, Scores/Highlights - 02/23/2026MLB.com",
-    "date": "2026-02-24T11:51:29.836309+00:00"
-  },
-  {
-    "title": "Spring Training Game #4: New York Yankees vs. Pittsburgh Pirates - Bucs Dugout",
-    "url": "https://www.bucsdugout.com",
-    "url_fp": "d65b62781def35278f3785ac82253575",
-    "description": "Spring Training Game #4: New York Yankees vs. Pittsburgh PiratesBucs Dugout",
-    "date": "2026-02-24T11:51:29.855051+00:00"
-  },
-  {
-    "title": "Knicks’ Jalen Brunson Drops Major Quote on His Future - heavy.com",
-    "url": "https://heavy.com",
-    "url_fp": "374bf1bb8fee633961da067e5c478089",
-    "description": "Knicks’ Jalen Brunson Drops Major Quote on His Futureheavy.com",
-    "date": "2026-02-24T11:51:29.886632+00:00"
-  },
-  {
-    "title": "2026 NFL Combine: New York Giants' hierarchy on display for first time - Giants Wire",
-    "url": "https://giantswire.usatoday.com",
-    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
-    "description": "2026 NFL Combine: New York Giants' hierarchy on display for first timeGiants WireJoe Schoen and John Harbaugh’s Giants vision will begin to take shape at NFL combineNew York PostNew York Giants receive massive trade haul for the No. 2 pick, remake the secondary and WR room in 7-round 2026 NFL mock draftA to Z Sports",
-    "date": "2026-02-24T11:51:29.907909+00:00"
-  },
-  {
-    "title": "As Devils Players Return From Olympics, What Can We Learn About The Core Of This Team? - All About The Jersey",
-    "url": "https://www.allaboutthejersey.com",
-    "url_fp": "247a96d3a8bbfeafd183ae1a03525854",
-    "description": "As Devils Players Return From Olympics, What Can We Learn About The Core Of This Team?All About The Jersey",
-    "date": "2026-02-24T11:51:29.967914+00:00"
-  },
-  {
-    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBC",
-    "date": "2026-02-24T15:44:51.663047+00:00"
-  },
-  {
-    "title": "Software Quandary: Are OpenAI and Anthropic Frenemies or Foes? - The Information",
-    "url": "https://www.theinformation.com",
-    "url_fp": "72b590c15d155fb212e2522a01a89a99",
-    "description": "Software Quandary: Are OpenAI and Anthropic Frenemies or Foes?The Information",
-    "date": "2026-02-24T15:44:51.723653+00:00"
-  },
-  {
-    "title": "Detecting and preventing distillation attacks - Anthropic",
-    "url": "https://www.anthropic.com",
-    "url_fp": "83724ceebdffe591c85e5dfb049f94b6",
-    "description": "Detecting and preventing distillation attacksAnthropicAnthropic Says Chinese AI Firms Used 16 Million Claude Queries to Copy ModelThe Hacker NewsAnthropic Accuses Chinese Companies of Siphoning Data From ClaudeWSJ",
-    "date": "2026-02-24T15:44:51.726762+00:00"
-  },
-  {
-    "title": "Anthropic Event Today: AI Start-Up to Demonstrate New Claude Capabilities; Watch Live - Barron's",
-    "url": "https://www.barrons.com",
-    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
-    "description": "Anthropic Event Today: AI Start-Up to Demonstrate New Claude Capabilities; Watch LiveBarron's",
-    "date": "2026-02-24T15:44:51.761721+00:00"
-  },
-  {
-    "title": "AI nerves are fraying. Anthropic keeps doubling down - CNN",
-    "url": "https://www.cnn.com",
-    "url_fp": "8d215893cca08911f456711875e8e3bc",
-    "description": "AI nerves are fraying. Anthropic keeps doubling downCNN",
-    "date": "2026-02-24T15:44:51.785366+00:00"
-  },
-  {
-    "title": "Police still using AI tool despite inaccurate evidence in Israeli football fan ban - Sky News",
-    "url": "https://news.sky.com",
-    "url_fp": "120eb61fd0c86e8f8960f23a1a902018",
-    "description": "Police still using AI tool despite inaccurate evidence in Israeli football fan banSky News",
-    "date": "2026-02-24T15:44:51.840456+00:00"
-  },
-  {
-    "title": "AI-for-Accounting Startup Basis Hits $1.15 Billion Valuation - Bloomberg",
-    "url": "https://www.bloomberg.com",
-    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
-    "description": "AI-for-Accounting Startup Basis Hits $1.15 Billion ValuationBloomberg",
-    "date": "2026-02-24T15:44:51.856669+00:00"
-  },
-  {
-    "title": "Stock market today: Dow, S&P 500, Nasdaq futures tick up after AI-fueled sell-off as new Trump tariff kicks in - Yahoo Finance UK",
-    "url": "https://uk.finance.yahoo.com",
-    "url_fp": "2c19f9b77aeac73a5fe63313054f3504",
-    "description": "Stock market today: Dow, S&P 500, Nasdaq futures tick up after AI-fueled sell-off as new Trump tariff kicks inYahoo Finance UK",
-    "date": "2026-02-24T15:44:51.900850+00:00"
-  },
-  {
-    "title": "Anthropic Launches Enterprise AI Agents, Threatening SaaS Giants - The Tech Buzz",
-    "url": "https://www.techbuzz.ai",
-    "url_fp": "ef939d3bc6ef2bd4e508de78d0d4f040",
-    "description": "Anthropic Launches Enterprise AI Agents, Threatening SaaS GiantsThe Tech Buzz",
-    "date": "2026-02-24T15:44:51.920077+00:00"
-  },
-  {
-    "title": "2025: The State of Generative AI in the Enterprise - Menlo Ventures",
-    "url": "https://menlovc.com",
-    "url_fp": "ebdf6b573c5c0efa78e389a1203a6760",
-    "description": "2025: The State of Generative AI in the EnterpriseMenlo Ventures",
-    "date": "2026-02-24T15:44:51.942974+00:00"
-  },
-  {
-    "title": "Monetary Policy and the Economic Outlook - kansascityfed.org",
-    "url": "https://www.kansascityfed.org",
-    "url_fp": "92e26c12fa2db216fb44691d0328fc73",
-    "description": "Monetary Policy and the Economic Outlookkansascityfed.org",
-    "date": "2026-02-24T15:44:51.996444+00:00"
-  },
-  {
-    "title": "Steve Jobs would have celebrated his 71st birthday today - Appleosophy",
-    "url": "https://appleosophy.com",
-    "url_fp": "41e8aefd430c73fd924774894ac8ad0d",
-    "description": "Steve Jobs would have celebrated his 71st birthday todayAppleosophy",
-    "date": "2026-02-24T15:44:52.020649+00:00"
-  },
-  {
-    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingReuters",
-    "date": "2026-02-24T15:44:52.028735+00:00"
-  },
-  {
-    "title": "Here's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the Stock - Investopedia",
-    "url": "https://www.investopedia.com",
-    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
-    "description": "Here's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the StockInvestopedia",
-    "date": "2026-02-24T15:44:52.050776+00:00"
-  },
-  {
-    "title": "The Tesla Model S, destined for the history books, in a short time upended everything - Automotive News",
-    "url": "https://www.autonews.com",
-    "url_fp": "e93719bb1d66b9c7c89f55764c166030",
-    "description": "The Tesla Model S, destined for the history books, in a short time upended everythingAutomotive News",
-    "date": "2026-02-24T15:44:52.075800+00:00"
-  },
-  {
-    "title": "Quiet Roster Decision That Could Shape Yankees First Month - Sports Illustrated",
-    "url": "https://www.si.com",
-    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
-    "description": "Quiet Roster Decision That Could Shape Yankees First MonthSports Illustrated",
-    "date": "2026-02-24T15:44:52.148528+00:00"
-  },
-  {
-    "title": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRs - MLB.com",
-    "url": "https://www.mlb.com",
-    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
-    "description": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRsMLB.com",
-    "date": "2026-02-24T15:44:52.148844+00:00"
-  },
-  {
-    "title": "Knicks G League Star Faces Uncertain Future Amid Sudden Struggles - heavy.com",
-    "url": "https://heavy.com",
-    "url_fp": "374bf1bb8fee633961da067e5c478089",
-    "description": "Knicks G League Star Faces Uncertain Future Amid Sudden Strugglesheavy.com",
-    "date": "2026-02-24T15:44:52.148990+00:00"
-  },
-  {
-    "title": "Legendary Status | FEATURE - NHL.com",
-    "url": "https://www.nhl.com",
-    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
-    "description": "Legendary Status | FEATURENHL.comJack Hughes Predicted He'd Win Olympic Gold with His Brother in Resurfaced Letter from 2019People.comWho is Jack Hughes, Team USA’s golden goal scorer?Star Tribune",
-    "date": "2026-02-24T15:44:52.171865+00:00"
-  },
-  {
-    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBC",
-    "date": "2026-02-24T15:46:24.137543+00:00"
-  },
-  {
-    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingReuters",
-    "date": "2026-02-24T15:46:24.282175+00:00"
-  },
-  {
-    "title": "Here's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the Stock - Investopedia",
-    "url": "https://www.investopedia.com",
-    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
-    "description": "Here's Why Nvidia's Earnings Could Move Your Portfolio Even If You Don't Hold the StockInvestopedia",
-    "date": "2026-02-24T15:46:24.304007+00:00"
-  },
-  {
-    "title": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRs - MLB.com",
-    "url": "https://www.mlb.com",
-    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
-    "description": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRsMLB.com",
-    "date": "2026-02-24T15:46:24.356822+00:00"
-  },
-  {
-    "title": "Knicks G League Star Faces Uncertain Future Amid Sudden Struggles - heavy.com",
-    "url": "https://heavy.com",
-    "url_fp": "374bf1bb8fee633961da067e5c478089",
-    "description": "Knicks G League Star Faces Uncertain Future Amid Sudden Strugglesheavy.com",
-    "date": "2026-02-24T15:46:24.356973+00:00"
-  },
-  {
-    "title": "Meta Announces Major Chips-for-Stock Deal With AMD",
-    "url": "https://www.nytimes.com/2026/02/24/business/meta-amd-chips-ai.html",
-    "url_fp": "303bfda84c3f367e4be95a77cb54066a",
-    "description": "The multibillion-dollar deal is AMD’s latest move to catch up to Nvidia in the lucrative world of selling artificial intelligence chips.",
-    "date": "2026-02-24T15:47:38.012470+00:00"
-  },
-  {
-    "title": "More Than Half of Teens Use Chatbots for Schoolwork, Survey Finds",
-    "url": "https://www.nytimes.com/2026/02/24/technology/schoolwork-chatbot-cheating-pew.html",
-    "url_fp": "6b2233a4f416201e0125863b6247c41e",
-    "description": "A new study from the Pew Research Center finds teens think chatbot-assisted cheating has become “a regular feature of student life.”",
-    "date": "2026-02-24T15:47:38.042823+00:00"
-  },
-  {
-    "title": "Russia Moves Closer to Banning Telegram App, Saying It Foments Terrorism",
-    "url": "https://www.nytimes.com/2026/02/24/world/europe/russia-telegram-pavel-durov-terrorism.html",
-    "url_fp": "a0beebeb151afdfdbe624a1f49fdf458",
-    "description": "News of an investigation into Pavel Durov, the app’s billionaire founder, deepened a crackdown on what remains of the free Russian internet.",
-    "date": "2026-02-24T15:47:38.076430+00:00"
-  },
-  {
-    "title": "Mexico Is Caught Between Trump and the Cartels",
-    "url": "https://www.nytimes.com/2026/02/24/world/americas/trump-sheinbaum-us-mexico-cartel.html",
-    "url_fp": "5a23a2ced206e9ee1ed9932fc08d2820",
-    "description": "President Trump has demanded President Claudia Sheinbaum confront the cartels. The killing of “El Mencho” suggests it might be working — but could come at a cost.",
-    "date": "2026-02-24T15:47:38.098058+00:00"
-  },
-  {
-    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBC",
-    "date": "2026-02-24T15:47:38.098739+00:00"
-  },
-  {
-    "title": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol Tool - Yahoo Finance",
-    "url": "https://finance.yahoo.com",
-    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
-    "description": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol ToolYahoo Finance",
-    "date": "2026-02-24T15:47:38.127724+00:00"
-  },
-  {
-    "title": "Supreme Court Sides With Couple in Case Involving Baby Food Sold at Whole Foods",
-    "url": "https://www.nytimes.com/2026/02/24/us/politics/supreme-court-whole-foods.html",
-    "url_fp": "2922346ee0543fcf47229ea40fdc57ee",
-    "description": "The court agreed to revive a lawsuit by a Texas couple who claimed that tainted baby food purchased at Whole Foods had sickened their young son.",
-    "date": "2026-02-24T15:47:38.194146+00:00"
-  },
-  {
-    "title": "Storm Leads to a First for The Boston Globe: A Day Without a Paper",
-    "url": "https://www.nytimes.com/2026/02/24/business/media/boston-globe-storm.html",
-    "url_fp": "452a105de50dd72d20dc36014ada6e62",
-    "description": "The company said the blizzard had made it too treacherous for workers to make it to the printing press on Monday.",
-    "date": "2026-02-24T15:47:38.223008+00:00"
-  },
-  {
-    "title": "Trump’s Tariff Goes Into Effect at 10 Percent, Not the 15 Threatened",
-    "url": "https://www.nytimes.com/2026/02/24/us/politics/trump-tariffs-global-trade.html",
-    "url_fp": "69a0aa1023af743c4650c3266d0152e5",
-    "description": "The change surprised executives and foreign leaders, who had been expecting the 15 percent rate the president announced on Saturday.",
-    "date": "2026-02-24T15:47:38.249282+00:00"
-  },
-  {
-    "title": "Corporate America’s Growing Quest for Tariff Refunds",
-    "url": "https://www.nytimes.com/2026/02/24/business/dealbook/fex-tariff-refund.html",
-    "url_fp": "84d02e7049502bcbb14950a428f9b282",
-    "description": "Thousands of companies are expected to follow FedEx’ in suing the government to recoup levy payments, after the Supreme Court overturned the tariffs.",
-    "date": "2026-02-24T15:47:38.263953+00:00"
-  },
-  {
-    "title": "Paramount Revises Its Bid for Warner Bros. Discovery",
-    "url": "https://www.nytimes.com/2026/02/24/business/paramount-warner-bros-discovery.html",
-    "url_fp": "54264139f224ea697018733b5e193394",
-    "description": "If Warner Bros. deems Paramount’s latest bid superior, Netflix would have four days to make a counteroffer.",
-    "date": "2026-02-24T15:47:38.278489+00:00"
-  },
-  {
-    "title": "Agile Space Industries raises $17 million in oversubscribed funding round - The Durango Herald",
-    "url": "https://www.durangoherald.com",
-    "url_fp": "ecb06736c0dffa16ea4a819f8a35dcd5",
-    "description": "Agile Space Industries raises $17 million in oversubscribed funding roundThe Durango Herald",
-    "date": "2026-02-24T15:47:38.309732+00:00"
-  },
-  {
-    "title": "Federal Reserve Official Calls March Interest Rate Cut a ‘Coin Flip’ - Fine Day 102.3",
-    "url": "https://www.finedayradio.com",
-    "url_fp": "c2df6c4814911f83ecd8ff4d68fc08a0",
-    "description": "Federal Reserve Official Calls March Interest Rate Cut a ‘Coin Flip’Fine Day 102.3",
-    "date": "2026-02-24T15:47:38.348051+00:00"
-  },
-  {
-    "title": "The Warsh Doctrine: Federal Reserve Nomination Signals a Paradigm Shift in Monetary Policy - FinancialContent",
-    "url": "https://markets.financialcontent.com",
-    "url_fp": "9d0918f176b2fe48d826f363013acaa4",
-    "description": "The Warsh Doctrine: Federal Reserve Nomination Signals a Paradigm Shift in Monetary PolicyFinancialContent",
-    "date": "2026-02-24T15:47:38.376722+00:00"
-  },
-  {
-    "title": "Fed Holds Rates Steady as It Points to an Improving Economy - The New York Times",
-    "url": "https://www.nytimes.com",
-    "url_fp": "55878905590e5ea6136f9730d218c235",
-    "description": "Fed Holds Rates Steady as It Points to an Improving EconomyThe New York Times",
-    "date": "2026-02-24T15:47:38.376958+00:00"
-  },
-  {
-    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingReuters",
-    "date": "2026-02-24T15:47:38.391785+00:00"
-  },
-  {
-    "title": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents show - CNN",
-    "url": "https://www.cnn.com",
-    "url_fp": "8d215893cca08911f456711875e8e3bc",
-    "description": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents showCNN",
-    "date": "2026-02-24T15:47:38.391931+00:00"
-  },
-  {
-    "title": "Nvidia Earnings: Live Updates and Commentary February 2026 - Kiplinger",
-    "url": "https://www.kiplinger.com",
-    "url_fp": "6c972e9293ff036ae482ed970d05661f",
-    "description": "Nvidia Earnings: Live Updates and Commentary February 2026Kiplinger",
-    "date": "2026-02-24T15:47:38.401038+00:00"
-  },
-  {
-    "title": "Netflix Stock Drops as Trump Sets Sights on Director Susan Rice - Investopedia",
-    "url": "https://www.investopedia.com",
-    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
-    "description": "Netflix Stock Drops as Trump Sets Sights on Director Susan RiceInvestopedia",
-    "date": "2026-02-24T15:47:38.429271+00:00"
-  },
-  {
-    "title": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRs - MLB.com",
-    "url": "https://www.mlb.com",
-    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
-    "description": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRsMLB.com",
-    "date": "2026-02-24T15:47:38.452608+00:00"
-  },
-  {
-    "title": "Knicks G League Star Faces Uncertain Future Amid Sudden Struggles - heavy.com",
-    "url": "https://heavy.com",
-    "url_fp": "374bf1bb8fee633961da067e5c478089",
-    "description": "Knicks G League Star Faces Uncertain Future Amid Sudden Strugglesheavy.com",
-    "date": "2026-02-24T15:47:38.452753+00:00"
-  },
-  {
-    "title": "How Jeffrey Epstein Ingratiated Himself With Top Microsoft Executives",
-    "url": "https://www.nytimes.com/2026/02/24/technology/jeffrey-epstein-microsoft-executives.html",
-    "url_fp": "d0c45661b18ab2a1b021a4baae14c104",
-    "description": "For more than two decades, the convicted sex offender developed a network at the tech giant, making him privy to succession discussions and other business.",
-    "date": "2026-02-24T16:50:03.656054+00:00"
-  },
-  {
-    "title": "Is It Safe to Travel to Mexico Right Now?",
-    "url": "https://www.nytimes.com/2026/02/24/travel/mexico-tourism-safety-spring-break.html",
-    "url_fp": "3da37b3f65e77d4471851f7045ead07b",
-    "description": "A wave of unrest after the killing of a cartel leader has rattled tourists at popular destinations in Mexico, prompting travelers to reconsider their plans. Here’s what to know.",
-    "date": "2026-02-24T16:50:03.673200+00:00"
-  },
-  {
-    "title": "OpenAI lands multiyear deals with consulting giants in enterprise push - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "OpenAI lands multiyear deals with consulting giants in enterprise pushCNBC",
-    "date": "2026-02-24T16:50:03.673655+00:00"
-  },
-  {
-    "title": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol Tool - Yahoo Finance",
-    "url": "https://finance.yahoo.com",
-    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
-    "description": "IBM Sinks Most Since 2000 as Anthropic Touts Cobol ToolYahoo Finance",
-    "date": "2026-02-24T16:50:03.692713+00:00"
-  },
-  {
-    "title": "How an AI tool is helping U.K. clinicians save time and be present with patients - Microsoft Source",
-    "url": "https://news.microsoft.com",
-    "url_fp": "d66c29155c0d8df0755b40a37da2eadf",
-    "description": "How an AI tool is helping U.K. clinicians save time and be present with patientsMicrosoft Source",
-    "date": "2026-02-24T16:50:03.699514+00:00"
-  },
-  {
-    "title": "Trump Administration Tells States It Aims to ‘Reimagine’ Jobless Benefits",
-    "url": "https://www.nytimes.com/2026/02/24/us/politics/trump-unemployment-benefits-fraud.html",
-    "url_fp": "7fbb0877323481851bb57871dcb49104",
-    "description": "Federal officials are subjecting some states to higher scrutiny in an antifraud campaign, as the president rails against California and states led by Democrats.",
-    "date": "2026-02-24T16:50:03.737373+00:00"
-  },
-  {
-    "title": "Centauri Therapeutics Extends Series A to £30M With £6M Investment From AMR Action Fund to Support Progression of Lead Clinical Candidate - BioSpace",
-    "url": "https://www.biospace.com",
-    "url_fp": "6c3d4a021ad920d604900765849fa5e0",
-    "description": "Centauri Therapeutics Extends Series A to £30M With £6M Investment From AMR Action Fund to Support Progression of Lead Clinical CandidateBioSpace",
-    "date": "2026-02-24T16:50:03.799551+00:00"
-  },
-  {
-    "title": "Apple accelerates U.S. manufacturing, with Mac mini production coming later this year - Apple",
-    "url": "https://www.apple.com",
-    "url_fp": "e845cbdc3785b1a67978cbc5a146a168",
-    "description": "Apple accelerates U.S. manufacturing, with Mac mini production coming later this yearApple",
-    "date": "2026-02-24T16:50:03.849199+00:00"
-  },
-  {
-    "title": "Apple’s Steve Jobs Would Have Turned 71 Today - Wccftech",
-    "url": "https://wccftech.com",
-    "url_fp": "ccf54329bda7d90ecf5234f0066a2424",
-    "description": "Apple’s Steve Jobs Would Have Turned 71 TodayWccftech",
-    "date": "2026-02-24T16:50:03.873912+00:00"
-  },
-  {
-    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingReuters",
-    "date": "2026-02-24T16:50:03.874214+00:00"
-  },
-  {
-    "title": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents show - CNN",
-    "url": "https://www.cnn.com",
-    "url_fp": "8d215893cca08911f456711875e8e3bc",
-    "description": "Facebook researchers previously proposed studying whether features were ‘addictive,’ documents showCNN",
-    "date": "2026-02-24T16:50:03.874369+00:00"
-  },
-  {
-    "title": "Amazon price gives in to negative pressures - Forecast today - 24-02-2026 - Economies.com",
-    "url": "https://www.economies.com",
-    "url_fp": "55ef0ee6d2f39a18011b03788e4b3098",
-    "description": "Amazon price gives in to negative pressures - Forecast today - 24-02-2026Economies.com",
-    "date": "2026-02-24T16:50:03.909952+00:00"
-  },
-  {
-    "title": "Netflix Stock Drops as Trump Sets Sights on Director Susan Rice - Investopedia",
-    "url": "https://www.investopedia.com",
-    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
-    "description": "Netflix Stock Drops as Trump Sets Sights on Director Susan RiceInvestopedia",
-    "date": "2026-02-24T16:50:03.939605+00:00"
-  },
-  {
-    "title": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRs - MLB.com",
-    "url": "https://www.mlb.com",
-    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
-    "description": "Yanks' 6-foot-7 sluggers Judge (TWICE), Jones open spring with HRsMLB.com",
-    "date": "2026-02-24T16:50:03.962943+00:00"
-  },
-  {
-    "title": "New York Knicks vs Milwaukee Bucks Feb 27, 2026 Game Summary - NBA",
-    "url": "https://www.nba.com",
-    "url_fp": "5567ef57bde48e2912b076b1d46096e6",
-    "description": "New York Knicks vs Milwaukee Bucks Feb 27, 2026 Game SummaryNBA",
-    "date": "2026-02-24T16:50:03.981407+00:00"
-  },
-  {
-    "title": "New Jersey Devils Prospect Update: First to 20 Edition - Yahoo Sports",
-    "url": "https://sports.yahoo.com",
-    "url_fp": "4bbd7d0db668261e182a6708e474c8dc",
-    "description": "New Jersey Devils Prospect Update: First to 20 EditionYahoo Sports",
-    "date": "2026-02-24T16:50:04.032764+00:00"
-  },
-  {
-    "title": "Podcasts? TV Talk Shows? Netflix Just Hopes They’re Hits.",
-    "url": "https://www.nytimes.com/2026/02/25/arts/television/podcasts-netflix-pete-davidson.html",
-    "url_fp": "45e2819ac8ffcacb50a8e9cbf4b126c1",
-    "description": "The podcasts in the streamer’s debut crop, including “The Pete Davidson Show,” have revived metaphysical questions about the definition of the medium.",
-    "date": "2026-02-25T11:45:36.124939+00:00"
-  },
-  {
-    "title": "These Tools Say They Can Spot A.I. Fakes. Do They Really Work?",
-    "url": "https://www.nytimes.com/2026/02/25/technology/ai-detection-generated-photos-video.html",
-    "url_fp": "e2c2c772484488c5e9f2ab0f1dd1c2ca",
-    "description": "Artificial intelligence detectors are increasingly used to check the veracity of content online. We ran more than 1,000 tests and found several strengths and plenty of weaknesses.",
-    "date": "2026-02-25T11:45:36.155609+00:00"
-  },
-  {
-    "title": "Wayve, an A.I. Driverless Car Start-Up in Europe, Raises $1.2 Billion",
-    "url": "https://www.nytimes.com/2026/02/24/technology/wayve-ai-driverless-car-start-up.html",
-    "url_fp": "58f7ea52af86c624976dac273d824a5a",
-    "description": "The London-based company is building a system that uses artificial intelligence to power autonomous vehicles.",
-    "date": "2026-02-25T11:45:36.189395+00:00"
-  },
-  {
-    "title": "Pentagon Gives A.I. Company an Ultimatum",
-    "url": "https://www.nytimes.com/2026/02/24/us/politics/pentagon-anthropic.html",
-    "url_fp": "856c26c1e2d0ceca3667474bea1b0e1c",
-    "description": "Anthropic insists on limits on how its technology is used and could be labeled a supply chain risk if it fails to accept the military’s demands.",
-    "date": "2026-02-25T11:45:36.209682+00:00"
-  },
-  {
-    "title": "Trump Puts On a Show, Casting Democrats as the Villains",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/trump-state-of-the-union-speech.html",
-    "url_fp": "05d0af718ad76fd3dcb54f9bfef1d006",
-    "description": "On the defensive over the economy and with the midterms approaching, President Trump made clear that his political strategy is to paint Democrats as unpatriotic and ‘crazy.’",
-    "date": "2026-02-25T11:45:36.237752+00:00"
-  },
-  {
-    "title": "‘Stand Up’: With One Maneuver, Trump Tries to Box In Democrats",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/trump-state-of-the-union-scene.html",
-    "url_fp": "85f54f15dd113c60d63446022a95a829",
-    "description": "President Trump turned his State of the Union address into full-blown political theater, handing out medals to war veterans and tossing the spotlight to ice hockey players.",
-    "date": "2026-02-25T11:45:36.267512+00:00"
-  },
-  {
-    "title": "6 Takeaways From Trump’s State of the Union",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/trump-state-of-the-union-takeaways.html",
-    "url_fp": "5f1e087d5e5aef93ada3a8c671c34d09",
-    "description": "In an address that was heavy on theatrics, President Trump lashed out at Democrats as “crazy” and unpatriotic.",
-    "date": "2026-02-25T11:45:36.289434+00:00"
-  },
-  {
-    "title": "Key Moments from Trump’s State of the Union, and a $1 Million Reward in the Guthrie Case",
-    "url": "https://www.nytimes.com/2026/02/25/podcasts/the-headlines/trump-state-of-the-union-guthrie-case.html",
-    "url_fp": "998aee174e1f17735c0b2f65bf10c67a",
-    "description": "Plus, how kids are getting around phone-free classroom rules.",
-    "date": "2026-02-25T11:45:36.331372+00:00"
-  },
-  {
-    "title": "The Fall of a Strongman: Inside Maduro’s Last Days in Power",
-    "url": "https://www.nytimes.com/2026/02/25/world/americas/maduro-venezuela-us-capture-trump.html",
-    "url_fp": "a88a1714d3013772c419e66f1ef5a356",
-    "description": "The Venezuelan leader overestimated his strength and misread his exchange with President Trump in the decisive weeks before his capture by U.S. forces.",
-    "date": "2026-02-25T11:45:36.361102+00:00"
-  },
-  {
-    "title": "Thanks, Ukrainians Say, but Please Stop Calling Us Resilient",
-    "url": "https://www.nytimes.com/2026/02/25/world/europe/ukrainian-war-resilience.html",
-    "url_fp": "e425999661d5eb714f6c03939f671295",
-    "description": "Ukraine must project strength to secure continued Western support. But its people want the world to know they are not superhuman.",
-    "date": "2026-02-25T11:45:36.390639+00:00"
-  },
-  {
-    "title": "Ukraine Wants to Join the E.U. Quickly. That Won’t Be Easy.",
-    "url": "https://www.nytimes.com/2026/02/25/world/europe/ukraine-european-union-membership.html",
-    "url_fp": "56e8c6a547dbb6841c34a285101e1f1e",
-    "description": "Negotiators agree that joining the bloc is critical to Kyiv’s future. But obstacles abound, and compromises might forever change how the union works.",
-    "date": "2026-02-25T11:45:36.419727+00:00"
-  },
-  {
-    "title": "Casey Means, Critic of Mainstream Medicine, Poised to Become Nation’s Top Doctor",
-    "url": "https://www.nytimes.com/2026/02/25/well/casey-means-surgeon-general.html",
-    "url_fp": "5adad355490e6f6588df5f13a1cc237d",
-    "description": "Dr. Means, a wellness influencer and President Trump’s nominee for surgeon general, will appear before a Senate committee Wednesday.",
-    "date": "2026-02-25T11:45:36.457725+00:00"
-  },
-  {
-    "title": "US judge dismisses xAI trade-secrets suit against OpenAI: report - Seeking Alpha",
-    "url": "https://seekingalpha.com",
-    "url_fp": "4f758a4bfcb0ea243656cb4316ef4533",
-    "description": "US judge dismisses xAI trade-secrets suit against OpenAI: reportSeeking Alpha",
-    "date": "2026-02-25T11:45:36.495673+00:00"
-  },
-  {
-    "title": "U.S. Court Dismisses xAI's Trade Secret Lawsuit Against OpenAI - 조선일보",
-    "url": "https://www.chosun.com",
-    "url_fp": "60ad62a945bfa7ea3ede4128ebda3df4",
-    "description": "U.S. Court Dismisses xAI's Trade Secret Lawsuit Against OpenAI조선일보",
-    "date": "2026-02-25T11:45:36.526565+00:00"
-  },
-  {
-    "title": "Judge dismisses Elon Musk’s lawsuit against OpenAI which the company claims is part of his “ongoing campa - The Times of India",
-    "url": "https://timesofindia.indiatimes.com",
-    "url_fp": "541cc79a8638cfd34bdc56d1a27c8cd7",
-    "description": "Judge dismisses Elon Musk’s lawsuit against OpenAI which the company claims is part of his “ongoing campaThe Times of India",
-    "date": "2026-02-25T11:45:36.583663+00:00"
-  },
-  {
-    "title": "Exclusive: Hegseth gives Anthropic until Friday to back down on AI safeguards - Axios",
-    "url": "https://www.axios.com",
-    "url_fp": "749087a4a2a5ca3de610717b8a354a82",
-    "description": "Exclusive: Hegseth gives Anthropic until Friday to back down on AI safeguardsAxiosUS military leaders pressure Anthropic to bend Claude safeguardsThe GuardianPentagon Gives Anthropic an Ultimatum Over the Company’s A.I. ModelThe New York Times",
-    "date": "2026-02-25T11:45:36.621870+00:00"
-  },
-  {
-    "title": "Detecting and preventing distillation attacks - Anthropic",
-    "url": "https://www.anthropic.com",
-    "url_fp": "83724ceebdffe591c85e5dfb049f94b6",
-    "description": "Detecting and preventing distillation attacksAnthropic",
-    "date": "2026-02-25T11:45:36.622156+00:00"
-  },
-  {
-    "title": "I Signed Up for Google Gemini Pro. These 5 Features Make It Worth the Cost - PCMag",
-    "url": "https://www.pcmag.com",
-    "url_fp": "3f522e472cba9684fb6cf20cc736376c",
-    "description": "I Signed Up for Google Gemini Pro. These 5 Features Make It Worth the CostPCMag",
-    "date": "2026-02-25T11:45:36.666412+00:00"
-  },
-  {
-    "title": "Gemini 3.1 Pro: A smarter model for your most complex tasks - blog.google",
-    "url": "https://blog.google",
-    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
-    "description": "Gemini 3.1 Pro: A smarter model for your most complex tasksblog.google",
-    "date": "2026-02-25T11:45:36.700966+00:00"
-  },
-  {
-    "title": "Copilot quietly grabs your data from other Microsoft products now - here's how to opt out - ZDNET",
-    "url": "https://www.zdnet.com",
-    "url_fp": "1f974cfc7bc3b47249615852bc48d369",
-    "description": "Copilot quietly grabs your data from other Microsoft products now - here's how to opt outZDNET",
-    "date": "2026-02-25T11:45:36.744402+00:00"
-  },
-  {
-    "title": "How an AI tool is helping U.K. clinicians save time and be present with patients - Microsoft Source",
-    "url": "https://news.microsoft.com",
-    "url_fp": "d66c29155c0d8df0755b40a37da2eadf",
-    "description": "How an AI tool is helping U.K. clinicians save time and be present with patientsMicrosoft Source",
-    "date": "2026-02-25T11:45:36.744598+00:00"
-  },
-  {
-    "title": "Microsoft Copilot Ignored Sensitivity Labels, Processed Confidential Emails - TechRepublic",
-    "url": "https://www.techrepublic.com",
-    "url_fp": "d3c3a045cb75e54bd79668d3cbeb621f",
-    "description": "Microsoft Copilot Ignored Sensitivity Labels, Processed Confidential EmailsTechRepublic",
-    "date": "2026-02-25T11:45:36.785533+00:00"
-  },
-  {
-    "title": "AI chip startups soak up $1.1B in VC funding this week - theregister.com",
-    "url": "https://www.theregister.com",
-    "url_fp": "0b490fcfb212fb4542fa6ad143edd5f3",
-    "description": "AI chip startups soak up $1.1B in VC funding this weektheregister.com",
-    "date": "2026-02-25T11:45:36.814523+00:00"
-  },
-  {
-    "title": "AI accounting startup Basis raises $100M at $1.15B valuation from Accel, GV to automate Big Four drudgery - Tech Funding News",
-    "url": "https://techfundingnews.com",
-    "url_fp": "6cf0d04621cc6879e83b02df8a3c0807",
-    "description": "AI accounting startup Basis raises $100M at $1.15B valuation from Accel, GV to automate Big Four drudgeryTech Funding News",
-    "date": "2026-02-25T11:45:36.851351+00:00"
-  },
-  {
-    "title": "The future of AI: A roundup of breakthroughs, data and uncharted territory - Mainebiz",
-    "url": "https://mainebiz.biz",
-    "url_fp": "3ee4ba76202e6a505030a9cf162f859a",
-    "description": "The future of AI: A roundup of breakthroughs, data and uncharted territoryMainebiz",
-    "date": "2026-02-25T11:45:36.877514+00:00"
-  },
-  {
-    "title": "Bleak Research Report Stokes A.I. Debate on Wall St.",
-    "url": "https://www.nytimes.com/2026/02/25/business/citrini-ai-stock-market.html",
-    "url_fp": "d3b16f36ad2900de1dd931b4a10e470b",
-    "description": "In a widely circulated note, Citrini Research painted a dire picture of job losses and stock market sell-offs, though many analysts and economists questioned its conclusions.",
-    "date": "2026-02-25T11:45:36.903523+00:00"
-  },
-  {
-    "title": "In the Lap of Luxury: 5 New Hotels Aim to Indulge",
-    "url": "https://www.nytimes.com/2026/02/25/travel/luxury-hotels.html",
-    "url_fp": "48501845d4fa430c511785b8ab8076ea",
-    "description": "From palatial to contemporary to luxuriously rustic, this collection of new resorts and inns offers spas, private gardens, fine restaurants and exquisite settings.",
-    "date": "2026-02-25T11:45:36.918809+00:00"
-  },
-  {
-    "title": "Abu Dhabi’s State Oil Company Looks Beyond Oil",
-    "url": "https://www.nytimes.com/2026/02/25/business/abu-dhabi-oil-energy.html",
-    "url_fp": "28f30a4f22bf57ff21025f9d4e33b9e5",
-    "description": "Having reshaped the company, Sultan Ahmed Al Jaber wants to expand internationally, particularly in natural gas, chemicals and renewables.",
-    "date": "2026-02-25T11:45:36.934027+00:00"
-  },
-  {
-    "title": "Court Rules Against Justice Dept. Search of Reporter’s Computers",
-    "url": "https://www.nytimes.com/2026/02/24/business/media/washington-post-reporter-search-ruling.html",
-    "url_fp": "bcbb3c3d14f47d7917f354b5f1067234",
-    "description": "The judge said the court itself would search the devices, which were seized from a Washington Post reporter’s home last month.",
-    "date": "2026-02-25T11:45:36.954745+00:00"
-  },
-  {
-    "title": "Paramount Raises Its Bid for Warner Bros. Discovery",
-    "url": "https://www.nytimes.com/2026/02/24/business/paramount-netflix-warner-bros-discovery.html",
-    "url_fp": "26dfe88665765ee27cde57065f5fb489",
-    "description": "Warner Bros. Discovery said Paramount’s new offer of $31 a share could lead to a “superior proposal” to the deal it signed with Netflix.",
-    "date": "2026-02-25T11:45:36.970270+00:00"
-  },
-  {
-    "title": "Senate Democrat Opens Inquiry Into Iran Transactions on Binance",
-    "url": "https://www.nytimes.com/2026/02/24/technology/richard-blumenthal-iran-binance-inquiry.html",
-    "url_fp": "ee9373546c103c7b42829ff7dc35ae0c",
-    "description": "Senator Richard Blumenthal of Connecticut sent a letter to Binance asking about the flow of $1.7 billion from accounts on the crypto exchange to Iranian entities.",
-    "date": "2026-02-25T11:45:36.991585+00:00"
-  },
-  {
-    "title": "Trump Squeezes Cuba",
-    "url": "https://www.nytimes.com/2026/02/24/world/cuba-trump-oil-tourism-russia-economy.html",
-    "url_fp": "22b2b54f463af355a38299a463413db7",
-    "description": "Many U.S. presidents have tried to bring down the Communist government over almost seven decades. This time, it feels different.",
-    "date": "2026-02-25T11:45:36.998475+00:00"
-  },
-  {
-    "title": "How Fast Will A.I. Agents Rip Through the Economy?",
-    "url": "https://www.nytimes.com/2026/02/24/opinion/ezra-klein-podcast-jack-clark.html",
-    "url_fp": "62879e3d7390907e56295a7ae20a8507",
-    "description": "The Anthropic co-founder Jack Clark tells Ezra Klein what he sees coming in the new era of A.I. agents.",
-    "date": "2026-02-25T11:45:37.014586+00:00"
-  },
-  {
-    "title": "America Has an Edge Over China. Why Won’t We Use It?",
-    "url": "https://www.nytimes.com/2026/02/24/opinion/china-america-manufacturing-ai.html",
-    "url_fp": "03ee4da5c55ffa088dee2aa1e5e6ebe4",
-    "description": "American manufacturing prowess won’t be restored without bringing new technologies to the factory floor.",
-    "date": "2026-02-25T11:45:37.032357+00:00"
-  },
-  {
-    "title": "Stock futures inch higher ahead of key earnings results from Nvidia: Live updates - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "Stock futures inch higher ahead of key earnings results from Nvidia: Live updatesCNBC",
-    "date": "2026-02-25T11:45:37.032836+00:00"
-  },
-  {
-    "title": "Stock market today: Dow, S&P 500, Nasdaq jump as software leads AI relief rally ahead of Nvidia earnings - Yahoo Finance",
-    "url": "https://finance.yahoo.com",
-    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
-    "description": "Stock market today: Dow, S&P 500, Nasdaq jump as software leads AI relief rally ahead of Nvidia earningsYahoo Finance",
-    "date": "2026-02-25T11:45:37.033450+00:00"
-  },
-  {
-    "title": "US Stock Market Today: S&P 500 Futures Edge Higher On Strong Hiring And Rate Hopes - simplywall.st",
-    "url": "https://simplywall.st",
-    "url_fp": "00bde8332e7e948dd256ee2976ba58dc",
-    "description": "US Stock Market Today: S&P 500 Futures Edge Higher On Strong Hiring And Rate Hopessimplywall.st",
-    "date": "2026-02-25T11:45:37.061607+00:00"
-  },
-  {
-    "title": "Stock Market News From Feb. 24, 2026: Dow, S&P 500, Nasdaq Rise; IBM, AMD, Palantir, Nvidia, Eli Lilly, More Movers - Barron's",
-    "url": "https://www.barrons.com",
-    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
-    "description": "Stock Market News From Feb. 24, 2026: Dow, S&P 500, Nasdaq Rise; IBM, AMD, Palantir, Nvidia, Eli Lilly, More MoversBarron's",
-    "date": "2026-02-25T11:45:37.061839+00:00"
-  },
-  {
-    "title": "Why the S&P 500, Dow Jones, and Nasdaq Are Rising Today - Nasdaq",
-    "url": "https://www.nasdaq.com",
-    "url_fp": "c5c080b76b14f8921aabc3a827dc219e",
-    "description": "Why the S&P 500, Dow Jones, and Nasdaq Are Rising TodayNasdaq",
-    "date": "2026-02-25T11:45:37.081692+00:00"
-  },
-  {
-    "title": "The Five Biggest Budget Traps in Enterprise AI Projects - EC-Council",
-    "url": "https://www.eccouncil.org",
-    "url_fp": "4bbb2c25b5374872814bede8ca77d611",
-    "description": "The Five Biggest Budget Traps in Enterprise AI ProjectsEC-Council",
-    "date": "2026-02-25T11:45:37.102272+00:00"
-  },
-  {
-    "title": "Red Hat and Nvidia team up to build an AI factory for enterprise-scale AI - BetaNews",
-    "url": "https://betanews.com",
-    "url_fp": "343d4f895b9b91460691f522fd3d656c",
-    "description": "Red Hat and Nvidia team up to build an AI factory for enterprise-scale AIBetaNews",
-    "date": "2026-02-25T11:45:37.135330+00:00"
-  },
-  {
-    "title": "With AI, investor loyalty is (almost) dead: At least a dozen OpenAI VCs now also back Anthropic - TechCrunch",
-    "url": "https://techcrunch.com",
-    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
-    "description": "With AI, investor loyalty is (almost) dead: At least a dozen OpenAI VCs now also back AnthropicTechCrunch",
-    "date": "2026-02-25T11:45:37.166258+00:00"
-  },
-  {
-    "title": "The Fed’s ample reserves framework: A report and a response - Brookings",
-    "url": "https://www.brookings.edu",
-    "url_fp": "5878e80780f967e133573b75e85671f3",
-    "description": "The Fed’s ample reserves framework: A report and a responseBrookings",
-    "date": "2026-02-25T11:45:37.197768+00:00"
-  },
-  {
-    "title": "The AI Moment? Possibilities, Productivity, and Policy - Federal Reserve Bank of San Francisco",
-    "url": "https://www.frbsf.org",
-    "url_fp": "ce5a80b1385c251b9a3d72d779565ee3",
-    "description": "The AI Moment? Possibilities, Productivity, and PolicyFederal Reserve Bank of San Francisco",
-    "date": "2026-02-25T11:45:37.224229+00:00"
-  },
-  {
-    "title": "Apple expands age assurance tools as new App Store requirements roll out in several regions - 9to5Mac",
-    "url": "https://9to5mac.com",
-    "url_fp": "8def0a95ccbdb9b4116de5148d89d7f7",
-    "description": "Apple expands age assurance tools as new App Store requirements roll out in several regions9to5Mac",
-    "date": "2026-02-25T11:45:37.255398+00:00"
-  },
-  {
-    "title": "Meta and AMD Partner for Longterm AI Infrastructure Agreement - meta.com",
-    "url": "https://about.fb.com",
-    "url_fp": "419dcbb1bdd3096e4ff2ebdab9a204fb",
-    "description": "Meta and AMD Partner for Longterm AI Infrastructure Agreementmeta.comMeta agrees $60bn deal with chipmaker AMD despite AI bubble fearsThe GuardianFacebook owner Meta to buy AI chips from AMD in deal worth up to $100 billionAP News",
-    "date": "2026-02-25T11:45:37.278256+00:00"
-  },
-  {
-    "title": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filing - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "Meta executive warned Facebook Messenger encryption plan was 'so irresponsible', shows court filingReuters",
-    "date": "2026-02-25T11:45:37.278539+00:00"
-  },
-  {
-    "title": "Major $250 discount delivers Amazon low pricing on this 512GB 13-inch M3 iPad Air today, more from $489 - 9to5Toys",
-    "url": "https://9to5toys.com",
-    "url_fp": "7229e8b9792290e7482145ca1a02a7c8",
-    "description": "Major $250 discount delivers Amazon low pricing on this 512GB 13-inch M3 iPad Air today, more from $4899to5Toys",
-    "date": "2026-02-25T11:45:37.287570+00:00"
-  },
-  {
-    "title": "Stock Market Today: Nasdaq Futures Inch Up; Nvidia Earnings Due This Afternoon — Live Updates - WSJ",
-    "url": "https://www.wsj.com",
-    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
-    "description": "Stock Market Today: Nasdaq Futures Inch Up; Nvidia Earnings Due This Afternoon — Live UpdatesWSJ",
-    "date": "2026-02-25T11:45:37.287874+00:00"
-  },
-  {
-    "title": "Worker killed by Tesla crash in San Leandro - KRON4",
-    "url": "https://www.kron4.com",
-    "url_fp": "f93320cc9c48740e529c40de357aa9a3",
-    "description": "Worker killed by Tesla crash in San LeandroKRON4",
-    "date": "2026-02-25T11:45:37.304551+00:00"
-  },
-  {
-    "title": "Microsoft Sovereign Cloud adds governance, productivity and support for large AI models securely running even when completely disconnected - The Official Microsoft Blog",
-    "url": "https://blogs.microsoft.com",
-    "url_fp": "fec2db4129d1d87600e1ed88b2da78fd",
-    "description": "Microsoft Sovereign Cloud adds governance, productivity and support for large AI models securely running even when completely disconnectedThe Official Microsoft Blog",
-    "date": "2026-02-25T11:45:37.358833+00:00"
-  },
-  {
-    "title": "Wells Fargo Updates Google Stock Price Target - Watcher Guru",
-    "url": "https://watcher.guru",
-    "url_fp": "0a8dc0309c4c135cd770421f844fba61",
-    "description": "Wells Fargo Updates Google Stock Price TargetWatcher Guru",
-    "date": "2026-02-25T11:45:37.377371+00:00"
-  },
-  {
-    "title": "Knicks Roster Is Full, But Moves Might Not Be Done - Sports Illustrated",
-    "url": "https://www.si.com",
-    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
-    "description": "Knicks Roster Is Full, But Moves Might Not Be DoneSports Illustrated",
-    "date": "2026-02-25T11:45:37.390893+00:00"
-  },
-  {
-    "title": "‘Passive’ Karl-Anthony Towns Under Fire After Knicks Loss to Cavaliers - heavy.com",
-    "url": "https://heavy.com",
-    "url_fp": "374bf1bb8fee633961da067e5c478089",
-    "description": "‘Passive’ Karl-Anthony Towns Under Fire After Knicks Loss to Cavaliersheavy.com",
-    "date": "2026-02-25T11:45:37.391012+00:00"
-  },
-  {
-    "title": "Giants NFL free agency 2026: Will LB Micah McFadden have a place in New York? - Big Blue View",
-    "url": "https://www.bigblueview.com",
-    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
-    "description": "Giants NFL free agency 2026: Will LB Micah McFadden have a place in New York?Big Blue View",
-    "date": "2026-02-25T11:45:37.417970+00:00"
-  },
-  {
-    "title": "3 New York Giants ranked among top 101 free agents by NFL.com - Giants Wire",
-    "url": "https://giantswire.usatoday.com",
-    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
-    "description": "3 New York Giants ranked among top 101 free agents by NFL.comGiants Wire",
-    "date": "2026-02-25T11:45:37.418315+00:00"
-  },
-  {
-    "title": "Devils teammates thrilled watching Jack Hughes clinch gold medal for U.S. - NHL.com",
-    "url": "https://www.nhl.com",
-    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
-    "description": "Devils teammates thrilled watching Jack Hughes clinch gold medal for U.S.NHL.com",
-    "date": "2026-02-25T11:45:37.418579+00:00"
-  },
-  {
-    "title": "Devils announcer rips people who painted 'narrative' that Jack Hughes, US men's hockey team are 'sexist' - Fox News",
-    "url": "https://www.foxnews.com",
-    "url_fp": "d3ce7f6297b01ad89f11c5c255b0545c",
-    "description": "Devils announcer rips people who painted 'narrative' that Jack Hughes, US men's hockey team are 'sexist'Fox News",
-    "date": "2026-02-25T11:45:37.452857+00:00"
-  },
-  {
-    "title": "Devils' Jack Hughes has forever raised his perceived value on NHL contracts - sportingnews.com",
-    "url": "https://www.sportingnews.com",
-    "url_fp": "18fd94f3c6d077fc4c37c7476955e0d2",
-    "description": "Devils' Jack Hughes has forever raised his perceived value on NHL contractssportingnews.comJack Hughes’ Olympics heroics might just lift him into a new NHL stratosphereNew York PostJack Hughes Predicted He'd Win Olympic Gold with His Brother in Resurfaced Letter from 2019People.com",
-    "date": "2026-02-25T11:45:37.468643+00:00"
-  },
-  {
     "title": "Nvidia’s Quarterly Profit Hits $43 Billion on Strong A.I. Chip Sales",
     "url": "https://www.nytimes.com/2026/02/25/technology/nvidia-earnings.html",
     "url_fp": "d5ba5eacb2ccf58b808703c106719adb",
@@ -4065,5 +2987,460 @@
     "url_fp": "6f6dc000cd65ae7e53b763c13d9d7d9d",
     "description": "Devils Trade Matchmaker: Six Players that Could Move at the DeadlineSportsnaut",
     "date": "2026-03-03T11:45:38.184392+00:00"
+  },
+  {
+    "title": "Iran’s Secret Outreach Highlights Trump’s Challenge",
+    "url": "https://www.nytimes.com/2026/03/04/us/politics/trump-iran-intelligence-leaders.html",
+    "url_fp": "2e59d774c76c69fd0392a12fe14a84e1",
+    "description": "President Trump is beginning to consider what sort of Iranian government might come next, as the U.S.-Israeli assault continues.",
+    "date": "2026-03-04T11:45:35.850881+00:00"
+  },
+  {
+    "title": "Ayatollah Ali Khamenei’s Son Emerges as Leading Choice to Be His Successor",
+    "url": "https://www.nytimes.com/2026/03/03/world/middleeast/iran-mojtaba-khamenei-successor.html",
+    "url_fp": "f087748589977be36f60677d3137648a",
+    "description": "If Mojtaba Khamenei is chosen by Iran’s senior clerics, it may signal a victory for hard-liners, an analyst said.",
+    "date": "2026-03-04T11:45:35.951938+00:00"
+  },
+  {
+    "title": "Global Leaders Brace for the Fallout From a Fast Metastasizing War",
+    "url": "https://www.nytimes.com/2026/03/04/world/europe/iran-trump-world-reaction.html",
+    "url_fp": "7dda8088334a2a5eafe691327776850e",
+    "description": "Higher energy prices, political instability and a potential new wave of refugees: The escalating regional conflict in the Middle East could have far-reaching effects.",
+    "date": "2026-03-04T11:45:36.040199+00:00"
+  },
+  {
+    "title": "Trump’s ‘Worst Case’ Scenario in Iran, and the Most Expensive Primary in U.S. History",
+    "url": "https://www.nytimes.com/2026/03/04/podcasts/the-headlines/trump-iran-texas-primary.html",
+    "url_fp": "4bf70ba5c43e34811b243878e291061c",
+    "description": "Plus, the fight over daylight saving time.",
+    "date": "2026-03-04T11:45:36.150349+00:00"
+  },
+  {
+    "title": "Talarico Triumphs as G.O.P. Heads to Runoff: 6 Takeaways from Texas",
+    "url": "https://www.nytimes.com/2026/03/04/us/politics/primary-election-takeaways-tx-nc-ar.html",
+    "url_fp": "1f548615d707c92054d34e5d0e54695d",
+    "description": "James Talarico won the state’s Democratic primary for Senate, while Senator John Cornyn faces a runoff against Ken Paxton, his right-wing challenger.",
+    "date": "2026-03-04T11:45:36.238681+00:00"
+  },
+  {
+    "title": "Cornyn and Paxton Head to Runoff in Bitter Texas Senate Primary",
+    "url": "https://www.nytimes.com/2026/03/03/us/elections/texas-senate-republican-primary-cornyn-paxton-runoff.html",
+    "url_fp": "2b994e77cb6421950b2e31a52f19b42b",
+    "description": "Neither Senator John Cornyn nor Attorney General Ken Paxton secured a majority on Tuesday, setting up a May runoff after a bitter and costly Republican primary.",
+    "date": "2026-03-04T11:45:36.328593+00:00"
+  },
+  {
+    "title": "Representative Dan Crenshaw Loses G.O.P. Primary in Texas",
+    "url": "https://www.nytimes.com/2026/03/04/us/elections/texas-district-2-primary.html",
+    "url_fp": "ca58dc65a4ef2b087d97856512f0f91d",
+    "description": "The victory by Steve Toth, a hard-line Texas state representative, underscored how even a conservative House member could lose Republican voters by breaking with President Trump.",
+    "date": "2026-03-04T11:45:36.405866+00:00"
+  },
+  {
+    "title": "How Kennedy Is Trying to Revamp Medical School",
+    "url": "https://www.nytimes.com/2026/03/04/us/how-kennedy-is-trying-to-revamp-medical-school.html",
+    "url_fp": "718719bd6c20ef3cc901a6e334f8633d",
+    "description": "The health secretary, Robert F. Kennedy Jr., has tapped into an old debate about how much doctors should know about nutrition. But some of his ideas, and tactics, concern medical experts.",
+    "date": "2026-03-04T11:45:36.474285+00:00"
+  },
+  {
+    "title": "A Fight About the Future of War",
+    "url": "https://www.nytimes.com/2026/03/03/world/anthropic-pentagon-lebanon-miami.html",
+    "url_fp": "bbe057aa797c8cbcad9f554415161645",
+    "description": "A.I. is already reshaping warfare, but there are big disagreements over what guardrails are needed.",
+    "date": "2026-03-04T11:45:36.521266+00:00"
+  },
+  {
+    "title": "‘Whatever It Takes’ Rattles Global Markets",
+    "url": "https://www.nytimes.com/2026/03/03/business/dealbook/iran-markets-trump.html",
+    "url_fp": "0fce9979b114286b8697918b070269e5",
+    "description": "President Trump has signaled that he is open to the idea of a prolonged military conflict with Iran. Investors are spooked by that scenario.",
+    "date": "2026-03-04T11:45:36.580245+00:00"
+  },
+  {
+    "title": "The Midterms Begin During War",
+    "url": "https://www.nytimes.com/2026/03/03/briefing/the-midterms-begin-during-war.html",
+    "url_fp": "34ef32d0f4aac864b2627c3642fc1589",
+    "description": "We’re following the first primaries of the midterm elections.",
+    "date": "2026-03-04T11:45:36.623698+00:00"
+  },
+  {
+    "title": "OpenAI CEO Sam Altman defends decision to strike Pentagon deal, admits ‘optics don’t look good’ - Fortune",
+    "url": "https://fortune.com",
+    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
+    "description": "OpenAI CEO Sam Altman defends decision to strike Pentagon deal, admits ‘optics don’t look good’FortuneExclusive | OpenAI CEO Sam Altman Defends Pentagon Work to Staff, Calls Backlash ‘Really Painful’WSJWhen the Pentagon gave Anthropic the boot, OpenAI swooped in. Some staff are frustrated with how it unfoldedCNN",
+    "date": "2026-03-04T11:45:36.623905+00:00"
+  },
+  {
+    "title": "Quit ChatGPT: right now! Your subscription is bankrolling authoritarianism | Rutger Bregman - The Guardian",
+    "url": "https://www.theguardian.com",
+    "url_fp": "b49674329b31ee735fa4368cd1a19ba8",
+    "description": "Quit ChatGPT: right now! Your subscription is bankrolling authoritarianism | Rutger BregmanThe Guardian",
+    "date": "2026-03-04T11:45:36.624407+00:00"
+  },
+  {
+    "title": "OpenAI is developing alternative to Microsoft's GitHub, The Information reports - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "OpenAI is developing alternative to Microsoft's GitHub, The Information reportsReuters",
+    "date": "2026-03-04T11:45:36.624670+00:00"
+  },
+  {
+    "title": "Anthropic’s Claude is suddenly the most popular iPhone app following Pentagon feud - CNN",
+    "url": "https://www.cnn.com",
+    "url_fp": "8d215893cca08911f456711875e8e3bc",
+    "description": "Anthropic’s Claude is suddenly the most popular iPhone app following Pentagon feudCNN",
+    "date": "2026-03-04T11:45:36.624803+00:00"
+  },
+  {
+    "title": "Anthropic's Claude AI being used in Iran war by U.S. military, sources say - CBS News",
+    "url": "https://www.cbsnews.com",
+    "url_fp": "db9e06841d873dda9a4f6c17b2621cf4",
+    "description": "Anthropic's Claude AI being used in Iran war by U.S. military, sources sayCBS NewsAnthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feudThe Washington PostClaude AI Helped Bomb Iran. But How Exactly?Bloomberg",
+    "date": "2026-03-04T11:45:36.734990+00:00"
+  },
+  {
+    "title": "U.S. Strikes in Middle East Use Anthropic, Hours After Trump Ban - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "U.S. Strikes in Middle East Use Anthropic, Hours After Trump BanWSJ",
+    "date": "2026-03-04T11:45:36.735302+00:00"
+  },
+  {
+    "title": "Gemini 3.1 Flash-Lite: Built for intelligence at scale - blog.google",
+    "url": "https://blog.google",
+    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
+    "description": "Gemini 3.1 Flash-Lite: Built for intelligence at scaleblog.google",
+    "date": "2026-03-04T11:45:36.735500+00:00"
+  },
+  {
+    "title": "Google just launched Gemini 3.1 Flash-Lite — 7 prompts to test its new 'Thinking' mode - Tom's Guide",
+    "url": "https://www.tomsguide.com",
+    "url_fp": "e946de172e1bc60d60b3f544b76f5dfb",
+    "description": "Google just launched Gemini 3.1 Flash-Lite — 7 prompts to test its new 'Thinking' modeTom's Guide",
+    "date": "2026-03-04T11:45:36.821054+00:00"
+  },
+  {
+    "title": "New Microsoft 365 E7 Subscription to Bundle Copilot and Agent 365 - Petri IT Knowledgebase",
+    "url": "https://petri.com",
+    "url_fp": "09a1562835ed63e83a2a4336826272d4",
+    "description": "New Microsoft 365 E7 Subscription to Bundle Copilot and Agent 365Petri IT Knowledgebase",
+    "date": "2026-03-04T11:45:36.896156+00:00"
+  },
+  {
+    "title": "Copilot AI ‘Microslop’ Chat Ban Is Not Censorship—Says Microsoft - Forbes",
+    "url": "https://www.forbes.com",
+    "url_fp": "974a05326cbbafcecec1f11b22f1eb27",
+    "description": "Copilot AI ‘Microslop’ Chat Ban Is Not Censorship—Says MicrosoftForbesMicrosoft Sparks Backlash by Banning the Word ‘Microslop’ on Copilot's Discord Serverextremetech.comMicrosoft Bans Term ‘Microslop’ From Official Discord ServerGizmodo",
+    "date": "2026-03-04T11:45:36.957739+00:00"
+  },
+  {
+    "title": "SharePoint at 25: How Microsoft is putting knowledge to work in the AI era - Microsoft",
+    "url": "https://www.microsoft.com",
+    "url_fp": "c439589400212f33bcef65939bd8c69f",
+    "description": "SharePoint at 25: How Microsoft is putting knowledge to work in the AI eraMicrosoft",
+    "date": "2026-03-04T11:45:36.957856+00:00"
+  },
+  {
+    "title": "Why AI startups are selling the same equity at two different prices - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "Why AI startups are selling the same equity at two different pricesTechCrunch",
+    "date": "2026-03-04T11:45:36.958101+00:00"
+  },
+  {
+    "title": "Seattle’s newest early stage fund makes a bet on vertical AI startups - GeekWire",
+    "url": "https://www.geekwire.com",
+    "url_fp": "4d3f914e9a7491ea697dc038fcf5f6b9",
+    "description": "Seattle’s newest early stage fund makes a bet on vertical AI startupsGeekWire",
+    "date": "2026-03-04T11:45:36.958225+00:00"
+  },
+  {
+    "title": "China’s AI Breakthroughs Put US Tech Dominance at Risk: Book Excerpt - Newsweek",
+    "url": "https://www.newsweek.com",
+    "url_fp": "cc866bcdbb25212ddbbb9241848c62d7",
+    "description": "China’s AI Breakthroughs Put US Tech Dominance at Risk: Book ExcerptNewsweek",
+    "date": "2026-03-04T11:45:37.025510+00:00"
+  },
+  {
+    "title": "Government to create new lab to keep UK in the fast lane on AI breakthroughs - GOV.UK",
+    "url": "https://www.gov.uk",
+    "url_fp": "0654429fdf150efe5e4fdae07ab4ffa3",
+    "description": "Government to create new lab to keep UK in the fast lane on AI breakthroughsGOV.UK",
+    "date": "2026-03-04T11:45:37.097743+00:00"
+  },
+  {
+    "title": "Top Fed Official, Wary of Inflation, Calls for Extended Rate Pause",
+    "url": "https://www.nytimes.com/2026/03/04/business/fed-harrack-inflation-interest-rates.html",
+    "url_fp": "afa1cf506007c55df00c1646ca9c4e5e",
+    "description": "Beth M. Hammack, head of the Federal Reserve Bank of Cleveland, says it is too early to gauge the economic impact of the Iran war and backs holding interest rates steady for “quite some time.”",
+    "date": "2026-03-04T11:45:37.155225+00:00"
+  },
+  {
+    "title": "Paramount-Warner Deal Promises to Shake Up Streaming",
+    "url": "https://www.nytimes.com/2026/03/04/business/media/paramount-warner-streaming-wars.html",
+    "url_fp": "e24621309371f521d06327d094401894",
+    "description": "The deal would put the combined company in the same league as Disney and Amazon. But Netflix and YouTube will still easily outrank everyone.",
+    "date": "2026-03-04T11:45:37.201012+00:00"
+  },
+  {
+    "title": "To Cut Housing Costs, Some States Are Easing Fire Safety Rules",
+    "url": "https://www.nytimes.com/2026/03/04/business/single-staircase-apartment-buildings.html",
+    "url_fp": "0c2786ce96d540cf7187c4e8b8b64733",
+    "description": "Last year, six states eliminated a fire-safety code requiring apartment buildings taller than three stories to have at least two staircases. More states are exploring the move.",
+    "date": "2026-03-04T11:45:37.257402+00:00"
+  },
+  {
+    "title": "He Was a Critic of the N.B.A. Players’ Union. Now He’s Leading It.",
+    "url": "https://www.nytimes.com/2026/03/04/business/fred-vanvleet-nba-players-union.html",
+    "url_fp": "26fd42ae5a0e4f52a40f58d2393fceaf",
+    "description": "Fred VanVleet, a league veteran, has plenty of headaches to deal with. Can he revive trust in the organization?",
+    "date": "2026-03-04T11:45:37.312337+00:00"
+  },
+  {
+    "title": "Energy Price Fears Ripple Through Global Markets",
+    "url": "https://www.nytimes.com/2026/03/04/business/iran-stocks-natural-gas-oil.html",
+    "url_fp": "4680723d3de8ac43bcd2901acb0bf87b",
+    "description": "Stocks in Asia tumbled on Wednesday, led by sharp declines in South Korea, but markets in Europe and the United States appeared to stabilize after days of turmoil.",
+    "date": "2026-03-04T11:45:37.353892+00:00"
+  },
+  {
+    "title": "9 Million Indians Live in the Persian Gulf. The Money They Send Home Is a Lifeline.",
+    "url": "https://www.nytimes.com/2026/03/03/business/india-workers-iran-persian-gulf.html",
+    "url_fp": "1e7014e242cec80584ecbc928979c0e8",
+    "description": "A huge number of Indians spend their lives hopping across the Arabian Sea — remitting billions of dollars a year, supporting their families and the Indian economy.",
+    "date": "2026-03-04T11:45:37.423029+00:00"
+  },
+  {
+    "title": "Are You a Gen Z Skier? Vail Just Cut the Price of Your Next Epic Pass.",
+    "url": "https://www.nytimes.com/2026/03/03/travel/skiing-gen-z-epic-pass.html",
+    "url_fp": "02de422a72fedace8f723a96ced4be30",
+    "description": "Seeming to acknowledge critics’ complaints about the high cost of snow sports, the company is cutting the price of its 2026-2027 Epic Passes for younger skiers and snowboarders.",
+    "date": "2026-03-04T11:45:37.484306+00:00"
+  },
+  {
+    "title": "How the Iran War Is Choking Off the World’s Oil and Gas",
+    "url": "https://www.nytimes.com/interactive/2026/03/03/business/iran-war-oil-gas-strait-of-hormuz.html",
+    "url_fp": "b0445e2b488c05ba0a611284066490f9",
+    "description": "One-fifth of the global oil supply and substantial amounts of natural gas travel through the Strait of Hormuz, which has become a no-go zone for many tankers as fighting continues.",
+    "date": "2026-03-04T11:45:37.533335+00:00"
+  },
+  {
+    "title": "Iranians Viewed by U.S. as Potential Leaders Died in Strikes, Trump Says",
+    "url": "https://www.nytimes.com/2026/03/03/world/middleeast/iranian-leaders-trum.html",
+    "url_fp": "f4264c70c6601e618b636c3a1e6ab02d",
+    "description": "With the future of Iran deeply uncertain, President Trump acknowledged that it could end up with a ruler “as bad” as Ayatollah Ali Khamenei.",
+    "date": "2026-03-04T11:45:37.592476+00:00"
+  },
+  {
+    "title": "Target to Spend Billions to Refresh Stores, and Hire More Workers",
+    "url": "https://www.nytimes.com/2026/03/03/business/target-stores-investment-payrolls.html",
+    "url_fp": "d55e0c103aca7276f12589096ac022ab",
+    "description": "The new C.E.O. said the company would focus on home décor, apparel and pop culture trends in an effort to reverse years of sales declines.",
+    "date": "2026-03-04T11:45:37.650203+00:00"
+  },
+  {
+    "title": "Big Lenders’ Risky Loans Are Rattling Wall Street",
+    "url": "https://www.nytimes.com/2026/03/03/business/private-credit-crisis-blue-owl-capital.html",
+    "url_fp": "752eb7414aee87b6894fd72970304cf2",
+    "description": "Lending troubles at Blue Owl Capital and other so-called private credit behemoths are setting off fears of a “bank run,” as one hedge fund put it.",
+    "date": "2026-03-04T11:45:37.695328+00:00"
+  },
+  {
+    "title": "Dow closes down 400 points after falling as much as 1,200 points as Iran conflict volatility continues: Live updates - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Dow closes down 400 points after falling as much as 1,200 points as Iran conflict volatility continues: Live updatesCNBCStock Market News, March 3, 2026: Dow Pares Early Decline, Oil's Climb ModeratesWSJMarkets News, March 3, 2026: Major Stock Indexes Fall But Close Well Off Early Lows as Volatility Persists Amid Iran ConflictInvestopedia",
+    "date": "2026-03-04T11:45:37.695600+00:00"
+  },
+  {
+    "title": "Stock market today: Dow falls by 700 points, S&P 500 and Nasdaq sink as oil surges amid war worries - Yahoo Finance UK",
+    "url": "https://uk.finance.yahoo.com",
+    "url_fp": "2c19f9b77aeac73a5fe63313054f3504",
+    "description": "Stock market today: Dow falls by 700 points, S&P 500 and Nasdaq sink as oil surges amid war worriesYahoo Finance UK",
+    "date": "2026-03-04T11:45:37.695906+00:00"
+  },
+  {
+    "title": "Stock market today: Dow falls by 700 points, S&P 500 and Nasdaq sink as oil surges amid war worries - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Stock market today: Dow falls by 700 points, S&P 500 and Nasdaq sink as oil surges amid war worriesYahoo Finance",
+    "date": "2026-03-04T11:45:37.696393+00:00"
+  },
+  {
+    "title": "Pluralsight Launches AI Academy to Help Enterprises Measure and Scale AI Productivity - HPCwire",
+    "url": "https://www.hpcwire.com",
+    "url_fp": "94d7f773fc411f27533bb240cb362916",
+    "description": "Pluralsight Launches AI Academy to Help Enterprises Measure and Scale AI ProductivityHPCwire",
+    "date": "2026-03-04T11:45:37.774998+00:00"
+  },
+  {
+    "title": "Enterprises Are Spending 15% More on Software in 2026, Thanks to AI. Here's How to Profit. - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Enterprises Are Spending 15% More on Software in 2026, Thanks to AI. Here's How to Profit.The Motley Fool",
+    "date": "2026-03-04T11:45:37.775139+00:00"
+  },
+  {
+    "title": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks Reel - Crunchbase News",
+    "url": "https://news.crunchbase.com",
+    "url_fp": "f087ef1c2fa43cca40bcb212d1ef6ca1",
+    "description": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks ReelCrunchbase News",
+    "date": "2026-03-04T11:45:37.775489+00:00"
+  },
+  {
+    "title": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp) - Bloomberg",
+    "url": "https://www.bloomberg.com",
+    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
+    "description": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp)Bloomberg",
+    "date": "2026-03-04T11:45:37.775622+00:00"
+  },
+  {
+    "title": "Top Fed Official, Wary of Inflation, Calls for Extended Rate Pause - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "Top Fed Official, Wary of Inflation, Calls for Extended Rate PauseThe New York Times",
+    "date": "2026-03-04T11:45:37.775883+00:00"
+  },
+  {
+    "title": "Apple introduces the new MacBook Air with M5 - Apple",
+    "url": "https://www.apple.com",
+    "url_fp": "e845cbdc3785b1a67978cbc5a146a168",
+    "description": "Apple introduces the new MacBook Air with M5Apple",
+    "date": "2026-03-04T11:45:37.776035+00:00"
+  },
+  {
+    "title": "New Apple products keep launching, here’s what’s coming next - 9to5Mac",
+    "url": "https://9to5mac.com",
+    "url_fp": "8def0a95ccbdb9b4116de5148d89d7f7",
+    "description": "New Apple products keep launching, here’s what’s coming next9to5Mac",
+    "date": "2026-03-04T11:45:37.776204+00:00"
+  },
+  {
+    "title": "Facebook down for thousands with this error message showing - AL.com",
+    "url": "https://www.al.com",
+    "url_fp": "6293b6089126e9f58e91a8788d44bfed",
+    "description": "Facebook down for thousands with this error message showingAL.com",
+    "date": "2026-03-04T11:45:37.833263+00:00"
+  },
+  {
+    "title": "Amazon increases investment in Spain to €33.7 billion to expand data center infrastructure and drive AI innovation across Europe - About Amazon",
+    "url": "https://www.aboutamazon.com",
+    "url_fp": "ad4f2ca29452c4a90b63ae5542584422",
+    "description": "Amazon increases investment in Spain to €33.7 billion to expand data center infrastructure and drive AI innovation across EuropeAbout Amazon",
+    "date": "2026-03-04T11:45:37.833402+00:00"
+  },
+  {
+    "title": "NVIDIA and Global Telecom Leaders Commit to Build 6G on Open and Secure AI-Native Platforms - NVIDIA Newsroom",
+    "url": "http://nvidianews.nvidia.com",
+    "url_fp": "ce9cab6387aa754d1fdbe31e47ca968e",
+    "description": "NVIDIA and Global Telecom Leaders Commit to Build 6G on Open and Secure AI-Native PlatformsNVIDIA Newsroom",
+    "date": "2026-03-04T11:45:37.833642+00:00"
+  },
+  {
+    "title": "Tesla Stock Falls as Investors Wait for Its New Robot, Optimus Version 3.0 - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Tesla Stock Falls as Investors Wait for Its New Robot, Optimus Version 3.0Barron's",
+    "date": "2026-03-04T11:45:37.833830+00:00"
+  },
+  {
+    "title": "New Tesla Battery Data Emerges, Tesla Stock (NASDAQ:TSLA) Still Falls - TipRanks",
+    "url": "https://www.tipranks.com",
+    "url_fp": "7d4aac19dbe1293d3c1010c0bdadf380",
+    "description": "New Tesla Battery Data Emerges, Tesla Stock (NASDAQ:TSLA) Still FallsTipRanks",
+    "date": "2026-03-04T11:45:37.896693+00:00"
+  },
+  {
+    "title": "MSFT stock price today: Microsoft shares rise, investors watch AI execution - onmsft.com",
+    "url": "https://onmsft.com",
+    "url_fp": "7c14a7f9584acc43293346caf99d3e4f",
+    "description": "MSFT stock price today: Microsoft shares rise, investors watch AI executiononmsft.com",
+    "date": "2026-03-04T11:45:37.967580+00:00"
+  },
+  {
+    "title": "CI Investments Inc. Sells 385,523 Shares of Alphabet Inc. $GOOG - MarketBeat",
+    "url": "https://www.marketbeat.com",
+    "url_fp": "2dc276236d3b374e1b7bd2affebbd6fa",
+    "description": "CI Investments Inc. Sells 385,523 Shares of Alphabet Inc. $GOOGMarketBeat",
+    "date": "2026-03-04T11:45:38.027483+00:00"
+  },
+  {
+    "title": "Alphabet And Apple AI Alliance Adds Context To Valuation And Growth Prospects - simplywall.st",
+    "url": "https://simplywall.st",
+    "url_fp": "00bde8332e7e948dd256ee2976ba58dc",
+    "description": "Alphabet And Apple AI Alliance Adds Context To Valuation And Growth Prospectssimplywall.st",
+    "date": "2026-03-04T11:45:38.027659+00:00"
+  },
+  {
+    "title": "When the Captain speaks, you listen: Judge addresses Team USA ahead of Classic - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "When the Captain speaks, you listen: Judge addresses Team USA ahead of ClassicMLB.com",
+    "date": "2026-03-04T11:45:38.027859+00:00"
+  },
+  {
+    "title": "Ben Hess flashes why he’s one of Yankees’ top pitching prospects against Phillies stars - New York Post",
+    "url": "https://nypost.com",
+    "url_fp": "6a3bd587d57d5503a436b77127565c5b",
+    "description": "Ben Hess flashes why he’s one of Yankees’ top pitching prospects against Phillies starsNew York Post",
+    "date": "2026-03-04T11:45:38.028037+00:00"
+  },
+  {
+    "title": "How Cody Bellinger's Injury Impacts Yankees Long-Term Plans - Sports Illustrated",
+    "url": "https://www.si.com",
+    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
+    "description": "How Cody Bellinger's Injury Impacts Yankees Long-Term PlansSports Illustrated",
+    "date": "2026-03-04T11:45:38.028163+00:00"
+  },
+  {
+    "title": "Kristian Winfield: Mohamed Diawara is another Knicks 2nd-round pick hit - New York Daily News",
+    "url": "https://www.nydailynews.com",
+    "url_fp": "8b0b63fa78d617b1ee89794d52bc2748",
+    "description": "Kristian Winfield: Mohamed Diawara is another Knicks 2nd-round pick hitNew York Daily News",
+    "date": "2026-03-04T11:45:38.028361+00:00"
+  },
+  {
+    "title": "The Knicks have found a hidden gem in 2nd round rookie Mohamed Diawara - Empire Sports Media",
+    "url": "https://empiresportsmedia.com",
+    "url_fp": "32c1ae359ebda5c97014e9704fb2c846",
+    "description": "The Knicks have found a hidden gem in 2nd round rookie Mohamed DiawaraEmpire Sports Media",
+    "date": "2026-03-04T11:45:38.106257+00:00"
+  },
+  {
+    "title": "NY Giants draft 2026: How the NFL Scouting Combine changed mock drafts - Big Blue View",
+    "url": "https://www.bigblueview.com",
+    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
+    "description": "NY Giants draft 2026: How the NFL Scouting Combine changed mock draftsBig Blue ViewGiants news, 3/4: Mock drafts shift, and Abdul Carter changes numbersYahoo SportsNew York Giants' John Harbaugh won't draft based on 'positional value'Giants Wire",
+    "date": "2026-03-04T11:45:38.106363+00:00"
+  },
+  {
+    "title": "New York Giants expected to begin roster cuts before start of free agency - Giants Wire",
+    "url": "https://giantswire.usatoday.com",
+    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
+    "description": "New York Giants expected to begin roster cuts before start of free agencyGiants Wire",
+    "date": "2026-03-04T11:45:38.106765+00:00"
+  },
+  {
+    "title": "Melovsky Signed to 2-Year, Entry-Level Contract | RELEASE - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Melovsky Signed to 2-Year, Entry-Level Contract | RELEASENHL.com",
+    "date": "2026-03-04T11:45:38.106904+00:00"
+  },
+  {
+    "title": "Devils Trade Matchmaker: Six Players that Could Move at the Deadline - Sportsnaut",
+    "url": "https://sportsnaut.com",
+    "url_fp": "6f6dc000cd65ae7e53b763c13d9d7d9d",
+    "description": "Devils Trade Matchmaker: Six Players that Could Move at the DeadlineSportsnaut",
+    "date": "2026-03-04T11:45:38.107056+00:00"
+  },
+  {
+    "title": "Game Preview #61: New Jersey Devils vs. Florida Panthers - All About The Jersey",
+    "url": "https://www.allaboutthejersey.com",
+    "url_fp": "247a96d3a8bbfeafd183ae1a03525854",
+    "description": "Game Preview #61: New Jersey Devils vs. Florida PanthersAll About The Jersey",
+    "date": "2026-03-04T11:45:38.107193+00:00"
   }
 ]
