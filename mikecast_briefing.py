@@ -1303,11 +1303,11 @@ def send_email(
 <div style="margin:2rem auto;max-width:600px;text-align:center;font-family:sans-serif;">
   <p style="color:#8b949e;font-size:.85rem;margin-bottom:.75rem;">Subscribe to MikeCast on your favourite podcast app:</p>
   <div style="display:inline-flex;gap:.5rem;flex-wrap:wrap;justify-content:center;">
-    <a href="https://podcastsconnect.apple.com/my-podcasts/show/mikecast-%E2%80%94-daily-briefing/20164e6d-fead-410a-a89f-b7cd70c11be1/episodes"
+    <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449"
        style="display:inline-block;padding:.35rem .85rem;border-radius:20px;background:#a855f7;color:#fff;font-size:.78rem;font-weight:600;text-decoration:none;">
       Apple Podcasts
     </a>
-    <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv"
+    <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv?si=Ia1BvyEGQLKqZ7TwByXOCQ"
        style="display:inline-block;padding:.35rem .85rem;border-radius:20px;background:#1db954;color:#fff;font-size:.78rem;font-weight:600;text-decoration:none;">
       Spotify
     </a>
