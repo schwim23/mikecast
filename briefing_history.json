@@ -1,432 +1,5 @@
 [
   {
-    "title": "Nvidia’s Quarterly Profit Hits $43 Billion on Strong A.I. Chip Sales",
-    "url": "https://www.nytimes.com/2026/02/25/technology/nvidia-earnings.html",
-    "url_fp": "d5ba5eacb2ccf58b808703c106719adb",
-    "description": "Total profit for the fiscal year was $120 billion, the company said. Three years ago, it was just $4.4 billion.",
-    "date": "2026-02-26T11:45:35.955299+00:00"
-  },
-  {
-    "title": "A.I. Complicates Old Internet Privacy Risks",
-    "url": "https://www.nytimes.com/2026/02/26/technology/personaltech/ai-complicates-old-internet-privacy-risks.html",
-    "url_fp": "d7d345058bbac3e7195316897ec87d2a",
-    "description": "Artificial intelligence is convenient and easy to use, but you should think about what you say to the chatbots.",
-    "date": "2026-02-26T11:45:35.984733+00:00"
-  },
-  {
-    "title": "When Chatbots Are Used to Plan Violence, Is There a Duty to Warn?",
-    "url": "https://www.nytimes.com/2026/02/26/technology/chatbots-duty-warn-police.html",
-    "url_fp": "955d72974d0d352d4240e47280255a3d",
-    "description": "People are revealing sensitive personal information to A.I. chatbots — including plans to commit violent acts.",
-    "date": "2026-02-26T11:45:36.028469+00:00"
-  },
-  {
-    "title": "How A.I.-Generated Videos Are Distorting Your Child’s YouTube Feed",
-    "url": "https://www.nytimes.com/2026/02/26/us/ai-videos-children-youtube.html",
-    "url_fp": "881fa13e505f4b2ac2c2fc73cc67c3d0",
-    "description": "Experts caution that low-quality, A.I.-generated videos on YouTube geared toward children often feature conflicting information, lack plot structure and can be cognitively overwhelming — all of which could affect young children’s development.",
-    "date": "2026-02-26T11:45:36.069225+00:00"
-  },
-  {
-    "title": "Women Are Falling in Love With A.I. It’s a Problem for Beijing.",
-    "url": "https://www.nytimes.com/2026/02/26/technology/china-ai-dating-apps.html",
-    "url_fp": "1e1ef7d5721f1bdf38c6b911f72a8fe7",
-    "description": "As China grapples with a shrinking population and historically low birthrate, people are finding romance with chatbots instead.",
-    "date": "2026-02-26T11:45:36.108733+00:00"
-  },
-  {
-    "title": "For Trump, Military Strike in Iran Could Serve Symbolic Purpose",
-    "url": "https://www.nytimes.com/2026/02/26/us/politics/trump-iran-strike.html",
-    "url_fp": "4dbda2dfa4fcdb9c0c049a609b4066eb",
-    "description": "Some officials in the Trump administration hope an attack would force Iran to give up its nuclear enrichment program. Others have doubts.",
-    "date": "2026-02-26T11:45:36.149678+00:00"
-  },
-  {
-    "title": "Israelis Are Waiting for War With Iran, Again",
-    "url": "https://www.nytimes.com/2026/02/26/world/middleeast/israel-iran-war.html",
-    "url_fp": "44194f166fde22867337e3ceba0a8f45",
-    "description": "The national mood is somewhere between anxiety, resignation and anticipation as President Trump considers whether to attack Iran.",
-    "date": "2026-02-26T11:45:36.181647+00:00"
-  },
-  {
-    "title": "A Deal or War? Crucial Talks Begin Between U.S. and Iran",
-    "url": "https://www.nytimes.com/2026/02/26/world/middleeast/iran-us-nuclear-talks.html",
-    "url_fp": "2d661bc28424229ed1211f419cc5ffc7",
-    "description": "President Trump has kept up a steady drumbeat of threats and built up U.S. troops in the region. Iran’s task is to give him a win but also preserve some semblance of nuclear enrichment.",
-    "date": "2026-02-26T11:45:36.218726+00:00"
-  },
-  {
-    "title": "The Missing Records From the Epstein Files, and a Gun Battle Off the Coast of Cuba",
-    "url": "https://www.nytimes.com/2026/02/26/podcasts/the-headlines/epstein-files-cuba-us-boat.html",
-    "url_fp": "c646aff52bade75612cafe0ccf4a9105",
-    "description": "Plus, a big shift in the housing market.",
-    "date": "2026-02-26T11:45:36.271959+00:00"
-  },
-  {
-    "title": "Trump’s Push for Election Power Raises Fears He Will ‘Subvert’ Midterms",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/trump-elections-midterms.html",
-    "url_fp": "e163077069fdf4da5bef08305475d932",
-    "description": "The president appears to be undermining Americans’ faith in the outcome, at a moment when Republicans face an uphill climb to keep control of Congress.",
-    "date": "2026-02-26T11:45:36.317426+00:00"
-  },
-  {
-    "title": "New A.C.A. Plans Could Increase Family Deductibles to $31,000",
-    "url": "https://www.nytimes.com/2026/02/26/health/obamacare-health-insurance-rollbacks.html",
-    "url_fp": "ded878916399cfc332e6231f4c185658",
-    "description": "The Trump administration is proposing Obamacare plans that it says will lower health insurance premiums. But critics warn they would make care unaffordable.",
-    "date": "2026-02-26T11:45:36.352828+00:00"
-  },
-  {
-    "title": "Patel Ousts F.B.I. Personnel Tied to Inquiry Into Trump’s Retained Classified Records",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/patel-fbi-firings-trump-classified-records.html",
-    "url_fp": "da9e7a14d468a1b36a5cb5461019037b",
-    "description": "The firings are part of a rolling barrage of retribution aimed at those who worked on the two federal prosecutions of President Trump.",
-    "date": "2026-02-26T11:45:36.404856+00:00"
-  },
-  {
-    "title": "What We Know About the Gun Battle Off the Coast of Cuba",
-    "url": "https://www.nytimes.com/2026/02/26/us/cuba-speedboat-florida-shooting-killed.html",
-    "url_fp": "a101c2e8a2605996ea65be524e80bf19",
-    "description": "Four armed Cubans aboard a Florida-based speedboat died in a gunfight with Cuban border troops on Wednesday, officials said.",
-    "date": "2026-02-26T11:45:36.442129+00:00"
-  },
-  {
-    "title": "As Electric Bills Rise, Trump Says Tech Companies Should Pay More",
-    "url": "https://www.nytimes.com/2026/02/25/climate/ai-data-centers-trump-energy-costs.html",
-    "url_fp": "070a80d6fccec95266834cdff4705810",
-    "description": "The president said he had negotiated a deal with tech giants to cover the energy costs of data centers, but offered few details. Experts said such pledges could prove difficult in practice.",
-    "date": "2026-02-26T11:45:36.485097+00:00"
-  },
-  {
-    "title": "Hungry for Affirmation, Vulnerable to Scams: As a Writer, I Know the Feeling",
-    "url": "https://www.nytimes.com/2026/02/25/books/review/publishing-scams.html",
-    "url_fp": "785a320986eef1a52fe8ae08db426f69",
-    "description": "From George Saunders to the National Book Foundation, the literary world has been besieged by fake requests. Just like me.",
-    "date": "2026-02-26T11:45:36.533489+00:00"
-  },
-  {
-    "title": "I Thought I Understood A.I. Companies. I Couldn’t Have Been More Wrong.",
-    "url": "https://www.nytimes.com/2026/02/25/opinion/ai-industry-competition-innovation.html",
-    "url_fp": "5816b1bb0b6508d43bf8ecea44cf8eb2",
-    "description": "The future of the field is still up for grabs.",
-    "date": "2026-02-26T11:45:36.575790+00:00"
-  },
-  {
-    "title": "Thrive Capital invested about $1 billion in OpenAI at a $285 billion valuation, source says - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "Thrive Capital invested about $1 billion in OpenAI at a $285 billion valuation, source saysCNBC",
-    "date": "2026-02-26T11:45:36.576417+00:00"
-  },
-  {
-    "title": "Canada’s AI minister blames OpenAI for ‘failure’ after mass shooting - Politico",
-    "url": "https://www.politico.com",
-    "url_fp": "8c9bf0146c0792d5befcb525694a72bf",
-    "description": "Canada’s AI minister blames OpenAI for ‘failure’ after mass shootingPolitico",
-    "date": "2026-02-26T11:45:36.623138+00:00"
-  },
-  {
-    "title": "OpenAI's ban of Canada school shooting suspect's account raises scrutiny of other online activity - Reuters",
-    "url": "https://www.reuters.com",
-    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
-    "description": "OpenAI's ban of Canada school shooting suspect's account raises scrutiny of other online activityReuters",
-    "date": "2026-02-26T11:45:36.623480+00:00"
-  },
-  {
-    "title": "Anthropic acquires Vercept to advance Claude's computer use capabilities - Anthropic",
-    "url": "https://www.anthropic.com",
-    "url_fp": "83724ceebdffe591c85e5dfb049f94b6",
-    "description": "Anthropic acquires Vercept to advance Claude's computer use capabilitiesAnthropic",
-    "date": "2026-02-26T11:45:36.623733+00:00"
-  },
-  {
-    "title": "Hacker Used Anthropic’s Claude to Steal Mexican Data Trove - Bloomberg",
-    "url": "https://www.bloomberg.com",
-    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
-    "description": "Hacker Used Anthropic’s Claude to Steal Mexican Data TroveBloomberg",
-    "date": "2026-02-26T11:45:36.623880+00:00"
-  },
-  {
-    "title": "AI-Powered Hacker Steals 150GB from Mexican Government Using Anthropic’s Claude - Yahoo",
-    "url": "https://www.yahoo.com",
-    "url_fp": "1b03577ed104f16aadc00a639d33cb44",
-    "description": "AI-Powered Hacker Steals 150GB from Mexican Government Using Anthropic’s ClaudeYahoo",
-    "date": "2026-02-26T11:45:36.657263+00:00"
-  },
-  {
-    "title": "Google's latest app helps you use Gemini models and AI agents at work - Android Authority",
-    "url": "https://www.androidauthority.com",
-    "url_fp": "8a5e28679c11bd652e4480dc7fe32d4e",
-    "description": "Google's latest app helps you use Gemini models and AI agents at workAndroid Authority",
-    "date": "2026-02-26T11:45:36.695728+00:00"
-  },
-  {
-    "title": "Let Gemini handle your multi-step daily tasks on Android. - blog.google",
-    "url": "https://blog.google",
-    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
-    "description": "Let Gemini handle your multi-step daily tasks on Android.blog.google",
-    "date": "2026-02-26T11:45:36.695968+00:00"
-  },
-  {
-    "title": "Microsoft CEO slams AI slop after dismissing its importance - theregister.com",
-    "url": "https://www.theregister.com",
-    "url_fp": "0b490fcfb212fb4542fa6ad143edd5f3",
-    "description": "Microsoft CEO slams AI slop after dismissing its importancetheregister.com",
-    "date": "2026-02-26T11:45:36.696118+00:00"
-  },
-  {
-    "title": "ILUNION’s José Luis Barceló credits creative legal team —and Copilot 365—with a ‘deep transformation’ - Microsoft Source",
-    "url": "https://news.microsoft.com",
-    "url_fp": "d66c29155c0d8df0755b40a37da2eadf",
-    "description": "ILUNION’s José Luis Barceló credits creative legal team —and Copilot 365—with a ‘deep transformation’Microsoft Source",
-    "date": "2026-02-26T11:45:36.696395+00:00"
-  },
-  {
-    "title": "Anthropic acquires Vercept in early exit for one of Seattle’s standout AI startups - GeekWire",
-    "url": "https://www.geekwire.com",
-    "url_fp": "4d3f914e9a7491ea697dc038fcf5f6b9",
-    "description": "Anthropic acquires Vercept in early exit for one of Seattle’s standout AI startupsGeekWire",
-    "date": "2026-02-26T11:45:36.734462+00:00"
-  },
-  {
-    "title": "Cyber Startups Ride AI Wave to Funding Highs - WSJ",
-    "url": "https://www.wsj.com",
-    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
-    "description": "Cyber Startups Ride AI Wave to Funding HighsWSJ",
-    "date": "2026-02-26T11:45:36.734802+00:00"
-  },
-  {
-    "title": "Taiwan Excellence Showcases AI Breakthroughs at embedded world 2026 - Embedded Computing Design",
-    "url": "https://embeddedcomputing.com",
-    "url_fp": "fe190dfa5a58fbe6d71cf1682ad3b05d",
-    "description": "Taiwan Excellence Showcases AI Breakthroughs at embedded world 2026Embedded Computing Design",
-    "date": "2026-02-26T11:45:36.771604+00:00"
-  },
-  {
-    "title": "‘Z’? ‘Zo’? ‘Mam’? A New Mayor Needs a Nickname.",
-    "url": "https://www.nytimes.com/2026/02/26/business/media/zohran-mamdani-nyc-mayor-new-york-post.html",
-    "url_fp": "8b67eba3b102da0cfc3f324322b46c1f",
-    "description": "Mayor Zohran Mamdani has been given a bevy of nicknames by New York City’s tabloid newspapers and political class. Which will stick?",
-    "date": "2026-02-26T11:45:36.793444+00:00"
-  },
-  {
-    "title": "Kalshi Says ‘MrBeast’ Employee Violated Insider Trading Rules",
-    "url": "https://www.nytimes.com/2026/02/25/business/kalshi-mrbeast-employee-insider-trading-accusations.html",
-    "url_fp": "2aa860c2f01a5892e071b8042f67c758",
-    "description": "The prediction-market platform said it had reported the employee to federal regulators. The show’s parent company said it had “no tolerance for this behavior.”",
-    "date": "2026-02-26T11:45:36.819212+00:00"
-  },
-  {
-    "title": "For America’s 250th, Should the Coin of Trump’s Realm Be Gold?",
-    "url": "https://www.nytimes.com/2026/02/25/us/trump-coins.html",
-    "url_fp": "b435e9120cf3c98a8eb03e7ae8803ae5",
-    "description": "A federally appointed committee is pushing back on plans to mint gold currency depicting President Trump.",
-    "date": "2026-02-26T11:45:36.843222+00:00"
-  },
-  {
-    "title": "Trump Proposed a New Retirement Plan With Up to a $1,000 Match. How Might It Work?",
-    "url": "https://www.nytimes.com/2026/02/25/business/trump-retirement-401k-match.html",
-    "url_fp": "28e1951908b33c2fd8d2f7fb3d76ede5",
-    "description": "An existing law could help create new retirement savings plans for people who lack them. But there may be income restrictions on any match.",
-    "date": "2026-02-26T11:45:36.874991+00:00"
-  },
-  {
-    "title": "Businesses Push for Tariff Refunds as Trump Aides Hint at Fight to Come",
-    "url": "https://www.nytimes.com/2026/02/25/business/trump-tariffs-refunds-lawsuits.html",
-    "url_fp": "e3517bb751ef3408bb6b1c6758184a2b",
-    "description": "By the president’s own admission, it could be years before the matter is settled, even though the administration previously indicated it would pay.",
-    "date": "2026-02-26T11:45:36.904813+00:00"
-  },
-  {
-    "title": "Blaming Tariffs, Aston Martin Will Trim 20% of Its Work Force",
-    "url": "https://www.nytimes.com/2026/02/25/business/tariffs-aston-martin.html",
-    "url_fp": "4c1c4803f9bd9edf55760ac787c82d5c",
-    "description": "The luxury automaker said losses for 2025 had increased from the year before, as tariffs and geopolitical uncertainty took a toll on its operations.",
-    "date": "2026-02-26T11:45:36.930032+00:00"
-  },
-  {
-    "title": "How Was Trump’s Speech? Choose Your Own Algorithmic Adventure.",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/trump-sotu-social-media-reactions.html",
-    "url_fp": "a61d42d97e1877ceed3235f7f5654049",
-    "description": "Here’s how social media may have shaped your impressions of the State of the Union.",
-    "date": "2026-02-26T11:45:36.955220+00:00"
-  },
-  {
-    "title": "What Trump Did (and Didn’t) Say",
-    "url": "https://www.nytimes.com/2026/02/25/business/dealbook/trump-state-of-union.html",
-    "url_fp": "a1c666bf8b4975547de04e61eb14bc76",
-    "description": "The president boasted about a strong economy in his State of the Union address. But he spent less time on a potential weakness, affordability.",
-    "date": "2026-02-26T11:45:36.968825+00:00"
-  },
-  {
-    "title": "Who Said It Better? How Trump’s Economic Pitch Echoes Biden’s.",
-    "url": "https://www.nytimes.com/2026/02/25/us/politics/trump-biden-state-of-the-union-economy.html",
-    "url_fp": "a25859eede506e7adab05f239c7a3825",
-    "description": "With the midterms approaching and polls showing unease about the economy, some of President Trump’s arguments about its strength sounded eerily like those of his predecessor.",
-    "date": "2026-02-26T11:45:36.993579+00:00"
-  },
-  {
-    "title": "Stock market today: Dow, S&P 500, Nasdaq rally on tech jolt as Nvidia earnings loom - Yahoo Finance",
-    "url": "https://finance.yahoo.com",
-    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
-    "description": "Stock market today: Dow, S&P 500, Nasdaq rally on tech jolt as Nvidia earnings loomYahoo Finance",
-    "date": "2026-02-26T11:45:36.994228+00:00"
-  },
-  {
-    "title": "Stock Market Today: Dow, S&P 500 and Nasdaq to dip following strong 2-day rally as Nvidia's earnings get muted reaction; software stocks under pressure after results. - MarketWatch",
-    "url": "https://www.marketwatch.com",
-    "url_fp": "5b80a053b8f3f5b09a0e2b665ba6d444",
-    "description": "Stock Market Today: Dow, S&P 500 and Nasdaq to dip following strong 2-day rally as Nvidia's earnings get muted reaction; software stocks under pressure after results.MarketWatch",
-    "date": "2026-02-26T11:45:36.994855+00:00"
-  },
-  {
-    "title": "Nvidia Posts Record $68.1B Quarter as AI Boom Accelerates - The Tech Buzz",
-    "url": "https://www.techbuzz.ai",
-    "url_fp": "ef939d3bc6ef2bd4e508de78d0d4f040",
-    "description": "Nvidia Posts Record $68.1B Quarter as AI Boom AcceleratesThe Tech Buzz",
-    "date": "2026-02-26T11:45:36.994999+00:00"
-  },
-  {
-    "title": "Exclusive: AI financial platform Rowspace raises $50 million led by Sequoia to help investment firms take on messy data - Fortune",
-    "url": "https://fortune.com",
-    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
-    "description": "Exclusive: AI financial platform Rowspace raises $50 million led by Sequoia to help investment firms take on messy dataFortune",
-    "date": "2026-02-26T11:45:37.050367+00:00"
-  },
-  {
-    "title": "Bootstrap or Venture Capital? 27 Ways to Think About it - inc.com",
-    "url": "https://www.inc.com",
-    "url_fp": "a866c6a59b417915b0b1f0f57cc02614",
-    "description": "Bootstrap or Venture Capital? 27 Ways to Think About itinc.com",
-    "date": "2026-02-26T11:45:37.077329+00:00"
-  },
-  {
-    "title": "Federal Reserve Bank of Atlanta CEO: Farewell to the best job I’ve ever had - AJC.com",
-    "url": "https://www.ajc.com",
-    "url_fp": "c23d3a300ab89832b39d51aea4980394",
-    "description": "Federal Reserve Bank of Atlanta CEO: Farewell to the best job I’ve ever hadAJC.com",
-    "date": "2026-02-26T11:45:37.110626+00:00"
-  },
-  {
-    "title": "Today’s obituary: Mary Craven, 79, guided North Syracuse’s ‘Apple Muffin Gang’ in 1987 - Syracuse.com",
-    "url": "https://www.syracuse.com",
-    "url_fp": "96e1ca717dfbdb1d169f19504fc1b644",
-    "description": "Today’s obituary: Mary Craven, 79, guided North Syracuse’s ‘Apple Muffin Gang’ in 1987Syracuse.com",
-    "date": "2026-02-26T11:45:37.146618+00:00"
-  },
-  {
-    "title": "Why Apple Stock Ascended Today - The Motley Fool",
-    "url": "https://www.fool.com",
-    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
-    "description": "Why Apple Stock Ascended TodayThe Motley Fool",
-    "date": "2026-02-26T11:45:37.166740+00:00"
-  },
-  {
-    "title": "Meta and AMD Partner for Longterm AI Infrastructure Agreement - meta.com",
-    "url": "https://about.fb.com",
-    "url_fp": "419dcbb1bdd3096e4ff2ebdab9a204fb",
-    "description": "Meta and AMD Partner for Longterm AI Infrastructure Agreementmeta.com",
-    "date": "2026-02-26T11:45:37.166905+00:00"
-  },
-  {
-    "title": "Amazon stock price today: AMZN ends higher as AI trade steadies, antitrust and exec exits linger - TechStock²",
-    "url": "https://ts2.tech",
-    "url_fp": "0a8eedd2ceabbf4d74bc2561d9ffc053",
-    "description": "Amazon stock price today: AMZN ends higher as AI trade steadies, antitrust and exec exits lingerTechStock²",
-    "date": "2026-02-26T11:45:37.218031+00:00"
-  },
-  {
-    "title": "Nvidia Beats Wall Street Targets. Stock Edges Higher - Investor's Business Daily",
-    "url": "https://www.investors.com",
-    "url_fp": "545362646854336a3463a9033e71efc5",
-    "description": "Nvidia Beats Wall Street Targets. Stock Edges HigherInvestor's Business Daily",
-    "date": "2026-02-26T11:45:37.249036+00:00"
-  },
-  {
-    "title": "Cathie Wood on Tesla, Bitcoin, and Whether AI Is in a Bubble - Morningstar Canada",
-    "url": "https://global.morningstar.com",
-    "url_fp": "b15eeb823132b595514e2a16eb4e8398",
-    "description": "Cathie Wood on Tesla, Bitcoin, and Whether AI Is in a BubbleMorningstar Canada",
-    "date": "2026-02-26T11:45:37.281451+00:00"
-  },
-  {
-    "title": "How High Will Netflix Go in the Hunt for Warner Bros? - The Hollywood Reporter",
-    "url": "https://www.hollywoodreporter.com",
-    "url_fp": "89e3065b8fbc5e8ef0cd1c93bc6894f5",
-    "description": "How High Will Netflix Go in the Hunt for Warner Bros?The Hollywood Reporter",
-    "date": "2026-02-26T11:45:37.281812+00:00"
-  },
-  {
-    "title": "Bill Gates admits to affairs, apologizes for Epstein relationship, WSJ reports - USA Today",
-    "url": "https://www.usatoday.com",
-    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
-    "description": "Bill Gates admits to affairs, apologizes for Epstein relationship, WSJ reportsUSA Today",
-    "date": "2026-02-26T11:45:37.318372+00:00"
-  },
-  {
-    "title": "Nationals vs. Yankees (Feb 25, 2026) Live Score - ESPN",
-    "url": "https://www.espn.com",
-    "url_fp": "f23ac12a07189adde19ca28f3d7c7b4f",
-    "description": "Nationals vs. Yankees (Feb 25, 2026) Live ScoreESPN",
-    "date": "2026-02-26T11:45:37.352963+00:00"
-  },
-  {
-    "title": "Yankees to honor CC with jersey retirement, plaque ceremony on Sept. 26 - MLB.com",
-    "url": "https://www.mlb.com",
-    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
-    "description": "Yankees to honor CC with jersey retirement, plaque ceremony on Sept. 26MLB.com",
-    "date": "2026-02-26T11:45:37.353165+00:00"
-  },
-  {
-    "title": "One Ring Would Make Jalen Brunson a Knicks God - Sports Illustrated",
-    "url": "https://www.si.com",
-    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
-    "description": "One Ring Would Make Jalen Brunson a Knicks GodSports Illustrated",
-    "date": "2026-02-26T11:45:37.353324+00:00"
-  },
-  {
-    "title": "Top 10 Knicks tough guys of all time - Newsday",
-    "url": "https://www.newsday.com",
-    "url_fp": "f10c15cd03b1d03fc174d7f1fcd3385f",
-    "description": "Top 10 Knicks tough guys of all timeNewsday",
-    "date": "2026-02-26T11:45:37.373464+00:00"
-  },
-  {
-    "title": "Knicks’ Karl-Anthony Towns Sends Fiery Message to His Critics - heavy.com",
-    "url": "https://heavy.com",
-    "url_fp": "374bf1bb8fee633961da067e5c478089",
-    "description": "Knicks’ Karl-Anthony Towns Sends Fiery Message to His Criticsheavy.com",
-    "date": "2026-02-26T11:45:37.373610+00:00"
-  },
-  {
-    "title": "Giants at NFL Combine 2026: Live updates, news, and what we're hearing - Bergen Record",
-    "url": "https://www.northjersey.com",
-    "url_fp": "6026964090783cb869e5eedf8cd59cb1",
-    "description": "Giants at NFL Combine 2026: Live updates, news, and what we're hearingBergen Record",
-    "date": "2026-02-26T11:45:37.406208+00:00"
-  },
-  {
-    "title": "'The Insiders' weigh in on Giants personnel's comments to the media at the NFL Combine - NFL.com",
-    "url": "https://www.nfl.com",
-    "url_fp": "d7ebf4dab31ce298edfc01d971c976bb",
-    "description": "'The Insiders' weigh in on Giants personnel's comments to the media at the NFL CombineNFL.com",
-    "date": "2026-02-26T11:45:37.442789+00:00"
-  },
-  {
-    "title": "Devils Fans Welcome Jack Hughes Back To New Jersey With Pregame Celebration - OutKick",
-    "url": "https://www.outkick.com",
-    "url_fp": "d144d23fcd3ddf44f86f8c7eabf60d3d",
-    "description": "Devils Fans Welcome Jack Hughes Back To New Jersey With Pregame CelebrationOutKick",
-    "date": "2026-02-26T11:45:37.476074+00:00"
-  },
-  {
-    "title": "Thompson, Krebs help Sabres edge Devils - NHL.com",
-    "url": "https://www.nhl.com",
-    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
-    "description": "Thompson, Krebs help Sabres edge DevilsNHL.com",
-    "date": "2026-02-26T11:45:37.476217+00:00"
-  },
-  {
     "title": "They Helped Women Fight Online Abuse. They Were Barred From the U.S.",
     "url": "https://www.nytimes.com/2026/02/26/technology/hateaid-online-abuse-free-speech-europe.html",
     "url_fp": "8e517342087c2c279c3da8878ec50d23",
@@ -3442,5 +3015,2119 @@
     "url_fp": "247a96d3a8bbfeafd183ae1a03525854",
     "description": "Game Preview #61: New Jersey Devils vs. Florida PanthersAll About The Jersey",
     "date": "2026-03-04T11:45:38.107193+00:00"
+  },
+  {
+    "title": "Iranian TV and Social Media Project Defiant and Distorted View of the War",
+    "url": "https://www.nytimes.com/2026/03/04/business/media/iran-state-tv-social-media-war-ai.html",
+    "url_fp": "3ddc108228eff3500aeadef6d5dd82d4",
+    "description": "State media and online propagandists are striking a confident posture, despite heavy losses. Some of the content was generated by artificial intelligence.",
+    "date": "2026-03-05T00:41:48.806714+00:00"
+  },
+  {
+    "title": "Trump Announces A.I. Industry Pledge to Pay for Power",
+    "url": "https://www.nytimes.com/2026/03/04/technology/ai-energy-pledge-white-house-trump.html",
+    "url_fp": "6a42c89e6f51ba32169de632691610d8",
+    "description": "Companies including Google, Microsoft and OpenAI committed to pay for the power plants and grid upgrades needed to run their data centers.",
+    "date": "2026-03-05T00:41:48.869357+00:00"
+  },
+  {
+    "title": "Lawmakers Question Intel’s Use of Tools From Blacklisted Chinese Firm",
+    "url": "https://www.nytimes.com/2026/03/04/technology/intel-senators-china-tools.html",
+    "url_fp": "e8cca49f3512a3be31e2cef6cfe678a0",
+    "description": "A bipartisan group of senators raised national security concerns about the chipmaker, which is now partly owned by taxpayers.",
+    "date": "2026-03-05T00:41:48.925592+00:00"
+  },
+  {
+    "title": "Elon Musk Defends Social Media Posts in Twitter Shareholder Lawsuit",
+    "url": "https://www.nytimes.com/2026/03/04/technology/elon-musk-testifies-twitter-lawsuit.html",
+    "url_fp": "2047f35dae0ab01a42abaa277d365f2c",
+    "description": "Mr. Musk said he did not expect his posts in the lead-up to his 2022 acquisition of the social media site, now X, to affect the company’s share price.",
+    "date": "2026-03-05T00:41:48.977317+00:00"
+  },
+  {
+    "title": "How Every Senator Voted on the Iran War Powers Resolution",
+    "url": "https://www.nytimes.com/interactive/2026/03/04/us/iran-war-powers.html",
+    "url_fp": "b94bfb0023cfdb7e7130d4b7c13d538e",
+    "description": "The Senate rejected on a measure to rein in the use of military force in Iran.",
+    "date": "2026-03-05T00:41:49.026169+00:00"
+  },
+  {
+    "title": "Iran’s Drones Cost a Fraction of the U.S. Weapons Shooting Them Down",
+    "url": "https://www.nytimes.com/2026/03/04/business/iran-shahed-drones-missiles-us-war.html",
+    "url_fp": "d995127fcd0d0d67f749a1a88dad1c80",
+    "description": "What to know about Iran’s cheap, noisy Shahed drones and the expensive defense systems trying to stop them.",
+    "date": "2026-03-05T00:41:49.077084+00:00"
+  },
+  {
+    "title": "How Latino Voters Helped Talarico Win in Texas",
+    "url": "https://www.nytimes.com/interactive/2026/03/04/us/elections/texas-primary-talarico-crockett-results-votes.html",
+    "url_fp": "1890b54f021fb40da6cb1277dd94f23f",
+    "description": "The state legislator’s apparent strength with Latino voters in the Democratic primary for Senate suggested that he might be able to make inroads with a crucial demographic that has shifted away from his party.",
+    "date": "2026-03-05T00:41:49.115142+00:00"
+  },
+  {
+    "title": "Long-Suffering Texas Democrats Wonder: Is James Talarico the One?",
+    "url": "https://www.nytimes.com/2026/03/04/us/politics/james-talarico-texas-senate.html",
+    "url_fp": "86079702212146a5e536d4901bb7890b",
+    "description": "After the state representative won the Senate primary, he joined a list of other promising progressives who have captured the left’s fancy.",
+    "date": "2026-03-05T00:41:49.161532+00:00"
+  },
+  {
+    "title": "Three Reasons John Cornyn Is Fighting for His Political Life",
+    "url": "https://www.nytimes.com/2026/03/04/us/texas-john-cornyn-ken-paxton-senate-runoff.html",
+    "url_fp": "3a3c419fea26dc11cfde59c135f180af",
+    "description": "The veteran Texas senator faces what promises to be a bruising runoff with the state attorney general challenging him from the right. But he had a stronger showing than expected.",
+    "date": "2026-03-05T00:41:49.208114+00:00"
+  },
+  {
+    "title": "Justice Dept., Under Pressure From Trump, Fails to Build Autopen Case Against Biden",
+    "url": "https://www.nytimes.com/2026/03/04/us/politics/trump-biden-autopen.html",
+    "url_fp": "fba44248e98010058284ee31d34119ce",
+    "description": "Prosecutors in the U.S. attorney’s office in Washington were unable to build a case, underscoring the department’s increasing inability to follow through on the president’s desire to indict his rivals.",
+    "date": "2026-03-05T00:41:49.265932+00:00"
+  },
+  {
+    "title": "Data Centers Are a Distraction. The Real Fight Is Elsewhere.",
+    "url": "https://www.nytimes.com/2026/03/04/opinion/data-centers-ai-regulation.html",
+    "url_fp": "3af0ea811214e0f9ecf281f16cfa5286",
+    "description": "We are trying to decide what role A.I. will have in our lives.",
+    "date": "2026-03-05T00:41:49.312085+00:00"
+  },
+  {
+    "title": "Why Tech Firms Are Working With Trump on Data Centers and Energy Costs",
+    "url": "https://www.nytimes.com/2026/03/04/climate/data-centers-electricity-trump.html",
+    "url_fp": "1d33844d7dba876b72bc638f693cbb65",
+    "description": "The White House has floated a new plan to try to ease voter concerns over the A.I. boom’s effect on electric bills. But it won’t be easy to put into practice.",
+    "date": "2026-03-05T00:41:49.364036+00:00"
+  },
+  {
+    "title": "Nvidia CEO Huang says $30 billion OpenAI investment 'might be the last' - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Nvidia CEO Huang says $30 billion OpenAI investment 'might be the last'CNBC",
+    "date": "2026-03-05T00:41:49.364260+00:00"
+  },
+  {
+    "title": "Tech stocks today: Nvidia CEO Jensen Huang suggests end of OpenAI investments, Apple unveils MacBook Neo - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Tech stocks today: Nvidia CEO Jensen Huang suggests end of OpenAI investments, Apple unveils MacBook NeoYahoo Finance",
+    "date": "2026-03-05T00:41:49.364458+00:00"
+  },
+  {
+    "title": "Nvidia CEO hints at end of investments in OpenAI, Anthropic - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "Nvidia CEO hints at end of investments in OpenAI, AnthropicReuters",
+    "date": "2026-03-05T00:41:49.364632+00:00"
+  },
+  {
+    "title": "Anthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feud - The Washington Post",
+    "url": "https://www.washingtonpost.com",
+    "url_fp": "add4932ae5e02f0328761d82ff3b4ea2",
+    "description": "Anthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feudThe Washington PostAnthropic's Claude AI being used in Iran war by U.S. military, sources sayCBS NewsDefense tech companies are dropping Claude after Pentagon's Anthropic blacklistCNBC",
+    "date": "2026-03-05T00:41:49.437036+00:00"
+  },
+  {
+    "title": "Anthropic’s Claude is suddenly the most popular iPhone app following Pentagon feud - CNN",
+    "url": "https://www.cnn.com",
+    "url_fp": "8d215893cca08911f456711875e8e3bc",
+    "description": "Anthropic’s Claude is suddenly the most popular iPhone app following Pentagon feudCNN",
+    "date": "2026-03-05T00:41:49.437200+00:00"
+  },
+  {
+    "title": "Claude outages lay bare software developers' growing reliance on AI: 'I guess I'll write code like a caveman' - Business Insider",
+    "url": "https://www.businessinsider.com",
+    "url_fp": "04220288456435753371c3e6a38ca102",
+    "description": "Claude outages lay bare software developers' growing reliance on AI: 'I guess I'll write code like a caveman'Business Insider",
+    "date": "2026-03-05T00:41:49.437478+00:00"
+  },
+  {
+    "title": "Father claims Google's AI product fuelled son's delusional spiral - BBC",
+    "url": "https://www.bbc.com",
+    "url_fp": "290ccda0deea6083ee613d358446103e",
+    "description": "Father claims Google's AI product fuelled son's delusional spiralBBCGoogle's AI chatbot allegedly told user to stage 'mass casualty attack,' wrongful death suit claimsCNBCChaotic 4 days led to man's suicide, says lawsuit against GoogleSFGATE",
+    "date": "2026-03-05T00:41:49.437544+00:00"
+  },
+  {
+    "title": "Gemini 3.1 Flash-Lite: Built for intelligence at scale - blog.google",
+    "url": "https://blog.google",
+    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
+    "description": "Gemini 3.1 Flash-Lite: Built for intelligence at scaleblog.google",
+    "date": "2026-03-05T00:41:49.437640+00:00"
+  },
+  {
+    "title": "Google Search rolls out Gemini’s Canvas in AI Mode to all US users - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "Google Search rolls out Gemini’s Canvas in AI Mode to all US usersTechCrunch",
+    "date": "2026-03-05T00:41:49.437726+00:00"
+  },
+  {
+    "title": "Microsoft gets tired of “Microslop,” bans the word on its Discord, then locks the server after backlash - Windows Latest",
+    "url": "https://www.windowslatest.com",
+    "url_fp": "82e50d0ac28a8a8edc834892cd57536f",
+    "description": "Microsoft gets tired of “Microslop,” bans the word on its Discord, then locks the server after backlashWindows LatestCopilot AI ‘Microslop’ Chat Ban Is Not Censorship—Says MicrosoftForbesMicrosoft Effort to Ban 'Microslop' on Copilot Discord Didn't Go As PlannedPCMag",
+    "date": "2026-03-05T00:41:49.437800+00:00"
+  },
+  {
+    "title": "SharePoint at 25: How Microsoft is putting knowledge to work in the AI era - Microsoft",
+    "url": "https://www.microsoft.com",
+    "url_fp": "c439589400212f33bcef65939bd8c69f",
+    "description": "SharePoint at 25: How Microsoft is putting knowledge to work in the AI eraMicrosoft",
+    "date": "2026-03-05T00:41:49.437892+00:00"
+  },
+  {
+    "title": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks Reel - Crunchbase News",
+    "url": "https://news.crunchbase.com",
+    "url_fp": "f087ef1c2fa43cca40bcb212d1ef6ca1",
+    "description": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks ReelCrunchbase News",
+    "date": "2026-03-05T00:41:49.438213+00:00"
+  },
+  {
+    "title": "Why Big Tech’s Equity Investments May Be Fueling Their Own AI Bubble - 24/7 Wall St.",
+    "url": "https://247wallst.com",
+    "url_fp": "5174185651b0be54b91403adb571059b",
+    "description": "Why Big Tech’s Equity Investments May Be Fueling Their Own AI Bubble24/7 Wall St.",
+    "date": "2026-03-05T00:41:49.495346+00:00"
+  },
+  {
+    "title": "Multi-Tiered Funding Rounds: AI Startup Valuation Strategy in 2026 - News and Statistics - IndexBox",
+    "url": "https://www.indexbox.io",
+    "url_fp": "10b969df1d797feeaad54d94c5ce7feb",
+    "description": "Multi-Tiered Funding Rounds: AI Startup Valuation Strategy in 2026 - News and StatisticsIndexBox",
+    "date": "2026-03-05T00:41:49.561732+00:00"
+  },
+  {
+    "title": "Advancing Nuclear Innovation: Leadership, AI Breakthroughs - blackengineer.com",
+    "url": "https://www.blackengineer.com",
+    "url_fp": "4e67a47b9ddd76d6721fd0baae367cb8",
+    "description": "Advancing Nuclear Innovation: Leadership, AI Breakthroughsblackengineer.com",
+    "date": "2026-03-05T00:41:49.613878+00:00"
+  },
+  {
+    "title": "Government to Launch £40 Million AI Research Lab to Drive Next Generation Breakthroughs - politicsuk.com",
+    "url": "https://politicsuk.com",
+    "url_fp": "2f4d49e7890554c9fb0ee1186d4c443e",
+    "description": "Government to Launch £40 Million AI Research Lab to Drive Next Generation Breakthroughspoliticsuk.com",
+    "date": "2026-03-05T00:41:49.685883+00:00"
+  },
+  {
+    "title": "MacBook Neo",
+    "url": "https://www.apple.com/newsroom/2026/03/say-hello-to-macbook-neo/",
+    "url_fp": "edad862765fd4d8ba9f7021232e7105e",
+    "description": "HN score: 1473 | Comments: 1821",
+    "date": "2026-03-05T00:41:49.698374+00:00"
+  },
+  {
+    "title": "Something is afoot in the land of Qwen",
+    "url": "https://simonwillison.net/2026/Mar/4/qwen/",
+    "url_fp": "ff4edf8bdf0c0719479220556f023592",
+    "description": "HN score: 487 | Comments: 229",
+    "date": "2026-03-05T00:41:49.730818+00:00"
+  },
+  {
+    "title": "An interactive map of Flock Cams",
+    "url": "https://deflock.org/map#map=5/37.125286/-96.284180",
+    "url_fp": "13fe1765a0c250b67424c7bb1de45b01",
+    "description": "HN score: 486 | Comments: 186",
+    "date": "2026-03-05T00:41:49.758202+00:00"
+  },
+  {
+    "title": "Qwen3.5 Fine-Tuning Guide – Unsloth Documentation",
+    "url": "https://unsloth.ai/docs/models/qwen3.5/fine-tune",
+    "url_fp": "b49470ee1471357373c8a9391b1ffa6d",
+    "description": "HN score: 257 | Comments: 63",
+    "date": "2026-03-05T00:41:49.793690+00:00"
+  },
+  {
+    "title": "Making Firefox's right-click not suck with about:config",
+    "url": "https://joshua.hu/firefox-making-right-click-not-suck",
+    "url_fp": "5df87322106ab62ee8aafd38327a8c73",
+    "description": "HN score: 246 | Comments: 170",
+    "date": "2026-03-05T00:41:49.831728+00:00"
+  },
+  {
+    "title": "Building a new Flash",
+    "url": "https://bill.newgrounds.com/news/post/1607118",
+    "url_fp": "92e060a03f61cc634fa6bcaa06156dc0",
+    "description": "HN score: 236 | Comments: 54",
+    "date": "2026-03-05T00:41:49.850064+00:00"
+  },
+  {
+    "title": "“It turns out” (2010)",
+    "url": "https://jsomers.net/blog/it-turns-out",
+    "url_fp": "0c345fb563ed5b43e6a0cc14b4869ba8",
+    "description": "HN score: 230 | Comments: 74",
+    "date": "2026-03-05T00:41:49.866061+00:00"
+  },
+  {
+    "title": "Libre Solar – Open Hardware for Renewable Energy",
+    "url": "https://libre.solar",
+    "url_fp": "a09c6fcb24972e821db36cca2b38c8c6",
+    "description": "HN score: 203 | Comments: 60",
+    "date": "2026-03-05T00:41:49.904209+00:00"
+  },
+  {
+    "title": "Glaze by Raycast",
+    "url": "https://www.glazeapp.com/",
+    "url_fp": "072792bf8adcff8ce59eac60095ae5d0",
+    "description": "HN score: 187 | Comments: 114",
+    "date": "2026-03-05T00:41:49.920522+00:00"
+  },
+  {
+    "title": "Does that use a lot of energy?",
+    "url": "https://hannahritchie.github.io/energy-use-comparisons/",
+    "url_fp": "b39e5ed3dbff530117249ec6578d07ef",
+    "description": "HN score: 173 | Comments: 145",
+    "date": "2026-03-05T00:41:49.949038+00:00"
+  },
+  {
+    "title": "Moss is a pixel canvas where every brush is a tiny program",
+    "url": "https://www.moss.town/",
+    "url_fp": "94ae029505ae311682b54effc9043b77",
+    "description": "HN score: 162 | Comments: 20",
+    "date": "2026-03-05T00:41:49.995420+00:00"
+  },
+  {
+    "title": "NanoGPT Slowrun: Language Modeling with Limited Data, Infinite Compute",
+    "url": "https://qlabs.sh/slowrun",
+    "url_fp": "506f0dcc96d89f2159cbfb5233997949",
+    "description": "HN score: 111 | Comments: 22",
+    "date": "2026-03-05T00:41:50.050518+00:00"
+  },
+  {
+    "title": "MyFirst Kids Watch Hacked. Access to Camera and Microphone",
+    "url": "https://www.kth.se/en/om/nyheter/centrala-nyheter/kth-studenten-hackade-klocka-for-barn-1.1461249",
+    "url_fp": "603f35e94485e2e2c4438809d444df0f",
+    "description": "HN score: 105 | Comments: 30",
+    "date": "2026-03-05T00:41:50.094380+00:00"
+  },
+  {
+    "title": "Data Has Weight but Only on SSDs",
+    "url": "https://cubiclenate.com/2026/03/04/data-has-weight-but-only-on-ssds-blathering/",
+    "url_fp": "6f6ab6f1e69e0dc584116280e6802c37",
+    "description": "HN score: 61 | Comments: 40",
+    "date": "2026-03-05T00:41:50.123012+00:00"
+  },
+  {
+    "title": "Raspberry Pi Pico as AM Radio Transmitter",
+    "url": "https://www.pesfandiar.com/blog/2026/02/28/pico-am-radio-transmitter",
+    "url_fp": "ede46eab82c66139c64f5d245340d653",
+    "description": "HN score: 61 | Comments: 28",
+    "date": "2026-03-05T00:41:50.158518+00:00"
+  },
+  {
+    "title": "The View from RSS",
+    "url": "https://www.carolinecrampton.com/the-view-from-rss/",
+    "url_fp": "ee63495952f30374bd87641d59fbbb9a",
+    "description": "HN score: 60 | Comments: 14",
+    "date": "2026-03-05T00:41:50.176055+00:00"
+  },
+  {
+    "title": "BMW Group to deploy humanoid robots in production in Germany for the first time",
+    "url": "https://www.press.bmwgroup.com/global/article/detail/T0455864EN/bmw-group-to-deploy-humanoid-robots-in-production-in-germany-for-the-first-time?language=en",
+    "url_fp": "1a4aff5964cbfadca1e8fc29f8b6da90",
+    "description": "HN score: 59 | Comments: 53",
+    "date": "2026-03-05T00:41:50.234176+00:00"
+  },
+  {
+    "title": "The Rust calling convention we deserve (2024)",
+    "url": "https://mcyoung.xyz/2024/04/17/calling-convention/",
+    "url_fp": "b93f58f2e2e9a066b622557dd9347ac3",
+    "description": "HN score: 55 | Comments: 11",
+    "date": "2026-03-05T00:41:50.268202+00:00"
+  },
+  {
+    "title": "Faster C software with Dynamic Feature Detection",
+    "url": "https://gist.github.com/jjl/d998164191af59a594500687a679b98d",
+    "url_fp": "ac60f9996a79c90a025940ee929d8fcb",
+    "description": "HN score: 53 | Comments: 2",
+    "date": "2026-03-05T00:41:50.306638+00:00"
+  },
+  {
+    "title": "My Favorite 39C3 Talks",
+    "url": "https://asindu.xyz/my-favorite-39c3-talks/",
+    "url_fp": "f55fe82878d19b74c48d1b4cd7d4a383",
+    "description": "HN score: 52 | Comments: 3",
+    "date": "2026-03-05T00:41:50.326094+00:00"
+  },
+  {
+    "title": "Anthropic CEO Dario Amodei calls OpenAI’s messaging around military deal ‘straight up lies,’ report says",
+    "url": "https://techcrunch.com/2026/03/04/anthropic-ceo-dario-amodei-calls-openais-messaging-around-military-deal-straight-up-lies-report-says/",
+    "url_fp": "bf8f6cb9a5f932f7c0f6e92959ff334a",
+    "description": "Anthropic gave up its contract with the Pentagon over AI safety disagreements -- then, OpenAI swooped in.",
+    "date": "2026-03-05T00:41:50.398590+00:00"
+  },
+  {
+    "title": "Apple Music to add Transparency Tags to distinguish AI music, says report",
+    "url": "https://techcrunch.com/2026/03/04/apple-music-to-add-transparency-tags-to-distinguish-ai-music-says-report/",
+    "url_fp": "e8b63844f9015498142ef9d3d67d5d56",
+    "description": "The label or distributor has to opt in to tagging their music as AI, so it's unclear how effective this intervention will be.",
+    "date": "2026-03-05T00:41:50.451901+00:00"
+  },
+  {
+    "title": "Google settles with Epic Games, drops its Play Store commissions to 20%",
+    "url": "https://techcrunch.com/2026/03/04/google-settles-with-epic-games-drops-its-play-store-commissions-to-20/",
+    "url_fp": "3e7e94bc0d3c4be6ac337c27402b0fd0",
+    "description": "Google has dropped its commission, charging a 20% service fee and an optional 5% to use its billing services. It will also offer a new process for third-party app stores.",
+    "date": "2026-03-05T00:41:50.503044+00:00"
+  },
+  {
+    "title": "His house burned down. He used the insurance money to build PopSockets.",
+    "url": "https://techcrunch.com/video/his-house-burned-down-he-used-the-insurance-money-to-build-popsockets/",
+    "url_fp": "399dd5819bd737ea3080414545fe6028",
+    "description": "Does a consumer hardware company need to get on the VC treadmill to succeed? Eleven years and 290 million products sold across 115 countries later, PopSockets has proven that the bootstrapped, low-dilution path more viable than the industry gives it credit for. The global consumer hardware brand was",
+    "date": "2026-03-05T00:41:50.553086+00:00"
+  },
+  {
+    "title": "US and EU police shut down LeakBase, a site accused of sharing stolen passwords and hacking tools",
+    "url": "https://techcrunch.com/2026/03/04/u-s-and-eu-police-shut-down-leakbase-a-site-accused-of-sharing-stolen-passwords-and-hacking-tools/",
+    "url_fp": "9f6f3a8d0e19c344eaf490978bda3aed",
+    "description": "Authorities say LeakBase was \"one of the world’s largest online forums for cybercriminals,\" and maintained an archive of hacked databases containing hundreds of millions of passwords.",
+    "date": "2026-03-05T00:41:50.623879+00:00"
+  },
+  {
+    "title": "MacBook Neo, iPhone 17e, and everything else Apple announced this week",
+    "url": "https://techcrunch.com/2026/03/04/everything-apple-announced-macbook-neo-iphone-17e-ipad-air/",
+    "url_fp": "dc1d441f4eb71a06a49826134350f2c7",
+    "description": "From a new iPhone to a budget-friendly MacBook, Apple announced a series of new products this week.",
+    "date": "2026-03-05T00:41:50.675636+00:00"
+  },
+  {
+    "title": "Google Search rolls out Gemini’s Canvas in AI Mode to all US users",
+    "url": "https://techcrunch.com/2026/03/04/https-techcrunch-com-2026-03-04-google-search-rolls-out-geminis-canvas-in-ai-mode-to-all-us-users/",
+    "url_fp": "1381595219d69d774ae6a5e8c5f5a912",
+    "description": "Canvas in AI Mode is available to U.S. users in English for creating plans, projects, apps, and more.",
+    "date": "2026-03-05T00:41:50.727086+00:00"
+  },
+  {
+    "title": "Decagon completes first tender offer at $4.5B valuation",
+    "url": "https://techcrunch.com/2026/03/04/decagon-completes-first-tender-offer-at-4-5b-valuation/",
+    "url_fp": "195a2418b5f124e7d7f40c4516c34bfc",
+    "description": "The AI-powered customer support startup is the latest example of a fast-growing, young company that's providing employee liquidity.",
+    "date": "2026-03-05T00:41:50.767511+00:00"
+  },
+  {
+    "title": "TerraPower gets OK to start construction of its first nuclear plant",
+    "url": "https://arstechnica.com/science/2026/03/terrapower-gets-ok-to-start-construction-of-its-first-nuclear-plant/",
+    "url_fp": "03144ec8f36870dc8f7971741e0bf474",
+    "description": "Plant won't be done until 2030 at the earliest, and it still needs an operating license.",
+    "date": "2026-03-05T00:41:50.818963+00:00"
+  },
+  {
+    "title": "Space Command chief throws cold water on the question of UAPs in space",
+    "url": "https://arstechnica.com/space/2026/03/space-command-chief-throws-cold-water-on-the-question-of-uaps-in-space/",
+    "url_fp": "26d41d349ccb79cf667d146f5ec6bd9a",
+    "description": "\"I am not aware of anything that is extraterrestrial, other than comets and things like that.\"",
+    "date": "2026-03-05T00:41:50.871400+00:00"
+  },
+  {
+    "title": "Large genome model: Open source AI trained on trillions of bases",
+    "url": "https://arstechnica.com/science/2026/03/large-genome-model-open-source-ai-trained-on-trillions-of-bases/",
+    "url_fp": "f98d97bf552bdcb96bfb659c5b817ea4",
+    "description": "System can identify genes, regulatory sequences, splice sites, and more.",
+    "date": "2026-03-05T00:41:50.921037+00:00"
+  },
+  {
+    "title": "Google and Epic announce settlement to end app store antitrust case",
+    "url": "https://arstechnica.com/gadgets/2026/03/google-and-epic-look-to-bury-the-hatchet-with-new-app-store-settlement/",
+    "url_fp": "d6cf9ea8edc37c7b6f768d6bd30bdea9",
+    "description": "The era of the 30 percent app store cut has ended.",
+    "date": "2026-03-05T00:41:50.972629+00:00"
+  },
+  {
+    "title": "Lawsuit: Google Gemini sent man on violent missions, set suicide \"countdown\"",
+    "url": "https://arstechnica.com/tech-policy/2026/03/lawsuit-google-gemini-sent-man-on-violent-missions-set-suicide-countdown/",
+    "url_fp": "2c6e755daad55a004c70b3a0e97df6e7",
+    "description": "Gemini allegedly called man its \"husband,\" said they could be together in death.",
+    "date": "2026-03-05T00:41:51.028551+00:00"
+  },
+  {
+    "title": "After a rocky six years, Sony cancels future single-player PC game releases",
+    "url": "https://arstechnica.com/gaming/2026/03/sony-wont-bring-any-more-single-player-playstation-games-to-pc/",
+    "url_fp": "64ff64a37fcb4f37c0c6f727f3141244",
+    "description": "Titles likeGhost of Yoteiwill remain exclusive to Sony's hardware.",
+    "date": "2026-03-05T00:41:51.082352+00:00"
+  },
+  {
+    "title": "Black Forest Labs' new Self-Flow technique makes training multimodal AI models 2.8x more efficient",
+    "url": "https://venturebeat.com/technology/black-forest-labs-new-self-flow-technique-makes-training-multimodal-ai",
+    "url_fp": "e30226ecb75d7ed0abf7ae365594f34a",
+    "description": "To create coherent images or videos, generative AI diffusion models like Stable Diffusion or FLUX have typically relied on external \"teachers\"—frozen encoders like CLIP or DINOv2—to provide the semantic understanding they couldn't learn on their own.But this reliance has come at a cost: a \"bottlenec",
+    "date": "2026-03-05T00:41:51.148749+00:00"
+  },
+  {
+    "title": "Microsoft built Phi-4-reasoning-vision-15B to know when to think — and when thinking is a waste of time",
+    "url": "https://venturebeat.com/technology/microsoft-built-phi-4-reasoning-vision-15b-to-know-when-to-think-and-when",
+    "url_fp": "d6694a6868c1f642c6c27820e7e58cb9",
+    "description": "Microsofton Tuesday releasedPhi-4-reasoning-vision-15B, a compact open-weight multimodal AI model that the company says matches or exceeds the performance of systems many times its size — while consuming a fraction of the compute and training data. The release marks the latest and most technically a",
+    "date": "2026-03-05T00:41:51.218824+00:00"
+  },
+  {
+    "title": "Pentagon vendor cutoff exposes the AI dependency map most enterprises never built",
+    "url": "https://venturebeat.com/security/ai-supply-chain-visibility-gap-anthropic-pentagon-ciso-audit",
+    "url_fp": "c905ca1c02004090e6d2597da2863765",
+    "description": "Thefederal directiveordering all U.S. government agencies tocease using Anthropic technologycomes with a six-month phaseout window. That timeline assumes agencies already know where Anthropic’s models sit inside their workflows. Most don’t today.Most enterprises wouldn’t, either. The gap between wha",
+    "date": "2026-03-05T00:41:51.278223+00:00"
+  },
+  {
+    "title": "Did Alibaba just kneecap its powerful Qwen AI team? Key figures depart in wake of latest open source release",
+    "url": "https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in",
+    "url_fp": "f17e087c99605bf657e760b7c3daadd0",
+    "description": "Alibaba's Qwen team of AI researchers have been among the most prolific and well-regarded by international machine learning community — shipping dozens of powerful generalized and specialized generative modelsstarting last summer, most of them entirely open source and free.But now, just 24 hours aft",
+    "date": "2026-03-05T00:41:51.355632+00:00"
+  },
+  {
+    "title": "Google releases Gemini 3.1 Flash Lite at 1/8th the cost of Pro",
+    "url": "https://venturebeat.com/technology/google-releases-gemini-3-1-flash-lite-at-1-8th-the-cost-of-pro",
+    "url_fp": "869d5ce0d01da74b68eb3e1b8937e899",
+    "description": "Google's newest AI model is here:Gemini 3.1 Flash-Lite, and the biggest improvements this time around come in cost and speed, especially for enterprises and developers seeking to leverage powerful reasoning and multimodal capabilities from the U.S. search and cloud giant.Positioning it as the most c",
+    "date": "2026-03-05T00:41:51.402078+00:00"
+  },
+  {
+    "title": "EY hit 4x coding productivity by connecting AI agents to engineering standards",
+    "url": "https://venturebeat.com/orchestration/ey-hit-4x-coding-productivity-by-connecting-ai-agents-to-engineering",
+    "url_fp": "8841f87df4f975d96299fbd13dfff434",
+    "description": "Coding agents can generate thousands of lines of code in minutes. The problem: most of it can't be deployed. It breaks internal standards, fails compliance checks, or creates more cleanup work than it saves.\"You can generate a ton of code, but it doesn't mean really anything, right? It's got to be c",
+    "date": "2026-03-05T00:41:51.457348+00:00"
+  },
+  {
+    "title": "These $500 Windows Laptops Show the MacBook Neo’s Competition",
+    "url": "https://www.wired.com/story/asus-vivobook-14-deal-macbook-neo/",
+    "url_fp": "9e3a31005116c94682727eab1d097877",
+    "description": "They aren’t as high-end as the MacBook Neo, but these Windows laptops show that Apple has some strong competition.",
+    "date": "2026-03-05T00:41:51.502406+00:00"
+  },
+  {
+    "title": "Grammarly Is Offering ‘Expert’ AI Reviews From Your Favorite Authors—Dead or Alive",
+    "url": "https://www.wired.com/story/grammarly-is-offering-expert-ai-reviews-from-your-favorite-authors-dead-or-alive/",
+    "url_fp": "4f3696529c44971b5d9a494816582a67",
+    "description": "The tool, offered by the recently-rebranded company Superhuman, gives feedback based on the work of famous dead and living writers—without their permission.",
+    "date": "2026-03-05T00:41:51.560631+00:00"
+  },
+  {
+    "title": "Big Tech Signs White House Data Center Pledge With Good Optics and Little Substance",
+    "url": "https://www.wired.com/story/big-tech-signs-white-house-data-center-pledge-with-good-optics-not-much-substance/",
+    "url_fp": "9b0af7718c7cff5254438a70fea09390",
+    "description": "“Data centers … they need some PR help,”President Donald Trump said at the event.",
+    "date": "2026-03-05T00:41:51.621732+00:00"
+  },
+  {
+    "title": "What AI Models for War Actually Look Like",
+    "url": "https://www.wired.com/story/ai-model-military-use-smack-technologies/",
+    "url_fp": "cd23913fefb315095890bc1e6c0417dd",
+    "description": "While companies like Anthropic debate limits on military uses of AI, Smack Technologies is training models to plan battlefield operations.",
+    "date": "2026-03-05T00:41:51.654855+00:00"
+  },
+  {
+    "title": "USB Hubs Can Save You Lots of Hassles—Here Are 5 We Like Best in 2026",
+    "url": "https://www.wired.com/gallery/best-usb-hubs/",
+    "url_fp": "ebb091d6b88a36da7b2c57e4578b5c5e",
+    "description": "Ditch the dongles. These multiport USB hubs will maximize your connectivity options.",
+    "date": "2026-03-05T00:41:51.706619+00:00"
+  },
+  {
+    "title": "Bridging the operational AI gap",
+    "url": "https://www.technologyreview.com/2026/03/04/1133642/bridging-the-operational-ai-gap/",
+    "url_fp": "77fc02cb0b111a22184fc21bee9c9191",
+    "description": "The transformational potential of AI is already well established. Enterprise use cases are building momentum and organizations are transitioning from pilot projects to AI in production. Companies are no longer just talking about AI; they are redirecting budgets and resources to make it happen. Many ",
+    "date": "2026-03-05T00:41:51.732068+00:00"
+  },
+  {
+    "title": "The Download: Earth’s rumblings, and AI for strikes on Iran",
+    "url": "https://www.technologyreview.com/2026/03/04/1133942/the-download-earths-rumblings-and-ai-for-strikes-on-iran/",
+    "url_fp": "d6d7ffe832592cd8b64ec067860c255d",
+    "description": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. Listen to Earth’s rumbling, secret soundtrack The boom of a calving glacier. The crackling rumble of a wildfire. The roar of a surging storm front. They’re the no",
+    "date": "2026-03-05T00:41:51.775979+00:00"
+  },
+  {
+    "title": "MIT Technology Review Insiders Panel",
+    "url": "https://www.technologyreview.com/2026/03/03/1133907/mit-technology-review-insiders-panel-2/",
+    "url_fp": "f594b85ac4ab771ba174d014d986d72a",
+    "description": "",
+    "date": "2026-03-05T00:41:51.805603+00:00"
+  },
+  {
+    "title": "The Download: The startup that says it can stop lightning, and inside OpenAI’s Pentagon deal",
+    "url": "https://www.technologyreview.com/2026/03/03/1133900/the-download-the-startup-that-says-it-can-stop-lightning-and-inside-openais-pentagon-deal/",
+    "url_fp": "f4460123278aa43922a0983f0e88e995",
+    "description": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. This startup claims it can stop lightning and prevent catastrophic wildfires Startup Skyward Wildfire says it can prevent catastrophic fires by stopping the light",
+    "date": "2026-03-05T00:41:51.869413+00:00"
+  },
+  {
+    "title": "This startup claims it can stop lightning and prevent catastrophic wildfires",
+    "url": "https://www.technologyreview.com/2026/03/03/1133848/this-startup-claims-it-can-stop-lightning-and-prevent-catastrophic-wildfires/",
+    "url_fp": "f86fddb8878f22508ee694cf7901c244",
+    "description": "On June 1, 2023, as a sweltering heat wave baked Quebec, thousands of lightning strikes flashed across the province, setting off more than 120 wildfires. The blazes ripped through parched forests and withered grasslands, burned for weeks, and compounded what was rapidly turning into Canada’s worst f",
+    "date": "2026-03-05T00:41:51.925442+00:00"
+  },
+  {
+    "title": "Amazon's Bahrain data center targeted by Iran for support of U.S. military, state media says",
+    "url": "https://www.cnbc.com/2026/03/04/amazon-bahrain-data-centers-targeted-iran-drone-strike.html",
+    "url_fp": "35ac305b298cd3c2a175954467a5da02",
+    "description": "Amazon said the Bahrain facility was damaged due to a nearby drone strike, and two data centers in the UAE were directly hit by drones.",
+    "date": "2026-03-05T00:41:51.991070+00:00"
+  },
+  {
+    "title": "Okta beats fourth-quarter estimates, but issues weak guidance",
+    "url": "https://www.cnbc.com/2026/03/04/okta-okta-q4-2026-earnings.html",
+    "url_fp": "5806b9caffb8de8fb67ec8b93b0fe110",
+    "description": "Okta's stock has dropped this year as investors fret over AI replacing cybersecurity",
+    "date": "2026-03-05T00:41:52.035916+00:00"
+  },
+  {
+    "title": "Tech industry group expresses 'concern' to Pete Hegseth over supply chain risk label",
+    "url": "https://www.cnbc.com/2026/03/04/big-tech-industry-group-.html",
+    "url_fp": "0b8255f15ec4c938b30c4223a9dd3788",
+    "description": "The Information Technology Industry Council's letter doesn't name Anthropic, but lands days after the AI company was designated a supply chain risk.",
+    "date": "2026-03-05T00:41:52.095393+00:00"
+  },
+  {
+    "title": "Google's AI chatbot allegedly told user to stage 'mass casualty attack,' wrongful death suit claims",
+    "url": "https://www.cnbc.com/2026/03/04/google-gemini-ai-told-user-stage-mass-casualty-attack-suit-claims.html",
+    "url_fp": "0b46e7f381ff83a73205621aef23eac6",
+    "description": "The father of Jonathan Gavalas accused Google of convincing his son to commit suicide after first encouraging him to execute a \"mass casualty attack.\"",
+    "date": "2026-03-05T00:41:52.164149+00:00"
+  },
+  {
+    "title": "As bond investors fret over an AI bubble, what to know — and how to find an opportunity",
+    "url": "https://www.cnbc.com/2026/03/04/as-bond-investors-fret-over-an-ai-bubble-what-investors-need-to-know.html",
+    "url_fp": "03df82e91b984c95f71d6827d68825fd",
+    "description": "For the first time, investors said an AI bubble was their biggest worry, according to a recent Bank of America survey. What the pros are saying.",
+    "date": "2026-03-05T00:41:52.228083+00:00"
+  },
+  {
+    "title": "Nvidia CEO Huang says $30 billion OpenAI investment 'might be the last'",
+    "url": "https://www.cnbc.com/2026/03/04/nvidia-huang-openai-investment.html",
+    "url_fp": "2e3f06b35afa13fbdc937d0068614adc",
+    "description": "Huang also mentioned that Nvidia's $10 billion investment in OpenAI rival Anthropic would likely be its last.",
+    "date": "2026-03-05T00:41:52.279142+00:00"
+  },
+  {
+    "title": "[D] Self-Promotion Thread",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rihows/d_selfpromotion_thread/",
+    "url_fp": "b5ea4cb8cba57ec9f418e1569321f0c9",
+    "description": "Please post your personal projects, startups, product placements, collaboration needs, blogs etc.Please mention the payment and pricing requirements for products and services.Please do not post link shorteners, link aggregator websites , or auto-subscribe links.--Any abuse of trust will lead to bans",
+    "date": "2026-03-05T00:41:52.298602+00:00"
+  },
+  {
+    "title": "[D] Monthly Who's Hiring and Who wants to be Hired?",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1qrrayn/d_monthly_whos_hiring_and_who_wants_to_be_hired/",
+    "url_fp": "6851c489bc7a507db2255e3abb53fbb7",
+    "description": "For Job Postingsplease use this templateHiring: [Location], Salary:[], [Remote | Relocation], [Full Time | Contract | Part Time] and [Brief overview, what you're looking for]For Those looking for jobsplease use this templateWant to be Hired: [Location], Salary Expectation:[], [Remote | Relocation], ",
+    "date": "2026-03-05T00:41:52.335769+00:00"
+  },
+  {
+    "title": "[R] GFlowsNets for accelerating ray tracing for radio propagation modeling",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rkgn8y/r_gflowsnets_for_accelerating_ray_tracing_for/",
+    "url_fp": "496964f4361bf59f104d96ebb60f3b75",
+    "description": "Hi everyone!I have just submitted my new journal paper on using Generative Flow Networks (GFlowNets) to speed up radio propagation modeling.Preprint on arXivTutorial notebookGitHub repositoryThe problem and our solutionTraditional point-to-point ray tracing suffers from exponential computational com",
+    "date": "2026-03-05T00:41:52.387915+00:00"
+  },
+  {
+    "title": "[R] IJCAI-ECAI'26 Summary Rejects status",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rkln6n/r_ijcaiecai26_summary_rejects_status/",
+    "url_fp": "5864c29ccfaf4109e663d83bb505b854",
+    "description": "Hi, is there any update regarding summary rejects ? Deadline is March 4 AOE, and my paper status is still \"Submitted\" on chairingtool. Does anyone know by when they will be out ?submitted by/u/AddendumNo5533[link][comments]",
+    "date": "2026-03-05T00:41:52.416094+00:00"
+  },
+  {
+    "title": "[D] Intel Core Ultra 7 265K vs AMD Ryzen 7 7800X3D Which one is better for ML?",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rkxbx8/d_intel_core_ultra_7_265k_vs_amd_ryzen_7_7800x3d/",
+    "url_fp": "8d02720f076e27d62d2244c42de2d6f3",
+    "description": "I am building a new PC for a mix of gaming and ML work, having a hard time to pick weather if I should go with Intel or AMD, current specs are 5070 ti, 32gb ram, what do u guys think?Edit: Intel is the better choice here, there's barely any performance difference in terms of gamingsubmitted by/u/pet",
+    "date": "2026-03-05T00:41:52.470034+00:00"
+  },
+  {
+    "title": "[P] We made GoodSeed, a pleasant ML experiment tracker",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rk1mgi/p_we_made_goodseed_a_pleasant_ml_experiment/",
+    "url_fp": "f2c7554cff1b10e2e65440e2a819349d",
+    "description": "GoodSeed v0.3.0 🎉I and my friend are pleased to announceGoodSeed- a ML experiment tracker which we are now using as a replacement for Neptune.Key FeaturesSimple and fast: Beautiful, clean UIMetric plots:Zoom-based downsampling, smoothing, relative time x axis, fullscreen mode, ...Monitoring plots: G",
+    "date": "2026-03-05T00:41:52.510369+00:00"
+  },
+  {
+    "title": "[P] I trained Qwen2.5-1.5b with RLVR (GRPO) vs SFT and compared benchmark performance",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rk2kcz/p_i_trained_qwen2515b_with_rlvr_grpo_vs_sft_and/",
+    "url_fp": "2cebf41f89bfc952a6bff5f5a74298f9",
+    "description": "Hello everyone. I trained Qwen2.5-1.5B-Instruct with RLVR and SFT on the GSM8K dataset. RLVR boosted math reasoning by +11.9 points. SFT degraded it by -15.2.SFT (Supervised Fine-tuning): Standard next-token prediction training on labeled data.RLVR (Reinforcement Learning with Verifiable Rewards): T",
+    "date": "2026-03-05T00:41:52.565185+00:00"
+  },
+  {
+    "title": "[P] I open-sourced a synth framework for creating physics-simulated humanoids in Unity with MuJoCo -- train them with on-device RL and interact in VR",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rkf5rn/p_i_opensourced_a_synth_framework_for_creating/",
+    "url_fp": "92c9e1c62ae8dd5105204b3f907946c2",
+    "description": "I've been building a system to create physics-based humanoid characters in Unity that can learn through reinforcement learning -- and you can physically interact with them in mixed reality on Quest. Today I'm open-sourcing the three packages that make it up.What it does:synth-core -- Take any Daz Ge",
+    "date": "2026-03-05T00:41:52.661180+00:00"
+  },
+  {
+    "title": "[R] AdamWClip: AdamW with adaptive gradient clipping",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rjmwmf/r_adamwclip_adamw_with_adaptive_gradient_clipping/",
+    "url_fp": "1083e4c81e5cac0bbec6701293335813",
+    "description": "Hi,Would you like to try out an optimizer that does (adaptive) gradient clipping, so you don't have to set clipping thresholds manually?We have developed AdamWClip, an extension to AdamW that does exactly that, with no additional memory required and only marginal computational overhead. In our preli",
+    "date": "2026-03-05T00:41:52.696574+00:00"
+  },
+  {
+    "title": "[R] Are neurons the wrong primitive for modeling decision systems?",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rjcqzq/r_are_neurons_the_wrong_primitive_for_modeling/",
+    "url_fp": "360e5deabe9ff45f1020e1d286757351",
+    "description": "A recent ICLR paper proposes Behavior Learning — replacing neural layers with learnable constrained optimization blocks. It models it as:\"utility + constraints → optimal decision\"https://openreview.net/forum?id=bbAN9PPcI1If many real-world systems are optimization-driven, should \"optimization module",
+    "date": "2026-03-05T00:41:52.743975+00:00"
+  },
+  {
+    "title": "Nvidia’s Jensen Huang Rules Out $100 Billion OpenAI Investment",
+    "url": "https://www.reddit.com/r/artificial/comments/1rkw3i9/nvidias_jensen_huang_rules_out_100_billion_openai/",
+    "url_fp": "a062facad3824d1ca8e199e1f03d1c8d",
+    "description": "submitted by/u/esporx[link][comments]",
+    "date": "2026-03-05T00:41:52.788511+00:00"
+  },
+  {
+    "title": "The OpenClaw Meltdown: 9 CVEs, 2,200 Malicious Skills, and the Most Comprehensive Real-World Test of the OWASP Agentic Top 10",
+    "url": "https://www.reddit.com/r/artificial/comments/1rkiq9a/the_openclaw_meltdown_9_cves_2200_malicious/",
+    "url_fp": "5c17e6ebedae3a57ffc457b8699695a6",
+    "description": "submitted by/u/gastao_s_s[link][comments]",
+    "date": "2026-03-05T00:41:52.872753+00:00"
+  },
+  {
+    "title": "AMD engineer leverages AI to help make a pure-Python AMD GPU user-space driver",
+    "url": "https://www.reddit.com/r/artificial/comments/1rl27ei/amd_engineer_leverages_ai_to_help_make_a/",
+    "url_fp": "f2fc64a1032b4493729551c030cc27ca",
+    "description": "submitted by/u/Fcking_Chuck[link][comments]",
+    "date": "2026-03-05T00:41:52.929470+00:00"
+  },
+  {
+    "title": "New Port Richey City Council considers automatic tag reader cameras",
+    "url": "https://www.reddit.com/r/artificial/comments/1rl2xib/new_port_richey_city_council_considers_automatic/",
+    "url_fp": "e301dd16f67e7cc43172bc3c83d7702e",
+    "description": "submitted by/u/Fcking_Chuck[link][comments]",
+    "date": "2026-03-05T00:41:52.979321+00:00"
+  },
+  {
+    "title": "OpenAI looking at contract with NATO, source says",
+    "url": "https://www.reddit.com/r/artificial/comments/1rkm1it/openai_looking_at_contract_with_nato_source_says/",
+    "url_fp": "411730f8e5f829158b50b0653cc90ff5",
+    "description": "submitted by/u/DareToCMe[link][comments]",
+    "date": "2026-03-05T00:41:53.019494+00:00"
+  },
+  {
+    "title": "When should AI recommend a decision vs make one?",
+    "url": "https://www.reddit.com/r/artificial/comments/1rkyshs/when_should_ai_recommend_a_decision_vs_make_one/",
+    "url_fp": "e14e0a99bff0602bbf636944f3307115",
+    "description": "One of the things I’ve been thinking about with AI systems is the difference betweendecision supportanddecision making.Decision support: meaning the system provides info and a human evaluates it and may or may not take an action.Decision making: meaning the system actually performs the action.For ex",
+    "date": "2026-03-05T00:41:53.057449+00:00"
+  },
+  {
+    "title": "🚀 OllamaFX v0.5.0 ya disponible!",
+    "url": "https://www.reddit.com/r/artificial/comments/1rkxub9/ollamafx_v050_ya_disponible/",
+    "url_fp": "9fb058592c52f380da9018d9ff8f3ad7",
+    "description": "Ollama FX es una interfaz de escritorio Open Source paraOllamacon grandes mejoras en gestión de chats, RAG, multimodalidad y organización 🔥📅Lanzado hoy en GitHub—https://github.com/fredericksalazar/OllamaFX🧠 Principales novedades de la v0.5.0⭐ 🔍 Soporte RAG y análisis de archivosCarga y análisis de ",
+    "date": "2026-03-05T00:41:53.081723+00:00"
+  },
+  {
+    "title": "Fireflies and Otter just launched MCP connectors for meeting data — here's the open-source one you can self-host",
+    "url": "https://www.reddit.com/r/artificial/comments/1rkli5j/fireflies_and_otter_just_launched_mcp_connectors/",
+    "url_fp": "c361bfcabdbd6f54818546fcf988e35e",
+    "description": "Fireflies just became the first meeting tool in Anthropic's official Claude MCP Directory. Otter.ai launched an enterprise MCP server too. tl;dv has one as well. The \"meeting data + MCP\" space is heating up fast.But all three are closed-source, cloud-only. Your meeting data — strategy discussions, f",
+    "date": "2026-03-05T00:41:53.159566+00:00"
+  },
+  {
+    "title": "Emergence or training artifact? My AI agents independently built safety tools I never asked for. 28/170 builds over 3 weeks.",
+    "url": "https://www.reddit.com/r/artificial/comments/1rki8d4/emergence_or_training_artifact_my_ai_agents/",
+    "url_fp": "59e73ab2f8c664e43803b0eb232fc1dd",
+    "description": "Three weeks ago I stopped giving my AI agents specific tasks. Instead I gave them an open brief: scan developer forums and research platforms, identify pain points in how developers work, design solutions, build prototypes. No specific domain. No target output. Just: find problems worth solving and ",
+    "date": "2026-03-05T00:41:53.242984+00:00"
+  },
+  {
+    "title": "What's Next for Qwen After Junyang Lin's Departure?",
+    "url": "https://www.reddit.com/r/artificial/comments/1rk8lid/whats_next_for_qwen_after_junyang_lins_departure/",
+    "url_fp": "11f7a8c084480b5211e26d25ccc5755e",
+    "description": "Junyang Lin, the technical lead and public face of Alibaba's Qwen AI project, just announced that he's stepping down from the team on X, right after the release of the new Qwen 3.5 small models.Does this signal a shift in Qwen's research direction or openness? Is this just a leadership change or som",
+    "date": "2026-03-05T00:41:53.280954+00:00"
+  },
+  {
+    "title": "Brendan Carr Can’t Explain Why ‘Equal Time’ Rule Doesn’t Apply To Right Wing Radio",
+    "url": "https://www.reddit.com/r/technology/comments/1rkv7az/brendan_carr_cant_explain_why_equal_time_rule/",
+    "url_fp": "c23c6d6179250a3fd13ddad0b0b52751",
+    "description": "submitted by/u/StraightedgexLiberal[link][comments]",
+    "date": "2026-03-05T00:41:53.337080+00:00"
+  },
+  {
+    "title": "AI-generated art can’t be copyrighted after Supreme Court declines to review the rule",
+    "url": "https://www.reddit.com/r/technology/comments/1rkqzzd/aigenerated_art_cant_be_copyrighted_after_supreme/",
+    "url_fp": "3c33a0404fbcc836183e7065a7b68506",
+    "description": "submitted by/u/Bobcats_Forever[link][comments]",
+    "date": "2026-03-05T00:41:53.396985+00:00"
+  },
+  {
+    "title": "Apple Launches $599 MacBook Neo, Threatening Windows PC Market",
+    "url": "https://www.reddit.com/r/technology/comments/1rkn4a3/apple_launches_599_macbook_neo_threatening/",
+    "url_fp": "e9c560013e66b522a946d5d3f5c79a17",
+    "description": "submitted by/u/Few_Baseball_3835[link][comments]",
+    "date": "2026-03-05T00:41:53.440690+00:00"
+  },
+  {
+    "title": "Quit ChatGPT: right now! Your subscription is bankrolling authoritarianism (Opinion article)",
+    "url": "https://www.reddit.com/r/technology/comments/1rkkom8/quit_chatgpt_right_now_your_subscription_is/",
+    "url_fp": "2c595705e501729280b9948264d13bc7",
+    "description": "submitted by/u/gdelacalle[link][comments]",
+    "date": "2026-03-05T00:41:53.503348+00:00"
+  },
+  {
+    "title": "FTC Admits Age Verification Violates Children’s Privacy Law, Decides To Just Ignore That",
+    "url": "https://www.reddit.com/r/technology/comments/1rkxio4/ftc_admits_age_verification_violates_childrens/",
+    "url_fp": "209fe346297724d48160fb9211215347",
+    "description": "submitted by/u/MarvelsGrantMan136[link][comments]",
+    "date": "2026-03-05T00:41:53.566421+00:00"
+  },
+  {
+    "title": "Universal Vaccine Blocks Viruses, Bacteria, And Allergies With a Nasal Spray",
+    "url": "https://www.reddit.com/r/technology/comments/1rkobxz/universal_vaccine_blocks_viruses_bacteria_and/",
+    "url_fp": "982c0a3d14fceb7e2f28b3f1dbfd4435",
+    "description": "submitted by/u/_Dark_Wing[link][comments]",
+    "date": "2026-03-05T00:41:53.620958+00:00"
+  },
+  {
+    "title": "Gemini Said They Could Only Be Together if He Killed Himself. Soon, He Was Dead.",
+    "url": "https://www.reddit.com/r/technology/comments/1rkm15f/gemini_said_they_could_only_be_together_if_he/",
+    "url_fp": "23e117506147dcce140b27d471f6e80b",
+    "description": "submitted by/u/aacool[link][comments]",
+    "date": "2026-03-05T00:41:53.678433+00:00"
+  },
+  {
+    "title": "Father sues Google, claiming Gemini chatbot drove son into fatal delusion",
+    "url": "https://www.reddit.com/r/technology/comments/1rks7ua/father_sues_google_claiming_gemini_chatbot_drove/",
+    "url_fp": "b9cebe30f223ae7deb40d8be000a2869",
+    "description": "submitted by/u/harsh2k5[link][comments]",
+    "date": "2026-03-05T00:41:53.731703+00:00"
+  },
+  {
+    "title": "The Car World Is Going Electric, Without America.",
+    "url": "https://www.reddit.com/r/technology/comments/1rl1ct4/the_car_world_is_going_electric_without_america/",
+    "url_fp": "4583a6681be3de3488e18135fa407780",
+    "description": "submitted by/u/DonkeyFuel[link][comments]",
+    "date": "2026-03-05T00:41:53.769553+00:00"
+  },
+  {
+    "title": "Anthropic CEO Dario Amodei calls OpenAI’s messaging around military deal ‘straight up lies,’ report says",
+    "url": "https://www.reddit.com/r/technology/comments/1rl1w8v/anthropic_ceo_dario_amodei_calls_openais/",
+    "url_fp": "79e83851828422fdea87f976ad9b8258",
+    "description": "submitted by/u/Logical_Welder3467[link][comments]",
+    "date": "2026-03-05T00:41:53.841589+00:00"
+  },
+  {
+    "title": "No Help and Few Options for Travelers Stranded by Mideast Conflict",
+    "url": "https://www.nytimes.com/2026/03/04/travel/iran-middle-east-stranded-travelers-flight-cancellations.html",
+    "url_fp": "be5d3b7a29e081a45f0e2971c3f8da86",
+    "description": "Even far from hubs like Dubai and Abu Dhabi, the disruptions from the growing violence have left people jumping “from one cancellation to the next.”",
+    "date": "2026-03-05T00:41:53.892018+00:00"
+  },
+  {
+    "title": "With Qatar’s Gas Shut Off, Western Energy Giants See a Big Payday",
+    "url": "https://www.nytimes.com/2026/03/04/business/energy-environment/natural-gas-prices-lng-shell-exxon-war-iran.html",
+    "url_fp": "b1788683e2b38abc1f8cc774c1c9ecac",
+    "description": "Prices for liquefied natural gas have shot up in recent days, which could bring bigger profits for European and U.S. energy companies.",
+    "date": "2026-03-05T00:41:53.941076+00:00"
+  },
+  {
+    "title": "The Best Playbook for Investing During a War Is Usually Doing Nothing",
+    "url": "https://www.nytimes.com/2026/03/04/business/iran-us-israel-war-investing-stocks-bonds.html",
+    "url_fp": "07896ebfa2edeb41ba3133600abff77b",
+    "description": "The Trump administration has breached so many norms that the old approach carries heightened risks, our columnist says.",
+    "date": "2026-03-05T00:41:53.992421+00:00"
+  },
+  {
+    "title": "U.S. Gas Prices Continue to Rise",
+    "url": "https://www.nytimes.com/2026/03/04/business/gas-prices-iran-conflict.html",
+    "url_fp": "d17d64e14d2d7e823abf09f3794fff06",
+    "description": "The price for a gallon of regular gasoline has jumped more than 20 cents this week. Diesel prices rose to their highest level since April 2024.",
+    "date": "2026-03-05T00:41:54.019425+00:00"
+  },
+  {
+    "title": "2 Big Production Houses to Merge, Chaired by Jeff Zucker",
+    "url": "https://www.nytimes.com/2026/03/04/business/dealbook/all3media-banijay-merger-media.html",
+    "url_fp": "592e0daac82acf63ceddea3bf3f41281",
+    "description": "The deal between All3Media and Banijay will bring together the companies behind the “Peaky Blinders” and the “Traitors” franchises.",
+    "date": "2026-03-05T00:41:54.060970+00:00"
+  },
+  {
+    "title": "Bessent Says Global Tariffs Will Rise to 15 Percent This Week",
+    "url": "https://www.nytimes.com/2026/03/04/business/economy/bessent-trump-tariffs-15-percent.html",
+    "url_fp": "a788871cc6cdeb1f3d0f01fbc3de3b8b",
+    "description": "Treasury Secretary Scott Bessent also predicted that overall tariff rates, which fell after a Supreme Court ruling last month, would be back to previous levels within five months.",
+    "date": "2026-03-05T00:41:54.108003+00:00"
+  },
+  {
+    "title": "The High Stakes of Keeping the Strait of Hormuz Open",
+    "url": "https://www.nytimes.com/2026/03/04/business/dealbook/iran-hormuz-oil-trump.html",
+    "url_fp": "c04534d18050ed89466b850c0493ac7a",
+    "description": "The U.S.-Israeli war with Iran has paralyzed the strait, a vital shipping lane for energy and commerce, putting global investors on edge.",
+    "date": "2026-03-05T00:41:54.150511+00:00"
+  },
+  {
+    "title": "Global Markets Swing as Investors Assess Energy Price Impact",
+    "url": "https://www.nytimes.com/2026/03/04/business/iran-stocks-natural-gas-oil.html",
+    "url_fp": "4680723d3de8ac43bcd2901acb0bf87b",
+    "description": "Markets in Europe and the United States appeared to stabilize after days of turmoil, but stocks in Asia fell sharply.",
+    "date": "2026-03-05T00:41:54.150727+00:00"
+  },
+  {
+    "title": "Dow Rises and Oil Ends Little Changed - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Dow Rises and Oil Ends Little ChangedBarron's",
+    "date": "2026-03-05T00:41:54.150890+00:00"
+  },
+  {
+    "title": "Enterprises now write $100M checks for AI infrastructure, says VAST Data VP - Fierce Network",
+    "url": "https://www.fiercewireless.com",
+    "url_fp": "23a105094c7b30ece4e8d082c17f178f",
+    "description": "Enterprises now write $100M checks for AI infrastructure, says VAST Data VPFierce Network",
+    "date": "2026-03-05T00:41:54.217235+00:00"
+  },
+  {
+    "title": "Enterprises Are Spending 15% More on Software in 2026, Thanks to AI. Here's How to Profit. - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Enterprises Are Spending 15% More on Software in 2026, Thanks to AI. Here's How to Profit.The Motley Fool",
+    "date": "2026-03-05T00:41:54.217367+00:00"
+  },
+  {
+    "title": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp) - Bloomberg",
+    "url": "https://www.bloomberg.com",
+    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
+    "description": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp)Bloomberg",
+    "date": "2026-03-05T00:41:54.217607+00:00"
+  },
+  {
+    "title": "Beige Book: Regional Economy Grows, Albeit Modestly - Atlanta - Federal Reserve Bank",
+    "url": "https://www.atlantafed.org",
+    "url_fp": "b3fada34d6a61e6639af04aa6e838a2c",
+    "description": "Beige Book: Regional Economy Grows, Albeit ModestlyAtlanta - Federal Reserve Bank",
+    "date": "2026-03-05T00:41:54.277588+00:00"
+  },
+  {
+    "title": "Top Fed Official, Wary of Inflation, Calls for Extended Rate Pause - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "Top Fed Official, Wary of Inflation, Calls for Extended Rate PauseThe New York Times",
+    "date": "2026-03-05T00:41:54.277823+00:00"
+  },
+  {
+    "title": "Fed’s Beige Book Sees a Stable Economy Still Facing Challenges - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "Fed’s Beige Book Sees a Stable Economy Still Facing ChallengesWSJ",
+    "date": "2026-03-05T00:41:54.277913+00:00"
+  },
+  {
+    "title": "Live updates: War powers vote fails in the Senate, allowing Trump to continue Iran strikes",
+    "url": "https://www.cnbc.com/2026/03/04/us-iran-war-live-updates.html",
+    "url_fp": "8e367fd14df1cca4933d4bf235646093",
+    "description": "Follow the latest news after the U.S. and Israel launched a massive attack on Iran that killed Iran's Supreme Leader Ayatollah Ali Khamenei.",
+    "date": "2026-03-05T00:41:54.342761+00:00"
+  },
+  {
+    "title": "Stock futures are flat after major averages rebound, traders' U.S.-Iran fears ease: Live updates",
+    "url": "https://www.cnbc.com/2026/03/04/stock-market-today-live-updates-iran-war.html",
+    "url_fp": "29221ee03607c32eaee57c8b4e22f08d",
+    "description": "Stocks rebounded on Wednesday, buoyed by gains in technology and semiconductor giants. Oil prices stabilized after this week's surge.",
+    "date": "2026-03-05T00:41:54.408633+00:00"
+  },
+  {
+    "title": "Broadcom beats on earnings and guidance as AI revenue doubles",
+    "url": "https://www.cnbc.com/2026/03/04/broadcom-avgo-q1-earnings-report-2026.html",
+    "url_fp": "e4a55a8ef300348b3164faec93db7412",
+    "description": "Broadcom's AI revenue jumped 106% as the company continues to be a big beneficiary of the boom in infrastructure spending.",
+    "date": "2026-03-05T00:41:54.456032+00:00"
+  },
+  {
+    "title": "'HALO' is the trade in vogue on Wall Street right now. Here are Goldman's favorite stocks",
+    "url": "https://www.cnbc.com/2026/03/04/halo-is-the-in-vogue-trade-here-are-goldmans-favorite-stocks.html",
+    "url_fp": "cb065bf9f097c7675bf8f3d27d3f7dcb",
+    "description": "These stocks are asset-heavy, which may make them more insulated from risks that emerge in an AI economy, the firm says.",
+    "date": "2026-03-05T00:41:54.519616+00:00"
+  },
+  {
+    "title": "China to reportedly boost defense spending by 7%, slowest pace since 2021",
+    "url": "https://www.cnbc.com/2026/03/05/china-defense-spending-7-percent-2026-budget.html",
+    "url_fp": "dd77639eb0dbea1b93904c374425ef7c",
+    "description": "Beijing's planned military budget, reported by Reuters, comes amid increased conflict in the Middle East.",
+    "date": "2026-03-05T00:41:54.570948+00:00"
+  },
+  {
+    "title": "Stocks making the biggest moves after hours: Broadcom, Okta, StubHub & more",
+    "url": "https://www.cnbc.com/2026/03/04/stocks-making-the-biggest-moves-after-hours-avgo-okta-stub.html",
+    "url_fp": "ab3d4a6e8f4205d803d846ed48fffef3",
+    "description": "These are the stocks posting the largest moves in extended trading.",
+    "date": "2026-03-05T00:41:54.622671+00:00"
+  },
+  {
+    "title": "Coinbase leads crypto stocks higher after Trump signals support for digital asset market structure bill",
+    "url": "https://www.cnbc.com/2026/03/04/coinbase-leads-crypto-stocks-higher-after-trump-signals-support-for-digital-asset-market-structure-bill.html",
+    "url_fp": "7700ead76cfc70c470d13e02e2dd48cd",
+    "description": "Coinbase jumped 12% on Wednesday following President Trump's latest call to help pass a law that would enable crypto firms to issue yield-bearing stablecoins.",
+    "date": "2026-03-05T00:41:54.693958+00:00"
+  },
+  {
+    "title": "Trump sides with crypto firms in trillion-dollar battle with banks over stablecoin yield",
+    "url": "https://www.cnbc.com/2026/03/04/trump-crypto-banks-stablecoin-yield.html",
+    "url_fp": "4bc184b7098675029d19455d92c1582c",
+    "description": "The dispute centers on whether crypto firms like Coinbase can offer yields on stablecoins, which banks warn will siphon trillions of dollars from the industry.",
+    "date": "2026-03-05T00:41:54.755882+00:00"
+  },
+  {
+    "title": "Stocks making the biggest moves premarket: Moderna, Ross Stores, Box, Gitlab and more",
+    "url": "https://www.cnbc.com/2026/03/04/stocks-making-the-biggest-moves-premarket-mrna-rost-box-gtlb.html",
+    "url_fp": "a550cb93766e2ae68f082099343c6e39",
+    "description": "These are the stocks posting the largest moves in premarket trading.",
+    "date": "2026-03-05T00:41:54.815002+00:00"
+  },
+  {
+    "title": "China is set to kick off its big policy meeting. What will be the key announcements?",
+    "url": "https://www.cnbc.com/2026/03/04/china-two-sessions-policy-meeting.html",
+    "url_fp": "e1d0327d800c8b13d6b9cc01c7c03c50",
+    "description": "Chinese Premier Li Qiang is set to announce economic targets and policies for the year ahead on Thursday.",
+    "date": "2026-03-05T00:41:54.876365+00:00"
+  },
+  {
+    "title": "Daily General Discussion and Advice Thread - March 04, 2026",
+    "url": "https://www.reddit.com/r/investing/comments/1rkgl3f/daily_general_discussion_and_advice_thread_march/",
+    "url_fp": "e3ea359b61ec129e78746532d7119fc1",
+    "description": "Have a general question? Want to offer some commentary on markets? Maybe you would just like to throw out a neat fact that doesn't warrant a self post? Feel free to post here!Please consider consulting our FAQ first -https://www.reddit.com/r/investing/wiki/faqAnd ourside baralso has useful resources",
+    "date": "2026-03-05T00:41:54.918144+00:00"
+  },
+  {
+    "title": "Investing and Trading Scam Reminder",
+    "url": "https://www.reddit.com/r/investing/comments/1q13q10/investing_and_trading_scam_reminder/",
+    "url_fp": "1ba8b823172bf2577225b7be594d117b",
+    "description": "For those new to Reddit and to investing and trading - please be aware that social media platform like Reddit, Discord, etc. can be a vector for scams and fraud.Offers to DM should be viewed as suspicious.Social media platforms continue to be a common method to recruit new investors to scams. - do n",
+    "date": "2026-03-05T00:41:54.947181+00:00"
+  },
+  {
+    "title": "3PM ET Today: Trump to Meet Microsoft, Amazon, Google, Meta & OpenAI on AI Energy Pledge",
+    "url": "https://www.reddit.com/r/investing/comments/1rkp4gh/3pm_et_today_trump_to_meet_microsoft_amazon/",
+    "url_fp": "c85cab1db7ef7d14aee29b88a93bdb8f",
+    "description": "Per Reuters, President Donald Trump is hosting major tech executives today at 3PM ET to formalize a “Ratepayer Protection” pledge focused on how AI data centers source electricity ahead of the 2026 midterms.The core issue is straightforward: AI infrastructure is power-intensive, and utilities in mul",
+    "date": "2026-03-05T00:41:55.008749+00:00"
+  },
+  {
+    "title": "NRC Approval for TerraPower’s Natrium Reactor Signals Major Breakthrough for Advanced Nuclear",
+    "url": "https://www.reddit.com/r/investing/comments/1rkrxft/nrc_approval_for_terrapowers_natrium_reactor/",
+    "url_fp": "3d35a9c5a3c74e72a7888497a09ba7ff",
+    "description": "The U.S. Nuclear Regulatory Commission has officially granted a construction permit to Bill Gates-backed TerraPower for its Natrium reactor in Kemmerer, Wyoming, marking one of the most significant regulatory milestones for advanced nuclear in the U.S. in years. This is the first commercial-scale ad",
+    "date": "2026-03-05T00:41:55.074786+00:00"
+  },
+  {
+    "title": "Map of Oil Tankers Waiting for Passage Through the Straits of Hormuz",
+    "url": "https://www.reddit.com/r/investing/comments/1rk5kq4/map_of_oil_tankers_waiting_for_passage_through/",
+    "url_fp": "7368145ddb7c1aa8372a34161eeb36ee",
+    "description": "After a recent announcements that US destroyers would safeguard ships passing through the Straits of Hormuz (combined with news that US would insure ships in the Straits) the next question is, has anybody taken the US up on that offer? Is the 20 million BPD that normally transits the Straits flowing",
+    "date": "2026-03-05T00:41:55.125957+00:00"
+  },
+  {
+    "title": "UiPath - a contrarian play",
+    "url": "https://www.reddit.com/r/investing/comments/1rl1smz/uipath_a_contrarian_play/",
+    "url_fp": "e4ea088aa0b959ef3d4003b38f2fbefa",
+    "description": "Tired of posts about Adobe, Novo, PayPal, and whatever other falling knives people are trying to catch? I have an actual deep value play for you. This stock is down 80% since IPO, which has caused Wall Street to ignore it. They’re sleeping on the company’s fairly recent agentic AI business pivot.UiP",
+    "date": "2026-03-05T00:41:55.148822+00:00"
+  },
+  {
+    "title": "How much does the brand of the gold determine its value?",
+    "url": "https://www.reddit.com/r/investing/comments/1rkz4sm/how_much_does_the_brand_of_the_gold_determine_its/",
+    "url_fp": "e55d4411283bedab782aa4aeb503064f",
+    "description": "The title pretty much sells it.I simply don't yet know about this as much as I would like to. Does the brand of the gold matter when determining its value? Does it matter if its gold from the Perth Mint, a Hungarian gold coin or a renowned Swiss gold brand? And if yes, how much does it matter? Also,",
+    "date": "2026-03-05T00:41:55.193873+00:00"
+  },
+  {
+    "title": "US Citizen investing abroad - buying s&p 1-2 stocks a month - tips?",
+    "url": "https://www.reddit.com/r/investing/comments/1rkuegv/us_citizen_investing_abroad_buying_sp_12_stocks_a/",
+    "url_fp": "8105e2d7e366966207378b253e7eb70f",
+    "description": "Hi all,I'm a US citizen living outside of the US. I invested in mutual funds while I lived in the US. I'm not allowed to do so now that I live outside of it and many other options aren't allowed or would carry high fees. Therefore buying USD based individual stocks is one of my only options. Without",
+    "date": "2026-03-05T00:41:55.241831+00:00"
+  },
+  {
+    "title": "Time to buy the international dip from panic sellers",
+    "url": "https://www.reddit.com/r/investing/comments/1rjsjpy/time_to_buy_the_international_dip_from_panic/",
+    "url_fp": "14c1591be7bf5f862e02edb3b881a197",
+    "description": "With the Iran conflict, the price of oil has skyrocketed - well only skyrocketed in relation to the absurd cheap price it was at.This has caused pretty much every non US market to sink hard, with countries like brazil down 10%. There's no way the Iran conflict will touch Brazil outside of oil prices",
+    "date": "2026-03-05T00:41:55.283283+00:00"
+  },
+  {
+    "title": "Long Term or Short Term Capital Gain?",
+    "url": "https://www.reddit.com/r/investing/comments/1rkz271/long_term_or_short_term_capital_gain/",
+    "url_fp": "54f6c810ccc099b1f23ce0faedbbfc21",
+    "description": "When I was a child, my parents opened up a UTMA Investment account which diversified funds into mutual funds. That account has grown significantly, and now I am looking to sell these funds to buy a house. I recently gained control of that account, and in the process I had to open up a new account an",
+    "date": "2026-03-05T00:41:55.314447+00:00"
+  },
+  {
+    "title": "Say hello to MacBook Neo - Apple",
+    "url": "https://www.apple.com",
+    "url_fp": "e845cbdc3785b1a67978cbc5a146a168",
+    "description": "Say hello to MacBook NeoApple",
+    "date": "2026-03-05T00:41:55.314577+00:00"
+  },
+  {
+    "title": "Apple launches new MacBook Pro with M5 Pro and M5 Max chips - 9to5Mac",
+    "url": "https://9to5mac.com",
+    "url_fp": "8def0a95ccbdb9b4116de5148d89d7f7",
+    "description": "Apple launches new MacBook Pro with M5 Pro and M5 Max chips9to5Mac",
+    "date": "2026-03-05T00:41:55.314708+00:00"
+  },
+  {
+    "title": "Is Facebook Down? What We Know After Outage Reports Spike - Forbes",
+    "url": "https://www.forbes.com",
+    "url_fp": "974a05326cbbafcecec1f11b22f1eb27",
+    "description": "Is Facebook Down? What We Know After Outage Reports SpikeForbes",
+    "date": "2026-03-05T00:41:55.314927+00:00"
+  },
+  {
+    "title": "Amazon’s new AI experience helps sellers visualize and grow their business in real time—here's how it works - About Amazon",
+    "url": "https://www.aboutamazon.com",
+    "url_fp": "ad4f2ca29452c4a90b63ae5542584422",
+    "description": "Amazon’s new AI experience helps sellers visualize and grow their business in real time—here's how it worksAbout Amazon",
+    "date": "2026-03-05T00:41:55.315110+00:00"
+  },
+  {
+    "title": "Pooler Police provide update after body found near Amazon Warehouse - WTOC",
+    "url": "https://www.wtoc.com",
+    "url_fp": "c1ca68ee25abb76c2ad8bad838f60d65",
+    "description": "Pooler Police provide update after body found near Amazon WarehouseWTOC",
+    "date": "2026-03-05T00:41:55.367363+00:00"
+  },
+  {
+    "title": "2 Tesla Cybertrucks catch fire in Santa Monica - NBC Los Angeles",
+    "url": "https://www.nbclosangeles.com",
+    "url_fp": "ae9a59884edb34b411061330920b4aea",
+    "description": "2 Tesla Cybertrucks catch fire in Santa MonicaNBC Los Angeles",
+    "date": "2026-03-05T00:41:55.417387+00:00"
+  },
+  {
+    "title": "Stock Market Today, March 2: Netflix Advances After Dropping Pursuit of Warner Bros. Deal - Nasdaq",
+    "url": "https://www.nasdaq.com",
+    "url_fp": "c5c080b76b14f8921aabc3a827dc219e",
+    "description": "Stock Market Today, March 2: Netflix Advances After Dropping Pursuit of Warner Bros. DealNasdaq",
+    "date": "2026-03-05T00:41:55.484760+00:00"
+  },
+  {
+    "title": "Alphabet's Google Sued for 'Wrongful Death' Over Suicide Allegedly Caused by Gemini's Advice - marketscreener.com",
+    "url": "https://www.marketscreener.com",
+    "url_fp": "162dcf8b97e8c24ffc12e4498270617d",
+    "description": "Alphabet's Google Sued for 'Wrongful Death' Over Suicide Allegedly Caused by Gemini's Advicemarketscreener.com",
+    "date": "2026-03-05T00:41:55.558711+00:00"
+  },
+  {
+    "title": "New York Yankees at Boston Red Sox Game Story, Scores/Highlights - 03/04/2026 - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "New York Yankees at Boston Red Sox Game Story, Scores/Highlights - 03/04/2026MLB.com",
+    "date": "2026-03-05T00:41:55.558904+00:00"
+  },
+  {
+    "title": "Giancarlo Stanton solid in Yankees spring training debut: ‘Nice, prototype first day’ - New York Post",
+    "url": "https://nypost.com",
+    "url_fp": "6a3bd587d57d5503a436b77127565c5b",
+    "description": "Giancarlo Stanton solid in Yankees spring training debut: ‘Nice, prototype first day’New York Post",
+    "date": "2026-03-05T00:41:55.559122+00:00"
+  },
+  {
+    "title": "Should the Yankees sign Jazz Chisholm Jr. to a long-term extension? - Pinstripe Alley",
+    "url": "https://www.pinstripealley.com",
+    "url_fp": "4cc498be01e5472bc3227b3ef1e0469e",
+    "description": "Should the Yankees sign Jazz Chisholm Jr. to a long-term extension?Pinstripe Alley",
+    "date": "2026-03-05T00:41:55.559314+00:00"
+  },
+  {
+    "title": "Kristian Winfield: Mohamed Diawara is another Knicks 2nd-round pick hit - New York Daily News",
+    "url": "https://www.nydailynews.com",
+    "url_fp": "8b0b63fa78d617b1ee89794d52bc2748",
+    "description": "Kristian Winfield: Mohamed Diawara is another Knicks 2nd-round pick hitNew York Daily News",
+    "date": "2026-03-05T00:41:55.559506+00:00"
+  },
+  {
+    "title": "Mohamed Diawara’s breakout is creating a new problem for the Knicks - Daily Knicks",
+    "url": "https://dailyknicks.com",
+    "url_fp": "fc37127339619a423c05ae0e84af1232",
+    "description": "Mohamed Diawara’s breakout is creating a new problem for the KnicksDaily Knicks",
+    "date": "2026-03-05T00:41:55.559626+00:00"
+  },
+  {
+    "title": "Giants will hold 2026 training camp in West Virginia - Big Blue View",
+    "url": "https://www.bigblueview.com",
+    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
+    "description": "Giants will hold 2026 training camp in West VirginiaBig Blue View",
+    "date": "2026-03-05T00:41:55.559819+00:00"
+  },
+  {
+    "title": "New York Giants will opening training camp in West Virginia - Giants Wire",
+    "url": "https://giantswire.usatoday.com",
+    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
+    "description": "New York Giants will opening training camp in West VirginiaGiants Wire",
+    "date": "2026-03-05T00:41:55.559973+00:00"
+  },
+  {
+    "title": "Devils Trade Buzz: Could Simon Nemec Fetch a Star Forward? - Sportsnaut",
+    "url": "https://sportsnaut.com",
+    "url_fp": "6f6dc000cd65ae7e53b763c13d9d7d9d",
+    "description": "Devils Trade Buzz: Could Simon Nemec Fetch a Star Forward?SportsnautNHL On Tap: Kraken, Devils, Canucks play home games amid trade rumorsNHL.comWhat If the Devils Were Aggressive Sellers at the Trade DeadlineAll About The Jersey",
+    "date": "2026-03-05T00:41:55.560046+00:00"
+  },
+  {
+    "title": "Trade Buzz: Maple Leafs won’t withhold players from lineup against Devils - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Trade Buzz: Maple Leafs won’t withhold players from lineup against DevilsNHL.com",
+    "date": "2026-03-05T00:41:55.560140+00:00"
+  },
+  {
+    "title": "Daily Discussion Thread + Game Thread Index",
+    "url": "https://www.reddit.com/r/nba/comments/1rku7h7/daily_discussion_thread_game_thread_index/",
+    "url_fp": "3afbac9ab18fe707dba23fe490e9aafd",
+    "description": "Game Threads Index (March 04, 2026):Tip-offGDTAwayScoreHomePGT07:00 pm ETLinkOklahoma City Thunder01:57 1Q22 to 18New York Knicks07:30 pm ETLinkCharlotte HornetsFINAL0 to 0Boston Celtics07:30 pm ETLinkUtah JazzFINAL0 to 0Philadelphia 76ers08:00 pm ETLinkPortland Trail BlazersPRE-GAMEMemphis Grizzlie",
+    "date": "2026-03-05T00:41:55.593617+00:00"
+  },
+  {
+    "title": "[SERIOUS NEXT DAY THREAD] Post-Game Discussion (March 03, 2026)",
+    "url": "https://www.reddit.com/r/nba/comments/1rkjldu/serious_next_day_thread_postgame_discussion_march/",
+    "url_fp": "e44fc3ce584a97e39b1e1f77314f262d",
+    "description": "Here is a place to have in depth, x's and o's, discussions on yesterday's games. Post-game discussions are linked in the table, keep your memes and reactions there.Please keep your discussion of a particular game in the respective comment thread.All direct replies to this post will be removed.AwayHo",
+    "date": "2026-03-05T00:41:55.635707+00:00"
+  },
+  {
+    "title": "[Lorenzi] Lu Dort on the play that got him ejected in Friday’s game vs Denver: “That’s a physical game and there’s limits to it. And I went over the limit.”",
+    "url": "https://www.reddit.com/r/nba/comments/1rkrck2/lorenzi_lu_dort_on_the_play_that_got_him_ejected/",
+    "url_fp": "39f4b8b0fc63b911806c88df2452e214",
+    "description": "Source:https://www.nytimes.com/athletic/7086081/2026/03/04/thunder-nuggets-lu-dort-nikola-jokic-flagrant-foul/?source=emp_shared_article&unlocked_article_code=1.QlA.D-N9.bunb7kV7Ux7c&smid=ta-ios-shareAfter a few days, Dort conceded as much himself.“It was a physical game throughout the whole game,” ",
+    "date": "2026-03-05T00:41:55.738096+00:00"
+  },
+  {
+    "title": "The 2nd pick Dylan Harper last night: 22/2/2 with 2 TOs and 2 threes in 22mins.",
+    "url": "https://www.reddit.com/r/nba/comments/1rkpf5d/the_2nd_pick_dylan_harper_last_night_2222_with_2/",
+    "url_fp": "9d14d8f90277d32d64642f135d123ba7",
+    "description": "He is also wearing No.2, playing the 2 on the court, while being the 2nd child in the Harper family.His birthday is on March 2nd (ok now I'm stretching it).submitted by/u/mioraka[link][comments]",
+    "date": "2026-03-05T00:41:55.793063+00:00"
+  },
+  {
+    "title": "Adelman: \"Nobody's being guarded like him in the league. Nobody. Nobody's going at the knees of other MVP's. Nobody's taking the shots like he's taking. But that's our reality. I have no problem with him reacting. Reacting is a part of being a human being. If it continues, we'll react accordingly.\"",
+    "url": "https://www.reddit.com/r/nba/comments/1rkx0av/adelman_nobodys_being_guarded_like_him_in_the/",
+    "url_fp": "6d4eddc68d55b988a69e1f1366b56d30",
+    "description": "David Adelman: \"It's not being biased to my own player. Nobody's being guarded like him in the league. Nobody. Nobody's going at the knees of other MVP's. Nobody's taking the shots like he's taking. But that's our reality. He has to play through that physicality. I have to find places on the court w",
+    "date": "2026-03-05T00:41:55.980213+00:00"
+  },
+  {
+    "title": "Jeremy Lin opens up about how disrespectful Kobe Bryant was to him and when Lin confronted him about his bad body language & leadership style, Kobe went months without talking to him",
+    "url": "https://www.reddit.com/r/nba/comments/1rkbj4i/jeremy_lin_opens_up_about_how_disrespectful_kobe/",
+    "url_fp": "daf2e9ea1c17f94528ad13b6cb98585e",
+    "description": "Quote: \"He’s not used to people challenging him… I’m not disrespecting Kobe because he’s 1000x the player I am… He could have handled it differently, you’re not perfect”submitted by/u/MrBuckBuck[link][comments]",
+    "date": "2026-03-05T00:41:56.100699+00:00"
+  },
+  {
+    "title": "Draymond Green On Magic City Night: “I don't know if you've ever been, but if you see it in action, it's actually a form of art”",
+    "url": "https://www.reddit.com/r/nba/comments/1rl2afl/draymond_green_on_magic_city_night_i_dont_know_if/",
+    "url_fp": "d8ba3cedaeb2e7b7f353e902be076531",
+    "description": "https://www.nbcsportsbayarea.com/nba/golden-state-warriors/draymond-green-luke-kornet-magic-city/1921453/In a statement, the Hawks announced the promotional night as a “collaboration to celebrate the city’s iconic cultural institution Magic City,” an Atlanta-based adult entertainment venue. Kornet p",
+    "date": "2026-03-05T00:41:56.189436+00:00"
+  },
+  {
+    "title": "[O’Connor] Daryl Morey and the Philadelphia 76ers attempted to trade for Kawhi Leonard at the trade deadline.",
+    "url": "https://www.reddit.com/r/nba/comments/1rko8af/oconnor_daryl_morey_and_the_philadelphia_76ers/",
+    "url_fp": "d7ad8d7ef7158fd0d4f08cfd876e73c2",
+    "description": "Source:https://sports.yahoo.com/nba/article/did-the-76ers-make-a-mistake-trading-jared-mccain-to-the-thunder-142233306.htmlExecutives have said that the Sixers were actively making calls pre-deadline, though nothing seemed remotely close. Some sources suggest that Morey was star hunting with Kawhi L",
+    "date": "2026-03-05T00:41:56.264645+00:00"
+  },
+  {
+    "title": "[Serious] Why will the Guardians exceed expectations? Why won't they?",
+    "url": "https://www.reddit.com/r/baseball/comments/1rknp2t/serious_why_will_the_guardians_exceed/",
+    "url_fp": "90ba041f51b3ce0fce5f66b2f270528e",
+    "description": "What are the expectations for the 2025 AL Central Champion Cleveland Guardians this year? Why will they exceed those expectations? Why won't they? That's the question what we've been asking for a few weeks, and will continue to ask for the next couple weeks, so put on your expert hat and help analyz",
+    "date": "2026-03-05T00:41:56.312495+00:00"
+  },
+  {
+    "title": "Bo Naylor shrunk three inches this offseason",
+    "url": "https://www.reddit.com/r/baseball/comments/1rkwhvh/bo_naylor_shrunk_three_inches_this_offseason/",
+    "url_fp": "ce6485e8c6822a481a3d7d806e5d94c3",
+    "description": "submitted by/u/noruber35393546[link][comments]",
+    "date": "2026-03-05T00:41:56.348163+00:00"
+  },
+  {
+    "title": "[Highlight] Aaron Judge CRUSHES a 453-foot homer for Team USA",
+    "url": "https://www.reddit.com/r/baseball/comments/1rkw98e/highlight_aaron_judge_crushes_a_453foot_homer_for/",
+    "url_fp": "105df7cb3975fafbb87ff5d241049f0d",
+    "description": "submitted by/u/MLBOfficial[link][comments]",
+    "date": "2026-03-05T00:41:56.392831+00:00"
+  },
+  {
+    "title": "Homers from Mickey Moniak and Kyle Karros gives the Rockies a 4-3 lead over Team USA in the 4th",
+    "url": "https://www.reddit.com/r/baseball/comments/1rky39x/homers_from_mickey_moniak_and_kyle_karros_gives/",
+    "url_fp": "6c0b3149737035a8cd9f867a146479cf",
+    "description": "submitted by/u/JianClaymore[link][comments]",
+    "date": "2026-03-05T00:41:56.462195+00:00"
+  },
+  {
+    "title": "Max Clark makes a poor decision to dive for the ball which leads to a Junior Caminero triple",
+    "url": "https://www.reddit.com/r/baseball/comments/1rkyvcw/max_clark_makes_a_poor_decision_to_dive_for_the/",
+    "url_fp": "1c28f7d506a76727c6021a06a7cded8d",
+    "description": "submitted by/u/AlphaBern0[link][comments]",
+    "date": "2026-03-05T00:41:56.531642+00:00"
+  },
+  {
+    "title": "[Highlight] Pete Alonso steals 2nd Base and then proceeds to get thrown out by a mile trying to score from 2nd on a single in the same inning",
+    "url": "https://www.reddit.com/r/baseball/comments/1rkuiwj/highlight_pete_alonso_steals_2nd_base_and_then/",
+    "url_fp": "8550c482324820613c3cf1a9b5754b27",
+    "description": "submitted by/u/Knightbear49[link][comments]",
+    "date": "2026-03-05T00:41:56.630650+00:00"
+  },
+  {
+    "title": "Fan sues Los Angeles Dodgers after she got hit with a BuzzBallz alcoholic drink during a game",
+    "url": "https://www.reddit.com/r/baseball/comments/1rkretp/fan_sues_los_angeles_dodgers_after_she_got_hit/",
+    "url_fp": "12791b69b80417b27fbb49bbb0f54396",
+    "description": "submitted by/u/theindependentonline[link][comments]",
+    "date": "2026-03-05T00:41:56.698424+00:00"
+  },
+  {
+    "title": "[MLB on FOX] WAKE UP! THE 2026 WORLD BASEBALL CLASSIC STARTS TONIGHT! 😍",
+    "url": "https://www.reddit.com/r/baseball/comments/1rknxww/mlb_on_fox_wake_up_the_2026_world_baseball/",
+    "url_fp": "4eacc8e0a9c3d01d2e6d9e05870b62fc",
+    "description": "submitted by/u/Hungry_Drama_1015[link][comments]",
+    "date": "2026-03-05T00:41:56.746322+00:00"
+  },
+  {
+    "title": "You’ve Never Seen Ants Like This Before",
+    "url": "https://www.nytimes.com/2026/03/05/science/ants-3d-scans.html",
+    "url_fp": "cb22178fb6cad45474a6a1fe8f800935",
+    "description": "The Antscan database captures the tiny insects’ diversity and shows how the world’s living things could be rendered in three dimensions.",
+    "date": "2026-03-05T11:46:27.159965+00:00"
+  },
+  {
+    "title": "A Word to the Wise: Don’t Trust A.I. to File Your Taxes",
+    "url": "https://www.nytimes.com/2026/03/05/technology/artificial-intelligence-taxes-tax-refund.html",
+    "url_fp": "6f1b0787a63b192c71209cc3ad4b1d83",
+    "description": "The world’s smartest technology is no match for the U.S. tax code.",
+    "date": "2026-03-05T11:46:27.251707+00:00"
+  },
+  {
+    "title": "Trump Wants a Quick Victory in Iran. But the War May Be Costly.",
+    "url": "https://www.nytimes.com/2026/03/05/us/politics/trump-iran-war-deaths.html",
+    "url_fp": "c98123e2edce45f025c9b54133f83827",
+    "description": "The opening days of the conflict are challenging the idea that President Trump can project force abroad while safeguarding American lives and the economy.",
+    "date": "2026-03-05T11:46:27.352779+00:00"
+  },
+  {
+    "title": "Iran Has Friends, but Where Are They Now?",
+    "url": "https://www.nytimes.com/2026/03/05/world/middleeast/iran-turkey-india-russia.html",
+    "url_fp": "b59e5fbf0eda655f693a831fea3d8132",
+    "description": "Iran maintains ties with a range of countries, including Turkey, India, Russia and China. Yet in this war, their support is mostly rhetoric.",
+    "date": "2026-03-05T11:46:27.423515+00:00"
+  },
+  {
+    "title": "How War in the Persian Gulf Could Spill Into the U.S. Economy",
+    "url": "https://www.nytimes.com/2026/03/05/business/economy/iran-oil-economy-consumers.html",
+    "url_fp": "b52b90d08750b6fc746f50c479ded349",
+    "description": "Rising energy prices, snarled supply chains and higher government debt could all hurt American consumers.",
+    "date": "2026-03-05T11:46:27.519936+00:00"
+  },
+  {
+    "title": "Hegseth Says War Will Go On ‘Until We Decide,’ and U.S. Court Moves Toward Ordering Tariff Refunds",
+    "url": "https://www.nytimes.com/2026/03/05/podcasts/the-headlines/hegseth-war-iran-billionaires-wyoming.html",
+    "url_fp": "70bf508a3c75743dd49901bd78660027",
+    "description": "Plus, why you should not let A.I. do your taxes.",
+    "date": "2026-03-05T11:46:27.665837+00:00"
+  },
+  {
+    "title": "If You Liked the Texas Primaries, You’ll Love the Sequel",
+    "url": "https://www.nytimes.com/2026/03/04/us/politics/texas-primaries-runoffs-may.html",
+    "url_fp": "26542d679caa33a85827c54f0fceef36",
+    "description": "Texas voters will revisit the Republican Senate primary — and some House races where no candidate captured more than 50 percent of the vote — in runoffs on May 26.",
+    "date": "2026-03-05T11:46:27.755457+00:00"
+  },
+  {
+    "title": "Primary Results Offer Warning Signs to Incumbents in Both Parties",
+    "url": "https://www.nytimes.com/2026/03/05/us/elections/primary-results-incumbents-dems-gop.html",
+    "url_fp": "a5d60f52cc412400e9a5965856c80b8d",
+    "description": "Even as some top targets held on, lawmakers in both parties were pushed into runoffs by challengers in Texas, while some in the North Carolina state legislature lost.",
+    "date": "2026-03-05T11:46:27.861287+00:00"
+  },
+  {
+    "title": "F.D.A. Faces Upset Over Denials of New Drugs",
+    "url": "https://www.nytimes.com/2026/03/05/health/fda-drugs-rare-diseases-rfk-jr.html",
+    "url_fp": "3dd3b3fb3dbc9fc28a1f0269f99f3915",
+    "description": "Agency officials promise fast reviews of new treatments while vowing they will not be a “rubber stamp” for the industry. But patients with rare diseases view recent decisions as signs that the doors are closing on their options.",
+    "date": "2026-03-05T11:46:27.934946+00:00"
+  },
+  {
+    "title": "In a Riskier Era, China Bets on Technology to Resist U.S. Pressure",
+    "url": "https://www.nytimes.com/2026/03/04/world/asia/china-us-technology-trade-military.html",
+    "url_fp": "c953d0bc014a902884671b71a064649b",
+    "description": "China announced a 7 percent increase in military spending and a five-year plan to try to reduce its military and industry’s reliance on Western technology.",
+    "date": "2026-03-05T11:46:28.039975+00:00"
+  },
+  {
+    "title": "Tech stocks today: Nvidia CEO Jensen Huang suggests end of OpenAI investments, Apple unveils MacBook Neo - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Tech stocks today: Nvidia CEO Jensen Huang suggests end of OpenAI investments, Apple unveils MacBook NeoYahoo FinanceNvidia CEO Huang says $30 billion OpenAI investment 'might be the last'CNBCJensen Huang says Nvidia is pulling back from OpenAI and Anthropic, but his explanation raises more questions than it answersTechCrunch",
+    "date": "2026-03-05T11:46:28.040570+00:00"
+  },
+  {
+    "title": "Sam Altman admits OpenAI can’t control Pentagon’s use of AI - The Guardian",
+    "url": "https://www.theguardian.com",
+    "url_fp": "b49674329b31ee735fa4368cd1a19ba8",
+    "description": "Sam Altman admits OpenAI can’t control Pentagon’s use of AIThe GuardianSome OpenAI staff are fuming about its Pentagon dealCNNRead Anthropic CEO’s Memo Attacking OpenAI’s ‘Mendacious’ Pentagon AnnouncementThe Information",
+    "date": "2026-03-05T11:46:28.040785+00:00"
+  },
+  {
+    "title": "Like OpenAI, Google’s AI chatbot is being accused of wrongful death in a tragic story - Fortune",
+    "url": "https://fortune.com",
+    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
+    "description": "Like OpenAI, Google’s AI chatbot is being accused of wrongful death in a tragic storyFortune",
+    "date": "2026-03-05T11:46:28.041176+00:00"
+  },
+  {
+    "title": "Anthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feud - The Washington Post",
+    "url": "https://www.washingtonpost.com",
+    "url_fp": "add4932ae5e02f0328761d82ff3b4ea2",
+    "description": "Anthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feudThe Washington PostDefense tech companies are dropping Claude after Pentagon's Anthropic blacklistCNBCClaude AI Helped Bomb Iran. But How Exactly?Bloomberg.com",
+    "date": "2026-03-05T11:46:28.041350+00:00"
+  },
+  {
+    "title": "Anthropic’s Claude is suddenly the most popular iPhone app following Pentagon feud - CNN",
+    "url": "https://www.cnn.com",
+    "url_fp": "8d215893cca08911f456711875e8e3bc",
+    "description": "Anthropic’s Claude is suddenly the most popular iPhone app following Pentagon feudCNN",
+    "date": "2026-03-05T11:46:28.041500+00:00"
+  },
+  {
+    "title": "Claude outages lay bare software developers' growing reliance on AI: 'I guess I'll write code like a caveman' - Business Insider",
+    "url": "https://www.businessinsider.com",
+    "url_fp": "04220288456435753371c3e6a38ca102",
+    "description": "Claude outages lay bare software developers' growing reliance on AI: 'I guess I'll write code like a caveman'Business Insider",
+    "date": "2026-03-05T11:46:28.041817+00:00"
+  },
+  {
+    "title": "Father claims Google's AI product fuelled son's delusional spiral - BBC",
+    "url": "https://www.bbc.com",
+    "url_fp": "290ccda0deea6083ee613d358446103e",
+    "description": "Father claims Google's AI product fuelled son's delusional spiralBBCGoogle's AI chatbot allegedly told user to stage 'mass casualty attack,' wrongful death suit claimsCNBCChaotic 4 days led to man's suicide, says lawsuit against GoogleSFGATE",
+    "date": "2026-03-05T11:46:28.041887+00:00"
+  },
+  {
+    "title": "Gemini 3.1 Flash-Lite: Built for intelligence at scale - blog.google",
+    "url": "https://blog.google",
+    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
+    "description": "Gemini 3.1 Flash-Lite: Built for intelligence at scaleblog.google",
+    "date": "2026-03-05T11:46:28.041994+00:00"
+  },
+  {
+    "title": "Google Search rolls out Gemini’s Canvas in AI Mode to all US users - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "Google Search rolls out Gemini’s Canvas in AI Mode to all US usersTechCrunch",
+    "date": "2026-03-05T11:46:28.042099+00:00"
+  },
+  {
+    "title": "SharePoint at 25: How Microsoft is putting knowledge to work in the AI era - Microsoft",
+    "url": "https://www.microsoft.com",
+    "url_fp": "c439589400212f33bcef65939bd8c69f",
+    "description": "SharePoint at 25: How Microsoft is putting knowledge to work in the AI eraMicrosoft",
+    "date": "2026-03-05T11:46:28.042350+00:00"
+  },
+  {
+    "title": "Why the Microsoft 365 Copilot bug matters for data security - Fox News",
+    "url": "https://www.foxnews.com",
+    "url_fp": "d3ce7f6297b01ad89f11c5c255b0545c",
+    "description": "Why the Microsoft 365 Copilot bug matters for data securityFox News",
+    "date": "2026-03-05T11:46:28.042549+00:00"
+  },
+  {
+    "title": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks Reel - Crunchbase News",
+    "url": "https://news.crunchbase.com",
+    "url_fp": "f087ef1c2fa43cca40bcb212d1ef6ca1",
+    "description": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks ReelCrunchbase News",
+    "date": "2026-03-05T11:46:28.042815+00:00"
+  },
+  {
+    "title": "Seattle’s newest early stage fund makes a bet on vertical AI startups - GeekWire",
+    "url": "https://www.geekwire.com",
+    "url_fp": "4d3f914e9a7491ea697dc038fcf5f6b9",
+    "description": "Seattle’s newest early stage fund makes a bet on vertical AI startupsGeekWire",
+    "date": "2026-03-05T11:46:28.042981+00:00"
+  },
+  {
+    "title": "MassRobotics resident startups surpass $2B in funding - The Robot Report",
+    "url": "https://www.therobotreport.com",
+    "url_fp": "56eba0dcfeb46766f076026507444b30",
+    "description": "MassRobotics resident startups surpass $2B in fundingThe Robot Report",
+    "date": "2026-03-05T11:46:28.114508+00:00"
+  },
+  {
+    "title": "China's new five-year plan calls for AI throughout its economy, tech breakthroughs - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "China's new five-year plan calls for AI throughout its economy, tech breakthroughsReuters",
+    "date": "2026-03-05T11:46:28.114793+00:00"
+  },
+  {
+    "title": "Google Workspace CLI",
+    "url": "https://github.com/googleworkspace/cli",
+    "url_fp": "8b26c083ea601fef1b49bd355a138b3f",
+    "description": "HN score: 626 | Comments: 210",
+    "date": "2026-03-05T11:46:28.139324+00:00"
+  },
+  {
+    "title": "Dario Amodei calls OpenAI’s messaging around military deal ‘straight up lies’",
+    "url": "https://techcrunch.com/2026/03/04/anthropic-ceo-dario-amodei-calls-openais-messaging-around-military-deal-straight-up-lies-report-says/",
+    "url_fp": "bf8f6cb9a5f932f7c0f6e92959ff334a",
+    "description": "HN score: 613 | Comments: 326",
+    "date": "2026-03-05T11:46:28.139433+00:00"
+  },
+  {
+    "title": "The L in \"LLM\" Stands for Lying",
+    "url": "https://acko.net/blog/the-l-in-llm-stands-for-lying/",
+    "url_fp": "1ae1a3cf62d4729954aeaf6bdc0a2d6f",
+    "description": "HN score: 240 | Comments: 123",
+    "date": "2026-03-05T11:46:28.175166+00:00"
+  },
+  {
+    "title": "No right to relicense this project",
+    "url": "https://github.com/chardet/chardet/issues/327",
+    "url_fp": "e0a40714da5da01dd3f380e98ef8ca9e",
+    "description": "HN score: 200 | Comments: 124",
+    "date": "2026-03-05T11:46:28.216697+00:00"
+  },
+  {
+    "title": "You Just Reveived",
+    "url": "https://dylan.gr/1772520728",
+    "url_fp": "cafdb77f0d1c8c5d6fb77ea980a687d8",
+    "description": "HN score: 181 | Comments: 53",
+    "date": "2026-03-05T11:46:28.239548+00:00"
+  },
+  {
+    "title": "Relicensing with AI-Assisted Rewrite",
+    "url": "https://tuananh.net/2026/03/05/relicensing-with-ai-assisted-rewrite/",
+    "url_fp": "2cfd23b7350deed080ee277edb8c06ac",
+    "description": "HN score: 156 | Comments: 139",
+    "date": "2026-03-05T11:46:28.280276+00:00"
+  },
+  {
+    "title": "Dulce et Decorum Est (1921)",
+    "url": "https://www.poetryfoundation.org/poems/46560/dulce-et-decorum-est",
+    "url_fp": "8e61d56dfedd5eca184a48b7285aa632",
+    "description": "HN score: 140 | Comments: 77",
+    "date": "2026-03-05T11:46:28.310568+00:00"
+  },
+  {
+    "title": "Picking Up a Zillion Pieces of Litter",
+    "url": "https://www.sixstepstobetterhealth.com/litter.html",
+    "url_fp": "072c3fc92b7aa06a5e5890e8f2e08391",
+    "description": "HN score: 134 | Comments: 45",
+    "date": "2026-03-05T11:46:28.353574+00:00"
+  },
+  {
+    "title": "Humans 40k yrs ago developed a system of conventional signs",
+    "url": "https://www.pnas.org/doi/10.1073/pnas.2520385123",
+    "url_fp": "d44142992f7ff66be66723d717cfd749",
+    "description": "HN score: 129 | Comments: 54",
+    "date": "2026-03-05T11:46:28.418176+00:00"
+  },
+  {
+    "title": "Nvidia PersonaPlex 7B on Apple Silicon: Full-Duplex Speech-to-Speech in Swift",
+    "url": "https://blog.ivan.digital/nvidia-personaplex-7b-on-apple-silicon-full-duplex-speech-to-speech-in-native-swift-with-mlx-0aa5276f2e23",
+    "url_fp": "734195eb087af96daf4d06e779a6056e",
+    "description": "HN score: 124 | Comments: 42",
+    "date": "2026-03-05T11:46:28.491212+00:00"
+  },
+  {
+    "title": "NRC issues first commercial reactor construction approval in 10 years [pdf]",
+    "url": "https://www.nrc.gov/sites/default/files/cdn/doc-collection-news/2026/26-028.pdf",
+    "url_fp": "5f3861419af396356c939f456bce7c47",
+    "description": "HN score: 115 | Comments: 83",
+    "date": "2026-03-05T11:46:28.565990+00:00"
+  },
+  {
+    "title": "Show HN: Poppy – A simple app to stay intentional with relationships",
+    "url": "https://poppy-connection-keeper.netlify.app/",
+    "url_fp": "75ad729cb56e68d628bbe1c2a8d1a680",
+    "description": "HN score: 111 | Comments: 42",
+    "date": "2026-03-05T11:46:28.638322+00:00"
+  },
+  {
+    "title": "AMD will bring its “Ryzen AI” processors to standard desktop PCs for first time",
+    "url": "https://arstechnica.com/gadgets/2026/03/amd-ryzen-ai-400-cpus-will-bring-upgraded-graphics-to-socket-am5-desktops/",
+    "url_fp": "dddff7d832bf0a704d88cedc35b71845",
+    "description": "HN score: 94 | Comments: 73",
+    "date": "2026-03-05T11:46:28.719931+00:00"
+  },
+  {
+    "title": "Jensen Huang says Nvidia is pulling back from OpenAI and Anthropic, but his explanation raises more questions than it answers",
+    "url": "https://techcrunch.com/2026/03/04/jensen-huang-says-nvidia-is-pulling-back-from-openai-and-anthropic-but-his-explanation-raises-more-questions-than-it-answers/",
+    "url_fp": "4624daa37b883bbcc80425bea571a7a3",
+    "description": "Nvidia CEO Jensen Huang said Wednesday that his company's investments in OpenAI and Anthropic will likely be its last — but his explanation may not tell the whole story.",
+    "date": "2026-03-05T11:46:28.839800+00:00"
+  },
+  {
+    "title": "Suunto Vertical 2 Review: Catching Up to the Pack",
+    "url": "https://www.wired.com/review/suunto-vertical-2/",
+    "url_fp": "a78bd906c3601f2a685bf5c72b3fb9b7",
+    "description": "Suunto's latest adventure fitness tracker finally introduces a bright AMOLED screen that's great for maps.",
+    "date": "2026-03-05T11:46:28.892369+00:00"
+  },
+  {
+    "title": "Nothing Has 2 New Midrange Phones, but Only 1 Will Be Sold in the US",
+    "url": "https://www.wired.com/story/nothing-phone-4a-and-phone-4a-pro-and-headphone-a/",
+    "url_fp": "a850237a3c525ccbcc16de110d8a136d",
+    "description": "Nothing won't launch a flagship phone this year, but the colorful and affordable Phone (4a), Phone (4a) Pro, and Headphone (a) are here to fill the void.",
+    "date": "2026-03-05T11:46:28.961287+00:00"
+  },
+  {
+    "title": "How to Survive Daylight Saving Time: Start Early (2026)",
+    "url": "https://www.wired.com/story/survive-daylight-savings-by-starting-early/",
+    "url_fp": "3bec14f5e4999bd70963e634bf80a607",
+    "description": "Forcing your body to wake up a full hour earlier out of nowhere will be as brutal as it sounds. Instead, start early and add some light to your routine.",
+    "date": "2026-03-05T11:46:29.015843+00:00"
+  },
+  {
+    "title": "Best Sheets Under $200 and $100 (2026): Cotton, Bamboo, Organic",
+    "url": "https://www.wired.com/story/best-sheets/",
+    "url_fp": "321e29c8f8108a230be22b45a10656a3",
+    "description": "After sleeping on more than 70 different sets of sheets, these are the best sets that won't break the bank.",
+    "date": "2026-03-05T11:46:29.073673+00:00"
+  },
+  {
+    "title": "Don’t Let Industry Jargon Cost You When Shopping for a Smart Bed",
+    "url": "https://www.wired.com/story/adjustable-mattress-vs-adjustable-frame-vs-smart-bed/",
+    "url_fp": "85e81c69b99ca07a59fc36715b3fb004",
+    "description": "Why the terms “smart bed,” \"adjustable mattress,\" and “adjustable frame” are not interchangeable, and how to avoid an expensive mistake.",
+    "date": "2026-03-05T11:46:29.141391+00:00"
+  },
+  {
+    "title": "How much wildfire prevention is too much?",
+    "url": "https://www.technologyreview.com/2026/03/05/1133960/wildfire-prevention-limits/",
+    "url_fp": "e3b21f7732301b76a5359c1665a83f50",
+    "description": "The race to prevent the worst wildfires has been an increasingly high-tech one. Companies are proposing AI fire detection systems and drones that can stamp out early blazes. And now, one Canadian startup says it’s going after lightning. Lightning-sparked fires can be a big deal: The Canadian wildfir",
+    "date": "2026-03-05T11:46:29.185971+00:00"
+  },
+  {
+    "title": "Online harassment is entering its AI era",
+    "url": "https://www.technologyreview.com/2026/03/05/1133962/online-harassment-is-entering-its-ai-era/",
+    "url_fp": "9192023a10a2d9e28c21a10ced50be2f",
+    "description": "Scott Shambaugh didn’t think twice when he denied an AI agent’s request to contribute to matplotlib, a software library that he helps manage. Like many open-source projects, matplotlib has been overwhelmed by a glut of AI code contributions, and so Shambaugh and his fellow maintainers have institute",
+    "date": "2026-03-05T11:46:29.233237+00:00"
+  },
+  {
+    "title": "Iran's Shahed drone: How 'the poor man’s cruise missile’ is shaping Tehran’s retaliation",
+    "url": "https://www.cnbc.com/2026/03/05/iran-shahed-136-drone-cost-air-defense-gulf-war-us-israel-gulf-scorpion-strike-centcom.html",
+    "url_fp": "71a2f7d0ddbd988c83d16bc24efc7782",
+    "description": "After years on the front lines of Russia's invasion of Ukraine, the Iranian Shahed-136 drone is at the center of Tehran's retaliation against recent U.S. strikes.",
+    "date": "2026-03-05T11:46:29.320085+00:00"
+  },
+  {
+    "title": "Defense experts defend Anthropic in letter to Congress, slam DoD for setting 'dangerous precedent'",
+    "url": "https://www.cnbc.com/2026/03/05/defense-experts-defend-anthropic-to-congress-slams-pentagons-move.html",
+    "url_fp": "b65d70951ddf84bd478ec1e65183e2ad",
+    "description": "Former defense and intelligence officials and policy experts are urging Congress to investigate the Pentagon's labeling of Anthropic as a supply chain risk.",
+    "date": "2026-03-05T11:46:29.415482+00:00"
+  },
+  {
+    "title": "BYD sales plunge in first two months of 2026 as EV giant loses more ground to competitors",
+    "url": "https://www.cnbc.com/2026/03/05/drawdown-byd-chinese-ev-sales-mixed-results-holiday-lull.html",
+    "url_fp": "5f7e1612fb576f12a83bc285a9ca48f5",
+    "description": "BYD lost ground to its domestic competitors over the first two months of 2026, as overall demand in China's electric vehicle market slowed.",
+    "date": "2026-03-05T11:46:29.504847+00:00"
+  },
+  {
+    "title": "Anthropic and the Pentagon are back at the negotiating table, FT reports",
+    "url": "https://www.cnbc.com/2026/03/05/anthropic-pentagon-ai-deal-department-of-defense-openai-.html",
+    "url_fp": "cd73a33da5dc7174fa78a7d6c95317c5",
+    "description": "Anthropic CEO Dario Amodei is reportedly back at the negotiating table with the U.S. Department of Defense after the breakdown of talks on Friday.",
+    "date": "2026-03-05T11:46:29.580113+00:00"
+  },
+  {
+    "title": "Broadcom's custom AI chip business stays hot and gives the bulls a much-needed win",
+    "url": "https://www.cnbc.com/2026/03/04/broadcoms-custom-ai-chip-business-stays-hot-and-gives-the-bulls-a-much-needed-win-.html",
+    "url_fp": "0d87a20e736cda7bfee5074cd95d45ac",
+    "description": "Shares of Broadcom rose about 5% in extended trading after its earnings report underscored the strength of its custom chip business.",
+    "date": "2026-03-05T11:46:29.659907+00:00"
+  },
+  {
+    "title": "Broadcom CEO Hock Tan sees AI chip revenue 'significantly' above $100 billion next year",
+    "url": "https://www.cnbc.com/2026/03/04/broadcom-sees-ai-chip-sales-significantly-over-100-billion-in-2027.html",
+    "url_fp": "f7117b21e4836c080c77e383cb5f1bfb",
+    "description": "Broadcom reported that AI revenue more than doubled in the latest quarter and is projecting continued growth as demand soars.",
+    "date": "2026-03-05T11:46:29.745087+00:00"
+  },
+  {
+    "title": "[D] A mathematical proof from an anonymous Korean forum: The essence of Attention is fundamentally a d^2 problem, not n^2. (PDF included)",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rl9j3s/d_a_mathematical_proof_from_an_anonymous_korean/",
+    "url_fp": "f9e150237cb19b814bac54bebed13896",
+    "description": "Hello,r/MachineLearning. I am just a regular user from a Korean AI community (\"The Singularity Gallery\"). I recently came across an anonymous post with a paper attached. I felt that the mathematical proof inside was too important to be buried in a local forum and not go viral globally, so I used Gem",
+    "date": "2026-03-05T11:46:29.870281+00:00"
+  },
+  {
+    "title": "[P] Bypassing CoreML to natively train a 110M Transformer on the Apple Neural Engine (Orion)",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rl9k3r/p_bypassing_coreml_to_natively_train_a_110m/",
+    "url_fp": "20201d4c309084295b8b427c6be92cbc",
+    "description": "It is hard to communicate how frustrating the current Apple ML stack is for low-level research. CoreML imposes opaque abstractions that prevent direct ANE programming and do not support on-device training. Despite having up to 38 TOPS (INT8) and ~19 TFLOPS of fp16 compute, the ANE remains almost ent",
+    "date": "2026-03-05T11:46:29.958506+00:00"
+  },
+  {
+    "title": "[D] Ijcai 2026 reviews",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rle02j/d_ijcai_2026_reviews/",
+    "url_fp": "1383d1951b15820582ac4c295a2d45c1",
+    "description": "[D] Did anyone received their ijcai 2026 reviews and what are expectations by all ?I am also new to chairing tool if anyone has used it can tell me also how to check reviews on that or it will pop up as entering to its pagesubmitted by/u/adi_gawd[link][comments]",
+    "date": "2026-03-05T11:46:29.983755+00:00"
+  },
+  {
+    "title": "[R] Are keywords necessary for ECCV submission?",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rlfhqw/r_are_keywords_necessary_for_eccv_submission/",
+    "url_fp": "647d265fbf4b529af4c50985f93c73c1",
+    "description": "Hello,First time submitting to ECCV here. No other team member has done it before.I’m not really sure if inclusion of keywords is necessary or mot in the submission, can someone help be here please?Thanks!submitted by/u/Training-Adeptness57[link][comments]",
+    "date": "2026-03-05T11:46:30.040754+00:00"
+  },
+  {
+    "title": "[D] Impact of EU AI Act on your work?",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1rldp59/d_impact_of_eu_ai_act_on_your_work/",
+    "url_fp": "2578bb34add3266616c7b1b6af2a643c",
+    "description": "Greetingsr/MachineLearning. I am studying the impact of EU AI Act on data science practitioners, especially those working on models that are classified as high risk. I am outside EU, so it has not impacted my company yet, but my country is drafting a similar one, and I am worried about its impact.Fr",
+    "date": "2026-03-05T11:46:30.083008+00:00"
+  },
+  {
+    "title": "LLMs can unmask pseudonymous users at scale with surprising accuracy",
+    "url": "https://www.reddit.com/r/artificial/comments/1rl5wwp/llms_can_unmask_pseudonymous_users_at_scale_with/",
+    "url_fp": "bbed8856cdc940241f21c391696a68b4",
+    "description": "So ai can uncover your anonymous identity on social media now so creating burner accounts may be pointless.submitted by/u/_Dark_Wing[link][comments]",
+    "date": "2026-03-05T11:46:30.151553+00:00"
+  },
+  {
+    "title": "Large genome model: Open source AI trained on trillions of bases",
+    "url": "https://www.reddit.com/r/artificial/comments/1rlegdl/large_genome_model_open_source_ai_trained_on/",
+    "url_fp": "4ab026f96b90797fbce8ec9161287c37",
+    "description": "\"...Evo 2, an open source AI that has been trained on genomes from all three domains of life (bacteria, archaea, and eukaryotes). After training on trillions of base pairs of DNA, Evo 2 developed internal representations of key features in even complex genomes like ours, including things like regula",
+    "date": "2026-03-05T11:46:30.206545+00:00"
+  },
+  {
+    "title": "Apple Music is building tools to identify and tag AI-generated songs",
+    "url": "https://www.reddit.com/r/artificial/comments/1rl61te/apple_music_is_building_tools_to_identify_and_tag/",
+    "url_fp": "c7bf9b82f9a8a5f61654e39ee3258434",
+    "description": "Apple is deploying new detection tools to identify and label AI-generated tracks across its streaming platform. The move aims to protect artist royalties and ensure transparency as \"fake\" songs increasingly flood the charts.This infrastructure shift allows Apple to verify human-made content while ke",
+    "date": "2026-03-05T11:46:30.276487+00:00"
+  },
+  {
+    "title": "US air defenses may not be able to intercept many of Iran’s one-way drones",
+    "url": "https://www.reddit.com/r/technology/comments/1rl6lay/us_air_defenses_may_not_be_able_to_intercept_many/",
+    "url_fp": "96e36306783bf8ab8bd7006d487a324a",
+    "description": "submitted by/u/esporx[link][comments]",
+    "date": "2026-03-05T11:46:30.354475+00:00"
+  },
+  {
+    "title": "President Bought Netflix Debt in January 2026, Amid Paramount’s Fight for Warner Bros. | New financial disclosures released Wednesday show that the President acquired Netflix bonds as Paramount was trying to pry WBD away from the streaming giant.",
+    "url": "https://www.reddit.com/r/technology/comments/1rlblhn/president_bought_netflix_debt_in_january_2026/",
+    "url_fp": "ddbae8d35b6bbfc30fbeba5c5f57602f",
+    "description": "submitted by/u/ControlCAD[link][comments]",
+    "date": "2026-03-05T11:46:30.556553+00:00"
+  },
+  {
+    "title": "Sam Altman Tells Staff OpenAI Has No Say Over Pentagon Decisions",
+    "url": "https://www.reddit.com/r/technology/comments/1rl8efu/sam_altman_tells_staff_openai_has_no_say_over/",
+    "url_fp": "a53463e7782d66096a32c0c9a951e84a",
+    "description": "submitted by/u/Cute-Guarantee-1676[link][comments]",
+    "date": "2026-03-05T11:46:30.624922+00:00"
+  },
+  {
+    "title": "Jensen Huang says Nvidia is pulling back from OpenAI and Anthropic, but his explanation raises more questions than it answers",
+    "url": "https://www.reddit.com/r/technology/comments/1rl4mom/jensen_huang_says_nvidia_is_pulling_back_from/",
+    "url_fp": "e5085b6825e586efd3fee66e62d710c2",
+    "description": "submitted by/u/Moonskaraos[link][comments]",
+    "date": "2026-03-05T11:46:30.741723+00:00"
+  },
+  {
+    "title": "‘No Tax on Overtime’ Isn’t All It Seems for Some Workers",
+    "url": "https://www.nytimes.com/2026/03/05/business/no-tax-on-overtime-tax-returns.html",
+    "url_fp": "c5230e7823c4b9254169c796935b9da0",
+    "description": "President Trump’s simple campaign promise, now reality, includes lots of fine print that is confounding taxpayers and companies this filing season.",
+    "date": "2026-03-05T11:46:30.801471+00:00"
+  },
+  {
+    "title": "Help! The Hotel Had Rodents, and Our Credit Card Won’t Accept a Dispute.",
+    "url": "https://www.nytimes.com/2026/03/05/travel/hotel-mold-rodents-credit-card-refund-refusal.html",
+    "url_fp": "c9205f90c05cdbc95aaf670c8175b06e",
+    "description": "A couple spent $630 to reserve a room at Yosemite a year in advance, but days before their trip, they learned it had a rodent problem. Why did Citi tell them it was too late?",
+    "date": "2026-03-05T11:46:30.874089+00:00"
+  },
+  {
+    "title": "Why Does Child Care Seem Less Affordable Than Ever?",
+    "url": "https://www.nytimes.com/2026/03/05/upshot/child-care-expensive-prices.html",
+    "url_fp": "d6e71ad82a9536c4dec38b967fc302ca",
+    "description": "It has always been expensive, but recently prices have risen faster than inflation.",
+    "date": "2026-03-05T11:46:30.928884+00:00"
+  },
+  {
+    "title": "They Made It Through the 24 Hours That Rocked South Korea’s Markets",
+    "url": "https://www.nytimes.com/2026/03/05/business/south-korea-markets.html",
+    "url_fp": "60f3c8eea46c25676733a75ee7da5df5",
+    "description": "After explosive growth in recent months, the country’s benchmark stock index plummeted, then rebounded, in the wake of the U.S. and Israeli attacks on Iran.",
+    "date": "2026-03-05T11:46:30.995742+00:00"
+  },
+  {
+    "title": "$2.5 Million Rift Pits Cannabis Pioneer Against Group That Backed Her",
+    "url": "https://www.nytimes.com/2026/03/05/nyregion/cannabis-housingworks-new-york-dispute.html",
+    "url_fp": "aebab3ac20ab248c53ba8f68c6a70134",
+    "description": "A dispute between the nonprofit Housing Works and the owner of a cannabis dispensary shows the risks for businesses in an industry that is locked out of traditional financing and resources.",
+    "date": "2026-03-05T11:46:31.065196+00:00"
+  },
+  {
+    "title": "What the Extraordinary Market Volatility in Asia Says About Energy and A.I.",
+    "url": "https://www.nytimes.com/2026/03/05/business/stocks-asia-iran-energy.html",
+    "url_fp": "f81a4436f9f457525128ea44947fff1e",
+    "description": "Stocks in South Korea and Taiwan, the center of global chip making, plunged on fears about energy prices. Their recovery shows the bullishness over artificial intelligence.",
+    "date": "2026-03-05T11:46:31.138490+00:00"
+  },
+  {
+    "title": "Top Aide to Labor Secretary Placed on Leave",
+    "url": "https://www.nytimes.com/2026/03/04/business/economy/top-aide-to-labor-secretary-placed-on-leave.html",
+    "url_fp": "1f807ba28204ae8a9a519c70b1a22894",
+    "description": "Several of Labor Secretary Lori Chavez-DeRemer’s employees are under investigation for official misconduct under her leadership.",
+    "date": "2026-03-05T11:46:31.187784+00:00"
+  },
+  {
+    "title": "Global Markets Swing as Investors Assess Energy Price Impact",
+    "url": "https://www.nytimes.com/2026/03/04/business/iran-stocks-natural-gas-oil.html",
+    "url_fp": "4680723d3de8ac43bcd2901acb0bf87b",
+    "description": "Markets in Europe and the United States appeared to stabilize after days of turmoil, but stocks in Asia fell sharply.",
+    "date": "2026-03-05T11:46:31.188314+00:00"
+  },
+  {
+    "title": "Stock Market Today: Dow, S&P 500 and Nasdaq rally off lows; Broadcom up after earnings; oil holds near highs; Korean stocks bounce back. - MarketWatch",
+    "url": "https://www.marketwatch.com",
+    "url_fp": "5b80a053b8f3f5b09a0e2b665ba6d444",
+    "description": "Stock Market Today: Dow, S&P 500 and Nasdaq rally off lows; Broadcom up after earnings; oil holds near highs; Korean stocks bounce back.MarketWatch",
+    "date": "2026-03-05T11:46:31.188752+00:00"
+  },
+  {
+    "title": "Stock Market Today: Stock Market News And Analysis - Investor's Business Daily",
+    "url": "https://www.investors.com",
+    "url_fp": "545362646854336a3463a9033e71efc5",
+    "description": "Stock Market Today: Stock Market News And AnalysisInvestor's Business Daily",
+    "date": "2026-03-05T11:46:31.188870+00:00"
+  },
+  {
+    "title": "Dow closes down 400 points after falling as much as 1,200 points as Iran conflict volatility continues: Live updates - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Dow closes down 400 points after falling as much as 1,200 points as Iran conflict volatility continues: Live updatesCNBC",
+    "date": "2026-03-05T11:46:31.189063+00:00"
+  },
+  {
+    "title": "Stock Market News from March 4, 2026: Dow Rises and Oil Ends Little Changed - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Stock Market News from March 4, 2026: Dow Rises and Oil Ends Little ChangedBarron's",
+    "date": "2026-03-05T11:46:31.189283+00:00"
+  },
+  {
+    "title": "Enterprises Are Spending 15% More on Software in 2026, Thanks to AI. Here's How to Profit. - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Enterprises Are Spending 15% More on Software in 2026, Thanks to AI. Here's How to Profit.The Motley Fool",
+    "date": "2026-03-05T11:46:31.269583+00:00"
+  },
+  {
+    "title": "The tangled web behind Marbruck, Australia’s most secretive VC fund - Capital Brief",
+    "url": "https://www.capitalbrief.com",
+    "url_fp": "d0c6b1232cd79526964742ca87d3921c",
+    "description": "The tangled web behind Marbruck, Australia’s most secretive VC fundCapital Brief",
+    "date": "2026-03-05T11:46:31.349411+00:00"
+  },
+  {
+    "title": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp) - Bloomberg.com",
+    "url": "https://www.bloomberg.com",
+    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
+    "description": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp)Bloomberg.com",
+    "date": "2026-03-05T11:46:31.349549+00:00"
+  },
+  {
+    "title": "Top Fed Official, Wary of Inflation, Calls for Extended Rate Pause - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "Top Fed Official, Wary of Inflation, Calls for Extended Rate PauseThe New York Times",
+    "date": "2026-03-05T11:46:31.349836+00:00"
+  },
+  {
+    "title": "Fed’s Beige Book Sees a Stable Economy Still Facing Challenges - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "Fed’s Beige Book Sees a Stable Economy Still Facing ChallengesWSJ",
+    "date": "2026-03-05T11:46:31.349924+00:00"
+  },
+  {
+    "title": "Spain rejects White House claim it agreed to cooperate with U.S. forces amid Iran war",
+    "url": "https://www.cnbc.com/2026/03/05/iran-war-us-spain-trump-sanchez-defense-trade-eu.html",
+    "url_fp": "02f2e508879f7f56854a5a391705f55b",
+    "description": "The White House says Spain will now cooperate with the U.S. militarily over the Iran conflict. Madrid swiftly rejected this claim.",
+    "date": "2026-03-05T11:46:31.434697+00:00"
+  },
+  {
+    "title": "Why Iran war oil price shock won't stop Fed pick Kevin Warsh from cutting interest rates",
+    "url": "https://www.cnbc.com/2026/03/05/iran-oil-fed-kevin-warsh.html",
+    "url_fp": "b0c38eeabbbd5fe3aca5932cb083120d",
+    "description": "President Donald Trump's choice to lead the Federal Reserve sees inflation risk very differently than Chairman Jerome Powell.",
+    "date": "2026-03-05T11:46:31.520551+00:00"
+  },
+  {
+    "title": "Eli Lilly launches program to help boost employer coverage of obesity drugs in U.S.",
+    "url": "https://www.cnbc.com/2026/03/05/eli-lilly-launches-program-to-boost-employer-coverage-of-obesity-drugs.html",
+    "url_fp": "54597288a4fdc63f8dcf3aba976501f0",
+    "description": "Employers can use Lilly's platform to connect with different third-party program administrators that help manage obesity treatment benefits and costs.",
+    "date": "2026-03-05T11:46:31.601763+00:00"
+  },
+  {
+    "title": "China to boost defense spending by 7%, slowest pace since 2021",
+    "url": "https://www.cnbc.com/2026/03/05/china-defense-spending-7-percent-2026-budget.html",
+    "url_fp": "dd77639eb0dbea1b93904c374425ef7c",
+    "description": "Beijing's planned military budget comes amid escalating conflict in the Middle East and persistent tensions over Taiwan.",
+    "date": "2026-03-05T11:46:31.602121+00:00"
+  },
+  {
+    "title": "China Tells Top Refiners to Suspend Diesel and Gasoline Exports",
+    "url": "https://www.reddit.com/r/investing/comments/1rl754i/china_tells_top_refiners_to_suspend_diesel_and/",
+    "url_fp": "9f90fc1220d6f09c8f4cf9423b767cc7",
+    "description": "China’s government has told the country’s largest oil refiners to suspend exports of diesel and gasoline as an escalating conflict in the Persian Gulf disrupts the arrival of crude from one of the world’s largest producing regions.Officials from the National Development and Reform Commission, the co",
+    "date": "2026-03-05T11:46:31.721186+00:00"
+  },
+  {
+    "title": "A tanker was hit by a \"large explosion\" in the northern Persian Gulf",
+    "url": "https://www.reddit.com/r/investing/comments/1rl4ho7/a_tanker_was_hit_by_a_large_explosion_in_the/",
+    "url_fp": "340caf891ce1312520fd6aba5547cc86",
+    "description": "A tanker was hit by a \"large explosion\" in the northern Persian Gulf, causing an oil spill, British maritime security agency UKMTO said ThursdayThe oil tanker is taking on water.https://x.com/Osinttechnical/status/2029366606518771842submitted by/u/Possible-Shoulder940[link][comments]",
+    "date": "2026-03-05T11:46:31.792384+00:00"
+  },
+  {
+    "title": "Bitcoin just went over $70k and software stocks are ripping. What happened?",
+    "url": "https://www.reddit.com/r/investing/comments/1rl5gkq/bitcoin_just_went_over_70k_and_software_stocks/",
+    "url_fp": "40d94db447aeabd1032feaadbea66c4c",
+    "description": "Bitcoin just pushed past $70k, and at the same time a lot of software / tech stocks are moving up pretty aggressively as well. I’m seeing strong moves across names in the software space and the IGM/IGV ETFs also had a lot of volume. I don’t see any obvious catalyst that suddenly changed sentiment th",
+    "date": "2026-03-05T11:46:31.861995+00:00"
+  },
+  {
+    "title": "Be wary of investment advise from Chamath",
+    "url": "https://www.reddit.com/r/investing/comments/1rl481c/be_wary_of_investment_advise_from_chamath/",
+    "url_fp": "92617e93021c111efc91f88dbc535a55",
+    "description": "https://x.com/chamath/status/2029237354712731972dp:How about all the scams through your SPACs, you never came clean about it. Millions of customers lost money.Chamath Palihapitiya Replying to dp:Bullshit.Dude:It’s not bullshit. I invested in all of them. You pitches were compelling. Then I lost tons",
+    "date": "2026-03-05T11:46:31.906229+00:00"
+  },
+  {
+    "title": "The $599 iPhone 17e made me rethink $AAPL’s near term outlook",
+    "url": "https://www.reddit.com/r/investing/comments/1rldtns/the_599_iphone_17e_made_me_rethink_aapls_near/",
+    "url_fp": "4b40f3abda5afad50baa201ec7d046f9",
+    "description": "Apple’s recent launch of the $599 iPhone 17e caught my attention from an investing perspective. The device combines A19 chip performance, 256GB storage, and a 48MP camera at a lower price point, which could drive upgrades among users holding older iPhones. In a market where consumer spending is unde",
+    "date": "2026-03-05T11:46:31.967177+00:00"
+  },
+  {
+    "title": "How one options strategy allegedly made $73M in a day by moving the underlying market",
+    "url": "https://www.reddit.com/r/investing/comments/1rle41d/how_one_options_strategy_allegedly_made_73m_in_a/",
+    "url_fp": "d07ef2383e01f7745b9ae7d45822668a",
+    "description": "A lot of people are talking about the 10 AM dump that seems to keep happening referred to as the \"10 AM dump\". Some people are using this as a timed short strategy.There are rumors accusing the quant trading firm Jane Street of using a strategy to crash the markets and make billions.Here is how thei",
+    "date": "2026-03-05T11:46:32.045581+00:00"
+  },
+  {
+    "title": "Say hello to MacBook Neo - Apple",
+    "url": "https://www.apple.com",
+    "url_fp": "e845cbdc3785b1a67978cbc5a146a168",
+    "description": "Say hello to MacBook NeoApple",
+    "date": "2026-03-05T11:46:32.045868+00:00"
+  },
+  {
+    "title": "Apple launches new MacBook Pro with M5 Pro and M5 Max chips - 9to5Mac",
+    "url": "https://9to5mac.com",
+    "url_fp": "8def0a95ccbdb9b4116de5148d89d7f7",
+    "description": "Apple launches new MacBook Pro with M5 Pro and M5 Max chips9to5Mac",
+    "date": "2026-03-05T11:46:32.045995+00:00"
+  },
+  {
+    "title": "Amazon’s new AI experience helps sellers visualize and grow their business in real time—here's how it works - About Amazon",
+    "url": "https://www.aboutamazon.com",
+    "url_fp": "ad4f2ca29452c4a90b63ae5542584422",
+    "description": "Amazon’s new AI experience helps sellers visualize and grow their business in real time—here's how it worksAbout Amazon",
+    "date": "2026-03-05T11:46:32.046177+00:00"
+  },
+  {
+    "title": "Musk claims Tesla will ‘make AGI’ after years of wrong AI predictions - Electrek",
+    "url": "https://electrek.co",
+    "url_fp": "23f70e3d2c01895a0a522bfd3733a201",
+    "description": "Musk claims Tesla will ‘make AGI’ after years of wrong AI predictionsElectrek",
+    "date": "2026-03-05T11:46:32.046374+00:00"
+  },
+  {
+    "title": "87 Million Devices Permanently Lost Access to Netflix Today - Parade",
+    "url": "https://parade.com",
+    "url_fp": "48979768f3931d7d58111dcb0551e521",
+    "description": "87 Million Devices Permanently Lost Access to Netflix TodayParade",
+    "date": "2026-03-05T11:46:32.112644+00:00"
+  },
+  {
+    "title": "Here Is Why Alphabet (GOOGL) is One of The Best Stocks According to Billionaires - Finviz",
+    "url": "https://finviz.com",
+    "url_fp": "96330fd518cd0e35c2996c1476ca44e8",
+    "description": "Here Is Why Alphabet (GOOGL) is One of The Best Stocks According to BillionairesFinviz",
+    "date": "2026-03-05T11:46:32.195946+00:00"
+  },
+  {
+    "title": "Alphabet Inc. $GOOGL Stake Lessened by Alberta Investment Management Corp - MarketBeat",
+    "url": "https://www.marketbeat.com",
+    "url_fp": "2dc276236d3b374e1b7bd2affebbd6fa",
+    "description": "Alphabet Inc. $GOOGL Stake Lessened by Alberta Investment Management CorpMarketBeat",
+    "date": "2026-03-05T11:46:32.196036+00:00"
+  },
+  {
+    "title": "MLB Rank 2026: Ranking baseball's top 100 players - ESPN",
+    "url": "https://www.espn.com",
+    "url_fp": "f23ac12a07189adde19ca28f3d7c7b4f",
+    "description": "MLB Rank 2026: Ranking baseball's top 100 playersESPN",
+    "date": "2026-03-05T11:46:32.196112+00:00"
+  },
+  {
+    "title": "Proposed Yankees trade New York part ways with Jasson Dominguez, land package centered around MLB's No. 98 overall prospect - Yahoo Sports",
+    "url": "https://sports.yahoo.com",
+    "url_fp": "4bbd7d0db668261e182a6708e474c8dc",
+    "description": "Proposed Yankees trade New York part ways with Jasson Dominguez, land package centered around MLB's No. 98 overall prospectYahoo Sports",
+    "date": "2026-03-05T11:46:32.196319+00:00"
+  },
+  {
+    "title": "MLB trade rumors: New York Yankees could sign $330 million Philadelphia Phillies franchise superstar to f - The Times of India",
+    "url": "https://timesofindia.indiatimes.com",
+    "url_fp": "541cc79a8638cfd34bdc56d1a27c8cd7",
+    "description": "MLB trade rumors: New York Yankees could sign $330 million Philadelphia Phillies franchise superstar to fThe Times of India",
+    "date": "2026-03-05T11:46:32.196610+00:00"
+  },
+  {
+    "title": "Thunder top Knicks at MSG in potential NBA Finals preview: Highlights - USA Today",
+    "url": "https://www.usatoday.com",
+    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
+    "description": "Thunder top Knicks at MSG in potential NBA Finals preview: HighlightsUSA TodayKnicks livid with refs over favorable Shai Gilgeous-Alexander whistles: ‘Does a great job of convincing’New York PostOklahoma City Thunder vs New York Knicks Mar 4, 2026 Box ScoresNBA",
+    "date": "2026-03-05T11:46:32.196678+00:00"
+  },
+  {
+    "title": "What Mitchell Robinson blames for his worsening Knicks free-throw woes as he dismisses ‘silly as hell’ idea for fix - New York Post",
+    "url": "https://nypost.com",
+    "url_fp": "6a3bd587d57d5503a436b77127565c5b",
+    "description": "What Mitchell Robinson blames for his worsening Knicks free-throw woes as he dismisses ‘silly as hell’ idea for fixNew York Post",
+    "date": "2026-03-05T11:46:32.196921+00:00"
+  },
+  {
+    "title": "Giants HC John Harbaugh Dealt Bad News on Tuesday - Athlon Sports",
+    "url": "https://athlonsports.com",
+    "url_fp": "51c72c2998d731c5aa062540f941b4f9",
+    "description": "Giants HC John Harbaugh Dealt Bad News on TuesdayAthlon Sports",
+    "date": "2026-03-05T11:46:32.266172+00:00"
+  },
+  {
+    "title": "NFL insider says to 'keep an eye' on the New York Giants for future Hall of Famer that's set to be a free agent - Yardbarker",
+    "url": "https://www.yardbarker.com",
+    "url_fp": "670386ff8acd6ccd00772fbc4c5ba4d8",
+    "description": "NFL insider says to 'keep an eye' on the New York Giants for future Hall of Famer that's set to be a free agentYardbarker",
+    "date": "2026-03-05T11:46:32.384228+00:00"
+  },
+  {
+    "title": "Devils Trade Buzz: Could Simon Nemec Fetch a Star Forward? - Sportsnaut",
+    "url": "https://sportsnaut.com",
+    "url_fp": "6f6dc000cd65ae7e53b763c13d9d7d9d",
+    "description": "Devils Trade Buzz: Could Simon Nemec Fetch a Star Forward?SportsnautNHL On Tap: Kraken, Devils, Canucks play home games amid trade rumorsNHL.comLatest NHL Rumors on Potential Simon Nemec Trade from Devils At 2026 DeadlineBleacher Report",
+    "date": "2026-03-05T11:46:32.384299+00:00"
+  },
+  {
+    "title": "Brown ties it late, Devils rally for shootout win against Maple Leafs - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Brown ties it late, Devils rally for shootout win against Maple LeafsNHL.comMaple Leafs fall to Devils in shootout for fifth-straight lossSportsnetMaple Leafs vs Devils Prediction, Picks & Odds for Tonight’s NHL GameCovers.com",
+    "date": "2026-03-05T11:46:32.384345+00:00"
+  },
+  {
+    "title": "Daily Discussion Thread + Game Thread Index",
+    "url": "https://www.reddit.com/r/nba/comments/1rku7h7/daily_discussion_thread_game_thread_index/",
+    "url_fp": "3afbac9ab18fe707dba23fe490e9aafd",
+    "description": "Game Threads Index (March 04, 2026):Tip-offGDTAwayScoreHomePGT07:00 pm ETLinkOklahoma City ThunderFINAL103 to 100New York KnicksLink07:30 pm ETLinkCharlotte HornetsFINAL118 to 89Boston CelticsLink07:30 pm ETLinkUtah JazzFINAL102 to 106Philadelphia 76ersLink08:00 pm ETLinkPortland Trail BlazersFINAL1",
+    "date": "2026-03-05T11:46:32.384553+00:00"
+  },
+  {
+    "title": "[Highlight] The Charlotte Hornets defeat the Boston Celtics 118-89 to win their sixth straight. All six of their wins during this win streak have been by 15+ points and Charlotte is now 16-4 over their last 20 games.",
+    "url": "https://www.reddit.com/r/nba/comments/1rl5wtp/highlight_the_charlotte_hornets_defeat_the_boston/",
+    "url_fp": "2ef8dd5268f470c8e35becc7cd442b67",
+    "description": "submitted by/u/nba[link][comments]",
+    "date": "2026-03-05T11:46:32.572991+00:00"
+  },
+  {
+    "title": "[Highlight] SGA runs into Jalen Brunson knocking him down with no call from the refs. Mike Brown is so irate he gets assessed a technical",
+    "url": "https://www.reddit.com/r/nba/comments/1rl40b6/highlight_sga_runs_into_jalen_brunson_knocking/",
+    "url_fp": "0e3fc9f54e469774efb3cd9aa42b5dba",
+    "description": "submitted by/u/SwellandDecay[link][comments]",
+    "date": "2026-03-05T11:46:32.701357+00:00"
+  },
+  {
+    "title": "[SNY] \"SGA, he's a tough cover. He does a great job of convincing the referees - probably better than anybody in the league - that he's getting hit.\"",
+    "url": "https://www.reddit.com/r/nba/comments/1rl6d6i/sny_sga_hes_a_tough_cover_he_does_a_great_job_of/",
+    "url_fp": "f9c96f4f994330331811dec1237dc4cd",
+    "description": "submitted by/u/PassMeTheBackwood[link][comments]",
+    "date": "2026-03-05T11:46:32.835865+00:00"
+  },
+  {
+    "title": "[Highlight] LaMelo hits a longg 3 in front of Jaylen Brown as the shot lock winds down",
+    "url": "https://www.reddit.com/r/nba/comments/1rl5lt5/highlight_lamelo_hits_a_longg_3_in_front_of/",
+    "url_fp": "a6e1469eb3472dc8288382b9ff80ef63",
+    "description": "submitted by/u/FrankSamples[link][comments]",
+    "date": "2026-03-05T11:46:32.919176+00:00"
+  },
+  {
+    "title": "Hornets have won 6 straight games by 15+ points, the longest streak by any team since the 2017-18 Warriors. It's tied for the 2nd-longest streak in NBA history.",
+    "url": "https://www.reddit.com/r/nba/comments/1rl5y0v/hornets_have_won_6_straight_games_by_15_points/",
+    "url_fp": "37618c415526e4ebe54033165535a3af",
+    "description": "From Keerthika Uthayakumar:Hornets have won 6 straight games by 15+ points, the longest streak by any team since the 2017-18 Warriors.It's tied for the 2nd-longest streak in NBA history.ht: @Statheadsubmitted by/u/jonsnowKITN[link][comments]",
+    "date": "2026-03-05T11:46:33.064126+00:00"
+  },
+  {
+    "title": "[General Discussion] Around the Horn & Game Thread Index - 3/5/26",
+    "url": "https://www.reddit.com/r/baseball/comments/1rld7tw/general_discussion_around_the_horn_game_thread/",
+    "url_fp": "2ffbed23ee27cf52ad3f5f311d8805bf",
+    "description": "So what's this thread for?Discussion of yesterday's gamesExcitement for today's gamesGeneral questionsMildly interesting factsPraising Santa 🎅Anything else worth sharing/asking that doesn't warrant its own postFor game threads, use the games schedule on the sidebar to navigate to the team you want a",
+    "date": "2026-03-05T11:46:33.125671+00:00"
+  },
+  {
+    "title": "Game Thread 3/5 ⚾ Czech Republic (0-0) @ Korea (0-0) 5:00 AM ET",
+    "url": "https://www.reddit.com/r/baseball/comments/1rlcqi5/game_thread_35_czech_republic_00_korea_00_500_am/",
+    "url_fp": "8dd8a474eaea87c025fd91dbb8fb91e1",
+    "description": "Join us on Discord!Czech Republic (0-0) @ Korea (0-0)First Pitch: 5:00 AM at Tokyo DomeTeamStarterTVRadioCzech RepublicDaniel Padysak(0-0, -.-- ERA)KoreaHyeong Jun So(0-0, -.-- ERA)MLBFangraphsReddit StreamIRC ChatGamedayGame GraphLive CommentsLibera: ##baseballLine Score - Runner on second, 1 Out, ",
+    "date": "2026-03-05T11:46:33.181669+00:00"
+  },
+  {
+    "title": "Team Australia takes the opening game of the World Baseball Classic!",
+    "url": "https://www.reddit.com/r/baseball/comments/1rl94hm/team_australia_takes_the_opening_game_of_the/",
+    "url_fp": "785714edadaea07472f3f98bc61c02f7",
+    "description": "submitted by/u/MLBOfficial[link][comments]",
+    "date": "2026-03-05T11:46:33.251414+00:00"
+  },
+  {
+    "title": "She's SMOKING a baseball with high heels on 😲",
+    "url": "https://www.reddit.com/r/baseball/comments/1rlb282/shes_smoking_a_baseball_with_high_heels_on/",
+    "url_fp": "191f833ce2732158653276a9dad115a5",
+    "description": "submitted by/u/IngenuitySilly2763[link][comments]",
+    "date": "2026-03-05T11:46:33.299619+00:00"
+  },
+  {
+    "title": "40,523 fans attended Taiwan vs. Australia today at the Tokyo Dome. No non-Japan game in 2023 drew more than 16,641.",
+    "url": "https://www.reddit.com/r/baseball/comments/1rl98uu/40523_fans_attended_taiwan_vs_australia_today_at/",
+    "url_fp": "a217b8c0f2ea856cfb8696f257507a5c",
+    "description": "The WBC is back and better than ever.submitted by/u/Hungry_Drama_1015[link][comments]",
+    "date": "2026-03-05T11:46:33.401566+00:00"
+  },
+  {
+    "title": "Travis Bazzana extends Team Australia's lead with a solo homer",
+    "url": "https://www.reddit.com/r/baseball/comments/1rl8inz/travis_bazzana_extends_team_australias_lead_with/",
+    "url_fp": "78d7f9f932e302f9e9c101704d4e800a",
+    "description": "submitted by/u/MLBOfficial[link][comments]",
+    "date": "2026-03-05T11:46:33.467129+00:00"
+  },
+  {
+    "title": "A message from Munenori Kawasaki in anticipation of the visit of the Prime Minister of Canada and his spouse to Japan.",
+    "url": "https://www.reddit.com/r/baseball/comments/1rl5to5/a_message_from_munenori_kawasaki_in_anticipation/",
+    "url_fp": "6d14097ac7a7ad71c4330ca585dedafe",
+    "description": "submitted by/u/kpopsns28[link][comments]",
+    "date": "2026-03-05T11:46:33.579919+00:00"
   }
 ]
