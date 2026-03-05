@@ -269,9 +269,52 @@ body {
 }
 .btn-subscribe:hover { opacity: .8; }
 
+/* Legacy small pill buttons (RSS only now) */
 .btn-apple   { background: #a855f7; color: #fff; }
 .btn-spotify { background: #1db954; color: #fff; }
 .btn-rss     { background: #f97316; color: #fff; }
+
+/* Brand badge buttons (Apple Podcasts & Spotify) */
+.btn-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .5rem 1.1rem .5rem .8rem;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: opacity .15s, transform .1s;
+  border: 1px solid rgba(255,255,255,.15);
+}
+.btn-badge:hover { opacity: .88; transform: translateY(-1px); }
+
+.btn-badge.btn-apple   { background: #4b1d96; }
+.btn-badge.btn-spotify { background: #117a37; }
+
+.badge-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
+}
+
+.badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  color: #fff;
+}
+.badge-text small {
+  font-size: .62rem;
+  font-weight: 400;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.badge-text {
+  font-size: .88rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
 
 @media (max-width: 600px) {
   .brand-name  { font-size: 1.6rem; }
