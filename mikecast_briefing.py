@@ -1149,7 +1149,7 @@ Format rules:
 
 <div style="text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;">
   <p style="color:#666;font-size:0.85em;">MikeCast Daily Briefing • Generated {TODAY_DISPLAY}<br>
-  Powered by NYT API, Google News &amp; OpenAI GPT-4o</p>
+  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>
 </div>
 </body>
 </html>"""
