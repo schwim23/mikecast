@@ -97,14 +97,71 @@ CATEGORIES = {
 NYT_SECTIONS = ["technology", "business", "sports", "home"]
 
 # ---------------------------------------------------------------------------
+# Source credibility tiers (used by LLM scoring prompt)
+# ---------------------------------------------------------------------------
+SOURCE_TIERS: dict[str, int] = {
+    # Tier 1 — highest credibility
+    "The New York Times": 1, "Reuters": 1, "Associated Press": 1,
+    "The Verge": 1, "Ars Technica": 1, "MIT Technology Review": 1, "Wired": 1,
+    # Tier 2 — strong trade sources
+    "TechCrunch": 2, "VentureBeat": 2, "CNBC": 2, "ESPN": 2, "Hacker News": 2,
+    # Tier 3 — community aggregators
+    "Reddit": 3, "Google News": 3,
+}
+
+TECH_RSS_FEEDS = [
+    ("TechCrunch",            "https://techcrunch.com/feed/",                    "AI & Tech", 8),
+    ("The Verge",             "https://www.theverge.com/rss/index.xml",          "AI & Tech", 8),
+    ("Ars Technica",          "https://feeds.arstechnica.com/arstechnica/index", "AI & Tech", 6),
+    ("VentureBeat",           "https://venturebeat.com/feed/",                   "AI & Tech", 6),
+    ("Wired",                 "https://www.wired.com/feed/rss",                  "AI & Tech", 5),
+    ("MIT Technology Review", "https://www.technologyreview.com/feed/",          "AI & Tech", 5),
+]
+
+WIRE_RSS_FEEDS = [
+    ("Reuters",          "https://feeds.reuters.com/reuters/topNews",          "Business & Markets", 6),
+    ("Reuters",          "https://feeds.reuters.com/reuters/businessNews",     "Business & Markets", 6),
+    ("Reuters",          "https://feeds.reuters.com/reuters/technologyNews",   "AI & Tech",          5),
+    ("Associated Press", "https://feeds.apnews.com/rss/apf-topnews",          "Business & Markets", 5),
+    ("Associated Press", "https://feeds.apnews.com/rss/apf-technology",       "AI & Tech",          5),
+    ("Associated Press", "https://feeds.apnews.com/rss/apf-business",         "Business & Markets", 5),
+]
+
+CNBC_RSS_FEEDS = [
+    ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", "Business & Markets", 6),
+    ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",  "AI & Tech",          6),
+    ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",  "Business & Markets", 6),
+]
+
+ESPN_RSS_FEEDS = [
+    ("https://www.espn.com/espn/rss/news",     "General"),
+    ("https://www.espn.com/espn/rss/nba/news", "NBA"),
+    ("https://www.espn.com/espn/rss/mlb/news", "MLB"),
+    ("https://www.espn.com/espn/rss/nfl/news", "NFL"),
+    ("https://www.espn.com/espn/rss/nhl/news", "NHL"),
+]
+
+REDDIT_FEEDS = [
+    ("MachineLearning", "AI & Tech",          10),
+    ("artificial",      "AI & Tech",          10),
+    ("technology",      "AI & Tech",          10),
+    ("investing",       "Business & Markets", 10),
+    ("nba",             "NY Sports",           8),
+    ("baseball",        "NY Sports",           8),
+]
+
+REDDIT_USER_AGENT = "MikeCast/2.0 (personal news briefing bot; contact: prometheusagent23@gmail.com)"
+SCORE_BATCH_SIZE = 40
+
+# ---------------------------------------------------------------------------
 # Utility helpers
 # ---------------------------------------------------------------------------
 
-def _safe_request(url: str, params: dict | None = None, timeout: int = 15) -> requests.Response | None:
+def _safe_request(url: str, params: dict | None = None, timeout: int = 15, headers: dict | None = None) -> requests.Response | None:
     """GET with retries and error handling."""
     for attempt in range(3):
         try:
-            resp = requests.get(url, params=params, timeout=timeout)
+            resp = requests.get(url, params=params, timeout=timeout, headers=headers)
             if resp.status_code == 429:
                 wait = 2 ** attempt
                 logger.warning("Rate-limited on %s — waiting %ds", url, wait)
@@ -276,6 +333,206 @@ def search_news_web(query: str, max_results: int = 5) -> list[dict]:
     return articles
 
 
+def fetch_hacker_news_top(max_results: int = 20) -> list[dict]:
+    """Fetch top stories from Hacker News via Algolia API."""
+    resp = _safe_request(
+        "https://hn.algolia.com/api/v1/search",
+        params={"tags": "front_page", "hitsPerPage": max_results},
+    )
+    if resp is None:
+        return []
+
+    articles = []
+    try:
+        hits = resp.json().get("hits") or []
+        for hit in hits[:max_results]:
+            title = hit.get("title", "").strip()
+            url = hit.get("url", "").strip()
+            if not title or not url:
+                continue
+            articles.append({
+                "title": title,
+                "url": url,
+                "description": f"HN score: {hit.get('points', 0)} | Comments: {hit.get('num_comments', 0)}",
+                "source": "Hacker News",
+                "published": hit.get("created_at", ""),
+                "hn_score": hit.get("points", 0),
+                "hn_comments": hit.get("num_comments", 0),
+            })
+    except (KeyError, ValueError) as exc:
+        logger.warning("HN parse error: %s", exc)
+    return articles
+
+
+def _parse_rss_feed(source_name: str, url: str, category: str, max_results: int) -> list[dict]:
+    """Generic RSS 2.0 feed parser (uses <item> + <link> text)."""
+    resp = _safe_request(url, timeout=15)
+    if resp is None:
+        return []
+
+    articles = []
+    try:
+        soup = BeautifulSoup(resp.content, "xml")
+        items = soup.find_all("item")
+        for item in items[:max_results]:
+            title_tag = item.find("title")
+            link_tag = item.find("link")
+            desc_tag = item.find("description")
+            pub_tag = item.find("pubDate") or item.find("pubdate")
+
+            title = title_tag.get_text(strip=True) if title_tag else ""
+            # lxml's xml parser puts <link> text as next sibling NavigableString
+            if link_tag:
+                link = link_tag.get_text(strip=True) or link_tag.get("href", "")
+            else:
+                link = ""
+            desc = BeautifulSoup(desc_tag.get_text(), "html.parser").get_text(strip=True)[:300] if desc_tag else ""
+            pub = pub_tag.get_text(strip=True) if pub_tag else ""
+
+            if title and link:
+                articles.append({
+                    "title": title,
+                    "url": link,
+                    "description": desc,
+                    "source": source_name,
+                    "published": pub,
+                })
+    except Exception as exc:
+        logger.warning("%s RSS parse error: %s", source_name, exc)
+    return articles
+
+
+def fetch_tech_rss_feeds() -> dict[str, list[dict]]:
+    """Fetch from all tech publication RSS feeds. Returns {category: [articles]}."""
+    results: dict[str, list[dict]] = {}
+    for source_name, feed_url, category, max_results in TECH_RSS_FEEDS:
+        arts = _parse_rss_feed(source_name, feed_url, category, max_results)
+        results.setdefault(category, []).extend(arts)
+        logger.info("Tech RSS [%s]: %d articles", source_name, len(arts))
+        time.sleep(0.3)
+    return results
+
+
+def fetch_wire_rss_feeds() -> dict[str, list[dict]]:
+    """Fetch Reuters and AP wire service RSS feeds. Returns {category: [articles]}."""
+    results: dict[str, list[dict]] = {}
+    for source_name, feed_url, category, max_results in WIRE_RSS_FEEDS:
+        arts = _parse_rss_feed(source_name, feed_url, category, max_results)
+        results.setdefault(category, []).extend(arts)
+        logger.info("Wire RSS [%s %s]: %d articles", source_name, category, len(arts))
+        time.sleep(0.3)
+    return results
+
+
+def fetch_cnbc_rss_feeds() -> dict[str, list[dict]]:
+    """Fetch CNBC RSS feeds. Returns {category: [articles]}."""
+    results: dict[str, list[dict]] = {}
+    for source_name, feed_url, category, max_results in CNBC_RSS_FEEDS:
+        arts = _parse_rss_feed(source_name, feed_url, category, max_results)
+        results.setdefault(category, []).extend(arts)
+        logger.info("CNBC RSS [%s]: %d articles", source_name, len(arts))
+        time.sleep(0.3)
+    return results
+
+
+def fetch_reddit_rss() -> dict[str, list[dict]]:
+    """
+    Fetch Reddit subreddit Atom feeds.
+    Reddit uses Atom XML (<entry> + <link rel='alternate' href='...'>) not RSS 2.0.
+    Requires a custom User-Agent or Reddit returns 429.
+    Returns {category: [articles]}.
+    """
+    results: dict[str, list[dict]] = {}
+    headers = {"User-Agent": REDDIT_USER_AGENT}
+
+    for subreddit, category, max_results in REDDIT_FEEDS:
+        feed_url = f"https://www.reddit.com/r/{subreddit}/.rss"
+        resp = _safe_request(feed_url, timeout=15, headers=headers)
+        if resp is None:
+            logger.warning("Reddit r/%s: no response", subreddit)
+            continue
+
+        try:
+            soup = BeautifulSoup(resp.content, "xml")
+            entries = soup.find_all("entry")
+            articles = []
+            for entry in entries[:max_results]:
+                title_tag = entry.find("title")
+                # Atom: <link rel="alternate" href="..."/>
+                link_tag = entry.find("link", attrs={"rel": "alternate"}) or entry.find("link")
+                content_tag = entry.find("content") or entry.find("summary")
+                pub_tag = entry.find("published") or entry.find("updated")
+
+                title = title_tag.get_text(strip=True) if title_tag else ""
+                link = link_tag.get("href", "") if link_tag else ""
+                # Reddit content is HTML; strip tags for description
+                if content_tag:
+                    raw_html = content_tag.get_text()
+                    desc = BeautifulSoup(raw_html, "html.parser").get_text(strip=True)[:300]
+                else:
+                    desc = ""
+                pub = pub_tag.get_text(strip=True) if pub_tag else ""
+
+                if title and link:
+                    articles.append({
+                        "title": title,
+                        "url": link,
+                        "description": desc,
+                        "source": "Reddit",
+                        "published": pub,
+                    })
+            results.setdefault(category, []).extend(articles)
+            logger.info("Reddit r/%s: %d articles", subreddit, len(articles))
+        except Exception as exc:
+            logger.warning("Reddit r/%s parse error: %s", subreddit, exc)
+
+        time.sleep(0.5)
+
+    return results
+
+
+def fetch_espn_rss_feeds() -> list[dict]:
+    """Fetch ESPN RSS feeds for general sports, NBA, MLB, NFL, NHL. Returns flat list."""
+    articles: list[dict] = []
+    for feed_url, sport_label in ESPN_RSS_FEEDS:
+        resp = _safe_request(feed_url, timeout=15)
+        if resp is None:
+            logger.warning("ESPN [%s]: no response", sport_label)
+            continue
+        try:
+            soup = BeautifulSoup(resp.content, "xml")
+            items = soup.find_all("item")
+            count = 0
+            for item in items[:8]:
+                title_tag = item.find("title")
+                link_tag = item.find("link")
+                desc_tag = item.find("description")
+                pub_tag = item.find("pubDate") or item.find("pubdate")
+
+                title = title_tag.get_text(strip=True) if title_tag else ""
+                if link_tag:
+                    link = link_tag.get_text(strip=True) or link_tag.get("href", "")
+                else:
+                    link = ""
+                desc = BeautifulSoup(desc_tag.get_text(), "html.parser").get_text(strip=True)[:300] if desc_tag else ""
+                pub = pub_tag.get_text(strip=True) if pub_tag else ""
+
+                if title and link:
+                    articles.append({
+                        "title": title,
+                        "url": link,
+                        "description": desc,
+                        "source": "ESPN",
+                        "published": pub,
+                    })
+                    count += 1
+            logger.info("ESPN [%s]: %d articles", sport_label, count)
+        except Exception as exc:
+            logger.warning("ESPN [%s] parse error: %s", sport_label, exc)
+        time.sleep(0.3)
+    return articles
+
+
 def collect_all_news() -> dict[str, list[dict]]:
     """
     Collect articles for every category from both NYT APIs and web search.
@@ -318,6 +575,49 @@ def collect_all_news() -> dict[str, list[dict]]:
             categorised[cat].extend(results)
             logger.info("Web [%s] '%s': %d articles", cat, q, len(results))
             time.sleep(0.3)
+
+    # --- Hacker News top stories ---
+    hn_articles = fetch_hacker_news_top()
+    categorised["AI & Tech"].extend(hn_articles)
+    logger.info("Hacker News: %d articles", len(hn_articles))
+    time.sleep(0.3)
+
+    # --- Tech publication RSS feeds ---
+    tech_rss = fetch_tech_rss_feeds()
+    for cat, arts in tech_rss.items():
+        if cat in categorised:
+            categorised[cat].extend(arts)
+    logger.info("Tech RSS total: %d articles", sum(len(v) for v in tech_rss.values()))
+    time.sleep(0.3)
+
+    # --- Wire service RSS feeds (Reuters, AP) ---
+    wire_rss = fetch_wire_rss_feeds()
+    for cat, arts in wire_rss.items():
+        if cat in categorised:
+            categorised[cat].extend(arts)
+    logger.info("Wire RSS total: %d articles", sum(len(v) for v in wire_rss.values()))
+    time.sleep(0.3)
+
+    # --- CNBC RSS feeds ---
+    cnbc_rss = fetch_cnbc_rss_feeds()
+    for cat, arts in cnbc_rss.items():
+        if cat in categorised:
+            categorised[cat].extend(arts)
+    logger.info("CNBC RSS total: %d articles", sum(len(v) for v in cnbc_rss.values()))
+    time.sleep(0.3)
+
+    # --- Reddit Atom feeds ---
+    reddit_rss = fetch_reddit_rss()
+    for cat, arts in reddit_rss.items():
+        if cat in categorised:
+            categorised[cat].extend(arts)
+    logger.info("Reddit total: %d articles", sum(len(v) for v in reddit_rss.values()))
+    time.sleep(0.3)
+
+    # --- ESPN RSS feeds ---
+    espn_articles = fetch_espn_rss_feeds()
+    categorised["NY Sports"].extend(espn_articles)
+    logger.info("ESPN: %d articles", len(espn_articles))
 
     total_raw = sum(len(v) for v in categorised.values())
     logger.info("Collection complete: %d raw articles across %d categories.", total_raw, len(categorised))
@@ -424,7 +724,10 @@ def deduplicate(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
 
 
 def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> dict[str, list[dict]]:
-    """Trim each category to keep roughly *total* articles across all categories."""
+    """
+    Trim each category proportionally to keep roughly *total* articles.
+    Articles must already be sorted by score (highest first) before calling this.
+    """
     counts = {cat: len(arts) for cat, arts in categorised.items()}
     total_available = sum(counts.values())
     if total_available == 0:
@@ -435,6 +738,114 @@ def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> 
         share = max(3, int(total * len(arts) / total_available))
         selected[cat] = arts[:share]
     return selected
+
+
+def _build_scoring_prompt(batch: list[dict]) -> str:
+    """Build the user prompt for GPT-4o article scoring."""
+    lines = []
+    for item in batch:
+        score_id = item["_score_id"]
+        title = item.get("title", "").replace("[Updated] ", "")
+        source = item.get("source", "Unknown")
+        tier = SOURCE_TIERS.get(source, 3)
+        desc = item.get("description", "")[:200]
+        hn_info = ""
+        if item.get("hn_score"):
+            hn_info = f" | HN score={item['hn_score']} comments={item['hn_comments']}"
+        lines.append(
+            f"[{score_id}] {title}\n"
+            f"  Source: {source} (tier {tier}){hn_info}\n"
+            f"  Desc: {desc}"
+        )
+    return "\n\n".join(lines)
+
+
+def score_and_rank_articles(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
+    """
+    Score all articles with GPT-4o and sort each category by score descending.
+    Falls back gracefully: any failure gives affected articles score=50.
+    Never raises — always returns a valid categorised dict.
+    """
+    if not OPENAI_API_KEY:
+        logger.warning("OPENAI_API_KEY not set — skipping LLM scoring.")
+        return categorised
+
+    # Flatten and tag with temp IDs
+    flat: list[dict] = []
+    for cat, arts in categorised.items():
+        for art in arts:
+            art["_score_id"] = len(flat) + 1
+            art["_score_cat"] = cat
+            art["score"] = 50  # default
+            art["score_reason"] = ""
+            flat.append(art)
+
+    if not flat:
+        return categorised
+
+    system_prompt = (
+        "You are a news relevance scorer for Mike, a tech-focused executive in New York. "
+        "Score each article 1-100 based on these criteria:\n"
+        "  - Breaking/time-sensitive news: up to +25\n"
+        "  - Relevance to Mike (AI/tech, VC, markets, big tech, NY sports): up to +35\n"
+        "  - Source credibility tier (tier 1 = highest): up to +20\n"
+        "  - Depth/novelty (non-commodity): up to +15\n"
+        "  - Cross-category significance: up to +5\n"
+        "  Penalties: clickbait -10, duplicate angle -20, non-NY sports -30\n\n"
+        "Return ONLY a JSON array with no markdown, no explanation outside JSON:\n"
+        '[{"id": 1, "score": 87, "reason": "One sentence explaining score."}]'
+    )
+
+    # Process in batches
+    for batch_start in range(0, len(flat), SCORE_BATCH_SIZE):
+        batch = flat[batch_start: batch_start + SCORE_BATCH_SIZE]
+        user_prompt = _build_scoring_prompt(batch)
+
+        try:
+            from openai import OpenAI
+            client = OpenAI()
+            resp = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ],
+                max_tokens=1500,
+                temperature=0.2,
+            )
+            raw = resp.choices[0].message.content.strip()
+            # Strip markdown code fences if present
+            raw = re.sub(r"^```(?:json)?\s*", "", raw)
+            raw = re.sub(r"\s*```$", "", raw)
+            scores = json.loads(raw)
+            id_to_result = {item["id"]: item for item in scores}
+            for art in batch:
+                sid = art["_score_id"]
+                if sid in id_to_result:
+                    art["score"] = int(id_to_result[sid].get("score", 50))
+                    art["score_reason"] = id_to_result[sid].get("reason", "")
+            logger.info(
+                "Scored batch %d-%d (%d articles)",
+                batch_start + 1, batch_start + len(batch), len(batch),
+            )
+        except Exception as exc:
+            logger.warning("GPT scoring failed for batch starting %d: %s — defaulting to 50", batch_start, exc)
+
+    # Sort each category by score descending, clean up temp fields
+    result: dict[str, list[dict]] = {cat: [] for cat in categorised}
+    for art in flat:
+        cat = art.pop("_score_cat")
+        art.pop("_score_id", None)
+        result[cat].append(art)
+
+    for cat in result:
+        result[cat].sort(key=lambda a: a.get("score", 50), reverse=True)
+
+    total_scored = len(flat)
+    avg_score = sum(a.get("score", 50) for a in flat) / total_scored if total_scored else 0
+    logger.info("Scoring complete: %d articles, avg score=%.1f", total_scored, avg_score)
+
+    return result
 
 
 # ===================================================================
@@ -1078,7 +1489,7 @@ def main() -> None:
         sys.exit(0)
 
     # 1. Collect news
-    logger.info("Step 1/7: Collecting news…")
+    logger.info("Step 1/8: Collecting news…")
     raw_news = collect_all_news()
     raw_total = sum(len(v) for v in raw_news.values())
     if raw_total == 0:
@@ -1088,27 +1499,31 @@ def main() -> None:
         logger.warning("Very few articles collected (%d) — possible widespread API failure.", raw_total)
 
     # 2. Deduplicate
-    logger.info("Step 2/7: Deduplicating…")
+    logger.info("Step 2/8: Deduplicating…")
     deduped = deduplicate(raw_news)
 
-    # 3. Select top articles
-    logger.info("Step 3/7: Selecting top articles…")
-    top_articles = select_top_articles(deduped, total=25)
+    # 3. Score and rank articles with LLM
+    logger.info("Step 3/8: Scoring and ranking articles…")
+    scored = score_and_rank_articles(deduped)
+
+    # 4. Select top articles
+    logger.info("Step 4/8: Selecting top articles…")
+    top_articles = select_top_articles(scored, total=25)
     total = sum(len(v) for v in top_articles.values())
     logger.info("Selected %d articles across %d categories.", total, len(top_articles))
     if total == 0:
         logger.warning("All articles were duplicates — briefing will have no new stories.")
 
-    # 4. Process Mike's Picks
-    logger.info("Step 4/7: Processing Mike's Picks…")
+    # 5. Process Mike's Picks
+    logger.info("Step 5/8: Processing Mike's Picks…")
     picks = process_picks()
 
-    # 5. Generate HTML briefing
-    logger.info("Step 5/7: Generating HTML briefing…")
+    # 6. Generate HTML briefing
+    logger.info("Step 6/8: Generating HTML briefing…")
     html = generate_html_briefing(top_articles, picks)
 
-    # 6. Generate podcast
-    logger.info("Step 6/7: Generating podcast script & audio…")
+    # 7. Generate podcast
+    logger.info("Step 7/8: Generating podcast script & audio…")
     script = generate_podcast_script(top_articles, picks)
     audio_path = DATA_DIR / f"MikeCast_{TODAY}.mp3"
     audio_ok = generate_podcast_audio(script, audio_path)
@@ -1117,8 +1532,8 @@ def main() -> None:
         logger.warning("Removed partial/stale audio file: %s", audio_path)
     audio_filename = audio_path.name if audio_ok else None
 
-    # 7. Save & send
-    logger.info("Step 7/7: Saving data & sending email…")
+    # 8. Save & send
+    logger.info("Step 8/8: Saving data & sending email…")
     save_daily_data(html, top_articles, picks, script, audio_filename)
     generate_manifest()
     generate_rss_feed()
