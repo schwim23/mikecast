@@ -1304,23 +1304,19 @@ def send_email(
   <p style="color:#8b949e;font-size:13px;margin:0 0 12px;">Subscribe to MikeCast on your favourite podcast app:</p>
   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
     <tr>
-      <td style="padding:0 5px;">
-        <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449"
-           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#4b1d96;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-          <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1;margin-bottom:3px;">Listen on</div>
-          <div style="font-size:14px;font-weight:700;color:#ffffff;line-height:1;">Apple Podcasts</div>
+      <td style="padding:0 6px;">
+        <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449" style="display:inline-block;text-decoration:none;border:0;">
+          <img src="https://schwim23.github.io/mikecast/data/badge-apple.png" width="180" height="54" alt="Listen on Apple Podcasts" style="display:block;border:0;">
         </a>
       </td>
-      <td style="padding:0 5px;">
-        <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv?si=Ia1BvyEGQLKqZ7TwByXOCQ"
-           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#1db954;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-          <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1;margin-bottom:3px;">Listen on</div>
-          <div style="font-size:14px;font-weight:700;color:#ffffff;line-height:1;">Spotify</div>
+      <td style="padding:0 6px;">
+        <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv?si=Ia1BvyEGQLKqZ7TwByXOCQ" style="display:inline-block;text-decoration:none;border:0;">
+          <img src="https://schwim23.github.io/mikecast/data/badge-spotify.png" width="180" height="54" alt="Listen on Spotify" style="display:block;border:0;">
         </a>
       </td>
-      <td style="padding:0 5px;">
+      <td style="padding:0 6px;">
         <a href="https://schwim23.github.io/mikecast/data/feed.xml"
-           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#f97316;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#f97316;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;vertical-align:middle;">
           <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1;margin-bottom:3px;">Subscribe via</div>
           <div style="font-size:14px;font-weight:700;color:#ffffff;line-height:1;">RSS Feed</div>
         </a>
