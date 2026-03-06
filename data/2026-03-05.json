@@ -1,246 +1,246 @@
 {
   "date": "2026-03-05",
   "date_display": "March 05, 2026",
-  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 05, 2026</p>\n</div>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's briefing focuses on the dynamic interplay between artificial intelligence and global business dynamics. Nvidia's strategic shift away from OpenAI investments signals potential shifts in AI funding, while Broadcom's AI chip business continues to boom. In markets, geopolitical tensions are impacting energy and tech stocks, with Bitcoin surging past $70k. Meanwhile, companies like Tesla and Amazon are pushing the boundaries of AI applications.</p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">TOP STORIES</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI & TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia CEO Jensen Huang announced the company is pulling back from its investments in OpenAI and Anthropic, suggesting a strategic pivot in AI focus. This move sparks questions about Nvidia's future AI investments and broader implications for the AI landscape. <a href=\"https://finance.yahoo.com\" style=\"color:#81d4fa;text-decoration:none;\">Yahoo Finance</a> <a href=\"https://techcrunch.com/2026/03/04/jensen-huang-says-nvidia-is-pulling-back-from-openai-and-anthropic-but-his-explanation-raises-more-questions-than-it-answers/\" style=\"color:#81d4fa;text-decoration:none;\">TechCrunch</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Broadcom reported robust growth in its AI chip revenue, projecting figures significantly above $100 billion next year. This underscores the surging demand for AI-integrated technology, validating Broadcom's strategic investments and positioning it as a key player in the tech sector. <a href=\"https://www.cnbc.com/2026/03/04/broadcom-sees-ai-chip-sales-significantly-over-100-billion-in-2027.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">China's new five-year plan emphasizes widespread AI integration across its economy, highlighting its ambition for technological breakthroughs. This plan could shift global tech dynamics, positioning China as a formidable leader in AI development. <a href=\"https://www.reuters.com\" style=\"color:#81d4fa;text-decoration:none;\">Reuters</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Google has rolled out Gemini’s Canvas in AI Mode to all U.S. users, enhancing the search experience with AI-driven features. This rollout reflects Google's commitment to embedding AI deeper into its services, potentially reshaping how users interact with search technology. <a href=\"https://techcrunch.com\" style=\"color:#81d4fa;text-decoration:none;\">TechCrunch</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS & MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Asian markets experienced volatility due to energy price fears, yet are buoyed by optimism in AI. The recovery in South Korea and Taiwan's stock markets highlights the resilience and bullish sentiment surrounding AI's potential. <a href=\"https://www.nytimes.com/2026/03/05/business/stocks-asia-iran-energy.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Dow Jones closed down 400 points amid ongoing volatility related to the Iran conflict. This fluctuation underscores the geopolitical risks affecting global markets, particularly in energy and tech sectors. <a href=\"https://www.cnbc.com\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Bitcoin surged past $70k, driving a bullish wave across software stocks. This price movement lacks a clear catalyst but suggests increasing investor confidence in digital currencies and their integration with tech stocks. <a href=\"https://www.reddit.com/r/investing/comments/1rl5gkq/bitcoin_just_went_over_70k_and_software_stocks/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Elon Musk claimed Tesla will develop artificial general intelligence (AGI), despite previous inaccurate predictions. Tesla's ambitious AI goals could redefine automotive technology and spur further innovation in the industry. <a href=\"https://electrek.co\" style=\"color:#81d4fa;text-decoration:none;\">Electrek</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Amazon introduced a new AI-driven tool to help sellers visualize and grow their businesses in real time. This move exemplifies Amazon's strategy to leverage AI to enhance user experience and business operations, setting new standards in e-commerce. <a href=\"https://www.aboutamazon.com\" style=\"color:#81d4fa;text-decoration:none;\">About Amazon</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple unveiled the new MacBook Pro with M5 Pro and M5 Max chips, promising enhanced performance and efficiency. This launch reinforces Apple's commitment to leading innovation in personal computing hardware. <a href=\"https://9to5mac.com\" style=\"color:#81d4fa;text-decoration:none;\">9to5Mac</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Yankees are reportedly considering trading Jasson Dominguez, potentially acquiring a package centered around MLB's No. 98 overall prospect. This strategic move could reshape the team's future roster and competitive strategy. <a href=\"https://sports.yahoo.com\" style=\"color:#81d4fa;text-decoration:none;\">Yahoo Sports</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Oklahoma City Thunder defeated the Knicks at Madison Square Garden in a potential NBA Finals preview. The match highlighted the Knicks' challenges with refereeing decisions and Shai Gilgeous-Alexander's impactful play. <a href=\"https://www.usatoday.com\" style=\"color:#81d4fa;text-decoration:none;\">USA Today</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Mitchell Robinson of the Knicks has openly discussed his free-throw struggles, dismissing unconventional solutions as ineffective. His candidness reflects ongoing challenges that could impact the Knicks' performance if unresolved. <a href=\"https://nypost.com\" style=\"color:#81d4fa;text-decoration:none;\">New York Post</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS & INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">AI continues to dominate tech discussions, with significant investments and strategic shifts by major companies like Nvidia and Broadcom. - Geopolitical tensions, particularly involving Iran, are creating volatility in global markets, impacting energy and tech sectors. - The surge in Bitcoin highlights a growing confidence in digital currencies, influencing broader market movements. - Companies are increasingly integrating AI to enhance product offerings and operational efficiency, as seen with Amazon and Apple's latest initiatives.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor Nvidia's future investment strategies and how its withdrawal from OpenAI impacts the broader AI funding environment. - Watch for further market reactions to geopolitical tensions, especially regarding energy prices and tech stock volatility. - Track the adoption and impact of Google's Gemini’s Canvas on user engagement and search technology trends. - Follow developments in Tesla's AGI ambitions and their potential impact on the automotive and tech industries.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 05, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 05, 2026</p>\n</div>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI's rapid advancements with GPT-5.4 highlight the ongoing race in AI capabilities, while controversy brews over military applications. Market volatility persists amid geopolitical tensions, with oil prices surging due to the Iran conflict. Major firms like Google and Amazon face significant operational and legal challenges, underlining the dynamic landscape of tech and business.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI & TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI's new GPT-5.4 models, including GPT-5.4 Thinking and GPT-5.4 Pro, expand AI's ability to perform complex tasks, such as financial analysis via plugins for Microsoft Excel and Google Sheets. These enhancements come as OpenAI faces backlash over its military-linked activities, raising ethical questions about AI's role in defense. <a href=\"https://venturebeat.com/technology/openai-launches-gpt-5-4-with-native-computer-use-mode-financial-plugins-for\" style=\"color:#81d4fa;text-decoration:none;\">VentureBeat</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Amazon experienced a significant outage affecting over 20,000 users who struggled with accessing product details and checkout systems. The disruption was attributed to a 'software code deployment,' highlighting the complexities and risks inherent in maintaining massive online retail platforms. <a href=\"https://www.cnbc.com/2026/03/05/amazon-online-store-suffers-outage-for-some-users.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Anthropic is challenging its designation as a 'supply chain risk' by the Pentagon, a label that could severely impact its business with government entities. This legal battle underscores the increasing scrutiny and geopolitical implications of AI technologies in national security contexts. <a href=\"https://techcrunch.com/2026/03/05/anthropic-to-challenge-dods-supply-chain-label-in-court/\" style=\"color:#81d4fa;text-decoration:none;\">TechCrunch</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS & MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oil prices have surged to their highest since 2024, driven by fears surrounding the Iran conflict. This spike is contributing to market volatility, with the S&P 500 now in negative territory for the year. The situation underscores how geopolitical tensions can rapidly influence global commodity markets. <a href=\"https://www.nytimes.com/2026/03/05/business/oil-stocks-iran-war.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Dow is experiencing substantial losses, down nearly 785 points amid the oil price rise, marking its worst week since October. Investors are navigating a turbulent landscape with conflicting signals from geopolitical events and domestic economic data. <a href=\"https://www.cnbc.com/2026/03/05/stock-market-today-live-updates.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Better's new ChatGPT app promises to revolutionize mortgage processing, reducing the time required to just 47 seconds from weeks. This innovation targets competitors like Rocket and UWM, highlighting the transformative potential of AI in streamlining financial services. <a href=\"https://www.cnbc.com/2026/03/05/mortgages-in-47-seconds-betters-new-chatgpt-app-targets-lenders-rocket-and-uwm.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Google and Alphabet face a lawsuit over alleged safety failures in their AI chatbots. This legal challenge reflects the broader concerns about AI's safety and reliability, especially as these technologies become more embedded in daily life. <a href=\"https://theaiinsider.tech\" style=\"color:#81d4fa;text-decoration:none;\">AI Insider</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Amazon's outage, attributed to a software deployment error, highlights ongoing challenges in maintaining robust digital infrastructure. Such disruptions can have significant ripple effects on consumer trust and operational efficiency. <a href=\"https://arstechnica.com/gadgets/2026/03/amazon-appears-to-be-down-with-over-20000-reported-problems/\" style=\"color:#81d4fa;text-decoration:none;\">Ars Technica</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Microsoft is attracting investor attention with calls to 'buy the dip,' following market fluctuations. This reflects optimism about Microsoft's resilience and long-term growth potential despite short-term market challenges. <a href=\"https://seekingalpha.com\" style=\"color:#81d4fa;text-decoration:none;\">Seeking Alpha</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Speculation is rife that the New York Yankees might sign a $330 million superstar from the Phillies, stirring excitement and strategic considerations in baseball's trading circles. The move could significantly impact team dynamics and league standings. <a href=\"https://timesofindia.indiatimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The Times of India</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Knicks faced a narrow defeat against the Oklahoma City Thunder, with key players Isaiah Hartenstein and Alex Caruso leaving the game early due to injuries. This loss could affect the Knicks' strategy and performance in upcoming games. <a href=\"https://www.nba.com\" style=\"color:#81d4fa;text-decoration:none;\">NBA</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Minnesota Twins and New York Yankees' recent game showcased intense competition, with implications for both teams' standings and playoff aspirations. The Yankees' performance remains a focal point for fans and analysts alike. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS & INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">The rapid iteration of AI models like GPT-5.4 emphasizes the race for technological dominance, with ethical concerns about military applications becoming increasingly prominent. - Geopolitical tensions, especially related to the Iran conflict, are driving volatility in global markets, notably impacting commodity prices and stock indices. - Legal and operational challenges faced by major tech firms like Google and Amazon underscore the complexity of maintaining trust and efficiency in digital ecosystems. - The integration of AI in financial services, as seen with Better's mortgage app, exemplifies how technology can disrupt traditional industries by enhancing speed and efficiency.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Further developments in OpenAI's handling of military applications and the associated ethical debates could significantly influence public and private sector AI strategies. - The evolving situation in the Iran conflict and its impact on oil prices and market stability will remain a critical focus for investors and policymakers. - The outcome of Anthropic's legal challenge against the Pentagon's supply chain risk designation could set important precedents for AI companies interacting with government entities. - Watch for any further disruptions or strategic shifts from Amazon as it addresses the aftermath of its recent outage and works to bolster consumer confidence.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 05, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
   "articles": {
     "AI & Tech": [
       {
-        "title": "[Updated] Tech stocks today: Nvidia CEO Jensen Huang suggests end of OpenAI investments, Apple unveils MacBook Neo - Yahoo Finance",
-        "url": "https://finance.yahoo.com",
-        "description": "Tech stocks today: Nvidia CEO Jensen Huang suggests end of OpenAI investments, Apple unveils MacBook NeoYahoo FinanceNvidia CEO Huang says $30 billion OpenAI investment 'might be the last'CNBCJensen Huang says Nvidia is pulling back from OpenAI and Anthropic, but his explanation raises more questions than it answersTechCrunch",
-        "source": "Yahoo Finance",
-        "published": "",
-        "score": 87,
-        "score_reason": "Highly relevant tech news with market implications."
+        "title": "OpenAI introduces GPT-5.4 with more knowledge-work capability",
+        "url": "https://arstechnica.com/ai/2026/03/openai-introduces-gpt-5-4-with-more-knowledge-work-capability/",
+        "description": "Updates come amid user blowback over the company's Pentagon deal.",
+        "source": "Ars Technica",
+        "published": "Thu, 05 Mar 2026 20:55:25 +0000",
+        "score": 90,
+        "score_reason": "OpenAI's GPT-5.4 release is highly relevant to AI and tech sectors."
       },
       {
-        "title": "Broadcom CEO Hock Tan sees AI chip revenue 'significantly' above $100 billion next year",
-        "url": "https://www.cnbc.com/2026/03/04/broadcom-sees-ai-chip-sales-significantly-over-100-billion-in-2027.html",
-        "description": "Broadcom reported that AI revenue more than doubled in the latest quarter and is projecting continued growth as demand soars.",
-        "source": "CNBC",
-        "published": "Thu, 05 Mar 2026 01:45:15 GMT",
-        "score": 87,
-        "score_reason": "AI and tech relevance with market impact and credible source."
+        "title": "OpenAI launches GPT-5.4 with native computer use mode, financial plugins for Microsoft Excel, Google Sheets",
+        "url": "https://venturebeat.com/technology/openai-launches-gpt-5-4-with-native-computer-use-mode-financial-plugins-for",
+        "description": "The AI updates aren't slowing down. Literally two days after OpenAI launched a new underlying AI model for ChatGPT calledGPT-5.3 Instant,the company hasunveiled another, even more massive upgrade: GPT-5.4.Actually, GPT-5.4 comes in two varieties:GPT-5.4 Thinking and GPT-5.4 Pro, the latter designed ",
+        "source": "VentureBeat",
+        "published": "Thu, 05 Mar 2026 18:00:00 GMT",
+        "score": 88,
+        "score_reason": "OpenAI's GPT-5.4 update with new features is significant for AI and tech."
       },
       {
-        "title": "A Word to the Wise: Don’t Trust A.I. to File Your Taxes",
-        "url": "https://www.nytimes.com/2026/03/05/technology/artificial-intelligence-taxes-tax-refund.html",
-        "description": "The world’s smartest technology is no match for the U.S. tax code.",
+        "title": "Meet the A.I. Prospectors Tapping a Billion-Dollar Gusher",
+        "url": "https://www.nytimes.com/2026/03/05/technology/ai-data-centers-land-cloverleaf-infrastructure.html",
+        "description": "Brian Janous, a former Microsoft executive, and his firm Cloverleaf have become modern-day land men, packaging electricity and land for data centers.",
         "source": "The New York Times",
-        "published": "2026-03-05T05:01:46-05:00",
+        "published": "2026-03-05T11:30:12-05:00",
+        "score": 87,
+        "score_reason": "High relevance to AI/tech and VC, credible source, novel angle on data centers."
+      },
+      {
+        "title": "Amazon appears to be down, with over 20,000 reported problems",
+        "url": "https://arstechnica.com/gadgets/2026/03/amazon-appears-to-be-down-with-over-20000-reported-problems/",
+        "description": "Problems viewing products and checking out.",
+        "source": "Ars Technica",
+        "published": "Thu, 05 Mar 2026 21:06:05 +0000",
+        "score": 87,
+        "score_reason": "Amazon outage is breaking news affecting big tech and markets."
+      },
+      {
+        "title": "Pentagon Officially Notifies Anthropic It Is a ‘Supply Chain Risk’",
+        "url": "https://www.nytimes.com/2026/03/05/technology/anthropic-supply-chain-risk-defense-department.html",
+        "description": "Anthropic has said it will sue the Defense Department over the designation, which could prevent the start-up from doing business with the U.S. government.",
+        "source": "The New York Times",
+        "published": "2026-03-05T18:03:40-05:00",
         "score": 85,
-        "score_reason": "Relevant AI/tech angle with credible source and novelty."
+        "score_reason": "Breaking news on AI company Anthropic with potential market impact, credible source."
       },
       {
-        "title": "Broadcom's custom AI chip business stays hot and gives the bulls a much-needed win",
-        "url": "https://www.cnbc.com/2026/03/04/broadcoms-custom-ai-chip-business-stays-hot-and-gives-the-bulls-a-much-needed-win-.html",
-        "description": "Shares of Broadcom rose about 5% in extended trading after its earnings report underscored the strength of its custom chip business.",
-        "source": "CNBC",
-        "published": "Thu, 05 Mar 2026 01:54:14 GMT",
-        "score": 85,
-        "score_reason": "AI and tech relevance with market impact and credible source."
-      },
-      {
-        "title": "[Updated] Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks Reel - Crunchbase News",
-        "url": "https://news.crunchbase.com",
-        "description": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks ReelCrunchbase News",
-        "source": "Crunchbase News",
-        "published": "",
-        "score": 80,
-        "score_reason": "Highly relevant VC/market news with credible source."
-      },
-      {
-        "title": "Jensen Huang says Nvidia is pulling back from OpenAI and Anthropic, but his explanation raises more questions than it answers",
-        "url": "https://techcrunch.com/2026/03/04/jensen-huang-says-nvidia-is-pulling-back-from-openai-and-anthropic-but-his-explanation-raises-more-questions-than-it-answers/",
-        "description": "Nvidia CEO Jensen Huang said Wednesday that his company's investments in OpenAI and Anthropic will likely be its last — but his explanation may not tell the whole story.",
-        "source": "TechCrunch",
-        "published": "Thu, 05 Mar 2026 01:08:28 +0000",
-        "score": 80,
-        "score_reason": "Highly relevant tech news with credible source."
-      },
-      {
-        "title": "Online harassment is entering its AI era",
-        "url": "https://www.technologyreview.com/2026/03/05/1133962/online-harassment-is-entering-its-ai-era/",
-        "description": "Scott Shambaugh didn’t think twice when he denied an AI agent’s request to contribute to matplotlib, a software library that he helps manage. Like many open-source projects, matplotlib has been overwhelmed by a glut of AI code contributions, and so Shambaugh and his fellow maintainers have institute",
-        "source": "MIT Technology Review",
-        "published": "Thu, 05 Mar 2026 10:00:00 +0000",
-        "score": 80,
-        "score_reason": "AI and tech relevance with credible source and novel angle."
-      },
-      {
-        "title": "[Updated] Sam Altman admits OpenAI can’t control Pentagon’s use of AI - The Guardian",
-        "url": "https://www.theguardian.com",
-        "description": "Sam Altman admits OpenAI can’t control Pentagon’s use of AIThe GuardianSome OpenAI staff are fuming about its Pentagon dealCNNRead Anthropic CEO’s Memo Attacking OpenAI’s ‘Mendacious’ Pentagon AnnouncementThe Information",
-        "source": "The Guardian",
-        "published": "",
-        "score": 75,
-        "score_reason": "Relevant AI/tech angle with credible source."
-      },
-      {
-        "title": "[Updated] Google Search rolls out Gemini’s Canvas in AI Mode to all US users - TechCrunch",
-        "url": "https://techcrunch.com",
-        "description": "Google Search rolls out Gemini’s Canvas in AI Mode to all US usersTechCrunch",
-        "source": "TechCrunch",
-        "published": "",
-        "score": 75,
-        "score_reason": "Relevant AI/tech angle with credible source."
-      },
-      {
-        "title": "[Updated] China's new five-year plan calls for AI throughout its economy, tech breakthroughs - Reuters",
-        "url": "https://www.reuters.com",
-        "description": "China's new five-year plan calls for AI throughout its economy, tech breakthroughsReuters",
-        "source": "Reuters",
-        "published": "",
-        "score": 75,
-        "score_reason": "Relevant AI/tech angle with credible source."
-      },
-      {
-        "title": "How much wildfire prevention is too much?",
-        "url": "https://www.technologyreview.com/2026/03/05/1133960/wildfire-prevention-limits/",
-        "description": "The race to prevent the worst wildfires has been an increasingly high-tech one. Companies are proposing AI fire detection systems and drones that can stamp out early blazes. And now, one Canadian startup says it’s going after lightning. Lightning-sparked fires can be a big deal: The Canadian wildfir",
-        "source": "MIT Technology Review",
-        "published": "Thu, 05 Mar 2026 11:00:00 +0000",
-        "score": 75,
-        "score_reason": "AI and tech relevance with credible source and novel angle."
-      },
-      {
-        "title": "[Updated] Anthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feud - The Washington Post",
-        "url": "https://www.washingtonpost.com",
-        "description": "Anthropic’s AI tool Claude central to U.S. campaign in Iran, amid a bitter feudThe Washington PostDefense tech companies are dropping Claude after Pentagon's Anthropic blacklistCNBCClaude AI Helped Bomb Iran. But How Exactly?Bloomberg.com",
-        "source": "The Washington Post",
-        "published": "",
-        "score": 70,
-        "score_reason": "Relevant AI/tech angle with credible source."
-      },
-      {
-        "title": "AMD will bring its “Ryzen AI” processors to standard desktop PCs for first time",
-        "url": "https://arstechnica.com/gadgets/2026/03/amd-ryzen-ai-400-cpus-will-bring-upgraded-graphics-to-socket-am5-desktops/",
-        "description": "HN score: 94 | Comments: 73",
+        "title": "Labor market impacts of AI: A new measure and early evidence",
+        "url": "https://www.anthropic.com/research/labor-market-impacts",
+        "description": "HN score: 85 | Comments: 97",
         "source": "Hacker News",
-        "published": "2026-03-02T11:51:57Z",
-        "hn_score": 94,
-        "hn_comments": 73,
-        "score": 70,
-        "score_reason": "Relevant AI/tech angle with moderate engagement."
+        "published": "2026-03-05T22:55:01Z",
+        "hn_score": 85,
+        "hn_comments": 97,
+        "score": 85,
+        "score_reason": "AI's impact on labor markets is highly relevant to tech and VC, with a strong discussion on Hacker News."
+      },
+      {
+        "title": "OpenAI Had Banned Military Use. The Pentagon Tested Its Models Through Microsoft Anyway",
+        "url": "https://www.wired.com/story/openai-defense-department-ban-military-use-microsoft/",
+        "description": "Sources allege the Defense Department experimented with Microsoft’s version of OpenAI technology before the ChatGPT-maker lifted its prohibition on military applications.",
+        "source": "Wired",
+        "published": "Thu, 05 Mar 2026 22:00:00 +0000",
+        "score": 85,
+        "score_reason": "OpenAI's military use controversy is relevant to AI and tech ethics."
+      },
+      {
+        "title": "Amazon says hours-long outage was triggered by 'software code deployment'",
+        "url": "https://www.cnbc.com/2026/03/05/amazon-online-store-suffers-outage-for-some-users.html",
+        "description": "Amazon users reported trouble accessing checkout and account information, as well as viewing product detail pages.",
+        "source": "CNBC",
+        "published": "Fri, 06 Mar 2026 01:25:12 GMT",
+        "score": 84,
+        "score_reason": "Amazon's outage explanation is important for tech and market stakeholders."
+      },
+      {
+        "title": "US reportedly considering sweeping new chip export controls",
+        "url": "https://techcrunch.com/2026/03/05/us-reportedly-considering-sweeping-new-chip-export-controls/",
+        "description": "In an alleged drafted proposal, the U.S. government would play a role in every chip export sale regardless of which country it's coming from.",
+        "source": "TechCrunch",
+        "published": "Thu, 05 Mar 2026 21:24:50 +0000",
+        "score": 83,
+        "score_reason": "Potential new chip export controls are significant for tech and markets."
+      },
+      {
+        "title": "FBI investigating hack on its wiretap and surveillance systems: Report",
+        "url": "https://techcrunch.com/2026/03/05/fbi-investigating-hack-on-its-wiretap-and-surveillance-systems-report/",
+        "description": "Hackers allegedly broke into the FBI’s networks, according to a report by CNN.",
+        "source": "TechCrunch",
+        "published": "Thu, 05 Mar 2026 21:33:24 +0000",
+        "score": 82,
+        "score_reason": "FBI hack investigation is breaking news with tech and security implications."
+      },
+      {
+        "title": "The Smart Home Never Quite Worked. Now It’s Getting an A.I. Reboot.",
+        "url": "https://www.nytimes.com/2026/03/05/technology/personaltech/ai-smart-home-google-gemini-amazon-alexa.html",
+        "description": "Amazon and Google think that artificially intelligent assistants like Alexa+ and Gemini will speed up the process of setting up a smart home, but many problems remain unsolved.",
+        "source": "The New York Times",
+        "published": "2026-03-05T11:30:06-05:00",
+        "score": 80,
+        "score_reason": "Relevant to AI/tech with big tech involvement, credible source, novel angle on smart homes."
+      },
+      {
+        "title": "Can Anthropic Make Peace With the Pentagon?",
+        "url": "https://www.nytimes.com/2026/03/05/business/dealbook/anthropic-pentagon-ai.html",
+        "description": "The artificial intelligence start-up has reportedly resumed talks with the Defense Department over use of its tools, with high stakes for both.",
+        "source": "The New York Times",
+        "published": "2026-03-05T13:07:55Z",
+        "score": 80,
+        "score_reason": "Relevant to AI/tech and markets, credible source, ongoing development."
+      },
+      {
+        "title": "AWS launches a new AI agent platform specifically for healthcare",
+        "url": "https://techcrunch.com/2026/03/05/aws-amazon-connect-health-ai-agent-platform-health-care-providers/",
+        "description": "AWS is launching Amazon Connect Health, an AI agent platform that will help with patient scheduling, documentation, and patient verification.",
+        "source": "TechCrunch",
+        "published": "Thu, 05 Mar 2026 21:54:37 +0000",
+        "score": 80,
+        "score_reason": "AWS's new AI platform for healthcare is a notable development in tech and AI."
+      },
+      {
+        "title": "Anthropic to challenge DOD’s supply-chain label in court",
+        "url": "https://techcrunch.com/2026/03/05/anthropic-to-challenge-dods-supply-chain-label-in-court/",
+        "description": "Anthropic CEO Dario Amodei said he plans to challenge the Department of Defense's designation of the AI firm as a supply-chain risk. He claims most Anthropic customers are unaffected by the label.",
+        "source": "TechCrunch",
+        "published": "Fri, 06 Mar 2026 01:28:54 +0000",
+        "score": 78,
+        "score_reason": "Anthropic's legal challenge against the DOD is significant for AI and tech sectors."
       }
     ],
     "Business & Markets": [
       {
-        "title": "What the Extraordinary Market Volatility in Asia Says About Energy and A.I.",
-        "url": "https://www.nytimes.com/2026/03/05/business/stocks-asia-iran-energy.html",
-        "description": "Stocks in South Korea and Taiwan, the center of global chip making, plunged on fears about energy prices. Their recovery shows the bullishness over artificial intelligence.",
+        "title": "Oil Jumps, Stocks Drop as Investors Grapple With Iran War’s Impact",
+        "url": "https://www.nytimes.com/2026/03/05/business/oil-stocks-iran-war.html",
+        "description": "Oil futures are at their highest level since July 2024. The S&P 500 is now in negative territory for the year.",
         "source": "The New York Times",
-        "published": "2026-03-05T01:35:40-05:00",
-        "score": 75,
-        "score_reason": "AI and market relevance with credible source and cross-category significance."
+        "published": "2026-03-05T14:10:02-05:00",
+        "score": 60,
+        "score_reason": "Market impact of geopolitical events, credible source."
       },
       {
-        "title": "[Updated] Dow closes down 400 points after falling as much as 1,200 points as Iran conflict volatility continues: Live updates - CNBC",
-        "url": "https://www.cnbc.com",
-        "description": "Dow closes down 400 points after falling as much as 1,200 points as Iran conflict volatility continues: Live updatesCNBC",
+        "title": "Mortgages in 47 seconds: Better’s new ChatGPT app targets lenders Rocket and UWM",
+        "url": "https://www.cnbc.com/2026/03/05/mortgages-in-47-seconds-betters-new-chatgpt-app-targets-lenders-rocket-and-uwm.html",
+        "description": "Creating a mortgage has been one of the most time-consuming corners of American finance, with lenders relying on dozens of steps that can take weeks.",
         "source": "CNBC",
-        "published": "",
-        "score": 70,
-        "score_reason": "Market relevance with credible source and time-sensitive."
+        "published": "Thu, 05 Mar 2026 20:42:54 GMT",
+        "score": 60,
+        "score_reason": "AI application in finance, relevant and from a credible source."
       },
       {
-        "title": "[Updated] Top Fed Official, Wary of Inflation, Calls for Extended Rate Pause - The New York Times",
-        "url": "https://www.nytimes.com",
-        "description": "Top Fed Official, Wary of Inflation, Calls for Extended Rate PauseThe New York Times",
-        "source": "The New York Times",
-        "published": "",
-        "score": 70,
-        "score_reason": "Market relevance with credible source and cross-category significance."
+        "title": "Dow futures tick higher, but index heads for worst week since October on oil surge: Live updates",
+        "url": "https://www.cnbc.com/2026/03/05/stock-market-today-live-updates.html",
+        "description": "The Dow Industrials lost nearly 785 points in Thursday’s sell-off as oil prices leapt. The blue-chip index is on track for its worst week since October.",
+        "source": "CNBC",
+        "published": "Fri, 06 Mar 2026 02:30:51 GMT",
+        "score": 55,
+        "score_reason": "Market update with relevance to Mike, credible source."
       },
       {
-        "title": "Bitcoin just went over $70k and software stocks are ripping. What happened?",
-        "url": "https://www.reddit.com/r/investing/comments/1rl5gkq/bitcoin_just_went_over_70k_and_software_stocks/",
-        "description": "Bitcoin just pushed past $70k, and at the same time a lot of software / tech stocks are moving up pretty aggressively as well. I’m seeing strong moves across names in the software space and the IGM/IGV ETFs also had a lot of volume. I don’t see any obvious catalyst that suddenly changed sentiment th",
-        "source": "Reddit",
-        "published": "2026-03-05T02:31:11+00:00",
-        "score": 70,
-        "score_reason": "Relevant to tech and markets, moderate source credibility, breaking news."
-      },
-      {
-        "title": "[Updated] Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp) - Bloomberg.com",
-        "url": "https://www.bloomberg.com",
-        "description": "Sequoia, Founders Fund Back $70 Million Raise for Latam’s ARQ (DolarApp)Bloomberg.com",
-        "source": "Bloomberg.com",
+        "title": "[Updated] Stock market today: Dow, S&P 500, Nasdaq rise on Iran war hopes, upbeat jobs data - Yahoo Finance",
+        "url": "https://finance.yahoo.com",
+        "description": "Stock market today: Dow, S&P 500, Nasdaq rise on Iran war hopes, upbeat jobs dataYahoo FinanceStock Market News From March 5, 2026: Dow Sinks Nearly 800 Points, Oil Tops $80Barron'sDow futures tick higher, but index heads for worst week since October on oil surge: Live updatesCNBCStock Market News, March 5, 2026: Dow Drops 1.6%, Oil Pushes Above $80WSJDow Jones Futures Fall, Oil Prices Rise Again; AI Chip Giant Broadcom JumpsInvestor's Business DailyKorean Stocks to Bounce, US Inflation Fears Ease: Markets WrapBloombergStock Market News, March 5, 2026: S&P 500 and Nasdaq decline, Dow turns negative for the year; Broadcom gains after earnings; oil climbsMarketWatchMarkets News, March 5, 2026: U.S. Indexes Tumble as Oil Hits $80 a Barrel; Dow Closes Down Almost 800 PointsInvestopediaIran Hits Gulf Tanker, Dow Drops 784 Points: Stock Market TodayKiplinger",
+        "source": "Yahoo Finance",
         "published": "",
-        "score": 65,
-        "score_reason": "VC relevance with credible source."
+        "score": 50,
+        "score_reason": "Market update with some relevance to Mike, but from a lower credibility source."
       }
     ],
     "Companies": [
       {
-        "title": "[Updated] Musk claims Tesla will ‘make AGI’ after years of wrong AI predictions - Electrek",
-        "url": "https://electrek.co",
-        "description": "Musk claims Tesla will ‘make AGI’ after years of wrong AI predictionsElectrek",
-        "source": "Electrek",
+        "title": "Lawsuit Filed Against Google and Alphabet Over Alleged AI Chatbot Safety Failures - AI Insider",
+        "url": "https://theaiinsider.tech",
+        "description": "Lawsuit Filed Against Google and Alphabet Over Alleged AI Chatbot Safety FailuresAI Insider",
+        "source": "AI Insider",
         "published": "",
-        "score": 80,
-        "score_reason": "Highly relevant to AI/tech, moderate source credibility, novel claim."
+        "score": 70,
+        "score_reason": "Relevant to AI and tech."
       },
       {
-        "title": "[Updated] Amazon’s new AI experience helps sellers visualize and grow their business in real time—here's how it works - About Amazon",
-        "url": "https://www.aboutamazon.com",
-        "description": "Amazon’s new AI experience helps sellers visualize and grow their business in real time—here's how it worksAbout Amazon",
-        "source": "About Amazon",
-        "published": "",
-        "score": 75,
-        "score_reason": "Highly relevant to AI/tech, moderate source credibility, novel application."
-      },
-      {
-        "title": "[Updated] Apple launches new MacBook Pro with M5 Pro and M5 Max chips - 9to5Mac",
-        "url": "https://9to5mac.com",
-        "description": "Apple launches new MacBook Pro with M5 Pro and M5 Max chips9to5Mac",
-        "source": "9to5Mac",
+        "title": "[Updated] Microsoft: Buy The Dip, Or Regret It Forever (NASDAQ:MSFT) - Seeking Alpha",
+        "url": "https://seekingalpha.com",
+        "description": "Microsoft: Buy The Dip, Or Regret It Forever (NASDAQ:MSFT)Seeking Alpha",
+        "source": "Seeking Alpha",
         "published": "",
         "score": 65,
-        "score_reason": "Relevant to tech, moderate source credibility, new product launch."
+        "score_reason": "Relevant to big tech and markets."
+      },
+      {
+        "title": "[Updated] Is Google Stock Still Cheap or Is It Time to Let Go? - Nasdaq",
+        "url": "https://www.nasdaq.com",
+        "description": "Is Google Stock Still Cheap or Is It Time to Let Go?Nasdaq",
+        "source": "Nasdaq",
+        "published": "",
+        "score": 65,
+        "score_reason": "Relevant to big tech and markets."
       }
     ],
     "NY Sports": [
       {
-        "title": "[Updated] Proposed Yankees trade New York part ways with Jasson Dominguez, land package centered around MLB's No. 98 overall prospect - Yahoo Sports",
-        "url": "https://sports.yahoo.com",
-        "description": "Proposed Yankees trade New York part ways with Jasson Dominguez, land package centered around MLB's No. 98 overall prospectYahoo Sports",
-        "source": "Yahoo Sports",
-        "published": "",
-        "score": 70,
-        "score_reason": "Relevant to NY sports, moderate source credibility, potential trade news."
-      },
-      {
-        "title": "[Updated] Thunder top Knicks at MSG in potential NBA Finals preview: Highlights - USA Today",
-        "url": "https://www.usatoday.com",
-        "description": "Thunder top Knicks at MSG in potential NBA Finals preview: HighlightsUSA TodayKnicks livid with refs over favorable Shai Gilgeous-Alexander whistles: ‘Does a great job of convincing’New York PostOklahoma City Thunder vs New York Knicks Mar 4, 2026 Box ScoresNBA",
-        "source": "USA Today",
-        "published": "",
-        "score": 65,
-        "score_reason": "Relevant to NY sports, moderate source credibility, recent game highlights."
-      },
-      {
-        "title": "[Updated] What Mitchell Robinson blames for his worsening Knicks free-throw woes as he dismisses ‘silly as hell’ idea for fix - New York Post",
-        "url": "https://nypost.com",
-        "description": "What Mitchell Robinson blames for his worsening Knicks free-throw woes as he dismisses ‘silly as hell’ idea for fixNew York Post",
-        "source": "New York Post",
-        "published": "",
-        "score": 60,
-        "score_reason": "Relevant to NY sports, moderate source credibility, player performance."
-      },
-      {
-        "title": "NFL insider says to 'keep an eye' on the New York Giants for future Hall of Famer that's set to be a free agent - Yardbarker",
-        "url": "https://www.yardbarker.com",
-        "description": "NFL insider says to 'keep an eye' on the New York Giants for future Hall of Famer that's set to be a free agentYardbarker",
-        "source": "Yardbarker",
+        "title": "[Updated] MLB trade rumors: New York Yankees could sign $330 million Philadelphia Phillies franchise superstar to f - The Times of India",
+        "url": "https://timesofindia.indiatimes.com",
+        "description": "MLB trade rumors: New York Yankees could sign $330 million Philadelphia Phillies franchise superstar to fThe Times of India",
+        "source": "The Times of India",
         "published": "",
         "score": 55,
-        "score_reason": "Relevant to NY sports, moderate source credibility, speculative."
+        "score_reason": "Relevant to NY sports."
+      },
+      {
+        "title": "[Updated] Minnesota Twins at New York Yankees Game Story, Scores/Highlights - 03/05/2026 - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "Minnesota Twins at New York Yankees Game Story, Scores/Highlights - 03/05/2026MLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "Relevant to NY sports."
+      },
+      {
+        "title": "[Updated] New York Yankees’ Hot Trade Rumor Just Doesn’t Add Up - heavy.com",
+        "url": "https://heavy.com",
+        "description": "New York Yankees’ Hot Trade Rumor Just Doesn’t Add Upheavy.com",
+        "source": "heavy.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "Relevant to NY sports."
+      },
+      {
+        "title": "Oklahoma City Thunder vs New York Knicks Mar 4, 2026 Box Scores - NBA",
+        "url": "https://www.nba.com",
+        "description": "Oklahoma City Thunder vs New York Knicks Mar 4, 2026 Box ScoresNBAThunder 103-100 Knicks (Mar 4, 2026) Game RecapESPNOKC Thunder See Isaiah Hartenstein, Alex Caruso Leave Knicks Game EarlySports Illustrated",
+        "source": "NBA",
+        "published": "",
+        "score": 50,
+        "score_reason": "Relevant to NY sports."
       }
     ]
   },
   "mikes_picks": [],
-  "podcast_script": "[INTRO]\n\nHey there, welcome to MikeCast, your daily dose of news with a dash of insight and a sprinkle of opinion. I'm your host, Mike, catching you up on this March 5th, 2026. Today, we’re diving into some sizzling tech updates — Nvidia's pulling back from OpenAI, Broadcom's AI chip bonanza, and why AI might not be your best tax buddy. Plus, we'll check out what's shaking in the business world, peek into some big company moves, and wrap up with a quick hit of NY sports. Let’s jump right in!\n\n[AI & TECH]\n\nFirst up, Nvidia CEO Jensen Huang dropped a bombshell by announcing Nvidia's scaling back its investments in OpenAI and Anthropic. Huang suggested their $30 billion investment might be their last. Now, why's this a big deal? Nvidia's been a major player in AI hardware, so pulling back could signal a shift in strategy or maybe a focus on new ventures. But really, Huang's explanation left us with more questions than answers. Is this a strategic pivot or a reaction to market saturation?\n\nMeanwhile, Broadcom is riding high on the AI wave, with CEO Hock Tan predicting AI chip revenue to soar past $100 billion next year. That’s not just a number — it’s a statement about the growing reliance on AI across industries. This surge underscores the increasing demand for the tech that makes AI tick, and it’s giving Broadcom's stock a nice boost.\n\nBut, a word to the wise: don’t trust AI to file your taxes just yet. According to The New York Times, even the smartest AI can’t navigate the labyrinth of the U.S. tax code. So if you’re thinking about offloading your tax headaches to a bot, maybe hold off a bit.\n\nAlright, switching gears, let’s talk business.\n\n[BUSINESS & MARKETS]\n\nThe Dow took a bit of a rollercoaster ride, closing down 400 points after a volatile day driven by the ongoing conflict in Iran. Why does this matter to you? Well, it highlights how geopolitical tensions can create ripples in the stock market, impacting everything from your 401(k) to energy prices.\n\nSpeaking of energy, market volatility in Asia, especially in chip-making hubs like South Korea and Taiwan, was a thing. But their recovery shows the bullish sentiment around AI. It seems like the AI optimism is outshining energy fears, at least for now.\n\nAnd Bitcoin enthusiasts, hold your hats — Bitcoin surged past $70k! This crypto rally coincided with a spike in software stocks, but the catalyst is still a bit of a mystery. Could it be renewed interest in digital assets or just market momentum? Either way, it’s a reminder of how quickly things can shift in the financial world.\n\nNow let's dive into some company news.\n\n[COMPANIES]\n\nTesla's Elon Musk is back with another bold claim — he says Tesla will ‘make AGI’, or artificial general intelligence. After years of ambitious AI predictions, it’s hard not to be skeptical. But if anyone’s going to shake up the AI world, it's probably Musk.\n\nApple's got some shiny new toys — they’ve just launched the MacBook Neo, alongside the new MacBook Pro with M5 Pro and M5 Max chips. These latest gadgets from Apple are sure to appeal to tech enthusiasts, especially with their promise of more power and efficiency.\n\nAnd Amazon's stepping up its game, introducing a new AI tool to help sellers visualize and grow their business in real time. This could be a game-changer for small businesses looking to harness the power of AI.\n\nAlright, from companies to the court.\n\n[NY SPORTS]\n\nQuick sports update: The New York Yankees are considering a trade that would see them part ways with Jasson Dominguez. It’s a big move considering Dominguez’s potential, but it could shake things up for the team.\n\nIn basketball, the Oklahoma City Thunder topped the Knicks in what some are calling a potential NBA Finals preview. And Knicks fans, Mitchell Robinson’s free-throw woes continue, but he’s dismissing some of the more out-there suggestions for improvement. Gotta love the classic sports drama.\n\n[OUTRO]\n\nAnd that's a wrap for today’s MikeCast! Hope you’re feeling a little more informed and a lot more energized. If you enjoyed this episode, make sure to subscribe and share it with your friends. Catch you tomorrow for more headlines and highlights. Until then, take care and stay curious!",
+  "podcast_script": "Hey there, welcome to MikeCast! It’s March 5, 2026, and as always, I'm thrilled to have you here. Grab your coffee, settle in, and let’s dive into today’s top stories. We’ve got a big reveal from OpenAI causing quite the buzz, the ripple effects of the ongoing Iran conflict on the stock market, and Amazon's hiccup that had a lot of us frantically refreshing our carts. Plus, we’ll check out some New York sports rumors that are heating up. Let’s get started!\n\nAlright, first up, AI & Tech. OpenAI is making waves again with the release of GPT-5.4. Just two days after unveiling GPT-5.3 Instant, they’re already rolling out these new versions. So, we’ve got GPT-5.4 Thinking and GPT-5.4 Pro, with Pro boasting new plugins for Microsoft Excel and Google Sheets. This is a big deal for folks in the knowledge economy, especially those doing heavy data lifting. But here’s the kicker — OpenAI’s announcement comes amid some controversy over their Pentagon deal. Turns out, the Defense Department’s been testing these models through Microsoft, even when OpenAI had a ban on military use. It’s raising eyebrows and ethical questions. What’s the boundary for AI use, and who gets to draw that line?\n\nAlso in AI news, we’ve got Anthropic in the spotlight. They’ve been labeled a \"supply chain risk\" by the Pentagon, and they’re not taking it lying down. They’re planning to challenge this in court. Why does this matter? Well, if Anthropic can’t do business with the government, it shakes up the competitive landscape for AI contracts, and potentially sets a precedent for how startups navigate these government relationships.\n\nMeanwhile, Amazon’s outage yesterday had more than 20,000 users pulling their hair out. Imagine trying to check out and the site just won’t load. Amazon blames a software code deployment for the chaos. It’s a reminder of how reliant we’ve become on these platforms and how vulnerable they can be to technical hiccups. \n\nSwitching gears to Business & Markets. The Iran conflict is pushing oil prices through the roof, hitting their highest since July 2024. This spike is sending shockwaves through the stock market. The S&P 500 is down for the year and the Dow is seeing its worst week since October. It’s a tense time for investors. When oil prices soar, costs go up across the board — from transportation to goods production. So, if you’re noticing higher prices, this is part of the reason why.\n\nAnd in a more tech-savvy twist, Better’s new app promises to create mortgages in 47 seconds using ChatGPT tech. This could be a game-changer for the mortgage industry, which is notorious for its lengthy processes. If it works as advertised, it could streamline home buying and maybe even save you some sanity.\n\nNow let’s talk companies. Google and Alphabet are facing a lawsuit over alleged safety failures with their AI chatbots. The details are still unfolding, but the suit argues these chatbots weren’t as safe as they should have been. With AI playing a bigger role in our lives, accountability and safety are becoming increasingly critical.\n\nMeanwhile, Microsoft’s stock has taken a dip, and some analysts are saying it’s a prime time to buy. They’re calling it a rare opportunity, given Microsoft’s strong position in AI and cloud services. If you’re considering investing, it might be worth watching.\n\nAnd finally, let’s breeze through New York sports. The Yankees are swirling in trade rumors again, this time potentially eyeing a $330 million superstar from the Phillies. But not everyone’s buying it. Some say the rumor doesn’t add up. Meanwhile, on the field, the Yankees had a game against the Minnesota Twins, and over in basketball, the Knicks took a narrow loss to the Thunder. It’s been a busy week for New York sports fans!\n\nAlright, folks, that wraps up today’s episode of MikeCast. If you enjoyed the show, make sure to subscribe and leave a review. Your feedback keeps us going! I’ll catch you tomorrow with more news and insights. Until then, stay curious and stay informed!",
   "audio_file": "MikeCast_2026-03-05.mp3",
-  "generated_at": "2026-03-05T11:49:17.917481+00:00"
+  "generated_at": "2026-03-06T03:58:40.569357+00:00"
 }

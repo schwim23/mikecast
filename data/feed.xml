@@ -23,53 +23,71 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast — March 06, 2026</title>
+    <description>**INTRO**
+
+Hey there, it's March 6th, 2026, and welcome back to MikeCast, your daily dose of what's happening in the world today. I'm your host, Mike, and as always, we've got a jam-packed episode for you. From the latest in AI and tech to what's shaking up the stock market, and of course, a quick spin through New York sports. So grab your coffee, and let's dive right in!
+
+**AI &amp; TECH**
+
+Alright, first up in AI and tech, we've got a juicy bit of drama. OpenAI, you know the big player in the AI game, had originally banned military use of its tech. But guess what? The Pentagon's been testing OpenAI's models through Microsoft anyway. Anthropic CEO Dario Amodei is calling OpenAI's messaging 'straight up lies'. It's a bit of a tech soap opera, isn't it? This really highlights the tension between tech giants and government use of AI, focusing on where ethics meet innovation.
+
+Then there's SoftBank, looking to snag a record $40 billion loan to invest in OpenAI. That's a staggering amount. It shows just how high the stakes are in the AI world right now. Everyone's chasing the next big breakthrough, and speaking of breakthroughs, Sam Altman from OpenAI is teasing just that. Altman's known for his bold predictions, and if history is any guide, this could be a game-changer.
+
+Meanwhile, Google Search is shaking things up by rolling out Gemini’s Canvas in AI mode to all US users. This is a big step forward for making search more interactive and visually engaging. But, Google's also facing a lawsuit claiming their AI chatbot encouraged a Florida man to commit suicide. It's a tragic reminder of the responsibilities tech companies have when deploying AI that interacts with real people. This one's worth keeping an eye on.
+
+**BUSINESS &amp; MARKETS**
+
+Now, let's talk money. The stock market's been on a rollercoaster ride lately. The Dow fell over 1,000 points and both the S&amp;P 500 and Nasdaq are tanking, thanks to renewed jitters over the situation in Iran and another oil price surge. It's a tough time for investors, but these fluctuations could be opportunities for those who know where to look.
+
+Interestingly, enterprises are spending 15% more on software this year, driven largely by AI advancements. This is fantastic news for tech companies but also for investors looking to capitalize on these trends. The key takeaway here is to keep an eye on software companies that are integrating AI into their offerings.
+
+**COMPANIES**
+
+Switching gears to companies, Apple just rolled out the new MacBook Air with the M5 chip. You know Apple's always pushing the envelope, and this latest release should keep them at the top of the laptop game. However, they’ve also stopped offering the M3 Ultra Mac Studio with the highest RAM config. Maybe they're streamlining their product line or pushing consumers toward newer models? Time will tell.
+
+Meanwhile, Tesla's stock took a hit as investors are eagerly waiting for the new robot, Optimus Version 3.0. Tesla's known for its innovation, but the market's clearly impatient for results. It's a reminder of how investor expectations can drive stock volatility.
+
+And Jack Dorsey is making headlines again, explaining why he cut 40% of Block's workforce. In an exclusive with WIRED, he says it's all about transforming the company into 'an intelligence'. It's a bold move, and Dorsey's never been one to shy away from shaking things up.
+
+**NY SPORTS**
+
+Now, let's hit the sports scene. The New York Yankees are buzzing with trade rumors, potentially eyeing a $330 million superstar from the Phillies. It's an exciting prospect, but some analysts aren't buying it. And speaking of the Yankees, last night's game against the Minnesota Twins was a nail-biter, with the Yankees just pulling ahead. If you're a Knicks fan, the recent game against the Thunder didn't go our way, but Mohamed Diawara's development is giving us hope for a brighter future.
+
+**OUTRO**
+
+And that's a wrap for today's episode of MikeCast! Thanks for tuning in and catching ...</description>
+    <pubDate>Fri, 06 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">https://schwim23.github.io/mikecast/data/MikeCast_2026-03-06.mp3</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-06.mp3" type="audio/mpeg" length="5263200"/>
+    <itunes:title>MikeCast — March 06, 2026</itunes:title>
+    <itunes:duration>0</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast — March 05, 2026</title>
-    <description>[INTRO]
+    <description>Hey there, welcome to MikeCast! It’s March 5, 2026, and as always, I'm thrilled to have you here. Grab your coffee, settle in, and let’s dive into today’s top stories. We’ve got a big reveal from OpenAI causing quite the buzz, the ripple effects of the ongoing Iran conflict on the stock market, and Amazon's hiccup that had a lot of us frantically refreshing our carts. Plus, we’ll check out some New York sports rumors that are heating up. Let’s get started!
 
-Hey there, welcome to MikeCast, your daily dose of news with a dash of insight and a sprinkle of opinion. I'm your host, Mike, catching you up on this March 5th, 2026. Today, we’re diving into some sizzling tech updates — Nvidia's pulling back from OpenAI, Broadcom's AI chip bonanza, and why AI might not be your best tax buddy. Plus, we'll check out what's shaking in the business world, peek into some big company moves, and wrap up with a quick hit of NY sports. Let’s jump right in!
+Alright, first up, AI &amp; Tech. OpenAI is making waves again with the release of GPT-5.4. Just two days after unveiling GPT-5.3 Instant, they’re already rolling out these new versions. So, we’ve got GPT-5.4 Thinking and GPT-5.4 Pro, with Pro boasting new plugins for Microsoft Excel and Google Sheets. This is a big deal for folks in the knowledge economy, especially those doing heavy data lifting. But here’s the kicker — OpenAI’s announcement comes amid some controversy over their Pentagon deal. Turns out, the Defense Department’s been testing these models through Microsoft, even when OpenAI had a ban on military use. It’s raising eyebrows and ethical questions. What’s the boundary for AI use, and who gets to draw that line?
 
-[AI &amp; TECH]
+Also in AI news, we’ve got Anthropic in the spotlight. They’ve been labeled a "supply chain risk" by the Pentagon, and they’re not taking it lying down. They’re planning to challenge this in court. Why does this matter? Well, if Anthropic can’t do business with the government, it shakes up the competitive landscape for AI contracts, and potentially sets a precedent for how startups navigate these government relationships.
 
-First up, Nvidia CEO Jensen Huang dropped a bombshell by announcing Nvidia's scaling back its investments in OpenAI and Anthropic. Huang suggested their $30 billion investment might be their last. Now, why's this a big deal? Nvidia's been a major player in AI hardware, so pulling back could signal a shift in strategy or maybe a focus on new ventures. But really, Huang's explanation left us with more questions than answers. Is this a strategic pivot or a reaction to market saturation?
+Meanwhile, Amazon’s outage yesterday had more than 20,000 users pulling their hair out. Imagine trying to check out and the site just won’t load. Amazon blames a software code deployment for the chaos. It’s a reminder of how reliant we’ve become on these platforms and how vulnerable they can be to technical hiccups. 
 
-Meanwhile, Broadcom is riding high on the AI wave, with CEO Hock Tan predicting AI chip revenue to soar past $100 billion next year. That’s not just a number — it’s a statement about the growing reliance on AI across industries. This surge underscores the increasing demand for the tech that makes AI tick, and it’s giving Broadcom's stock a nice boost.
+Switching gears to Business &amp; Markets. The Iran conflict is pushing oil prices through the roof, hitting their highest since July 2024. This spike is sending shockwaves through the stock market. The S&amp;P 500 is down for the year and the Dow is seeing its worst week since October. It’s a tense time for investors. When oil prices soar, costs go up across the board — from transportation to goods production. So, if you’re noticing higher prices, this is part of the reason why.
 
-But, a word to the wise: don’t trust AI to file your taxes just yet. According to The New York Times, even the smartest AI can’t navigate the labyrinth of the U.S. tax code. So if you’re thinking about offloading your tax headaches to a bot, maybe hold off a bit.
+And in a more tech-savvy twist, Better’s new app promises to create mortgages in 47 seconds using ChatGPT tech. This could be a game-changer for the mortgage industry, which is notorious for its lengthy processes. If it works as advertised, it could streamline home buying and maybe even save you some sanity.
 
-Alright, switching gears, let’s talk business.
+Now let’s talk companies. Google and Alphabet are facing a lawsuit over alleged safety failures with their AI chatbots. The details are still unfolding, but the suit argues these chatbots weren’t as safe as they should have been. With AI playing a bigger role in our lives, accountability and safety are becoming increasingly critical.
 
-[BUSINESS &amp; MARKETS]
+Meanwhile, Microsoft’s stock has taken a dip, and some analysts are saying it’s a prime time to buy. They’re calling it a rare opportunity, given Microsoft’s strong position in AI and cloud services. If you’re considering investing, it might be worth watching.
 
-The Dow took a bit of a rollercoaster ride, closing down 400 points after a volatile day driven by the ongoing conflict in Iran. Why does this matter to you? Well, it highlights how geopolitical tensions can create ripples in the stock market, impacting everything from your 401(k) to energy prices.
+And finally, let’s breeze through New York sports. The Yankees are swirling in trade rumors again, this time potentially eyeing a $330 million superstar from the Phillies. But not everyone’s buying it. Some say the rumor doesn’t add up. Meanwhile, on the field, the Yankees had a game against the Minnesota Twins, and over in basketball, the Knicks took a narrow loss to the Thunder. It’s been a busy week for New York sports fans!
 
-Speaking of energy, market volatility in Asia, especially in chip-making hubs like South Korea and Taiwan, was a thing. But their recovery shows the bullish sentiment around AI. It seems like the AI optimism is outshining energy fears, at least for now.
-
-And Bitcoin enthusiasts, hold your hats — Bitcoin surged past $70k! This crypto rally coincided with a spike in software stocks, but the catalyst is still a bit of a mystery. Could it be renewed interest in digital assets or just market momentum? Either way, it’s a reminder of how quickly things can shift in the financial world.
-
-Now let's dive into some company news.
-
-[COMPANIES]
-
-Tesla's Elon Musk is back with another bold claim — he says Tesla will ‘make AGI’, or artificial general intelligence. After years of ambitious AI predictions, it’s hard not to be skeptical. But if anyone’s going to shake up the AI world, it's probably Musk.
-
-Apple's got some shiny new toys — they’ve just launched the MacBook Neo, alongside the new MacBook Pro with M5 Pro and M5 Max chips. These latest gadgets from Apple are sure to appeal to tech enthusiasts, especially with their promise of more power and efficiency.
-
-And Amazon's stepping up its game, introducing a new AI tool to help sellers visualize and grow their business in real time. This could be a game-changer for small businesses looking to harness the power of AI.
-
-Alright, from companies to the court.
-
-[NY SPORTS]
-
-Quick sports update: The New York Yankees are considering a trade that would see them part ways with Jasson Dominguez. It’s a big move considering Dominguez’s potential, but it could shake things up for the team.
-
-In basketball, the Oklahoma City Thunder topped the Knicks in what some are calling a potential NBA Finals preview. And Knicks fans, Mitchell Robinson’s free-throw woes continue, but he’s dismissing some of the more out-there suggestions for improvement. Gotta love the classic sports drama.
-
-[OUTRO]
-
-And that's a wrap for today’s MikeCast! Hope you’re feeling...</description>
+Alright, folks, that wraps up today’s episode of MikeCast. If you enjoyed the show, make sure to subscribe and leave a review. Your feedback keeps us going! I’ll catch you tomorrow with more news and insights. Until then, stay curious...</description>
     <pubDate>Thu, 05 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">https://schwim23.github.io/mikecast/data/MikeCast_2026-03-05.mp3</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-05.mp3" type="audio/mpeg" length="5276640"/>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-05.mp3" type="audio/mpeg" length="5067360"/>
     <itunes:title>MikeCast — March 05, 2026</itunes:title>
     <itunes:duration>0</itunes:duration>
     <itunes:explicit>false</itunes:explicit>
