@@ -1302,17 +1302,25 @@ def send_email(
     subscribe_html = """
 <div style="margin:2rem auto;max-width:600px;text-align:center;font-family:sans-serif;">
   <p style="color:#8b949e;font-size:.85rem;margin-bottom:.75rem;">Subscribe to MikeCast on your favourite podcast app:</p>
-  <div style="display:inline-flex;gap:.5rem;flex-wrap:wrap;justify-content:center;">
+  <div style="display:inline-flex;gap:.5rem;flex-wrap:wrap;justify-content:center;align-items:center;">
     <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449"
-       style="display:inline-block;padding:.35rem .85rem;border-radius:20px;background:#a855f7;color:#fff;font-size:.78rem;font-weight:600;text-decoration:none;">
-      Apple Podcasts
+       style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:6px;background:#4b1d96;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.15);">
+      <img src="https://schwim23.github.io/mikecast/data/applepodcasts-white.svg" width="16" height="16" alt="" style="display:block;">
+      <span style="display:inline-flex;flex-direction:column;line-height:1.2;">
+        <span style="font-size:8px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;opacity:.85;">Listen on</span>
+        <span style="font-size:12px;font-weight:700;">Apple Podcasts</span>
+      </span>
     </a>
     <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv?si=Ia1BvyEGQLKqZ7TwByXOCQ"
-       style="display:inline-block;padding:.35rem .85rem;border-radius:20px;background:#1db954;color:#fff;font-size:.78rem;font-weight:600;text-decoration:none;">
-      Spotify
+       style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:6px;background:#117a37;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.15);">
+      <img src="https://schwim23.github.io/mikecast/data/spotify-white.svg" width="16" height="16" alt="" style="display:block;">
+      <span style="display:inline-flex;flex-direction:column;line-height:1.2;">
+        <span style="font-size:8px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;opacity:.85;">Listen on</span>
+        <span style="font-size:12px;font-weight:700;">Spotify</span>
+      </span>
     </a>
     <a href="https://schwim23.github.io/mikecast/data/feed.xml"
-       style="display:inline-block;padding:.35rem .85rem;border-radius:20px;background:#f97316;color:#fff;font-size:.78rem;font-weight:600;text-decoration:none;">
+       style="display:inline-block;padding:5px 12px;border-radius:6px;background:#f97316;color:#fff;font-size:12px;font-weight:600;text-decoration:none;">
       RSS Feed
     </a>
   </div>
