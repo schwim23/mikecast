@@ -1300,30 +1300,33 @@ def send_email(
 
     # Append subscribe footer to HTML body
     subscribe_html = """
-<div style="margin:2rem auto;max-width:600px;text-align:center;font-family:sans-serif;">
-  <p style="color:#8b949e;font-size:.85rem;margin-bottom:.75rem;">Subscribe to MikeCast on your favourite podcast app:</p>
-  <div style="display:inline-flex;gap:.5rem;flex-wrap:wrap;justify-content:center;align-items:center;">
-    <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449"
-       style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:6px;background:#4b1d96;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.15);">
-      <img src="https://schwim23.github.io/mikecast/data/applepodcasts-white.svg" width="16" height="16" alt="" style="display:block;">
-      <span style="display:inline-flex;flex-direction:column;line-height:1.2;">
-        <span style="font-size:8px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;opacity:.85;">Listen on</span>
-        <span style="font-size:12px;font-weight:700;">Apple Podcasts</span>
-      </span>
-    </a>
-    <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv?si=Ia1BvyEGQLKqZ7TwByXOCQ"
-       style="display:inline-flex;align-items:center;gap:6px;padding:5px 12px 5px 8px;border-radius:6px;background:#117a37;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.15);">
-      <img src="https://schwim23.github.io/mikecast/data/spotify-white.svg" width="16" height="16" alt="" style="display:block;">
-      <span style="display:inline-flex;flex-direction:column;line-height:1.2;">
-        <span style="font-size:8px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;opacity:.85;">Listen on</span>
-        <span style="font-size:12px;font-weight:700;">Spotify</span>
-      </span>
-    </a>
-    <a href="https://schwim23.github.io/mikecast/data/feed.xml"
-       style="display:inline-block;padding:5px 12px;border-radius:6px;background:#f97316;color:#fff;font-size:12px;font-weight:600;text-decoration:none;">
-      RSS Feed
-    </a>
-  </div>
+<div style="margin:2rem auto;max-width:600px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+  <p style="color:#8b949e;font-size:13px;margin:0 0 12px;">Subscribe to MikeCast on your favourite podcast app:</p>
+  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
+    <tr>
+      <td style="padding:0 5px;">
+        <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449"
+           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#4b1d96;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+          <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1;margin-bottom:3px;">Listen on</div>
+          <div style="font-size:14px;font-weight:700;color:#ffffff;line-height:1;">Apple Podcasts</div>
+        </a>
+      </td>
+      <td style="padding:0 5px;">
+        <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv?si=Ia1BvyEGQLKqZ7TwByXOCQ"
+           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#1db954;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+          <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1;margin-bottom:3px;">Listen on</div>
+          <div style="font-size:14px;font-weight:700;color:#ffffff;line-height:1;">Spotify</div>
+        </a>
+      </td>
+      <td style="padding:0 5px;">
+        <a href="https://schwim23.github.io/mikecast/data/feed.xml"
+           style="display:inline-block;padding:8px 18px;border-radius:8px;background:#f97316;color:#ffffff;text-decoration:none;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+          <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.75);line-height:1;margin-bottom:3px;">Subscribe via</div>
+          <div style="font-size:14px;font-weight:700;color:#ffffff;line-height:1;">RSS Feed</div>
+        </a>
+      </td>
+    </tr>
+  </table>
 </div>"""
     msg.attach(MIMEText(html_body + subscribe_html, "html", "utf-8"))
 
