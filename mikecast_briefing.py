@@ -1834,7 +1834,7 @@ def generate_rss_feed() -> None:
     <title>MikeCast #{episode_num} — {_esc(date_display)}</title>
     <description>{_esc(description)}</description>
     <pubDate>{pub_date}</pubDate>
-    <guid isPermaLink="false">{audio_url}</guid>
+    <guid isPermaLink="false">mikecast-{date_str}</guid>
     <enclosure url="{audio_url}" type="audio/mpeg" length="{file_size}"/>
     <itunes:title>MikeCast #{episode_num} — {_esc(date_display)}</itunes:title>
     <itunes:subtitle>{_esc(subtitle)}</itunes:subtitle>
