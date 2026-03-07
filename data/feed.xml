@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #13 — March 07, 2026</title>
+    <description>Episode #13 — MikeCast daily news briefing.</description>
+    <pubDate>Sat, 07 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">https://schwim23.github.io/mikecast/data/MikeCast_2026-03-07.mp3</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-07.mp3" type="audio/mpeg" length="5369760"/>
+    <itunes:title>MikeCast #13 — March 07, 2026</itunes:title>
+    <itunes:subtitle>Episode #13 — MikeCast daily news briefing.</itunes:subtitle>
+    <itunes:summary>Episode #13 — MikeCast daily news briefing.</itunes:summary>
+    <itunes:duration>0</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #12 — March 06, 2026</title>
     <description>Episode #12 — The financial landscape remains volatile as weak jobs data compounds the economic uncertainty fueled by Middle East tensions, impacting both stock markets and oil prices. Meanwhile, tech giants like SoftBank and Google make headlines with major financial maneuvers and controversial AI developments. In sports, New York teams are making strategic moves with the Yankees eyeing high-profile signings and the Giants actively pursuing new talent.</description>
     <pubDate>Fri, 06 Mar 2026 11:45:00 GMT</pubDate>
