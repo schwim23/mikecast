@@ -1887,8 +1887,10 @@ def save_daily_data(
     elevenlabs_audio_filename: str | None = None,
 ) -> Path:
     """Save all briefing data as a JSON file for the dashboard."""
-    # Episode number = chronological position (existing completed episodes + 1)
-    existing = sorted(DATA_DIR.glob("????-??-??.json"))
+    # Episode number = chronological position (existing completed episodes + 1).
+    # Exclude today's file so --force reruns don't bump the episode number.
+    today_path = DATA_DIR / f"{TODAY}.json"
+    existing = [p for p in DATA_DIR.glob("????-??-??.json") if p != today_path]
     episode_num = len(existing) + 1
 
     # Use conversational script for episode description if available, else single-voice
