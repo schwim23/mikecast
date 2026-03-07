@@ -20,11 +20,12 @@
   const podcastMeta   = document.getElementById("podcast-meta");
   const noAudioEl     = document.getElementById("no-audio");
   const articlesList  = document.getElementById("articles-list");
-  const scriptToggle  = document.getElementById("script-toggle");
-  const scriptContent = document.getElementById("script-content");
-  const scriptArrow   = document.getElementById("script-arrow");
-  const scriptText    = document.getElementById("script-text");
-  const footerDate    = document.getElementById("footer-date");
+  const scriptToggle    = document.getElementById("script-toggle");
+  const scriptContent   = document.getElementById("script-content");
+  const scriptArrow     = document.getElementById("script-arrow");
+  const scriptText      = document.getElementById("script-text");
+  const footerDate      = document.getElementById("footer-date");
+  const podcastTitle    = document.getElementById("podcast-section-title");
 
   function todayStr() {
     const d = new Date();
@@ -59,10 +60,11 @@
       const data = await resp.json();
       const dates = data.dates || [];
       archiveSelect.innerHTML = '<option value="">Archive &#9662;</option>';
-      for (const d of dates) {
+      for (let i = 0; i < dates.length; i++) {
         const opt = document.createElement("option");
-        opt.value = d;
-        opt.textContent = formatDisplayDate(d);
+        opt.value = dates[i];
+        const epNum = dates.length - i;
+        opt.textContent = `Ep. #${epNum} — ${formatDisplayDate(dates[i])}`;
         archiveSelect.appendChild(opt);
       }
     } catch (e) { /* manifest unavailable */ }
@@ -95,6 +97,13 @@
       briefingHtml.innerHTML = innerBody ? innerBody.innerHTML : tmp.innerHTML;
     } else {
       briefingHtml.innerHTML = "<p class='muted'>No briefing content for this edition.</p>";
+    }
+
+    // 2. Podcast episode title
+    if (podcastTitle) {
+      podcastTitle.textContent = data.episode_num
+        ? `🎧 Episode #${data.episode_num}`
+        : "🎧 Today's Podcast";
     }
 
     // 2. Podcast audio
@@ -218,10 +227,11 @@
         const data = await resp.json();
         const dates = data.dates || [];
         archiveSelect.innerHTML = '<option value="">Archive &#9662;</option>';
-        for (const d of dates) {
+        for (let i = 0; i < dates.length; i++) {
           const opt = document.createElement("option");
-          opt.value = d;
-          opt.textContent = formatDisplayDate(d);
+          opt.value = dates[i];
+          const epNum = dates.length - i;
+          opt.textContent = `Ep. #${epNum} — ${formatDisplayDate(dates[i])}`;
           archiveSelect.appendChild(opt);
         }
         const latestDate = dates.length > 0 ? dates[0] : today;
