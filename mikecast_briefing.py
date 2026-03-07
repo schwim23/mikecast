@@ -1399,9 +1399,41 @@ def generate_rss_feed() -> None:
         except ValueError:
             pub_date = formatdate(usegmt=True)
 
-        description = data.get("podcast_script", f"MikeCast daily news briefing for {date_display}.")
+        # Build a structured description: executive summary + top headlines per category
+        exec_summary = ""
+        try:
+            soup = BeautifulSoup(data.get("html_briefing", ""), "html.parser")
+            for h2 in soup.find_all("h2"):
+                if "EXECUTIVE SUMMARY" in h2.get_text().upper():
+                    p = h2.find_next_sibling("p")
+                    if p:
+                        exec_summary = p.get_text().strip()
+                    break
+        except Exception:
+            pass
+
+        articles = data.get("articles", {})
+        lines = []
+        if exec_summary:
+            lines.append(exec_summary)
+        for category, stories in articles.items():
+            titles = [
+                re.sub(r"^\[Updated\]\s*", "", s.get("title", "")).split(" - ")[0].strip()
+                for s in stories[:3]
+            ]
+            if titles:
+                lines.append(f"\n{category.upper()}")
+                for t in titles:
+                    lines.append(f"\u2022 {t}")
+        description = "\n".join(lines).strip()
+        if not description:
+            description = data.get("podcast_script", f"MikeCast daily news briefing for {date_display}.")
         if len(description) > 4000:
             description = description[:3997] + "..."
+
+        subtitle = exec_summary[:252] + "..." if len(exec_summary) > 255 else exec_summary
+        if not subtitle:
+            subtitle = f"MikeCast daily briefing — {date_display}"
 
         def _esc(s):
             return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
@@ -1413,6 +1445,8 @@ def generate_rss_feed() -> None:
     <guid isPermaLink="false">{audio_url}</guid>
     <enclosure url="{audio_url}" type="audio/mpeg" length="{file_size}"/>
     <itunes:title>MikeCast — {_esc(date_display)}</itunes:title>
+    <itunes:subtitle>{_esc(subtitle)}</itunes:subtitle>
+    <itunes:summary>{_esc(description)}</itunes:summary>
     <itunes:duration>0</itunes:duration>
     <itunes:explicit>false</itunes:explicit>
   </item>""")
