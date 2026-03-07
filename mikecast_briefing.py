@@ -1784,7 +1784,8 @@ def generate_rss_feed() -> None:
 
         date_str = data.get("date", json_path.stem)
         date_display = data.get("date_display", date_str)
-        audio_file = data.get("audio_file")
+        # Prefer ElevenLabs 3-voice audio when available, fall back to OpenAI TTS
+        audio_file = data.get("elevenlabs_audio_file") or data.get("audio_file")
         if not audio_file:
             continue
 
