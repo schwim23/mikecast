@@ -93,10 +93,12 @@ CATEGORIES = {
         "Amazon news today", "Nvidia news today",
         "Tesla news today", "Netflix news today",
         "Microsoft news today", "Google Alphabet news",
+        "Uber news today",
     ],
     "NY Sports": [
         "New York Yankees", "New York Knicks",
         "New York Giants NFL", "New Jersey Devils NHL",
+        "NBA news today", "MLB news today", "NFL news today",
     ],
 }
 
@@ -178,17 +180,19 @@ CATEGORY_SCORER_PROMPTS: dict[str, str] = {
     ),
     "Companies": (
         "You score company-specific news for Mike, who closely follows Apple, Meta, Amazon, Nvidia, Tesla, "
-        "Microsoft, Google, Netflix. Prioritize: product announcements, earnings, leadership changes, "
+        "Microsoft, Google, Netflix, Uber. Prioritize: product announcements, earnings, leadership changes, "
         "strategic pivots, regulatory actions, major partnerships. "
         "Bonus: stories about those specific companies +15. "
         "Penalty: minor product updates with no strategic significance -10, obscure companies -15."
     ),
     "NY Sports": (
-        "You score New York sports news for Mike, a devoted Yankees, Knicks, Giants, and Devils fan. "
-        "Prioritize: Yankees, Knicks, Giants, Devils — game results, trades, injuries, roster moves, signings. "
-        "Bonus: Yankees or Knicks story +20. "
-        "Heavy penalty: non-New York teams -40 unless directly affecting NY (e.g. trade for NY player). "
-        "Moderate penalty: generic sports commentary without specific team news -15."
+        "You score sports news for Mike, a devoted New York sports fan. "
+        "His top teams are Yankees, Knicks, Giants, and Devils — always prioritize those. "
+        "Bonus: Yankees or Knicks story +20, Devils or Giants story +10. "
+        "Also include major national sports news (e.g. blockbuster trades, championship results, "
+        "star player injuries, landmark records) even if not NY-related — score these 50-70. "
+        "Penalty: routine non-NY game recaps with no broader significance -20, "
+        "generic sports commentary with no specific news -15."
     ),
 }
 
@@ -645,8 +649,8 @@ def collect_all_news() -> dict[str, list[dict]]:
     nyt_search_queries = {
         "AI & Tech": ["artificial intelligence", "OpenAI Anthropic"],
         "Business & Markets": ["stock market economy", "venture capital AI"],
-        "Companies": ["Apple Meta Amazon Nvidia Tesla"],
-        "NY Sports": ["Yankees Knicks Giants Devils"],
+        "Companies": ["Apple Meta Amazon Nvidia Tesla", "Uber Netflix Microsoft Google"],
+        "NY Sports": ["Yankees Knicks Giants Devils", "NBA MLB NFL sports"],
     }
     for cat, queries in nyt_search_queries.items():
         for q in queries:
