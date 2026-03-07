@@ -24,13 +24,13 @@
     <itunes:category text="News"/>
   <item>
     <title>MikeCast #13 — March 07, 2026</title>
-    <description>Episode #13 — MikeCast daily news briefing.</description>
+    <description>Episode #13 — This episode covers the intensifying rivalry between OpenAI and Anthropic over Pentagon contracts, Anthropic's launch of the Claude Marketplace, Robinhood's startup fund's rocky NYSE debut, MIT's breakthrough in LLM memory reduction, the U.S.-Iran conflict causing a historic 35% surge in oil prices, and Elon Musk's bold claims about Tesla achieving AGI.</description>
     <pubDate>Sat, 07 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">https://schwim23.github.io/mikecast/data/MikeCast_2026-03-07.mp3</guid>
     <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-07.mp3" type="audio/mpeg" length="5369760"/>
     <itunes:title>MikeCast #13 — March 07, 2026</itunes:title>
-    <itunes:subtitle>Episode #13 — MikeCast daily news briefing.</itunes:subtitle>
-    <itunes:summary>Episode #13 — MikeCast daily news briefing.</itunes:summary>
+    <itunes:subtitle>Episode #13 — This episode covers the intensifying rivalry between OpenAI and Anthropic over Pentagon contracts, Anthropic's launch of the Claude Marketplace, Robinhood's startup fund's rocky NYSE debut, MIT's breakthrough in LLM memory reduction, the ...</itunes:subtitle>
+    <itunes:summary>Episode #13 — This episode covers the intensifying rivalry between OpenAI and Anthropic over Pentagon contracts, Anthropic's launch of the Claude Marketplace, Robinhood's startup fund's rocky NYSE debut, MIT's breakthrough in LLM memory reduction, the U.S.-Iran conflict causing a historic 35% surge in oil prices, and Elon Musk's bold claims about Tesla achieving AGI.</itunes:summary>
     <itunes:duration>0</itunes:duration>
     <itunes:explicit>false</itunes:explicit>
   </item>

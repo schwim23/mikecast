@@ -1282,6 +1282,7 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
 def generate_episode_description(podcast_script: str, episode_num: int) -> str:
     """Generate a ~50-word episode description using GPT-4o."""
     try:
+        openai_client = OpenAI()
         resp = openai_client.chat.completions.create(
             model=WRITE_MODEL,
             messages=[
