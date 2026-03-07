@@ -1279,6 +1279,37 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
         return False
 
 
+def generate_episode_description(podcast_script: str, episode_num: int) -> str:
+    """Generate a ~50-word episode description using GPT-4o."""
+    try:
+        resp = openai_client.chat.completions.create(
+            model=WRITE_MODEL,
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You write concise podcast episode descriptions. "
+                        "Write a single sentence of approximately 50 words summarizing "
+                        "the key topics covered in this episode. Be specific about the "
+                        "actual stories — name the companies, people, or events discussed. "
+                        "Do not start with 'Episode', a number, or the word 'Today'."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": f"Podcast script:\n\n{podcast_script[:3000]}",
+                },
+            ],
+            max_tokens=120,
+            temperature=0.3,
+        )
+        summary = resp.choices[0].message.content.strip().rstrip(".")
+        return f"Episode #{episode_num} — {summary}."
+    except Exception as exc:
+        logger.warning("Episode description generation failed: %s", exc)
+        return f"Episode #{episode_num} — MikeCast daily news briefing."
+
+
 # ===================================================================
 # 7. EMAIL DELIVERY
 # ===================================================================
@@ -1372,6 +1403,10 @@ def generate_rss_feed() -> None:
     from email.utils import formatdate
     import calendar
 
+    # Build episode number map: chronological order → episode #1, #2, …
+    all_episodes = sorted(DATA_DIR.glob("????-??-??.json"))
+    episode_num_map = {p.stem: i + 1 for i, p in enumerate(all_episodes)}
+
     items = []
     for json_path in sorted(DATA_DIR.glob("????-??-??.json"), reverse=True):
         try:
@@ -1399,52 +1434,41 @@ def generate_rss_feed() -> None:
         except ValueError:
             pub_date = formatdate(usegmt=True)
 
-        # Build a structured description: executive summary + top headlines per category
-        exec_summary = ""
-        try:
-            soup = BeautifulSoup(data.get("html_briefing", ""), "html.parser")
-            for h2 in soup.find_all("h2"):
-                if "EXECUTIVE SUMMARY" in h2.get_text().upper():
-                    p = h2.find_next_sibling("p")
-                    if p:
-                        exec_summary = p.get_text().strip()
-                    break
-        except Exception:
-            pass
+        episode_num = episode_num_map.get(json_path.stem, "?")
 
-        articles = data.get("articles", {})
-        lines = []
-        if exec_summary:
-            lines.append(exec_summary)
-        for category, stories in articles.items():
-            titles = [
-                re.sub(r"^\[Updated\]\s*", "", s.get("title", "")).split(" - ")[0].strip()
-                for s in stories[:3]
-            ]
-            if titles:
-                lines.append(f"\n{category.upper()}")
-                for t in titles:
-                    lines.append(f"\u2022 {t}")
-        description = "\n".join(lines).strip()
-        if not description:
-            description = data.get("podcast_script", f"MikeCast daily news briefing for {date_display}.")
-        if len(description) > 4000:
-            description = description[:3997] + "..."
+        # Use stored ~50-word description if available; fall back for older episodes
+        if data.get("episode_description"):
+            description = data["episode_description"]
+        else:
+            # Fallback for episodes generated before this feature: use exec summary
+            exec_summary = ""
+            try:
+                soup = BeautifulSoup(data.get("html_briefing", ""), "html.parser")
+                for h2 in soup.find_all("h2"):
+                    if "EXECUTIVE SUMMARY" in h2.get_text().upper():
+                        p = h2.find_next_sibling("p")
+                        if p:
+                            exec_summary = p.get_text().strip()
+                        break
+            except Exception:
+                pass
+            fallback = exec_summary or f"MikeCast daily news briefing for {date_display}."
+            description = f"Episode #{episode_num} — {fallback}"
+            if len(description) > 4000:
+                description = description[:3997] + "..."
 
-        subtitle = exec_summary[:252] + "..." if len(exec_summary) > 255 else exec_summary
-        if not subtitle:
-            subtitle = f"MikeCast daily briefing — {date_display}"
+        subtitle = description[:252] + "..." if len(description) > 255 else description
 
         def _esc(s):
             return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
         items.append(f"""  <item>
-    <title>MikeCast — {_esc(date_display)}</title>
+    <title>MikeCast #{episode_num} — {_esc(date_display)}</title>
     <description>{_esc(description)}</description>
     <pubDate>{pub_date}</pubDate>
     <guid isPermaLink="false">{audio_url}</guid>
     <enclosure url="{audio_url}" type="audio/mpeg" length="{file_size}"/>
-    <itunes:title>MikeCast — {_esc(date_display)}</itunes:title>
+    <itunes:title>MikeCast #{episode_num} — {_esc(date_display)}</itunes:title>
     <itunes:subtitle>{_esc(subtitle)}</itunes:subtitle>
     <itunes:summary>{_esc(description)}</itunes:summary>
     <itunes:duration>0</itunes:duration>
@@ -1493,9 +1517,18 @@ def save_daily_data(
     audio_filename: str | None,
 ) -> Path:
     """Save all briefing data as a JSON file for the dashboard."""
+    # Episode number = chronological position (existing completed episodes + 1)
+    existing = sorted(DATA_DIR.glob("????-??-??.json"))
+    episode_num = len(existing) + 1
+
+    episode_description = generate_episode_description(podcast_script, episode_num)
+    logger.info("Episode description: %s", episode_description)
+
     data = {
         "date": TODAY,
         "date_display": TODAY_DISPLAY,
+        "episode_num": episode_num,
+        "episode_description": episode_description,
         "html_briefing": html_briefing,
         "articles": categorised,
         "mikes_picks": picks,
