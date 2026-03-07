@@ -18,6 +18,7 @@ import smtplib
 import sys
 import time
 import hashlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timedelta, timezone
 try:
     from zoneinfo import ZoneInfo
@@ -61,6 +62,12 @@ OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 GMAIL_APP_PASSWORD = os.environ.get("GMAIL_APP_PASSWORD", "").replace("\\n", "").replace("\n", "").strip()
 GMAIL_FROM = os.environ.get("GMAIL_FROM", "prometheusagent23@gmail.com")
 GMAIL_TO = os.environ.get("GMAIL_TO", "Michael.schwimmer@gmail.com")
+
+# ElevenLabs — 3-voice podcast
+ELEVENLABS_API_KEY       = os.environ.get("ELEVENLABS_API_KEY", "")
+ELEVENLABS_VOICE_MIKE    = os.environ.get("ELEVENLABS_VOICE_MIKE", "")
+ELEVENLABS_VOICE_ELIZABETH = os.environ.get("ELEVENLABS_VOICE_ELIZABETH", "")
+ELEVENLABS_VOICE_JESSE   = os.environ.get("ELEVENLABS_VOICE_JESSE", "")
 
 # Use Eastern Time so file names match what the browser (in EST/EDT) expects
 _ET = ZoneInfo("America/New_York")
@@ -152,6 +159,38 @@ REDDIT_FEEDS = [
 
 REDDIT_USER_AGENT = "MikeCast/2.0 (personal news briefing bot; contact: prometheusagent23@gmail.com)"
 SCORE_BATCH_SIZE = 40
+
+# Per-category specialized scoring prompts (used by parallel scoring agents)
+CATEGORY_SCORER_PROMPTS: dict[str, str] = {
+    "AI & Tech": (
+        "You score AI and technology news for Mike, a tech-focused executive in New York. "
+        "Prioritize: model releases, AI research breakthroughs, funding rounds >$50M, product launches "
+        "from major AI companies (OpenAI, Anthropic, Google DeepMind, Meta AI, xAI, Nvidia), regulatory moves. "
+        "Bonus: clear business/investment implications +10. "
+        "Penalty: vague AI hype without substance -15, recycled benchmarks -10, clickbait -15."
+    ),
+    "Business & Markets": (
+        "You score financial and business news for Mike, an investor tracking macro trends and the AI sector. "
+        "Prioritize: Fed/monetary policy, market-moving macro data, earnings surprises from major tech companies, "
+        "M&A activity, IPOs, large VC rounds, economic indicators. "
+        "Bonus: direct investment implications +10, unusual market moves +10. "
+        "Penalty: generic 'markets up/down' with no analysis -20, non-US markets with no US impact -10."
+    ),
+    "Companies": (
+        "You score company-specific news for Mike, who closely follows Apple, Meta, Amazon, Nvidia, Tesla, "
+        "Microsoft, Google, Netflix. Prioritize: product announcements, earnings, leadership changes, "
+        "strategic pivots, regulatory actions, major partnerships. "
+        "Bonus: stories about those specific companies +15. "
+        "Penalty: minor product updates with no strategic significance -10, obscure companies -15."
+    ),
+    "NY Sports": (
+        "You score New York sports news for Mike, a devoted Yankees, Knicks, Giants, and Devils fan. "
+        "Prioritize: Yankees, Knicks, Giants, Devils — game results, trades, injuries, roster moves, signings. "
+        "Bonus: Yankees or Knicks story +20. "
+        "Heavy penalty: non-New York teams -40 unless directly affecting NY (e.g. trade for NY player). "
+        "Moderate penalty: generic sports commentary without specific team news -15."
+    ),
+}
 
 # ---------------------------------------------------------------------------
 # Utility helpers
@@ -535,26 +574,74 @@ def fetch_espn_rss_feeds() -> list[dict]:
 
 def collect_all_news() -> dict[str, list[dict]]:
     """
-    Collect articles for every category from both NYT APIs and web search.
+    Collect articles from all sources. RSS/API sources run in parallel;
+    NYT calls remain serial to respect their rate limits.
     Returns {category: [article_dicts]}.
     """
     categorised: dict[str, list[dict]] = {cat: [] for cat in CATEGORIES}
 
-    # --- NYT Top Stories ---
+    # --- Parallel: RSS feeds + HN (all I/O-bound, fully independent) ---
+    def _fetch_hn():
+        arts = fetch_hacker_news_top()
+        logger.info("Hacker News: %d articles", len(arts))
+        return ("hn", arts)
+
+    def _fetch_tech():
+        r = fetch_tech_rss_feeds()
+        logger.info("Tech RSS: %d articles", sum(len(v) for v in r.values()))
+        return ("cat_dict", r)
+
+    def _fetch_wire():
+        r = fetch_wire_rss_feeds()
+        logger.info("Wire RSS: %d articles", sum(len(v) for v in r.values()))
+        return ("cat_dict", r)
+
+    def _fetch_cnbc():
+        r = fetch_cnbc_rss_feeds()
+        logger.info("CNBC RSS: %d articles", sum(len(v) for v in r.values()))
+        return ("cat_dict", r)
+
+    def _fetch_reddit():
+        r = fetch_reddit_rss()
+        logger.info("Reddit: %d articles", sum(len(v) for v in r.values()))
+        return ("cat_dict", r)
+
+    def _fetch_espn():
+        arts = fetch_espn_rss_feeds()
+        logger.info("ESPN: %d articles", len(arts))
+        return ("espn", arts)
+
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        futures = [ex.submit(fn) for fn in
+                   (_fetch_hn, _fetch_tech, _fetch_wire, _fetch_cnbc, _fetch_reddit, _fetch_espn)]
+        for fut in as_completed(futures):
+            try:
+                kind, result = fut.result()
+                if kind == "hn":
+                    categorised["AI & Tech"].extend(result)
+                elif kind == "espn":
+                    categorised["NY Sports"].extend(result)
+                else:  # cat_dict
+                    for cat, arts in result.items():
+                        if cat in categorised:
+                            categorised[cat].extend(arts)
+            except Exception as exc:
+                logger.warning("Parallel source fetch error: %s", exc)
+
+    # --- Serial: NYT (rate-limited to 0.5s between calls) ---
     section_to_category = {
         "technology": "AI & Tech",
         "business": "Business & Markets",
         "sports": "NY Sports",
-        "home": "AI & Tech",  # homepage may have cross-cutting stories
+        "home": "AI & Tech",
     }
     for section in NYT_SECTIONS:
         cat = section_to_category.get(section, "AI & Tech")
         stories = fetch_nyt_top_stories(section)
         categorised[cat].extend(stories)
         logger.info("NYT Top Stories [%s]: %d articles", section, len(stories))
-        time.sleep(0.5)  # respect rate limits
+        time.sleep(0.5)
 
-    # --- NYT Article Search per category ---
     nyt_search_queries = {
         "AI & Tech": ["artificial intelligence", "OpenAI Anthropic"],
         "Business & Markets": ["stock market economy", "venture capital AI"],
@@ -568,56 +655,16 @@ def collect_all_news() -> dict[str, list[dict]]:
             logger.info("NYT Search [%s] '%s': %d articles", cat, q, len(results))
             time.sleep(0.5)
 
-    # --- Google News RSS per category ---
-    for cat, queries in CATEGORIES.items():
-        for q in queries:
-            results = search_news_web(q, max_results=3)
+    # --- Parallel: Google News RSS per category ---
+    gnews_tasks = [(cat, q) for cat, queries in CATEGORIES.items() for q in queries]
+
+    def _fetch_gnews(cat_q: tuple[str, str]) -> tuple[str, list[dict]]:
+        cat, q = cat_q
+        return cat, search_news_web(q, max_results=3)
+
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        for cat, results in ex.map(_fetch_gnews, gnews_tasks):
             categorised[cat].extend(results)
-            logger.info("Web [%s] '%s': %d articles", cat, q, len(results))
-            time.sleep(0.3)
-
-    # --- Hacker News top stories ---
-    hn_articles = fetch_hacker_news_top()
-    categorised["AI & Tech"].extend(hn_articles)
-    logger.info("Hacker News: %d articles", len(hn_articles))
-    time.sleep(0.3)
-
-    # --- Tech publication RSS feeds ---
-    tech_rss = fetch_tech_rss_feeds()
-    for cat, arts in tech_rss.items():
-        if cat in categorised:
-            categorised[cat].extend(arts)
-    logger.info("Tech RSS total: %d articles", sum(len(v) for v in tech_rss.values()))
-    time.sleep(0.3)
-
-    # --- Wire service RSS feeds (Reuters, AP) ---
-    wire_rss = fetch_wire_rss_feeds()
-    for cat, arts in wire_rss.items():
-        if cat in categorised:
-            categorised[cat].extend(arts)
-    logger.info("Wire RSS total: %d articles", sum(len(v) for v in wire_rss.values()))
-    time.sleep(0.3)
-
-    # --- CNBC RSS feeds ---
-    cnbc_rss = fetch_cnbc_rss_feeds()
-    for cat, arts in cnbc_rss.items():
-        if cat in categorised:
-            categorised[cat].extend(arts)
-    logger.info("CNBC RSS total: %d articles", sum(len(v) for v in cnbc_rss.values()))
-    time.sleep(0.3)
-
-    # --- Reddit Atom feeds ---
-    reddit_rss = fetch_reddit_rss()
-    for cat, arts in reddit_rss.items():
-        if cat in categorised:
-            categorised[cat].extend(arts)
-    logger.info("Reddit total: %d articles", sum(len(v) for v in reddit_rss.values()))
-    time.sleep(0.3)
-
-    # --- ESPN RSS feeds ---
-    espn_articles = fetch_espn_rss_feeds()
-    categorised["NY Sports"].extend(espn_articles)
-    logger.info("ESPN: %d articles", len(espn_articles))
 
     total_raw = sum(len(v) for v in categorised.values())
     logger.info("Collection complete: %d raw articles across %d categories.", total_raw, len(categorised))
@@ -740,6 +787,71 @@ def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> 
     return selected
 
 
+def cluster_articles(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
+    """
+    Use gpt-4o-mini to cluster articles by story within each category, keeping
+    one representative per cluster. Runs categories in parallel. Cheap and fast —
+    reduces article count before the expensive scoring step.
+    """
+    if not OPENAI_API_KEY:
+        return categorised
+
+    from openai import OpenAI
+    client = OpenAI()
+
+    def cluster_category(cat: str, articles: list[dict]) -> list[dict]:
+        if len(articles) <= 5:
+            return articles  # not worth clustering tiny sets
+        titles_text = "\n".join(
+            f"{i}: {a.get('title', '')[:120]}" for i, a in enumerate(articles)
+        )
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{
+                    "role": "user",
+                    "content": (
+                        f"These {len(articles)} headlines are from the '{cat}' news category. "
+                        "Group articles that cover the same story or event. "
+                        "Return ONLY a JSON array of integers — one index per distinct story, "
+                        "picking the most informative headline from each cluster. "
+                        f"Headlines:\n{titles_text}\n\n"
+                        "Return format: [0, 3, 7, ...] — one integer per distinct story. No explanation."
+                    ),
+                }],
+                max_tokens=300,
+                temperature=0.1,
+            )
+            raw = resp.choices[0].message.content.strip()
+            raw = re.sub(r"^```(?:json)?\s*", "", raw)
+            raw = re.sub(r"\s*```$", "", raw)
+            keep_indices = json.loads(raw)
+            if isinstance(keep_indices, list) and all(isinstance(i, int) for i in keep_indices):
+                kept = [articles[i] for i in keep_indices if 0 <= i < len(articles)]
+                logger.info("Clustering [%s]: %d → %d articles", cat, len(articles), len(kept))
+                return kept
+        except Exception as exc:
+            logger.warning("Clustering failed for [%s]: %s — keeping all", cat, exc)
+        return articles
+
+    clustered: dict[str, list[dict]] = {}
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        futures = {ex.submit(cluster_category, cat, arts): cat
+                   for cat, arts in categorised.items()}
+        for fut in as_completed(futures):
+            cat = futures[fut]
+            try:
+                clustered[cat] = fut.result()
+            except Exception as exc:
+                logger.warning("Cluster future failed [%s]: %s", cat, exc)
+                clustered[cat] = categorised[cat]
+
+    before = sum(len(v) for v in categorised.values())
+    after  = sum(len(v) for v in clustered.values())
+    logger.info("Clustering complete: %d → %d articles total", before, after)
+    return clustered
+
+
 def _build_scoring_prompt(batch: list[dict]) -> str:
     """Build the user prompt for GPT-4o article scoring."""
     lines = []
@@ -762,90 +874,153 @@ def _build_scoring_prompt(batch: list[dict]) -> str:
 
 def score_and_rank_articles(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
     """
-    Score all articles with GPT-4o and sort each category by score descending.
-    Falls back gracefully: any failure gives affected articles score=50.
-    Never raises — always returns a valid categorised dict.
+    Score articles per category in parallel, each with a domain-specific prompt.
+    Runs N category scoring agents simultaneously via ThreadPoolExecutor.
+    Falls back gracefully — never raises.
     """
     if not OPENAI_API_KEY:
         logger.warning("OPENAI_API_KEY not set — skipping LLM scoring.")
         return categorised
 
-    # Flatten and tag with temp IDs
-    flat: list[dict] = []
-    for cat, arts in categorised.items():
-        for art in arts:
-            art["_score_id"] = len(flat) + 1
-            art["_score_cat"] = cat
-            art["score"] = 50  # default
-            art["score_reason"] = ""
-            flat.append(art)
+    from openai import OpenAI
+    client = OpenAI()
 
-    if not flat:
-        return categorised
-
-    system_prompt = (
-        "You are a news relevance scorer for Mike, a tech-focused executive in New York. "
-        "Score each article 1-100 based on these criteria:\n"
-        "  - Breaking/time-sensitive news: up to +25\n"
-        "  - Relevance to Mike (AI/tech, VC, markets, big tech, NY sports): up to +35\n"
-        "  - Source credibility tier (tier 1 = highest): up to +20\n"
-        "  - Depth/novelty (non-commodity): up to +15\n"
-        "  - Cross-category significance: up to +5\n"
-        "  Penalties: clickbait -10, duplicate angle -20, non-NY sports -30\n\n"
-        "Return ONLY a JSON array with no markdown, no explanation outside JSON:\n"
-        '[{"id": 1, "score": 87, "reason": "One sentence explaining score."}]'
+    scorer_suffix = (
+        "\n\nReturn ONLY a JSON array with no markdown, no explanation outside JSON:\n"
+        '[{"id": 1, "score": 87, "reason": "One sentence."}]'
     )
 
-    # Process in batches
-    for batch_start in range(0, len(flat), SCORE_BATCH_SIZE):
-        batch = flat[batch_start: batch_start + SCORE_BATCH_SIZE]
-        user_prompt = _build_scoring_prompt(batch)
+    def score_category(cat: str, articles: list[dict]) -> tuple[str, list[dict]]:
+        if not articles:
+            return cat, articles
+        # Assign per-category temp IDs (1-based, scoped to this category)
+        for i, art in enumerate(articles):
+            art["_score_id"] = i + 1
+            art["score"] = 50
+            art["score_reason"] = ""
 
-        try:
-            from openai import OpenAI
-            client = OpenAI()
-            resp = client.chat.completions.create(
-                model="gpt-4o",
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_prompt},
-                ],
-                max_tokens=1500,
-                temperature=0.2,
-            )
-            raw = resp.choices[0].message.content.strip()
-            # Strip markdown code fences if present
-            raw = re.sub(r"^```(?:json)?\s*", "", raw)
-            raw = re.sub(r"\s*```$", "", raw)
-            scores = json.loads(raw)
-            id_to_result = {item["id"]: item for item in scores}
-            for art in batch:
-                sid = art["_score_id"]
-                if sid in id_to_result:
-                    art["score"] = int(id_to_result[sid].get("score", 50))
-                    art["score_reason"] = id_to_result[sid].get("reason", "")
-            logger.info(
-                "Scored batch %d-%d (%d articles)",
-                batch_start + 1, batch_start + len(batch), len(batch),
-            )
-        except Exception as exc:
-            logger.warning("GPT scoring failed for batch starting %d: %s — defaulting to 50", batch_start, exc)
+        system_prompt = CATEGORY_SCORER_PROMPTS.get(cat, (
+            "You are a news relevance scorer. Score each article 1-100 based on "
+            "newsworthiness, credibility, and relevance to a tech executive."
+        )) + scorer_suffix
 
-    # Sort each category by score descending, clean up temp fields
-    result: dict[str, list[dict]] = {cat: [] for cat in categorised}
-    for art in flat:
-        cat = art.pop("_score_cat")
-        art.pop("_score_id", None)
-        result[cat].append(art)
+        for batch_start in range(0, len(articles), SCORE_BATCH_SIZE):
+            batch = articles[batch_start: batch_start + SCORE_BATCH_SIZE]
+            user_prompt = _build_scoring_prompt(batch)
+            try:
+                resp = client.chat.completions.create(
+                    model="gpt-4o",
+                    messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user",   "content": user_prompt},
+                    ],
+                    max_tokens=1500,
+                    temperature=0.2,
+                )
+                raw = resp.choices[0].message.content.strip()
+                raw = re.sub(r"^```(?:json)?\s*", "", raw)
+                raw = re.sub(r"\s*```$", "", raw)
+                scores = json.loads(raw)
+                id_map = {item["id"]: item for item in scores}
+                for art in batch:
+                    if art["_score_id"] in id_map:
+                        art["score"] = int(id_map[art["_score_id"]].get("score", 50))
+                        art["score_reason"] = id_map[art["_score_id"]].get("reason", "")
+                logger.info("Scored [%s] %d articles", cat, len(batch))
+            except Exception as exc:
+                logger.warning("Scoring failed [%s] batch %d: %s", cat, batch_start, exc)
 
-    for cat in result:
-        result[cat].sort(key=lambda a: a.get("score", 50), reverse=True)
+        for art in articles:
+            art.pop("_score_id", None)
+        articles.sort(key=lambda a: a.get("score", 50), reverse=True)
+        return cat, articles
 
-    total_scored = len(flat)
-    avg_score = sum(a.get("score", 50) for a in flat) / total_scored if total_scored else 0
-    logger.info("Scoring complete: %d articles, avg score=%.1f", total_scored, avg_score)
+    result: dict[str, list[dict]] = {}
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        futures = {ex.submit(score_category, cat, list(arts)): cat
+                   for cat, arts in categorised.items()}
+        for fut in as_completed(futures):
+            cat = futures[fut]
+            try:
+                cat, scored = fut.result()
+                result[cat] = scored
+            except Exception as exc:
+                logger.warning("Category scoring future failed [%s]: %s", cat, exc)
+                result[cat] = categorised[cat]
 
+    all_arts = [a for arts in result.values() for a in arts]
+    avg = sum(a.get("score", 50) for a in all_arts) / len(all_arts) if all_arts else 0
+    logger.info("Scoring complete: %d articles across %d categories, avg score=%.1f",
+                len(all_arts), len(result), avg)
     return result
+
+
+def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[str, list[dict]]:
+    """
+    For the top N articles (by score) across all categories, fetch the article
+    body and use gpt-4o-mini to add a 'why_it_matters' one-sentence insight.
+    Runs fetch + enrichment in parallel. Mutates articles in-place.
+    """
+    if not OPENAI_API_KEY:
+        return articles
+
+    from openai import OpenAI
+    client = OpenAI()
+
+    # Collect the top_n articles by score across all categories
+    all_arts = [(cat, art) for cat, arts in articles.items() for art in arts]
+    all_arts.sort(key=lambda x: x[1].get("score", 50), reverse=True)
+    to_enrich = all_arts[:top_n]
+
+    def fetch_body(url: str) -> str:
+        """Fetch article body text (first ~1500 chars)."""
+        try:
+            resp = requests.get(
+                url, timeout=10,
+                headers={"User-Agent": "MikeCast/2.0 (enrichment)"},
+            )
+            soup = BeautifulSoup(resp.text, "html.parser")
+            for tag in soup(["script", "style", "nav", "footer"]):
+                tag.decompose()
+            return soup.get_text(separator=" ", strip=True)[:1500]
+        except Exception:
+            return ""
+
+    def enrich_article(_cat: str, art: dict) -> None:
+        url   = art.get("url", "")
+        title = art.get("title", "")
+        desc  = art.get("description", "")
+        body  = fetch_body(url) if url else ""
+        context = f"Title: {title}\nDescription: {desc}\nBody: {body[:800]}"
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o-mini",
+                messages=[{
+                    "role": "user",
+                    "content": (
+                        "In one crisp sentence (max 30 words), explain why this story matters "
+                        "to a tech-executive investor in New York today.\n\n"
+                        + context
+                    ),
+                }],
+                max_tokens=80,
+                temperature=0.3,
+            )
+            art["why_it_matters"] = resp.choices[0].message.content.strip()
+        except Exception as exc:
+            logger.debug("Enrichment failed for '%s': %s", title[:50], exc)
+
+    with ThreadPoolExecutor(max_workers=4) as ex:
+        futures = [ex.submit(enrich_article, cat, art) for cat, art in to_enrich]
+        for fut in as_completed(futures):
+            try:
+                fut.result()
+            except Exception as exc:
+                logger.debug("Enrichment future error: %s", exc)
+
+    enriched_count = sum(1 for _, art in to_enrich if art.get("why_it_matters"))
+    logger.info("Enrichment: %d/%d top articles enriched.", enriched_count, len(to_enrich))
+    return articles
 
 
 # ===================================================================
@@ -1229,6 +1404,24 @@ Script requirements:
 # 6. TTS AUDIO GENERATION
 # ===================================================================
 
+def _split_text_for_tts(text: str, max_chunk: int = 4000) -> list[str]:
+    """Split *text* on sentence boundaries for TTS API calls (≤ max_chunk chars each)."""
+    chunks: list[str] = []
+    remaining = text
+    while remaining:
+        if len(remaining) <= max_chunk:
+            chunks.append(remaining)
+            break
+        split_at = remaining[:max_chunk].rfind(". ")
+        if split_at == -1:
+            split_at = max_chunk
+        else:
+            split_at += 2
+        chunks.append(remaining[:split_at])
+        remaining = remaining[split_at:]
+    return chunks
+
+
 def generate_podcast_audio(script: str, output_path: Path) -> bool:
     """Generate MP3 audio from the podcast script using OpenAI TTS."""
     if not OPENAI_API_KEY:
@@ -1239,22 +1432,7 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
         from openai import OpenAI
         client = OpenAI()  # uses OPENAI_API_KEY env var automatically
 
-        # TTS has a 4096-char limit per request — split if needed
-        max_chunk = 4000
-        chunks = []
-        remaining = script
-        while remaining:
-            if len(remaining) <= max_chunk:
-                chunks.append(remaining)
-                break
-            # Find a sentence boundary near the limit
-            split_at = remaining[:max_chunk].rfind(". ")
-            if split_at == -1:
-                split_at = max_chunk
-            else:
-                split_at += 2
-            chunks.append(remaining[:split_at])
-            remaining = remaining[split_at:]
+        chunks = _split_text_for_tts(script)
 
         audio_segments: list[bytes] = []
         for i, chunk in enumerate(chunks):
@@ -1279,12 +1457,196 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
         return False
 
 
+def generate_conversational_script(
+    categorised: dict[str, list[dict]],
+    picks: list[dict],
+) -> str:
+    """
+    Generate a 3-voice conversational podcast script tagged with:
+      [MIKE]      — host: intro and sign-off
+      [ELIZABETH] — AI & Tech, Business & Markets, Companies
+      [JESSE]     — NY Sports
+
+    Elizabeth hands off to Jesse after the Companies segment.
+    Returns raw tagged script as a string.
+    """
+    articles_context = _build_articles_context(categorised)
+    picks_context = ""
+    if picks:
+        picks_context = "\n\n=== MIKE'S PICKS ==="
+        for p in picks:
+            picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
+
+    system_prompt = (
+        "You write scripts for a 3-host daily news podcast called MikeCast.\n"
+        "The hosts are:\n"
+        "  MIKE — the executive producer and host. Warm, authoritative. Does the intro and sign-off only.\n"
+        "  ELIZABETH — the tech and business correspondent. Sharp, energetic, insightful. "
+        "Covers AI & Tech, Business & Markets, and Companies stories.\n"
+        "  JESSE — the sports guy. Enthusiastic, quick-witted, NY-sports-obsessed. "
+        "Covers NY Sports only.\n\n"
+        "Tag every line of dialogue with the speaker name in brackets on its own line, e.g.:\n"
+        "[MIKE]\nHey everyone, welcome to MikeCast...\n\n"
+        "[ELIZABETH]\nAlright, let's start with AI news...\n\n"
+        "Rules:\n"
+        "- MIKE speaks ONLY at the start (intro) and the very end (sign-off).\n"
+        "- ELIZABETH covers everything until NY Sports, then explicitly hands off to Jesse.\n"
+        "- JESSE covers NY Sports and hands back to Mike for the sign-off.\n"
+        "- Write in natural spoken language — contractions, energy, personality.\n"
+        "- NO URLs in the script. NO stage directions. Only spoken words.\n"
+        "- Each host segment should feel like a real broadcast, not a list."
+    )
+
+    user_prompt = f"""Today is {TODAY_DISPLAY}. Write the full MikeCast 3-host podcast script.
+
+Here are today's articles:
+{articles_context}
+{picks_context}
+
+Script structure:
+1. [MIKE] INTRO — Welcome listeners, briefly tease the top 2-3 stories (~30 seconds).
+2. [ELIZABETH] AI & TECH — Cover top 3-4 stories with context and insight.
+3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories, explain what it means.
+4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality.
+   End with a handoff: "Alright Jesse, take it away with sports..."
+5. [JESSE] NY SPORTS — Energetic, team-focused rundown of Yankees, Knicks, Giants, Devils.
+   End with: "Back to you, Mike."
+6. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
+
+Total length: 5-8 minutes of spoken audio (approx 800-1200 words).
+Write the COMPLETE script with all tags. No outline, no placeholders."""
+
+    script = _gpt_call(system_prompt, user_prompt, max_tokens=2500)
+
+    if not script:
+        logger.warning("Conversational script generation failed — empty response.")
+        return ""
+
+    # Ensure every [SPEAKER] tag is on its own line
+    script = re.sub(r'(\[(?:MIKE|ELIZABETH|JESSE)\])', r'\n\1\n', script)
+    script = re.sub(r'\n{3,}', '\n\n', script).strip()
+    return script
+
+
+def parse_conversational_script(script: str) -> list[tuple[str, str]]:
+    """
+    Parse a tagged conversational script into (speaker, text) tuples.
+    Speaker tags look like: [MIKE], [ELIZABETH], [JESSE]
+    Returns list of (speaker_name, spoken_text) pairs.
+    """
+    segments: list[tuple[str, str]] = []
+    current_speaker: str | None = None
+    buffer: list[str] = []
+
+    for line in script.splitlines():
+        stripped = line.strip()
+        m = re.fullmatch(r'\[(MIKE|ELIZABETH|JESSE)\]', stripped)
+        if m:
+            if current_speaker and buffer:
+                text = " ".join(buffer).strip()
+                if text:
+                    segments.append((current_speaker, text))
+            current_speaker = m.group(1)
+            buffer = []
+        else:
+            if stripped:
+                buffer.append(stripped)
+
+    if current_speaker and buffer:
+        text = " ".join(buffer).strip()
+        if text:
+            segments.append((current_speaker, text))
+
+    return segments
+
+
+def generate_elevenlabs_audio(
+    conversational_script: str,
+    output_path: Path,
+) -> bool:
+    """
+    Generate a 3-voice MP3 using ElevenLabs TTS.
+    Parses [MIKE]/[ELIZABETH]/[JESSE] tags, calls the ElevenLabs API for each
+    segment with the correct voice ID, then concatenates the raw MP3 bytes.
+    Falls back gracefully and returns False on failure.
+    """
+    if not ELEVENLABS_API_KEY:
+        logger.warning("ELEVENLABS_API_KEY not set — skipping ElevenLabs audio.")
+        return False
+
+    voice_map = {
+        "MIKE":      ELEVENLABS_VOICE_MIKE,
+        "ELIZABETH": ELEVENLABS_VOICE_ELIZABETH,
+        "JESSE":     ELEVENLABS_VOICE_JESSE,
+    }
+    missing = [name for name, vid in voice_map.items() if not vid]
+    if missing:
+        logger.warning("ElevenLabs voice IDs missing for: %s — skipping.", missing)
+        return False
+
+    segments = parse_conversational_script(conversational_script)
+    if not segments:
+        logger.warning("No segments parsed from conversational script.")
+        return False
+
+    def tts_segment(speaker: str, text: str) -> bytes:
+        voice_id = voice_map[speaker]
+        # Split long segments to stay under ElevenLabs' practical limit (~5000 chars)
+        chunks = _split_text_for_tts(text, max_chunk=4500)
+        audio_parts: list[bytes] = []
+        for chunk in chunks:
+            url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+            headers = {
+                "xi-api-key": ELEVENLABS_API_KEY,
+                "Content-Type": "application/json",
+                "Accept": "audio/mpeg",
+            }
+            payload = {
+                "text": chunk,
+                "model_id": "eleven_turbo_v2_5",
+                "voice_settings": {"stability": 0.45, "similarity_boost": 0.80},
+            }
+            resp = requests.post(url, json=payload, headers=headers, timeout=90)
+            resp.raise_for_status()
+            audio_parts.append(resp.content)
+        return b"".join(audio_parts)
+
+    audio_segments: list[bytes] = []
+    for i, (speaker, text) in enumerate(segments):
+        logger.info(
+            "ElevenLabs TTS segment %d/%d [%s] (%d chars)…",
+            i + 1, len(segments), speaker, len(text),
+        )
+        try:
+            audio_bytes = tts_segment(speaker, text)
+            audio_segments.append(audio_bytes)
+            time.sleep(0.3)  # gentle rate-limit buffer
+        except Exception as exc:
+            logger.error("ElevenLabs segment %d [%s] failed: %s", i + 1, speaker, exc)
+            return False
+
+    try:
+        with open(output_path, "wb") as fh:
+            for seg in audio_segments:
+                fh.write(seg)
+        size_mb = output_path.stat().st_size / 1e6
+        logger.info(
+            "ElevenLabs audio saved: %s (%.1f MB, %d segments)",
+            output_path, size_mb, len(audio_segments),
+        )
+        return True
+    except Exception as exc:
+        logger.error("Failed to write ElevenLabs audio: %s", exc)
+        return False
+
+
 def generate_episode_description(podcast_script: str, episode_num: int) -> str:
     """Generate a ~50-word episode description using GPT-4o."""
     try:
+        from openai import OpenAI
         openai_client = OpenAI()
         resp = openai_client.chat.completions.create(
-            model=WRITE_MODEL,
+            model="gpt-4o",
             messages=[
                 {
                     "role": "system",
@@ -1516,13 +1878,17 @@ def save_daily_data(
     picks: list[dict],
     podcast_script: str,
     audio_filename: str | None,
+    conversational_script: str = "",
+    elevenlabs_audio_filename: str | None = None,
 ) -> Path:
     """Save all briefing data as a JSON file for the dashboard."""
     # Episode number = chronological position (existing completed episodes + 1)
     existing = sorted(DATA_DIR.glob("????-??-??.json"))
     episode_num = len(existing) + 1
 
-    episode_description = generate_episode_description(podcast_script, episode_num)
+    # Use conversational script for episode description if available, else single-voice
+    desc_source = conversational_script if conversational_script else podcast_script
+    episode_description = generate_episode_description(desc_source, episode_num)
     logger.info("Episode description: %s", episode_description)
 
     data = {
@@ -1534,7 +1900,9 @@ def save_daily_data(
         "articles": categorised,
         "mikes_picks": picks,
         "podcast_script": podcast_script,
+        "conversational_script": conversational_script,
         "audio_file": audio_filename,
+        "elevenlabs_audio_file": elevenlabs_audio_filename,
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
     out_path = DATA_DIR / f"{TODAY}.json"
@@ -1563,8 +1931,8 @@ def main() -> None:
         )
         sys.exit(0)
 
-    # 1. Collect news
-    logger.info("Step 1/8: Collecting news…")
+    # 1. Collect news (parallel I/O)
+    logger.info("Step 1/10: Collecting news…")
     raw_news = collect_all_news()
     raw_total = sum(len(v) for v in raw_news.values())
     if raw_total == 0:
@@ -1574,50 +1942,120 @@ def main() -> None:
         logger.warning("Very few articles collected (%d) — possible widespread API failure.", raw_total)
 
     # 2. Deduplicate
-    logger.info("Step 2/8: Deduplicating…")
+    logger.info("Step 2/10: Deduplicating…")
     deduped = deduplicate(raw_news)
 
-    # 3. Score and rank articles with LLM
-    logger.info("Step 3/8: Scoring and ranking articles…")
-    scored = score_and_rank_articles(deduped)
+    # 3. Cluster (cheap gpt-4o-mini — reduces article count before expensive scoring)
+    logger.info("Step 3/10: Clustering duplicate stories…")
+    clustered = cluster_articles(deduped)
 
-    # 4. Select top articles
-    logger.info("Step 4/8: Selecting top articles…")
+    # 4. Score and rank articles (parallel per-category gpt-4o agents)
+    logger.info("Step 4/10: Scoring and ranking articles…")
+    scored = score_and_rank_articles(clustered)
+
+    # 5. Select top articles
+    logger.info("Step 5/10: Selecting top articles…")
     top_articles = select_top_articles(scored, total=25)
     total = sum(len(v) for v in top_articles.values())
     logger.info("Selected %d articles across %d categories.", total, len(top_articles))
     if total == 0:
         logger.warning("All articles were duplicates — briefing will have no new stories.")
 
-    # 5. Process Mike's Picks
-    logger.info("Step 5/8: Processing Mike's Picks…")
+    # 6. Enrich top stories (fetch body + gpt-4o-mini 'why it matters')
+    logger.info("Step 6/10: Enriching top stories…")
+    top_articles = enrich_top_stories(top_articles, top_n=8)
+
+    # 7. Process Mike's Picks
+    logger.info("Step 7/10: Processing Mike's Picks…")
     picks = process_picks()
 
-    # 6. Generate HTML briefing
-    logger.info("Step 6/8: Generating HTML briefing…")
-    html = generate_html_briefing(top_articles, picks)
+    # 8. Generate HTML briefing + both scripts in parallel
+    logger.info("Step 8/10: Generating HTML briefing and podcast scripts…")
 
-    # 7. Generate podcast
-    logger.info("Step 7/8: Generating podcast script & audio…")
-    script = generate_podcast_script(top_articles, picks)
-    audio_path = DATA_DIR / f"MikeCast_{TODAY}.mp3"
-    audio_ok = generate_podcast_audio(script, audio_path)
-    if not audio_ok and audio_path.exists():
-        audio_path.unlink()
-        logger.warning("Removed partial/stale audio file: %s", audio_path)
-    audio_filename = audio_path.name if audio_ok else None
+    html: str = ""
+    single_voice_script: str = ""
+    conversational_script: str = ""
 
-    # 8. Save & send
-    logger.info("Step 8/8: Saving data & sending email…")
-    save_daily_data(html, top_articles, picks, script, audio_filename)
+    def _gen_html() -> str:
+        return generate_html_briefing(top_articles, picks)
+
+    def _gen_single_script() -> str:
+        return generate_podcast_script(top_articles, picks)
+
+    def _gen_conv_script() -> str:
+        return generate_conversational_script(top_articles, picks)
+
+    with ThreadPoolExecutor(max_workers=3) as ex:
+        f_html   = ex.submit(_gen_html)
+        f_single = ex.submit(_gen_single_script)
+        f_conv   = ex.submit(_gen_conv_script)
+        try:
+            html = f_html.result()
+        except Exception as exc:
+            logger.error("HTML briefing generation failed: %s", exc)
+            html = "<p>Briefing generation failed.</p>"
+        try:
+            single_voice_script = f_single.result()
+        except Exception as exc:
+            logger.error("Single-voice script generation failed: %s", exc)
+        try:
+            conversational_script = f_conv.result()
+        except Exception as exc:
+            logger.error("Conversational script generation failed: %s", exc)
+
+    # 9. Generate audio
+    logger.info("Step 9/10: Generating audio…")
+    audio_path        = DATA_DIR / f"MikeCast_{TODAY}.mp3"
+    el_audio_path     = DATA_DIR / f"MikeCast_3voice_{TODAY}.mp3"
+    audio_ok          = False
+    el_audio_ok       = False
+    audio_filename    = None
+    el_audio_filename = None
+
+    # Try ElevenLabs 3-voice first (preferred)
+    if conversational_script and ELEVENLABS_API_KEY:
+        logger.info("Generating ElevenLabs 3-voice audio…")
+        el_audio_ok = generate_elevenlabs_audio(conversational_script, el_audio_path)
+        if not el_audio_ok and el_audio_path.exists():
+            el_audio_path.unlink()
+            logger.warning("Removed partial ElevenLabs audio: %s", el_audio_path)
+        el_audio_filename = el_audio_path.name if el_audio_ok else None
+
+    # Always generate single-voice OpenAI TTS as backup / email attachment
+    script_for_tts = single_voice_script or conversational_script
+    if script_for_tts:
+        logger.info("Generating OpenAI TTS single-voice audio…")
+        audio_ok = generate_podcast_audio(script_for_tts, audio_path)
+        if not audio_ok and audio_path.exists():
+            audio_path.unlink()
+            logger.warning("Removed partial OpenAI TTS audio: %s", audio_path)
+        audio_filename = audio_path.name if audio_ok else None
+
+    # Primary podcast audio = ElevenLabs if available, else OpenAI TTS
+    primary_audio_file = el_audio_filename or audio_filename
+    primary_audio_path = el_audio_path if el_audio_ok else (audio_path if audio_ok else None)
+
+    # 10. Save & send
+    logger.info("Step 10/10: Saving data & sending email…")
+    save_daily_data(
+        html,
+        top_articles,
+        picks,
+        single_voice_script,
+        primary_audio_file,
+        conversational_script=conversational_script,
+        elevenlabs_audio_filename=el_audio_filename,
+    )
     generate_manifest()
     generate_rss_feed()
-    email_ok = send_email(html, script, audio_path if audio_ok else None)
+    email_ok = send_email(html, single_voice_script or conversational_script, primary_audio_path)
 
     logger.info(
-        "Run summary — articles: %d | picks: %d | audio: %s | email: %s",
+        "Run summary — articles: %d | picks: %d | "
+        "elevenlabs: %s | openai_tts: %s | email: %s",
         total,
         len(picks),
+        "ok" if el_audio_ok else ("skip" if not ELEVENLABS_API_KEY else "FAILED"),
         "ok" if audio_ok else "FAILED",
         "ok" if email_ok else "FAILED",
     )
