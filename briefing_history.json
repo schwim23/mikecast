@@ -9357,5 +9357,607 @@
     "url_fp": "44ba8b941538e7dcb1daa728c54fae83",
     "description": "2026 Free Agent Forecast: Offensive LineNew England Patriots",
     "date": "2026-03-07T23:45:09.448393+00:00"
+  },
+  {
+    "title": "Put the zip code first",
+    "url": "https://zipcodefirst.com",
+    "url_fp": "8062c70b43c4e8a816f15d47047dec70",
+    "description": "HN score: 195 | Comments: 151",
+    "date": "2026-03-08T01:25:45.078189+00:00"
+  },
+  {
+    "title": "LLM Writing Tropes.md",
+    "url": "https://tropes.fyi/tropes-md",
+    "url_fp": "d6c15872839c04c6a7782f0794c872fb",
+    "description": "HN score: 81 | Comments: 34",
+    "date": "2026-03-08T01:25:45.123722+00:00"
+  },
+  {
+    "title": "macOS code injection for fun and no profit (2024)",
+    "url": "https://mariozechner.at/posts/2024-07-20-macos-code-injection-fun/",
+    "url_fp": "e18dde65d22a2c94df9cf3795fda47cd",
+    "description": "HN score: 66 | Comments: 12",
+    "date": "2026-03-08T01:25:45.214885+00:00"
+  },
+  {
+    "title": "In 1985 Maxell built a bunch of life-size robots for its bad floppy ad",
+    "url": "https://buttondown.com/suchbadtechads/archive/maxell-life-size-robots/",
+    "url_fp": "2fa73e7d526a78c5884d403445df0a2d",
+    "description": "HN score: 57 | Comments: 6",
+    "date": "2026-03-08T01:25:45.343103+00:00"
+  },
+  {
+    "title": "Package managers need to cool down",
+    "url": "https://nesbitt.io/2026/03/04/package-managers-need-to-cool-down.html",
+    "url_fp": "47cb4e29a7326a185109c13a375417fd",
+    "description": "HN score: 42 | Comments: 39",
+    "date": "2026-03-08T01:25:45.413382+00:00"
+  },
+  {
+    "title": "The stagnancy of publishing and the disappearance of the midlist",
+    "url": "https://www.honest-broker.com/p/the-day-ny-publishing-lost-its-soul",
+    "url_fp": "7914cd40edc7e6d59c1d7fce1569f99b",
+    "description": "HN score: 41 | Comments: 25",
+    "date": "2026-03-08T01:25:45.531154+00:00"
+  },
+  {
+    "title": "Why developers using AI are working longer hours",
+    "url": "https://www.scientificamerican.com/article/why-developers-using-ai-are-working-longer-hours/",
+    "url_fp": "9fdb7cffc4829ec5c5695ddec6418972",
+    "description": "HN score: 39 | Comments: 22",
+    "date": "2026-03-08T01:25:45.624353+00:00"
+  },
+  {
+    "title": "The surprising whimsy of the Time Zone Database",
+    "url": "https://muddy.jprs.me/links/2026-03-06-the-surprising-whimsy-of-the-time-zone-database/",
+    "url_fp": "ab7ecd5e90cd3e6719b1a003d3873a4c",
+    "description": "HN score: 38 | Comments: 3",
+    "date": "2026-03-08T01:25:45.716587+00:00"
+  },
+  {
+    "title": "Bourdieu's theory of taste: a grumbling abrégé (2023)",
+    "url": "https://dynomight.net/bourdieu/",
+    "url_fp": "6960f37775db11ffb43559e538e0ec39",
+    "description": "HN score: 36 | Comments: 13",
+    "date": "2026-03-08T01:25:45.805996+00:00"
+  },
+  {
+    "title": "Google just gave Sundar Pichai a $692M pay package",
+    "url": "https://techcrunch.com/2026/03/07/google-just-gave-sundar-pichai-a-692m-pay-package/",
+    "url_fp": "968287c30cc5a6502d9b65c85a5f4b4f",
+    "description": "Most of it is tied to performance, including new stock incentives linked to Waymo and Wing, its drone delivery venture.",
+    "date": "2026-03-08T01:25:45.899175+00:00"
+  },
+  {
+    "title": "Andrew Tate, Brother Tristan Suing X to ID Users They Claim Defamed Them",
+    "url": "https://www.reddit.com/r/technology/comments/1rnq0x3/andrew_tate_brother_tristan_suing_x_to_id_users/",
+    "url_fp": "06c39d8396365bd97360bcded83461a8",
+    "description": "submitted by/u/TomlinSteelers[link][comments]",
+    "date": "2026-03-08T01:25:46.038841+00:00"
+  },
+  {
+    "title": "Anthropic’s and OpenAI’s Dance With the Pentagon: What to Know - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "Anthropic’s and OpenAI’s Dance With the Pentagon: What to KnowThe New York TimesAnthropic CEO apologizes for leaked memo calling OpenAI staff 'gullible,' confirms risk designationFortuneOpenAI Is Opening the Door to Government SpyingThe Atlantic",
+    "date": "2026-03-08T01:25:46.043187+00:00"
+  },
+  {
+    "title": "OpenAI Robotics head resigns after deal with Pentagon - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "OpenAI Robotics head resigns after deal with PentagonReuters",
+    "date": "2026-03-08T01:25:46.043320+00:00"
+  },
+  {
+    "title": "OpenAI robotics leader resigns over concerns about surveillance and autonomous weapons amid Pentagon contract - Fortune",
+    "url": "https://fortune.com",
+    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
+    "description": "OpenAI robotics leader resigns over concerns about surveillance and autonomous weapons amid Pentagon contractFortune",
+    "date": "2026-03-08T01:25:46.043582+00:00"
+  },
+  {
+    "title": "Anthropic is tracking which jobs are most exposed to AI. These 10 professions top the list. - CBS News",
+    "url": "https://www.cbsnews.com",
+    "url_fp": "db9e06841d873dda9a4f6c17b2621cf4",
+    "description": "Anthropic is tracking which jobs are most exposed to AI. These 10 professions top the list.CBS News",
+    "date": "2026-03-08T01:25:46.043992+00:00"
+  },
+  {
+    "title": "Partnering with Mozilla to improve Firefox’s security - Anthropic",
+    "url": "https://www.anthropic.com",
+    "url_fp": "83724ceebdffe591c85e5dfb049f94b6",
+    "description": "Partnering with Mozilla to improve Firefox’s securityAnthropic",
+    "date": "2026-03-08T01:25:46.044144+00:00"
+  },
+  {
+    "title": "Anthropic officially told by DOD that it's a supply chain risk even as Claude used in Iran - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Anthropic officially told by DOD that it's a supply chain risk even as Claude used in IranCNBCWhat does the US military’s feud with Anthropic mean for AI used in war? | AI (artificial intelligence)The GuardianClaude AI Helped Bomb Iran. But How Exactly?Bloomberg.com",
+    "date": "2026-03-08T01:25:46.044209+00:00"
+  },
+  {
+    "title": "The latest AI news we announced in February - blog.google",
+    "url": "https://blog.google",
+    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
+    "description": "The latest AI news we announced in Februaryblog.google",
+    "date": "2026-03-08T01:25:46.044321+00:00"
+  },
+  {
+    "title": "Father claims Google's AI product fuelled son's delusional spiral - BBC",
+    "url": "https://www.bbc.com",
+    "url_fp": "290ccda0deea6083ee613d358446103e",
+    "description": "Father claims Google's AI product fuelled son's delusional spiralBBC",
+    "date": "2026-03-08T01:25:46.044449+00:00"
+  },
+  {
+    "title": "Man Fell in Love with Google Gemini, Took Own Life to Be with It: Lawsuit - People.com",
+    "url": "https://people.com",
+    "url_fp": "92b89d68d988233e40760714186e5e05",
+    "description": "Man Fell in Love with Google Gemini, Took Own Life to Be with It: LawsuitPeople.com",
+    "date": "2026-03-08T01:25:46.194007+00:00"
+  },
+  {
+    "title": "Unify. Simplify. Scale: Microsoft Dragon Copilot meets the moment at HIMSS 2026 - Microsoft",
+    "url": "https://www.microsoft.com",
+    "url_fp": "c439589400212f33bcef65939bd8c69f",
+    "description": "Unify. Simplify. Scale: Microsoft Dragon Copilot meets the moment at HIMSS 2026Microsoft",
+    "date": "2026-03-08T01:25:46.194234+00:00"
+  },
+  {
+    "title": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks Reel - Crunchbase News",
+    "url": "https://news.crunchbase.com",
+    "url_fp": "f087ef1c2fa43cca40bcb212d1ef6ca1",
+    "description": "Massive AI Deals Drive $189B Startup Funding Record In February While Public Software Stocks ReelCrunchbase News",
+    "date": "2026-03-08T01:25:46.194852+00:00"
+  },
+  {
+    "title": "In the AI Boom, Startups Are Speedrunning Unicorn Status - Business Insider",
+    "url": "https://www.businessinsider.com",
+    "url_fp": "04220288456435753371c3e6a38ca102",
+    "description": "In the AI Boom, Startups Are Speedrunning Unicorn StatusBusiness Insider",
+    "date": "2026-03-08T01:25:46.195117+00:00"
+  },
+  {
+    "title": "Why AI startups are selling the same equity at two different prices - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "Why AI startups are selling the same equity at two different pricesTechCrunch",
+    "date": "2026-03-08T01:25:46.195247+00:00"
+  },
+  {
+    "title": "NVIDIA Kicks Off the Next Generation of AI With Rubin — Six New Chips, One Incredible AI Supercomputer - NVIDIA Newsroom",
+    "url": "https://nvidianews.nvidia.com",
+    "url_fp": "ce9cab6387aa754d1fdbe31e47ca968e",
+    "description": "NVIDIA Kicks Off the Next Generation of AI With Rubin — Six New Chips, One Incredible AI SupercomputerNVIDIA Newsroom",
+    "date": "2026-03-08T01:25:46.195687+00:00"
+  },
+  {
+    "title": "Exclusive | Nvidia Plans New Chip to Speed AI Processing, Shake Up Computing Market - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "Exclusive | Nvidia Plans New Chip to Speed AI Processing, Shake Up Computing MarketWSJ",
+    "date": "2026-03-08T01:25:46.195888+00:00"
+  },
+  {
+    "title": "Nvidia GTC 2026: The biggest reveals we expect to see - Tom's Guide",
+    "url": "https://www.tomsguide.com",
+    "url_fp": "e946de172e1bc60d60b3f544b76f5dfb",
+    "description": "Nvidia GTC 2026: The biggest reveals we expect to seeTom's Guide",
+    "date": "2026-03-08T01:25:46.196065+00:00"
+  },
+  {
+    "title": "Decoding quantum hype: what Google, Microsoft, and AWS are really announcing - Moody's",
+    "url": "https://www.moodys.com",
+    "url_fp": "55f517252a8f9e61da8fa22e16986c81",
+    "description": "Decoding quantum hype: what Google, Microsoft, and AWS are really announcingMoody's",
+    "date": "2026-03-08T01:25:46.336649+00:00"
+  },
+  {
+    "title": "Microsoft Launches Mico, AI-Powered Clippy Successor - The Tech Buzz",
+    "url": "https://www.techbuzz.ai",
+    "url_fp": "ef939d3bc6ef2bd4e508de78d0d4f040",
+    "description": "Microsoft Launches Mico, AI-Powered Clippy SuccessorThe Tech Buzz",
+    "date": "2026-03-08T01:25:46.336815+00:00"
+  },
+  {
+    "title": "Tesla rallies after Elon Musk highlights its AI chip design upside (TSLA:NASDAQ) - Seeking Alpha",
+    "url": "https://seekingalpha.com",
+    "url_fp": "4f758a4bfcb0ea243656cb4316ef4533",
+    "description": "Tesla rallies after Elon Musk highlights its AI chip design upside (TSLA:NASDAQ)Seeking Alpha",
+    "date": "2026-03-08T01:25:46.336946+00:00"
+  },
+  {
+    "title": "Deep Dive: Tesla (TSLA) – Navigating the Future of AI, Autonomy, and Energy - FinancialContent",
+    "url": "https://markets.financialcontent.com",
+    "url_fp": "9d0918f176b2fe48d826f363013acaa4",
+    "description": "Deep Dive: Tesla (TSLA) – Navigating the Future of AI, Autonomy, and EnergyFinancialContent",
+    "date": "2026-03-08T01:25:46.493679+00:00"
+  },
+  {
+    "title": "Tesla (NASDAQ: TSLA): A Large-Cap Powerhouse Navigating the Future of Tech and Transport - The Chronicle-Journal",
+    "url": "http://markets.chroniclejournal.com",
+    "url_fp": "b9b7995f647943c2281e87a5e00cb5b2",
+    "description": "Tesla (NASDAQ: TSLA): A Large-Cap Powerhouse Navigating the Future of Tech and TransportThe Chronicle-Journal",
+    "date": "2026-03-08T01:25:46.674474+00:00"
+  },
+  {
+    "title": "Iran vows it won't surrender as war with the U.S. and Israel enters second week",
+    "url": "https://www.cnbc.com/2026/03/07/not-slowing-down-one-week-on-us-israeli-strikes-on-iran-continue.html",
+    "url_fp": "e6a5eb748d84c5fe251422c49ccf68df",
+    "description": "The U.S. and Israel continued their campaign to rid Tehran of its nuclear and ballistic missile capabilities and push for regime change.",
+    "date": "2026-03-08T01:25:46.675311+00:00"
+  },
+  {
+    "title": "when to switch 529 to more conservative allocations?",
+    "url": "https://www.reddit.com/r/investing/comments/1rn9kyl/when_to_switch_529_to_more_conservative/",
+    "url_fp": "c88212ebd5ddebe6fcc4b6d770d1630b",
+    "description": "We have age based portfolio's for my kids. Right now we have 27k in my 6.5 year olds 529. We have 80% in mutual funds and 10% in bonds ( I think?) and for my 4.5 year old we have 21k, 95% in mutual funds. I'm sure the 4.5 year old will switch to 80% soon. I'm thinking of going more aggressive with b",
+    "date": "2026-03-08T01:25:46.810892+00:00"
+  },
+  {
+    "title": "Economic Warning Signs Pile Up for Republicans Ahead of Midterms",
+    "url": "https://www.nytimes.com/2026/03/07/us/politics/economy-midterms-republicans.html",
+    "url_fp": "9209cfb4f2e29a7e34c420fedabed8d7",
+    "description": "With employers cutting jobs and gas prices rising amid the war in Iran, Democrats see an opportunity to press their advantage.",
+    "date": "2026-03-08T01:25:46.929961+00:00"
+  },
+  {
+    "title": "Stock market today: Dow falls more than 1,000 points, S&P 500 and Nasdaq tank as Iran war jitters return with another oil surge - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Stock market today: Dow falls more than 1,000 points, S&P 500 and Nasdaq tank as Iran war jitters return with another oil surgeYahoo FinanceStock Market News From March 5, 2026: Dow Sinks Nearly 800 Points, Oil Tops $80Barron'sDow falls 450 points, posts worst week in nearly a year as oil tops $90, jobs data disappoints: Live updatesCNBCStocks Fall as Bond Rout Deepens After Jump in Oil: Markets WrapBloomberg.comStock Market Today: Dow Loses 450 Points As Oil Prices Surge; Palantir Rises, Nvidia Falls (Live Coverage)Investor's Business DailyStock Market News, March 6, 2026: Stocks Slide After Weak Jobs Report; Oil Soars Above $90WSJStock Market Today, March 6: Energy Stocks Rise as Oil Closes Over $90 on Middle East TensionsThe Motley FoolMarkets News, March 6, 2026: Stocks Slide to Close Out a Volatile Week as Oil Hits $90/Barrel; Dow Has Worst Week Since AprilInvestopediaStock Market on March 6, 2026: Dow posts worst week since April as oil prices rise to $90 a barrel and a weak jobs report adds another worry for investors; S&P 500 and tech-heavy Nasdaq drop sharply to book weekly lossesMarketWatch",
+    "date": "2026-03-08T01:25:46.930478+00:00"
+  },
+  {
+    "title": "Stock Market News From March 6, 2026: Dow Slides as Stagflation Worries Roil Markets - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Stock Market News From March 6, 2026: Dow Slides as Stagflation Worries Roil MarketsBarron's",
+    "date": "2026-03-08T01:25:46.930656+00:00"
+  },
+  {
+    "title": "Stock Market Rally Attempt Depends On Iran War, Oil's Next Move - Investor's Business Daily",
+    "url": "https://www.investors.com",
+    "url_fp": "545362646854336a3463a9033e71efc5",
+    "description": "Stock Market Rally Attempt Depends On Iran War, Oil's Next MoveInvestor's Business Daily",
+    "date": "2026-03-08T01:25:46.930836+00:00"
+  },
+  {
+    "title": "Even Tech Investors Are Getting Sick of All These AI Startups With Weak Ideas - Futurism",
+    "url": "https://futurism.com",
+    "url_fp": "892f67c1da31468f1d75e5712e1c7c74",
+    "description": "Even Tech Investors Are Getting Sick of All These AI Startups With Weak IdeasFuturism",
+    "date": "2026-03-08T01:25:46.987691+00:00"
+  },
+  {
+    "title": "Federal Reserve Reports Strong Economy Despite Immigration Enforcement Disruptions - Fine Day 102.3",
+    "url": "https://www.finedayradio.com",
+    "url_fp": "c2df6c4814911f83ecd8ff4d68fc08a0",
+    "description": "Federal Reserve Reports Strong Economy Despite Immigration Enforcement DisruptionsFine Day 102.3",
+    "date": "2026-03-08T01:25:47.152943+00:00"
+  },
+  {
+    "title": "US Nonfarm Payrolls Reveal Crucial Moderate Job Growth as Fed Rate Cut Timeline Shifts - CryptoRank",
+    "url": "https://cryptorank.io",
+    "url_fp": "ecfe3df0f5a8024c9ec6a10037365560",
+    "description": "US Nonfarm Payrolls Reveal Crucial Moderate Job Growth as Fed Rate Cut Timeline ShiftsCryptoRank",
+    "date": "2026-03-08T01:25:47.153624+00:00"
+  },
+  {
+    "title": "Trump Could Soon Name A New Fed Chair. What Does It Mean For Rate Cuts? - Bankrate",
+    "url": "https://www.bankrate.com",
+    "url_fp": "d59654ef9e79b7962b93fe53c0f6acad",
+    "description": "Trump Could Soon Name A New Fed Chair. What Does It Mean For Rate Cuts?Bankrate",
+    "date": "2026-03-08T01:25:47.304186+00:00"
+  },
+  {
+    "title": "Russia Revels in a Sudden Reversal in Fortunes as Oil and Gas Prices Soar - vocal.media",
+    "url": "https://vocal.media",
+    "url_fp": "9a70c15aebc39d732417ff95b0b03828",
+    "description": "Russia Revels in a Sudden Reversal in Fortunes as Oil and Gas Prices Soarvocal.media",
+    "date": "2026-03-08T01:25:47.304418+00:00"
+  },
+  {
+    "title": "US stock market biggest consecutive crash: Dow opens with 900-point loss after oil prices jump to highest - The Economic Times",
+    "url": "https://m.economictimes.com",
+    "url_fp": "39029eecad8e4e69bcfabda90ae5a077",
+    "description": "US stock market biggest consecutive crash: Dow opens with 900-point loss after oil prices jump to highestThe Economic Times",
+    "date": "2026-03-08T01:25:47.512489+00:00"
+  },
+  {
+    "title": "Global Oil Markets Rattled as Crude Prices Surge $12 in Just 9 Hours —What Triggered the Spike? - The Logical Indian",
+    "url": "https://thelogicalindian.com",
+    "url_fp": "9ccae6df182230e01f303ef9dfdb3bee",
+    "description": "Global Oil Markets Rattled as Crude Prices Surge $12 in Just 9 Hours —What Triggered the Spike?The Logical Indian",
+    "date": "2026-03-08T01:25:47.710207+00:00"
+  },
+  {
+    "title": "U.S. Economy Loses 92,000 Jobs, Fueling Speculation of Fed Rate Cuts - Bitget",
+    "url": "https://www.bitget.com",
+    "url_fp": "cf143393051119340f68de252102734c",
+    "description": "U.S. Economy Loses 92,000 Jobs, Fueling Speculation of Fed Rate CutsBitget",
+    "date": "2026-03-08T01:25:47.842166+00:00"
+  },
+  {
+    "title": "7 Best Cryptocurrency ETFs to Buy | Investing - Money/ US News",
+    "url": "https://money.usnews.com",
+    "url_fp": "2003d888eba6b4d18bf4eaaacd1325b2",
+    "description": "7 Best Cryptocurrency ETFs to Buy | InvestingMoney/ US News",
+    "date": "2026-03-08T01:25:47.953823+00:00"
+  },
+  {
+    "title": "MacBook Neo is Apple’s new cheap laptop. Is it worth it? - USA Today",
+    "url": "https://www.usatoday.com",
+    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
+    "description": "MacBook Neo is Apple’s new cheap laptop. Is it worth it?USA Today",
+    "date": "2026-03-08T01:25:47.954361+00:00"
+  },
+  {
+    "title": "Mark Zuckerberg says criminal behavior on Facebook inevitable - The Guardian",
+    "url": "https://www.theguardian.com",
+    "url_fp": "b49674329b31ee735fa4368cd1a19ba8",
+    "description": "Mark Zuckerberg says criminal behavior on Facebook inevitableThe Guardian",
+    "date": "2026-03-08T01:25:47.954659+00:00"
+  },
+  {
+    "title": "Update on our organization - About Amazon",
+    "url": "https://www.aboutamazon.com",
+    "url_fp": "ad4f2ca29452c4a90b63ae5542584422",
+    "description": "Update on our organizationAbout Amazon",
+    "date": "2026-03-08T01:25:47.954758+00:00"
+  },
+  {
+    "title": "Four injured, driver charged with DWI after crash outside Garner Amazon facility - WRAL",
+    "url": "https://www.wral.com",
+    "url_fp": "541ea236996c699a9a75b9842f763f79",
+    "description": "Four injured, driver charged with DWI after crash outside Garner Amazon facilityWRAL",
+    "date": "2026-03-08T01:25:47.954889+00:00"
+  },
+  {
+    "title": "Why is Nvidia stock falling today? - TradingView",
+    "url": "https://www.tradingview.com",
+    "url_fp": "84ea80fab7315a2f6446f2aedca0019f",
+    "description": "Why is Nvidia stock falling today?TradingView",
+    "date": "2026-03-08T01:25:47.955037+00:00"
+  },
+  {
+    "title": "Musk claims Tesla will ‘make AGI’ after years of wrong AI predictions - Electrek",
+    "url": "https://electrek.co",
+    "url_fp": "23f70e3d2c01895a0a522bfd3733a201",
+    "description": "Musk claims Tesla will ‘make AGI’ after years of wrong AI predictionsElectrek",
+    "date": "2026-03-08T01:25:47.955448+00:00"
+  },
+  {
+    "title": "Magnificent 7 Stock Report: Apple Leads, NVIDIA Fades, Microsoft Crashes - 24/7 Wall St.",
+    "url": "https://247wallst.com",
+    "url_fp": "5174185651b0be54b91403adb571059b",
+    "description": "Magnificent 7 Stock Report: Apple Leads, NVIDIA Fades, Microsoft Crashes24/7 Wall St.",
+    "date": "2026-03-08T01:25:47.955941+00:00"
+  },
+  {
+    "title": "Google gives CEO Sundar Pichai new pay deal worth up to $692mn - Financial Times",
+    "url": "https://www.ft.com",
+    "url_fp": "ffecc791cb849142c68a1a217b46e756",
+    "description": "Google gives CEO Sundar Pichai new pay deal worth up to $692mnFinancial Times",
+    "date": "2026-03-08T01:25:47.956097+00:00"
+  },
+  {
+    "title": "Alphabet offers CEO Sundar Pichai’s $692 million package over 3 years - The Times of India",
+    "url": "https://timesofindia.indiatimes.com",
+    "url_fp": "541cc79a8638cfd34bdc56d1a27c8cd7",
+    "description": "Alphabet offers CEO Sundar Pichai’s $692 million package over 3 yearsThe Times of India",
+    "date": "2026-03-08T01:25:47.956346+00:00"
+  },
+  {
+    "title": "United American Securities Inc. Sells Uber Shares - National Today",
+    "url": "https://nationaltoday.com",
+    "url_fp": "a13df8b91a7375f0569dc626d64998db",
+    "description": "United American Securities Inc. Sells Uber SharesNational Today",
+    "date": "2026-03-08T01:25:47.956660+00:00"
+  },
+  {
+    "title": "\"A huge week for Apple launches\" — here's the week's 9 biggest tech news stories you need to catch up on - TechRadar",
+    "url": "https://www.techradar.com",
+    "url_fp": "2f53fb3d29c8edd66ce6e074b56b90bd",
+    "description": "\"A huge week for Apple launches\" — here's the week's 9 biggest tech news stories you need to catch up onTechRadar",
+    "date": "2026-03-08T01:25:48.150962+00:00"
+  },
+  {
+    "title": "7 AR Moves In 2026 That Reveal What Changes For Apple, Meta And You - Glass Almanac",
+    "url": "https://glassalmanac.com",
+    "url_fp": "34136dca81f7c915f54a33671580a969",
+    "description": "7 AR Moves In 2026 That Reveal What Changes For Apple, Meta And YouGlass Almanac",
+    "date": "2026-03-08T01:25:48.299526+00:00"
+  },
+  {
+    "title": "Did Amazon trick people into paying for Prime? Federal case goes to trial - NPR",
+    "url": "https://www.npr.org",
+    "url_fp": "fe17b03ed000941c51f40c1cb712a7e6",
+    "description": "Did Amazon trick people into paying for Prime? Federal case goes to trialNPR",
+    "date": "2026-03-08T01:25:48.299866+00:00"
+  },
+  {
+    "title": "Boeing Secures Major Orders Amid Skyrocketing Growth in Aircraft Demand - StocksToTrade",
+    "url": "https://stockstotrade.com",
+    "url_fp": "af7ec3360ab14cc9eb5d2e053f96c7da",
+    "description": "Boeing Secures Major Orders Amid Skyrocketing Growth in Aircraft DemandStocksToTrade",
+    "date": "2026-03-08T01:25:48.453519+00:00"
+  },
+  {
+    "title": "Will The Upcoming Trump Xi Summit Seal Boeings Record Breaking 500 Jet Order In Beijing? - AeroXplorer",
+    "url": "https://aeroxplorer.com",
+    "url_fp": "635a9eaf419cfb31b30d27e7b61aee31",
+    "description": "Will The Upcoming Trump Xi Summit Seal Boeings Record Breaking 500 Jet Order In Beijing?AeroXplorer",
+    "date": "2026-03-08T01:25:48.632992+00:00"
+  },
+  {
+    "title": "United Airlines Flight Attendants Confident They Can Secure Contract Deal Next Month But Still Aren't Backing Down On Concessions - PYOK",
+    "url": "https://www.paddleyourownkanoo.com",
+    "url_fp": "44972a44b64e07542a5a741ae9a1f864",
+    "description": "United Airlines Flight Attendants Confident They Can Secure Contract Deal Next Month But Still Aren't Backing Down On ConcessionsPYOK",
+    "date": "2026-03-08T01:25:48.864841+00:00"
+  },
+  {
+    "title": "Why Meta (META) Shares Are Sliding Today - StockStory",
+    "url": "https://stockstory.org",
+    "url_fp": "8cdbaaad2324c04dffac72fb13d3302a",
+    "description": "Why Meta (META) Shares Are Sliding TodayStockStory",
+    "date": "2026-03-08T01:25:48.963579+00:00"
+  },
+  {
+    "title": "Daily Discussion Thread + Game Thread Index",
+    "url": "https://www.reddit.com/r/nba/comments/1rnhe0a/daily_discussion_thread_game_thread_index/",
+    "url_fp": "1f41fec5a14085b6101d8d96a378303f",
+    "description": "Game Threads Index (March 07, 2026):Tip-offGDTAwayScoreHomePGT08:00 pm ETLinkLos Angeles Clippers08:41 1Q8 to 6Memphis Grizzlies08:00 pm ETLinkUtah Jazz09:04 1Q3 to 6Milwaukee Bucks06:00 pm ETLinkPhiladelphia 76ers04:03 4Q104 to 114Atlanta Hawks06:00 pm ETLinkBrooklyn Nets07:23 4Q81 to 91Detroit Pis",
+    "date": "2026-03-08T01:25:48.964014+00:00"
+  },
+  {
+    "title": "Has anyone been booed longer after leaving than Kawhi?",
+    "url": "https://www.reddit.com/r/nba/comments/1rnoo1n/has_anyone_been_booed_longer_after_leaving_than/",
+    "url_fp": "cc5e4535bb23ceade29c6e19278dba73",
+    "description": "In last night's Spurs-Clips game, Spurs fans booed Kawhi.......every single time he touched the ball. They've been doing that since he left seven years ago. Doesn't bother The Klaw, though. He's a cold-blooded professional and regularly puts up big numbers against the Spurs, like he does against jus",
+    "date": "2026-03-08T01:25:49.068175+00:00"
+  },
+  {
+    "title": "Game Thread 3/7 ⚾ Panama (0-0) @ Puerto Rico (0-0) 6:00 PM ET",
+    "url": "https://www.reddit.com/r/baseball/comments/1rnmpdu/game_thread_37_panama_00_puerto_rico_00_600_pm_et/",
+    "url_fp": "5217c8ae61b4feebd70f5d211e98544b",
+    "description": "Join us on Discord!Panama (0-0) @ Puerto Rico (0-0)First Pitch: 6:00 PM at Hiram Bithorn StadiumTeamStarterTVRadioPanamaAriel Jurado(0-0, -.-- ERA)Puerto RicoEduardo Rivera(0-0, -.-- ERA)MLBFangraphsReddit StreamIRC ChatGamedayGame GraphLive CommentsLibera: ##baseballLine Score - Bases empty, 0 Outs",
+    "date": "2026-03-08T01:25:49.223069+00:00"
+  },
+  {
+    "title": "[Highlight] Eugenio Suárez CRUSHES one",
+    "url": "https://www.reddit.com/r/baseball/comments/1rnq6h7/highlight_eugenio_suárez_crushes_one/",
+    "url_fp": "e9ac139dc2318ab848b1a27918b9b0db",
+    "description": "submitted by/u/MLBOfficial[link][comments]",
+    "date": "2026-03-08T01:25:49.293733+00:00"
+  },
+  {
+    "title": "Vibes couldn't be higher in the Team Venezuela dugout pregame",
+    "url": "https://www.reddit.com/r/baseball/comments/1rnp7q0/vibes_couldnt_be_higher_in_the_team_venezuela/",
+    "url_fp": "9e6046735fc3975b7f7b76ec54cc90e6",
+    "description": "submitted by/u/MLBOfficial[link][comments]",
+    "date": "2026-03-08T01:25:49.406982+00:00"
+  },
+  {
+    "title": "[Highlight] Nate Eaton takes Tarik Skubal deep on the first pitch of the game, making it 1-0 Great Britain after review.",
+    "url": "https://www.reddit.com/r/baseball/comments/1rnr6nm/highlight_nate_eaton_takes_tarik_skubal_deep_on/",
+    "url_fp": "f3e249004f72066c77ed57dccc0b7a54",
+    "description": "submitted by/u/Juicyjackson[link][comments]",
+    "date": "2026-03-08T01:25:49.609778+00:00"
+  },
+  {
+    "title": "Yankees prospect throwing so hard even Cole is left stunned - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "Yankees prospect throwing so hard even Cole is left stunnedMLB.com",
+    "date": "2026-03-08T01:25:49.610148+00:00"
+  },
+  {
+    "title": "New York Yankees' Gerrit Cole Shares Most Difficult Part of Rehab - Yahoo Sports",
+    "url": "https://sports.yahoo.com",
+    "url_fp": "4bbd7d0db668261e182a6708e474c8dc",
+    "description": "New York Yankees' Gerrit Cole Shares Most Difficult Part of RehabYahoo Sports",
+    "date": "2026-03-08T01:25:49.610271+00:00"
+  },
+  {
+    "title": "Exclusive | Jordan Clarkson tells The Post about what playing with LeBron James meant to him - New York Post",
+    "url": "https://nypost.com",
+    "url_fp": "6a3bd587d57d5503a436b77127565c5b",
+    "description": "Exclusive | Jordan Clarkson tells The Post about what playing with LeBron James meant to himNew York Post",
+    "date": "2026-03-08T01:25:49.610535+00:00"
+  },
+  {
+    "title": "Knicks Star's MVP Chances Falling Amidst Rough Scoring Stretch - Sports Illustrated",
+    "url": "https://www.si.com",
+    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
+    "description": "Knicks Star's MVP Chances Falling Amidst Rough Scoring StretchSports Illustrated",
+    "date": "2026-03-08T01:25:49.610676+00:00"
+  },
+  {
+    "title": "New York Giants mailbag: Scouting Combine fallout, NFL free agency - Big Blue View",
+    "url": "https://www.bigblueview.com",
+    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
+    "description": "New York Giants mailbag: Scouting Combine fallout, NFL free agencyBig Blue View",
+    "date": "2026-03-08T01:25:49.610853+00:00"
+  },
+  {
+    "title": "Ex-Giants QB Tommy DeVito Gets Tremendous News Just Before NFL Free Agency - heavy.com",
+    "url": "https://heavy.com",
+    "url_fp": "374bf1bb8fee633961da067e5c478089",
+    "description": "Ex-Giants QB Tommy DeVito Gets Tremendous News Just Before NFL Free Agencyheavy.comGiants free agency tracker 2026: Rumors, cuts, signings, news, analysisBig Blue ViewAre New York Giants gearing up for shocking free agent addition?Giants Wire",
+    "date": "2026-03-08T01:25:49.610941+00:00"
+  },
+  {
+    "title": "Jack Hughes has hat trick, assist for Devils, who top Rangers for 4th win in row - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Jack Hughes has hat trick, assist for Devils, who top Rangers for 4th win in rowNHL.comRangers vs Devils Prediction, Picks & Odds for Tonight’s NHL GameCovers.comRangers sunk by Jack Hughes hat trick in loss to Devils with Vincent Trocheck trade saga over for nowNew York Post",
+    "date": "2026-03-08T01:25:49.611021+00:00"
+  },
+  {
+    "title": "Celtics' Tatum starts rough, finds groove in 15-point return - ESPN",
+    "url": "https://www.espn.com",
+    "url_fp": "f23ac12a07189adde19ca28f3d7c7b4f",
+    "description": "Celtics' Tatum starts rough, finds groove in 15-point returnESPN",
+    "date": "2026-03-08T01:25:49.611142+00:00"
+  },
+  {
+    "title": "New York Knicks vs. Denver Nuggets Live Score and Stats - March 6, 2026 Gametracker - CBS Sports",
+    "url": "https://www.cbssports.com",
+    "url_fp": "b5ffe46b5ef8b6136676d9d1372f0f90",
+    "description": "New York Knicks vs. Denver Nuggets Live Score and Stats - March 6, 2026 GametrackerCBS Sports",
+    "date": "2026-03-08T01:25:49.611364+00:00"
+  },
+  {
+    "title": "Recap: Jayson Tatum's return highlights 7-game Friday - NBA",
+    "url": "https://www.nba.com",
+    "url_fp": "5567ef57bde48e2912b076b1d46096e6",
+    "description": "Recap: Jayson Tatum's return highlights 7-game FridayNBA",
+    "date": "2026-03-08T01:25:49.611646+00:00"
+  },
+  {
+    "title": "NFL Teams Are Becoming More Willing to Trade Two First-Round Picks for Elite Defensive Players - The National Herald",
+    "url": "https://www.thenationalherald.com",
+    "url_fp": "e0bb0d78671f46cad94717ee25b93f5e",
+    "description": "NFL Teams Are Becoming More Willing to Trade Two First-Round Picks for Elite Defensive PlayersThe National Herald",
+    "date": "2026-03-08T01:25:49.811318+00:00"
+  },
+  {
+    "title": "Nuggets' Murray hobbles off with ankle injury vs. Knicks - theScore.com",
+    "url": "https://www.thescore.com",
+    "url_fp": "a3d592afbc0122a0e3e437be327d0cc0",
+    "description": "Nuggets' Murray hobbles off with ankle injury vs. KnickstheScore.com",
+    "date": "2026-03-08T01:25:49.931911+00:00"
+  },
+  {
+    "title": "MLB Spring Training Buzz: Jeremy Peña's Finger Injury Makes WBC Status Unclear - FOX Sports",
+    "url": "https://www.foxsports.com",
+    "url_fp": "c0ab525ee9db32d6ac110bb43787049b",
+    "description": "MLB Spring Training Buzz: Jeremy Peña's Finger Injury Makes WBC Status UnclearFOX Sports",
+    "date": "2026-03-08T01:25:50.088736+00:00"
+  },
+  {
+    "title": "Gerrit Cole injury updates from Yankees spring training all sound borderline magical - Yanks Go Yard",
+    "url": "https://yanksgoyard.com",
+    "url_fp": "30a1b5e85bea4f77494dc1bbd8726fd3",
+    "description": "Gerrit Cole injury updates from Yankees spring training all sound borderline magicalYanks Go Yard",
+    "date": "2026-03-08T01:25:50.264851+00:00"
+  },
+  {
+    "title": "Yankees announce 2 roster moves as spring training continues - ClutchPoints",
+    "url": "https://clutchpoints.com",
+    "url_fp": "64cae9ffb0268317cbdd4f00e613f570",
+    "description": "Yankees announce 2 roster moves as spring training continuesClutchPoints",
+    "date": "2026-03-08T01:25:50.402350+00:00"
+  },
+  {
+    "title": "NY Giants could sign Super Bowl champion WR to help QB Jaxson Dart - bolavip.com",
+    "url": "https://bolavip.com",
+    "url_fp": "a9d59f8f8790d0e19e5b4df4f4cd4337",
+    "description": "NY Giants could sign Super Bowl champion WR to help QB Jaxson Dartbolavip.com",
+    "date": "2026-03-08T01:25:50.546288+00:00"
   }
 ]
