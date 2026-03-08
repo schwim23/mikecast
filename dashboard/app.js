@@ -96,12 +96,15 @@
       briefingHtml.innerHTML = "<p class='muted'>No briefing content for this edition.</p>";
     }
 
-    // 2. Podcast audio
-    if (data.audio_file) {
-      podcastPlayer.src = `../data/${data.audio_file}`;
+    // 2. Podcast audio — prefer ElevenLabs 3-voice, fall back to OpenAI
+    const audioFile = data.elevenlabs_audio_file || data.audio_file;
+    if (audioFile) {
+      podcastPlayer.src = `../data/${audioFile}`;
       podcastPlayer.style.display = "block";
       noAudioEl.style.display = "none";
-      if (podcastMeta) podcastMeta.textContent = "tts-1-hd \u00b7 alloy \u00b7 OpenAI";
+      if (podcastMeta) podcastMeta.textContent = data.elevenlabs_audio_file
+        ? "3-Voice \u00b7 MIKE \u00b7 ELIZABETH \u00b7 JESSE \u00b7 ElevenLabs"
+        : "Single Voice \u00b7 alloy \u00b7 OpenAI";
       document.getElementById("episode-subscribe").style.display = "flex";
     } else {
       podcastPlayer.style.display = "none";
