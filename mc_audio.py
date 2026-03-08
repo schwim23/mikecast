@@ -26,6 +26,30 @@ from mc_generate import parse_conversational_script
 logger = logging.getLogger("mikecast")
 
 
+def _strip_vbr_header(path: Path) -> None:
+    """
+    Nullify the Xing/Info/VBRI VBR header in the first MP3 frame.
+
+    When ElevenLabs segments are concatenated as raw bytes, the first segment's
+    Xing header (which encodes only *that segment's* frame count) becomes the
+    VBR header for the whole file. Players read it and report the first
+    segment's duration (e.g. 21s) instead of the real file length. Clearing
+    the marker makes players fall back to bitrate×file-size estimation, which
+    is accurate enough and lets the subsequent TLEN stamp take effect.
+    """
+    try:
+        data = path.read_bytes()
+        for marker in (b"Xing", b"Info", b"VBRI"):
+            pos = data[:2000].find(marker)
+            if pos != -1:
+                patched = data[:pos] + b"\x00" * len(marker) + data[pos + len(marker):]
+                path.write_bytes(patched)
+                logger.info("Stripped VBR header '%s' from %s", marker.decode(), path.name)
+                return
+    except Exception as exc:
+        logger.warning("Could not strip VBR header from %s: %s", path.name, exc)
+
+
 def _stamp_mp3_duration(path: Path) -> None:
     """
     Write the actual audio duration into the MP3's ID3 TLEN tag so that
@@ -166,11 +190,11 @@ def generate_elevenlabs_audio(
             }
             payload = {
                 "text": chunk,
-                "model_id": "eleven_turbo_v2_5",
+                "model_id": "eleven_multilingual_v2",
                 "voice_settings": {
-                    "stability": 0.35,
+                    "stability": 0.55,
                     "similarity_boost": 0.75,
-                    "style": 0.25,
+                    "style": 0.20,
                     "use_speaker_boost": True,
                 },
             }
@@ -201,6 +225,7 @@ def generate_elevenlabs_audio(
             "ElevenLabs audio saved: %s (%.1f MB, %d segments)",
             output_path, output_path.stat().st_size / 1e6, len(audio_segments),
         )
+        _strip_vbr_header(output_path)
         _stamp_mp3_duration(output_path)
         return True
     except Exception as exc:

@@ -141,6 +141,25 @@ def generate_rss_feed() -> None:
         audio_path = DATA_DIR / audio_file
         file_size = audio_path.stat().st_size if audio_path.exists() else 0
 
+        # Compute real duration for itunes:duration (seconds)
+        duration_secs = 0
+        if audio_path.exists():
+            try:
+                from mutagen.mp3 import MP3
+                from mutagen.id3 import ID3
+                # Prefer the TLEN tag stamped after Xing stripping (most accurate)
+                try:
+                    tags = ID3(audio_path)
+                    tlen = tags.get("TLEN")
+                    if tlen:
+                        duration_secs = int(str(tlen)) // 1000
+                except Exception:
+                    pass
+                if not duration_secs:
+                    duration_secs = int(MP3(audio_path).info.length)
+            except Exception as exc:
+                logger.warning("Could not read duration for %s: %s", audio_file, exc)
+
         # Build pubDate in RFC 2822 format (publish at 6:45 AM ET = 11:45 UTC)
         try:
             dt = datetime.strptime(date_str, "%Y-%m-%d").replace(
@@ -183,7 +202,7 @@ def generate_rss_feed() -> None:
     <itunes:title>MikeCast #{episode_num} — {_esc(date_display)}</itunes:title>
     <itunes:subtitle>{_esc(subtitle)}</itunes:subtitle>
     <itunes:summary>{_esc(description)}</itunes:summary>
-    <itunes:duration>0</itunes:duration>
+    <itunes:duration>{duration_secs}</itunes:duration>
     <itunes:explicit>false</itunes:explicit>
   </item>""")
 
