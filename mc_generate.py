@@ -8,6 +8,7 @@ GPT-4o calls for:
   - Short episode description for RSS/dashboard
 """
 
+import html as _html
 import json
 import logging
 import re
@@ -142,7 +143,7 @@ Format rules:
             color = "#ffb74d" if section in ("KEY TRENDS & INSIGHTS", "WHAT TO WATCH") else "#4fc3f7"
             out = (
                 f'<h2 style="color:{color};border-bottom:1px solid #444;'
-                f'padding-bottom:6px;margin-top:28px;">{section}</h2>\n'
+                f'padding-bottom:6px;margin-top:28px;">{_html.escape(section)}</h2>\n'
             )
             combined = " ".join(buf).strip()
             # Convert [Source](URL) markdown links to HTML
@@ -275,7 +276,7 @@ Here are today's news articles:
 {picks_context}
 
 Script requirements:
-- Total length: 5-10 minutes of spoken audio (approximately 800-1500 words)
+- Total length: 5-10 minutes of spoken audio (approximately 1000-1500 words)
 - Structure:
   1. Warm, engaging INTRO (welcome listeners, tease the top stories, ~30 seconds)
   2. AI & TECH segment — cover the top 3-4 stories with context and insight
@@ -370,7 +371,7 @@ Script structure:
    End with: "Back to you, Mike."
 6. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
 
-Total length: 5-8 minutes of spoken audio (approx 800-1200 words).
+Total length: 5-8 minutes of spoken audio (approx 1000-1500 words).
 Write the COMPLETE script with all tags. No outline, no placeholders."""
 
     script = _gpt_call(system_prompt, user_prompt, max_tokens=2500)
