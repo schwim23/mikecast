@@ -177,10 +177,10 @@ def main() -> None:
             logger.warning("Removed partial ElevenLabs audio: %s", el_audio_path)
         el_audio_filename = el_audio_path.name if el_audio_ok else None
 
-    # OpenAI TTS single-voice (always generated as backup + email attachment)
+    # OpenAI TTS single-voice (only as fallback when ElevenLabs fails/unavailable)
     script_for_tts = single_voice_script or conversational_script
-    if script_for_tts:
-        logger.info("Generating OpenAI TTS single-voice audio…")
+    if script_for_tts and not el_audio_ok:
+        logger.info("Generating OpenAI TTS single-voice audio (ElevenLabs unavailable)…")
         audio_ok = generate_podcast_audio(script_for_tts, audio_path)
         if not audio_ok and audio_path.exists():
             audio_path.unlink()
