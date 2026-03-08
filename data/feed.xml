@@ -23,14 +23,26 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #14 — March 08, 2026</title>
+    <description>Episode #14 — NVIDIA launches Rubin, a groundbreaking AI chip, while Elon Musk faces a legal setback in California over data disclosure laws affecting xAI; OpenAI's robotics chief resigns amid surveillance concerns, and Anthropic analyzes AI's impact on jobs; Apple battles antitrust issues in India, and U.S. unemployment rises to 4.4%.</description>
+    <pubDate>Sun, 08 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-08</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-08.mp3" type="audio/mpeg" length="4538375"/>
+    <itunes:title>MikeCast #14 — March 08, 2026</itunes:title>
+    <itunes:subtitle>Episode #14 — NVIDIA launches Rubin, a groundbreaking AI chip, while Elon Musk faces a legal setback in California over data disclosure laws affecting xAI; OpenAI's robotics chief resigns amid surveillance concerns, and Anthropic analyzes AI's impact o...</itunes:subtitle>
+    <itunes:summary>Episode #14 — NVIDIA launches Rubin, a groundbreaking AI chip, while Elon Musk faces a legal setback in California over data disclosure laws affecting xAI; OpenAI's robotics chief resigns amid surveillance concerns, and Anthropic analyzes AI's impact on jobs; Apple battles antitrust issues in India, and U.S. unemployment rises to 4.4%.</itunes:summary>
+    <itunes:duration>0</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #13 — March 07, 2026</title>
-    <description>Episode #13 — This episode covers the U.S. economy losing 92,000 jobs, sparking speculation about Federal Reserve rate cuts, NVIDIA's launch of six new chips and the Rubin AI supercomputer, Amazon's federal trial over Prime subscription practices, Apple's MacBook Neo release, and tensions involving the U.S., Israel, and Iran affecting oil prices and markets.</description>
+    <description>Episode #13 — This episode covers Iran's ongoing conflict with the U.S. and Israel impacting oil prices and stock markets, NVIDIA's launch of Rubin and new AI chips, Google's breakthrough quantum algorithm, a record $189 billion in AI startup funding, the Teamsters' historic strike against Amazon, and Sundar Pichai's $692 million pay deal at Google.</description>
     <pubDate>Sat, 07 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-07</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-07.mp3" type="audio/mpeg" length="3890121"/>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-07.mp3" type="audio/mpeg" length="4347785"/>
     <itunes:title>MikeCast #13 — March 07, 2026</itunes:title>
-    <itunes:subtitle>Episode #13 — This episode covers the U.S. economy losing 92,000 jobs, sparking speculation about Federal Reserve rate cuts, NVIDIA's launch of six new chips and the Rubin AI supercomputer, Amazon's federal trial over Prime subscription practices, Appl...</itunes:subtitle>
-    <itunes:summary>Episode #13 — This episode covers the U.S. economy losing 92,000 jobs, sparking speculation about Federal Reserve rate cuts, NVIDIA's launch of six new chips and the Rubin AI supercomputer, Amazon's federal trial over Prime subscription practices, Apple's MacBook Neo release, and tensions involving the U.S., Israel, and Iran affecting oil prices and markets.</itunes:summary>
+    <itunes:subtitle>Episode #13 — This episode covers Iran's ongoing conflict with the U.S. and Israel impacting oil prices and stock markets, NVIDIA's launch of Rubin and new AI chips, Google's breakthrough quantum algorithm, a record $189 billion in AI startup funding, ...</itunes:subtitle>
+    <itunes:summary>Episode #13 — This episode covers Iran's ongoing conflict with the U.S. and Israel impacting oil prices and stock markets, NVIDIA's launch of Rubin and new AI chips, Google's breakthrough quantum algorithm, a record $189 billion in AI startup funding, the Teamsters' historic strike against Amazon, and Sundar Pichai's $692 million pay deal at Google.</itunes:summary>
     <itunes:duration>0</itunes:duration>
     <itunes:explicit>false</itunes:explicit>
   </item>
