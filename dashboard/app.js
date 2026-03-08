@@ -53,7 +53,7 @@
 
   async function loadManifest() {
     try {
-      const resp = await fetch("/api/manifest");
+      const resp = await fetch("../data/manifest.json");
       if (!resp.ok) return;
       const data = await resp.json();
       const dates = data.dates || [];
@@ -72,7 +72,7 @@
     errorEl.style.display   = "none";
     loadingEl.style.display = "block";
     try {
-      const resp = await fetch(`/data/${dateStr}.json`);
+      const resp = await fetch(`../data/${dateStr}.json`);
       if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
       const data = await resp.json();
       renderBriefing(data, dateStr);
@@ -98,7 +98,7 @@
 
     // 2. Podcast audio
     if (data.audio_file) {
-      podcastPlayer.src = `/data/${data.audio_file}`;
+      podcastPlayer.src = `../data/${data.audio_file}`;
       podcastPlayer.style.display = "block";
       noAudioEl.style.display = "none";
       if (podcastMeta) podcastMeta.textContent = "tts-1-hd \u00b7 alloy \u00b7 OpenAI";
@@ -175,7 +175,7 @@
     // On "Today" click, re-fetch manifest to get latest, then load most recent
     (async () => {
       try {
-        const resp = await fetch("/api/manifest");
+        const resp = await fetch("../data/manifest.json");
         if (resp.ok) {
           const data = await resp.json();
           const latest = (data.dates || [])[0] || todayStr();
@@ -215,7 +215,7 @@
   // Load manifest first, then default to the most recent available date
   (async () => {
     try {
-      const resp = await fetch("/api/manifest");
+      const resp = await fetch("../data/manifest.json");
       if (resp.ok) {
         const data = await resp.json();
         const dates = data.dates || [];
