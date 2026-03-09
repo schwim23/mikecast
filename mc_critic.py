@@ -186,11 +186,14 @@ def _regenerate_html_section(cat: str, articles: list[dict], issue: str) -> str:
     prompt = (
         f"You are writing the '{cat}' section of a daily news briefing HTML page.\n\n"
         f"Quality issue identified: {issue}\n\n"
-        f"Available articles:\n{articles_text}\n\n"
+        f"Available articles ({len(articles)} total — use ONLY these, nothing else):\n{articles_text}\n\n"
+        "CRITICAL: Only write about the articles listed above. Do NOT add stories, facts, "
+        "player names, scores, trades, or events that are not explicitly stated in those articles. "
+        "If fewer than 4 articles are available, cover only those that exist — do not invent more.\n\n"
         "Write an improved HTML section that:\n"
-        "  - Covers 4-6 of the most important stories\n"
+        "  - Covers the available stories with deeper analysis\n"
         "  - Has 3-4 sentences of analysis per story\n"
-        "  - Includes specific facts, numbers, and implications\n"
+        "  - Includes specific facts from the articles above\n"
         "  - Uses <h3> for story headlines and <p> for analysis\n"
         "  - Does NOT include an <h2> header (it will be added separately)\n"
         "Return ONLY the HTML fragment — no markdown, no explanation."
@@ -221,9 +224,17 @@ def patch_weak_sections(
     """
     from mc_generate import generate_conversational_script, generate_podcast_script
 
+    # NY Sports is never patched — thin sports coverage is acceptable and honest.
+    # Patching sports invites GPT to hallucinate games, scores, and players.
+    NEVER_PATCH = {"NY Sports"}
+    patchable = [c for c in weak_categories if c not in NEVER_PATCH]
+    if len(patchable) < len(weak_categories):
+        skipped = [c for c in weak_categories if c in NEVER_PATCH]
+        logger.info("Skipping critic patch for fact-sensitive categories: %s", skipped)
+
     improved_html = html
 
-    for cat in weak_categories:
+    for cat in patchable:
         articles = categorised.get(cat, [])
         issue = issues.get(cat, "Section lacks depth and substance.")
         logger.info("Patching weak section: %s — %s", cat, issue)
