@@ -23,12 +23,18 @@ logger = logging.getLogger("mikecast")
 # ---------------------------------------------------------------------------
 
 def _build_articles_context(categorised: dict[str, list[dict]]) -> str:
-    """Flatten all articles into a structured text block for GPT prompts."""
+    """
+    Flatten all articles into a structured text block for GPT prompts.
+    Each category header explicitly states the article count so the model
+    knows exactly how many articles it is allowed to reference.
+    """
     lines = []
     for cat, arts in categorised.items():
-        if not arts:
+        count = len(arts)
+        if count == 0:
+            lines.append(f"\n=== {cat.upper()} — 0 ARTICLES (do not discuss this category) ===")
             continue
-        lines.append(f"\n=== {cat.upper()} ===")
+        lines.append(f"\n=== {cat.upper()} — {count} ARTICLE{'S' if count != 1 else ''} (discuss ONLY these) ===")
         for i, art in enumerate(arts, 1):
             title = art.get("title", "").replace("[Updated] ", "")
             desc = art.get("description", "")
@@ -289,7 +295,7 @@ Script requirements:
   2. AI & TECH segment — cover the top 3-4 stories with context and insight
   3. BUSINESS & MARKETS segment — cover top 2-3 stories, explain what it means for listeners
   4. COMPANIES segment — cover top 3-4 company stories with personality
-  5. NY SPORTS segment — quick, energetic rundown of sports news
+  5. NY SPORTS segment — cover ONLY the NY Sports articles listed above; do not mention any team, player, or coach not explicitly named in those articles
   6. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads"
   7. OUTRO — brief wrap-up, call to action, sign-off (~20 seconds)
 
@@ -379,7 +385,9 @@ Script structure:
 3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories, explain what it means.
 4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality.
    End with a handoff: "Alright Jesse, take it away with sports..."
-5. [JESSE] NY SPORTS — Energetic, team-focused rundown of Yankees, Knicks, Giants, Devils.
+5. [JESSE] NY SPORTS — Cover ONLY the NY Sports articles listed above. Do not mention any
+   team, player, coach, or event not explicitly named in those articles. If an article does
+   not name a specific player or coach, do not invent one. Keep it short if there are few articles.
    End with: "Back to you, Mike."
 6. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
 
