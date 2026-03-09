@@ -226,10 +226,11 @@ def patch_weak_sections(
 
     # NY Sports is never patched — thin sports coverage is acceptable and honest.
     # Patching sports invites GPT to hallucinate games, scores, and players.
-    NEVER_PATCH = {"NY Sports"}
-    patchable = [c for c in weak_categories if c not in NEVER_PATCH]
+    # Use case-insensitive match since GPT may return "NY SPORTS" or "NY Sports".
+    NEVER_PATCH_NORMALIZED = {"ny sports"}
+    patchable = [c for c in weak_categories if c.lower() not in NEVER_PATCH_NORMALIZED]
     if len(patchable) < len(weak_categories):
-        skipped = [c for c in weak_categories if c in NEVER_PATCH]
+        skipped = [c for c in weak_categories if c.lower() in NEVER_PATCH_NORMALIZED]
         logger.info("Skipping critic patch for fact-sensitive categories: %s", skipped)
 
     improved_html = html
