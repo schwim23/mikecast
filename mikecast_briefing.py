@@ -30,6 +30,7 @@ from mc_collect import (
     deduplicate,
     enrich_top_stories,
     filter_stale_articles,
+    filter_sports_by_trusted_sources,
     process_picks,
     score_and_rank_articles,
     select_top_articles,
@@ -39,7 +40,7 @@ from mc_audio import generate_elevenlabs_audio, generate_podcast_audio
 from mc_critic import run_critic_pass
 from mc_deliver import generate_manifest, generate_rss_feed, save_daily_data, send_email
 from mc_generate import generate_conversational_script, generate_html_briefing, generate_podcast_script
-from mc_plan import fetch_grok_articles, plan_daily_searches
+from mc_plan import plan_daily_searches
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -68,23 +69,17 @@ def main() -> None:
         )
         sys.exit(0)
 
-    # 0. Plan today's searches + fetch live articles via xAI Grok
-    logger.info("Step 0/10: Planning today's searches and fetching live articles via xAI Grok…")
+    # 0. Plan today's searches with xAI Grok (generates targeted queries only)
+    logger.info("Step 0/10: Planning today's searches with xAI Grok…")
     dynamic_queries: dict[str, list[str]] = {}
     trending_context: str = ""
-    grok_articles: dict[str, list[dict]] = {}
     try:
-        from concurrent.futures import ThreadPoolExecutor as _TPE
-        with _TPE(max_workers=2) as _ex:
-            _f_queries  = _ex.submit(plan_daily_searches)
-            _f_articles = _ex.submit(fetch_grok_articles)
-            dynamic_queries, trending_context = _f_queries.result()
-            grok_articles = _f_articles.result()
+        dynamic_queries, trending_context = plan_daily_searches()
         if dynamic_queries:
             total_dyn = sum(len(v) for v in dynamic_queries.values())
             logger.info("Planning complete: %d dynamic queries generated.", total_dyn)
-        total_grok = sum(len(v) for v in grok_articles.values())
-        logger.info("Grok live articles fetched: %d across %d categories.", total_grok, len(grok_articles))
+        else:
+            logger.info("Planning skipped or returned no queries (XAI_API_KEY may not be set).")
     except Exception as exc:
         logger.warning("Planning step failed (non-fatal): %s", exc)
 
@@ -101,19 +96,15 @@ def main() -> None:
             raw_total,
         )
 
-    # 1b. Inject Grok live articles (verified, current) before dedup
-    if grok_articles:
-        for cat, arts in grok_articles.items():
-            if cat in raw_news:
-                raw_news[cat] = arts + raw_news[cat]  # Grok articles first (highest priority)
-        logger.info("Injected Grok articles into raw news collection.")
-
     # 2. Deduplicate (against 7-day rolling history)
     logger.info("Step 2/10: Deduplicating…")
     deduped = deduplicate(raw_news)
 
     # 2b. Drop stale articles (older than 3 days — prevents recirculated old content)
     deduped = filter_stale_articles(deduped, max_age_days=3)
+
+    # 2c. Drop sports articles from untrusted publishers (blocks AOL et al.)
+    deduped = filter_sports_by_trusted_sources(deduped)
 
     # 3. Cluster similar stories (cheap gpt-4o-mini — reduces count before scoring)
     logger.info("Step 3/10: Clustering duplicate stories…")

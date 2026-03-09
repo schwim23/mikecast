@@ -80,9 +80,10 @@ CATEGORIES: dict[str, list[str]] = {
         "Microsoft news today", "Google Alphabet news",
         "Uber news today",
     ],
-    # NY Sports: Google News RSS removed — sports articles come from
-    # Grok live search (fetch_grok_articles) + NYT only.
-    "NY Sports": [],
+    "NY Sports": [
+        "New York Yankees", "New York Knicks",
+        "New York Giants NFL", "New Jersey Devils NHL",
+    ],
 }
 
 # NYT Top Stories sections → category mapping
@@ -144,18 +145,32 @@ CNBC_RSS_FEEDS: list[tuple[str, str, str, int]] = [
     ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",  "Business & Markets", 6),
 ]
 
-# ESPN RSS removed — national feeds pulled stale/non-NY content.
-# Sports now sourced exclusively from Grok live search + NYT.
-ESPN_RSS_FEEDS: list[tuple[str, str]] = []
+# ESPN RSS feeds — real, current sports articles (date-filtered in pipeline).
+ESPN_RSS_FEEDS: list[tuple[str, str]] = [
+    ("https://www.espn.com/espn/rss/nba/news", "NBA"),
+    ("https://www.espn.com/espn/rss/mlb/news", "MLB"),
+    ("https://www.espn.com/espn/rss/nfl/news", "NFL"),
+    ("https://www.espn.com/espn/rss/nhl/news", "NHL"),
+]
 
 # Reddit Atom feeds: (subreddit, category, max_articles)
-# Sports subreddits removed — fan speculation and old content caused hallucination.
+# Sports subreddits excluded — fan speculation caused hallucination in generation.
 REDDIT_FEEDS: list[tuple[str, str, int]] = [
     ("MachineLearning", "AI & Tech",          10),
     ("artificial",      "AI & Tech",          10),
     ("technology",      "AI & Tech",          10),
     ("investing",       "Business & Markets", 10),
 ]
+
+# Publishers trusted for sports articles. Articles from other sources in the
+# NY Sports category are dropped before generation to prevent stale aggregator
+# content (e.g. AOL.com) from entering the pipeline.
+SPORTS_TRUSTED_SOURCES: set[str] = {
+    "ESPN", "The New York Times", "Associated Press", "Reuters",
+    "CBS Sports", "NBC Sports", "Sports Illustrated", "The Athletic",
+    "Bleacher Report", "MLB.com", "NBA.com", "NFL.com", "NHL.com",
+    "New York Post", "New York Daily News", "NJ.com",
+}
 
 REDDIT_USER_AGENT = (
     "MikeCast/2.0 (personal news briefing bot; contact: prometheusagent23@gmail.com)"

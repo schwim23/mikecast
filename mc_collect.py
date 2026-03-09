@@ -543,6 +543,40 @@ def filter_stale_articles(
     return filtered
 
 
+def filter_sports_by_trusted_sources(
+    categorised: dict[str, list[dict]],
+) -> dict[str, list[dict]]:
+    """
+    For the NY Sports category only, drop articles from publishers not in
+    SPORTS_TRUSTED_SOURCES. This blocks low-quality aggregators (AOL.com,
+    random blogs) that recirculate old content.
+
+    Articles from other categories are passed through unchanged.
+    Sports articles with no source field are dropped (fail-closed).
+    """
+    from mc_config import SPORTS_TRUSTED_SOURCES
+
+    result = dict(categorised)
+    sports = categorised.get("NY Sports", [])
+    if not sports:
+        return result
+
+    kept = []
+    dropped = 0
+    for art in sports:
+        source = art.get("source", "").strip()
+        if any(trusted.lower() in source.lower() for trusted in SPORTS_TRUSTED_SOURCES):
+            kept.append(art)
+        else:
+            logger.debug("Dropping untrusted sports source '%s': %s", source, art.get("title", "")[:60])
+            dropped += 1
+
+    if dropped:
+        logger.info("Sports source filter: dropped %d articles from untrusted publishers.", dropped)
+    result["NY Sports"] = kept
+    return result
+
+
 def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> dict[str, list[dict]]:
     """
     Trim each category proportionally to keep roughly *total* articles overall.
