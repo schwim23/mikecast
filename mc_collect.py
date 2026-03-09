@@ -278,10 +278,11 @@ def search_news_web(query: str, max_results: int = 5) -> list[dict]:
     Fetch Google News RSS for a query and return article dicts.
     Uses the publisher's domain URL (from <source url='...'>) as the article link
     because Google News redirect URLs hit a consent wall server-side.
+    Restricts results to the past 24 hours via the 'when:1d' modifier.
     """
     resp = _safe_request(
         "https://news.google.com/rss/search",
-        params={"q": query, "hl": "en-US", "gl": "US", "ceid": "US:en"},
+        params={"q": f"{query} when:1d", "hl": "en-US", "gl": "US", "ceid": "US:en"},
     )
     if resp is None:
         return []
@@ -493,6 +494,53 @@ def deduplicate(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
     history.extend(new_history_entries)
     save_history(history)
     return deduped
+
+
+def filter_stale_articles(
+    categorised: dict[str, list[dict]],
+    max_age_days: int = 3,
+) -> dict[str, list[dict]]:
+    """
+    Drop articles whose parsed publication date is older than *max_age_days*.
+    Articles with unparseable or missing dates are kept (benefit of the doubt).
+    This prevents old recirculated content (e.g. from AOL) from entering the pipeline.
+    """
+    from email.utils import parsedate_to_datetime
+
+    cutoff = datetime.now(timezone.utc) - timedelta(days=max_age_days)
+    filtered: dict[str, list[dict]] = {}
+    total_dropped = 0
+
+    for cat, arts in categorised.items():
+        kept: list[dict] = []
+        for art in arts:
+            pub = art.get("published", "").strip()
+            if not pub:
+                kept.append(art)
+                continue
+            parsed_dt = None
+            for parse_fn in (
+                lambda s: parsedate_to_datetime(s),            # RFC 2822 (RSS pubDate)
+                lambda s: datetime.fromisoformat(s.replace("Z", "+00:00")),  # ISO 8601
+            ):
+                try:
+                    parsed_dt = parse_fn(pub)
+                    if parsed_dt.tzinfo is None:
+                        parsed_dt = parsed_dt.replace(tzinfo=timezone.utc)
+                    break
+                except Exception:
+                    continue
+
+            if parsed_dt is not None and parsed_dt < cutoff:
+                logger.debug("Dropping stale article (%s): %s", pub[:10], art.get("title", "")[:60])
+                total_dropped += 1
+                continue
+            kept.append(art)
+        filtered[cat] = kept
+
+    if total_dropped:
+        logger.info("Stale article filter: dropped %d articles older than %d days.", total_dropped, max_age_days)
+    return filtered
 
 
 def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> dict[str, list[dict]]:

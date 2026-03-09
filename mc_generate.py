@@ -61,7 +61,7 @@ def _gpt_call(system_prompt: str, user_prompt: str, max_tokens: int = 2500) -> s
                 {"role": "user",   "content": user_prompt},
             ],
             max_tokens=max_tokens,
-            temperature=0.7,
+            temperature=0.4,
         )
         return resp.choices[0].message.content.strip()
     except Exception as exc:
@@ -91,7 +91,11 @@ def generate_html_briefing(
     system_prompt = (
         "You are MikeCast, a sharp, well-informed daily briefing writer. "
         "Write in a professional yet engaging tone — like a smart friend who reads everything so you don't have to. "
-        "Be concise but substantive. Use active voice. Avoid filler phrases."
+        "Be concise but substantive. Use active voice. Avoid filler phrases.\n\n"
+        "CRITICAL RULE: Only report facts explicitly stated in the provided articles. "
+        "Do NOT add details, claims, trades, events, statistics, or context from your training knowledge. "
+        "If a category has few or no articles, write only what the articles say — do not fill gaps with invented news. "
+        "Every specific claim (names, numbers, events) must trace directly to an article in the input."
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. You have collected {total_articles} news articles across 4 categories.
@@ -265,8 +269,11 @@ def generate_podcast_script(
     system_prompt = (
         "You are the host of MikeCast, a daily news podcast. "
         "Your style is smart, conversational, and energetic — like a knowledgeable friend catching you up over coffee. "
-        "You speak directly to the listener. You add context, opinion, and insight — not just headlines. "
-        "You're concise but never dry. You use natural spoken language, not written prose."
+        "You speak directly to the listener. You add context and insight — not just headlines. "
+        "You're concise but never dry. You use natural spoken language, not written prose.\n\n"
+        "CRITICAL RULE: Only discuss stories explicitly present in the provided articles. "
+        "Do NOT mention trades, events, statistics, or facts from your training knowledge that aren't in the input. "
+        "If a category has few articles, keep that segment short — never invent news to fill time."
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write a full podcast script for today's MikeCast episode.
@@ -352,7 +359,12 @@ def generate_conversational_script(
         "- JESSE covers NY Sports and hands back to Mike for the sign-off.\n"
         "- Write in natural spoken language — contractions, energy, personality.\n"
         "- NO URLs in the script. NO stage directions. Only spoken words.\n"
-        "- Each host segment should feel like a real broadcast, not a list."
+        "- Each host segment should feel like a real broadcast, not a list.\n\n"
+        "CRITICAL RULE: Only discuss stories explicitly present in the provided articles. "
+        "Do NOT mention trades, signings, game scores, injuries, or any sports/business facts "
+        "from your training knowledge that aren't in the input articles. "
+        "If a category (especially NY Sports) has few or no articles, Jesse should say there's "
+        "not much happening today and keep it brief — never fabricate news."
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write the full MikeCast 3-host podcast script.

@@ -29,6 +29,7 @@ from mc_collect import (
     collect_all_news,
     deduplicate,
     enrich_top_stories,
+    filter_stale_articles,
     process_picks,
     score_and_rank_articles,
     select_top_articles,
@@ -97,6 +98,9 @@ def main() -> None:
     # 2. Deduplicate (against 7-day rolling history)
     logger.info("Step 2/10: Deduplicating…")
     deduped = deduplicate(raw_news)
+
+    # 2b. Drop stale articles (older than 3 days — prevents recirculated old content)
+    deduped = filter_stale_articles(deduped, max_age_days=3)
 
     # 3. Cluster similar stories (cheap gpt-4o-mini — reduces count before scoring)
     logger.info("Step 3/10: Clustering duplicate stories…")
