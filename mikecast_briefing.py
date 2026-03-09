@@ -124,7 +124,7 @@ def main() -> None:
 
     # 6. Enrich top 8 stories (fetch article body + 'why it matters' via gpt-4o-mini)
     logger.info("Step 6/10: Enriching top stories…")
-    top_articles = enrich_top_stories(top_articles, top_n=8)
+    top_articles = enrich_top_stories(top_articles, top_n=15)
 
     # 7. Process Mike's Picks (user-submitted URLs / PDFs / text)
     logger.info("Step 7/10: Processing Mike's Picks…")

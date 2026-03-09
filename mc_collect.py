@@ -854,7 +854,7 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
         except Exception as exc:
             logger.debug("Enrichment failed for '%s': %s", title[:50], exc)
 
-    with ThreadPoolExecutor(max_workers=4) as ex:
+    with ThreadPoolExecutor(max_workers=8) as ex:
         futures = [ex.submit(enrich_article, cat, art) for cat, art in to_enrich]
         for fut in as_completed(futures):
             try:

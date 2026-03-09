@@ -2,228 +2,246 @@
   "date": "2026-03-09",
   "date_display": "March 09, 2026",
   "episode_num": 15,
-  "episode_description": "Episode #15 — This episode covers Nvidia's launch of a groundbreaking AI chip and Nscale's $14.6 billion valuation, the surge in oil prices due to Gulf state production cuts, a jury's decision on Amazon Prime practices, privacy concerns over online age-verification tools, and the Knicks' latest trade, alongside a fatal crash in Apple Valley.",
-  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 09, 2026</p>\n</div>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">As geopolitical tensions over oil grow, prices surge past $100 a barrel, creating ripples in global markets. In AI & Tech, Nvidia is making significant strides with a new chip aimed at revolutionizing AI processing, while privacy concerns continue to stir debates over surveillance and data use. New York sports see blockbuster trades and contract deals, while Amazon faces legal scrutiny over alleged deceptive practices involving its Prime memberships.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia is planning to release a new chip designed to accelerate AI processing, which could significantly impact the computing market. This move is part of Nvidia's ongoing efforts to dominate the AI hardware space as demand for AI capabilities skyrockets. The new chip aims to enhance efficiency and performance, potentially reshaping data processing landscapes. <a href=\"https://www.wsj.com\" style=\"color:#81d4fa;text-decoration:none;\">WSJ</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nscale, an AI data center startup backed by Nvidia, has reached a valuation of $14.6 billion. This highlights the growing importance and investment in AI infrastructure, as companies race to build robust systems capable of supporting advanced AI applications. Nvidia's involvement underscores its strategic focus on fostering AI innovations. <a href=\"https://www.cnbc.com/2026/03/09/nscale-ai-data-center-nvidia-raise.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">New age-verification tools aimed at protecting children online are raising privacy concerns for adults. As these tools spread across the U.S., privacy experts warn that the systems could lead to increased surveillance of adult users, sparking debates over balancing safety and privacy rights. <a href=\"https://www.cnbc.com/2026/03/08/social-media-child-safety-internet-ai-surveillance.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oil prices have surged above $100 per barrel as Gulf states cut back production due to export bottlenecks at the Strait of Hormuz. The G7 nations are considering tapping into their reserves to stabilize the market, reflecting the geopolitical tensions impacting global oil supply chains. <a href=\"https://www.cnbc.com/2026/03/08/crude-oil-prices-today-iran-war.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Dow futures have tumbled amid rising U.S. oil prices, marking a volatile start to the week's trading. This downturn follows the worst week for the Dow since the tariff policies were introduced in 2018, emphasizing the fragility of market confidence amid energy price fluctuations. <a href=\"https://www.cnbc.com/2026/03/08/stock-market-today-live-updates.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Iran's Kharg Island, a central hub for its oil exports, is in the spotlight as Middle East tensions escalate. The island's strategic importance in Iran's oil industry makes it a potential flashpoint in the regional conflict, influencing global oil markets and diplomatic relations. <a href=\"https://www.cnbc.com/2026/03/09/iran-war-us-israel-conflict-oil-prices-kharg-island.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Amazon is under legal scrutiny as a jury will decide if the company used deceptive practices to enroll customers into its Prime membership. This case highlights ongoing concerns about transparency in subscription services, which have faced criticism for unclear terms and conditions. <a href=\"https://www.nytimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta is launching a new support hub for users locked out of their Facebook accounts. This move aims to address user frustrations and improve customer service, a critical step as the company faces growing scrutiny over its platform management and user engagement policies. <a href=\"https://www.kktv.com\" style=\"color:#81d4fa;text-decoration:none;\">KKTV</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Anchor Blue Apple Sport Loops and Bands are available at significant discounts on Amazon, reflecting aggressive pricing strategies to boost sales. These deals highlight the competitive nature of online retail and the importance of strategic pricing to attract consumers. <a href=\"https://9to5toys.com\" style=\"color:#81d4fa;text-decoration:none;\">9to5Toys</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In a significant trade, the Knicks have sent Kristaps Porzingis to the Mavericks, reshaping both teams' rosters. This blockbuster deal signifies a strategic shift for the Knicks as they aim to build a more competitive team structure. <a href=\"https://www.aol.com\" style=\"color:#81d4fa;text-decoration:none;\">AOL.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Running back Devin Singletary will remain with the Giants on a restructured contract. This development emphasizes the team's commitment to retaining key players while managing salary cap constraints effectively. <a href=\"https://www.bigblueview.com\" style=\"color:#81d4fa;text-decoration:none;\">Big Blue View</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Victor Wembanyama delivered a standout performance for the San Antonio Spurs against the Houston Rockets, scoring 29 points and contributing significantly to the team's victory. His impact underscores his rising star status in the NBA and the Spurs' strong position in the league. <a href=\"https://www.reddit.com/r/nba/comments/1roo9ca/wembanyama_today_in_the_win_vs_the_rockets_29/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Geopolitical tensions are driving significant fluctuations in global oil markets, impacting both prices and stock market stability. - Nvidia's continued innovation in AI hardware signals a transformative period in computing, with broader implications for data processing capabilities. - Privacy concerns remain a dominant theme as new technologies and regulations seek to balance safety with individual rights. - Sports teams are actively reshaping their rosters and contracts, indicating strategic focuses on long-term competitiveness and financial management.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor further developments in the Amazon Prime case to understand potential changes in subscription service regulations and consumer protection. - Keep an eye on global oil price trends and G7 nations' responses, as these will be crucial in stabilizing markets amid geopolitical uncertainties. - Watch for additional innovations from Nvidia and other tech giants as competition in AI technology intensifies. - Follow upcoming sports trades and contract negotiations, which could further alter team dynamics and league standings.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 09, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "episode_description": "Episode #15 — This episode covers OpenAI's acquisition of Promptfoo and its strategic focus shift, Anthropic's study on AI's impact on jobs, the launch of VeridisQuo for deepfake detection, and Nscale's $14.6 billion valuation backed by Nvidia, alongside market concerns over surging oil prices due to US-Israel-Iran tensions and Apple's latest software releases.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 09, 2026</p>\n</div>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant economic and geopolitical tensions impacting global markets, with the US stock market experiencing a downturn amid rising oil prices and fears of conflict involving Iran. In the tech sector, Nvidia-backed startups are making waves, while OpenAI's strategic moves signal a shift in focus. Meanwhile, major companies like Apple and Nvidia face challenges due to market volatility and geopolitical risks.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia-backed startup Nscale has raised funds at a staggering $14.6 billion valuation, underscoring the continued investor confidence in AI and tech innovation. This funding round highlights the growing importance of AI-driven solutions in the tech ecosystem. <a href=\"https://www.wsj.com\" style=\"color:#81d4fa;text-decoration:none;\">WSJ</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Agentic AI startup Lyzr has secured funding at a $250 million valuation, reflecting the increasing interest in AI startups that offer innovative solutions. This investment indicates a robust market for AI technologies that address complex problems with advanced analytics. <a href=\"https://www.bloomberg.com\" style=\"color:#81d4fa;text-decoration:none;\">Bloomberg.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI has announced the acquisition of Promptfoo, signaling its commitment to expanding its capabilities in AI development. This move is part of OpenAI's broader strategy to enhance its technological offerings and maintain a competitive edge in the rapidly evolving AI landscape. <a href=\"https://openai.com\" style=\"color:#81d4fa;text-decoration:none;\">OpenAI</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Anthropic is actively tracking professions most exposed to AI, with a list of ten jobs topping the exposure chart. This initiative aims to understand the impact of AI on the workforce and guide future strategies for AI integration into various industries. <a href=\"https://www.cbsnews.com\" style=\"color:#81d4fa;text-decoration:none;\">CBS News</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The US stock market is experiencing a downturn, with the Dow, S&P 500, and Nasdaq all in the red as oil and silver prices surge. This market volatility is driven by geopolitical tensions, particularly fears of conflict involving Iran, which have pushed oil prices above $100. <a href=\"https://m.economictimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The Economic Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Dow futures have plummeted as oil prices soar past $100 amid fears of war involving Iran, highlighting the market's sensitivity to geopolitical developments. This situation underscores the interconnectedness of global markets and the potential for geopolitical events to disrupt economic stability. <a href=\"https://www.tradingview.com\" style=\"color:#81d4fa;text-decoration:none;\">TradingView</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The ongoing conflict involving the US, Israel, and Iran is causing disruptions in automotive logistics and supply chains, as oil prices continue to rise. This disruption is a reminder of the broader economic implications of geopolitical tensions and their impact on global trade. <a href=\"https://www.automotivelogistics.media\" style=\"color:#81d4fa;text-decoration:none;\">Automotive Logistics</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The war in Iran is pushing the US economy towards a state of 'stagflation,' characterized by stagnant growth and rising inflation. This economic condition poses significant challenges for policymakers and businesses as they navigate an increasingly uncertain environment. <a href=\"https://www.investopedia.com\" style=\"color:#81d4fa;text-decoration:none;\">Investopedia</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple is facing market concerns today, with investors wary of potential impacts on its performance. This apprehension may be linked to broader market trends and geopolitical uncertainties affecting tech companies. <a href=\"https://www.computerworld.com\" style=\"color:#81d4fa;text-decoration:none;\">Computerworld</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta has emerged as the top stock in the 'Magnificent 7,' according to data from 24/7 Wall St. This recognition reflects Meta's strong market performance and its strategic positioning in the tech sector. <a href=\"https://247wallst.com\" style=\"color:#81d4fa;text-decoration:none;\">24/7 Wall St.</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia's stock is under threat due to the ongoing conflict in Iran, which could impact its supply chains and market stability. This situation highlights the vulnerabilities tech companies face in the context of geopolitical tensions. <a href=\"https://www.barrons.com\" style=\"color:#81d4fa;text-decoration:none;\">Barron's</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Netflix has resumed its market activities, while Starbucks has been downgraded by top Wall Street analysts. These moves reflect shifting market dynamics and investor sentiment towards these major companies. <a href=\"https://finance.yahoo.com\" style=\"color:#81d4fa;text-decoration:none;\">Yahoo Finance</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees are facing a pivotal season, with six players in make-or-break situations. This season could significantly impact the team's future and its strategy moving forward. <a href=\"https://www.espn.com\" style=\"color:#81d4fa;text-decoration:none;\">ESPN</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Knicks are evaluating their playoff seeding outcomes, with discussions around whether a No. 4 seed is advantageous. This analysis is crucial as the team strategizes for optimal performance in the playoffs. <a href=\"https://www.nytimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The NHL's latest 'Odds and Ends' report provides ten key takeaways, offering insights into the current state of the league. This report is valuable for fans and analysts looking to understand the dynamics of the ongoing season. <a href=\"https://www.nhl.com\" style=\"color:#81d4fa;text-decoration:none;\">NHL.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Geopolitical tensions, particularly involving Iran, are causing significant market volatility and economic disruptions. - AI startups continue to attract substantial investments, highlighting the sector's growth potential and innovation. - Major tech companies face challenges from both market conditions and geopolitical risks, impacting their performance and strategies. - Sports teams in New York are strategically assessing their positions and potential outcomes as they navigate their respective seasons.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor developments in the US-Israel-Iran conflict and its impact on global markets and oil prices. - Keep an eye on further funding rounds and strategic moves by AI startups, as these could signal emerging trends in the tech sector. - Watch for updates from major companies like Apple and Nvidia on how they plan to address market and geopolitical challenges. - Follow the New York Yankees and Knicks as they strategize for their upcoming seasons, which could have long-term implications for their franchises.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 09, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
   "articles": {
-    "Companies": [
+    "NY Sports": [
       {
-        "title": "[Updated] Did Amazon Trick Customers Into Prime? A Jury Will Decide. - The New York Times",
+        "title": "[Updated] MLB 2026: What to expect from six make-or-break Yankees - ESPN",
+        "url": "https://www.espn.com",
+        "description": "MLB 2026: What to expect from six make-or-break YankeesESPN",
+        "source": "ESPN",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights key player dynamics in a major sports franchise, offering insights into potential investment opportunities and market trends relevant to sports tech and entertainment sectors."
+      },
+      {
+        "title": "[Updated] Ranking the Knicks’ best playoff seeding outcomes: Is the No. 4 seed that bad? - The New York Times",
         "url": "https://www.nytimes.com",
-        "description": "Did Amazon Trick Customers Into Prime? A Jury Will Decide.The New York Times",
+        "description": "Ranking the Knicks’ best playoff seeding outcomes: Is the No. 4 seed that bad?The New York Times",
         "source": "The New York Times",
         "published": "",
-        "score": 85,
-        "score_reason": "Amazon faces antitrust lawsuit filed by FTC on March 9, 2026.",
-        "why_it_matters": "This case could reshape consumer trust and regulatory scrutiny in e-commerce, impacting investment strategies and market dynamics for tech executives."
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Understanding the Knicks' playoff dynamics can inform investment strategies in sports tech and media, highlighting opportunities in fan engagement and market trends."
       },
       {
-        "title": "Official Anchor Blue Apple Sport Loop and Band up to 41% off at Amazon today, deals from $29 - 9to5Toys",
-        "url": "https://9to5toys.com",
-        "description": "Official Anchor Blue Apple Sport Loop and Band up to 41% off at Amazon today, deals from $299to5Toys",
-        "source": "9to5Toys",
+        "title": "[Updated] Odds and Ends | 10 TAKEAWAYS - NHL.com",
+        "url": "https://www.nhl.com",
+        "description": "Odds and Ends | 10 TAKEAWAYSNHL.com",
+        "source": "NHL.com",
         "published": "",
         "score": 50,
         "score_reason": "",
-        "why_it_matters": "This story highlights significant discounts on popular tech accessories, reflecting consumer trends and potential investment opportunities in the wearable tech market."
-      },
-      {
-        "title": "Fatal Multi-Vehicle Crash on Highway 18 in Apple Valley Shuts Down Eastbound Lanes - VVNG",
-        "url": "https://www.vvng.com",
-        "description": "Fatal Multi-Vehicle Crash on Highway 18 in Apple Valley Shuts Down Eastbound LanesVVNG",
-        "source": "VVNG",
-        "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights ongoing safety concerns on highways, emphasizing the need for innovative transportation solutions and technologies that could prevent such tragedies, appealing to investors in the tech sector."
-      },
-      {
-        "title": "Facebook account disabled? Meta is rolling out a new support hub for locked-out users - KKTV",
-        "url": "https://www.kktv.com",
-        "description": "Facebook account disabled? Meta is rolling out a new support hub for locked-out usersKKTV",
-        "source": "KKTV",
-        "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "Meta's new support hub for locked-out users highlights the growing importance of user experience and customer support in tech, crucial factors for investment decisions in today's digital landscape."
+        "why_it_matters": "Understanding sports trends and fan engagement can inform investment strategies in tech, particularly in areas like data analytics and digital media within the sports industry."
       }
     ],
     "Business & Markets": [
       {
-        "title": "Oil surges above $100 as Gulf states cut back production; G7 nations consider tapping reserves",
-        "url": "https://www.cnbc.com/2026/03/08/crude-oil-prices-today-iran-war.html",
-        "description": "Gulf Arab oil producers are cutting production as they run out of storage space because they can't export through the Strait of Hormuz",
-        "source": "CNBC",
-        "published": "Mon, 09 Mar 2026 09:49:34 GMT",
-        "score": 87,
-        "score_reason": "Global oil prices spike after Middle East supply disruption today; US stock market reacts to unexpected inflation data release this morning",
-        "why_it_matters": "This story highlights potential volatility in energy markets, impacting global supply chains and investment strategies for tech companies reliant on stable energy prices."
+        "title": "[Updated] Why is US stock market crashing again today? Dow, S&P 500 and Nasdaq in deep red as oil and silver surge w - The Economic Times",
+        "url": "https://m.economictimes.com",
+        "description": "Why is US stock market crashing again today? Dow, S&P 500 and Nasdaq in deep red as oil and silver surge wThe Economic Times",
+        "source": "The Economic Times",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights market volatility, signaling potential investment risks and opportunities in energy sectors, crucial for tech-executive investors navigating economic uncertainties."
       },
       {
-        "title": "Congressional Democrats demand reversal of Russian oil sales into India as energy prices soar",
-        "url": "https://www.cnbc.com/2026/03/09/bessent-russian-oil-sales-india.html",
-        "description": "Russia is reportedly helping Iran target U.S. forces in the Middle East, and could now benefit from a windfall of new oil and gas sales.",
-        "source": "CNBC",
-        "published": "Mon, 09 Mar 2026 09:44:10 GMT",
+        "title": "[Updated] Dow futures plunge as oil tops $100 amid Iran war fears - TradingView",
+        "url": "https://www.tradingview.com",
+        "description": "Dow futures plunge as oil tops $100 amid Iran war fearsTradingView",
+        "source": "TradingView",
+        "published": "",
         "score": 50,
-        "score_reason": ""
+        "score_reason": "",
+        "why_it_matters": "This story highlights rising oil prices and geopolitical tensions, signaling potential market volatility that could impact investment strategies for tech-focused portfolios."
       },
       {
-        "title": "Dow futures tumble as U.S. oil surges to begin the week's trading: Live updates",
-        "url": "https://www.cnbc.com/2026/03/08/stock-market-today-live-updates.html",
-        "description": "The Dow recorded its worst week since President Trump unveiled his tariff policy in April.",
-        "source": "CNBC",
-        "published": "Mon, 09 Mar 2026 09:51:48 GMT",
+        "title": "Oil prices surge above $100 amid US-Israel–Iran war, disrupting automotive logistics and supply chains - Automotive Logistics",
+        "url": "https://www.automotivelogistics.media",
+        "description": "Oil prices surge above $100 amid US-Israel–Iran war, disrupting automotive logistics and supply chainsAutomotive Logistics",
+        "source": "Automotive Logistics",
+        "published": "",
         "score": 50,
-        "score_reason": ""
+        "score_reason": "",
+        "why_it_matters": "The surge in oil prices disrupts automotive supply chains, impacting production costs and logistics, which directly affects investment strategies and market stability for tech-executive investors."
       },
       {
-        "title": "Iran's strategic oil island thrust into the spotlight as Middle East conflict escalates",
-        "url": "https://www.cnbc.com/2026/03/09/iran-war-us-israel-conflict-oil-prices-kharg-island.html",
-        "description": "Kharg Island serves as the centerpiece for Iran's oil industry, accounting for roughly 90% of the country’s crude exports.",
-        "source": "CNBC",
-        "published": "Mon, 09 Mar 2026 08:45:52 GMT",
+        "title": "[Updated] The Iran War Is Pushing the US Economy Toward 'Stagflation' - Investopedia",
+        "url": "https://www.investopedia.com",
+        "description": "The Iran War Is Pushing the US Economy Toward 'Stagflation'Investopedia",
+        "source": "Investopedia",
+        "published": "",
         "score": 50,
-        "score_reason": ""
+        "score_reason": "",
+        "why_it_matters": "The Iran War's impact on stagflation and oil prices poses significant risks for investment strategies, making it crucial for tech-executive investors to reassess market dynamics and economic forecasts."
       }
     ],
-    "NY Sports": [
+    "Companies": [
       {
-        "title": "[Updated] Knicks trade Porzingis to Mavericks in blockbuster deal - AOL.com",
-        "url": "https://www.aol.com",
-        "description": "Knicks trade Porzingis to Mavericks in blockbuster dealAOL.com",
-        "source": "AOL.com",
+        "title": "[Updated] Why markets are worrying about Apple today - Computerworld",
+        "url": "https://www.computerworld.com",
+        "description": "Why markets are worrying about Apple todayComputerworld",
+        "source": "Computerworld",
         "published": "",
-        "score": 90,
-        "score_reason": "Knicks trade Porzingis to Mavericks in blockbuster deal.",
-        "why_it_matters": "This trade highlights the intersection of sports and investment, showcasing how strategic decisions can reshape market dynamics and influence fan engagement, relevant for tech-driven sports ventures."
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights market concerns about Apple, signaling potential shifts in tech investment strategies that could impact portfolio performance for investors in New York."
       },
       {
-        "title": "[Updated] RB Devin Singletary will stay with Giants on restructured contract - Big Blue View",
-        "url": "https://www.bigblueview.com",
-        "description": "RB Devin Singletary will stay with Giants on restructured contractBig Blue View",
-        "source": "Big Blue View",
+        "title": "[Updated] Apple releases beta 4 for iPadOS 26.4, tvOS 26.4, and more - 9to5Mac",
+        "url": "https://9to5mac.com",
+        "description": "Apple releases beta 4 for iPadOS 26.4, tvOS 26.4, and more9to5Mac",
+        "source": "9to5Mac",
         "published": "",
-        "score": 60,
-        "score_reason": "RB Devin Singletary will stay with Giants on restructured contract.",
-        "why_it_matters": "This story highlights strategic player retention in the NFL, reflecting broader trends in sports management and investment opportunities in tech-driven analytics for performance optimization."
-      },
-      {
-        "title": "Wembanyama today in the win vs the Rockets: 29 points, 8 rebounds on 9-13 FG, 2-5 3 PT FG, 2 steals, 4 blocks, +27 in 30 mins!",
-        "url": "https://www.reddit.com/r/nba/comments/1roo9ca/wembanyama_today_in_the_win_vs_the_rockets_29/",
-        "description": "Wembanyama today in the win vs the Rockets: 29 points, 8 rebounds on 9-13 FG, 2-5 3 PT FG, 2 steals, 4 blocks, +27 in 30 mins!Spurs pick up the win and move to 47-17!Rockets frontcourt was no match for him.https://www.espn.com/nba/boxscore/_/gameId/401810782submitted by/u/MembershipSingle7137[link][",
-        "source": "Reddit",
-        "published": "2026-03-09T02:36:13+00:00",
         "score": 50,
-        "score_reason": ""
+        "score_reason": "",
+        "why_it_matters": "This story highlights Apple's ongoing innovation and product updates, signaling potential investment opportunities in the tech sector amid evolving consumer preferences and competitive landscapes."
       },
       {
-        "title": "[Post Game Thread] The San Antonio Spurs (46-17) defeat the Houston Rockets (39-23), 145-120.",
-        "url": "https://www.reddit.com/r/nba/comments/1roocn6/post_game_thread_the_san_antonio_spurs_4617/",
-        "description": "120 - 145Box Scores:NBA-YahooGAME SUMMARYLocation:Frost Bank CenterOfficials:Pat Fraher, Andy Nagy, and Jonathan SterlingTeamQ1Q2Q3Q4TotalHouston Rockets33243726120San Antonio Spurs32374135145TEAM STATSTeamPTSFGFG%3P3P%FTFT%OREBTREBASTPFSTLTOBLKHouston Rockets12042-8748.3%8-2828.6%28-3287.5%84625235",
-        "source": "Reddit",
-        "published": "2026-03-09T02:40:31+00:00",
+        "title": "[Updated] Meta Just Became the Best Stock in the Magnificent 7 — Here’s the Data That Proves It - 24/7 Wall St.",
+        "url": "https://247wallst.com",
+        "description": "Meta Just Became the Best Stock in the Magnificent 7 — Here’s the Data That Proves It24/7 Wall St.",
+        "source": "24/7 Wall St.",
+        "published": "",
         "score": 50,
-        "score_reason": ""
+        "score_reason": "",
+        "why_it_matters": "Meta's strong performance among the Magnificent 7 signals robust growth potential, making it a compelling investment opportunity for tech-focused investors navigating today's volatile market landscape."
       },
       {
-        "title": "[Highlight] Juan Soto homers to clinch mercy rule win for Dominican Republic",
-        "url": "https://www.reddit.com/r/baseball/comments/1rocgbl/highlight_juan_soto_homers_to_clinch_mercy_rule/",
-        "description": "submitted by/u/MLBOfficial[link][comments]",
-        "source": "Reddit",
-        "published": "2026-03-08T18:33:00+00:00",
+        "title": "[Updated] How Nvidia Stock Is Threatened by War in Iran - Barron's",
+        "url": "https://www.barrons.com",
+        "description": "How Nvidia Stock Is Threatened by War in IranBarron's",
+        "source": "Barron's",
+        "published": "",
         "score": 50,
-        "score_reason": ""
+        "score_reason": "",
+        "why_it_matters": "The potential conflict in Iran could disrupt global supply chains and semiconductor markets, directly impacting Nvidia's stock and broader tech investment strategies."
       },
       {
-        "title": "Julián Ornelas walks off Brazil via. the Mercy rule with a 2 run homer",
-        "url": "https://www.reddit.com/r/baseball/comments/1roob8u/julián_ornelas_walks_off_brazil_via_the_mercy/",
-        "description": "16-0. 16 runs on 16 hits. Mexico also scored in every inning but the 3rd. Just abitof a massacre.Homer stats- 100.4 mph, 377 ft, 36° launch angle.submitted by/u/CabassoG[link][comments]",
-        "source": "Reddit",
-        "published": "2026-03-09T02:38:38+00:00",
+        "title": "[Updated] ‘Upside Bias,’ Says UBS on Nvidia Stock (NVDA) Ahead of GTC - TipRanks",
+        "url": "https://www.tipranks.com",
+        "description": "‘Upside Bias,’ Says UBS on Nvidia Stock (NVDA) Ahead of GTCTipRanks",
+        "source": "TipRanks",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights UBS's positive outlook on Nvidia, signaling potential investment opportunities in AI and tech sectors, crucial for informed decision-making by tech-executive investors."
+      },
+      {
+        "title": "[Updated] Netflix resumed, Starbucks downgraded: Wall Street's top analyst calls - Yahoo Finance",
+        "url": "https://finance.yahoo.com",
+        "description": "Netflix resumed, Starbucks downgraded: Wall Street's top analyst callsYahoo Finance",
+        "source": "Yahoo Finance",
+        "published": "",
         "score": 50,
         "score_reason": ""
       }
     ],
     "AI & Tech": [
       {
-        "title": "[Updated] Exclusive | Nvidia Plans New Chip to Speed AI Processing, Shake Up Computing Market - WSJ",
+        "title": "[Updated] Nvidia-Backed Startup Nscale Raises Funds at $14.6 Billion Valuation - WSJ",
         "url": "https://www.wsj.com",
-        "description": "Exclusive | Nvidia Plans New Chip to Speed AI Processing, Shake Up Computing MarketWSJ",
+        "description": "Nvidia-Backed Startup Nscale Raises Funds at $14.6 Billion ValuationWSJ",
         "source": "WSJ",
         "published": "",
-        "score": 87,
-        "score_reason": "Nvidia plans new AI chip to speed processing, impacting computing market.",
-        "why_it_matters": "Nvidia's new chip could revolutionize AI processing, presenting lucrative investment opportunities and competitive advantages for tech executives navigating the rapidly evolving computing landscape."
+        "score": 95,
+        "score_reason": "Nvidia-backed startup Nscale raises funds at $14.6 billion valuation, indicating significant investment and potential market impact.",
+        "why_it_matters": "Nscale's $14.6 billion valuation highlights the growing demand for AI infrastructure, presenting lucrative investment opportunities for tech executives in a rapidly evolving market."
       },
       {
-        "title": "Nvidia backs AI data center startup Nscale as it hits $14.6 billion valuation",
-        "url": "https://www.cnbc.com/2026/03/09/nscale-ai-data-center-nvidia-raise.html",
-        "description": "Nscale has become a key player in the AI infrastructure buildout",
-        "source": "CNBC",
-        "published": "Mon, 09 Mar 2026 09:16:30 GMT",
-        "score": 50,
-        "score_reason": ""
+        "title": "Flash media longevity testing – 6 years later",
+        "url": "https://old.reddit.com/r/DataHoarder/comments/1q6xnun/flash_media_longevity_testing_6_years_later/",
+        "description": "HN score: 59 | Comments: 15",
+        "source": "Hacker News",
+        "published": "2026-03-08T16:22:24Z",
+        "hn_score": 59,
+        "hn_comments": 15,
+        "score": 60,
+        "score_reason": "Flash media longevity testing provides insights into technology durability, relevant for tech executives.",
+        "why_it_matters": "Understanding flash media longevity is crucial for tech investors to assess data storage reliability and inform investment in emerging technologies and infrastructure."
       },
       {
-        "title": "Online age-verification tools spread across U.S. for child safety, but adults are being surveilled",
-        "url": "https://www.cnbc.com/2026/03/08/social-media-child-safety-internet-ai-surveillance.html",
-        "description": "New age-verification laws and tools are designed for child safety on social media and the internet, but adults are in the crosshairs, say privacy experts.",
-        "source": "CNBC",
-        "published": "Sun, 08 Mar 2026 14:45:10 GMT",
-        "score": 50,
-        "score_reason": ""
+        "title": "[Updated] Agentic AI Startup Lyzr Raises Funds at $250 Million Valuation - Bloomberg.com",
+        "url": "https://www.bloomberg.com",
+        "description": "Agentic AI Startup Lyzr Raises Funds at $250 Million ValuationBloomberg.com",
+        "source": "Bloomberg.com",
+        "published": "",
+        "score": 55,
+        "score_reason": "Agentic AI startup Lyzr raises funds at $250 million valuation, showing investment interest in AI startups.",
+        "why_it_matters": "The $250 million valuation of Lyzr highlights the growing investment potential in agentic AI, signaling lucrative opportunities for tech-focused investors in New York's competitive landscape."
       },
       {
-        "title": "Ring’s Jamie Siminoff has been trying to calm privacy fears since the Super Bowl, but his answers may not help",
-        "url": "https://techcrunch.com/2026/03/08/rings-jamie-siminoff-has-been-trying-to-calm-privacy-fears-since-the-super-bowl-but-his-answers-may-not-help/",
-        "description": "The facial recognition question is where things get more tangled.",
-        "source": "TechCrunch",
-        "published": "Mon, 09 Mar 2026 04:35:06 +0000",
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Will the Pentagon’s Anthropic controversy scare startups away from defense work?",
-        "url": "https://techcrunch.com/2026/03/08/will-the-pentagons-anthropic-controversy-scare-startups-away-from-defense-work/",
-        "description": "On the latest episode of TechCrunch’s Equity podcast, we discussed what the controversy means for other startups seeking to work with the federal government.",
-        "source": "TechCrunch",
-        "published": "Sun, 08 Mar 2026 20:14:42 +0000",
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Owner of ICE detention facility sees big opportunity in AI man camps",
-        "url": "https://techcrunch.com/2026/03/08/owner-of-ice-detention-facility-sees-big-opportunity-in-ai-man-camps/",
-        "description": "AI data center developers are increasingly relying on a style of camp popularized as housing for men working in remote oil fields.",
-        "source": "TechCrunch",
-        "published": "Sun, 08 Mar 2026 16:30:00 +0000",
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Can AI Kill the Venture Capitalist?",
-        "url": "https://www.wired.com/story/ai-kill-venture-capital/",
-        "description": "VCs are betting that artificial intelligence will disrupt nearly every industry in the world. Are they prepared for it to disrupt their own?",
-        "source": "Wired",
-        "published": "Mon, 09 Mar 2026 09:00:00 +0000",
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "OpenAI on Surveillance and Autonomous Killings: You’re Going to Have to Trust Us",
-        "url": "https://www.reddit.com/r/technology/comments/1robpp4/openai_on_surveillance_and_autonomous_killings/",
-        "description": "submitted by/u/gdelacalle[link][comments]",
+        "title": "[Updated] [P] VeridisQuo - open-source deepfake detector that combines spatial + frequency analysis and shows you where the face was manipulated",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1rnajac/p_veridisquo_opensource_deepfake_detector_that/",
+        "description": "Salut tout le monde,Mon coéquipier et moi venons de terminer notre projet de détection de deepfake pour l'université et nous voulions le partager. L'idée a commencé assez simplement : la plupart des détecteurs ne se concentrent que sur les caractéristiques à niveau de pixel, mais les générateurs de ",
         "source": "Reddit",
-        "published": "2026-03-08T18:05:24+00:00",
+        "published": "2026-03-07T13:53:29+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] OpenAI to acquire Promptfoo - OpenAI",
+        "url": "https://openai.com",
+        "description": "OpenAI to acquire PromptfooOpenAI",
+        "source": "OpenAI",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] OpenAI delays ‘adult mode’ for ChatGPT to focus on work of higher priority - The Guardian",
+        "url": "https://www.theguardian.com",
+        "description": "OpenAI delays ‘adult mode’ for ChatGPT to focus on work of higher priorityThe Guardian",
+        "source": "The Guardian",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Anthropic is tracking which jobs are most exposed to AI. These 10 professions top the list. - CBS News",
+        "url": "https://www.cbsnews.com",
+        "description": "Anthropic is tracking which jobs are most exposed to AI. These 10 professions top the list.CBS News",
+        "source": "CBS News",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Anthropic sues in federal court to reverse Trump administration's 'supply chain risk' designation - PBS",
+        "url": "https://www.pbs.org",
+        "description": "Anthropic sues in federal court to reverse Trump administration's 'supply chain risk' designationPBS",
+        "source": "PBS",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Fake Google Gemini AI pushes ‘Google Coin’ crypto scam - Fox News",
+        "url": "https://www.foxnews.com",
+        "description": "Fake Google Gemini AI pushes ‘Google Coin’ crypto scamFox News",
+        "source": "Fox News",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Chatbot lawsuits push AI safety fight to the courts - Axios",
+        "url": "https://www.axios.com",
+        "description": "Chatbot lawsuits push AI safety fight to the courtsAxios",
+        "source": "Axios",
+        "published": "",
         "score": 50,
         "score_reason": ""
       }
     ]
   },
   "mikes_picks": [],
-  "podcast_script": "**[INTRO]**\n\nHey there, it's March 9th, 2026, and you're tuned into MikeCast, your daily dose of news with a twist. It's Mike here, ready to walk you through the headlines and stories that matter. Today, we're diving into some big moves in the tech world with Nvidia shaking things up, the oil market's rollercoaster ride, and a blockbuster Knicks trade that's got everyone talking. So grab your coffee and let's get into it!\n\n**[AI & TECH SEGMENT]**\n\nAlright, first up, we’ve got some major buzz from Nvidia. They’re planning to release a new chip designed to speed up AI processing. This could really shake up the computing market. You know, Nvidia’s been a giant in the graphics card world, but this new move might just cement their place at the forefront of AI tech. They’re not just playing the game; they’re rewriting the rules. And speaking of Nvidia, they’re backing Nscale, an AI data center startup that's now valued at a whopping $14.6 billion. It seems like Nvidia is all in on AI infrastructure, and that's something to keep an eye on as more companies look to harness AI's potential.\n\nMeanwhile, age-verification tools are spreading across the U.S. to protect children online. Sounds great in theory, right? But privacy experts are raising red flags. These tools could mean more surveillance for adults as well. It’s a classic case of balancing safety and privacy — always a tricky line to walk.\n\nAnd then there’s Jamie Siminoff from Ring. He’s been on a mission to calm privacy fears, especially after the Super Bowl spotlight, but his responses on facial recognition are leaving folks more tangled than reassured. Privacy in tech is a hot-button issue, and Ring’s handling of it could have ripple effects across the industry.\n\n**[BUSINESS & MARKETS SEGMENT]**\n\nSwitching gears to the business world, oil prices are soaring above $100 as Gulf states cut back production. They’re facing storage issues because they can’t export through the Strait of Hormuz. This squeeze is causing the G7 nations to consider tapping into their reserves. What does this mean for you and me? Well, higher oil prices usually trickle down to us at the pump and beyond. Everything from our grocery bills to heating costs could feel the pinch.\n\nAnd tensions are rising as Congressional Democrats call for a reversal of Russian oil sales into India. With Russia reportedly helping Iran target U.S. forces, there’s a geopolitical chess game unfolding. Energy prices are already high, and this could add another layer of complexity to the global market.\n\n**[COMPANIES SEGMENT]**\n\nOver in the world of companies, Amazon’s got some legal drama brewing. A jury is set to decide if they tricked customers into Prime memberships. It’s a classic “did-they-or-didn’t-they” scenario that could impact Amazon’s reputation and their bottom line if they lose.\n\nOn a lighter note, there’s a sweet deal on the official Anchor Blue Apple Sport Loop and Band — up to 41% off at Amazon. If you’ve been eyeing an upgrade for your Apple Watch, now’s the time to snag it!\n\nAnd Facebook users rejoice — or at least breathe a sigh of relief. Meta’s rolling out a new support hub for users locked out of their accounts. It’s about time, right? With so many people relying on Facebook for everything from personal connections to business, having robust support is crucial.\n\n**[NY SPORTS SEGMENT]**\n\nAlright, sports fans, it's time to get pumped! The Knicks have traded Kristaps Porzingis to the Mavericks in a blockbuster deal. Knicks fans, how are we feeling about this one? It's definitely shaking things up in the NBA.\n\nAnd for football followers, Devin Singletary is sticking around with the Giants on a restructured contract. Giants fans, you can breathe easy knowing he’s staying put.\n\nIn the world of basketball, Victor Wembanyama is making waves — 29 points, 8 rebounds, and a +27 in just 30 minutes for the Spurs against the Rockets. The kid's a beast, and it’s thrilling to see him in action!\n\n**[MIKE'S PICKS SEGMENT]**\n\nAlright, folks, it's time for Big Mike's hand-picked reads. If you’re curious about AI’s impact on venture capitalists, Wired’s got a great piece on whether AI could disrupt the VC world itself. And for those interested in the intersection of tech and defense, TechCrunch’s take on the Pentagon and startups is a must-read.\n\n**[OUTRO]**\n\nAnd that's a wrap on today's MikeCast! Thanks for tuning in and letting me be your news guide. If you enjoyed the show, don’t forget to hit that subscribe button and share it with a friend who needs to stay in the know. I'll catch you tomorrow with more stories and insights. Until then, stay curious and keep questioning. Have a fantastic day!",
-  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast, your go-to podcast for the latest in tech, business, and New York sports. It's March 9th, 2026, and we've got some exciting stories lined up for you today. We'll dive into Nvidia's plans to revolutionize AI computing, the recent surge in oil prices affecting global markets, and a jury's decision on Amazon's Prime practices. Plus, Jesse will break down the latest blockbuster trade for the Knicks. But first, let's hand it over to Elizabeth for the scoop on tech.\n\n[ELIZABETH]\n\nAlright, tech lovers, let's kick things off with some major AI news. Nvidia is planning to launch a new chip that's set to speed up AI processing and could totally shake up the computing market. This is huge because Nvidia's chips already power a lot of AI applications, and this could make them even more dominant in the field.\n\nIn other AI-related news, Nscale, an AI data center startup backed by Nvidia, recently hit a whopping $14.6 billion valuation. They're becoming a key player in building AI infrastructure, which is crucial as demand for AI services continues to skyrocket.\n\nMeanwhile, there's a growing debate over online age-verification tools. These are supposed to enhance child safety on the internet, but privacy experts warn that adults are getting caught in the surveillance net too. It's a tricky balance between safety and privacy.\n\nAnd speaking of privacy, Ring's Jamie Siminoff has been trying to ease concerns about facial recognition tech since the Super Bowl. His efforts might not be doing the trick though, as people are still pretty skeptical.\n\nNow, moving on to business and markets. Oil prices have surged past $100 a barrel as Gulf states cut back production. They're running out of storage space because they can't export through the Strait of Hormuz. This is pushing energy prices up globally, and the G7 nations are even considering tapping into their reserves.\n\nAt the same time, there's pressure on Congress to reverse Russian oil sales to India. With energy prices soaring, any shift in these dynamics could have a big impact on the global economy.\n\nAnd let's not forget about the stock market. Dow futures have taken a hit due to the oil surge, marking one of the worst weeks since the trade tariffs were unveiled years ago.\n\nAlright, shifting gears to companies, a big story today is about Amazon. A jury is set to decide if Amazon tricked customers into signing up for Prime. This could have major implications for how subscription services are marketed in the future.\n\nIn some lighter news, if you're in the market for an Apple Sport Loop or Band, Amazon's got them on sale for up to 41% off. It's a small deal in the grand scheme, but hey, who doesn't love a good bargain?\n\nMeanwhile, for all you Facebook users out there, Meta is rolling out a new support hub for people who've been locked out of their accounts. It's about time, right?\n\nAnd lastly, a tragic piece of news from Apple Valley, where a fatal multi-vehicle crash has shut down the eastbound lanes of Highway 18. Our thoughts are with everyone affected.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth! Alright, sports fans, let's get into it. Big news for Knicks fans today! Kristaps Porzingis has been traded to the Mavericks in a blockbuster deal. This is a huge shakeup for the team, and we're all waiting to see how this will play out on the court.\n\nOn the football front, Devin Singletary has decided to stay with the Giants on a restructured contract. This is great for the team as they keep a solid running back in their lineup.\n\nAnd let's not forget about the Yankees and the rest of the MLB action. Juan Soto's homer clinched a mercy rule win for the Dominican Republic. Talk about a power play!\n\nAlright, Mike, back to you.\n\n[MIKE]\n\nThanks, Jesse. Well, that's all we have for today's episode of MikeCast. We hope you found our insights on tech, business, and sports as exciting as we did. Be sure to tune in tomorrow for more updates. Thank you for listening, and have a great day!",
+  "podcast_script": "Welcome back to MikeCast, where we break down the latest news like we’re catching up over coffee. It’s March 9, 2026, and we've got a packed episode for you today. From the tech world, we’re diving into some big moves by OpenAI and the latest in AI safety. In the business realm, the stock market is in turmoil with oil prices surging past $100. And for sports fans, we’ll touch base on the Yankees and Knicks. So, let’s jump right in.\n\nAlright, starting with AI & Tech. OpenAI is making headlines today with its decision to acquire Promptfoo. Now, if you’re not familiar, Promptfoo is known for its innovative approach to AI prompt engineering. This acquisition signals OpenAI’s continued push to refine and expand its AI capabilities. Why does this matter? Well, it shows OpenAI's commitment to staying at the forefront of AI development, which could mean more sophisticated and user-friendly AI tools for all of us.\n\nBut that’s not all from OpenAI. They’ve also decided to delay the ‘adult mode’ for ChatGPT. The reason? They’re shifting focus to higher priority projects. This move highlights the challenges tech companies face in balancing innovation with user demands. It’s a reminder that even the tech giants have to prioritize and sometimes put the brakes on certain features to ensure quality and safety.\n\nMeanwhile, Anthropic is in the news for tracking which jobs are most exposed to AI. This is a hot topic as AI continues to evolve and integrate into various industries. Knowing which professions are most at risk can help workers and companies prepare and adapt. It’s a bit of a wake-up call for anyone in those fields to start thinking about upskilling or pivoting to roles that are less likely to be automated.\n\nAnd lastly in tech, there’s a bit of a scandal brewing with a fake Google Gemini AI pushing a crypto scam called ‘Google Coin’. This highlights the darker side of tech advancements—how malicious actors can exploit new technologies for scams. It’s a good reminder to stay vigilant and skeptical of too-good-to-be-true offers, especially in the crypto world.\n\nNow let’s talk money. The US stock market is having a rough day. The Dow, S&P 500, and Nasdaq are all deep in the red. What’s driving this downturn? Well, oil prices have surged past $100 a barrel amid fears of a war involving Iran. This spike is causing ripples across the economy, affecting everything from automotive logistics to consumer prices. It’s a classic case of geopolitical tensions impacting the global markets.\n\nIn fact, the situation with Iran is pushing the US economy towards what experts are calling ‘stagflation’—a nasty mix of stagnant economic growth and high inflation. This could mean higher prices for everyday goods and services without the corresponding increase in wages. For everyday folks, it’s a tough pill to swallow and something to keep an eye on as it unfolds.\n\nSwitching gears to companies, Apple is in the spotlight today. Markets are worried about Apple, though the specifics aren’t entirely clear. It’s a reminder of how even the biggest companies can face investor jitters. Meanwhile, Apple has released beta 4 for iPadOS 26.4 and tvOS 26.4. These updates are part of Apple’s ongoing effort to keep its software ecosystem fresh and competitive.\n\nMeta, on the other hand, is riding high. It’s been named the best stock in the ‘Magnificent 7’, a group of top tech stocks. This accolade is backed by data showing Meta’s strong performance. It’s a testament to how Meta has managed to navigate the tech landscape effectively, even as others struggle.\n\nAnd over at Nvidia, there’s a bit of mixed news. The ongoing situation in Iran is threatening Nvidia’s stock, reflecting the broader market concerns. However, UBS is maintaining an ‘upside bias’ on Nvidia ahead of its GTC event, suggesting that there’s still optimism about Nvidia’s future prospects despite the current challenges.\n\nAlright, sports fans, here’s your quick rundown. For the Yankees, ESPN is talking about six players for whom this season could be make-or-break. Over in the NBA, the Knicks are eyeing their playoff seeding, with The New York Times debating whether a No. 4 seed is really that bad. No new updates on the Giants or Devils today, so we’ll keep it moving.\n\nAnd now, it’s time for Big Mike’s hand-picked reads. If you’re looking for something intriguing, check out the startup Nscale, backed by Nvidia, which just raised funds at a whopping $14.6 billion valuation. This shows the massive potential and investor confidence in AI-driven startups. Also, don’t miss the open-source deepfake detector project VeridisQuo, which combines spatial and frequency analysis to spot manipulated faces. It’s a fascinating piece of tech that could play a crucial role in combating misinformation.\n\nThat’s it for today’s MikeCast. Thanks for tuning in and letting me be your go-to source for the latest news. If you enjoyed the episode, be sure to subscribe and share it with your friends. I’ll catch you tomorrow with more updates. Until then, stay curious and stay informed!",
+  "conversational_script": "[MIKE]\n  \nHey everyone, welcome to MikeCast! It's March 9th, 2026, and we've got a packed show for you today. The US stock market is taking a hit, oil prices are soaring, and in the tech world, OpenAI is making waves with its latest acquisition. Plus, we've got some insights on the Yankees' upcoming season and the Knicks' playoff prospects. So let's dive right in. Elizabeth, what's happening in the world of AI and tech?\n\n[ELIZABETH]\n  \nAlright, let's start with some big moves in AI and tech. First up, OpenAI is acquiring a company called Promptfoo. This is a pretty strategic move as OpenAI continues to expand its capabilities and influence in the AI space. They're always on the lookout for ways to enhance their AI models, and acquiring a company like Promptfoo could really bolster their offerings. On the other hand, OpenAI is also delaying the 'adult mode' for ChatGPT to focus on other priorities. It seems like they're really trying to streamline their efforts and focus on what they think will have the biggest impact right now.\n\nIn other news, Anthropic is making headlines by tracking which jobs are most exposed to AI. It's a fascinating study that highlights how AI is reshaping the workforce and which professions might need to adapt the most. And speaking of AI's impact, there's a new open-source deepfake detector called VeridisQuo that's aiming to tackle the deepfake problem with a novel approach by combining spatial and frequency analysis. It's always exciting to see new tools being developed to combat misinformation and technology misuse.\n\nLastly, Nvidia-backed startup Nscale has raised funds at a whopping $14.6 billion valuation. This is a testament to how much confidence investors have in AI's future, especially when backed by a giant like Nvidia. With AI continuing to grow and evolve, it's clear that we're just scratching the surface of what's possible. Now, let's shift gears to the business and markets scene.\n\nThe US stock market is in the red today, with the Dow, S&P 500, and Nasdaq all taking hits. The main driver here seems to be the surge in oil prices, which have topped $100 amid fears of an Iran war. This is causing quite a stir as investors worry about the implications for the global economy. The situation is also pushing the US economy toward a state of 'stagflation,' a term we haven't heard in a while but one that investors are definitely concerned about.\n\nOil prices surging above $100 is not just affecting the stock market; it's also disrupting automotive logistics and supply chains. Companies are scrambling to adapt to these changes, and it's a reminder of how interconnected our global economy is. With the ongoing US-Israel-Iran tensions, it's a situation that's likely to continue impacting markets for some time.\n\nAlright, let's talk about some company news. Apple is in the spotlight today, with markets worrying about its current situation. While they have released beta 4 for iPadOS 26.4 and tvOS 26.4, there's still some uncertainty around their market position. Meanwhile, Meta has become the best stock in the Magnificent 7, with data backing up its strong performance. It's a pretty impressive feat considering the competition.\n\nNvidia is also in the news, with mixed signals about its stock. On one hand, the war in Iran poses a threat, but on the other, UBS is showing an 'upside bias' ahead of Nvidia's GTC. It's a bit of a mixed bag, but Nvidia's resilience and innovation continue to make it a company to watch.\n\nAnd finally, Netflix has resumed its operations, while Starbucks has been downgraded by Wall Street analysts. It's a reminder of how quickly things can change in the business world and how companies need to stay agile to keep up.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n  \nThanks, Elizabeth! Let's dive into the New York sports scene. Starting with baseball, the Yankees are gearing up for a make-or-break season with six players under the spotlight. It's going to be interesting to see how they perform and what it means for their future. Over to basketball, the Knicks are eyeing their playoff seeding, and there's some debate over whether the No. 4 seed is actually a bad spot for them. It’s playoff season, so every game counts!\n\nIn hockey, the latest from NHL.com gives us some odds and ends, but nothing major to report on the Devils today. As for the Giants, well, there's nothing new on them right now. It's a bit of a quiet moment for New York sports, but you know how quickly things can change. Back to you, Mike.\n\n[MIKE]\n  \nThanks, Jesse. Well, that wraps up today's episode of MikeCast. We covered a lot of ground, from the tech world's latest moves to the ups and downs of the stock market, and of course, the latest in New York sports. Thanks for tuning in, and don't forget to subscribe for all the latest updates. Until next time, take care and have a great day!",
   "audio_file": "MikeCast_3voice_2026-03-09.mp3",
   "elevenlabs_audio_file": "MikeCast_3voice_2026-03-09.mp3",
-  "generated_at": "2026-03-09T10:33:19.640578+00:00"
+  "generated_at": "2026-03-09T17:32:12.034214+00:00"
 }

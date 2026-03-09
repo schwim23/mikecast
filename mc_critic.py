@@ -265,18 +265,24 @@ def patch_weak_sections(
         except Exception as exc:
             logger.warning("Failed to patch section '%s': %s", cat, exc)
 
-    # Regenerate both podcast scripts with the improved articles
-    logger.info("Regenerating podcast scripts after critic patches…")
-    try:
-        from concurrent.futures import ThreadPoolExecutor
-        with ThreadPoolExecutor(max_workers=2) as ex:
-            f_single = ex.submit(generate_podcast_script, categorised, picks)
-            f_conv   = ex.submit(generate_conversational_script, categorised, picks)
-            improved_single = f_single.result()
-            improved_conv   = f_conv.result()
-        logger.info("Podcast scripts regenerated successfully.")
-    except Exception as exc:
-        logger.warning("Script regeneration failed (keeping originals): %s", exc)
+    # Only regenerate podcast scripts if at least one HTML section was actually patched.
+    # If all weak categories were skipped (e.g. all in NEVER_PATCH), the originals are fine.
+    if patchable:
+        logger.info("Regenerating podcast scripts after critic patches…")
+        try:
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=2) as ex:
+                f_single = ex.submit(generate_podcast_script, categorised, picks)
+                f_conv   = ex.submit(generate_conversational_script, categorised, picks)
+                improved_single = f_single.result()
+                improved_conv   = f_conv.result()
+            logger.info("Podcast scripts regenerated successfully.")
+        except Exception as exc:
+            logger.warning("Script regeneration failed (keeping originals): %s", exc)
+            improved_single = single_voice_script
+            improved_conv   = conversational_script
+    else:
+        logger.info("No HTML sections patched — keeping original podcast scripts.")
         improved_single = single_voice_script
         improved_conv   = conversational_script
 

@@ -289,24 +289,25 @@ Here are today's news articles:
 {picks_context}
 
 Script requirements:
-- Total length: 5-10 minutes of spoken audio (approximately 1000-1500 words)
-- Structure:
-  1. Warm, engaging INTRO (welcome listeners, tease the top stories, ~30 seconds)
-  2. AI & TECH segment — cover the top 3-4 stories with context and insight
-  3. BUSINESS & MARKETS segment — cover top 2-3 stories, explain what it means for listeners
-  4. COMPANIES segment — cover top 3-4 company stories with personality
-  5. NY SPORTS segment — cover ONLY the NY Sports articles listed above; do not mention any team, player, or coach not explicitly named in those articles
-  6. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads"
-  7. OUTRO — brief wrap-up, call to action, sign-off (~20 seconds)
+- Total length: 7-10 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
+  that means a MINIMUM of 1000 words and a TARGET of 1400-1600 words. Do not stop short.
+- Structure with approximate word targets per segment:
+  1. Warm, engaging INTRO — welcome listeners, tease the top 2-3 stories (~100 words)
+  2. AI & TECH segment — cover the top 3-4 stories with context and insight (~350 words)
+  3. BUSINESS & MARKETS segment — cover top 2-3 stories, explain what it means for listeners (~300 words)
+  4. COMPANIES segment — cover top 3-4 company stories with personality (~300 words)
+  5. NY SPORTS segment — quick team rundown only (~75 words max): one sentence per NY team (Yankees, Knicks, Giants, Devils) summarizing what's in the articles, or "nothing new" if no article covers them. If and only if there is a single truly major national sports story (championship result, blockbuster trade, landmark record), add one brief sentence on it. Do not mention any team, player, or coach not explicitly named in the articles above.
+  6. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads" (~150 words)
+  7. OUTRO — brief wrap-up, call to action, sign-off (~50 words)
 
 - Write in natural spoken language — use contractions, rhetorical questions, transitions
-- Add brief commentary or "why this matters" for major stories
+- Add 2-3 sentences of commentary or "why this matters" for every major story
 - Use natural transitions between segments (e.g., "Alright, switching gears...", "Now let's talk money...")
 - Do NOT include stage directions like [MUSIC] or [PAUSE] — write only the spoken words
 - Do NOT include URLs in the script — this is audio only
 - Write the full script, not an outline"""
 
-    script = _gpt_call(system_prompt, user_prompt, max_tokens=2000)
+    script = _gpt_call(system_prompt, user_prompt, max_tokens=3000)
 
     if not script:
         logger.warning("GPT podcast script generation failed — using simple fallback.")
@@ -385,13 +386,16 @@ Script structure:
 3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories, explain what it means.
 4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality.
    End with a handoff: "Alright Jesse, take it away with sports..."
-5. [JESSE] NY SPORTS — Cover ONLY the NY Sports articles listed above. Do not mention any
-   team, player, coach, or event not explicitly named in those articles. If an article does
-   not name a specific player or coach, do not invent one. Keep it short if there are few articles.
+5. [JESSE] NY SPORTS — Quick team rundown (~75 words max): one sentence per NY team (Yankees,
+   Knicks, Giants, Devils) on what's in the articles, or "nothing new" if no article covers them.
+   If and only if there is a single truly major national sports story (championship, blockbuster
+   trade, landmark record), add one brief sentence. Do not mention any team, player, coach, or
+   event not explicitly named in the articles above.
    End with: "Back to you, Mike."
 6. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
 
-Total length: 5-8 minutes of spoken audio (approx 1000-1500 words).
+Total length: 7-10 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
+that means a MINIMUM of 1000 words and a TARGET of 1400-1600 words. Do not stop short.
 Write the COMPLETE script with all tags. No outline, no placeholders."""
 
     script = _gpt_call(system_prompt, user_prompt, max_tokens=2500)
