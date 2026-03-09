@@ -80,11 +80,9 @@ CATEGORIES: dict[str, list[str]] = {
         "Microsoft news today", "Google Alphabet news",
         "Uber news today",
     ],
-    "NY Sports": [
-        "New York Yankees", "New York Knicks",
-        "New York Giants NFL", "New Jersey Devils NHL",
-        "NBA news today", "MLB news today", "NFL news today",
-    ],
+    # NY Sports: Google News RSS removed — sports articles come from
+    # Grok live search (fetch_grok_articles) + NYT only.
+    "NY Sports": [],
 }
 
 # NYT Top Stories sections → category mapping
@@ -146,23 +144,17 @@ CNBC_RSS_FEEDS: list[tuple[str, str, str, int]] = [
     ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",  "Business & Markets", 6),
 ]
 
-# ESPN feeds: (url, sport_label) — all feed into "NY Sports" category
-ESPN_RSS_FEEDS: list[tuple[str, str]] = [
-    ("https://www.espn.com/espn/rss/news",     "General"),
-    ("https://www.espn.com/espn/rss/nba/news", "NBA"),
-    ("https://www.espn.com/espn/rss/mlb/news", "MLB"),
-    ("https://www.espn.com/espn/rss/nfl/news", "NFL"),
-    ("https://www.espn.com/espn/rss/nhl/news", "NHL"),
-]
+# ESPN RSS removed — national feeds pulled stale/non-NY content.
+# Sports now sourced exclusively from Grok live search + NYT.
+ESPN_RSS_FEEDS: list[tuple[str, str]] = []
 
 # Reddit Atom feeds: (subreddit, category, max_articles)
+# Sports subreddits removed — fan speculation and old content caused hallucination.
 REDDIT_FEEDS: list[tuple[str, str, int]] = [
     ("MachineLearning", "AI & Tech",          10),
     ("artificial",      "AI & Tech",          10),
     ("technology",      "AI & Tech",          10),
     ("investing",       "Business & Markets", 10),
-    ("nba",             "NY Sports",           8),
-    ("baseball",        "NY Sports",           8),
 ]
 
 REDDIT_USER_AGENT = (
