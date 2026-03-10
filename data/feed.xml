@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #16 — March 10, 2026</title>
+    <description>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bill Ackman's Pershing Square IPO filing, Hims &amp; Hers' stock surge due to a Novo Nordisk partnership, and oil market reactions to President Trump's statements on Iran.</description>
+    <pubDate>Tue, 10 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-10</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-10.mp3" type="audio/mpeg" length="4732633"/>
+    <itunes:title>MikeCast #16 — March 10, 2026</itunes:title>
+    <itunes:subtitle>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bi...</itunes:subtitle>
+    <itunes:summary>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bill Ackman's Pershing Square IPO filing, Hims &amp; Hers' stock surge due to a Novo Nordisk partnership, and oil market reactions to President Trump's statements on Iran.</itunes:summary>
+    <itunes:duration>295</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #15 — March 09, 2026</title>
     <description>Episode #15 — This episode covers OpenAI's acquisition of Promptfoo and its strategic focus shift, Anthropic's study on AI's impact on jobs, the launch of VeridisQuo for deepfake detection, and Nscale's $14.6 billion valuation backed by Nvidia, alongside market concerns over surging oil prices due to US-Israel-Iran tensions and Apple's latest software releases.</description>
     <pubDate>Mon, 09 Mar 2026 11:45:00 GMT</pubDate>
