@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #17 — March 11, 2026</title>
+    <description>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact of the U.S.-Iran conflict on oil prices and markets, and the passing of computer scientist Tony Hoare.</description>
+    <pubDate>Wed, 11 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-11</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-11.mp3" type="audio/mpeg" length="4396258"/>
+    <itunes:title>MikeCast #17 — March 11, 2026</itunes:title>
+    <itunes:subtitle>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact ...</itunes:subtitle>
+    <itunes:summary>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact of the U.S.-Iran conflict on oil prices and markets, and the passing of computer scientist Tony Hoare.</itunes:summary>
+    <itunes:duration>274</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #16 — March 10, 2026</title>
     <description>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bill Ackman's Pershing Square IPO filing, Hims &amp; Hers' stock surge due to a Novo Nordisk partnership, and oil market reactions to President Trump's statements on Iran.</description>
     <pubDate>Tue, 10 Mar 2026 11:45:00 GMT</pubDate>
