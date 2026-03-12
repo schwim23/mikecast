@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #18 — March 12, 2026</title>
+    <description>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for planning air attacks on Iran, and a massive data breach exposes one billion identity records, while oil prices surge amid Iran conflict, impacting Federal Reserve rate cut plans.</description>
+    <pubDate>Thu, 12 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-12</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-12.mp3" type="audio/mpeg" length="5396179"/>
+    <itunes:title>MikeCast #18 — March 12, 2026</itunes:title>
+    <itunes:subtitle>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for pla...</itunes:subtitle>
+    <itunes:summary>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for planning air attacks on Iran, and a massive data breach exposes one billion identity records, while oil prices surge amid Iran conflict, impacting Federal Reserve rate cut plans.</itunes:summary>
+    <itunes:duration>336</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #17 — March 11, 2026</title>
     <description>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact of the U.S.-Iran conflict on oil prices and markets, and the passing of computer scientist Tony Hoare.</description>
     <pubDate>Wed, 11 Mar 2026 11:45:00 GMT</pubDate>
