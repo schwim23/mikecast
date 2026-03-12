@@ -44,7 +44,7 @@ def _build_articles_context(categorised: dict[str, list[dict]]) -> str:
             prefix = "[UPDATE] " if updated else ""
             lines.append(f"{i}. {prefix}{title}")
             if desc:
-                lines.append(f"   Summary: {desc[:300]}")
+                lines.append(f"   Summary: {desc[:500]}")
             if source:
                 lines.append(f"   Source: {source}")
             if url:
@@ -97,7 +97,11 @@ def generate_html_briefing(
     system_prompt = (
         "You are MikeCast, a sharp, well-informed daily briefing writer. "
         "Write in a professional yet engaging tone — like a smart friend who reads everything so you don't have to. "
-        "Be concise but substantive. Use active voice. Avoid filler phrases.\n\n"
+        "Use active voice. Avoid filler phrases.\n\n"
+        "STORYTELLING RULE: For every story, tell the reader exactly what happened — the full substance. "
+        "Do NOT tease, trail off, or leave things unresolved. Do not write cliffhangers like "
+        "'what this means remains to be seen' or 'the fallout could be significant.' "
+        "Tell the reader the outcome, the numbers, the decision, the result — whatever the article contains.\n\n"
         "CRITICAL RULE: Only report facts explicitly stated in the provided articles. "
         "Do NOT add details, claims, trades, events, statistics, or context from your training knowledge. "
         "If a category has few or no articles, write only what the articles say — do not fill gaps with invented news. "
@@ -110,14 +114,24 @@ Here are today's articles:
 {articles_context}
 {picks_context}
 
-Write a professional daily briefing (800-1200 words) with these exact sections:
+Write a professional daily briefing (1200-1800 words) with these exact sections:
 
 1. EXECUTIVE SUMMARY (2-3 sentences capturing the most important themes of the day)
 
 2. TOP STORIES — organized by category (AI & Tech, Business & Markets, Companies, NY Sports). For each story:
-   - Write 2-4 sentences of analysis/context, not just a restatement of the headline
+   - Write a substantive paragraph of AT LEAST 80 words per story. Explain what happened, who was involved,
+     what the key details are (numbers, decisions, outcomes), and why it matters.
+   - Do NOT summarize in one line. Do NOT use a vague teaser. Tell the full story as the article presents it.
    - Include the clickable source URL at the end of each story item
    - Cover at least 3-4 stories per category that has content
+
+   NY SPORTS rules (apply these exactly):
+   - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
+     state the final score and opponent, and mention when their next game is. If there is a major
+     story or highlight beyond game results (trade, injury, milestone), include that too. Keep it to
+     1-2 sentences per team. Skip a team entirely if nothing substantive happened.
+   - For major national sports stories unrelated to NY teams: summarize in 1-2 sentences.
+   - Do NOT write generic filler about a team if there is nothing in the articles to report.
 
 3. KEY TRENDS & INSIGHTS (3-5 bullet points identifying patterns, themes, or connections across today's stories)
 
@@ -128,10 +142,9 @@ Format rules:
 - Use plain section headers like: EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS, KEY TRENDS & INSIGHTS, WHAT TO WATCH
 - Each story should be on its own paragraph
 - IMPORTANT: End every story paragraph with a clickable source link in this exact format: [Source Name](URL)
-  Use the exact URL provided in the article data above — do not make up or omit URLs
-- Keep it tight and informative — this is a busy executive's morning read"""
+  Use the exact URL provided in the article data above — do not make up or omit URLs"""
 
-    briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=2500)
+    briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
     if not briefing_text:
         briefing_text = "Unable to generate GPT briefing. See articles below."
     # Strip any markdown code fences the LLM may have accidentally included
@@ -276,7 +289,10 @@ def generate_podcast_script(
         "You are the host of MikeCast, a daily news podcast. "
         "Your style is smart, conversational, and energetic — like a knowledgeable friend catching you up over coffee. "
         "You speak directly to the listener. You add context and insight — not just headlines. "
-        "You're concise but never dry. You use natural spoken language, not written prose.\n\n"
+        "You're substantive but never dry. You use natural spoken language, not written prose.\n\n"
+        "STORYTELLING RULE: For every story, fully explain what happened — the outcome, the numbers, the key "
+        "people, the decision. Do NOT tease or leave the listener hanging with lines like 'we'll have to wait "
+        "and see' or 'the implications could be huge.' Tell them what the article actually says happened.\n\n"
         "CRITICAL RULE: Only discuss stories explicitly present in the provided articles. "
         "Do NOT mention trades, events, statistics, or facts from your training knowledge that aren't in the input. "
         "If a category has few articles, keep that segment short — never invent news to fill time."
@@ -289,25 +305,31 @@ Here are today's news articles:
 {picks_context}
 
 Script requirements:
-- Total length: 7-10 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
-  that means a MINIMUM of 1000 words and a TARGET of 1400-1600 words. Do not stop short.
+- Total length: 10-14 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
+  that means a MINIMUM of 1400 words and a TARGET of 1800-2000 words. Do not stop short.
 - Structure with approximate word targets per segment:
   1. Warm, engaging INTRO — welcome listeners, tease the top 2-3 stories (~100 words)
-  2. AI & TECH segment — cover the top 3-4 stories with context and insight (~350 words)
-  3. BUSINESS & MARKETS segment — cover top 2-3 stories, explain what it means for listeners (~300 words)
-  4. COMPANIES segment — cover top 3-4 company stories with personality (~300 words)
-  5. NY SPORTS segment — quick team rundown only (~75 words max): one sentence per NY team (Yankees, Knicks, Giants, Devils) summarizing what's in the articles, or "nothing new" if no article covers them. If and only if there is a single truly major national sports story (championship result, blockbuster trade, landmark record), add one brief sentence on it. Do not mention any team, player, or coach not explicitly named in the articles above.
+  2. AI & TECH segment — cover the top 3-4 stories with full context, details, and why it matters (~500 words)
+  3. BUSINESS & MARKETS segment — cover top 2-3 stories in depth, explain what it means for listeners (~400 words)
+  4. COMPANIES segment — cover top 3-4 company stories with personality and substance (~400 words)
+  5. NY SPORTS segment (~100-150 words):
+     - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
+       say the final score and opponent, and mention when their next game is. If there is a notable
+       story or highlight beyond the game result, include it briefly. Keep it to 1-2 sentences per team.
+       Skip a team entirely if nothing noteworthy happened — do not pad with filler.
+     - For major national sports stories unrelated to NY teams: 1-2 sentences.
+     - Do NOT mention any team, player, or event not explicitly named in the articles above.
   6. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads" (~150 words)
   7. OUTRO — brief wrap-up, call to action, sign-off (~50 words)
 
 - Write in natural spoken language — use contractions, rhetorical questions, transitions
-- Add 2-3 sentences of commentary or "why this matters" for every major story
+- For each major story, include the actual facts: numbers, names, outcomes, decisions — not vague commentary
 - Use natural transitions between segments (e.g., "Alright, switching gears...", "Now let's talk money...")
 - Do NOT include stage directions like [MUSIC] or [PAUSE] — write only the spoken words
 - Do NOT include URLs in the script — this is audio only
 - Write the full script, not an outline"""
 
-    script = _gpt_call(system_prompt, user_prompt, max_tokens=3000)
+    script = _gpt_call(system_prompt, user_prompt, max_tokens=4000)
 
     if not script:
         logger.warning("GPT podcast script generation failed — using simple fallback.")
@@ -366,7 +388,10 @@ def generate_conversational_script(
         "- JESSE covers NY Sports and hands back to Mike for the sign-off.\n"
         "- Write in natural spoken language — contractions, energy, personality.\n"
         "- NO URLs in the script. NO stage directions. Only spoken words.\n"
-        "- Each host segment should feel like a real broadcast, not a list.\n\n"
+        "- Each host segment should feel like a real broadcast, not a list.\n"
+        "- For every story, ELIZABETH should convey the actual substance: the numbers, the outcome, "
+        "the key people, the decision. Do NOT use vague teaser language like 'we'll see what happens' "
+        "or 'this could be significant.' Tell the listener what the article says happened.\n\n"
         "CRITICAL RULE: Only discuss stories explicitly present in the provided articles. "
         "Do NOT mention trades, signings, game scores, injuries, or any sports/business facts "
         "from your training knowledge that aren't in the input articles. "
@@ -382,23 +407,26 @@ Here are today's articles:
 
 Script structure:
 1. [MIKE] INTRO — Welcome listeners, briefly tease the top 2-3 stories (~30 seconds).
-2. [ELIZABETH] AI & TECH — Cover top 3-4 stories with context and insight.
-3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories, explain what it means.
-4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality.
+2. [ELIZABETH] AI & TECH — Cover top 3-4 stories with full context, key details, and why it matters.
+   For each story: explain what happened, who's involved, what the specific numbers/outcomes are.
+3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories in depth, explain what it means for listeners.
+4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality and substance.
    End with a handoff: "Alright Jesse, take it away with sports..."
-5. [JESSE] NY SPORTS — Quick team rundown (~75 words max): one sentence per NY team (Yankees,
-   Knicks, Giants, Devils) on what's in the articles, or "nothing new" if no article covers them.
-   If and only if there is a single truly major national sports story (championship, blockbuster
-   trade, landmark record), add one brief sentence. Do not mention any team, player, coach, or
-   event not explicitly named in the articles above.
+5. [JESSE] NY SPORTS (~100-150 words total):
+   - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
+     say the final score and opponent, and mention when their next game is. If there's a notable
+     story or highlight, include it too. Keep it to 1-2 sentences per team.
+     Skip a team entirely if nothing noteworthy happened — do not pad with filler.
+   - For major national sports stories unrelated to NY teams: 1-2 sentences.
+   - Do NOT mention any team, player, coach, or event not explicitly named in the articles above.
    End with: "Back to you, Mike."
 6. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
 
-Total length: 7-10 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
-that means a MINIMUM of 1000 words and a TARGET of 1400-1600 words. Do not stop short.
+Total length: 10-14 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
+that means a MINIMUM of 1400 words and a TARGET of 1800-2000 words. Do not stop short.
 Write the COMPLETE script with all tags. No outline, no placeholders."""
 
-    script = _gpt_call(system_prompt, user_prompt, max_tokens=2500)
+    script = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
 
     if not script:
         logger.warning("Conversational script generation failed — empty response.")
