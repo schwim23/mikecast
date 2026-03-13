@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #19 — March 13, 2026</title>
+    <description>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil prices impact global markets, with the Dow Jones dropping significantly due to Middle East tensions; Apple reduces China App Store commission fees.</description>
+    <pubDate>Fri, 13 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-13</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-13.mp3" type="audio/mpeg" length="4177027"/>
+    <itunes:title>MikeCast #19 — March 13, 2026</itunes:title>
+    <itunes:subtitle>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil p...</itunes:subtitle>
+    <itunes:summary>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil prices impact global markets, with the Dow Jones dropping significantly due to Middle East tensions; Apple reduces China App Store commission fees.</itunes:summary>
+    <itunes:duration>260</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #18 — March 12, 2026</title>
     <description>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for planning air attacks on Iran, and a massive data breach exposes one billion identity records, while oil prices surge amid Iran conflict, impacting Federal Reserve rate cut plans.</description>
     <pubDate>Thu, 12 Mar 2026 11:45:00 GMT</pubDate>
