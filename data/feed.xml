@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #20 — March 14, 2026</title>
+    <description>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500's decline due to the Iran oil crisis, and Meta's potential layoffs linked to AI development costs.</description>
+    <pubDate>Sat, 14 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-14</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-14.mp3" type="audio/mpeg" length="4880321"/>
+    <itunes:title>MikeCast #20 — March 14, 2026</itunes:title>
+    <itunes:subtitle>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500'...</itunes:subtitle>
+    <itunes:summary>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500's decline due to the Iran oil crisis, and Meta's potential layoffs linked to AI development costs.</itunes:summary>
+    <itunes:duration>304</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #19 — March 13, 2026</title>
     <description>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil prices impact global markets, with the Dow Jones dropping significantly due to Middle East tensions; Apple reduces China App Store commission fees.</description>
     <pubDate>Fri, 13 Mar 2026 11:45:00 GMT</pubDate>
