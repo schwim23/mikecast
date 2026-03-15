@@ -83,8 +83,36 @@
     }
   }
 
+  function renderTrending(trending) {
+    const el = document.getElementById("trending-card");
+    if (!el) return;
+    if (!trending || trending.length === 0) { el.style.display = "none"; return; }
+    let html = "";
+    trending.forEach(function(item, i) {
+      const topic  = escapeHtml(item.topic || "");
+      const title  = escapeHtml((item.title || "").replace(/^\[Updated\]\s*/, ""));
+      const source = escapeHtml(item.source || "");
+      const url    = escapeHtml(item.url || "#");
+      const desc   = escapeHtml((item.description || "").slice(0, 160));
+      html += `<div class="trending-item">
+        <span class="trending-rank">${i + 1}</span>
+        <div class="trending-body">
+          <div class="trending-topic">${topic}</div>
+          <a href="${url}" target="_blank" rel="noopener" class="trending-title">${title}</a>
+          <div class="trending-desc">${desc}</div>
+          <div class="trending-source">${source}</div>
+        </div>
+      </div>`;
+    });
+    el.querySelector(".trending-list").innerHTML = html;
+    el.style.display = "block";
+  }
+
   function renderBriefing(data, dateStr) {
     loadingEl.style.display = "none";
+
+    // 0. Trending
+    renderTrending(data.trending || []);
 
     // 1. HTML briefing
     if (data.html_briefing) {

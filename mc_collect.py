@@ -577,6 +577,81 @@ def filter_sports_by_trusted_sources(
     return result
 
 
+_STOPWORDS = frozenset({
+    "a", "an", "the", "is", "are", "in", "of", "to", "and", "for",
+    "with", "on", "at", "by", "its", "as", "it", "be", "was", "were",
+    "that", "this", "has", "have", "from", "or", "but", "not",
+})
+
+
+def match_trending_articles(
+    trending_stories: list[str],
+    scored_corpus: dict[str, list[dict]],
+) -> list[dict]:
+    """
+    Match each Grok trending topic phrase to the best-fitting article in the
+    scored corpus using keyword overlap. No API calls.
+
+    Returns a list of dicts (one per matched topic), each containing:
+      topic, title, url, source, description, score, category
+    Topics with no article match (< 2 token overlap) are skipped.
+    Each article URL is used at most once across all topics.
+    """
+    def tokenise(text: str) -> set[str]:
+        words = re.findall(r"[a-z]+", text.lower())
+        return {w for w in words if w not in _STOPWORDS}
+
+    # Flatten corpus: list of (category, article)
+    all_articles = [
+        (cat, art)
+        for cat, arts in scored_corpus.items()
+        for art in arts
+    ]
+
+    used_urls: set[str] = set()
+    matched: list[dict] = []
+
+    for topic in trending_stories:
+        topic_tokens = tokenise(topic)
+        if not topic_tokens:
+            continue
+
+        best_count = 0
+        best_cat   = ""
+        best_art: dict | None = None
+
+        for cat, art in all_articles:
+            url = art.get("url", "")
+            if url in used_urls:
+                continue
+            art_text = (
+                art.get("title", "") + " " +
+                art.get("description", "")[:200]
+            )
+            art_tokens = tokenise(art_text)
+            count = len(topic_tokens & art_tokens)
+            if count > best_count:
+                best_count = count
+                best_cat   = cat
+                best_art   = art
+
+        if best_count >= 2 and best_art is not None:
+            url = best_art.get("url", "")
+            used_urls.add(url)
+            title = best_art.get("title", "").replace("[Updated] ", "").strip()
+            matched.append({
+                "topic":       topic,
+                "title":       title,
+                "url":         url,
+                "source":      best_art.get("source", ""),
+                "description": best_art.get("description", "")[:200],
+                "score":       best_art.get("score", 50),
+                "category":    best_cat,
+            })
+
+    return matched
+
+
 def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> dict[str, list[dict]]:
     """
     Trim each category proportionally to keep roughly *total* articles overall.

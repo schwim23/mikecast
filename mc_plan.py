@@ -9,12 +9,14 @@ returning article content. LLMs hallucinate plausible-sounding article
 facts (fake URLs, scores, player names) when asked to return structured
 article data. All actual article content must come from real RSS/API fetches.
 
-Returns (dynamic_queries, trending_context) where:
+Returns (dynamic_queries, trending_context, trending_stories) where:
   - dynamic_queries: {category: [query, ...]} to supplement static CATEGORIES
   - trending_context: short paragraph summarising today's breaking news
     (passed to scoring agents to weight fresh stories higher)
+  - trending_stories: list of up to 5 short descriptive phrases for top
+    cross-category breaking stories (used to build the Trending section)
 
-Gracefully skips (returns ({}, "")) if XAI_API_KEY is not set or any error occurs.
+Gracefully skips (returns ({}, "", [])) if XAI_API_KEY is not set or any error occurs.
 """
 
 import json
@@ -42,28 +44,34 @@ _USER_PROMPT = (
     '  "AI & Tech": ["query1", "query2", ...],\n'
     '  "Business & Markets": ["query1", "query2", ...],\n'
     '  "Companies": ["query1", "query2", ...],\n'
-    '  "NY Sports": ["query1", "query2", ...]\n'
+    '  "NY Sports": ["query1", "query2", ...],\n'
+    '  "trending_stories": ["phrase1", "phrase2", ...]\n'
     '}\n\n'
     "Each query must be specific enough to find the story directly "
     "(e.g. 'OpenAI GPT-5 release today' not just 'OpenAI'). "
-    "Focus on what is genuinely NEW and breaking today, not evergreen topics."
+    "Focus on what is genuinely NEW and breaking today, not evergreen topics.\n\n"
+    'Also return a "trending_stories" key: a list of the 5 most important CROSS-CATEGORY '
+    "breaking stories happening right now. Each entry is a short descriptive phrase "
+    "(10-15 words) describing WHAT the story is — not a search query. "
+    'Example: "Senate passes sweeping AI regulation bill with bipartisan support"'
 )
 
 
-def plan_daily_searches() -> tuple[dict[str, list[str]], str]:
+def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[str]]:
     """
     Call xAI Grok-3 to identify today's breaking stories and generate
     targeted search queries for each MikeCast category.
 
     Returns:
-        (dynamic_queries, trending_context)
+        (dynamic_queries, trending_context, trending_stories)
         - dynamic_queries: {category: [query, ...]} — appended to static CATEGORIES
         - trending_context: short paragraph for scoring agents (may be "")
-        On any failure, returns ({}, "").
+        - trending_stories: up to 5 descriptive phrases for top breaking stories
+        On any failure, returns ({}, "", []).
     """
     if not XAI_API_KEY:
         logger.info("XAI_API_KEY not set — skipping adaptive search planning.")
-        return {}, ""
+        return {}, "", []
 
     try:
         from openai import OpenAI
@@ -76,7 +84,7 @@ def plan_daily_searches() -> tuple[dict[str, list[str]], str]:
                 {"role": "system", "content": _SYSTEM_PROMPT},
                 {"role": "user",   "content": _USER_PROMPT},
             ],
-            max_tokens=800,
+            max_tokens=1000,
             temperature=0.3,
         )
 
@@ -99,18 +107,22 @@ def plan_daily_searches() -> tuple[dict[str, list[str]], str]:
                 if valid:
                     cleaned[cat] = valid
 
+        raw_trending = dynamic_queries.pop("trending_stories", [])
+        trending_stories = [s for s in raw_trending if isinstance(s, str) and s.strip()][:5]
+
         total_queries = sum(len(v) for v in cleaned.values())
         logger.info(
-            "Grok planning complete: %d dynamic queries across %d categories.",
-            total_queries, len(cleaned),
+            "Grok planning complete: %d dynamic queries across %d categories, "
+            "%d trending stories.",
+            total_queries, len(cleaned), len(trending_stories),
         )
 
         trending_context = _build_trending_context(cleaned)
-        return cleaned, trending_context
+        return cleaned, trending_context, trending_stories
 
     except Exception as exc:
         logger.warning("xAI Grok planning failed (non-fatal): %s", exc)
-        return {}, ""
+        return {}, "", []
 
 
 def _build_trending_context(dynamic_queries: dict[str, list[str]]) -> str:

@@ -55,6 +55,7 @@ def save_daily_data(
     audio_filename: str | None,
     conversational_script: str = "",
     elevenlabs_audio_filename: str | None = None,
+    trending: list[dict] | None = None,
 ) -> Path:
     """
     Save all briefing data as a JSON file for the dashboard.
@@ -85,6 +86,7 @@ def save_daily_data(
         "conversational_script": conversational_script,
         "audio_file": audio_filename,
         "elevenlabs_audio_file": elevenlabs_audio_filename,
+        "trending": trending or [],
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
     out_path = DATA_DIR / f"{TODAY}.json"

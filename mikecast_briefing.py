@@ -31,6 +31,7 @@ from mc_collect import (
     enrich_top_stories,
     filter_stale_articles,
     filter_sports_by_trusted_sources,
+    match_trending_articles,
     process_picks,
     score_and_rank_articles,
     select_top_articles,
@@ -73,8 +74,9 @@ def main() -> None:
     logger.info("Step 0/10: Planning today's searches with xAI Grok…")
     dynamic_queries: dict[str, list[str]] = {}
     trending_context: str = ""
+    trending_stories: list[str] = []
     try:
-        dynamic_queries, trending_context = plan_daily_searches()
+        dynamic_queries, trending_context, trending_stories = plan_daily_searches()
         if dynamic_queries:
             total_dyn = sum(len(v) for v in dynamic_queries.values())
             logger.info("Planning complete: %d dynamic queries generated.", total_dyn)
@@ -122,6 +124,16 @@ def main() -> None:
     if total == 0:
         logger.warning("All articles were duplicates — briefing will have no new stories.")
 
+    # 5b. Match trending stories to corpus articles (no API calls)
+    logger.info("Step 5b/10: Matching trending stories to corpus…")
+    trending: list[dict] = []
+    try:
+        if trending_stories:
+            trending = match_trending_articles(trending_stories, top_articles)
+            logger.info("Trending: %d/%d topics resolved.", len(trending), len(trending_stories))
+    except Exception as exc:
+        logger.warning("Trending match failed (non-fatal): %s", exc)
+
     # 6. Enrich top 8 stories (fetch article body + 'why it matters' via gpt-4o-mini)
     logger.info("Step 6/10: Enriching top stories…")
     top_articles = enrich_top_stories(top_articles, top_n=15)
@@ -137,9 +149,9 @@ def main() -> None:
     conversational_script: str = ""
 
     with ThreadPoolExecutor(max_workers=3) as ex:
-        f_html   = ex.submit(generate_html_briefing, top_articles, picks)
-        f_single = ex.submit(generate_podcast_script, top_articles, picks)
-        f_conv   = ex.submit(generate_conversational_script, top_articles, picks)
+        f_html   = ex.submit(generate_html_briefing, top_articles, picks, trending)
+        f_single = ex.submit(generate_podcast_script, top_articles, picks, trending)
+        f_conv   = ex.submit(generate_conversational_script, top_articles, picks, trending)
         try:
             html = f_html.result()
         except Exception as exc:
@@ -211,6 +223,7 @@ def main() -> None:
         primary_audio_file,
         conversational_script=conversational_script,
         elevenlabs_audio_filename=el_audio_filename,
+        trending=trending,
     )
     generate_manifest()
     generate_rss_feed()

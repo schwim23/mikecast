@@ -79,9 +79,74 @@ def _gpt_call(system_prompt: str, user_prompt: str, max_tokens: int = 2500) -> s
 # HTML briefing
 # ---------------------------------------------------------------------------
 
+def _build_trending_prompt_blocks(
+    trending: list[dict],
+) -> tuple[str, str]:
+    """
+    Split trending items into tech/general vs sports blocks for prompt injection.
+
+    Returns (tech_block, sports_block) — each is a formatted string for
+    inserting into the podcast script user prompt, or "" if no items in that group.
+    """
+    tech_items   = [t for t in trending if t.get("category", "") != "NY Sports"]
+    sports_items = [t for t in trending if t.get("category", "") == "NY Sports"]
+
+    def _fmt(items: list[dict]) -> str:
+        lines = []
+        for i, t in enumerate(items, 1):
+            lines.append(f"  {i}. {t['topic']} (article: \"{t['title']}\")")
+        return "\n".join(lines)
+
+    tech_block = (
+        "\nTODAY'S TOP TRENDING TOPICS (live web search — surface these prominently):\n"
+        + _fmt(tech_items)
+    ) if tech_items else ""
+
+    sports_block = (
+        "\nTODAY'S TRENDING SPORTS TOPICS (live web search — lead with these):\n"
+        + _fmt(sports_items)
+    ) if sports_items else ""
+
+    return tech_block, sports_block
+
+
+def _build_trending_html(trending: list[dict]) -> str:
+    """Build the amber 'TOP TRENDING NOW' block from pre-matched article dicts."""
+    if not trending:
+        return ""
+    items = ""
+    for i, item in enumerate(trending, 1):
+        topic  = _html.escape(item.get("topic", ""))
+        title  = _html.escape(item.get("title", "").replace("[Updated] ", ""))
+        source = _html.escape(item.get("source", ""))
+        url    = _html.escape(item.get("url", "#"))
+        desc   = _html.escape((item.get("description", ""))[:160])
+        items += (
+            f'<div style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;">'
+            f'<span style="color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;'
+            f'text-align:center;flex-shrink:0;">{i}</span>'
+            f'<div>'
+            f'<div style="color:#ff8c00;font-size:.76em;font-weight:600;letter-spacing:.06em;'
+            f'text-transform:uppercase;margin-bottom:2px;">{topic}</div>'
+            f'<a href="{url}" style="color:#ffcc80;font-weight:600;text-decoration:none;'
+            f'font-size:.95em;">{title}</a>'
+            f'<div style="color:#aaa;font-size:.83em;margin-top:2px;">{desc}</div>'
+            f'<div style="color:#888;font-size:.76em;margin-top:1px;">{source}</div>'
+            f'</div></div>'
+        )
+    return (
+        '<div style="background:#1e1408;border:1px solid #8B4513;border-radius:8px;'
+        'padding:16px 20px;margin-bottom:24px;">'
+        '<h2 style="color:#ff8c00;margin:0 0 10px;font-size:1.05em;letter-spacing:.4px;">'
+        '🔥 TOP TRENDING NOW</h2>'
+        f'{items}</div>'
+    )
+
+
 def generate_html_briefing(
     categorised: dict[str, list[dict]],
     picks: list[dict],
+    trending: list[dict] | None = None,
 ) -> str:
     """Build a professional HTML briefing email using GPT for rich prose."""
 
@@ -219,6 +284,7 @@ Format rules:
         return "\n".join(html_parts)
 
     briefing_html_sections = text_to_html_sections(briefing_text)
+    trending_html = _build_trending_html(trending or [])
 
     picks_html = ""
     if picks:
@@ -255,6 +321,7 @@ Format rules:
   <p style="color:#888;margin:6px 0 0;font-size:1.05em;">Daily Briefing — {TODAY_DISPLAY}</p>
 </div>
 
+{trending_html}
 {briefing_html_sections}
 
 {picks_html}
@@ -275,6 +342,7 @@ Format rules:
 def generate_podcast_script(
     categorised: dict[str, list[dict]],
     picks: list[dict],
+    trending: list[dict] | None = None,
 ) -> str:
     """Create a conversational 5-10 minute single-voice podcast script using GPT."""
 
@@ -284,6 +352,8 @@ def generate_podcast_script(
         picks_context = "\n\n=== MIKE'S PICKS ==="
         for p in picks:
             picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
+
+    tech_trending_block, sports_trending_block = _build_trending_prompt_blocks(trending or [])
 
     system_prompt = (
         "You are the host of MikeCast, a daily news podcast. "
@@ -299,7 +369,7 @@ def generate_podcast_script(
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write a full podcast script for today's MikeCast episode.
-
+{tech_trending_block}{sports_trending_block}
 Here are today's news articles:
 {articles_context}
 {picks_context}
@@ -308,11 +378,15 @@ Script requirements:
 - Total length: 10-14 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
   that means a MINIMUM of 1400 words and a TARGET of 1800-2000 words. Do not stop short.
 - Structure with approximate word targets per segment:
-  1. Warm, engaging INTRO — welcome listeners, tease the top 2-3 stories (~100 words)
-  2. AI & TECH segment — cover the top 3-4 stories with full context, details, and why it matters (~500 words)
+  1. Warm, engaging INTRO — welcome listeners, tease the top 2-3 stories (~100 words).
+     If trending topics are listed above, briefly name 1-2 of them to hook listeners.
+  2. AI & TECH segment — cover the top 3-4 stories with full context, details, and why it matters (~500 words).
+     If trending tech/general topics are listed above, open by framing them as today's most-watched stories,
+     then cover the full substance of each from the articles.
   3. BUSINESS & MARKETS segment — cover top 2-3 stories in depth, explain what it means for listeners (~400 words)
   4. COMPANIES segment — cover top 3-4 company stories with personality and substance (~400 words)
   5. NY SPORTS segment (~100-150 words):
+     - If trending sports topics are listed above, lead with them.
      - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
        say the final score and opponent, and mention when their next game is. If there is a notable
        story or highlight beyond the game result, include it briefly. Keep it to 1-2 sentences per team.
@@ -355,6 +429,7 @@ Script requirements:
 def generate_conversational_script(
     categorised: dict[str, list[dict]],
     picks: list[dict],
+    trending: list[dict] | None = None,
 ) -> str:
     """
     Generate a 3-voice conversational podcast script tagged with:
@@ -370,6 +445,8 @@ def generate_conversational_script(
         picks_context = "\n\n=== MIKE'S PICKS ==="
         for p in picks:
             picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
+
+    tech_trending_block, sports_trending_block = _build_trending_prompt_blocks(trending or [])
 
     system_prompt = (
         "You write scripts for a 3-host daily news podcast called MikeCast.\n"
@@ -400,19 +477,24 @@ def generate_conversational_script(
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write the full MikeCast 3-host podcast script.
-
+{tech_trending_block}{sports_trending_block}
 Here are today's articles:
 {articles_context}
 {picks_context}
 
 Script structure:
 1. [MIKE] INTRO — Welcome listeners, briefly tease the top 2-3 stories (~30 seconds).
+   If trending topics are listed above, name 1-2 of them by name to hook listeners.
 2. [ELIZABETH] AI & TECH — Cover top 3-4 stories with full context, key details, and why it matters.
+   If trending tech/general topics are listed above, open with a line like "Today's most-watched
+   stories are..." then work through each one with full substance from the articles.
    For each story: explain what happened, who's involved, what the specific numbers/outcomes are.
 3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories in depth, explain what it means for listeners.
 4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality and substance.
    End with a handoff: "Alright Jesse, take it away with sports..."
 5. [JESSE] NY SPORTS (~100-150 words total):
+   - If trending sports topics are listed above, open with "The big story in sports today is..."
+     and lead with those items before the team-by-team rundown.
    - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
      say the final score and opponent, and mention when their next game is. If there's a notable
      story or highlight, include it too. Keep it to 1-2 sentences per team.
