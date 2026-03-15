@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #21 — March 15, 2026</title>
+    <description>Episode #21 — Meta plans significant layoffs to manage AI spending, Tesla initiates a new chip fab project, Rhoda AI secures $450 million for industrial robots, OpenAI develops the Sora video generator for ChatGPT, Google expands Gemini AI in productivity tools, the Federal Reserve considers interest rate changes amid Middle East tensions, and Fertitta negotiates acquiring Caesars.</description>
+    <pubDate>Sun, 15 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-15</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-15.mp3" type="audio/mpeg" length="4701256"/>
+    <itunes:title>MikeCast #21 — March 15, 2026</itunes:title>
+    <itunes:subtitle>Episode #21 — Meta plans significant layoffs to manage AI spending, Tesla initiates a new chip fab project, Rhoda AI secures $450 million for industrial robots, OpenAI develops the Sora video generator for ChatGPT, Google expands Gemini AI in productiv...</itunes:subtitle>
+    <itunes:summary>Episode #21 — Meta plans significant layoffs to manage AI spending, Tesla initiates a new chip fab project, Rhoda AI secures $450 million for industrial robots, OpenAI develops the Sora video generator for ChatGPT, Google expands Gemini AI in productivity tools, the Federal Reserve considers interest rate changes amid Middle East tensions, and Fertitta negotiates acquiring Caesars.</itunes:summary>
+    <itunes:duration>293</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #20 — March 14, 2026</title>
     <description>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500's decline due to the Iran oil crisis, and Meta's potential layoffs linked to AI development costs.</description>
     <pubDate>Sat, 14 Mar 2026 11:45:00 GMT</pubDate>
