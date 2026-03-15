@@ -182,6 +182,12 @@ body {
   font-size: .76rem;
   margin-top: 2px;
 }
+
+.trending-x-badge {
+  color: var(--text-muted);
+  font-size: .75rem;
+  font-weight: 400;
+}
 .podcast-header {
   display: flex;
   align-items: center;

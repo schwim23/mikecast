@@ -9,18 +9,19 @@ returning article content. LLMs hallucinate plausible-sounding article
 facts (fake URLs, scores, player names) when asked to return structured
 article data. All actual article content must come from real RSS/API fetches.
 
-Returns (dynamic_queries, trending_context, trending_stories) where:
+Returns (dynamic_queries, trending_context, trending) where:
   - dynamic_queries: {category: [query, ...]} to supplement static CATEGORIES
   - trending_context: short paragraph summarising today's breaking news
     (passed to scoring agents to weight fresh stories higher)
-  - trending_stories: list of up to 5 short descriptive phrases for top
-    cross-category breaking stories (used to build the Trending section)
+  - trending: list of up to 5 dicts {topic, x_url} for the top AI/tech/world
+    breaking stories, each linked to the most popular X post about that story
 
 Gracefully skips (returns ({}, "", [])) if XAI_API_KEY is not set or any error occurs.
 """
 
 import json
 import logging
+from urllib.parse import quote_plus
 
 from mc_config import TODAY_DISPLAY, XAI_API_KEY
 
@@ -29,7 +30,7 @@ logger = logging.getLogger(__name__)
 _CATEGORIES = ["AI & Tech", "Business & Markets", "Companies", "NY Sports"]
 
 _SYSTEM_PROMPT = (
-    "You are a news research assistant with live web search. "
+    "You are a news research assistant with live web search and direct access to X (Twitter) posts. "
     "Identify the most important breaking stories happening RIGHT NOW across four categories. "
     "Return ONLY valid JSON — no preamble, no markdown, no explanation outside the JSON object."
 )
@@ -45,28 +46,31 @@ _USER_PROMPT = (
     '  "Business & Markets": ["query1", "query2", ...],\n'
     '  "Companies": ["query1", "query2", ...],\n'
     '  "NY Sports": ["query1", "query2", ...],\n'
-    '  "trending_stories": ["phrase1", "phrase2", ...]\n'
+    '  "trending_stories": [\n'
+    '    {"topic": "short phrase describing the story", "x_url": "https://x.com/..."}\n'
+    '  ]\n'
     '}\n\n'
-    "Each query must be specific enough to find the story directly "
-    "(e.g. 'OpenAI GPT-5 release today' not just 'OpenAI'). "
+    "Each search query must be specific enough to find the story directly. "
     "Focus on what is genuinely NEW and breaking today, not evergreen topics.\n\n"
-    'Also return a "trending_stories" key: a list of the 5 most important CROSS-CATEGORY '
-    "breaking stories happening right now. Each entry is a short descriptive phrase "
-    "(10-15 words) describing WHAT the story is — not a search query. "
-    'Example: "Senate passes sweeping AI regulation bill with bipartisan support"'
+    'Also return a "trending_stories" key: the 5 most important trending stories in '
+    "AI, tech, and world news RIGHT NOW. For each story:\n"
+    '- "topic": a short descriptive phrase (10-15 words) describing WHAT the story is\n'
+    '- "x_url": the URL of the single most popular or most relevant X post about this '
+    "story (must be a real https://x.com/... URL you can verify from X; set to \"\" "
+    "if you cannot find a verified post)"
 )
 
 
-def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[str]]:
+def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[dict]]:
     """
     Call xAI Grok-3 to identify today's breaking stories and generate
     targeted search queries for each MikeCast category.
 
     Returns:
-        (dynamic_queries, trending_context, trending_stories)
+        (dynamic_queries, trending_context, trending)
         - dynamic_queries: {category: [query, ...]} — appended to static CATEGORIES
         - trending_context: short paragraph for scoring agents (may be "")
-        - trending_stories: up to 5 descriptive phrases for top breaking stories
+        - trending: up to 5 dicts {topic, x_url} for top AI/tech/world stories
         On any failure, returns ({}, "", []).
     """
     if not XAI_API_KEY:
@@ -108,17 +112,25 @@ def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[str]]:
                     cleaned[cat] = valid
 
         raw_trending = dynamic_queries.pop("trending_stories", [])
-        trending_stories = [s for s in raw_trending if isinstance(s, str) and s.strip()][:5]
+        trending: list[dict] = []
+        for item in raw_trending[:5]:
+            if isinstance(item, dict) and item.get("topic", "").strip():
+                topic = item["topic"].strip()
+                x_url = item.get("x_url", "").strip()
+                # Fall back to an X live-search URL when no specific post was returned
+                if not x_url:
+                    x_url = "https://x.com/search?q=" + quote_plus(topic) + "&f=live"
+                trending.append({"topic": topic, "x_url": x_url})
 
         total_queries = sum(len(v) for v in cleaned.values())
         logger.info(
             "Grok planning complete: %d dynamic queries across %d categories, "
             "%d trending stories.",
-            total_queries, len(cleaned), len(trending_stories),
+            total_queries, len(cleaned), len(trending),
         )
 
         trending_context = _build_trending_context(cleaned)
-        return cleaned, trending_context, trending_stories
+        return cleaned, trending_context, trending
 
     except Exception as exc:
         logger.warning("xAI Grok planning failed (non-fatal): %s", exc)

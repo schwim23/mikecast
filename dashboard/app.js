@@ -89,19 +89,14 @@
     if (!trending || trending.length === 0) { el.style.display = "none"; return; }
     let html = "";
     trending.forEach(function(item, i) {
-      const topic  = escapeHtml(item.topic || "");
-      const title  = escapeHtml((item.title || "").replace(/^\[Updated\]\s*/, ""));
-      const source = escapeHtml(item.source || "");
-      const url    = escapeHtml(item.url || "#");
-      const desc   = escapeHtml((item.description || "").slice(0, 160));
+      const topic = escapeHtml(item.topic || "");
+      const xUrl  = escapeHtml(item.x_url || "");
+      const content = xUrl
+        ? `<a href="${xUrl}" target="_blank" rel="noopener" class="trending-title">${topic} <span class="trending-x-badge">↗ X</span></a>`
+        : `<span class="trending-title">${topic}</span>`;
       html += `<div class="trending-item">
         <span class="trending-rank">${i + 1}</span>
-        <div class="trending-body">
-          <div class="trending-topic">${topic}</div>
-          <a href="${url}" target="_blank" rel="noopener" class="trending-title">${title}</a>
-          <div class="trending-desc">${desc}</div>
-          <div class="trending-source">${source}</div>
-        </div>
+        <div class="trending-body">${content}</div>
       </div>`;
     });
     el.querySelector(".trending-list").innerHTML = html;

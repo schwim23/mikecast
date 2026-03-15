@@ -31,7 +31,6 @@ from mc_collect import (
     enrich_top_stories,
     filter_stale_articles,
     filter_sports_by_trusted_sources,
-    match_trending_articles,
     process_picks,
     score_and_rank_articles,
     select_top_articles,
@@ -74,9 +73,9 @@ def main() -> None:
     logger.info("Step 0/10: Planning today's searches with xAI Grok…")
     dynamic_queries: dict[str, list[str]] = {}
     trending_context: str = ""
-    trending_stories: list[str] = []
+    trending: list[dict] = []
     try:
-        dynamic_queries, trending_context, trending_stories = plan_daily_searches()
+        dynamic_queries, trending_context, trending = plan_daily_searches()
         if dynamic_queries:
             total_dyn = sum(len(v) for v in dynamic_queries.values())
             logger.info("Planning complete: %d dynamic queries generated.", total_dyn)
@@ -123,16 +122,6 @@ def main() -> None:
     logger.info("Selected %d articles across %d categories.", total, len(top_articles))
     if total == 0:
         logger.warning("All articles were duplicates — briefing will have no new stories.")
-
-    # 5b. Match trending stories to corpus articles (no API calls)
-    logger.info("Step 5b/10: Matching trending stories to corpus…")
-    trending: list[dict] = []
-    try:
-        if trending_stories:
-            trending = match_trending_articles(trending_stories, top_articles)
-            logger.info("Trending: %d/%d topics resolved.", len(trending), len(trending_stories))
-    except Exception as exc:
-        logger.warning("Trending match failed (non-fatal): %s", exc)
 
     # 6. Enrich top 8 stories (fetch article body + 'why it matters' via gpt-4o-mini)
     logger.info("Step 6/10: Enriching top stories…")

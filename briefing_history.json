@@ -13795,5 +13795,978 @@
     "url_fp": "a70be2364d8c218538ff85e909b6b960",
     "description": "Fantasy Outlook 2026: Darnell Mooney Lands With The GiantsLast Word On Sports",
     "date": "2026-03-15T23:37:20.936995+00:00"
+  },
+  {
+    "title": "Oscars 2026 Winners: Updating List",
+    "url": "https://www.nytimes.com/2026/03/15/movies/oscars-winners-list.html",
+    "url_fp": "c24294ee04665b01442a23ba62800737",
+    "description": "The winning actors, directors, pictures and more at the 98th annual Academy Awards.",
+    "date": "2026-03-15T23:49:09.493809+00:00"
+  },
+  {
+    "title": "An OpenAI cofounder 'vibe coded' an analysis of the U.S. labor market's exposure to AI - Fortune",
+    "url": "https://fortune.com",
+    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
+    "description": "An OpenAI cofounder 'vibe coded' an analysis of the U.S. labor market's exposure to AIFortune",
+    "date": "2026-03-15T23:49:09.494280+00:00"
+  },
+  {
+    "title": "OpenAI says ChatGPT ads are not rolling out globally for now - BleepingComputer",
+    "url": "https://www.bleepingcomputer.com",
+    "url_fp": "ddf153fb8a8aefd506b182cb8ede597c",
+    "description": "OpenAI says ChatGPT ads are not rolling out globally for nowBleepingComputer",
+    "date": "2026-03-15T23:49:09.494422+00:00"
+  },
+  {
+    "title": "OpenAI rolls Sora into ChatGPT, seeing more in store for engagement - digitimes",
+    "url": "https://www.digitimes.com",
+    "url_fp": "9ceb43e3e4260623507e86489b0ba04a",
+    "description": "OpenAI rolls Sora into ChatGPT, seeing more in store for engagementdigitimes",
+    "date": "2026-03-15T23:49:09.494661+00:00"
+  },
+  {
+    "title": "Anthropic sues Pentagon as Claude downloads soar - Mashable",
+    "url": "https://mashable.com",
+    "url_fp": "b5f07f82860eb25681a9a8a477cc1ce4",
+    "description": "Anthropic sues Pentagon as Claude downloads soarMashable",
+    "date": "2026-03-15T23:49:09.494799+00:00"
+  },
+  {
+    "title": "Anthropic is doubling Claude's usage limits during off-peak hours for the next two weeks - Engadget",
+    "url": "https://www.engadget.com",
+    "url_fp": "c0169fc5888aee1b5aa704694cad7f3f",
+    "description": "Anthropic is doubling Claude's usage limits during off-peak hours for the next two weeksEngadget",
+    "date": "2026-03-15T23:49:09.495046+00:00"
+  },
+  {
+    "title": "Microsoft and Anthropic team up to bring Claude Cowork to Microsoft 365 - AOL.com",
+    "url": "https://www.aol.com",
+    "url_fp": "9f708995b5d401084bd42712242ccf7a",
+    "description": "Microsoft and Anthropic team up to bring Claude Cowork to Microsoft 365AOL.com",
+    "date": "2026-03-15T23:49:09.495184+00:00"
+  },
+  {
+    "title": "Apple's Gemini deal with Google could be worth Rs 45,200 crore: Report - MSN",
+    "url": "http://www.msn.com",
+    "url_fp": "2791b9f39341be4e182857a9c1319f29",
+    "description": "Apple's Gemini deal with Google could be worth Rs 45,200 crore: ReportMSN",
+    "date": "2026-03-15T23:49:09.495510+00:00"
+  },
+  {
+    "title": "Microsoft ditches plans to inject Copilot into a key part of Windows 11 - Neowin",
+    "url": "https://www.neowin.net",
+    "url_fp": "0c8c42d592ef5b579afb48b159c524f8",
+    "description": "Microsoft ditches plans to inject Copilot into a key part of Windows 11Neowin",
+    "date": "2026-03-15T23:49:09.495711+00:00"
+  },
+  {
+    "title": "Microsoft: Copilot For Gaming Introduced As AI Assistant To Help Players Save Time And Improve Skills - Pulse 2.0",
+    "url": "https://pulse2.com",
+    "url_fp": "363fff1b6096e3218eaa7170a5a631f2",
+    "description": "Microsoft: Copilot For Gaming Introduced As AI Assistant To Help Players Save Time And Improve SkillsPulse 2.0",
+    "date": "2026-03-15T23:49:09.495961+00:00"
+  },
+  {
+    "title": "Chinese AI Firm Moonshot Aims for $18 Billion Valuation - PYMNTS.com",
+    "url": "https://www.pymnts.com",
+    "url_fp": "ecb631570db0805657192cabfe079eb4",
+    "description": "Chinese AI Firm Moonshot Aims for $18 Billion ValuationPYMNTS.com",
+    "date": "2026-03-15T23:49:09.496153+00:00"
+  },
+  {
+    "title": "Efficiency at All Costs: Meta Eyes 20% Jobs Bloodbath to Fund AI Empire - 24/7 Wall St.",
+    "url": "https://247wallst.com",
+    "url_fp": "5174185651b0be54b91403adb571059b",
+    "description": "Efficiency at All Costs: Meta Eyes 20% Jobs Bloodbath to Fund AI Empire24/7 Wall St.",
+    "date": "2026-03-15T23:49:09.496605+00:00"
+  },
+  {
+    "title": "Rhoda AI Secures $450M Funding to Power Next-Gen Industrial Robots - USA Herald",
+    "url": "https://usaherald.com",
+    "url_fp": "0daa273078a5d044e107e1d844f5b81c",
+    "description": "Rhoda AI Secures $450M Funding to Power Next-Gen Industrial RobotsUSA Herald",
+    "date": "2026-03-15T23:49:09.496894+00:00"
+  },
+  {
+    "title": "Together AI Leverages NVIDIA-Powered GPUs as It Eyes $7.5B Valuation in New Round - Insider Monkey",
+    "url": "https://www.insidermonkey.com",
+    "url_fp": "df882513a712a75b1e30c4ef5e58bd2d",
+    "description": "Together AI Leverages NVIDIA-Powered GPUs as It Eyes $7.5B Valuation in New RoundInsider Monkey",
+    "date": "2026-03-15T23:49:09.497135+00:00"
+  },
+  {
+    "title": "Appier Releases Whitepaper on the Future of Autonomous Marketing with Agentic AI - PR Newswire UK",
+    "url": "https://www.prnewswire.co.uk",
+    "url_fp": "af8419f0008a812468d68750b15eeccf",
+    "description": "Appier Releases Whitepaper on the Future of Autonomous Marketing with Agentic AIPR Newswire UK",
+    "date": "2026-03-15T23:49:09.756076+00:00"
+  },
+  {
+    "title": "Craziest Games at #GDC2026 #FestivalofGaming - iblnews.org",
+    "url": "https://iblnews.org",
+    "url_fp": "1c1cfbe69b3b699ed3599614e512601e",
+    "description": "Craziest Games at #GDC2026 #FestivalofGamingiblnews.org",
+    "date": "2026-03-15T23:49:09.906632+00:00"
+  },
+  {
+    "title": "CarGurus breach linked to ShinyHunters exposes 12.4M records - 930 WFMD Free Talk",
+    "url": "https://www.wfmd.com",
+    "url_fp": "59f62de257a804cdddba1c5b2872e4bb",
+    "description": "CarGurus breach linked to ShinyHunters exposes 12.4M records930 WFMD Free Talk",
+    "date": "2026-03-15T23:49:09.906917+00:00"
+  },
+  {
+    "title": "Loblaw Companies Limited Data Breach 2026: Customer PII Exposed in Targeted Attack - Rescana",
+    "url": "https://www.rescana.com",
+    "url_fp": "a53b7f465954b6d391f2430f4bad049b",
+    "description": "Loblaw Companies Limited Data Breach 2026: Customer PII Exposed in Targeted AttackRescana",
+    "date": "2026-03-15T23:49:10.152207+00:00"
+  },
+  {
+    "title": "Quantum Computing And Ciena Bring Quantum Secure Networking Closer To Investors - simplywall.st",
+    "url": "https://simplywall.st",
+    "url_fp": "00bde8332e7e948dd256ee2976ba58dc",
+    "description": "Quantum Computing And Ciena Bring Quantum Secure Networking Closer To Investorssimplywall.st",
+    "date": "2026-03-15T23:49:10.152450+00:00"
+  },
+  {
+    "title": "Promising Quantum Computing Stocks To Watch Today - March 15th - MarketBeat",
+    "url": "https://www.marketbeat.com",
+    "url_fp": "2dc276236d3b374e1b7bd2affebbd6fa",
+    "description": "Promising Quantum Computing Stocks To Watch Today - March 15thMarketBeat",
+    "date": "2026-03-15T23:49:10.152605+00:00"
+  },
+  {
+    "title": "AI (artificial intelligence) - The Guardian",
+    "url": "https://www.theguardian.com",
+    "url_fp": "b49674329b31ee735fa4368cd1a19ba8",
+    "description": "AI (artificial intelligence)The Guardian",
+    "date": "2026-03-15T23:49:10.152703+00:00"
+  },
+  {
+    "title": "ByteDance reportedly pauses global launch of its Seedance 2.0 video generator - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "ByteDance reportedly pauses global launch of its Seedance 2.0 video generatorTechCrunch",
+    "date": "2026-03-15T23:49:10.152890+00:00"
+  },
+  {
+    "title": "United Way, Midland Area Community Foundation launch collaborative SPARK grant program in Midland County - Midland Daily News",
+    "url": "https://www.ourmidland.com",
+    "url_fp": "53ee96cddd12f7387ab50433bc455c46",
+    "description": "United Way, Midland Area Community Foundation launch collaborative SPARK grant program in Midland CountyMidland Daily News",
+    "date": "2026-03-15T23:49:10.462660+00:00"
+  },
+  {
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures waver as oil rises with US and Iran targeting energy infrastructure - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Stock market today: Dow, S&P 500, Nasdaq futures waver as oil rises with US and Iran targeting energy infrastructureYahoo Finance",
+    "date": "2026-03-15T23:49:10.578043+00:00"
+  },
+  {
+    "title": "Futures Due, Oil Eyes $100; 4 AI Stocks Near Buy Points - Investor's Business Daily",
+    "url": "https://www.investors.com",
+    "url_fp": "545362646854336a3463a9033e71efc5",
+    "description": "Futures Due, Oil Eyes $100; 4 AI Stocks Near Buy PointsInvestor's Business Daily",
+    "date": "2026-03-15T23:49:10.578245+00:00"
+  },
+  {
+    "title": "Opinion: A Stock Market Crash Is Much More Likely Now Than It Was 2 Months Ago - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Opinion: A Stock Market Crash Is Much More Likely Now Than It Was 2 Months AgoThe Motley Fool",
+    "date": "2026-03-15T23:49:10.578494+00:00"
+  },
+  {
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures decline as oil rises with US and Iran targeting energy infrastructure - Yahoo Finance Singapore",
+    "url": "https://sg.finance.yahoo.com",
+    "url_fp": "4098229b213252ebdfd2d79962039c52",
+    "description": "Stock market today: Dow, S&P 500, Nasdaq futures decline as oil rises with US and Iran targeting energy infrastructureYahoo Finance Singapore",
+    "date": "2026-03-15T23:49:10.578692+00:00"
+  },
+  {
+    "title": "Latest Enterprise AI News Today | Trends, Predictions, & Analysis - Forbes",
+    "url": "https://www.forbes.com",
+    "url_fp": "974a05326cbbafcecec1f11b22f1eb27",
+    "description": "Latest Enterprise AI News Today | Trends, Predictions, & AnalysisForbes",
+    "date": "2026-03-15T23:49:10.578875+00:00"
+  },
+  {
+    "title": "Companies ramp up AI spend, but most pilots fail to deploy: Lenovo executive - South China Morning Post",
+    "url": "https://www.scmp.com",
+    "url_fp": "1629c75e9ca406757cd61daf154e2629",
+    "description": "Companies ramp up AI spend, but most pilots fail to deploy: Lenovo executiveSouth China Morning Post",
+    "date": "2026-03-15T23:49:10.579076+00:00"
+  },
+  {
+    "title": "How would an ecosystem-led investment fund perform? - Technical.ly",
+    "url": "https://technical.ly",
+    "url_fp": "e56405fae70697a75c08d2804955d93a",
+    "description": "How would an ecosystem-led investment fund perform?Technical.ly",
+    "date": "2026-03-15T23:49:10.579221+00:00"
+  },
+  {
+    "title": "The Fed is no stranger to oil crises. But this time could be different - CNN",
+    "url": "https://www.cnn.com",
+    "url_fp": "8d215893cca08911f456711875e8e3bc",
+    "description": "The Fed is no stranger to oil crises. But this time could be differentCNN",
+    "date": "2026-03-15T23:49:10.579339+00:00"
+  },
+  {
+    "title": "Fed to weigh interest rates amid Iran war, potential price increases - USA Today",
+    "url": "https://www.usatoday.com",
+    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
+    "description": "Fed to weigh interest rates amid Iran war, potential price increasesUSA Today",
+    "date": "2026-03-15T23:49:10.579473+00:00"
+  },
+  {
+    "title": "For Trump, a Promised Economic Boom Collides With the Costs of War - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "For Trump, a Promised Economic Boom Collides With the Costs of WarThe New York Times",
+    "date": "2026-03-15T23:49:10.579759+00:00"
+  },
+  {
+    "title": "Global week ahead: Price pressure in the pipeline - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Global week ahead: Price pressure in the pipelineCNBC",
+    "date": "2026-03-15T23:49:10.579911+00:00"
+  },
+  {
+    "title": "Looming Fed meeting shifts bets for 2026 interest-rate cuts - thestreet.com",
+    "url": "https://www.thestreet.com",
+    "url_fp": "f223c2967c476a457c1292dbbe83f6dd",
+    "description": "Looming Fed meeting shifts bets for 2026 interest-rate cutsthestreet.com",
+    "date": "2026-03-15T23:49:10.580058+00:00"
+  },
+  {
+    "title": "Strategic oil release may calm markets but cannot fix Hormuz disruption - Al Jazeera",
+    "url": "https://www.aljazeera.com",
+    "url_fp": "e0da5ef1d3f0c95227cf34ffb82fa816",
+    "description": "Strategic oil release may calm markets but cannot fix Hormuz disruptionAl Jazeera",
+    "date": "2026-03-15T23:49:10.580173+00:00"
+  },
+  {
+    "title": "Gas prices surge in Montana amid global tensions - KRTV",
+    "url": "https://www.krtv.com",
+    "url_fp": "39084dea2840410a7d4fe5b450913a3f",
+    "description": "Gas prices surge in Montana amid global tensionsKRTV",
+    "date": "2026-03-15T23:49:10.748850+00:00"
+  },
+  {
+    "title": "Markets - CoinDesk",
+    "url": "https://www.coindesk.com",
+    "url_fp": "019483ba93cc4f69e630e7e0268bf981",
+    "description": "MarketsCoinDesk",
+    "date": "2026-03-15T23:49:10.748953+00:00"
+  },
+  {
+    "title": "Bitcoin Price Oil Market Volatility: A Catalyst for BTC? - NFT Plazas",
+    "url": "https://nftplazas.com",
+    "url_fp": "b6605d38196223a6fcf9f6a7c7381bdb",
+    "description": "Bitcoin Price Oil Market Volatility: A Catalyst for BTC?NFT Plazas",
+    "date": "2026-03-15T23:49:10.939852+00:00"
+  },
+  {
+    "title": "Bitcoin Consolidates at $71K Ahead of Fed Decision and 91 Pending ETF Approvals - AD HOC NEWS",
+    "url": "https://www.ad-hoc-news.de",
+    "url_fp": "e0b56bd6a0d851379b0a774f2225ea17",
+    "description": "Bitcoin Consolidates at $71K Ahead of Fed Decision and 91 Pending ETF ApprovalsAD HOC NEWS",
+    "date": "2026-03-15T23:49:10.940051+00:00"
+  },
+  {
+    "title": "Micron buys Taiwan chip plant to boost AI memory supply - Stock Titan",
+    "url": "https://www.stocktitan.net",
+    "url_fp": "5683b07ba5593fc74bba4d7c7bbdca26",
+    "description": "Micron buys Taiwan chip plant to boost AI memory supplyStock Titan",
+    "date": "2026-03-15T23:49:10.940220+00:00"
+  },
+  {
+    "title": "Micron Completes Acquisition of PSMC’s Tongluo P5 Site in Taiwan - The Globe and Mail",
+    "url": "https://www.theglobeandmail.com",
+    "url_fp": "d0c564eda0fa01daf89c4bb2145812fe",
+    "description": "Micron Completes Acquisition of PSMC’s Tongluo P5 Site in TaiwanThe Globe and Mail",
+    "date": "2026-03-15T23:49:10.940483+00:00"
+  },
+  {
+    "title": "Alphabet Completes Acquisition of Cybersecurity Firm Wiz - National Today",
+    "url": "https://nationaltoday.com",
+    "url_fp": "a13df8b91a7375f0569dc626d64998db",
+    "description": "Alphabet Completes Acquisition of Cybersecurity Firm WizNational Today",
+    "date": "2026-03-15T23:49:10.940564+00:00"
+  },
+  {
+    "title": "Steve Jobs Gave Tim Cook One Piece of Advice. It Still Shapes Apple Today - inc.com",
+    "url": "https://www.inc.com",
+    "url_fp": "a866c6a59b417915b0b1f0f57cc02614",
+    "description": "Steve Jobs Gave Tim Cook One Piece of Advice. It Still Shapes Apple Todayinc.com",
+    "date": "2026-03-15T23:49:10.940740+00:00"
+  },
+  {
+    "title": "Apple’s Liquid Glass Interface Isn’t Going Anywhere Anytime Soon - Bloomberg.com",
+    "url": "https://www.bloomberg.com",
+    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
+    "description": "Apple’s Liquid Glass Interface Isn’t Going Anywhere Anytime SoonBloomberg.com",
+    "date": "2026-03-15T23:49:10.940876+00:00"
+  },
+  {
+    "title": "Amazon has Apple’s most affordable current-gen iPad down at $299 (All colors) - 9to5Toys",
+    "url": "https://9to5toys.com",
+    "url_fp": "7229e8b9792290e7482145ca1a02a7c8",
+    "description": "Amazon has Apple’s most affordable current-gen iPad down at $299 (All colors)9to5Toys",
+    "date": "2026-03-15T23:49:10.941196+00:00"
+  },
+  {
+    "title": "Leanne Morgan Talks Chasing Her Comedy Dream as a Mom - TODAY.com",
+    "url": "https://www.today.com",
+    "url_fp": "ee1e3827db47eee7e328583e897a1701",
+    "description": "Leanne Morgan Talks Chasing Her Comedy Dream as a MomTODAY.com",
+    "date": "2026-03-15T23:49:10.941535+00:00"
+  },
+  {
+    "title": "Alphabet Inc. (GOOG) Announces Completion of its Acquisition of Wiz - Yahoo Finance UK",
+    "url": "https://uk.finance.yahoo.com",
+    "url_fp": "2c19f9b77aeac73a5fe63313054f3504",
+    "description": "Alphabet Inc. (GOOG) Announces Completion of its Acquisition of WizYahoo Finance UK",
+    "date": "2026-03-15T23:49:10.941677+00:00"
+  },
+  {
+    "title": "Uber Eats launches Bunnings - Uber",
+    "url": "https://www.uber.com",
+    "url_fp": "f626cf2d964aa14b20739b64d7338b25",
+    "description": "Uber Eats launches BunningsUber",
+    "date": "2026-03-15T23:49:10.941869+00:00"
+  },
+  {
+    "title": "Chegg, PacWest, Arista, Uber, SoFi, BP, and More Stock Market Movers - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Chegg, PacWest, Arista, Uber, SoFi, BP, and More Stock Market MoversBarron's",
+    "date": "2026-03-15T23:49:10.941984+00:00"
+  },
+  {
+    "title": "Syrah Resources Says Tesla Offtake Alleged Default Cure Date Extended - TradingView",
+    "url": "https://www.tradingview.com",
+    "url_fp": "84ea80fab7315a2f6446f2aedca0019f",
+    "description": "Syrah Resources Says Tesla Offtake Alleged Default Cure Date ExtendedTradingView",
+    "date": "2026-03-15T23:49:10.942164+00:00"
+  },
+  {
+    "title": "Tesla Investor Exit: A Decade-Long Journey from 2014 to 2024 - News and Statistics - IndexBox",
+    "url": "https://www.indexbox.io",
+    "url_fp": "10b969df1d797feeaad54d94c5ce7feb",
+    "description": "Tesla Investor Exit: A Decade-Long Journey from 2014 to 2024 - News and StatisticsIndexBox",
+    "date": "2026-03-15T23:49:10.942347+00:00"
+  },
+  {
+    "title": "FDA recalls cream cheese with highest warning for 'serious adverse health consequences or death' - UNILAD",
+    "url": "https://www.unilad.com",
+    "url_fp": "c301a85285e2f4b6614b6aa3dc16c378",
+    "description": "FDA recalls cream cheese with highest warning for 'serious adverse health consequences or death'UNILAD",
+    "date": "2026-03-15T23:49:11.224507+00:00"
+  },
+  {
+    "title": "Full List: 14 Cream Cheese & Tofu Products Recalled Over Listeria Fears - mibolsillo.co",
+    "url": "https://www.mibolsillo.co",
+    "url_fp": "08e8e57d67875e1b4897a1c6bfecd595",
+    "description": "Full List: 14 Cream Cheese & Tofu Products Recalled Over Listeria Fearsmibolsillo.co",
+    "date": "2026-03-15T23:49:11.456565+00:00"
+  },
+  {
+    "title": "Iran wages economic war in hopes of outlasting U.S. and Israel - The Washington Post",
+    "url": "https://www.washingtonpost.com",
+    "url_fp": "add4932ae5e02f0328761d82ff3b4ea2",
+    "description": "Iran wages economic war in hopes of outlasting U.S. and IsraelThe Washington Post",
+    "date": "2026-03-15T23:49:11.456817+00:00"
+  },
+  {
+    "title": "From coder to shuttle driver: Where Seattle’s laid-off tech workforce is now - Oregon Public Broadcasting - OPB",
+    "url": "https://www.opb.org",
+    "url_fp": "7f1fafaf5c77c4487e1a430d68b8ac54",
+    "description": "From coder to shuttle driver: Where Seattle’s laid-off tech workforce is nowOregon Public Broadcasting - OPB",
+    "date": "2026-03-15T23:49:11.743255+00:00"
+  },
+  {
+    "title": "New York Yankees vs. Detroit Tigers: Luis Gil vs. Framber Valdez - Yahoo Sports",
+    "url": "https://sports.yahoo.com",
+    "url_fp": "4bbd7d0db668261e182a6708e474c8dc",
+    "description": "New York Yankees vs. Detroit Tigers: Luis Gil vs. Framber ValdezYahoo Sports",
+    "date": "2026-03-15T23:49:11.743495+00:00"
+  },
+  {
+    "title": "Yankees predicted to reunite with $36 million All-Star ace, former Cy Young candidate to provide depth to massively injured starting rotation - sportingnews.com",
+    "url": "https://www.sportingnews.com",
+    "url_fp": "18fd94f3c6d077fc4c37c7476955e0d2",
+    "description": "Yankees predicted to reunite with $36 million All-Star ace, former Cy Young candidate to provide depth to massively injured starting rotationsportingnews.com",
+    "date": "2026-03-15T23:49:11.743999+00:00"
+  },
+  {
+    "title": "Golden State Warriors vs New York Knicks Mar 15, 2026 Game Summary - NBA",
+    "url": "https://www.nba.com",
+    "url_fp": "5567ef57bde48e2912b076b1d46096e6",
+    "description": "Golden State Warriors vs New York Knicks Mar 15, 2026 Game SummaryNBA",
+    "date": "2026-03-15T23:49:11.744155+00:00"
+  },
+  {
+    "title": "UPDATE: New York Knicks Announce Roster Move Before Warriors Game - heavy.com",
+    "url": "https://heavy.com",
+    "url_fp": "374bf1bb8fee633961da067e5c478089",
+    "description": "UPDATE: New York Knicks Announce Roster Move Before Warriors Gameheavy.com",
+    "date": "2026-03-15T23:49:11.744304+00:00"
+  },
+  {
+    "title": "Garafolo: Titans, Cor'Dale Flott agreed to a 3-year/$45M contract - NFL.com",
+    "url": "https://www.nfl.com",
+    "url_fp": "d7ebf4dab31ce298edfc01d971c976bb",
+    "description": "Garafolo: Titans, Cor'Dale Flott agreed to a 3-year/$45M contractNFL.com",
+    "date": "2026-03-15T23:49:11.744566+00:00"
+  },
+  {
+    "title": "New York Giants receive mixed grades after first wave of free agency - Giants Wire",
+    "url": "https://giantswire.usatoday.com",
+    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
+    "description": "New York Giants receive mixed grades after first wave of free agencyGiants Wire",
+    "date": "2026-03-15T23:49:11.744646+00:00"
+  },
+  {
+    "title": "NY Giants 4-round mock draft: Addressing the trenches in a different draft - Big Blue View",
+    "url": "https://www.bigblueview.com",
+    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
+    "description": "NY Giants 4-round mock draft: Addressing the trenches in a different draftBig Blue View",
+    "date": "2026-03-15T23:49:11.744803+00:00"
+  },
+  {
+    "title": "Kopitar scores twice, passes Dionne for Kings’ points record in loss to Devils - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Kopitar scores twice, passes Dionne for Kings’ points record in loss to DevilsNHL.com",
+    "date": "2026-03-15T23:49:11.745016+00:00"
+  },
+  {
+    "title": "New Jersey Devils 2025-26 NHL Regular Season Skating Stats - ESPN",
+    "url": "https://www.espn.com",
+    "url_fp": "f23ac12a07189adde19ca28f3d7c7b4f",
+    "description": "New Jersey Devils 2025-26 NHL Regular Season Skating StatsESPN",
+    "date": "2026-03-15T23:49:11.745418+00:00"
+  },
+  {
+    "title": "Is Stephen Curry playing tonight vs the New York Knicks? Latest update on the Golden State Warriors star' - The Times of India",
+    "url": "https://timesofindia.indiatimes.com",
+    "url_fp": "541cc79a8638cfd34bdc56d1a27c8cd7",
+    "description": "Is Stephen Curry playing tonight vs the New York Knicks? Latest update on the Golden State Warriors star'The Times of India",
+    "date": "2026-03-15T23:49:11.745737+00:00"
+  },
+  {
+    "title": "Where to watch Warriors vs. Knicks today: NBA free live stream - NewYorkUpstate.com",
+    "url": "https://www.newyorkupstate.com",
+    "url_fp": "bc5fb73909ab589fcd16b57422e31343",
+    "description": "Where to watch Warriors vs. Knicks today: NBA free live streamNewYorkUpstate.com",
+    "date": "2026-03-15T23:49:11.964650+00:00"
+  },
+  {
+    "title": "Latest Mets injuries & transactions - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "Latest Mets injuries & transactionsMLB.com",
+    "date": "2026-03-15T23:49:11.964827+00:00"
+  },
+  {
+    "title": "Cowboys Urged to Pull Off Shocking Trade With Giants for Superstar EDGE - Sports Illustrated",
+    "url": "https://www.si.com",
+    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
+    "description": "Cowboys Urged to Pull Off Shocking Trade With Giants for Superstar EDGESports Illustrated",
+    "date": "2026-03-15T23:49:11.964982+00:00"
+  },
+  {
+    "title": "NY Giants could address their weakness at guard with a blockbuster trade-down from No. 5 for Penn State's Vega Ioane - Empire Sports Media",
+    "url": "https://empiresportsmedia.com",
+    "url_fp": "32c1ae359ebda5c97014e9704fb2c846",
+    "description": "NY Giants could address their weakness at guard with a blockbuster trade-down from No. 5 for Penn State's Vega IoaneEmpire Sports Media",
+    "date": "2026-03-15T23:49:12.332593+00:00"
+  },
+  {
+    "title": "Mikal Bridges' recent slump encapsulates uneven two-year run with Knicks - SNY",
+    "url": "https://sny.tv",
+    "url_fp": "f00c94a68760fc8c385e9d3f25b8b5cc",
+    "description": "Mikal Bridges' recent slump encapsulates uneven two-year run with KnicksSNY",
+    "date": "2026-03-15T23:49:12.541607+00:00"
+  },
+  {
+    "title": "Full injury report for Joel Embiid, Sixers vs. Trail Blazers at home - Sixers Wire",
+    "url": "https://sixerswire.usatoday.com",
+    "url_fp": "1b26c088e358b1fc9ed7cef34b3bc68d",
+    "description": "Full injury report for Joel Embiid, Sixers vs. Trail Blazers at homeSixers Wire",
+    "date": "2026-03-15T23:49:12.764647+00:00"
+  },
+  {
+    "title": "Stop Sloppypasta",
+    "url": "https://stopsloppypasta.ai/",
+    "url_fp": "e49d1c2aa5e1716f0ce088e49b9234d9",
+    "description": "HN score: 64 | Comments: 35",
+    "date": "2026-03-15T23:57:07.501493+00:00"
+  },
+  {
+    "title": "Notorious UK rights group launches legal action against Valve for distributing music in games on Steam without a license | The Performing Right Society says a license to use music in a game does not constitute the right to distribute that music, via the game, to the public.",
+    "url": "https://www.reddit.com/r/technology/comments/1rurvwo/notorious_uk_rights_group_launches_legal_action/",
+    "url_fp": "f358675c38abab68d6897fc6080a9d8b",
+    "description": "submitted by/u/ControlCAD[link][comments]",
+    "date": "2026-03-15T23:57:08.284287+00:00"
+  },
+  {
+    "title": "An OpenAI cofounder 'vibe coded' an analysis of the U.S. labor market's exposure to AI - Fortune",
+    "url": "https://fortune.com",
+    "url_fp": "15e5985b5402b180ad0ff3cdd458ddfd",
+    "description": "An OpenAI cofounder 'vibe coded' an analysis of the U.S. labor market's exposure to AIFortune",
+    "date": "2026-03-15T23:57:08.576536+00:00"
+  },
+  {
+    "title": "Musk’s $134 Billion Claim in OpenAI Case Questioned by Judge - PYMNTS.com",
+    "url": "https://www.pymnts.com",
+    "url_fp": "ecb631570db0805657192cabfe079eb4",
+    "description": "Musk’s $134 Billion Claim in OpenAI Case Questioned by JudgePYMNTS.com",
+    "date": "2026-03-15T23:57:08.576741+00:00"
+  },
+  {
+    "title": "OpenAI says ChatGPT ads are not rolling out globally for now - BleepingComputer",
+    "url": "https://www.bleepingcomputer.com",
+    "url_fp": "ddf153fb8a8aefd506b182cb8ede597c",
+    "description": "OpenAI says ChatGPT ads are not rolling out globally for nowBleepingComputer",
+    "date": "2026-03-15T23:57:08.576888+00:00"
+  },
+  {
+    "title": "Anthropic sues Pentagon as Claude downloads soar - Mashable",
+    "url": "https://mashable.com",
+    "url_fp": "b5f07f82860eb25681a9a8a477cc1ce4",
+    "description": "Anthropic sues Pentagon as Claude downloads soarMashable",
+    "date": "2026-03-15T23:57:08.577035+00:00"
+  },
+  {
+    "title": "Anthropic is doubling Claude's usage limits during off-peak hours for the next two weeks - Engadget",
+    "url": "https://www.engadget.com",
+    "url_fp": "c0169fc5888aee1b5aa704694cad7f3f",
+    "description": "Anthropic is doubling Claude's usage limits during off-peak hours for the next two weeksEngadget",
+    "date": "2026-03-15T23:57:08.577285+00:00"
+  },
+  {
+    "title": "Microsoft and Anthropic team up to bring Claude Cowork to Microsoft 365 - AOL.com",
+    "url": "https://www.aol.com",
+    "url_fp": "9f708995b5d401084bd42712242ccf7a",
+    "description": "Microsoft and Anthropic team up to bring Claude Cowork to Microsoft 365AOL.com",
+    "date": "2026-03-15T23:57:08.577422+00:00"
+  },
+  {
+    "title": "Apple's Gemini deal with Google could be worth Rs 45,200 crore: Report - MSN",
+    "url": "http://www.msn.com",
+    "url_fp": "2791b9f39341be4e182857a9c1319f29",
+    "description": "Apple's Gemini deal with Google could be worth Rs 45,200 crore: ReportMSN",
+    "date": "2026-03-15T23:57:08.577752+00:00"
+  },
+  {
+    "title": "Microsoft ditches plans to inject Copilot into a key part of Windows 11 - Neowin",
+    "url": "https://www.neowin.net",
+    "url_fp": "0c8c42d592ef5b579afb48b159c524f8",
+    "description": "Microsoft ditches plans to inject Copilot into a key part of Windows 11Neowin",
+    "date": "2026-03-15T23:57:08.577953+00:00"
+  },
+  {
+    "title": "Microsoft: Copilot For Gaming Introduced As AI Assistant To Help Players Save Time And Improve Skills - Pulse 2.0",
+    "url": "https://pulse2.com",
+    "url_fp": "363fff1b6096e3218eaa7170a5a631f2",
+    "description": "Microsoft: Copilot For Gaming Introduced As AI Assistant To Help Players Save Time And Improve SkillsPulse 2.0",
+    "date": "2026-03-15T23:57:08.578215+00:00"
+  },
+  {
+    "title": "Korean VCs Directly Invest in AI, Aerospace Deep Tech Ecosystems - 조선일보",
+    "url": "https://www.chosun.com",
+    "url_fp": "60ad62a945bfa7ea3ede4128ebda3df4",
+    "description": "Korean VCs Directly Invest in AI, Aerospace Deep Tech Ecosystems조선일보",
+    "date": "2026-03-15T23:57:08.578606+00:00"
+  },
+  {
+    "title": "Efficiency at All Costs: Meta Eyes 20% Jobs Bloodbath to Fund AI Empire - 24/7 Wall St.",
+    "url": "https://247wallst.com",
+    "url_fp": "5174185651b0be54b91403adb571059b",
+    "description": "Efficiency at All Costs: Meta Eyes 20% Jobs Bloodbath to Fund AI Empire24/7 Wall St.",
+    "date": "2026-03-15T23:57:08.578810+00:00"
+  },
+  {
+    "title": "Rhoda AI Secures $450M Funding to Power Next-Gen Industrial Robots - USA Herald",
+    "url": "https://usaherald.com",
+    "url_fp": "0daa273078a5d044e107e1d844f5b81c",
+    "description": "Rhoda AI Secures $450M Funding to Power Next-Gen Industrial RobotsUSA Herald",
+    "date": "2026-03-15T23:57:08.579111+00:00"
+  },
+  {
+    "title": "Something Big Is Coming From Tether’s AI Team, CEO Paolo Ardoino Confirms - Cryptonews.net",
+    "url": "https://cryptonews.net",
+    "url_fp": "0de33b01c538bef56c6a6812d0cc658a",
+    "description": "Something Big Is Coming From Tether’s AI Team, CEO Paolo Ardoino ConfirmsCryptonews.net",
+    "date": "2026-03-15T23:57:08.827318+00:00"
+  },
+  {
+    "title": "Together AI Leverages NVIDIA-Powered GPUs as It Eyes $7.5B Valuation in New Round - Insider Monkey",
+    "url": "https://www.insidermonkey.com",
+    "url_fp": "df882513a712a75b1e30c4ef5e58bd2d",
+    "description": "Together AI Leverages NVIDIA-Powered GPUs as It Eyes $7.5B Valuation in New RoundInsider Monkey",
+    "date": "2026-03-15T23:57:08.827694+00:00"
+  },
+  {
+    "title": "2026 March Madness: Men's NCAA tournament schedule, dates - NCAA.com",
+    "url": "https://www.ncaa.com",
+    "url_fp": "4af5844dc26586cf61c147945bcf94ac",
+    "description": "2026 March Madness: Men's NCAA tournament schedule, datesNCAA.com",
+    "date": "2026-03-15T23:57:09.012246+00:00"
+  },
+  {
+    "title": "Texas Tech basketball tickets in 2026 NCAA Tournament: Prices, how to buy - Lubbock Avalanche-Journal",
+    "url": "https://www.lubbockonline.com",
+    "url_fp": "106a75d66e04c16a929369927eb44b41",
+    "description": "Texas Tech basketball tickets in 2026 NCAA Tournament: Prices, how to buyLubbock Avalanche-Journal",
+    "date": "2026-03-15T23:57:09.268931+00:00"
+  },
+  {
+    "title": "Men's March Madness 2026 bracket: Get to know all 68 teams - ESPN",
+    "url": "https://www.espn.com",
+    "url_fp": "f23ac12a07189adde19ca28f3d7c7b4f",
+    "description": "Men's March Madness 2026 bracket: Get to know all 68 teamsESPN",
+    "date": "2026-03-15T23:57:09.269286+00:00"
+  },
+  {
+    "title": "Tech: Congress confronts AI warfare - Punchbowl News",
+    "url": "https://punchbowl.news",
+    "url_fp": "0813a0cbdd706e2d844b1491d6726307",
+    "description": "Tech: Congress confronts AI warfarePunchbowl News",
+    "date": "2026-03-15T23:57:09.419632+00:00"
+  },
+  {
+    "title": "Could AI replace your doctor? Experts share serious ethical concerns - Akron Beacon Journal",
+    "url": "https://www.beaconjournal.com",
+    "url_fp": "34771a3e29b349542df07de097eca686",
+    "description": "Could AI replace your doctor? Experts share serious ethical concernsAkron Beacon Journal",
+    "date": "2026-03-15T23:57:09.420014+00:00"
+  },
+  {
+    "title": "DATA BREACH ALERT: Edelson Lechtzin LLP is Investigating Claims on Behalf of Persons Affected by the Hypertherm, Inc. Data Breach - Carroll County Mirror-Democrat",
+    "url": "https://www.mycarrollcountynews.com",
+    "url_fp": "0cf0b633797288cacf3f947c6b724335",
+    "description": "DATA BREACH ALERT: Edelson Lechtzin LLP is Investigating Claims on Behalf of Persons Affected by the Hypertherm, Inc. Data BreachCarroll County Mirror-Democrat",
+    "date": "2026-03-15T23:57:09.834684+00:00"
+  },
+  {
+    "title": "‘Your data has been breached’: But is the message itself hiding a scam? - WJBF",
+    "url": "https://www.wjbf.com",
+    "url_fp": "1f5b834374a602a455caf30175c8d0de",
+    "description": "‘Your data has been breached’: But is the message itself hiding a scam?WJBF",
+    "date": "2026-03-15T23:57:10.049009+00:00"
+  },
+  {
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures waver as oil rises with US and Iran targeting energy infrastructure - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "Stock market today: Dow, S&P 500, Nasdaq futures waver as oil rises with US and Iran targeting energy infrastructureYahoo Finance",
+    "date": "2026-03-15T23:57:10.166697+00:00"
+  },
+  {
+    "title": "Futures Due, Oil Eyes $100; 4 AI Stocks Near Buy Points - Investor's Business Daily",
+    "url": "https://www.investors.com",
+    "url_fp": "545362646854336a3463a9033e71efc5",
+    "description": "Futures Due, Oil Eyes $100; 4 AI Stocks Near Buy PointsInvestor's Business Daily",
+    "date": "2026-03-15T23:57:10.166897+00:00"
+  },
+  {
+    "title": "Opinion: A Stock Market Crash Is Much More Likely Now Than It Was 2 Months Ago - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Opinion: A Stock Market Crash Is Much More Likely Now Than It Was 2 Months AgoThe Motley Fool",
+    "date": "2026-03-15T23:57:10.167162+00:00"
+  },
+  {
+    "title": "Stock market today: Dow, S&P 500, Nasdaq futures decline as oil rises with US and Iran targeting energy infrastructure - Yahoo Finance Singapore",
+    "url": "https://sg.finance.yahoo.com",
+    "url_fp": "4098229b213252ebdfd2d79962039c52",
+    "description": "Stock market today: Dow, S&P 500, Nasdaq futures decline as oil rises with US and Iran targeting energy infrastructureYahoo Finance Singapore",
+    "date": "2026-03-15T23:57:10.167364+00:00"
+  },
+  {
+    "title": "Latest Enterprise AI News Today | Trends, Predictions, & Analysis - Forbes",
+    "url": "https://www.forbes.com",
+    "url_fp": "974a05326cbbafcecec1f11b22f1eb27",
+    "description": "Latest Enterprise AI News Today | Trends, Predictions, & AnalysisForbes",
+    "date": "2026-03-15T23:57:10.167552+00:00"
+  },
+  {
+    "title": "Companies ramp up AI spend, but most pilots fail to deploy: Lenovo executive - South China Morning Post",
+    "url": "https://www.scmp.com",
+    "url_fp": "1629c75e9ca406757cd61daf154e2629",
+    "description": "Companies ramp up AI spend, but most pilots fail to deploy: Lenovo executiveSouth China Morning Post",
+    "date": "2026-03-15T23:57:10.167732+00:00"
+  },
+  {
+    "title": "How would an ecosystem-led investment fund perform? - Technical.ly",
+    "url": "https://technical.ly",
+    "url_fp": "e56405fae70697a75c08d2804955d93a",
+    "description": "How would an ecosystem-led investment fund perform?Technical.ly",
+    "date": "2026-03-15T23:57:10.167875+00:00"
+  },
+  {
+    "title": "The Fed is no stranger to oil crises. But this time could be different - CNN",
+    "url": "https://www.cnn.com",
+    "url_fp": "8d215893cca08911f456711875e8e3bc",
+    "description": "The Fed is no stranger to oil crises. But this time could be differentCNN",
+    "date": "2026-03-15T23:57:10.167995+00:00"
+  },
+  {
+    "title": "Fed to weigh interest rates amid Iran war, potential price increases - USA Today",
+    "url": "https://www.usatoday.com",
+    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
+    "description": "Fed to weigh interest rates amid Iran war, potential price increasesUSA Today",
+    "date": "2026-03-15T23:57:10.168134+00:00"
+  },
+  {
+    "title": "For Trump, a Promised Economic Boom Collides With the Costs of War - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "For Trump, a Promised Economic Boom Collides With the Costs of WarThe New York Times",
+    "date": "2026-03-15T23:57:10.168424+00:00"
+  },
+  {
+    "title": "What to Expect in Markets This Week: Fed Interest Rate Decision, Powell Press Conference, Earnings from Micron and FedEx - Investopedia",
+    "url": "https://www.investopedia.com",
+    "url_fp": "1b64674b9df3a793791f54d36d2be0ab",
+    "description": "What to Expect in Markets This Week: Fed Interest Rate Decision, Powell Press Conference, Earnings from Micron and FedExInvestopedia",
+    "date": "2026-03-15T23:57:10.168658+00:00"
+  },
+  {
+    "title": "Global week ahead: Price pressure in the pipeline - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Global week ahead: Price pressure in the pipelineCNBC",
+    "date": "2026-03-15T23:57:10.168809+00:00"
+  },
+  {
+    "title": "Oil Supplies in Focus Ahead of Stock, Bond Open: Markets Wrap - Bloomberg.com",
+    "url": "https://www.bloomberg.com",
+    "url_fp": "8c779c4797f10c5a1287c0e89cec4ae7",
+    "description": "Oil Supplies in Focus Ahead of Stock, Bond Open: Markets WrapBloomberg.com",
+    "date": "2026-03-15T23:57:10.168984+00:00"
+  },
+  {
+    "title": "Strategic oil release may calm markets but cannot fix Hormuz disruption - Al Jazeera",
+    "url": "https://www.aljazeera.com",
+    "url_fp": "e0da5ef1d3f0c95227cf34ffb82fa816",
+    "description": "Strategic oil release may calm markets but cannot fix Hormuz disruptionAl Jazeera",
+    "date": "2026-03-15T23:57:10.169110+00:00"
+  },
+  {
+    "title": "Micron buys Taiwan chip plant to boost AI memory supply - Stock Titan",
+    "url": "https://www.stocktitan.net",
+    "url_fp": "5683b07ba5593fc74bba4d7c7bbdca26",
+    "description": "Micron buys Taiwan chip plant to boost AI memory supplyStock Titan",
+    "date": "2026-03-15T23:57:10.169264+00:00"
+  },
+  {
+    "title": "Micron Completes Acquisition of PSMC’s Tongluo P5 Site in Taiwan - The Globe and Mail",
+    "url": "https://www.theglobeandmail.com",
+    "url_fp": "d0c564eda0fa01daf89c4bb2145812fe",
+    "description": "Micron Completes Acquisition of PSMC’s Tongluo P5 Site in TaiwanThe Globe and Mail",
+    "date": "2026-03-15T23:57:10.169516+00:00"
+  },
+  {
+    "title": "Alphabet Completes Acquisition of Cybersecurity Firm Wiz - National Today",
+    "url": "https://nationaltoday.com",
+    "url_fp": "a13df8b91a7375f0569dc626d64998db",
+    "description": "Alphabet Completes Acquisition of Cybersecurity Firm WizNational Today",
+    "date": "2026-03-15T23:57:10.169599+00:00"
+  },
+  {
+    "title": "Steve Jobs Gave Tim Cook One Piece of Advice. It Still Shapes Apple Today - inc.com",
+    "url": "https://www.inc.com",
+    "url_fp": "a866c6a59b417915b0b1f0f57cc02614",
+    "description": "Steve Jobs Gave Tim Cook One Piece of Advice. It Still Shapes Apple Todayinc.com",
+    "date": "2026-03-15T23:57:10.169777+00:00"
+  },
+  {
+    "title": "Is It Time To Reassess Apple (AAPL) After Recent Share Price Pullback? - simplywall.st",
+    "url": "https://simplywall.st",
+    "url_fp": "00bde8332e7e948dd256ee2976ba58dc",
+    "description": "Is It Time To Reassess Apple (AAPL) After Recent Share Price Pullback?simplywall.st",
+    "date": "2026-03-15T23:57:10.169981+00:00"
+  },
+  {
+    "title": "Amazon has Apple’s most affordable current-gen iPad down at $299 (All colors) - 9to5Toys",
+    "url": "https://9to5toys.com",
+    "url_fp": "7229e8b9792290e7482145ca1a02a7c8",
+    "description": "Amazon has Apple’s most affordable current-gen iPad down at $299 (All colors)9to5Toys",
+    "date": "2026-03-15T23:57:10.170484+00:00"
+  },
+  {
+    "title": "Leanne Morgan Talks Chasing Her Comedy Dream as a Mom - TODAY.com",
+    "url": "https://www.today.com",
+    "url_fp": "ee1e3827db47eee7e328583e897a1701",
+    "description": "Leanne Morgan Talks Chasing Her Comedy Dream as a MomTODAY.com",
+    "date": "2026-03-15T23:57:10.170832+00:00"
+  },
+  {
+    "title": "Alphabet Inc. (GOOG) Announces Completion of its Acquisition of Wiz - Yahoo Finance UK",
+    "url": "https://uk.finance.yahoo.com",
+    "url_fp": "2c19f9b77aeac73a5fe63313054f3504",
+    "description": "Alphabet Inc. (GOOG) Announces Completion of its Acquisition of WizYahoo Finance UK",
+    "date": "2026-03-15T23:57:10.170976+00:00"
+  },
+  {
+    "title": "Uber Eats launches Bunnings - Uber",
+    "url": "https://www.uber.com",
+    "url_fp": "f626cf2d964aa14b20739b64d7338b25",
+    "description": "Uber Eats launches BunningsUber",
+    "date": "2026-03-15T23:57:10.171180+00:00"
+  },
+  {
+    "title": "Chegg, PacWest, Arista, Uber, SoFi, BP, and More Stock Market Movers - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Chegg, PacWest, Arista, Uber, SoFi, BP, and More Stock Market MoversBarron's",
+    "date": "2026-03-15T23:57:10.171295+00:00"
+  },
+  {
+    "title": "Apple's Delay-Plagued Siri Project Has Also Interfered with Physical Product Releases, Report Says - Gizmodo",
+    "url": "https://gizmodo.com",
+    "url_fp": "066856f95ebba2e63854a0b324c0e8a9",
+    "description": "Apple's Delay-Plagued Siri Project Has Also Interfered with Physical Product Releases, Report SaysGizmodo",
+    "date": "2026-03-15T23:57:10.455954+00:00"
+  },
+  {
+    "title": "Rate rises, helium shortages, EV sales spikes: how is the disruption in Iran’s strait of Hormuz affecting Australia? - The Guardian",
+    "url": "https://www.theguardian.com",
+    "url_fp": "b49674329b31ee735fa4368cd1a19ba8",
+    "description": "Rate rises, helium shortages, EV sales spikes: how is the disruption in Iran’s strait of Hormuz affecting Australia?The Guardian",
+    "date": "2026-03-15T23:57:10.456245+00:00"
+  },
+  {
+    "title": "Tesla set to launch ‘Gigantic’ Chip fab project in seven says: Elon Musk - The Times of India",
+    "url": "https://timesofindia.indiatimes.com",
+    "url_fp": "541cc79a8638cfd34bdc56d1a27c8cd7",
+    "description": "Tesla set to launch ‘Gigantic’ Chip fab project in seven says: Elon MuskThe Times of India",
+    "date": "2026-03-15T23:57:10.456492+00:00"
+  },
+  {
+    "title": "War escalates as US strikes Iran’s energy lifeline - Dawn",
+    "url": "https://www.dawn.com",
+    "url_fp": "9a23a538b14dc2646044465044a72f02",
+    "description": "War escalates as US strikes Iran’s energy lifelineDawn",
+    "date": "2026-03-15T23:57:10.627803+00:00"
+  },
+  {
+    "title": "Report: Meta could layoff 20% of its staff and replace many of them with AI workers - SiliconANGLE",
+    "url": "https://siliconangle.com",
+    "url_fp": "cac51e46dd90df140ac929999315d0f0",
+    "description": "Report: Meta could layoff 20% of its staff and replace many of them with AI workersSiliconANGLE",
+    "date": "2026-03-15T23:57:10.628096+00:00"
+  },
+  {
+    "title": "AI and automation cut 54,836 U.S. jobs in 2025 - Digital Journal",
+    "url": "https://www.digitaljournal.com",
+    "url_fp": "bc7e5755dd927ae6e1b8cd3d3dd44a12",
+    "description": "AI and automation cut 54,836 U.S. jobs in 2025Digital Journal",
+    "date": "2026-03-15T23:57:10.792538+00:00"
+  },
+  {
+    "title": "How Jeff Bezos upended The Washington Post with layoffs and cuts - Business Standard",
+    "url": "https://www.business-standard.com",
+    "url_fp": "1bdfba64842d2f457a90a7d8cefd9046",
+    "description": "How Jeff Bezos upended The Washington Post with layoffs and cutsBusiness Standard",
+    "date": "2026-03-15T23:57:11.018839+00:00"
+  },
+  {
+    "title": "Wiz investor unpacks Google’s $32B acquisition - TechCrunch",
+    "url": "https://techcrunch.com",
+    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
+    "description": "Wiz investor unpacks Google’s $32B acquisitionTechCrunch",
+    "date": "2026-03-15T23:57:11.018984+00:00"
+  },
+  {
+    "title": "DOJ Made Right Call on Live Nation. Blue State AGs Should Follow - Real Clear Politics",
+    "url": "https://www.realclearpolitics.com",
+    "url_fp": "b9cdc4122dd5ebee68586541976f9f61",
+    "description": "DOJ Made Right Call on Live Nation. Blue State AGs Should FollowReal Clear Politics",
+    "date": "2026-03-15T23:57:11.257894+00:00"
+  },
+  {
+    "title": "New York Yankees vs. Detroit Tigers: Luis Gil vs. Framber Valdez - Yahoo Sports",
+    "url": "https://sports.yahoo.com",
+    "url_fp": "4bbd7d0db668261e182a6708e474c8dc",
+    "description": "New York Yankees vs. Detroit Tigers: Luis Gil vs. Framber ValdezYahoo Sports",
+    "date": "2026-03-15T23:57:11.258127+00:00"
+  },
+  {
+    "title": "Yankees predicted to reunite with $36 million All-Star ace, former Cy Young candidate to provide depth to massively injured starting rotation - sportingnews.com",
+    "url": "https://www.sportingnews.com",
+    "url_fp": "18fd94f3c6d077fc4c37c7476955e0d2",
+    "description": "Yankees predicted to reunite with $36 million All-Star ace, former Cy Young candidate to provide depth to massively injured starting rotationsportingnews.com",
+    "date": "2026-03-15T23:57:11.258689+00:00"
+  },
+  {
+    "title": "Golden State Warriors vs New York Knicks Mar 15, 2026 Game Summary - NBA",
+    "url": "https://www.nba.com",
+    "url_fp": "5567ef57bde48e2912b076b1d46096e6",
+    "description": "Golden State Warriors vs New York Knicks Mar 15, 2026 Game SummaryNBA",
+    "date": "2026-03-15T23:57:11.258836+00:00"
+  },
+  {
+    "title": "UPDATE: New York Knicks Announce Roster Move Before Warriors Game - heavy.com",
+    "url": "https://heavy.com",
+    "url_fp": "374bf1bb8fee633961da067e5c478089",
+    "description": "UPDATE: New York Knicks Announce Roster Move Before Warriors Gameheavy.com",
+    "date": "2026-03-15T23:57:11.258981+00:00"
+  },
+  {
+    "title": "Garafolo: Titans, Cor'Dale Flott agreed to a 3-year/$45M contract - NFL.com",
+    "url": "https://www.nfl.com",
+    "url_fp": "d7ebf4dab31ce298edfc01d971c976bb",
+    "description": "Garafolo: Titans, Cor'Dale Flott agreed to a 3-year/$45M contractNFL.com",
+    "date": "2026-03-15T23:57:11.259266+00:00"
+  },
+  {
+    "title": "New York Giants receive mixed grades after first wave of free agency - Giants Wire",
+    "url": "https://giantswire.usatoday.com",
+    "url_fp": "f3771ae56b348a12bfe5b12afd28374d",
+    "description": "New York Giants receive mixed grades after first wave of free agencyGiants Wire",
+    "date": "2026-03-15T23:57:11.259346+00:00"
+  },
+  {
+    "title": "Kopitar scores twice, passes Dionne for Kings’ points record in loss to Devils - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Kopitar scores twice, passes Dionne for Kings’ points record in loss to DevilsNHL.com",
+    "date": "2026-03-15T23:57:11.259565+00:00"
+  },
+  {
+    "title": "Latest Mets injuries & transactions - MLB.com",
+    "url": "https://www.mlb.com",
+    "url_fp": "5178a7fcfb26d95eef89126233b121d6",
+    "description": "Latest Mets injuries & transactionsMLB.com",
+    "date": "2026-03-15T23:57:11.259904+00:00"
+  },
+  {
+    "title": "NY Giants 4-round mock draft: Addressing the trenches in a different draft - Big Blue View",
+    "url": "https://www.bigblueview.com",
+    "url_fp": "4c48636d45d325d70a5d7c6e1e951426",
+    "description": "NY Giants 4-round mock draft: Addressing the trenches in a different draftBig Blue View",
+    "date": "2026-03-15T23:57:11.260070+00:00"
+  },
+  {
+    "title": "NY Giants plan more additions following the arrival of Darnell Mooney - bolavip.com",
+    "url": "https://bolavip.com",
+    "url_fp": "a9d59f8f8790d0e19e5b4df4f4cd4337",
+    "description": "NY Giants plan more additions following the arrival of Darnell Mooneybolavip.com",
+    "date": "2026-03-15T23:57:11.260514+00:00"
+  },
+  {
+    "title": "Penguins Q&A: Playoff Runs, Demotions, & Dinner - Pittsburgh Hockey Now",
+    "url": "https://pittsburghhockeynow.com",
+    "url_fp": "cf81f5b94dcc422cf0cd25fe9f3e98d6",
+    "description": "Penguins Q&A: Playoff Runs, Demotions, & DinnerPittsburgh Hockey Now",
+    "date": "2026-03-15T23:57:11.456831+00:00"
   }
 ]
