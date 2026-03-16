@@ -47,7 +47,7 @@ _USER_PROMPT = (
     '  "Companies": ["query1", "query2", ...],\n'
     '  "NY Sports": ["query1", "query2", ...],\n'
     '  "trending_stories": [\n'
-    '    {"topic": "short phrase describing the story", "x_url": "https://x.com/..."}\n'
+    '    {"topic": "short phrase describing the story", "x_url": "https://x.com/...", "x_query": "keyword1 keyword2 keyword3"}\n'
     '  ]\n'
     '}\n\n'
     "Each search query must be specific enough to find the story directly. "
@@ -56,8 +56,9 @@ _USER_PROMPT = (
     "AI, tech, and world news RIGHT NOW. For each story:\n"
     '- "topic": a short descriptive phrase (10-15 words) describing WHAT the story is\n'
     '- "x_url": the URL of the single most popular or most relevant X post about this '
-    "story (must be a real https://x.com/... URL you can verify from X; set to \"\" "
-    "if you cannot find a verified post)"
+    "story (real https://x.com/... URL you can verify; set to \"\" if not found)\n"
+    '- "x_query": 3-5 specific keywords optimized for searching this story on X '
+    '(e.g. "OpenAI GPT-5 launch" or "Fed rate cut March 2026") — used as search fallback'
 )
 
 
@@ -115,11 +116,15 @@ def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[dict]]:
         trending: list[dict] = []
         for item in raw_trending[:5]:
             if isinstance(item, dict) and item.get("topic", "").strip():
-                topic = item["topic"].strip()
-                x_url = item.get("x_url", "").strip()
-                # Fall back to an X live-search URL when no specific post was returned
+                topic   = item["topic"].strip()
+                x_url   = item.get("x_url", "").strip()
+                x_query = item.get("x_query", "").strip()
+                # Build search URL: prefer verified post, then x_query keywords,
+                # then full topic phrase. Drop &f=live — "Top" results surface
+                # popular posts better than real-time-only filter.
                 if not x_url:
-                    x_url = "https://x.com/search?q=" + quote_plus(topic) + "&f=live"
+                    search_term = x_query if x_query else topic
+                    x_url = "https://x.com/search?q=" + quote_plus(search_term)
                 trending.append({"topic": topic, "x_url": x_url})
 
         total_queries = sum(len(v) for v in cleaned.values())
