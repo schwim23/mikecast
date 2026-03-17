@@ -2,29 +2,127 @@
   "date": "2026-03-17",
   "date_display": "March 17, 2026",
   "episode_num": 23,
-  "episode_description": "Episode #23 — OpenAI has launched a groundbreaking AI model, Nvidia announced the Vera Rubin Space-1 chip system and an enterprise AI agent platform at GTC 2026, the Federal Reserve unexpectedly raised interest rates, Tesla's massive layoffs are causing industry upheaval, and escalating Middle East tensions have driven oil prices up amid Iran-UAE conflicts.",
-  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 17, 2026</p>\n</div>\n\n<div style=\"background:#1e1408;border:1px solid #8B4513;border-radius:8px;padding:16px 20px;margin-bottom:24px;\"><h2 style=\"color:#ff8c00;margin:0 0 10px;font-size:1.05em;letter-spacing:.4px;\">🔥 TOP TRENDING NOW</h2><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">1</span><div><a href=\"https://x.com/search?q=OpenAI+new+model+March+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">OpenAI unveils groundbreaking AI model today</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">2</span><div><a href=\"https://x.com/search?q=Fed+rate+hike+March+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Federal Reserve announces unexpected rate hike</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">3</span><div><a href=\"https://x.com/search?q=Tesla+layoffs+March+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Tesla massive layoffs shock industry</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">4</span><div><a href=\"https://x.com/search?q=Google+AI+breach+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Google AI data breach sparks outrage</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">5</span><div><a href=\"https://x.com/search?q=oil+price+crisis+Middle+East+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Global oil crisis escalates with new conflict</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div></div>\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In a day marked by significant developments, Nvidia's unveiling of its new AI platforms at the GTC 2026 conference stands out, signaling a major leap in space computing and enterprise AI. Meanwhile, geopolitical tensions in the Middle East are impacting global oil markets, with Iran targeting UAE energy infrastructure and the reported death of Iran’s security chief. In the corporate world, Apple and Meta are making strategic moves with new product launches and operational shifts, respectively.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia has announced the Vera Rubin Space-1 chip system, a groundbreaking development for orbital AI data centers. This announcement was made by CEO Jensen Huang during the GTC 2026 conference, highlighting the arrival of space computing. This new technology is expected to revolutionize data processing capabilities in space, providing enhanced computational power for AI applications. The introduction of this system reflects Nvidia's commitment to expanding its technological reach beyond Earth, potentially opening new markets and opportunities in the space industry. <a href=\"https://www.cnbc.com/2026/03/16/nvidia-chips-orbital-data-centers-space-ai.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Additionally, Nvidia introduced the Vera Rubin, a seven-chip AI platform, in collaboration with major players like OpenAI, Anthropic, and Meta. This platform, now in full production, is supported by every major cloud provider, indicating its broad acceptance and potential impact on the AI industry. This launch underscores Nvidia's strategic partnerships and its position at the forefront of AI technology development. <a href=\"https://venturebeat.com/infrastructure/nvidia-introduces-vera-rubin-a-seven-chip-ai-platform-with-openai-anthropic\" style=\"color:#81d4fa;text-decoration:none;\">VentureBeat</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Nvidia also launched an enterprise AI agent platform with notable adopters including Adobe, Salesforce, and SAP. The Agent Toolkit, an open-source platform for building autonomous AI agents, was unveiled by CEO Jensen Huang. This initiative aims to empower companies with tools to develop sophisticated AI solutions, further solidifying Nvidia's influence in the enterprise AI sector. <a href=\"https://venturebeat.com/technology/nvidia-launches-enterprise-ai-agent-platform-with-adobe-salesforce-sap-among\" style=\"color:#81d4fa;text-decoration:none;\">VentureBeat</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Iran has targeted UAE energy infrastructure, setting a gas field ablaze and striking a tanker near the Strait of Hormuz. These actions have led to a rise in oil prices as market participants monitor the disruptions in Middle East supply. The geopolitical tensions underscore the vulnerability of global energy markets to regional conflicts, with potential implications for international energy security and economic stability. <a href=\"https://www.cnbc.com/2026/03/17/iran-war-uae-energy-gas-field-oil-fujairah-strait-of-hormuz.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In a related development, Israel has reported the killing of Iran’s security chief, Ali Larijani, in a strike. Iran has not yet confirmed this report, adding to the uncertainty in the region. This development could further escalate tensions between the two nations, affecting geopolitical dynamics and potentially impacting global markets. <a href=\"https://www.cnbc.com/2026/03/17/iran-war-ali-larijani-israel-united-states-middle-east-crisis.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oil prices have jumped 4% due to lingering doubts over a U.S.-backed plan to protect shipping through the Strait of Hormuz. The uncertainty surrounding the effectiveness of this coalition has contributed to market volatility, reflecting the strategic importance of this shipping route for global oil supply. <a href=\"https://www.cnbc.com/2026/03/17/oil-prices-wti-brent-hormuz-coalition-shipping-trump.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple has surprised the market by unveiling a new product, though specific details remain undisclosed. This move aligns with Apple's strategy of maintaining its innovation leadership and keeping its product lineup fresh and competitive. The announcement has generated significant interest and speculation about the nature of the new product. <a href=\"https://www.macrumors.com\" style=\"color:#81d4fa;text-decoration:none;\">MacRumors</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In addition, Apple has introduced the AirPods Max 2, the latest iteration of its high-end headphones. This release is part of Apple's ongoing efforts to enhance its audio product offerings, catering to consumers seeking premium sound quality and advanced features. <a href=\"https://www.apple.com\" style=\"color:#81d4fa;text-decoration:none;\">Apple</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta is reportedly planning sweeping layoffs to offset AI costs. This strategic decision highlights the financial pressures faced by tech companies as they invest heavily in AI development. The layoffs are part of Meta's broader efforts to streamline operations and focus resources on its core business areas. <a href=\"https://www.kron4.com\" style=\"color:#81d4fa;text-decoration:none;\">KRON4</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New Jersey Devils triumphed in overtime thanks to Cotter's heroics, securing a thrilling victory. This win adds momentum to their season as they continue to compete fiercely in the NHL. Their next game will be closely watched as they aim to build on this success. <a href=\"https://www.nhl.com\" style=\"color:#81d4fa;text-decoration:none;\">NHL.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In the NFL, the Tennessee Titans have signed Cor'Dale Flott to a 3-year, $45 million contract. This strategic acquisition aims to bolster the team's defensive lineup, reflecting their commitment to strengthening their roster for future challenges. <a href=\"https://www.nfl.com\" style=\"color:#81d4fa;text-decoration:none;\">NFL.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In MLB, several notable injuries have been reported, affecting players like Musgrove, Suzuki, J-Ram, Neto, and Lindor, as well as impacting the Dodgers. These injuries could influence team performances and strategies as the season progresses. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Nvidia's aggressive expansion into space and enterprise AI underscores the growing importance of AI across diverse sectors. - Geopolitical tensions in the Middle East continue to exert significant influence on global oil markets, highlighting energy security concerns. - Apple's product innovations and Meta's operational adjustments reflect ongoing strategic shifts in the tech industry to stay competitive. - The impact of player injuries in professional sports remains a critical factor in team dynamics and season outcomes.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor further developments in the Middle East, particularly any official confirmation from Iran regarding the death of Ali Larijani. - Keep an eye on Nvidia's market performance and investor reactions following its major announcements at the GTC 2026 conference. - Watch for Apple's potential product announcements or updates that could provide clarity on its newly unveiled product. - Follow the implications of Meta's reported layoffs on its workforce and overall business strategy.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 17, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "episode_description": "Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduces its Gemini chatbot in Hong Kong, and oil prices surge amid Iran tensions affecting US markets.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 17, 2026</p>\n</div>\n\n<div style=\"background:#1e1408;border:1px solid #8B4513;border-radius:8px;padding:16px 20px;margin-bottom:24px;\"><h2 style=\"color:#ff8c00;margin:0 0 10px;font-size:1.05em;letter-spacing:.4px;\">🔥 TOP TRENDING NOW</h2><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">1</span><div><a href=\"https://x.com/search?q=Federal+Reserve+rate+cut+March+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Federal Reserve announces surprise rate cut</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">2</span><div><a href=\"https://x.com/search?q=Apple+wearable+device+launch+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Apple unveils groundbreaking wearable device today</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">3</span><div><a href=\"https://x.com/search?q=oil+price+spike+geopolitical+March+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Global oil prices spike amid geopolitical tensions</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div></div>\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant developments in artificial intelligence, with NVIDIA and Alibaba unveiling new AI tools and strategies. The financial markets are reacting to geopolitical tensions and economic forecasts, while major companies like Apple and Meta are making strategic moves in product launches and content policies. In sports, New York teams are making headlines with contract updates and game performances.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">NVIDIA is expanding its Open Model Families to enhance AI applications across agentic, physical, and healthcare sectors. This move aims to provide more robust AI solutions that can handle complex tasks in these fields, potentially revolutionizing how AI is integrated into everyday operations. NVIDIA's initiative is part of a broader strategy to maintain its leadership in AI technology, offering open models that can be adapted for various applications. <a href=\"http://nvidianews.nvidia.com\" style=\"color:#81d4fa;text-decoration:none;\">NVIDIA Newsroom</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Alibaba has launched a new enterprise AI tool designed to integrate with platforms like Slack and Teams. This tool is part of Alibaba's broader effort to enhance its AI offerings and improve business operations. The integration with popular communication platforms could streamline workflows and enhance productivity for businesses using Alibaba's technology. <a href=\"https://www.cnbc.com/2026/03/17/alibaba-wukong-ai-enterprise-tool-restructuring-qwen-exits.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI is shifting its focus back to its core business, scaling back on side projects. This strategic pivot aims to strengthen its primary offerings and ensure the company's resources are concentrated on its main objectives. This decision reflects a growing trend among tech companies to refine their focus and optimize their core competencies. <a href=\"https://www.wsj.com\" style=\"color:#81d4fa;text-decoration:none;\">WSJ</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Anthropic AI users are experiencing issues with the Claude chatbot, which is reportedly not functioning properly. This disruption highlights the challenges faced by AI developers in maintaining reliable and efficient services. As AI becomes more integrated into daily life, ensuring consistent performance is crucial for user trust and satisfaction. <a href=\"https://uk.finance.yahoo.com\" style=\"color:#81d4fa;text-decoration:none;\">Yahoo Finance UK</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The US stock market experienced a significant downturn, with the Dow falling 600 points amid rising oil prices due to tensions with Iran. The S&P 500 and Nasdaq also saw declines, while gold and silver prices rose as investors sought safe havens. Bitcoin remained steady, nearing the $70,000 mark, indicating its growing role as a stable asset in volatile times. <a href=\"https://sundayguardianlive.com\" style=\"color:#81d4fa;text-decoration:none;\">The Sunday Guardian</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Israel announced the killing of Iran's security chief, Ali Larijani, in a strike. Larijani was a key figure in Iran's political landscape, closely associated with the late supreme leader Ayatollah Ali Khamenei. This event could escalate tensions in the Middle East, impacting global markets and geopolitical relations. <a href=\"https://www.cnbc.com/2026/03/17/iran-war-ali-larijani-israel-united-states-middle-east-crisis.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Delta Airlines has raised its revenue guidance, citing strong travel demand despite a $400 million impact in the fourth quarter. CEO Ed Bastian highlighted the robust demand as a positive sign for the airline industry, which is recovering from pandemic-related disruptions. This optimistic outlook suggests a potential rebound in the travel sector. <a href=\"https://www.cnbc.com/2026/03/17/airline-guidance-iran-war-oil.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Federal Reserve is likely to maintain current interest rates due to volatile oil prices and weak job performance in the US. This decision reflects the Fed's cautious approach amid economic uncertainty, balancing inflation concerns with the need to support economic growth. <a href=\"https://www.businessinsider.com\" style=\"color:#81d4fa;text-decoration:none;\">Business Insider</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">NVIDIA plans to launch L4 software-driven robotaxis on Uber's platform across 28 cities by 2028. This ambitious project aims to revolutionize urban transportation by integrating advanced AI technologies into everyday commuting. The collaboration with Uber underscores NVIDIA's commitment to expanding its AI applications into new markets. <a href=\"https://investor.uber.com\" style=\"color:#81d4fa;text-decoration:none;\">Uber Investor Relations</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple has introduced the AirPods Max 2, featuring upgraded capabilities that enhance user experience. This latest iteration of Apple's popular audio device underscores the company's focus on innovation and maintaining its competitive edge in the consumer electronics market. The new features are expected to attract both existing and new customers. <a href=\"https://www.apple.com\" style=\"color:#81d4fa;text-decoration:none;\">Apple</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta has implemented new rules on Facebook to prioritize original content and protect creator value. This policy change aims to enhance the platform's appeal to content creators by ensuring their work is given prominence, potentially increasing engagement and user satisfaction. This move reflects Meta's strategy to foster a more vibrant and original content ecosystem. <a href=\"https://www.emarketer.com\" style=\"color:#81d4fa;text-decoration:none;\">eMarketer</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Google's parent company, Alphabet, is seeing a significant boost in profits from a $346 billion investment, unrelated to AI. This financial gain highlights Alphabet's diverse investment strategy and its ability to generate substantial returns outside its core technology operations. This diversification is crucial for sustaining long-term growth and stability. <a href=\"https://www.bitget.com\" style=\"color:#81d4fa;text-decoration:none;\">Bitget</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Yankees are nearing the end of their Spring Training, with key observations highlighting player performances and strategies for the upcoming season. This period is crucial for finalizing the roster and preparing for the regular season's challenges. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Isaiah Likely has signed a three-year contract with the Giants, marking a significant move in the team's free agency strategy. This contract reflects the Giants' efforts to strengthen their roster and improve their competitive standing in the league. <a href=\"https://www.nfl.com\" style=\"color:#81d4fa;text-decoration:none;\">NFL.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Devils secured an overtime victory, thanks to Cotter's heroics, showcasing the team's resilience and skill. This win is a positive momentum builder as they continue their season, aiming for a strong playoff position. <a href=\"https://www.nhl.com\" style=\"color:#81d4fa;text-decoration:none;\">NHL.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">AI advancements are at the forefront, with major companies like NVIDIA and Alibaba expanding their offerings to integrate AI into various sectors, highlighting the technology's growing importance. - Geopolitical tensions, particularly involving Iran, are impacting global markets, influencing oil prices, and causing stock market fluctuations. - Companies are focusing on core competencies and strategic investments, as seen with OpenAI's refocus and Alphabet's profitable diversification. - The sports landscape is active with significant contract signings and game performances, indicating strategic planning and execution by New York teams.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor NVIDIA's AI developments and their impact on healthcare and physical applications as they expand their Open Model Families. - Keep an eye on the Middle East situation, particularly any further developments following the killing of Iran's security chief, which could affect global markets. - Watch for further announcements from the Federal Reserve regarding interest rates, as economic indicators and oil prices continue to fluctuate. - Follow the Yankees' final Spring Training games to see how their roster shapes up for the upcoming MLB season.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 17, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
   "articles": {
-    "NY Sports": [
+    "AI & Tech": [
       {
-        "title": "[Updated] Garafolo: Titans, Cor'Dale Flott agreed to a 3-year/$45M contract - NFL.com",
-        "url": "https://www.nfl.com",
-        "description": "Garafolo: Titans, Cor'Dale Flott agreed to a 3-year/$45M contractNFL.com",
-        "source": "NFL.com",
+        "title": "[Updated] NVIDIA Expands Open Model Families to Power the Next Wave of Agentic, Physical and Healthcare AI - NVIDIA Newsroom",
+        "url": "http://nvidianews.nvidia.com",
+        "description": "NVIDIA Expands Open Model Families to Power the Next Wave of Agentic, Physical and Healthcare AINVIDIA Newsroom",
+        "source": "NVIDIA Newsroom",
         "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights significant player investments in the NFL, reflecting broader trends in sports finance that can inform tech executives about lucrative opportunities in sports tech and media."
+        "score": 87,
+        "score_reason": "NVIDIA expands open model families, significant for AI development and investment.",
+        "why_it_matters": "NVIDIA's advancements in open AI models signal transformative investment opportunities in healthcare and robotics, crucial for tech executives seeking to capitalize on the next wave of innovation."
       },
       {
-        "title": "[Updated] Injuries: Musgrove, Suzuki, J-Ram, Neto, Lindor, Dodgers - MLB.com",
-        "url": "https://www.mlb.com",
-        "description": "Injuries: Musgrove, Suzuki, J-Ram, Neto, Lindor, DodgersMLB.com",
-        "source": "MLB.com",
+        "title": "Alibaba launches agentic AI tool for businesses with Slack, Teams integration plans",
+        "url": "https://www.cnbc.com/2026/03/17/alibaba-wukong-ai-enterprise-tool-restructuring-qwen-exits.html",
+        "description": "Alibaba unveiled a new enterprise artificial intelligence tool on Tuesday amid a series of other developments in the company's AI space.",
+        "source": "CNBC",
+        "published": "Tue, 17 Mar 2026 10:29:21 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Alibaba's new AI tool, integrating with popular platforms like Slack and Teams, signals a competitive shift in enterprise tech, presenting investment opportunities in AI-driven business solutions."
+      },
+      {
+        "title": "[Updated] Exclusive | OpenAI to Cut Back on Side Projects in Push to ‘Nail’ Core Business - WSJ",
+        "url": "https://www.wsj.com",
+        "description": "Exclusive | OpenAI to Cut Back on Side Projects in Push to ‘Nail’ Core BusinessWSJ",
+        "source": "WSJ",
         "published": "",
         "score": 50,
         "score_reason": "",
-        "why_it_matters": "This story highlights key player injuries in MLB, impacting team performance and investment opportunities in sports tech and analytics for executives seeking to capitalize on emerging trends."
+        "why_it_matters": "This story highlights OpenAI's strategic focus, signaling potential shifts in AI investment opportunities and market dynamics crucial for tech-executive investors navigating the evolving landscape."
+      },
+      {
+        "title": "[Updated] Claude down: Anthropic AI users hit by ‘errors’ as chatbot not working properly - Yahoo Finance UK",
+        "url": "https://uk.finance.yahoo.com",
+        "description": "Claude down: Anthropic AI users hit by ‘errors’ as chatbot not working properlyYahoo Finance UK",
+        "source": "Yahoo Finance UK",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights potential reliability issues in AI technologies, crucial for tech investors assessing risks and opportunities in the rapidly evolving AI landscape."
+      },
+      {
+        "title": "[Updated] Google to open Gemini chatbot to all Hong Kong users amid city’s AI push - South China Morning Post",
+        "url": "https://www.scmp.com",
+        "description": "Google to open Gemini chatbot to all Hong Kong users amid city’s AI pushSouth China Morning Post",
+        "source": "South China Morning Post",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Google's Gemini chatbot launch in Hong Kong signals a pivotal moment in AI adoption, presenting investment opportunities in a rapidly evolving tech landscape."
+      },
+      {
+        "title": "Moonshot AI chases $1B at $18B valuation, hot on heels of $10B round - Tech Funding News",
+        "url": "https://techfundingnews.com",
+        "description": "Moonshot AI chases $1B at $18B valuation, hot on heels of $10B roundTech Funding News",
+        "source": "Tech Funding News",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "Business & Markets": [
+      {
+        "title": "[Updated] US Stock Market Today: Dow Falls 600 Points, S&P 500 & Nasdaq Down as Oil Price Surges Amid Iran Tensions; Gold & Silver Rise; Bitcoin Steady Nears $70K - The Sunday Guardian",
+        "url": "https://sundayguardianlive.com",
+        "description": "US Stock Market Today: Dow Falls 600 Points, S&P 500 & Nasdaq Down as Oil Price Surges Amid Iran Tensions; Gold & Silver Rise; Bitcoin Steady Nears $70KThe Sunday Guardian",
+        "source": "The Sunday Guardian",
+        "published": "",
+        "score": 87,
+        "score_reason": "The US stock market is reacting to a surge in oil prices amid Iran tensions, with significant drops in major indices. This indicates potential market volatility and investment implications.",
+        "why_it_matters": "This story highlights market volatility and geopolitical risks, crucial for tech investors to assess potential impacts on investment strategies and portfolio stability in an uncertain economic climate."
+      },
+      {
+        "title": "[Updated] Israel says Iran’s security chief, Ali Larijani, has been killed in a strike",
+        "url": "https://www.cnbc.com/2026/03/17/iran-war-ali-larijani-israel-united-states-middle-east-crisis.html",
+        "description": "Ali  Larijani was seen as the right-hand man of Iran's late supreme leader Ayatollah Ali Khamenei.",
+        "source": "CNBC",
+        "published": "Tue, 17 Mar 2026 11:43:10 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Delta raises revenue guidance as CEO says travel demand has been 'really, really great'",
+        "url": "https://www.cnbc.com/2026/03/17/airline-guidance-iran-war-oil.html",
+        "description": "Bastian told CNBC's Phil LeBeau that Delta had taken a $400 million hit so far for the fourth quarter, but that demand has been \"really, really great.\"",
+        "source": "CNBC",
+        "published": "Tue, 17 Mar 2026 11:27:10 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] The Fed is likely to hold rates steady with volatile oil prices and poor US jobs performance - Business Insider",
+        "url": "https://www.businessinsider.com",
+        "description": "The Fed is likely to hold rates steady with volatile oil prices and poor US jobs performanceBusiness Insider",
+        "source": "Business Insider",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "NY Sports": [
+      {
+        "title": "[Updated] 5 observations as Yankees Spring Training draws near a close - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "5 observations as Yankees Spring Training draws near a closeMLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 20,
+        "score_reason": "Yankees spring training update."
+      },
+      {
+        "title": "[Updated] Pelissero breaks down Isaiah Likely's three-year contract with the Giants | 'Free Agency Frenzy' - NFL.com",
+        "url": "https://www.nfl.com",
+        "description": "Pelissero breaks down Isaiah Likely's three-year contract with the Giants | 'Free Agency Frenzy'NFL.com",
+        "source": "NFL.com",
+        "published": "",
+        "score": 10,
+        "score_reason": "Giants contract news."
       },
       {
         "title": "[Updated] Cotter Heroics Lift Devils in OT | GAME STORY - NHL.com",
@@ -33,51 +131,39 @@
         "source": "NHL.com",
         "published": "",
         "score": 10,
-        "score_reason": "Devils win in OT."
-      }
-    ],
-    "Business & Markets": [
-      {
-        "title": "Iran targets UAE energy infrastructure as gas field set ablaze, tanker struck near Strait of Hormuz",
-        "url": "https://www.cnbc.com/2026/03/17/iran-war-uae-energy-gas-field-oil-fujairah-strait-of-hormuz.html",
-        "description": "Oil prices advanced on Tuesday as energy market participants monitored Middle East supply disruptions.",
-        "source": "CNBC",
-        "published": "Tue, 17 Mar 2026 10:28:10 GMT",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights escalating geopolitical tensions that could disrupt energy markets, impacting investment strategies and operational costs for tech companies reliant on stable energy supplies."
-      },
-      {
-        "title": "Israel says Iran’s security chief, Ali Larijani, has been killed in a strike",
-        "url": "https://www.cnbc.com/2026/03/17/iran-war-ali-larijani-israel-united-states-middle-east-crisis.html",
-        "description": "Iran has not yet confirmed the report.",
-        "source": "CNBC",
-        "published": "Tue, 17 Mar 2026 10:24:40 GMT",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights geopolitical tensions that could impact global markets and technology investments, emphasizing the need for vigilance in risk assessment and strategic planning."
-      },
-      {
-        "title": "Oil jumps 4% as doubts linger over U.S.-backed plan to protect Strait of Hormuz shipping",
-        "url": "https://www.cnbc.com/2026/03/17/oil-prices-wti-brent-hormuz-coalition-shipping-trump.html",
-        "description": "Oil prices jumped 4% on Tuesday as uncertainty lingered over a U.S.-led coalition to protect shipping through the Strait of Hormuz.",
-        "source": "CNBC",
-        "published": "Tue, 17 Mar 2026 08:44:48 GMT",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights geopolitical risks affecting oil prices, crucial for tech investors considering energy costs and supply chain stability in their investment strategies."
+        "score_reason": "Devils OT win."
       }
     ],
     "Companies": [
       {
-        "title": "Apple Unveiled a Surprise New Product Today - MacRumors",
-        "url": "https://www.macrumors.com",
-        "description": "Apple Unveiled a Surprise New Product TodayMacRumors",
-        "source": "MacRumors",
+        "title": "[Updated] NVIDIA to Launch L4 Software-Driven Robotaxis on Uber Across 28 Cities by 2028 - Uber Investor Relations",
+        "url": "https://investor.uber.com",
+        "description": "NVIDIA to Launch L4 Software-Driven Robotaxis on Uber Across 28 Cities by 2028Uber Investor Relations",
+        "source": "Uber Investor Relations",
         "published": "",
-        "score": 87,
-        "score_reason": "Apple unveiled a surprise new product today, which is significant for Mike who follows Apple closely.",
-        "why_it_matters": "Apple's latest product launch signals innovation trends, influencing investment strategies and competitive positioning in the tech market, crucial for New York executives navigating a rapidly evolving landscape."
+        "score": 92,
+        "score_reason": "Nvidia and Uber partnership for robotaxis, a major strategic development.",
+        "why_it_matters": "This story highlights a pivotal advancement in autonomous vehicle technology, indicating significant investment opportunities and competitive advantages in the rapidly evolving transportation sector."
+      },
+      {
+        "title": "[Updated] Oil relief sparks a stock rally, but Cramer says Nvidia’s AI boom is the real story - CNBC",
+        "url": "https://www.cnbc.com",
+        "description": "Oil relief sparks a stock rally, but Cramer says Nvidia’s AI boom is the real storyCNBC",
+        "source": "CNBC",
+        "published": "",
+        "score": 90,
+        "score_reason": "Nvidia's AI boom highlighted as a key market driver, significant for company strategy.",
+        "why_it_matters": "This story highlights Nvidia's AI advancements as a key driver of market momentum, signaling lucrative investment opportunities in tech amidst fluctuating oil prices."
+      },
+      {
+        "title": "[Updated] Nscale signs 1.35GW Microsoft LOI for a West Virginia AI campus built around NVIDIA’s Vera Rubin GPUs - The Next Web",
+        "url": "http://thenextweb.com",
+        "description": "Nscale signs 1.35GW Microsoft LOI for a West Virginia AI campus built around NVIDIA’s Vera Rubin GPUsThe Next Web",
+        "source": "The Next Web",
+        "published": "",
+        "score": 88,
+        "score_reason": "Microsoft and Nvidia collaboration on AI campus, significant partnership.",
+        "why_it_matters": "This story highlights a significant investment in AI infrastructure, signaling growth opportunities in tech and energy sectors that could impact future investment strategies for tech-focused investors."
       },
       {
         "title": "[Updated] Apple introduces AirPods Max 2 - Apple",
@@ -85,29 +171,9 @@
         "description": "Apple introduces AirPods Max 2Apple",
         "source": "Apple",
         "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "The launch of AirPods Max 2 signals Apple's commitment to innovation and premium audio, highlighting trends in consumer tech that could influence investment strategies in the audio and wearable markets."
-      },
-      {
-        "title": "[Updated] Apple adds two iPhone models to its ‘obsolete products’ list - 9to5Mac",
-        "url": "https://9to5mac.com",
-        "description": "Apple adds two iPhone models to its ‘obsolete products’ list9to5Mac",
-        "source": "9to5Mac",
-        "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights Apple's product lifecycle management, signaling potential impacts on resale markets and innovation trends that tech investors should monitor for strategic opportunities."
-      },
-      {
-        "title": "Meta reportedly planning sweeping layoffs to offset AI costs - KRON4",
-        "url": "https://www.kron4.com",
-        "description": "Meta reportedly planning sweeping layoffs to offset AI costsKRON4",
-        "source": "KRON4",
-        "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights the financial pressures on tech giants like Meta, signaling potential shifts in investment strategies and workforce dynamics in the AI-driven market landscape."
+        "score": 87,
+        "score_reason": "Apple introduces AirPods Max 2, a significant product announcement.",
+        "why_it_matters": "The launch of AirPods Max 2 highlights Apple's innovation and market strategy, signaling investment opportunities in audio technology and consumer electronics trends for tech-focused investors."
       },
       {
         "title": "[Updated] Meta tightens Facebook rules to favor original content and protect creator value - eMarketer",
@@ -115,9 +181,19 @@
         "description": "Meta tightens Facebook rules to favor original content and protect creator valueeMarketer",
         "source": "eMarketer",
         "published": "",
-        "score": 50,
-        "score_reason": "",
-        "why_it_matters": "This story highlights Meta's strategic shift to prioritize original content, impacting advertising dynamics and creator economics, crucial for tech investors navigating evolving digital landscapes."
+        "score": 85,
+        "score_reason": "Meta tightens Facebook rules, impacting content strategy and creator value.",
+        "why_it_matters": "This story highlights Meta's strategic shift to prioritize original content, signaling potential investment opportunities in creator-driven platforms and the evolving digital advertising landscape."
+      },
+      {
+        "title": "Nvidia GTC 2026: Everything Jensen Huang Announced at the Keynote - Techloy",
+        "url": "https://www.techloy.com",
+        "description": "Nvidia GTC 2026: Everything Jensen Huang Announced at the KeynoteTechloy",
+        "source": "Techloy",
+        "published": "",
+        "score": 85,
+        "score_reason": "Nvidia GTC 2026 keynote announcements, important for company direction.",
+        "why_it_matters": "Nvidia's DLSS 5 announcement highlights critical advancements in AI graphics, signaling investment opportunities in transformative technologies that could reshape industries and enhance competitive advantages."
       },
       {
         "title": "[Updated] Amazon Announces The Return Of Big Spring Sale: What to Know - TODAY.com",
@@ -125,175 +201,76 @@
         "description": "Amazon Announces The Return Of Big Spring Sale: What to KnowTODAY.com",
         "source": "TODAY.com",
         "published": "",
-        "score": 50,
-        "score_reason": ""
-      }
-    ],
-    "AI & Tech": [
-      {
-        "title": "Nvidia announces Vera Rubin Space-1 chip system for orbital AI data centers",
-        "url": "https://www.cnbc.com/2026/03/16/nvidia-chips-orbital-data-centers-space-ai.html",
-        "description": "Nvidia CEO Jensen Huang said space computing \"has arrived\" at the GTC 2026 conference.",
-        "source": "CNBC",
-        "published": "Mon, 16 Mar 2026 20:24:43 GMT",
-        "score": 97,
-        "score_reason": "Nvidia announces Vera Rubin Space-1 chip system for orbital AI data centers, highlighting significant technological advancement and potential business implications.",
-        "why_it_matters": "Nvidia's Vera Rubin Space-1 chip system signals a transformative shift in AI and data processing, presenting lucrative investment opportunities in the burgeoning space computing sector."
+        "score": 80,
+        "score_reason": "Amazon announces major sales event, relevant for strategic business moves.",
+        "why_it_matters": "Amazon's Big Spring Sale signals consumer spending trends, offering insights into e-commerce dynamics crucial for tech-investment strategies in a competitive market."
       },
       {
-        "title": "Nvidia introduces Vera Rubin, a seven-chip AI platform with OpenAI, Anthropic and Meta on board",
-        "url": "https://venturebeat.com/infrastructure/nvidia-introduces-vera-rubin-a-seven-chip-ai-platform-with-openai-anthropic",
-        "description": "Nvidiaon Monday took the wraps offVera Rubin, a sweeping new computing platform built from seven chips now in full production — and backed by an extraordinary lineup of customers that includes Anthropic, OpenAI, Meta and Mistral AI, along with every major cloud provider.The message to the AI industr",
-        "source": "VentureBeat",
-        "published": "Mon, 16 Mar 2026 20:30:00 GMT",
-        "score": 95,
-        "score_reason": "Nvidia introduces Vera Rubin, a seven-chip AI platform with major AI companies on board, indicating a substantial product launch with broad industry impact.",
-        "why_it_matters": "Nvidia's Vera Rubin platform signifies a pivotal shift in AI infrastructure, presenting lucrative investment opportunities and strategic partnerships for tech executives navigating the rapidly evolving AI landscape."
+        "title": "[Updated] Google Parent Alphabet's $346 Billion Investment Is Providing a Big Lift to Its Bottom Line -- but It Has Nothing to Do With Artificial Intelligence (AI)\n改写如下：\nGoogle's parent company Alphabet is seeing a significant boost to its profits from a $346 billion invest - Bitget",
+        "url": "https://www.bitget.com",
+        "description": "Google Parent Alphabet's $346 Billion Investment Is Providing a Big Lift to Its Bottom Line -- but It Has Nothing to Do With Artificial Intelligence (AI)\n改写如下：\nGoogle's parent company Alphabet is seeing a significant boost to its profits from a $346 billion investBitget",
+        "source": "Bitget",
+        "published": "",
+        "score": 80,
+        "score_reason": "Alphabet's investment boosts profits, relevant for financial strategy.",
+        "why_it_matters": "This story highlights Alphabet's strategic investment success, signaling lucrative opportunities for tech investors seeking profitable ventures beyond AI in today's evolving market landscape."
       },
       {
-        "title": "Nvidia launches enterprise AI agent platform with Adobe, Salesforce, SAP among 17 adopters at GTC 2026",
-        "url": "https://venturebeat.com/technology/nvidia-launches-enterprise-ai-agent-platform-with-adobe-salesforce-sap-among",
-        "description": "Jensen Huangwalked onto theGTC stageMonday wearing his trademark leather jacket and carrying, as it turned out, the blueprints for a new kind of monopoly.The Nvidia CEO unveiled theAgent Toolkit, an open-source platform for building autonomous AI agents, and then rattled off the names of the compani",
-        "source": "VentureBeat",
-        "published": "Mon, 16 Mar 2026 08:30:00 GMT",
-        "score": 92,
-        "score_reason": "Nvidia launches enterprise AI agent platform with major adopters, showcasing a significant product launch with clear business implications.",
-        "why_it_matters": "Nvidia's Agent Toolkit signifies a pivotal shift in enterprise AI, presenting lucrative investment opportunities and competitive advantages for tech leaders in an increasingly automated market."
+        "title": "[Updated] Elizabeth Warren asks Meta, Amazon, and others why they're laying workers off despite tax perks - Yahoo Finance",
+        "url": "https://finance.yahoo.com",
+        "description": "Elizabeth Warren asks Meta, Amazon, and others why they're laying workers off despite tax perksYahoo Finance",
+        "source": "Yahoo Finance",
+        "published": "",
+        "score": 75,
+        "score_reason": "Elizabeth Warren questions Meta and Amazon on layoffs, indicating regulatory scrutiny.",
+        "why_it_matters": "This story highlights potential regulatory scrutiny and public backlash that could impact tech companies' reputations and stock performance, crucial factors for investors navigating today's volatile market."
       },
       {
-        "title": "Nvidia GTC 2026: CEO Jensen Huang sees $1 trillion in orders for Blackwell and Vera Rubin through '27",
-        "url": "https://www.cnbc.com/2026/03/16/nvidia-gtc-2026-ceo-jensen-huang-keynote-blackwell-vera-rubin.html",
-        "description": "At Nvidia's annual developer conference, CEO Jensen Huang said the company is seeing booming demand for its latest technology.",
-        "source": "CNBC",
-        "published": "Mon, 16 Mar 2026 20:51:22 GMT",
-        "score": 90,
-        "score_reason": "Nvidia's CEO announces $1 trillion in orders for new technology, indicating strong business demand and investment implications.",
-        "why_it_matters": "Nvidia's projected $1 trillion in orders signals a transformative shift in AI and tech demand, presenting lucrative investment opportunities for forward-thinking executives in New York's competitive landscape."
-      },
-      {
-        "title": "Polymarket gamblers threaten to kill me over Iran missile story",
-        "url": "https://www.timesofisrael.com/gamblers-trying-to-win-a-bet-on-polymarket-are-vowing-to-kill-me-if-i-dont-rewrite-an-iran-missile-story/",
-        "description": "HN score: 1502 | Comments: 946",
-        "source": "Hacker News",
-        "published": "2026-03-16T12:00:06Z",
-        "hn_score": 1502,
-        "hn_comments": 946,
-        "score": 87,
-        "score_reason": "OpenAI new model release March 2026, relevant for tech-focused executive interested in AI advancements.",
-        "why_it_matters": "This story highlights the dangerous intersection of misinformation, market speculation, and personal safety, emphasizing the urgent need for ethical standards in tech-driven platforms."
-      },
-      {
-        "title": "US SEC preparing to scrap quarterly reporting requirement",
-        "url": "https://www.reuters.com/business/finance/us-sec-preparing-eliminate-quarterly-reporting-requirement-wsj-says-2026-03-16/",
-        "description": "HN score: 584 | Comments: 316",
-        "source": "Hacker News",
-        "published": "2026-03-17T00:02:35Z",
-        "hn_score": 584,
-        "hn_comments": 316,
+        "title": "[Updated] Apple unveils AirPods Max 2. What to know about upgraded features. - USA Today",
+        "url": "https://www.usatoday.com",
+        "description": "Apple unveils AirPods Max 2. What to know about upgraded features.USA Today",
+        "source": "USA Today",
+        "published": "",
         "score": 50,
         "score_reason": ""
       },
       {
-        "title": "Leanstral: Open-source agent for trustworthy coding and formal proof engineering",
-        "url": "https://mistral.ai/news/leanstral",
-        "description": "HN score: 564 | Comments: 117",
-        "source": "Hacker News",
-        "published": "2026-03-16T20:59:40Z",
-        "hn_score": 564,
-        "hn_comments": 117,
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Kagi Translate now supports LinkedIn Speak as an output language",
-        "url": "https://translate.kagi.com/?from=en&to=LinkedIn+speak",
-        "description": "HN score: 562 | Comments: 146",
-        "source": "Hacker News",
-        "published": "2026-03-17T04:39:42Z",
-        "hn_score": 562,
-        "hn_comments": 146,
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Meta’s renewed commitment to jemalloc",
-        "url": "https://engineering.fb.com/2026/03/02/data-infrastructure/investing-in-infrastructure-metas-renewed-commitment-to-jemalloc/",
-        "description": "HN score: 442 | Comments: 193",
-        "source": "Hacker News",
-        "published": "2026-03-16T18:12:32Z",
-        "hn_score": 442,
-        "hn_comments": 193,
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Why I love FreeBSD",
-        "url": "https://it-notes.dragas.net/2026/03/16/why-i-love-freebsd/",
-        "description": "HN score: 440 | Comments: 215",
-        "source": "Hacker News",
-        "published": "2026-03-16T11:23:14Z",
-        "hn_score": 440,
-        "hn_comments": 215,
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "The American Healthcare Conundrum",
-        "url": "https://github.com/rexrodeo/american-healthcare-conundrum",
-        "description": "HN score: 358 | Comments: 309",
-        "source": "Hacker News",
-        "published": "2026-03-16T17:13:27Z",
-        "hn_score": 358,
-        "hn_comments": 309,
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Amazon rolls out 1-hour, 3-hour delivery as ultrafast shipping trend grows in the U.S.",
-        "url": "https://www.cnbc.com/2026/03/17/amazon-rolls-out-1-hour-3-hour-delivery-in-latest-fast-shipping-test.html",
-        "description": "Amazon is speeding up deliveries even further after investing significant money and resources to make same-day shipping the standard.",
-        "source": "CNBC",
-        "published": "Tue, 17 Mar 2026 10:00:01 GMT",
-        "score": 50,
-        "score_reason": ""
-      },
-      {
-        "title": "Oil relief sparks a stock rally, but Cramer says Nvidia’s AI boom is the real story",
-        "url": "https://www.cnbc.com/2026/03/16/oil-relief-sparks-a-stock-rally-but-cramer-says-nvidias-ai-boom-is-the-real-story.html",
-        "description": "A decline in oil on Monday triggered stock buying, particularly in AI stocks like Nvidia, which wowed investors at its developers conference.",
-        "source": "CNBC",
-        "published": "Mon, 16 Mar 2026 23:09:57 GMT",
+        "title": "Rosemount-Apple Valley-Eagan schools closed Tuesday due to threats - 5 EYEWITNESS NEWS",
+        "url": "https://kstp.com",
+        "description": "Rosemount-Apple Valley-Eagan schools closed Tuesday due to threats5 EYEWITNESS NEWS",
+        "source": "5 EYEWITNESS NEWS",
+        "published": "",
         "score": 50,
         "score_reason": ""
       }
     ]
   },
   "mikes_picks": [],
-  "podcast_script": "[INTRO]\n\nHey there, podcast pals! Welcome back to MikeCast, your go-to source for all things news, served with a side of wit and wisdom. I'm Mike, and today is March 17, 2026. We've got a packed episode for you today, so grab your coffee and settle in. We're diving into some major stories, including OpenAI's latest AI model that's making waves, a surprise rate hike from the Federal Reserve, and Tesla's shocking layoffs. But first, let's kick things off with the tech world, where some groundbreaking developments are unfolding.\n\n[AI & TECH SEGMENT]\n\nAlright, tech enthusiasts, this one's for you. The AI and tech landscape is buzzing today, and for good reason. OpenAI has just unveiled a groundbreaking AI model, and it's the talk of the town. While the details are still rolling in, this new model is expected to push the boundaries of what AI can do, potentially revolutionizing industries from healthcare to finance. It's a big leap forward, and we'll be keeping a close eye on how this unfolds in the coming weeks.\n\nMeanwhile, Nvidia is making headlines with some major announcements at their GTC 2026 conference. CEO Jensen Huang took the stage with some exciting news. First up, Nvidia introduced the Vera Rubin, a seven-chip AI platform that's already in full production. This platform is backed by heavy hitters like OpenAI, Anthropic, and Meta, along with every major cloud provider. Huang also unveiled the Agent Toolkit, an open-source platform for building autonomous AI agents, with Adobe, Salesforce, and SAP among the 17 adopters. It's clear that Nvidia is positioning itself at the forefront of AI innovation, and they're seeing booming demand for their latest technology, with $1 trillion in orders for their Blackwell and Vera Rubin systems expected through 2027.\n\nBut that's not all. Nvidia is also venturing into space computing with the Vera Rubin Space-1 chip system for orbital AI data centers. Huang declared that \"space computing has arrived,\" marking a new era for AI in space. This move could open up new possibilities for data processing and storage beyond our planet, and it's an exciting development for both tech and space enthusiasts alike.\n\nSwitching gears, let's talk about Amazon, which is rolling out one-hour and three-hour delivery options as the ultrafast shipping trend continues to grow in the U.S. This move is part of Amazon's ongoing efforts to make same-day shipping the standard, and it's a testament to their commitment to speedy service. With significant investments in logistics and infrastructure, Amazon is setting the bar high for e-commerce delivery times.\n\nSo, there you have it—a whirlwind tour of today's top tech stories. From groundbreaking AI models to space computing and ultrafast delivery, it's an exciting time to be following the tech world.\n\n[BUSINESS & MARKETS SEGMENT]\n\nNow let's shift our focus to the business and markets scene, where there's plenty to discuss. First up, the Federal Reserve has announced an unexpected rate hike, catching many by surprise. This move is part of the Fed's ongoing efforts to combat inflation, but it's already having ripple effects across the financial markets. Investors are reacting to the news, and we'll be watching closely to see how this impacts borrowing costs and consumer spending in the coming months.\n\nIn the oil market, tensions are escalating as Iran targets UAE energy infrastructure. A gas field has been set ablaze, and a tanker was struck near the Strait of Hormuz, causing oil prices to surge by 4%. This conflict is raising concerns about supply disruptions in the Middle East, and there's uncertainty surrounding a U.S.-backed plan to protect shipping through the Strait. The situation is fluid, and the implications for global energy markets are significant.\n\nMeanwhile, Israel has reported that Iran's security chief, Ali Larijani, has been killed in a strike. While Iran has not yet confirmed this report, it's adding to the already tense geopolitical landscape in the region. These developments are contributing to the volatility in oil prices, and it's a situation that bears watching as it unfolds.\n\nSo, whether you're an investor, a business owner, or just someone who fills up at the pump, these stories are worth keeping an eye on as they could have far-reaching implications for the economy.\n\n[COMPANIES SEGMENT]\n\nAlright, let's dive into the corporate world, where some big moves are happening. Starting with Apple, they surprised everyone today by unveiling a new product. While the details are still under wraps, Apple fans are buzzing with excitement. In addition to this surprise launch, Apple has also introduced the AirPods Max 2, the latest iteration of their high-end headphones. And if you're holding onto an older iPhone model, heads up—Apple has added two more iPhone models to its 'obsolete products' list, so it might be time to upgrade.\n\nOver at Meta, the company is reportedly planning sweeping layoffs to offset AI costs. This comes as Meta continues to invest heavily in AI development, and it's a reminder of the financial pressures tech giants face as they push the boundaries of innovation. In other Meta news, the company is tightening Facebook rules to favor original content and protect creator value, a move aimed at supporting content creators and enhancing user experience on the platform.\n\nAnd let's not forget Amazon, which is bringing back its Big Spring Sale. Shoppers, mark your calendars—this sale promises discounts across a wide range of products, and it's a great opportunity to snag some deals.\n\nSo, from surprise product launches to strategic layoffs and sales events, there's no shortage of action in the corporate world today.\n\n[NY SPORTS SEGMENT]\n\nAlright, sports fans, here's your quick hit of New York sports news. In the NFL, the Tennessee Titans have agreed to a 3-year, $45 million contract with Cor'Dale Flott, according to NFL.com. Over in the MLB, there's a slew of injury updates affecting key players like Musgrove, Suzuki, and Lindor. And in the NHL, the Devils are celebrating a thrilling overtime victory, thanks to some heroics from Cotter. It's an exciting time for sports, and we'll keep you updated on all the latest developments.\n\n[MIKE'S PICKS SEGMENT]\n\nAnd now, it's time for Big Mike's hand-picked reads. If you're looking for some thought-provoking content, check out the article on the American Healthcare Conundrum, which dives into the complexities of the U.S. healthcare system. For tech enthusiasts, the piece on Leanstral, an open-source agent for trustworthy coding and formal proof engineering, is a must-read. And if you're a fan of FreeBSD, there's a great article on why one tech enthusiast loves this operating system. These reads are sure to spark some interesting conversations.\n\n[OUTRO]\n\nAnd that's a wrap for today's episode of MikeCast! Thanks for tuning in and catching up on the latest news with me. Don't forget to subscribe and leave a review if you enjoyed today's show. I'm Mike, signing off—stay informed, stay curious, and I'll catch you next time!",
-  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast, your go-to podcast for all the latest in tech, business, and sports. I'm Mike, and today is March 17, 2026. We've got a packed show for you today. OpenAI just unveiled a groundbreaking new AI model, and the Federal Reserve has announced an unexpected rate hike. Plus, Tesla's massive layoffs are sending shockwaves through the industry. Let's dive right in.\n\n[ELIZABETH]\n\nThanks, Mike. Today's most-watched stories are making waves across the tech world. First up, OpenAI has unveiled a new AI model that's turning heads. This model is said to be a game-changer in the AI landscape, promising unprecedented advancements in machine learning capabilities. OpenAI continues to push the boundaries of what's possible, and this latest development is no exception.\n\nMoving on to Nvidia, they’ve been making headlines at the GTC 2026 conference. Nvidia CEO Jensen Huang announced the Vera Rubin Space-1 chip system, designed for orbital AI data centers. This marks a significant leap in space computing, with the potential to revolutionize how data is processed in space. Huang also introduced the Vera Rubin, a seven-chip AI platform backed by major players like OpenAI, Anthropic, and Meta. This platform is set to redefine AI infrastructure, further solidifying Nvidia's position as a leader in the field.\n\nIn other tech news, Nvidia launched an enterprise AI agent platform, the Agent Toolkit, at GTC 2026. This open-source platform is already being adopted by big names like Adobe, Salesforce, and SAP. Nvidia is seeing a staggering $1 trillion in orders for their Blackwell and Vera Rubin technologies through 2027, highlighting the booming demand for AI solutions.\n\nNow, let's shift gears to the business and markets front. The global oil crisis is escalating with new conflicts in the Middle East. Iran has targeted UAE energy infrastructure, setting a gas field ablaze and striking a tanker near the Strait of Hormuz. This has caused oil prices to surge, advancing on Tuesday as the market grapples with these supply disruptions. Additionally, oil prices jumped 4% due to lingering doubts over a U.S.-backed plan to protect shipping through the Strait of Hormuz. The situation remains tense, with significant implications for global energy markets.\n\nIn a related development, Israel has reported the death of Iran's security chief, Ali Larijani, in a strike. While Iran has not confirmed this, the news adds another layer to the already complex geopolitical landscape.\n\nAlright, let's talk companies. Tesla's decision to lay off a significant portion of its workforce has shocked the industry. This move is seen as a response to ongoing challenges in the electric vehicle market and could have far-reaching effects on Tesla's operations and stock performance.\n\nMeanwhile, Apple has been busy. They've unveiled a surprise new product and introduced the AirPods Max 2. Additionally, Apple has added two iPhone models to its 'obsolete products' list, signaling a shift in their product strategy.\n\nMeta is also in the spotlight, reportedly planning sweeping layoffs to offset AI costs. At the same time, they're tightening Facebook rules to favor original content, aiming to protect creator value.\n\nLastly, Amazon has announced the return of its Big Spring Sale, a major event for consumers and retailers alike. And in a bid to stay ahead in the fast-shipping race, Amazon is rolling out 1-hour and 3-hour delivery options, further pushing the boundaries of e-commerce logistics.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth! Alright, let's talk NY sports. Starting with the Devils, they pulled off an exciting overtime win thanks to some heroics from Cotter. It's always great to see the Devils clinch a victory in such a thrilling fashion.\n\nNow, onto the Yankees. While there's not much new to report today, the injury updates are worth noting. Players like Lindor are on the list, which could impact upcoming games. We'll keep an eye on how this affects the team moving forward.\n\nAs for the Giants and Knicks, it's been a quiet day. No major games or updates to share at the moment. Sometimes no news is good news, right?\n\nAnd on the national scene, the Titans have signed Cor'Dale Flott to a 3-year, $45 million contract. That's a big move for them and could shake things up in the NFL.\n\nThat's all I've got for sports today. Back to you, Mike.\n\n[MIKE]\n\nThanks, Jesse. And that's a wrap for today's MikeCast. We covered a lot of ground, from groundbreaking AI developments to major moves in the business world and the latest in NY sports. Thanks for tuning in, and be sure to join us again tomorrow for more insights and updates. Until then, take care and stay informed.",
+  "podcast_script": "[INTRO]\n\nHey there, folks! Welcome to MikeCast, your daily dose of news with a side of insight. It's March 17, 2026, and we've got a packed episode for you today. We're diving into some big stories, like the Federal Reserve's surprise move on interest rates and Apple's latest tech marvel. Plus, we'll break down the latest in oil prices and what that means for your wallet. So grab your coffee, settle in, and let's get to it!\n\n[AI & TECH SEGMENT]\n\nAlright, let's kick things off with the world of AI and tech, where there's always something buzzing. Today, we're looking at some major moves from the giants in the industry.\n\nFirst up, NVIDIA is making headlines with its expansion of open model families aimed at powering the next wave of agentic, physical, and healthcare AI. This move is all about broadening the horizons for AI applications, especially in sectors that are rapidly evolving. By expanding these open model families, NVIDIA is positioning itself as a key player in the future of AI, enabling more businesses to integrate advanced AI solutions into their operations. This could mean more efficient healthcare systems, smarter physical AI applications, and a boost in agentic AI capabilities, which are all exciting prospects for the tech world.\n\nMeanwhile, Alibaba has launched a new enterprise AI tool that's set to make waves in the business world. This tool is designed to integrate with popular platforms like Slack and Teams, making it easier for businesses to harness AI for their day-to-day operations. It's part of a broader strategy by Alibaba to strengthen its foothold in the AI sector, and it could change the way businesses communicate and operate, making processes more streamlined and efficient.\n\nIn other news, OpenAI is shifting gears by cutting back on side projects to focus on its core business. This strategic move is aimed at honing their primary offerings and ensuring they're delivering top-notch AI solutions. For users and businesses relying on OpenAI's technology, this could mean more robust and reliable products in the near future, as the company doubles down on perfecting its main services.\n\nAnd lastly, Google is opening its Gemini chatbot to all users in Hong Kong. This is part of the city's push to become a hub for AI innovation. By making the chatbot widely available, Google is not only expanding its user base but also contributing to the growing AI ecosystem in Hong Kong. This could lead to more localized AI solutions and innovations tailored to the needs of the region.\n\n[BUSINESS & MARKETS SEGMENT]\n\nNow, let's talk business and markets, where there's a lot happening today.\n\nThe stock market is feeling the heat as the Dow tumbles 600 points, and both the S&P 500 and Nasdaq are down. This drop comes amid a surge in oil prices, driven by escalating tensions with Iran. As oil prices climb, we're seeing ripple effects across various sectors. For investors, this means keeping a close eye on energy stocks and considering the broader implications for the economy.\n\nIn related news, Israel has confirmed the death of Iran's security chief, Ali Larijani, in a strike. Larijani was a significant figure, seen as a close ally of Iran's late supreme leader. This development adds another layer of complexity to the already tense geopolitical landscape, which is contributing to the volatility in oil prices and, consequently, the markets.\n\nOn a more positive note, Delta Airlines is raising its revenue guidance, thanks to what CEO Ed Bastian describes as \"really, really great\" travel demand. Despite a $400 million hit in the fourth quarter, the airline is optimistic about the future, which is a good sign for the travel industry as a whole. This uptick in demand could mean more flights, better deals for travelers, and a boost for related sectors.\n\n[COMPANIES SEGMENT]\n\nSwitching gears to the corporate world, we've got some intriguing updates.\n\nApple has just unveiled the AirPods Max 2, and they're packed with upgraded features. While the details are still emerging, it's clear that Apple is continuing to innovate in the audio space, offering consumers more advanced technology and improved sound quality. For Apple fans, this is another exciting addition to their tech arsenal.\n\nMeanwhile, NVIDIA is once again in the spotlight, as they're set to launch L4 software-driven robotaxis on Uber by 2028 across 28 cities. This ambitious project highlights NVIDIA's commitment to revolutionizing transportation with AI, and it could drastically change how we think about urban mobility in the coming years.\n\nMeta is tightening its Facebook rules to favor original content and protect creator value. This move is aimed at ensuring that creators get the recognition and compensation they deserve, which is a big win for those making a living on the platform. It's also a strategic effort by Meta to maintain a vibrant and engaging community on Facebook.\n\nAnd finally, Amazon is bringing back its Big Spring Sale. For shoppers, this means a chance to snag some great deals, and for Amazon, it's an opportunity to boost sales and engage with customers in a big way.\n\n[NY SPORTS SEGMENT]\n\nAlright, sports fans, let's see what's happening in the world of New York sports.\n\nThe Yankees are wrapping up their Spring Training, with some interesting observations coming out of camp. While the details are still unfolding, fans are eagerly anticipating the start of the season and hoping for a strong performance from the team.\n\nIn football news, Isaiah Likely has signed a three-year contract with the Giants. This move is part of the team's strategy to strengthen their lineup, and fans are hopeful that Likely will make a significant impact on the field.\n\nOver in hockey, the Devils pulled off an exciting overtime win, thanks to some heroics from Cotter. It's a thrilling time for Devils fans, as the team continues to show promise and determination on the ice.\n\n[MIKE'S PICKS SEGMENT]\n\nAnd now, it's time for Big Mike's hand-picked reads. If you're looking for something interesting to dive into, check out the latest developments from NVIDIA's GTC 2026 keynote. There's a lot of exciting tech on the horizon, and it's worth a read if you're into cutting-edge innovations.\n\n[OUTRO]\n\nAlright, that's a wrap for today's MikeCast. Thanks for tuning in and catching up with us. Don't forget to subscribe and leave a review if you enjoyed the show. We'll be back tomorrow with more news and insights. Until then, take care and have a great day!",
+  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast on this fine March 17, 2026. I'm Mike, your host, and we've got a packed show for you today. Big news from the tech world as Apple unveils a groundbreaking new wearable device. Plus, the Federal Reserve makes a surprise move with a rate cut. And in the business sector, global oil prices are spiking due to geopolitical tensions. Let's dive right in. Elizabeth, what's happening in AI and tech?\n\n[ELIZABETH]\n\nThanks, Mike. Today's most-watched stories are all about the latest moves in AI and tech. First up, NVIDIA is expanding its Open Model Families to power the next wave of AI in agentic, physical, and healthcare sectors. This is a big deal because it means NVIDIA is setting the stage for more advanced AI applications that could transform industries from robotics to medicine. They're really pushing the envelope here.\n\nMeanwhile, Alibaba has launched a new enterprise AI tool that's set to integrate with platforms like Slack and Teams. This tool is part of Alibaba's broader strategy to enhance AI capabilities for businesses, making it easier for companies to leverage AI in their daily operations. It's another step in the AI arms race among tech giants.\n\nOn the flip side, OpenAI is scaling back on its side projects to focus more on its core business. This move is all about doubling down on what they do best and ensuring their main offerings are top-notch. It's a strategic shift that could strengthen their position in the AI market.\n\nAnd lastly, Google's opening its Gemini chatbot to all users in Hong Kong as part of the city's AI push. This is a significant development as it shows Google's commitment to expanding AI accessibility and supporting innovation in Hong Kong. It's all about making AI tools more available and useful to a broader audience.\n\nNow, let's shift gears to the business and markets scene. The US stock market took a hit today, with the Dow falling 600 points. This drop is largely due to the surge in oil prices amid tensions with Iran. The S&P 500 and Nasdaq are also down, while gold and silver are on the rise. Bitcoin, however, is holding steady near $70K. It's a volatile time, and investors are definitely feeling the pressure.\n\nIn other news, Delta Airlines is raising its revenue guidance despite taking a $400 million hit in the fourth quarter. CEO Ed Bastian says travel demand has been \"really, really great,\" which is a positive sign for the airline industry as a whole. It's a testament to the resilience of the travel sector in the face of economic challenges.\n\nAlright, let's move on to some company news. NVIDIA is making headlines again with its plan to launch L4 software-driven robotaxis on Uber by 2028. This ambitious project will roll out in 28 cities and could revolutionize urban transportation. It's all about leveraging NVIDIA's AI expertise to create smarter, more efficient transportation solutions.\n\nApple's also in the spotlight with the introduction of the AirPods Max 2. These upgraded headphones promise enhanced features and better sound quality, catering to audiophiles and tech enthusiasts alike. It's a continuation of Apple's commitment to innovation in the consumer electronics space.\n\nAnd over at Meta, they're tightening Facebook rules to favor original content and protect creator value. This move is aimed at ensuring creators are rewarded for their work and that original content is prioritized on the platform. It's a strategic shift to maintain engagement and support the creator economy.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth. Let's talk NY sports. Starting with baseball, the Yankees are wrapping up their Spring Training. Not much action to report today, but they're gearing up for the season ahead. Over in football, Isaiah Likely has signed a three-year contract with the Giants. It's a significant move for the team as they look to strengthen their roster.\n\nAnd in hockey, the Devils had an exciting game with some heroics in overtime. Cotter's performance lifted them to a win, and fans are buzzing about it. That's all I've got for today. Not much else happening in the NY sports scene, so back to you, Mike.\n\n[MIKE]\n\nThanks, Jesse. That wraps up today's episode of MikeCast. We covered a lot of ground today, from tech innovations to market movements and sports updates. Thanks for tuning in, and we'll be back tomorrow with more news and insights. Have a great day, everyone!",
   "audio_file": "MikeCast_3voice_2026-03-17.mp3",
   "elevenlabs_audio_file": "MikeCast_3voice_2026-03-17.mp3",
   "trending": [
     {
-      "topic": "OpenAI unveils groundbreaking AI model today",
-      "x_url": "https://x.com/search?q=OpenAI+new+model+March+2026"
+      "topic": "New AI regulation bill passed in Congress",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+Congress+2026"
     },
     {
-      "topic": "Federal Reserve announces unexpected rate hike",
-      "x_url": "https://x.com/search?q=Fed+rate+hike+March+2026"
+      "topic": "Federal Reserve announces surprise rate cut",
+      "x_url": "https://x.com/search?q=Federal+Reserve+rate+cut+March+2026"
     },
     {
-      "topic": "Tesla massive layoffs shock industry",
-      "x_url": "https://x.com/search?q=Tesla+layoffs+March+2026"
+      "topic": "Major tech outage disrupts AI services globally",
+      "x_url": "https://x.com/search?q=tech+outage+AI+services+March+2026"
     },
     {
-      "topic": "Google AI data breach sparks outrage",
-      "x_url": "https://x.com/search?q=Google+AI+breach+2026"
+      "topic": "Apple unveils groundbreaking wearable device today",
+      "x_url": "https://x.com/search?q=Apple+wearable+device+launch+2026"
     },
     {
-      "topic": "Global oil crisis escalates with new conflict",
-      "x_url": "https://x.com/search?q=oil+price+crisis+Middle+East+2026"
+      "topic": "Global oil prices spike amid geopolitical tensions",
+      "x_url": "https://x.com/search?q=oil+price+spike+geopolitical+March+2026"
     }
   ],
-  "generated_at": "2026-03-17T10:32:52.769517+00:00"
+  "generated_at": "2026-03-17T11:49:35.595591+00:00"
 }

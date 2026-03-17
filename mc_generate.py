@@ -79,17 +79,53 @@ def _gpt_call(system_prompt: str, user_prompt: str, max_tokens: int = 2500) -> s
 # HTML briefing
 # ---------------------------------------------------------------------------
 
+def _filter_trending_to_articles(
+    trending: list[dict],
+    categorised: dict[str, list[dict]],
+) -> list[dict]:
+    """
+    Drop any trending topic that has no matching article in the collected set.
+    Matching is keyword-based: at least 1 significant word (≥5 chars) from the
+    topic phrase must appear in an article title or description.
+    This prevents GPT from hallucinating details for trending topics that were
+    never actually collected as articles.
+    """
+    # Build a single lowercase corpus of all article titles + descriptions
+    corpus_parts: list[str] = []
+    for arts in categorised.values():
+        for art in arts:
+            corpus_parts.append(art.get("title", "").lower())
+            corpus_parts.append(art.get("description", "").lower())
+    corpus = " ".join(corpus_parts)
+
+    matched: list[dict] = []
+    for item in trending:
+        topic = item.get("topic", "")
+        # Extract words ≥5 chars as significant keywords (skip stop-words / short words)
+        keywords = [w.lower() for w in topic.split() if len(w) >= 5]
+        if any(kw in corpus for kw in keywords):
+            matched.append(item)
+        else:
+            logger.info(
+                "Trending topic dropped — no matching article found: %r", topic
+            )
+    return matched
+
+
 def _build_trending_prompt_block(trending: list[dict]) -> str:
     """
     Format trending items for podcast prompt injection.
     Returns a labeled block listing each topic phrase, or "" if trending is empty.
+    Only call this AFTER filtering with _filter_trending_to_articles.
     """
     if not trending:
         return ""
     lines = [f"  {i}. {t.get('topic', '')}" for i, t in enumerate(trending, 1)]
     return (
-        "\nTODAY'S TOP TRENDING TOPICS (from live X/web search — surface these prominently):\n"
-        + "\n".join(lines) + "\n"
+        "\nTODAY'S TOP TRENDING TOPICS (confirmed present in today's articles — cover these):\n"
+        + "\n".join(lines)
+        + "\nIMPORTANT: Only reference a trending topic if the articles above directly support it. "
+        "If you cannot find an article covering a listed topic, skip it entirely — do NOT invent details.\n"
     )
 
 
@@ -142,6 +178,8 @@ def generate_html_briefing(
         for p in picks:
             picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
 
+    trending = _filter_trending_to_articles(trending or [], categorised)
+
     system_prompt = (
         "You are MikeCast, a sharp, well-informed daily briefing writer. "
         "Write in a professional yet engaging tone — like a smart friend who reads everything so you don't have to. "
@@ -153,7 +191,10 @@ def generate_html_briefing(
         "CRITICAL RULE: Only report facts explicitly stated in the provided articles. "
         "Do NOT add details, claims, trades, events, statistics, or context from your training knowledge. "
         "If a category has few or no articles, write only what the articles say — do not fill gaps with invented news. "
-        "Every specific claim (names, numbers, events) must trace directly to an article in the input."
+        "Every specific claim (names, numbers, events) must trace directly to an article in the input.\n\n"
+        "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
+        "which team they play for, do NOT name their team. Do not use training knowledge to infer "
+        "team affiliations, positions, or stats. Say only what the article says."
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. You have collected {total_articles} news articles across 4 categories.
@@ -267,7 +308,7 @@ Format rules:
         return "\n".join(html_parts)
 
     briefing_html_sections = text_to_html_sections(briefing_text)
-    trending_html = _build_trending_html(trending or [])
+    trending_html = _build_trending_html(trending)
 
     picks_html = ""
     if picks:
@@ -336,7 +377,9 @@ def generate_podcast_script(
         for p in picks:
             picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
 
-    trending_block = _build_trending_prompt_block(trending or [])
+    trending_block = _build_trending_prompt_block(
+        _filter_trending_to_articles(trending or [], categorised)
+    )
 
     system_prompt = (
         "You are the host of MikeCast, a daily news podcast. "
@@ -348,7 +391,10 @@ def generate_podcast_script(
         "and see' or 'the implications could be huge.' Tell them what the article actually says happened.\n\n"
         "CRITICAL RULE: Only discuss stories explicitly present in the provided articles. "
         "Do NOT mention trades, events, statistics, or facts from your training knowledge that aren't in the input. "
-        "If a category has few articles, keep that segment short — never invent news to fill time."
+        "If a category has few articles, keep that segment short — never invent news to fill time.\n\n"
+        "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
+        "which team they play for, do NOT name their team. Do not use training knowledge to infer "
+        "team affiliations, positions, or stats. Say only what the article says."
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write a full podcast script for today's MikeCast episode.
@@ -428,7 +474,9 @@ def generate_conversational_script(
         for p in picks:
             picks_context += f"\n- {p.get('title','')}: {p.get('summary','')[:300]}"
 
-    trending_block = _build_trending_prompt_block(trending or [])
+    trending_block = _build_trending_prompt_block(
+        _filter_trending_to_articles(trending or [], categorised)
+    )
 
     system_prompt = (
         "You write scripts for a 3-host daily news podcast called MikeCast.\n"
@@ -455,7 +503,10 @@ def generate_conversational_script(
         "Do NOT mention trades, signings, game scores, injuries, or any sports/business facts "
         "from your training knowledge that aren't in the input articles. "
         "If a category (especially NY Sports) has few or no articles, Jesse should say there's "
-        "not much happening today and keep it brief — never fabricate news."
+        "not much happening today and keep it brief — never fabricate news.\n\n"
+        "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
+        "which team they play for, Jesse must NOT name their team. Do not use training knowledge "
+        "to infer team affiliations, positions, or stats. Say only what the article says."
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write the full MikeCast 3-host podcast script.

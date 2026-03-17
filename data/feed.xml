@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #23 — March 17, 2026</title>
+    <description>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduces its Gemini chatbot in Hong Kong, and oil prices surge amid Iran tensions affecting US markets.</description>
+    <pubDate>Tue, 17 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-17</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-17.mp3" type="audio/mpeg" length="4111761"/>
+    <itunes:title>MikeCast #23 — March 17, 2026</itunes:title>
+    <itunes:subtitle>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduc...</itunes:subtitle>
+    <itunes:summary>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduces its Gemini chatbot in Hong Kong, and oil prices surge amid Iran tensions affecting US markets.</itunes:summary>
+    <itunes:duration>256</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #22 — March 16, 2026</title>
     <description>Episode #22 — This episode covers the new AI regulation bill stirring debate, the Fed's decision impacting the stock market, Tesla's disappointing earnings report, OpenAI's ChatGPT analytics launch, Big Tech's carbon credit race led by Microsoft, OpenAI's AGI challenges, Anthropic's lawsuit against the Pentagon over Claude AI models, and geopolitical tensions affecting global markets.</description>
     <pubDate>Mon, 16 Mar 2026 11:45:00 GMT</pubDate>
