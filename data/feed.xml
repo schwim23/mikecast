@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #24 — March 18, 2026</title>
+    <description>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory strikes following Ali Larijani's death, and Tesla's $4.3 billion battery plant with LG highlight today's tech, economic, and geopolitical developments.</description>
+    <pubDate>Wed, 18 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-18</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-18.mp3" type="audio/mpeg" length="4566956"/>
+    <itunes:title>MikeCast #24 — March 18, 2026</itunes:title>
+    <itunes:subtitle>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory st...</itunes:subtitle>
+    <itunes:summary>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory strikes following Ali Larijani's death, and Tesla's $4.3 billion battery plant with LG highlight today's tech, economic, and geopolitical developments.</itunes:summary>
+    <itunes:duration>285</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #23 — March 17, 2026</title>
     <description>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduces its Gemini chatbot in Hong Kong, and oil prices surge amid Iran tensions affecting US markets.</description>
     <pubDate>Tue, 17 Mar 2026 11:45:00 GMT</pubDate>
