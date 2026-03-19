@@ -1,6 +1,6 @@
 # MikeCast: Daily AI-Powered News Briefing
 
-MikeCast is an automated daily news briefing system for "Big Mike." It runs a 10-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a podcast, and a static dashboard website.
+MikeCast is an automated daily news briefing system. It runs a 10-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a podcast, and a static dashboard website.
 
 ## Features
 
@@ -8,28 +8,29 @@ MikeCast is an automated daily news briefing system for "Big Mike." It runs a 10
 
 2. **Multi-Source News Aggregation**: Pulls articles in parallel from:
    - **NYT Top Stories & Article Search APIs**: Authoritative headlines from Technology, Business, Sports, and Home sections.
-   - **RSS Feeds**: TechCrunch, The Verge, Ars Technica, VentureBeat, Wired, MIT Technology Review, Reuters, Associated Press, CNBC, ESPN (General/NBA/MLB/NFL/NHL).
-   - **Reddit Atom Feeds**: r/MachineLearning, r/artificial, r/technology, r/investing, r/nba, r/baseball.
+   - **RSS Feeds**: TechCrunch, Ars Technica, VentureBeat, Wired, MIT Technology Review, CNBC, ESPN (NBA/MLB/NFL/NHL).
+   - **Reddit Atom Feeds**: r/MachineLearning, r/artificial, r/technology, r/investing. *(Sports subreddits excluded — fan speculation was a hallucination source.)*
    - **Google News**: Fallback keyword search for broad coverage.
+   - **Hacker News**: Top stories via RSS.
 
 3. **Content Deduplication & Clustering**: Maintains a 7-day rolling history (`briefing_history.json`) to skip repeated stories. A `gpt-4o-mini` clustering pass then groups near-duplicate articles before scoring.
 
-4. **AI Scoring & Ranking**: Per-category GPT-4o agents score and rank articles using tailored prompts (e.g., bonus for Yankees/Knicks stories in Sports, penalty for vague AI hype in Tech). Grok's trending context is passed to scoring agents to weight breaking news higher.
+4. **AI Scoring & Ranking**: Per-category GPT-4o agents score and rank articles using tailored prompts (e.g., bonus for Yankees/Knicks stories in Sports, penalty for vague AI hype in Tech). Grok's trending context is passed to scoring agents to weight breaking news higher. Stale articles (older than 3 days) are dropped before scoring.
 
-5. **Story Enrichment**: The top 8 articles have their full body text fetched and receive a `gpt-4o-mini` "why it matters" annotation.
+5. **Story Enrichment**: The top 15 articles have their full body text fetched and receive a `gpt-4o-mini` "why it matters" annotation.
 
 6. **"Mike's Picks"**: User-submitted content (URLs, local PDFs, or raw text) queued via `mikes_picks_ingest.py` and included as a dedicated section in every briefing.
 
 7. **Multi-Format Generation** (parallel GPT-4o calls):
    - **HTML Briefing**: Professional email with executive summary, categorized stories, and clickable links.
-   - **Single-voice podcast script**: For OpenAI TTS (fallback/email attachment).
+   - **Single-voice podcast script**: For OpenAI TTS (fallback).
    - **3-voice conversational script**: For ElevenLabs with `[MIKE]`, `[ELIZABETH]`, and `[JESSE]` speaker tags.
 
-8. **Quality Critic Pass**: A GPT-4o critic scores each category section (1–10) on depth, substance, and story count. Sections scoring below 7 are automatically regenerated with targeted prompts, then podcast scripts are regenerated to match.
+8. **Quality Critic Pass**: A GPT-4o critic scores each category section (1–10) on depth, substance, and story count. Sections scoring below 7 are automatically regenerated with targeted prompts. NY Sports is never auto-patched — thin but honest sports coverage is preferable to GPT inventing game results from training knowledge.
 
 9. **Dual-TTS Audio Generation**:
-   - **ElevenLabs 3-voice** (preferred): Mike = host, Elizabeth = tech/biz, Jesse = sports.
-   - **OpenAI TTS** (single voice, "alloy"): Always generated as backup and email attachment.
+   - **ElevenLabs 3-voice** (preferred): Mike = host, Elizabeth = tech/biz, Jesse = sports. Uses `eleven_multilingual_v2`.
+   - **OpenAI TTS** (single voice, "alloy"): Generated only when ElevenLabs is unavailable or fails.
    - The ElevenLabs version is used for the RSS podcast feed when available.
 
 10. **Delivery & Publishing**:
@@ -43,51 +44,73 @@ MikeCast is an automated daily news briefing system for "Big Mike." It runs a 10
 ## Pipeline (10 Steps)
 
 ```
-Step 0   Plan searches       xAI Grok-3 identifies breaking stories → dynamic queries
-Step 1   Collect news        Parallel fetch from all sources (NYT, RSS, Reddit, Google News)
-Step 2   Deduplicate         Skip articles seen in the past 7 days
+Step 0   Plan searches       xAI Grok-3 identifies breaking stories → dynamic queries + trending topics
+Step 1   Collect news        Parallel fetch from all sources (NYT, RSS, Reddit, Hacker News, Google News)
+Step 2   Deduplicate         Skip articles seen in the past 7 days; drop stale articles (>3 days old)
 Step 3   Cluster             GPT-4o-mini groups near-duplicate articles
 Step 4   Score & rank        Per-category GPT-4o agents score articles (with trending context)
-Step 5   Select top 25       Proportional across categories
-Step 6   Enrich top 8        Fetch full body + "why it matters" via GPT-4o-mini
+Step 5   Select top 25       Proportional across categories; sports articles filtered to trusted sources
+Step 6   Enrich top 15       Fetch full body + "why it matters" via GPT-4o-mini
 Step 7   Mike's Picks        Process user-submitted URLs, PDFs, and text
 Step 8   Generate content    Parallel: HTML briefing + single-voice script + 3-voice script
-Step 8b  Critic pass         GPT-4o scores sections; regenerates weak ones (score < 7)
-Step 9   Generate audio      ElevenLabs 3-voice + OpenAI TTS single-voice backup
+Step 8b  Critic pass         GPT-4o scores sections; regenerates weak ones (score < 7); NY Sports never patched
+Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-voice fallback
 Step 10  Save & deliver      JSON → manifest → RSS feed → email
 ```
+
+## Hallucination Mitigations
+
+Preventing LLM hallucinations in a fully automated pipeline requires defense at every layer. The following guards are active:
+
+- **CRITICAL RULE in all generation prompts**: Every GPT-4o prompt explicitly prohibits adding facts, names, scores, or events not present in the provided articles.
+- **Explicit article counts**: Each category block tells GPT exactly how many articles it has (`"3 articles — discuss ONLY these"`), preventing gap-filling from training knowledge.
+- **Stale article filter**: Articles older than 3 days are dropped before generation.
+- **Sports trusted-source allowlist** (`SPORTS_TRUSTED_SOURCES` in `mc_config.py`): Sports articles from publishers outside the allowlist (e.g. AOL.com aggregators) are dropped before generation.
+- **NY Sports never patched**: `NEVER_PATCH_NORMALIZED = {"ny sports"}` in `mc_critic.py`. When sports coverage is thin, the section stays thin rather than being regenerated with hallucinated content.
+- **Two-stage trending topic filter** (`_filter_trending_to_articles` in `mc_generate.py`): Grok trending topics pass through a keyword gate first, then a GPT-4o semantic validation step that checks whether the topic's specific claim is actually supported by the collected articles — not just that a related entity appears somewhere in the corpus.
+- **Trending prompt label**: Topics injected into generation prompts are labeled as "suggested — verify before covering," not "confirmed present."
+- **Episode description guard**: The episode description prompt explicitly prohibits mentioning anything not stated in the podcast script.
+- **Grok grounding instruction**: Grok is instructed to omit any trending story it isn't highly confident actually occurred today.
+- **LLMs are never used as article sources**: Grok generates search queries only. All article content comes from real RSS feeds and APIs.
 
 ## Project Structure
 
 ```
 mikecast/
-├── mikecast_briefing.py      # Main entry point — orchestrates the full pipeline
+├── mikecast_briefing.py      # Main entry point — orchestrates the full 10-step pipeline
 ├── mc_config.py              # Configuration, constants, env vars, category definitions
 ├── mc_plan.py                # xAI Grok adaptive search planning (Step 0)
-├── mc_collect.py             # News collection, dedup, clustering, scoring, enrichment (Steps 1-6)
+├── mc_collect.py             # News collection, dedup, clustering, scoring, enrichment (Steps 1–6)
 ├── mc_generate.py            # GPT-4o content generation: HTML + podcast scripts (Step 8)
 ├── mc_critic.py              # Post-generation quality critic pass (Step 8b)
-├── mc_audio.py               # TTS audio: OpenAI + ElevenLabs (Step 9)
+├── mc_audio.py               # TTS audio: ElevenLabs 3-voice + OpenAI fallback (Step 9)
 ├── mc_deliver.py             # Save JSON, manifest, RSS feed, send email (Step 10)
 ├── mc_utils.py               # Shared utility helpers (HTTP, JSON, text similarity)
-├── mikes_picks_ingest.py     # Utility to queue content in Mike's Picks
+├── mc_ad.py                  # 30-second vertical video ad generator (Meta/Google formats)
+├── mc_youtube.py             # YouTube upload utilities
+├── mikes_picks_ingest.py     # CLI to queue URLs, PDFs, or text into Mike's Picks
 ├── server.py                 # Flask server for local dashboard with /api/manifest
+├── test_trending_filter.py   # Regression test for trending topic hallucination filter
+├── run_mikecast.sh           # Cron wrapper: sources env, runs pipeline, commits + pushes
 ├── mikes_picks.json          # Queue for user-submitted content
 ├── briefing_history.json     # Rolling 7-day history of processed articles
 ├── requirements.txt          # Python dependencies
-├── README.md                 # This file
-├── task_prompt.md            # Original scheduled task prompt
-├── .venv/                    # Python virtual environment (not committed)
-├── data/                     # Daily JSON files + audio + manifest + RSS
-│   ├── YYYY-MM-DD.json
-│   ├── MikeCast_YYYY-MM-DD.mp3
-│   ├── MikeCast_3voice_YYYY-MM-DD.mp3
-│   ├── manifest.json
-│   └── feed.xml
-└── dashboard/                # Static website files
-    ├── index.html
-    ├── style.css
-    └── app.js
+├── CLAUDE.md                 # Claude Code context and operating constraints
+├── index.html                # GitHub Pages entry point
+├── app.js                    # GitHub Pages dashboard JavaScript
+├── style.css                 # GitHub Pages dashboard styles
+├── assets/                   # Static assets (fonts for video ad generation)
+├── dashboard/                # Local dashboard SPA (served by server.py)
+│   ├── index.html
+│   ├── style.css
+│   └── app.js
+└── data/                     # Daily JSON files + audio + manifest + RSS
+    ├── YYYY-MM-DD.json
+    ├── MikeCast_YYYY-MM-DD.mp3
+    ├── MikeCast_3voice_YYYY-MM-DD.mp3
+    ├── manifest.json
+    ├── feed.xml
+    └── cover.png
 ```
 
 ## Setup and Installation
@@ -194,7 +217,7 @@ The `run_mikecast.sh` wrapper:
 Runs automatically via cron. To run manually:
 
 ```bash
-cd ~/mikecast && .venv/bin/python3 mikecast_briefing.py
+source ~/.profile && .venv/bin/python3 mikecast_briefing.py
 ```
 
 ### Adding to "Mike's Picks"
@@ -206,12 +229,11 @@ cd ~/mikecast && .venv/bin/python3 mikecast_briefing.py
 # Add a local PDF
 .venv/bin/python3 mikes_picks_ingest.py --pdf "/path/to/paper.pdf"
 
-# Add raw text
-.venv/bin/python3 mikes_picks_ingest.py --text "Some interesting analysis..."
-
-# Add with a custom title
-.venv/bin/python3 mikes_picks_ingest.py --url "https://example.com" --title "My Custom Title"
+# Add raw text with a title
+.venv/bin/python3 mikes_picks_ingest.py --text "Some interesting analysis..." --title "My Title"
 ```
+
+Picks are consumed and cleared during Step 7 of the next briefing run.
 
 ### Viewing the Dashboard
 
@@ -221,31 +243,28 @@ After each run, the cron script pushes data to GitHub, automatically updating th
 
 **URL:** `https://schwim23.github.io/mikecast/`
 
-> **Limitation:** The archive date-picker dropdown requires the `/api/manifest` endpoint, which GitHub Pages (static host) cannot serve. All other features — today's briefing, audio player, article links — work fine.
+> **Limitation:** The archive date-picker requires the `/api/manifest` endpoint, which GitHub Pages cannot serve. Today's briefing, audio player, and article links all work fine.
 
 #### Option B: Local Server (Full Functionality)
 
 ```bash
-cd ~/mikecast
 .venv/bin/python3 server.py
 ```
 
-Then open `http://localhost:8080/dashboard/` in your browser. The local Flask server exposes `/api/manifest`, enabling full archive date-picker navigation. Run in `screen` or `tmux` for persistence.
+Then open `http://localhost:8080` in your browser. The local Flask server exposes `/api/manifest`, enabling full archive date-picker navigation. Run in `screen` or `tmux` for persistence.
 
 ### Subscribing to the Podcast RSS Feed
-
-The RSS feed is published at:
 
 ```
 https://schwim23.github.io/mikecast/data/feed.xml
 ```
 
-Add this URL to any podcast app (Overcast, Pocket Casts, Castro, etc.) to receive new episodes automatically.
+Add this URL to any podcast app (Overcast, Pocket Casts, Castro, etc.) to receive new episodes automatically. The feed is also available on Apple Podcasts and Spotify.
 
 ### Monitoring
 
 ```bash
-cat ~/mikecast/mikecast.log
+tail -f mikecast.log
 ```
 
 ## Configuration
@@ -255,4 +274,15 @@ Edit `mc_config.py` to customize:
 - **`CATEGORY_SCORER_PROMPTS`**: The LLM scoring criteria for each category.
 - **`NYT_SECTIONS` / `NYT_SEARCH_QUERIES`**: NYT API sections and search terms.
 - **`TECH_RSS_FEEDS` / `WIRE_RSS_FEEDS` / `CNBC_RSS_FEEDS` / `ESPN_RSS_FEEDS` / `REDDIT_FEEDS`**: RSS and Reddit sources.
-- **`SOURCE_TIERS`**: Source credibility rankings (1 = highest) passed to scoring agents.
+- **`SPORTS_TRUSTED_SOURCES`**: Publisher allowlist for NY Sports articles.
+- **`SOURCE_TIERS`**: Source credibility rankings passed to scoring agents.
+
+## Claude Code Integration
+
+This project uses Claude Code with custom slash commands stored in `.claude/commands/`:
+
+- **`/mc-run`**: Check if today's briefing exists, then run (or force-regenerate) the pipeline and show the run summary.
+- **`/mc-debug`**: Triage a failed or incomplete run — checks logs, environment variables, output files, and briefing history integrity.
+- **`/mc-picks`**: Add a URL, PDF, or pasted text to the Mike's Picks queue.
+
+Operating constraints and hallucination guard rules for Claude Code are documented in `CLAUDE.md`.
