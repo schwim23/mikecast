@@ -84,31 +84,95 @@ def _filter_trending_to_articles(
     categorised: dict[str, list[dict]],
 ) -> list[dict]:
     """
-    Drop any trending topic that has no matching article in the collected set.
-    Matching is keyword-based: at least 1 significant word (≥5 chars) from the
-    topic phrase must appear in an article title or description.
-    This prevents GPT from hallucinating details for trending topics that were
-    never actually collected as articles.
+    Drop any trending topic that is not supported by the collected articles.
+
+    Two-stage filter:
+    1. Keyword gate: at least 1 significant word (≥5 chars) from the topic must
+       appear in any article title or description. Topics with zero keyword hits
+       are dropped immediately without an API call.
+    2. Semantic validation: for topics that pass stage 1, ask GPT-4o whether the
+       collected articles actually support the specific claim in the topic phrase.
+       Topics the model judges as unsupported or contradicted are dropped.
     """
-    # Build a single lowercase corpus of all article titles + descriptions
+    # Build corpus and per-article snippet list for semantic check
     corpus_parts: list[str] = []
+    article_snippets: list[str] = []
     for arts in categorised.values():
         for art in arts:
-            corpus_parts.append(art.get("title", "").lower())
-            corpus_parts.append(art.get("description", "").lower())
+            title = art.get("title", "")
+            desc = art.get("description", "")
+            corpus_parts.append(title.lower())
+            corpus_parts.append(desc.lower())
+            if title:
+                snippet = title if not desc else f"{title} — {desc[:120]}"
+                article_snippets.append(snippet)
     corpus = " ".join(corpus_parts)
+    articles_block = "\n".join(f"- {s}" for s in article_snippets[:80])
 
-    matched: list[dict] = []
+    # Stage 1: keyword gate
+    keyword_passed: list[dict] = []
     for item in trending:
         topic = item.get("topic", "")
-        # Extract words ≥5 chars as significant keywords (skip stop-words / short words)
         keywords = [w.lower() for w in topic.split() if len(w) >= 5]
         if any(kw in corpus for kw in keywords):
+            keyword_passed.append(item)
+        else:
+            logger.info("Trending topic dropped (no keyword match): %r", topic)
+
+    if not keyword_passed or not OPENAI_API_KEY:
+        return keyword_passed
+
+    # Stage 2: semantic validation via GPT-4o
+    try:
+        from openai import OpenAI
+        client = OpenAI()
+
+        topics_block = "\n".join(
+            f"{i}. {t['topic']}" for i, t in enumerate(keyword_passed, 1)
+        )
+        resp = client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "system",
+                    "content": (
+                        "You are a strict fact-checker. Given a list of trending topic claims "
+                        "and a set of collected news article headlines, determine whether each "
+                        "topic claim is directly supported by the articles. A topic is SUPPORTED "
+                        "only if the articles contain evidence for the specific claim made — "
+                        "not just a related subject. A topic is UNSUPPORTED if the articles "
+                        "contradict it, describe a different outcome, or merely mention the same "
+                        "entity in a different context (e.g. 'OpenAI faces lawsuit' does NOT "
+                        "support 'OpenAI launches new model'; 'Fed expects one cut this year' "
+                        "does NOT support 'Fed announces rate cut'). "
+                        "Return ONLY a JSON array of integers — the 1-based indices of SUPPORTED "
+                        "topics. Example: [1, 3]. If none are supported, return []."
+                    ),
+                },
+                {
+                    "role": "user",
+                    "content": (
+                        f"TRENDING TOPIC CLAIMS:\n{topics_block}\n\n"
+                        f"COLLECTED ARTICLE HEADLINES:\n{articles_block}"
+                    ),
+                },
+            ],
+            max_tokens=50,
+            temperature=0,
+        )
+        raw = resp.choices[0].message.content.strip()
+        # Parse JSON array of supported indices
+        supported_indices: set[int] = set(json.loads(raw))
+    except Exception as exc:
+        logger.warning("Trending semantic filter failed (%s) — keeping keyword-passed topics", exc)
+        return keyword_passed
+
+    matched: list[dict] = []
+    for i, item in enumerate(keyword_passed, 1):
+        if i in supported_indices:
             matched.append(item)
         else:
-            logger.info(
-                "Trending topic dropped — no matching article found: %r", topic
-            )
+            logger.info("Trending topic dropped (semantic check): %r", item.get("topic", ""))
     return matched
 
 
@@ -122,7 +186,7 @@ def _build_trending_prompt_block(trending: list[dict]) -> str:
         return ""
     lines = [f"  {i}. {t.get('topic', '')}" for i, t in enumerate(trending, 1)]
     return (
-        "\nTODAY'S TOP TRENDING TOPICS (confirmed present in today's articles — cover these):\n"
+        "\nTODAY'S SUGGESTED TRENDING TOPICS (verify against the articles above before covering):\n"
         + "\n".join(lines)
         + "\nIMPORTANT: Only reference a trending topic if the articles above directly support it. "
         "If you cannot find an article covering a listed topic, skip it entirely — do NOT invent details.\n"
@@ -603,12 +667,16 @@ def generate_episode_description(podcast_script: str, episode_num: int) -> str:
                         "Write a single sentence of approximately 50 words summarizing "
                         "the key topics covered in this episode. Be specific about the "
                         "actual stories — name the companies, people, or events discussed. "
-                        "Do not start with 'Episode', a number, or the word 'Today'."
+                        "Do not start with 'Episode', a number, or the word 'Today'. "
+                        "CRITICAL: Only mention stories and facts that are explicitly stated "
+                        "in the podcast script below. Do not add details, events, or claims "
+                        "from your training knowledge. If a topic is only vaguely mentioned, "
+                        "omit it rather than embellish it."
                     ),
                 },
                 {
                     "role": "user",
-                    "content": f"Podcast script:\n\n{podcast_script[:3000]}",
+                    "content": f"Podcast script:\n\n{podcast_script[:6000]}",
                 },
             ],
             max_tokens=120,

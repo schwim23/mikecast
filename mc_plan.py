@@ -58,7 +58,11 @@ _USER_PROMPT = (
     '- "x_url": the URL of the single most popular or most relevant X post about this '
     "story (real https://x.com/... URL you can verify; set to \"\" if not found)\n"
     '- "x_query": 3-5 specific keywords optimized for searching this story on X '
-    '(e.g. "OpenAI GPT-5 launch" or "Fed rate cut March 2026") — used as search fallback'
+    '(e.g. "OpenAI GPT-5 launch" or "Fed rate cut March 2026") — used as search fallback\n\n'
+    "IMPORTANT: Only include a trending story if you are highly confident it actually occurred "
+    "today. If you are uncertain whether a specific event happened (e.g. a product launch, "
+    "a rate decision, a policy announcement), omit it rather than include it. "
+    "Do not speculate or extrapolate from prior trends."
 )
 
 
