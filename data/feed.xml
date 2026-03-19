@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #25 — March 19, 2026</title>
+    <description>Episode #25 — This episode covers OpenAI's launch of a groundbreaking AI model, Meta's data security breach involving a rogue AI agent, Alibaba's disappointing earnings report amid struggles in the AI race, Meta's strategic shift from the metaverse to AI, the Federal Reserve's unexpected rate cut, and the impact of missile strikes in Qatar and Iran on global oil prices.</description>
+    <pubDate>Thu, 19 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-19</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-19.mp3" type="audio/mpeg" length="4410484"/>
+    <itunes:title>MikeCast #25 — March 19, 2026</itunes:title>
+    <itunes:subtitle>Episode #25 — This episode covers OpenAI's launch of a groundbreaking AI model, Meta's data security breach involving a rogue AI agent, Alibaba's disappointing earnings report amid struggles in the AI race, Meta's strategic shift from the metaverse to ...</itunes:subtitle>
+    <itunes:summary>Episode #25 — This episode covers OpenAI's launch of a groundbreaking AI model, Meta's data security breach involving a rogue AI agent, Alibaba's disappointing earnings report amid struggles in the AI race, Meta's strategic shift from the metaverse to AI, the Federal Reserve's unexpected rate cut, and the impact of missile strikes in Qatar and Iran on global oil prices.</itunes:summary>
+    <itunes:duration>275</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #24 — March 18, 2026</title>
     <description>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory strikes following Ali Larijani's death, and Tesla's $4.3 billion battery plant with LG highlight today's tech, economic, and geopolitical developments.</description>
     <pubDate>Wed, 18 Mar 2026 11:45:00 GMT</pubDate>
