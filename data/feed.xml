@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #26 — March 20, 2026</title>
+    <description>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing delivery robot maker Rivr; and President Trump approves $23 billion in arms sales to Gulf nations.</description>
+    <pubDate>Fri, 20 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-20</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-20.mp3" type="audio/mpeg" length="4537251"/>
+    <itunes:title>MikeCast #26 — March 20, 2026</itunes:title>
+    <itunes:subtitle>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing...</itunes:subtitle>
+    <itunes:summary>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing delivery robot maker Rivr; and President Trump approves $23 billion in arms sales to Gulf nations.</itunes:summary>
+    <itunes:duration>283</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #25 — March 19, 2026</title>
     <description>Episode #25 — In this episode, OpenAI's acquisition of Astral aims to challenge Anthropic, Figma's stock drops due to Google's new product, Meta shifts to AI for content enforcement, Tesla faces scrutiny over its 'Full Self-Driving' systems, the Dow Jones crashes amid market volatility, and Uber plans a $1.25 billion investment in Rivian.</description>
     <pubDate>Thu, 19 Mar 2026 11:45:00 GMT</pubDate>
