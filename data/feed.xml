@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #27 — March 21, 2026</title>
+    <description>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Uber's $1.25 billion deal with Rivian for robotaxis, and the FTC's warning to Apple over news curation practices.</description>
+    <pubDate>Sat, 21 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-21</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-21.mp3" type="audio/mpeg" length="4329317"/>
+    <itunes:title>MikeCast #27 — March 21, 2026</itunes:title>
+    <itunes:subtitle>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Ube...</itunes:subtitle>
+    <itunes:summary>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Uber's $1.25 billion deal with Rivian for robotaxis, and the FTC's warning to Apple over news curation practices.</itunes:summary>
+    <itunes:duration>270</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #26 — March 20, 2026</title>
     <description>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing delivery robot maker Rivr; and President Trump approves $23 billion in arms sales to Gulf nations.</description>
     <pubDate>Fri, 20 Mar 2026 11:45:00 GMT</pubDate>
