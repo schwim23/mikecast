@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #28 — March 22, 2026</title>
+    <description>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks anticipate changes with Giannis Antetokounmpo, while Cam Skattebo's comments spark health debates.</description>
+    <pubDate>Sun, 22 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-22</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-22.mp3" type="audio/mpeg" length="4921322"/>
+    <itunes:title>MikeCast #28 — March 22, 2026</itunes:title>
+    <itunes:subtitle>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks ...</itunes:subtitle>
+    <itunes:summary>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks anticipate changes with Giannis Antetokounmpo, while Cam Skattebo's comments spark health debates.</itunes:summary>
+    <itunes:duration>307</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #27 — March 21, 2026</title>
     <description>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Uber's $1.25 billion deal with Rivian for robotaxis, and the FTC's warning to Apple over news curation practices.</description>
     <pubDate>Sat, 21 Mar 2026 11:45:00 GMT</pubDate>
