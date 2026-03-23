@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #29 — March 23, 2026</title>
+    <description>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion acquisition, oil market volatility due to geopolitical tensions, Google's $4 trillion market cap milestone, and updates from the New York sports scene.</description>
+    <pubDate>Mon, 23 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-23</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-23.mp3" type="audio/mpeg" length="4889944"/>
+    <itunes:title>MikeCast #29 — March 23, 2026</itunes:title>
+    <itunes:subtitle>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion ...</itunes:subtitle>
+    <itunes:summary>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion acquisition, oil market volatility due to geopolitical tensions, Google's $4 trillion market cap milestone, and updates from the New York sports scene.</itunes:summary>
+    <itunes:duration>305</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #28 — March 22, 2026</title>
     <description>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks anticipate changes with Giannis Antetokounmpo, while Cam Skattebo's comments spark health debates.</description>
     <pubDate>Sun, 22 Mar 2026 11:45:00 GMT</pubDate>
