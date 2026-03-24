@@ -1,0 +1,280 @@
+{
+  "date": "2026-03-24",
+  "date_display": "March 24, 2026",
+  "episode_num": 30,
+  "episode_description": "Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran's conflict, the U.S. halting wind farm projects with TotalEnergies, Apollo's private credit fund challenges, Apple's upcoming WWDC26, Tesla's sales rebound in Europe, Netflix streaming Yankees-Giants Opening Night, and Uber's service expansion.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 24, 2026</p>\n</div>\n\n<div style=\"background:#1e1408;border:1px solid #8B4513;border-radius:8px;padding:16px 20px;margin-bottom:24px;\"><h2 style=\"color:#ff8c00;margin:0 0 10px;font-size:1.05em;letter-spacing:.4px;\">🔥 TOP TRENDING NOW</h2><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">1</span><div><a href=\"https://x.com/search?q=oil+price+surge+March+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Global oil prices spike amid supply concerns</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div></div>\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant developments across various sectors. In AI and tech, Anthropic's Claude is advancing its capabilities, while OpenAI addresses risks related to its Microsoft reliance. The business landscape sees oil prices rising amid geopolitical tensions, and the U.S. government is taking steps to alter energy projects. In the corporate world, Apple is gearing up for its upcoming WWDC, and Tesla experiences a sales rebound in Europe. In sports, the Yankees and Giants are set to open the MLB season on Netflix, and Zion Williamson's performance is a concern for the Knicks.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Anthropic is enhancing its AI agent, Claude, to perform tasks on users' computers, which includes opening applications, navigating browsers, and filling spreadsheets. This move is part of a broader industry trend to develop AI agents with more autonomous capabilities, following the viral success of OpenClaw. Such advancements could revolutionize how individuals interact with technology, making daily tasks more efficient and automated. <a href=\"https://www.cnbc.com/2026/03/24/anthropic-claude-ai-agent-use-computer-finish-tasks.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI has highlighted its dependency on Microsoft as a risk factor in a document resembling an IPO prospectus. The company points out potential supply disruptions at TSMC as another concern. This transparency is crucial as OpenAI prepares for a potential IPO, aiming to reassure investors by acknowledging these dependencies and risks. The document underscores the intertwined nature of tech giants and the challenges they face in maintaining operational stability. <a href=\"https://www.cnbc.com/2026/03/23/openai-risk-factors-microsoft-reliance-elon-musk-and-xai-lawsuits.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The FCC has updated its covered list to include foreign-made consumer routers, reflecting ongoing concerns about cybersecurity and foreign influence on critical infrastructure. This decision could impact the availability and variety of consumer routers in the U.S. market, prompting manufacturers to reassess their supply chains and compliance strategies. <a href=\"https://www.fcc.gov/document/fcc-updates-covered-list-include-foreign-made-consumer-routers\" style=\"color:#81d4fa;text-decoration:none;\">Hacker News</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oil prices have surged, with Brent crude climbing above $100 per barrel as optimism fades over the de-escalation of the Iran war. The conflict has disrupted global oil and gas supplies, highlighting the volatility in energy markets and the geopolitical factors that can influence prices. This rise in oil prices could have widespread economic implications, affecting everything from transportation costs to inflation rates. <a href=\"https://www.cnbc.com/2026/03/24/oil-prices-today-wti-brent-middle-east-iran-war.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The White House has announced a $1 billion payment to TotalEnergies to halt East Coast wind farm projects. This decision is driven by the need to prioritize LNG resource development amid disruptions caused by the Iran war. The move reflects shifting energy priorities in the U.S. as it seeks to secure energy independence and stability in the face of global supply challenges. <a href=\"https://www.cnbc.com/2026/03/24/us-to-pay-totalenergies-1-billion-to-kill-east-coast-wind-projects.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apollo Global Management is returning only 45% of requested withdrawals from its $15 billion private credit fund, highlighting the liquidity strains in the private credit market. This situation mirrors the challenges faced by other firms in managing investor redemptions amid concerns over loans to software companies. The development underscores the vulnerabilities in the private credit sector and the need for cautious investment strategies. <a href=\"https://www.cnbc.com/2026/03/23/apollo-private-credit-fund-gives-investors-only-45percent-of-requested-withdrawals.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">With the Worldwide Developers Conference 2026 approaching, Apple is expected to launch new products soon. This anticipation builds on Apple's tradition of unveiling innovative technologies at WWDC, which could include updates to existing product lines or entirely new offerings. The event serves as a critical platform for Apple to engage with developers and showcase its technological advancements. <a href=\"https://www.business-standard.com\" style=\"color:#81d4fa;text-decoration:none;\">Business Standard</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Tesla has reported a rebound in sales across Europe after experiencing a slump over several months. This recovery indicates a renewed demand for Tesla vehicles in the region, possibly driven by improved production capabilities or market conditions. The sales increase is a positive sign for Tesla's growth prospects in the European market. <a href=\"https://www.wsj.com\" style=\"color:#81d4fa;text-decoration:none;\">WSJ</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Netflix is entering the MLB scene with the Yankees and Giants opening night, marking the platform's venture into live sports broadcasting. This strategic move is part of Netflix's broader plan to diversify its content offerings and attract new subscribers by tapping into the sports audience. The success of this initiative could influence Netflix's future content strategy and partnerships. <a href=\"https://www.wral.com\" style=\"color:#81d4fa;text-decoration:none;\">WRAL</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees are set to face the San Francisco Giants on Opening Night, with the game being broadcast on Netflix at 8 p.m. ET. This matchup marks the beginning of the MLB season and represents Netflix's foray into live sports streaming. The outcome of this game could set the tone for both teams' seasons. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New Jersey Devils played against the Dallas Stars, though the article does not provide the final score or details about the game. The Devils' performance in this match will influence their standings and momentum as the NHL season progresses. <a href=\"https://www.nhl.com\" style=\"color:#81d4fa;text-decoration:none;\">NHL.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Zion Williamson's impressive resurgence poses a potential challenge for the New York Knicks as they prepare to face the motivated New Orleans Pelicans. Williamson's performance could significantly impact the game's outcome, and the Knicks will need to strategize effectively to counter his influence on the court. <a href=\"https://nypost.com\" style=\"color:#81d4fa;text-decoration:none;\">New York Post</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">AI agents are becoming increasingly capable, with companies like Anthropic enhancing their functionalities to automate complex tasks. - Energy markets are experiencing volatility due to geopolitical tensions, affecting oil prices and prompting shifts in energy policy. - Companies are navigating dependencies and risks, as seen with OpenAI's reliance on Microsoft and Apollo's liquidity challenges. - The integration of live sports into streaming platforms like Netflix signals a shift in content strategies to capture diverse audiences.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor the outcomes of Apple's upcoming product launches at WWDC26 for potential impacts on the tech market. - Follow the developments in the Iran conflict and its influence on global oil prices and energy policies. - Keep an eye on Tesla's sales performance in Europe to gauge the sustainability of its recent rebound. - Watch the Yankees' performance in their season opener against the Giants and the impact of Zion Williamson's play on the Knicks' upcoming game.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 24, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "articles": {
+    "NY Sports": [
+      {
+        "title": "[Updated] Yankees meet Giants in Opening Night on Netflix (Wednesday, 8 p.m. ET) - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "Yankees meet Giants in Opening Night on Netflix (Wednesday, 8 p.m. ET)MLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the intersection of sports and streaming, showcasing how major leagues leverage platforms like Netflix to engage audiences and drive investment opportunities in digital media."
+      },
+      {
+        "title": "[Updated] Devils at Stars | GAME STORY - NHL.com",
+        "url": "https://www.nhl.com",
+        "description": "Devils at Stars | GAME STORYNHL.com",
+        "source": "NHL.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the competitive dynamics of the NHL, reflecting broader trends in sports investment and the importance of strategic positioning in high-stakes environments."
+      },
+      {
+        "title": "[Updated] ‘Freak of nature: Zion Williamson’s resurgence could pose a Knicks problem versus motivated Pelicans - New York Post",
+        "url": "https://nypost.com",
+        "description": "‘Freak of nature: Zion Williamson’s resurgence could pose a Knicks problem versus motivated PelicansNew York Post",
+        "source": "New York Post",
+        "published": "",
+        "score": 20,
+        "score_reason": "Zion Williamson's resurgence could impact Knicks' performance against Pelicans."
+      }
+    ],
+    "Companies": [
+      {
+        "title": "[Updated] With WWDC26 approaching, Apple could launch new products soon: Check list - Business Standard",
+        "url": "https://www.business-standard.com",
+        "description": "With WWDC26 approaching, Apple could launch new products soon: Check listBusiness Standard",
+        "source": "Business Standard",
+        "published": "",
+        "score": 87,
+        "score_reason": "Apple could launch new products soon with WWDC26 approaching, significant for product announcements.",
+        "why_it_matters": "Apple's upcoming product launches at WWDC26 could significantly impact market trends and investment opportunities, making it crucial for tech-executive investors to stay informed."
+      },
+      {
+        "title": "[Updated] Apple’s Worldwide Developers Conference returns the week of June 8 - Apple",
+        "url": "https://www.apple.com",
+        "description": "Apple’s Worldwide Developers Conference returns the week of June 8Apple",
+        "source": "Apple",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Apple's WWDC showcases innovation trends that could shape investment strategies and technology landscapes, making it crucial for tech-executive investors to stay informed."
+      },
+      {
+        "title": "Jurors begin deliberating in New Mexico v. Meta; state seeks nearly $2B - Santa Fe New Mexican",
+        "url": "https://www.santafenewmexican.com",
+        "description": "Jurors begin deliberating in New Mexico v. Meta; state seeks nearly $2BSanta Fe New Mexican",
+        "source": "Santa Fe New Mexican",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "The outcome of New Mexico v. Meta could set significant legal precedents impacting tech regulations and investor strategies in the evolving landscape of digital privacy and accountability."
+      },
+      {
+        "title": "[Updated] Tesla Sales Rebound in Europe After Monthslong Slump - WSJ",
+        "url": "https://www.wsj.com",
+        "description": "Tesla Sales Rebound in Europe After Monthslong SlumpWSJ",
+        "source": "WSJ",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Tesla's sales rebound in Europe signals a potential recovery in EV demand, highlighting market resilience and investment opportunities in the rapidly evolving automotive and clean energy sectors."
+      },
+      {
+        "title": "Netflix swings into MLB with Yankees-Giants opening night, betting on 3 marquee events - WRAL",
+        "url": "https://www.wral.com",
+        "description": "Netflix swings into MLB with Yankees-Giants opening night, betting on 3 marquee eventsWRAL",
+        "source": "WRAL",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Netflix's foray into MLB events signals a strategic pivot towards live sports, highlighting opportunities for tech investors in streaming, advertising, and audience engagement in an evolving media landscape."
+      },
+      {
+        "title": "[Updated] Uber is becoming more than just a ride‑hailing company - USA Today",
+        "url": "https://www.usatoday.com",
+        "description": "Uber is becoming more than just a ride‑hailing companyUSA Today",
+        "source": "USA Today",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Uber's diversification into various services signals potential growth opportunities and market resilience, making it a crucial investment consideration for tech executives navigating today's dynamic landscape."
+      }
+    ],
+    "Business & Markets": [
+      {
+        "title": "Oil rises with Brent climbing back above $100 as optimism fades over Iran war de-escalation",
+        "url": "https://www.cnbc.com/2026/03/24/oil-prices-today-wti-brent-middle-east-iran-war.html",
+        "description": "Oil prices traded higher on Tuesday, with international benchmark Brent crude climbing back above $100 per barrel.",
+        "source": "CNBC",
+        "published": "Tue, 24 Mar 2026 09:55:26 GMT",
+        "score": 87,
+        "score_reason": "Global oil price surge due to Iran conflict impacts energy sector investments and inflation, affecting Fed policy and market dynamics.",
+        "why_it_matters": "Rising oil prices impact inflation and energy costs, influencing market stability and investment strategies for tech executives navigating economic uncertainties."
+      },
+      {
+        "title": "White House to pay TotalEnergies $1 billion to kill off East Coast wind farm projects",
+        "url": "https://www.cnbc.com/2026/03/24/us-to-pay-totalenergies-1-billion-to-kill-east-coast-wind-projects.html",
+        "description": "The announcement comes as the Iran war disrupts global oil and gas supplies, making the U.S.' development of its LNG resources more urgent.",
+        "source": "CNBC",
+        "published": "Tue, 24 Mar 2026 07:26:02 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This decision highlights the shifting energy landscape, emphasizing the urgency for tech investors to pivot towards sustainable solutions amid geopolitical disruptions in traditional energy markets."
+      },
+      {
+        "title": "Apollo gives investors only 45% of requested withdrawals from $15 billion private credit fund",
+        "url": "https://www.cnbc.com/2026/03/23/apollo-private-credit-fund-gives-investors-only-45percent-of-requested-withdrawals.html",
+        "description": "The withdrawals show that Apollo didn't avoid the rush of investor redemptions plaguing rivals, driven by concern over private credit loans to software firms.",
+        "source": "CNBC",
+        "published": "Tue, 24 Mar 2026 00:48:12 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights liquidity risks in private credit markets, crucial for tech investors assessing exposure to distressed sectors like software amid rising economic uncertainty."
+      },
+      {
+        "title": "Jeffrey Gundlach says it's a ‘going nowhere’ market, warns of private credit strains",
+        "url": "https://www.cnbc.com/2026/03/23/jeffrey-gundlach-says-its-a-going-nowhere-market-warns-of-private-credit-strains.html",
+        "description": "His comments come as investors increasingly scrutinize pockets of the private credit market, particularly funds exposed to riskier borrowers.",
+        "source": "CNBC",
+        "published": "Mon, 23 Mar 2026 22:37:47 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights potential risks in private credit markets, crucial for tech-executive investors navigating funding strategies in a volatile economic landscape."
+      },
+      {
+        "title": "U.S. executives, from Apple to Eli Lilly, revamp their push into the world's second-largest economy at the China Development Forum",
+        "url": "https://www.cnbc.com/2026/03/23/apple-eli-lilly-us-china-market-push-trade-truce.html",
+        "description": "More than 80 global executives traveled to Beijing this weekend for the state-organized China Development Forum.",
+        "source": "CNBC",
+        "published": "Mon, 23 Mar 2026 14:52:33 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights strategic opportunities for U.S. tech investors to capitalize on China's vast market potential amidst evolving global economic dynamics."
+      },
+      {
+        "title": "Iran War ceasefire ain't fixing oil prices",
+        "url": "https://www.reddit.com/r/investing/comments/1s1r1aq/iran_war_ceasefire_aint_fixing_oil_prices/",
+        "description": "Everyone's watching the Strait of Hormuz. That's not the real issue.MST Financial's Saul Kavonic: even if the Strait reopened tomorrow, there's barely anything left to ship. You can reopen a shipping lane in days. Rebuilding energy infrastructure takes 3 to 5 years.The strikes physically erased near",
+        "source": "Reddit",
+        "published": "2026-03-23T19:34:27+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the long-term impact of geopolitical conflicts on global oil supply, crucial for tech investors assessing energy market stability and potential investment risks."
+      }
+    ],
+    "AI & Tech": [
+      {
+        "title": "Anthropic says Claude can now use your computer to finish tasks for you in AI agent push",
+        "url": "https://www.cnbc.com/2026/03/24/anthropic-claude-ai-agent-use-computer-finish-tasks.html",
+        "description": "Anthropic and its rivals are trying to ramp up capabilities of AI agents after OpenClaw went viral earlier this year.",
+        "source": "CNBC",
+        "published": "Tue, 24 Mar 2026 10:03:38 GMT",
+        "score": 87,
+        "score_reason": "Anthropic's new AI agent capabilities have clear business implications for automation and productivity.",
+        "why_it_matters": "This story highlights Anthropic's advancements in AI agents, signaling a pivotal shift in productivity tools that could reshape investment strategies in tech and automation sectors."
+      },
+      {
+        "title": "iPhone 17 Pro Demonstrated Running a 400B LLM",
+        "url": "https://twitter.com/anemll/status/2035901335984611412",
+        "description": "HN score: 620 | Comments: 279",
+        "source": "Hacker News",
+        "published": "2026-03-23T14:30:10Z",
+        "hn_score": 620,
+        "hn_comments": 279,
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "FCC updates covered list to include foreign-made consumer routers",
+        "url": "https://www.fcc.gov/document/fcc-updates-covered-list-include-foreign-made-consumer-routers",
+        "description": "HN score: 320 | Comments: 219",
+        "source": "Hacker News",
+        "published": "2026-03-23T21:28:02Z",
+        "hn_score": 320,
+        "hn_comments": 219,
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "British fintech Revolut reports record annual profit as it gears up for U.S. push",
+        "url": "https://www.cnbc.com/2026/03/24/revolut-2025-earnings-record-profit.html",
+        "description": "The startup, which hit a $75 billion valuation in 2025, is one of Europe's most valuable private tech companies.",
+        "source": "CNBC",
+        "published": "Tue, 24 Mar 2026 09:30:59 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "OpenAI calls out Microsoft reliance as risk in investor document ahead of expected IPO",
+        "url": "https://www.cnbc.com/2026/03/23/openai-risk-factors-microsoft-reliance-elon-musk-and-xai-lawsuits.html",
+        "description": "In a document that resembles an IPO prospectus, OpenAI highlighted the risk of its dependence on Microsoft and of supply disruptions at TSMC.",
+        "source": "CNBC",
+        "published": "Mon, 23 Mar 2026 23:36:42 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Just in: You can now enable Claude to use your computer to complete tasks. It opens your apps, navigates your browser, fills in spreadsheets—anything you'd do sitting at your desk.",
+        "url": "https://www.reddit.com/r/artificial/comments/1s1xg9h/just_in_you_can_now_enable_claude_to_use_your/",
+        "description": "submitted by/u/Automatic_Subject463[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-23T23:33:10+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Mark Zuckerberg builds AI CEO to help him run Meta",
+        "url": "https://www.reddit.com/r/artificial/comments/1s1qk1c/mark_zuckerberg_builds_ai_ceo_to_help_him_run_meta/",
+        "description": "submitted by/u/esporx[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-23T19:17:39+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "US bans new foreign-made consumer internet routers",
+        "url": "https://www.reddit.com/r/technology/comments/1s21a4e/us_bans_new_foreignmade_consumer_internet_routers/",
+        "description": "submitted by/u/Different_Emotion625[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-24T02:15:27+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] OpenAI calls out Microsoft reliance as risk in investor document ahead of expected IPO - CNBC",
+        "url": "https://www.cnbc.com",
+        "description": "OpenAI calls out Microsoft reliance as risk in investor document ahead of expected IPOCNBC",
+        "source": "CNBC",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ]
+  },
+  "mikes_picks": [],
+  "podcast_script": "[INTRO]\n\nHey there, welcome to MikeCast! It's March 24, 2026, and I'm your host, Mike, here to catch you up on everything you need to know today. We've got a jam-packed episode, so grab your coffee and let's dive in. We're talking about some big moves in the AI world with Anthropic and OpenAI making headlines, oil prices spiking again, and some exciting updates from the sports world, including a unique MLB Opening Night. So, let's get started!\n\n[AI & TECH SEGMENT]\n\nAlright, kicking things off with AI and tech, where there's a lot of buzz today. First up, Anthropic is making waves with its AI agent, Claude. This tool is now capable of using your computer to finish tasks for you—everything from opening apps to navigating your browser and even filling in spreadsheets. It's like having a virtual assistant that can actually handle the nitty-gritty of your daily digital tasks. This push comes as Anthropic and its rivals are ramping up their AI capabilities, especially after OpenClaw went viral earlier this year. The idea here is to make AI more integrated into our daily workflows, which could change how we interact with technology on a fundamental level.\n\nSpeaking of AI, OpenAI is in the spotlight as well. They've highlighted some risks in a document that resembles an IPO prospectus. One of the big concerns? Their reliance on Microsoft. This dependency is seen as a potential risk factor, especially as OpenAI gears up for its expected IPO. They're also worried about supply disruptions at TSMC, which is crucial for their operations. It's a reminder of how interconnected the tech world is and how a hiccup in one area can ripple through the entire industry.\n\nAnd let's not forget about the hardware side of things. The FCC has updated its covered list to include foreign-made consumer routers. This move is part of a broader effort to secure the tech infrastructure in the U.S. by limiting the use of foreign-made equipment that could pose security risks. It's a significant step in the ongoing conversation about tech security and national safety.\n\nFinally, on a lighter note, British fintech company Revolut is celebrating a record annual profit as it prepares for a big push into the U.S. market. With a valuation of $75 billion, Revolut is one of Europe's most valuable private tech companies. This move into the U.S. could shake up the fintech scene, bringing more competition and innovation to the market.\n\n[BUSINESS & MARKETS SEGMENT]\n\nSwitching gears to business and markets, oil prices are making headlines again. Brent crude has climbed back above $100 per barrel. This rise is happening as optimism fades over a de-escalation in the Iran war. The situation in the Middle East is causing disruptions in global oil and gas supplies, and everyone's keeping an eye on the Strait of Hormuz. Even if the Strait reopens, experts like MST Financial's Saul Kavonic point out that rebuilding energy infrastructure could take years, so don't expect a quick fix on oil prices.\n\nIn the U.S., the White House has announced a $1 billion payment to TotalEnergies to halt East Coast wind farm projects. This decision is tied to the urgency of developing LNG resources amid the ongoing disruptions in oil and gas supplies. It's a strategic pivot to focus on LNG as a more immediate solution to energy needs.\n\nAnd in the world of private credit, Apollo is in the spotlight. They've only been able to give investors 45% of the requested withdrawals from their $15 billion private credit fund. This comes amid a rush of investor redemptions, driven by concerns over private credit loans to software firms. It's a tough market out there, and even big players like Apollo are feeling the pressure.\n\n[COMPANIES SEGMENT]\n\nNow, let's dive into some company news. Apple is gearing up for its Worldwide Developers Conference, set for the week of June 8. With WWDC26 approaching, there's a lot of speculation about new product launches. Apple events always generate a lot of buzz, and this year is no different. Everyone's eager to see what innovations Apple will bring to the table.\n\nTesla is also making headlines with a rebound in sales in Europe after a months-long slump. It's a positive sign for the electric vehicle giant, showing resilience in a challenging market. This rebound could set the stage for further growth as Tesla continues to expand its global footprint.\n\nAnd over at Uber, the company is evolving beyond just ride-hailing. They're expanding into new areas, looking to diversify their offerings and tap into different markets. It's a strategic move to stay competitive and relevant in a rapidly changing landscape.\n\nFinally, Netflix is making a splash in the sports world. They're streaming the Yankees vs. Giants Opening Night, betting on marquee events to attract viewers. This move into live sports is a big shift for Netflix, traditionally known for its on-demand content. It's an exciting development that could change how we consume sports entertainment.\n\n[NY SPORTS SEGMENT]\n\nAlright, let's talk sports! It's an exciting time for New York teams. The Yankees are set to face the Giants in their Opening Night game, streaming on Netflix this Wednesday at 8 p.m. ET. It's a unique way to kick off the season, and fans are buzzing with anticipation.\n\nOver in the NHL, the Devils took on the Stars. Unfortunately, the game didn't go their way, but they're looking to bounce back in their next matchup. Keep an eye on them as they continue their season.\n\nIn the NBA, Zion Williamson is making headlines with his resurgence, posing a potential problem for the Knicks as they face a motivated Pelicans team. It's shaping up to be an exciting game, and Knicks fans are hoping their team can rise to the challenge.\n\n[MIKE'S PICKS SEGMENT]\n\nAnd now, it's time for Big Mike's hand-picked reads! If you're looking for something interesting to dive into, check out the latest on how AI is transforming our daily tasks with Anthropic's Claude. It's a fascinating look at the future of work and technology. Also, don't miss the in-depth analysis of the oil market and what it means for global energy supplies. These stories are packed with insights that you won't want to miss.\n\n[OUTRO]\n\nThat's a wrap for today's episode of MikeCast! Thanks for tuning in and catching up with me. If you enjoyed the show, don't forget to subscribe and leave a review. I'll be back tomorrow with more news and insights. Until then, stay informed and stay curious!",
+  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast! It's March 24, 2026, and we've got a jam-packed episode for you today. We're diving into some exciting developments in the tech world, including OpenAI's big moves and Anthropic's latest AI agent. Plus, we'll take a look at the global oil market's reaction to geopolitical tensions. And of course, Jesse's got the latest on New York sports. Let's get started.\n\n[ELIZABETH]\n\nAlright, let's jump into today's most-watched stories in AI and tech. First up, Anthropic is making waves with their AI agent, Claude, which can now use your computer to finish tasks for you. This is a big step forward in AI capabilities, allowing Claude to open apps, navigate browsers, and even fill in spreadsheets—basically anything you'd do at your desk. Anthropic is really pushing the envelope here, trying to compete with the viral success of OpenClaw earlier this year.\n\nSpeaking of OpenAI, they're in the spotlight as they prepare for an expected IPO. In a recent investor document, they've highlighted their reliance on Microsoft as a significant risk. This dependency, along with potential supply disruptions at TSMC, is something investors are keeping a close eye on. It's a reminder of how interconnected these tech giants are and the potential vulnerabilities in those relationships.\n\nMoving on, the FCC has updated its covered list to include foreign-made consumer routers. This move is part of a broader effort to secure the nation's telecommunications infrastructure. It's a significant step, as it could impact a wide range of devices and manufacturers, reshaping the landscape for consumer tech products in the U.S.\n\nAnd finally, in the fintech world, British startup Revolut has reported a record annual profit as it gears up for a push into the U.S. market. With a valuation of $75 billion, Revolut is one of Europe's most valuable private tech companies, and this profitability milestone is a strong signal of their growth potential.\n\nNow, let's shift gears to business and markets. Oil prices are on the rise again, with Brent crude climbing back above $100 per barrel. The ongoing conflict in Iran is causing supply concerns, and despite a ceasefire, the market remains volatile. The situation in the Strait of Hormuz is critical, but experts like Saul Kavonic are pointing out that even if shipping lanes reopen, rebuilding energy infrastructure will take years.\n\nIn other news, the White House has announced a $1 billion payment to TotalEnergies to halt East Coast wind farm projects. This decision comes as the U.S. focuses on developing its LNG resources amid disruptions in global oil and gas supplies. It's a controversial move, reflecting the complex balancing act between energy independence and environmental commitments.\n\nOn the financial side, Apollo is facing challenges with its private credit fund, only granting investors 45% of their requested withdrawals. This is part of a broader trend of investor redemptions, driven by concerns over private credit loans to software firms. Jeffrey Gundlach has described the market as \"going nowhere,\" highlighting the strains in the private credit sector.\n\nAlright, let's talk companies. With WWDC26 approaching, Apple is gearing up to launch new products soon. The anticipation is building as the Worldwide Developers Conference returns the week of June 8. Apple events are always a highlight in the tech calendar, and this year's lineup is expected to be no different.\n\nMeanwhile, Tesla has seen a rebound in sales in Europe after a slump that lasted several months. This recovery is a positive sign for the electric vehicle maker, indicating a renewed interest in their offerings across the continent.\n\nNetflix is making a bold move into sports, streaming the Yankees-Giants Opening Night. This is part of their strategy to bet on marquee events, and it's a fascinating expansion for the streaming giant as they diversify their content offerings.\n\nAnd Uber is evolving beyond just ride-hailing, as they continue to expand their services. This transformation is part of their broader strategy to become a more comprehensive mobility platform.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth! Let's hit the New York sports scene. Starting with baseball, the Yankees are gearing up for their Opening Night against the Giants, which will be streamed on Netflix this Wednesday at 8 p.m. ET. It's an exciting start to the season, and fans are eager to see how the Yankees perform.\n\nOver in hockey, the Devils faced off against the Stars. Unfortunately, I don't have the final score for you, but it's part of their ongoing season. Keep an eye out for their next matchup.\n\nBasketball fans, the Knicks might have a challenge on their hands with Zion Williamson's resurgence as they prepare to face the Pelicans. Williamson's performance has been turning heads, and it's definitely something the Knicks will need to strategize against.\n\nThat's about it for today in New York sports. Back to you, Mike.\n\n[MIKE]\n\nGreat stuff, Jesse. Thanks for keeping us in the loop. And thank you to all our listeners for joining us today on MikeCast. We hope you enjoyed the show and got some valuable insights from our discussions. Be sure to tune in tomorrow for more updates and stories. Until then, take care and have a great day!",
+  "audio_file": "MikeCast_3voice_2026-03-24.mp3",
+  "elevenlabs_audio_file": "MikeCast_3voice_2026-03-24.mp3",
+  "trending": [
+    {
+      "topic": "New AI regulation bill passed in Congress",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+Congress+2026"
+    },
+    {
+      "topic": "Federal Reserve announces rate decision today",
+      "x_url": "https://x.com/search?q=Federal+Reserve+rate+decision+March+2026"
+    },
+    {
+      "topic": "Apple unveils new product lineup for 2026",
+      "x_url": "https://x.com/search?q=Apple+product+launch+March+24+2026"
+    },
+    {
+      "topic": "Global oil prices spike amid supply concerns",
+      "x_url": "https://x.com/search?q=oil+price+surge+March+2026"
+    },
+    {
+      "topic": "Major tech firm releases advanced AI model",
+      "x_url": "https://x.com/search?q=new+AI+model+release+2026"
+    }
+  ],
+  "generated_at": "2026-03-24T10:32:56.107005+00:00"
+}

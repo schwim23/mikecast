@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #30 — March 24, 2026</title>
+    <description>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran's conflict, the U.S. halting wind farm projects with TotalEnergies, Apollo's private credit fund challenges, Apple's upcoming WWDC26, Tesla's sales rebound in Europe, Netflix streaming Yankees-Giants Opening Night, and Uber's service expansion.</description>
+    <pubDate>Tue, 24 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-24</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-24.mp3" type="audio/mpeg" length="4939730"/>
+    <itunes:title>MikeCast #30 — March 24, 2026</itunes:title>
+    <itunes:subtitle>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran...</itunes:subtitle>
+    <itunes:summary>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran's conflict, the U.S. halting wind farm projects with TotalEnergies, Apollo's private credit fund challenges, Apple's upcoming WWDC26, Tesla's sales rebound in Europe, Netflix streaming Yankees-Giants Opening Night, and Uber's service expansion.</itunes:summary>
+    <itunes:duration>308</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #29 — March 23, 2026</title>
     <description>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion acquisition, oil market volatility due to geopolitical tensions, Google's $4 trillion market cap milestone, and updates from the New York sports scene.</description>
     <pubDate>Mon, 23 Mar 2026 11:45:00 GMT</pubDate>
