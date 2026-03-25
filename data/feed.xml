@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #31 — March 25, 2026</title>
+    <description>Episode #31 — In this episode, we explore Kleiner Perkins' $3.5 billion investment in AI, Meta's stock options strategy, SK Hynix's potential U.S. listing, Arm Holdings' stock surge, SpaceX's anticipated IPO, rising recession risks, Apple's new business platform, Meta's legal challenges, Amazon's Big Spring Sale, Microsoft's stock dip, and New York sports highlights including the Knicks' victory and Ben Rice's home run.</description>
+    <pubDate>Wed, 25 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-25</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-25.mp3" type="audio/mpeg" length="4024739"/>
+    <itunes:title>MikeCast #31 — March 25, 2026</itunes:title>
+    <itunes:subtitle>Episode #31 — In this episode, we explore Kleiner Perkins' $3.5 billion investment in AI, Meta's stock options strategy, SK Hynix's potential U.S. listing, Arm Holdings' stock surge, SpaceX's anticipated IPO, rising recession risks, Apple's new busines...</itunes:subtitle>
+    <itunes:summary>Episode #31 — In this episode, we explore Kleiner Perkins' $3.5 billion investment in AI, Meta's stock options strategy, SK Hynix's potential U.S. listing, Arm Holdings' stock surge, SpaceX's anticipated IPO, rising recession risks, Apple's new business platform, Meta's legal challenges, Amazon's Big Spring Sale, Microsoft's stock dip, and New York sports highlights including the Knicks' victory and Ben Rice's home run.</itunes:summary>
+    <itunes:duration>251</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #30 — March 24, 2026</title>
     <description>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran's conflict, the U.S. halting wind farm projects with TotalEnergies, Apollo's private credit fund challenges, Apple's upcoming WWDC26, Tesla's sales rebound in Europe, Netflix streaming Yankees-Giants Opening Night, and Uber's service expansion.</description>
     <pubDate>Tue, 24 Mar 2026 11:45:00 GMT</pubDate>
