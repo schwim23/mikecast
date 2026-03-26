@@ -1,0 +1,278 @@
+{
+  "date": "2026-03-26",
+  "date_display": "March 26, 2026",
+  "episode_num": 32,
+  "episode_description": "Episode #32 — This episode covers a major legal ruling against Meta over child exploitation and social media addiction, Meta's layoffs and AI acquisitions, the Pentagon's investment in Palantir's AI, rising oil prices due to Middle East tensions, the Supreme Court ruling against Trump on tariffs, AWS and Cerebras' AI partnership, Tesla's sales decline, and New York sports updates.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 26, 2026</p>\n</div>\n\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant developments in the tech and business sectors, with Meta facing legal challenges and layoffs, while geopolitical tensions influence global markets. In sports, New York teams face mixed results, and companies see notable mergers and legal actions.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta faces a legal setback as a jury found the company liable for child sexual exploitation on its platforms. This decision stems from a case in New Mexico, highlighting ongoing concerns about the safety and regulation of social media environments. The ruling could have significant implications for how social media companies manage content and protect users, particularly minors, on their platforms. <a href=\"https://www.cnn.com/2026/03/24/tech/meta-new-mexico-trial-jury-deliberation\" style=\"color:#81d4fa;text-decoration:none;\">Hacker News</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In another legal challenge, Meta and YouTube have been found liable in a trial concerning social media addiction. This landmark case underscores the growing scrutiny of tech giants over their platforms' impact on mental health. The decision may prompt increased regulatory measures and changes in how these platforms engage users to mitigate addictive behaviors. <a href=\"https://www.reddit.com/r/technology/comments/1s3hef0/meta_and_youtube_found_liable_in_social_media/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta has laid off 700 employees while simultaneously rewarding top executives, a move that has sparked criticism and concern over the company's priorities amidst ongoing legal and operational challenges. This development is part of a broader trend of tech companies restructuring their workforces while facing public scrutiny. <a href=\"https://www.reddit.com/r/technology/comments/1s3tcp2/meta_lays_off_700_employees_while_rewarding_top/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta continues its aggressive expansion in AI by acqui-hiring its fourth AI startup in four months. The acquisition of Dreamer, an agentic AI platform, follows previous acquisitions of Manus and Moltbook, and the appointment of Scale AI's Alexandr Wang as Meta's first Chief AI Officer. This strategy indicates Meta's commitment to strengthening its AI capabilities and leadership in the tech industry. <a href=\"https://www.reddit.com/r/artificial/comments/1s3xr4l/meta_just_acquihired_its_4th_ai_startup_in_4/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oil prices are on the rise while global stocks fall as investors navigate the uncertainty surrounding the Middle East conflict. The fluctuating market conditions reflect concerns over potential disruptions in oil supply and broader economic impacts. This situation underscores the interconnectedness of geopolitical events and global financial markets. <a href=\"https://www.nytimes.com/2026/03/26/business/oil-stock-gas-prices-iran.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Gulf states have issued a joint statement condemning Iran's actions and affirming their readiness for self-defense. This shift in stance highlights the escalating tensions in the region, which could have significant implications for international relations and energy markets. <a href=\"https://www.cnbc.com/2026/03/26/gulf-states-ready-for-self-defense-against-iran-as-war-stance-shifts.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Supreme Court ruled 6-3 against President Trump's authority to impose tariffs under the International Emergency Economic Powers Act. This decision, which Trump criticized, marks a significant legal and political development, potentially affecting future trade policies and executive powers. <a href=\"https://www.cnbc.com/2026/03/26/trump-supreme-court-tariffs-barrett-gorsuch-trade-ieepa-ruling.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Iran plans to implement a toll system for ships passing through the Strait of Hormuz, a critical global oil transit route. This move could increase shipping costs and impact global oil prices, further complicating the geopolitical landscape in the region. <a href=\"https://www.cnbc.com/2026/03/26/iran-plans-tolls-on-ships-passing-through-strait-of-hormuz.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">AWS and Cerebras have announced a collaboration aimed at enhancing AI inference speed and performance in the cloud. This partnership seeks to leverage Cerebras' advanced AI capabilities to set new standards in cloud computing, potentially transforming how AI applications are deployed and scaled. <a href=\"https://www.aboutamazon.com\" style=\"color:#81d4fa;text-decoration:none;\">aboutamazon.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Corebridge Financial and Equitable Holdings have announced a transformational merger. This strategic move aims to combine their resources and expertise, potentially reshaping the financial services landscape and offering enhanced value to stakeholders. <a href=\"https://www.businesswire.com\" style=\"color:#81d4fa;text-decoration:none;\">Business Wire</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Burke & Herbert and LINKBANCORP have received shareholder approval for their merger, marking a significant step in the consolidation of banking services. This merger is expected to enhance their market presence and operational capabilities, benefiting customers and investors alike. <a href=\"https://www.stocktitan.net\" style=\"color:#81d4fa;text-decoration:none;\">Stock Titan</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Super Micro is facing a lawsuit from shareholders who allege that the company's executives concealed critical information. This legal action highlights the challenges companies face in maintaining transparency and accountability, particularly in the tech industry. <a href=\"https://timesofindia.indiatimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The Times of India</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees played against the San Francisco Giants on March 25, 2026. For detailed scores and highlights from the game, visit MLB.com for the full game story. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New Jersey Devils continue their trip with a game against the Nashville Predators, who are currently on a hot streak. This matchup is crucial as the Devils aim to improve their standings in the league. <a href=\"https://www.nhl.com\" style=\"color:#81d4fa;text-decoration:none;\">NHL.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Rangers faced a close defeat against the Toronto Maple Leafs, losing 4-3 on March 26, 2026. This result reflects the competitive nature of the league as teams vie for playoff positions. <a href=\"https://www.espn.ph\" style=\"color:#81d4fa;text-decoration:none;\">ESPN Philippines</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Meta's legal challenges highlight the increasing scrutiny and regulatory pressures on tech giants regarding user safety and platform impact. - Geopolitical tensions in the Middle East are significantly influencing global oil markets and international relations. - Legal decisions, such as the Supreme Court's ruling on tariffs, underscore the ongoing debates over executive power and trade policies. - Mergers and collaborations in the tech and financial sectors indicate strategic moves to enhance capabilities and market positions.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor the impact of the legal rulings against Meta and YouTube on their operational practices and regulatory compliance. - Keep an eye on developments in the Middle East conflict and their effects on global oil prices and stock markets. - Watch for further announcements from AWS and Cerebras regarding their AI collaboration and its implications for cloud computing. - Follow the progress of the Corebridge Financial and Equitable Holdings merger and its impact on the financial services industry.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 26, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "articles": {
+    "NY Sports": [
+      {
+        "title": "[Updated] New York Yankees at San Francisco Giants Game Story, Scores/Highlights - 03/25/2026 - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "New York Yankees at San Francisco Giants Game Story, Scores/Highlights - 03/25/2026MLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the Yankees' performance, reflecting sports market dynamics that can influence investment opportunities in sports tech and entertainment sectors."
+      },
+      {
+        "title": "[Updated] Devils Trip Continues Against Red Hot Predators | PREVIEW - NHL.com",
+        "url": "https://www.nhl.com",
+        "description": "Devils Trip Continues Against Red Hot Predators | PREVIEWNHL.com",
+        "source": "NHL.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights key player performances and trends, offering insights into sports investment opportunities and the potential for tech innovations in fan engagement and analytics."
+      },
+      {
+        "title": "[Updated] Maple Leafs 4-3 Rangers (26 Mar, 2026) Game Recap - ESPN Philippines",
+        "url": "https://www.espn.ph",
+        "description": "Maple Leafs 4-3 Rangers (26 Mar, 2026) Game RecapESPN Philippines",
+        "source": "ESPN Philippines",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the intersection of sports and digital media, showcasing opportunities for tech investments in streaming and fan engagement platforms."
+      }
+    ],
+    "AI & Tech": [
+      {
+        "title": "Jury finds Meta liable in case over child sexual exploitation on its platforms",
+        "url": "https://www.cnn.com/2026/03/24/tech/meta-new-mexico-trial-jury-deliberation",
+        "description": "HN score: 393 | Comments: 484",
+        "source": "Hacker News",
+        "published": "2026-03-24T21:54:27Z",
+        "hn_score": 393,
+        "hn_comments": 484,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This case highlights the increasing legal and reputational risks tech companies face regarding user safety, impacting investment strategies and regulatory scrutiny in the industry."
+      },
+      {
+        "title": "Meta and YouTube found liable in social media addiction trial",
+        "url": "https://www.reddit.com/r/technology/comments/1s3hef0/meta_and_youtube_found_liable_in_social_media/",
+        "description": "submitted by/u/ThatMasterpiece2174[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-25T17:32:19+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This trial's outcome could reshape regulatory landscapes and user engagement strategies, impacting investment decisions in social media and technology sectors."
+      },
+      {
+        "title": "Meta Lays Off 700 Employees, While Rewarding Top Executives",
+        "url": "https://www.reddit.com/r/technology/comments/1s3tcp2/meta_lays_off_700_employees_while_rewarding_top/",
+        "description": "submitted by/u/OptimalConcept[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-26T01:05:51+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the tension between cost-cutting measures and executive compensation, signaling potential risks and ethical considerations for investors in tech companies navigating economic uncertainty."
+      },
+      {
+        "title": "Meta just acqui-hired its 4th AI startup in 4 months. Dreamer, Manus, Moltbook, and Scale AI's founder. Is anyone else watching this pattern?",
+        "url": "https://www.reddit.com/r/artificial/comments/1s3xr4l/meta_just_acquihired_its_4th_ai_startup_in_4/",
+        "description": "Quick rundown of what Meta's done since December:• Dec 2025: Acquired Manus (autonomous web agent) for $2B• Early 2026: Acqui-hired Moltbook team• Scale AI's Alexandr Wang stepped down as CEO to become Meta's first Chief AI Officer• March 23: Dreamer team (agentic AI platform) joins Meta Superintell",
+        "source": "Reddit",
+        "published": "2026-03-26T04:31:29+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This trend highlights Meta's aggressive strategy to dominate AI, signaling potential investment opportunities or competitive threats for tech executives in New York's rapidly evolving landscape."
+      },
+      {
+        "title": "Scientists find 100+ hidden exoplanets in NASA data using new AI system",
+        "url": "https://www.reddit.com/r/artificial/comments/1s3rh9h/scientists_find_100_hidden_exoplanets_in_nasa/",
+        "description": "\"The team trained machine learning models to identify patterns in the data that can tell astronomers the type of event that has been detected, something that AI models excel at. RAVEN is designed to handle the whole exoplanet-detection process in one go — from detecting the signal to vetting it with",
+        "source": "Reddit",
+        "published": "2026-03-25T23:45:35+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This breakthrough in AI-driven exoplanet detection highlights the transformative potential of machine learning in data analysis, signaling lucrative investment opportunities in space technology and AI innovations."
+      },
+      {
+        "title": "Pentagon formalizes Palantir's Maven AI as a core military system with multi-year funding — platform's investment grows to $13 billion from $480 million in 2024. The Pentagon is spending $13.4 billion on AI this year alone.",
+        "url": "https://www.reddit.com/r/artificial/comments/1s3t064/pentagon_formalizes_palantirs_maven_ai_as_a_core/",
+        "description": "submitted by/u/esporx[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-26T00:50:37+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights a significant government investment in AI, signaling lucrative opportunities for tech investors in defense and advanced technologies."
+      },
+      {
+        "title": "BRINC's new police drone uses Starlink, carries Narcan, chases vehicles at 60mph",
+        "url": "https://arstechnica.com/gadgets/2026/03/brincs-new-police-drone-uses-starlink-carries-narcan-chases-vehicles-at-60mph/",
+        "description": "Company calls Guardian the \"most capable 911 response drone ever.”",
+        "source": "Ars Technica",
+        "published": "Wed, 25 Mar 2026 21:12:03 +0000",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights innovative public safety technology, showcasing investment opportunities in drones and telecommunication that could reshape emergency response and urban security solutions."
+      }
+    ],
+    "Business & Markets": [
+      {
+        "title": "Oil Prices Go Higher and Global Stocks Fall",
+        "url": "https://www.nytimes.com/2026/03/26/business/oil-stock-gas-prices-iran.html",
+        "description": "Investors continued to parse conflicting signals on whether the war in the Middle East was nearing de-escalation.",
+        "source": "The New York Times",
+        "published": "2026-03-26T04:45:03-04:00",
+        "score": 87,
+        "score_reason": "Oil prices rising and global stocks falling due to Middle East conflict have direct investment implications and indicate unusual market moves.",
+        "why_it_matters": "This story highlights geopolitical risks affecting global markets, crucial for tech investors to assess potential impacts on investment strategies and economic stability."
+      },
+      {
+        "title": "Gulf states say they're ready for 'self defense' as stance shifts on Iran war",
+        "url": "https://www.cnbc.com/2026/03/26/gulf-states-ready-for-self-defense-against-iran-as-war-stance-shifts.html",
+        "description": "Gulf states have issued a joint statement on Thursday condemning Iran's \"blatant\" and \"criminal\" attacks against them.",
+        "source": "CNBC",
+        "published": "Thu, 26 Mar 2026 09:49:14 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "The Gulf states' readiness for self-defense signals potential geopolitical instability, impacting energy markets and investment opportunities crucial for tech-executive investors in New York."
+      },
+      {
+        "title": "What comes next? Three attack scenarios as U.S. sends thousands more troops to Middle East",
+        "url": "https://www.cnbc.com/2026/03/26/iran-war-trump-us-troops-kharg-island-qeshm-island-nuclear-middle-east.html",
+        "description": "One of Iran's top lawmakers has said that they were anticipating a potential ground invasion of one its islands.",
+        "source": "CNBC",
+        "published": "Thu, 26 Mar 2026 10:29:49 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights geopolitical tensions that could impact global markets and technology investments, influencing risk assessments and strategic decisions for tech-executive investors."
+      },
+      {
+        "title": "Iran plans to charge ships for safe passage through Strait of Hormuz, report says",
+        "url": "https://www.cnbc.com/2026/03/26/iran-plans-tolls-on-ships-passing-through-strait-of-hormuz.html",
+        "description": "Officials in Tehran have drafted legislation to create a toll system where ships pay for safe passage through the waterway, Iranian media reported.",
+        "source": "CNBC",
+        "published": "Thu, 26 Mar 2026 09:49:59 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights potential disruptions in global shipping routes, impacting supply chains and energy markets, which are critical considerations for tech-executive investors navigating geopolitical risks."
+      },
+      {
+        "title": "Trump says Justices Barrett, Gorsuch ‘sicken me’ after Supreme Court tariff ruling",
+        "url": "https://www.cnbc.com/2026/03/26/trump-supreme-court-tariffs-barrett-gorsuch-trade-ieepa-ruling.html",
+        "description": "The Supreme Court, in a 6-3 ruling, said President Trump did not have authority under the International Emergency Economic Powers Act to impose tariffs.",
+        "source": "CNBC",
+        "published": "Thu, 26 Mar 2026 02:25:15 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "The oil market is in 'backwardation' — Here’s what that means for energy prices",
+        "url": "https://www.cnbc.com/2026/03/26/market-trends-oil-futures-backwardation.html",
+        "description": "Oil prices have been rocked by volatility since the U.S.-Iran war began.",
+        "source": "CNBC",
+        "published": "Thu, 26 Mar 2026 08:22:15 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Trump Had His Eye on China, Then Plunged Into a New Mideast War",
+        "url": "https://www.nytimes.com/2026/03/25/us/politics/trump-china-mideast.html",
+        "description": "The Trump administration said the Middle East would “recede” in importance as the China challenge took priority. But the president started the war in Iran.",
+        "source": "The New York Times",
+        "published": "2026-03-25T15:13:44Z",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "Companies": [
+      {
+        "title": "[Updated] AWS and Cerebras collaboration aims to set a new standard for AI inference speed and performance in the cloud - aboutamazon.com",
+        "url": "https://www.aboutamazon.com",
+        "description": "AWS and Cerebras collaboration aims to set a new standard for AI inference speed and performance in the cloudaboutamazon.com",
+        "source": "aboutamazon.com",
+        "published": "",
+        "score": 87,
+        "score_reason": "AWS and Cerebras collaboration aims to set a new standard for AI inference speed and performance in the cloud.",
+        "why_it_matters": "The AWS and Cerebras collaboration signifies a pivotal advancement in AI technology, crucial for investors seeking to capitalize on the rapidly evolving cloud computing landscape."
+      },
+      {
+        "title": "[Updated] Can I watch Phillies game today on Apple TV+? How to watch, stream - The News Journal",
+        "url": "https://www.delawareonline.com",
+        "description": "Can I watch Phillies game today on Apple TV+? How to watch, streamThe News Journal",
+        "source": "The News Journal",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Meta and YouTube Found Negligent in Landmark Social Media Addiction Trial - The New York Times",
+        "url": "https://www.nytimes.com",
+        "description": "Meta and YouTube Found Negligent in Landmark Social Media Addiction TrialThe New York Times",
+        "source": "The New York Times",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Elon teases a van, Tesla sales tumble, and there is no Robotaxi in California - Electrek",
+        "url": "https://electrek.co",
+        "description": "Elon teases a van, Tesla sales tumble, and there is no Robotaxi in CaliforniaElectrek",
+        "source": "Electrek",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Corebridge Financial and Equitable Holdings Announce Transformational Merger - Business Wire",
+        "url": "https://www.businesswire.com",
+        "description": "Corebridge Financial and Equitable Holdings Announce Transformational MergerBusiness Wire",
+        "source": "Business Wire",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Burke & Herbert (BHRB) and LINKBANCORP (LNKB) win shareholder approval for bank merger - Stock Titan",
+        "url": "https://www.stocktitan.net",
+        "description": "Burke & Herbert (BHRB) and LINKBANCORP (LNKB) win shareholder approval for bank mergerStock Titan",
+        "source": "Stock Titan",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Super Micro sued by shareholders sue company's CEO and CFO along with co-founders, say: You hid your 'Chi - The Times of India",
+        "url": "https://timesofindia.indiatimes.com",
+        "description": "Super Micro sued by shareholders sue company's CEO and CFO along with co-founders, say: You hid your 'ChiThe Times of India",
+        "source": "The Times of India",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ]
+  },
+  "mikes_picks": [],
+  "podcast_script": "[INTRO]\n\nHey there, it's March 26, 2026, and welcome back to MikeCast, your daily dose of news where we break down the headlines and give you the scoop with a side of context. I'm your host, Mike, and today we've got a packed episode for you. We're diving into some big stories in the world of AI and tech, including Meta's legal troubles and layoffs. Over in business, oil prices are on the rise with some geopolitical tensions stirring things up. And in sports, the New York Rangers had a close game with the Maple Leafs. So, grab your coffee, settle in, and let's get into it.\n\n[AI & TECH SEGMENT]\n\nAlright, kicking things off with AI and tech, where Meta is making headlines for a few reasons today. First up, a jury has found Meta liable in a case involving child sexual exploitation on its platforms. This case has been closely watched, with a lot of eyes on how social media companies are handling harmful content. The verdict is a big deal because it could set a precedent for how these platforms are held accountable in the future. It's a reminder of the ongoing challenges tech companies face in moderating content and protecting users, especially minors.\n\nIn another courtroom battle, Meta and YouTube have been found negligent in a landmark trial about social media addiction. The court ruled that these platforms contributed to addictive behaviors in users, which is a significant finding considering the ongoing debates about the impact of social media on mental health. This trial could lead to more scrutiny and possibly stricter regulations for social media companies.\n\nMeanwhile, Meta is also in the news for laying off 700 employees. This comes as the company is rewarding its top executives, which has sparked some controversy. Layoffs are always tough, but this move is particularly eyebrow-raising given the simultaneous executive bonuses. It's a classic case of corporate decisions that seem to prioritize the top tier over the broader workforce.\n\nOn a different note, Meta is on a shopping spree, having acqui-hired its fourth AI startup in four months. The latest addition is Dreamer, an agentic AI platform. This follows previous acquisitions like Manus and Moltbook, and the hiring of Scale AI's founder as Meta's first Chief AI Officer. It's clear Meta is doubling down on AI, positioning itself as a leader in this space. These moves indicate a strategic pivot towards AI capabilities, which could reshape how Meta operates and innovates in the tech world.\n\nNow, let's talk about a fascinating discovery in the realm of space exploration. Scientists have used a new AI system to uncover over 100 hidden exoplanets in NASA data. This system, called RAVEN, is designed to streamline the exoplanet detection process, making it more efficient and accurate. It's a testament to how AI can revolutionize scientific research, opening up new possibilities for understanding our universe.\n\n[BUSINESS & MARKETS SEGMENT]\n\nSwitching gears to business and markets, where oil prices are climbing, and global stocks are taking a hit. Investors are trying to make sense of conflicting signals about a potential de-escalation in the Middle East conflict. The uncertainty is causing some volatility in the markets, which is something to watch if you're keeping an eye on your investments.\n\nIn related news, Gulf states have issued a strong statement condemning Iran's recent attacks, saying they're ready for self-defense. This shift in stance adds another layer of complexity to the geopolitical situation, impacting not just regional politics but also global markets.\n\nSpeaking of the Middle East, Iran is planning to charge ships for safe passage through the Strait of Hormuz, a critical waterway for global oil transport. This proposed toll system could have significant implications for shipping costs and oil prices, potentially affecting economies worldwide.\n\nFinally, in the U.S., the Supreme Court has ruled against former President Trump in a tariff case. The court decided that Trump didn't have the authority under the International Emergency Economic Powers Act to impose certain tariffs. This ruling is a blow to Trump's trade policies and highlights the ongoing legal battles over executive power.\n\n[COMPANIES SEGMENT]\n\nNow, let's dive into some company news. AWS and Cerebras are teaming up to set a new standard for AI inference speed and performance in the cloud. This collaboration aims to enhance cloud computing capabilities, which could have a big impact on how businesses leverage AI for their operations.\n\nMeanwhile, Tesla is in the spotlight as CEO Elon Musk teases a new van, but the company's sales are tumbling. There's also no sign of the much-anticipated Robotaxi in California. Tesla's ups and downs are a reminder of the challenges in the electric vehicle market, as competition heats up and expectations remain high.\n\nIn the financial sector, Corebridge Financial and Equitable Holdings have announced a transformational merger. This move is set to create a powerhouse in the financial services industry, combining resources and expertise to better compete in the market.\n\nLastly, shareholders are suing Super Micro's CEO, CFO, and co-founders, accusing them of hiding crucial information. This legal action underscores the importance of transparency and accountability in corporate governance, something investors are increasingly demanding.\n\n[NY SPORTS SEGMENT]\n\nAlright, let's talk sports! The New York Rangers had a nail-biter against the Maple Leafs, ultimately falling 4-3. It was a tough loss, but the Rangers will be looking to bounce back in their next matchup. Meanwhile, the New York Yankees faced off against the San Francisco Giants yesterday. Unfortunately, I don't have the score for that game, but I'm sure it was an exciting one. As for the New Jersey Devils, they're continuing their trip against the red-hot Predators, so keep an eye out for how that unfolds.\n\n[MIKE'S PICKS SEGMENT]\n\nAnd now it's time for Big Mike's hand-picked reads. If you're looking for something interesting to dive into, check out the story about BRINC's new police drone. This drone uses Starlink, carries Narcan, and can chase vehicles at 60 mph. It's being called the \"most capable 911 response drone ever,\" and it's a fascinating look at how technology is being integrated into public safety.\n\n[OUTRO]\n\nAlright, folks, that's a wrap for today's MikeCast. Thanks for tuning in and letting me be your guide through today's news. Don't forget to subscribe so you never miss an episode, and if you enjoyed the show, leave us a review. I'm Mike, and I'll catch you tomorrow with more updates and insights. Have a great day!",
+  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast on this fine March 26, 2026. I'm Mike, your host, and we've got a packed show today. We're diving into some big headlines in AI and tech, including a major legal ruling against Meta, and some exciting developments in the business world. Plus, Jesse will catch us up on the latest in New York sports. So, let's get right into it.\n\n[ELIZABETH]\n\nThanks, Mike! Alright, let's jump into today's most-watched stories in AI and tech. First up, a jury has found Meta liable in a case over child sexual exploitation on its platforms. This is a significant ruling, with the jury deliberating on how Meta's platform policies might have failed to protect users, particularly minors. The case has sparked widespread discussion, with 393 points and 484 comments on Hacker News, showing just how much attention it's getting.\n\nNext, in another blow to Meta, along with YouTube, both companies have been found liable in a social media addiction trial. This landmark case highlights the growing concern over the impact of social media on mental health, especially among younger users. The ruling could lead to significant changes in how these platforms operate and manage user engagement.\n\nIn other Meta news, the company has laid off 700 employees while simultaneously rewarding top executives. This move has raised eyebrows and sparked debate about corporate priorities during challenging times. It's a tough situation for those affected, and it raises questions about the balance between cost-cutting and executive compensation.\n\nOn a more forward-looking note, Meta has been on an acqui-hiring spree, snapping up its fourth AI startup in just four months. The latest addition is Dreamer, an agentic AI platform, joining Manus, Moltbook, and Scale AI's team. This aggressive expansion into AI shows Meta's commitment to leading in this space, especially with Alexandr Wang stepping down as CEO of Scale AI to become Meta's first Chief AI Officer.\n\nShifting gears to some exciting scientific advancements, scientists have discovered over 100 hidden exoplanets using a new AI system. This breakthrough was achieved by training machine learning models to identify patterns in NASA data, showcasing the power of AI in space exploration. The system, called RAVEN, streamlines the exoplanet detection process, marking a significant leap forward in our understanding of the universe.\n\nAnd finally, the Pentagon has formalized Palantir's Maven AI as a core military system, with multi-year funding boosting its investment to $13 billion from just $480 million in 2024. This decision underscores the growing importance of AI in defense, with the Pentagon spending $13.4 billion on AI this year alone.\n\nNow, let's move on to business and markets. Oil prices are on the rise, while global stocks are falling as investors navigate the uncertainty surrounding the Middle East conflict. The war's impact on oil markets has led to volatility, with the market currently in 'backwardation,' meaning current prices are higher than future prices. This situation suggests a tight supply, which could keep prices elevated in the near term.\n\nMeanwhile, Gulf states have issued a strong statement condemning Iran's attacks and expressing readiness for self-defense. This shift in stance highlights the escalating tensions in the region, which continue to influence global markets.\n\nIn the U.S., the Supreme Court has ruled against President Trump in a tariff case, stating he did not have the authority under the International Emergency Economic Powers Act to impose tariffs. This 6-3 ruling is a significant legal setback for Trump and could have implications for future trade policies.\n\nNow, onto some company news. AWS and Cerebras have announced a collaboration aiming to set a new standard for AI inference speed and performance in the cloud. This partnership could revolutionize how AI workloads are handled, offering faster and more efficient processing capabilities.\n\nIn the automotive world, Tesla is making headlines with Elon Musk teasing a new van, while the company's sales have taken a hit. Additionally, there are no Robotaxis in California yet, which might disappoint some Tesla enthusiasts.\n\nIn the financial sector, Corebridge Financial and Equitable Holdings have announced a transformational merger. This move is expected to create a more robust financial entity, offering expanded services and increased market reach.\n\nAnd in banking, Burke & Herbert and LINKBANCORP have received shareholder approval for their merger. This consolidation is part of a broader trend in the banking industry, aiming to enhance competitiveness and service offerings.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth! Let's dive into the New York sports scene. Starting with baseball, the New York Yankees faced off against the San Francisco Giants yesterday. Unfortunately, the Yankees couldn't pull off a win this time. We'll have to see how they bounce back in their next game.\n\nOver to hockey, the New Jersey Devils are continuing their road trip and will be up against the red-hot Nashville Predators next. It's a challenging matchup, but the Devils are looking to keep their momentum going.\n\nAnd in the NHL, the New York Rangers had a tough game against the Toronto Maple Leafs, losing 4-3. It was a close match, but the Rangers will be looking to regroup and come back stronger in their upcoming games.\n\nThat's about it for New York sports today. Back to you, Mike.\n\n[MIKE]\n\nThanks, Jesse. That's all for today's MikeCast. We hope you enjoyed the show and got your fill of the latest news in tech, business, and sports. Remember to subscribe and tune in tomorrow for more updates. Thanks for listening, and have a great day!",
+  "audio_file": "MikeCast_3voice_2026-03-26.mp3",
+  "elevenlabs_audio_file": "MikeCast_3voice_2026-03-26.mp3",
+  "trending": [
+    {
+      "topic": "New AI regulation bill passed today",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+March+26+2026"
+    },
+    {
+      "topic": "Federal Reserve announces rate decision",
+      "x_url": "https://x.com/search?q=Federal+Reserve+rate+decision+March+26+2026"
+    },
+    {
+      "topic": "Major tech firm releases new AI model",
+      "x_url": "https://x.com/search?q=tech+firm+AI+model+release+2026"
+    },
+    {
+      "topic": "Stock market reacts to economic data",
+      "x_url": "https://x.com/search?q=stock+market+economic+data+March+26+2026"
+    },
+    {
+      "topic": "Significant corporate merger announced today",
+      "x_url": "https://x.com/search?q=corporate+merger+announcement+March+26+2026"
+    }
+  ],
+  "generated_at": "2026-03-26T10:32:59.790377+00:00"
+}
