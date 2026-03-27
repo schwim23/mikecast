@@ -26,6 +26,29 @@ from mc_generate import parse_conversational_script
 logger = logging.getLogger("mikecast")
 
 
+def _strip_id3_header(data: bytes) -> bytes:
+    """
+    Strip an ID3v2 header from the start of *data* and return the remainder.
+
+    Each ElevenLabs segment is a complete MP3 file that begins with its own
+    ID3v2 header. When segments are concatenated as raw bytes, these embedded
+    headers confuse players at segment boundaries (audible glitch/skip).
+    Strip the header from all segments after the first before joining.
+
+    ID3v2 layout: 3-byte magic "ID3", 2-byte version, 1-byte flags,
+    4-byte synchsafe size. Total header = 10 + decoded_size bytes.
+    """
+    if not data[:3] == b"ID3":
+        return data
+    # Synchsafe integer: each byte uses only the low 7 bits.
+    raw = data[6:10]
+    if len(raw) < 4:
+        return data
+    size = (raw[0] << 21) | (raw[1] << 14) | (raw[2] << 7) | raw[3]
+    header_len = 10 + size
+    return data[header_len:]
+
+
 def _strip_vbr_header(path: Path) -> None:
     """
     Nullify the Xing/Info/VBRI VBR header in the first MP3 frame.
@@ -219,8 +242,11 @@ def generate_elevenlabs_audio(
 
     try:
         with open(output_path, "wb") as fh:
-            for seg in audio_segments:
-                fh.write(seg)
+            for i, seg in enumerate(audio_segments):
+                # Keep the first segment's ID3 header (contains metadata);
+                # strip ID3 headers from subsequent segments so embedded headers
+                # don't cause audible glitches at segment boundaries.
+                fh.write(seg if i == 0 else _strip_id3_header(seg))
         logger.info(
             "ElevenLabs audio saved: %s (%.1f MB, %d segments)",
             output_path, output_path.stat().st_size / 1e6, len(audio_segments),
