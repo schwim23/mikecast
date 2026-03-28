@@ -1,796 +1,5 @@
 [
   {
-    "title": "OpenCode – Open source AI coding agent",
-    "url": "https://opencode.ai/",
-    "url_fp": "b69160f3fe3e81b711ff3be86867d186",
-    "description": "HN score: 806 | Comments: 361",
-    "date": "2026-03-21T10:31:03.004357+00:00"
-  },
-  {
-    "title": "Delve – Fake Compliance as a Service",
-    "url": "https://deepdelver.substack.com/p/delve-fake-compliance-as-a-service",
-    "url_fp": "5a11cc1c9c54835b57e8091e0eed4c5b",
-    "description": "HN score: 683 | Comments: 218",
-    "date": "2026-03-21T10:31:03.189103+00:00"
-  },
-  {
-    "title": "France's aircraft carrier located in real time by Le Monde through fitness app",
-    "url": "https://www.lemonde.fr/en/international/article/2026/03/20/stravaleaks-france-s-aircraft-carrier-located-in-real-time-by-le-monde-through-fitness-app_6751640_4.html",
-    "url_fp": "b80ff341abae8b2c400d5e74f6c5ab94",
-    "description": "HN score: 567 | Comments: 458",
-    "date": "2026-03-21T10:31:03.431455+00:00"
-  },
-  {
-    "title": "Our commitment to Windows quality",
-    "url": "https://blogs.windows.com/windows-insider/2026/03/20/our-commitment-to-windows-quality/",
-    "url_fp": "0cd9b7feefa2307f5075c96dd9707661",
-    "description": "HN score: 523 | Comments: 952",
-    "date": "2026-03-21T10:31:03.541938+00:00"
-  },
-  {
-    "title": "The Los Angeles Aqueduct Is Wild",
-    "url": "https://practical.engineering/blog/2026/3/17/the-los-angeles-aqueduct-is-wild",
-    "url_fp": "cc308e7dbe0faa303d2f040e3136a78a",
-    "description": "HN score: 360 | Comments: 176",
-    "date": "2026-03-21T10:31:03.654345+00:00"
-  },
-  {
-    "title": "A Japanese glossary of chopsticks faux pas (2022)",
-    "url": "https://www.nippon.com/en/japan-data/h01362/",
-    "url_fp": "18e628dbb603335c8b583f059e857b95",
-    "description": "HN score: 274 | Comments: 205",
-    "date": "2026-03-21T10:31:03.802701+00:00"
-  },
-  {
-    "title": "Ghostling",
-    "url": "https://github.com/ghostty-org/ghostling",
-    "url_fp": "1a42fd5ddf58a969df0eea299e9713d1",
-    "description": "HN score: 218 | Comments: 36",
-    "date": "2026-03-21T10:31:03.844096+00:00"
-  },
-  {
-    "title": "We rewrote our Rust WASM parser in TypeScript and it got faster",
-    "url": "https://www.openui.com/blog/rust-wasm-parser",
-    "url_fp": "58a390aeb9ba30f686a25d378c347ea9",
-    "description": "HN score: 213 | Comments: 123",
-    "date": "2026-03-21T10:31:04.048717+00:00"
-  },
-  {
-    "title": "VisiCalc Reconstructed",
-    "url": "https://zserge.com/posts/visicalc/",
-    "url_fp": "d3eb74a7566d89124428b5481cf65d21",
-    "description": "HN score: 206 | Comments: 77",
-    "date": "2026-03-21T10:31:04.128411+00:00"
-  },
-  {
-    "title": "Entso-E final report on Iberian 2025 blackout",
-    "url": "https://www.entsoe.eu/publications/blackout/28-april-2025-iberian-blackout/",
-    "url_fp": "f3223501c1423ad8fa0532460992789b",
-    "description": "HN score: 195 | Comments: 91",
-    "date": "2026-03-21T10:31:04.271087+00:00"
-  },
-  {
-    "title": "Attention Residuals",
-    "url": "https://github.com/MoonshotAI/Attention-Residuals",
-    "url_fp": "f84c73e46ab1d49e0310290228fa4dfc",
-    "description": "HN score: 177 | Comments: 24",
-    "date": "2026-03-21T10:31:04.344798+00:00"
-  },
-  {
-    "title": "The worst volume control UI in the world (2017)",
-    "url": "https://uxdesign.cc/the-worst-volume-control-ui-in-the-world-60713dc86950",
-    "url_fp": "9e1a54ec173f520af8bd0fa2105fa0ac",
-    "description": "HN score: 132 | Comments: 67",
-    "date": "2026-03-21T10:31:04.490917+00:00"
-  },
-  {
-    "title": "Parallel Perl – Autoparallelizing interpreter with JIT",
-    "url": "https://perl.petamem.com/gpw2026/perl-mit-ai-gpw2026.html#/4/1/1",
-    "url_fp": "f2a73608e72919540cbf80f8063be8ff",
-    "description": "HN score: 131 | Comments: 43",
-    "date": "2026-03-21T10:31:04.655098+00:00"
-  },
-  {
-    "title": "Mamba-3",
-    "url": "https://www.together.ai/blog/mamba-3",
-    "url_fp": "02d6a0c183cf68e123938ce875e2b972",
-    "description": "HN score: 118 | Comments: 19",
-    "date": "2026-03-21T10:31:04.687694+00:00"
-  },
-  {
-    "title": "Molly Guard",
-    "url": "https://bookofjoe2.blogspot.com/2026/02/molly-guard.html",
-    "url_fp": "5ba73bc2f07848740f8e5f6c653f903d",
-    "description": "HN score: 106 | Comments: 44",
-    "date": "2026-03-21T10:31:04.735631+00:00"
-  },
-  {
-    "title": "Linux Applications Programming by Example: The Fundamental APIs (2nd Edition)",
-    "url": "https://github.com/arnoldrobbins/LinuxByExample-2e",
-    "url_fp": "7f7c091c2cebe349f99043a6a12da4f3",
-    "description": "HN score: 99 | Comments: 10",
-    "date": "2026-03-21T10:31:04.949833+00:00"
-  },
-  {
-    "title": "Show HN: We built a terminal-only Bluesky / AT Proto client written in Fortran",
-    "url": "https://github.com/FormerLab/fortransky",
-    "url_fp": "a081d1454f5e5bd7bbd5e99817748c8a",
-    "description": "HN score: 83 | Comments: 45",
-    "date": "2026-03-21T10:31:05.188093+00:00"
-  },
-  {
-    "title": "FFmpeg 101 (2024)",
-    "url": "https://blogs.igalia.com/llepage/ffmpeg-101/",
-    "url_fp": "b120219f33006a6092012462773c7067",
-    "description": "HN score: 83 | Comments: 1",
-    "date": "2026-03-21T10:31:05.239834+00:00"
-  },
-  {
-    "title": "The Ugliest Airplane: An Appreciation",
-    "url": "https://www.smithsonianmag.com/air-space-magazine/ugliest-airplane-appreciation-180978708/",
-    "url_fp": "d64738d42ba8dad510b99acd64754948",
-    "description": "HN score: 68 | Comments: 38",
-    "date": "2026-03-21T10:31:05.366528+00:00"
-  },
-  {
-    "title": "Elon Musk misled Twitter investors ahead of $44 billion acquisition, jury says",
-    "url": "https://www.cnbc.com/2026/03/20/elon-musk-determined-to-be-liable-for-misleading-twitter-investors.html",
-    "url_fp": "bcccaf83f37892073c4c4077aedc61b0",
-    "description": "Elon Musk was sued in late 2022 after completing his acquisition of Twitter, which he later renamed X.",
-    "date": "2026-03-21T10:31:05.597547+00:00"
-  },
-  {
-    "title": "ChatGPT's ad pilot has the industry excited, but some insiders are frustrated with the slow rollout",
-    "url": "https://www.cnbc.com/2026/03/20/chatgpt-ads-testing-openai.html",
-    "url_fp": "a60a15c495805eda25c21164f2407f14",
-    "description": "AI search ads are seen as having massive potential by ad industry insiders and analysts, but OpenAI rival Anthropic has pledged to not have them.",
-    "date": "2026-03-21T10:31:05.885425+00:00"
-  },
-  {
-    "title": "Super Micro co-founder indicted on Nvidia smuggling charges leaves board",
-    "url": "https://www.cnbc.com/2026/03/20/super-micro-co-founder-leaves-board.html",
-    "url_fp": "7b499b907ba3c679c69c4ff71e49bfe0",
-    "description": "Super Micro said Yih-Shyan \"Wally\" Liaw, a co-founder, has resigned from the server maker's board after he was indicted in the U.S.",
-    "date": "2026-03-21T10:31:06.095843+00:00"
-  },
-  {
-    "title": "Memory crisis latest: What we learned from the world's top producers this week",
-    "url": "https://www.cnbc.com/2026/03/20/memory-crisis-latest-dram-chips-micron-samsung-sk-hynix.html",
-    "url_fp": "03c6017944d18bdd9757321929929cab",
-    "description": "Parts of the market are asking if we're already nearing peak tightness and margins in the memory chip space as the shortage persists.",
-    "date": "2026-03-21T10:31:06.326861+00:00"
-  },
-  {
-    "title": "OpenAI's first crack at online shopping stumbled. It's preparing for the next wave",
-    "url": "https://www.cnbc.com/2026/03/20/open-ai-agentic-shopping-etsy-shopify-walmart-amazon.html",
-    "url_fp": "5ac5ac2f1d9330ffb809ab8ea6b50102",
-    "description": "Etsy, Walmart and Shopify were quick to jump into Instant Checkout, but item information was often inaccurate and onboarding merchants was difficult.",
-    "date": "2026-03-21T10:31:06.569950+00:00"
-  },
-  {
-    "title": "Super Micro shares plunge on shocking smuggling case. One stock stands to benefit",
-    "url": "https://www.cnbc.com/2026/03/20/super-micro-shares-plunge-on-shocking-smuggling-case-one-stock-stands-to-benefit.html",
-    "url_fp": "2ea5e96ee0051cf547a02c964a85170b",
-    "description": "Investors on Friday appeared to jump into one Super Micro rival analysts see as the obvious beneficiary of the smuggling case.",
-    "date": "2026-03-21T10:31:06.809871+00:00"
-  },
-  {
-    "title": "Medical AI gets 66% worse when you use automated labels for training, and the benchmark hides it! [R][P]",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rz748k/medical_ai_gets_66_worse_when_you_use_automated/",
-    "url_fp": "e9d30809db106e845d90e78ffbd61051",
-    "description": "A recent work on fairness in medical segmentation for breast cancer tumors found that segmentation models work way worse for younger patients.Common explanation: higher breast density = harder cases. But this is not it. The bias is qualitative -- younger patients have tumors that are larger, more va",
-    "date": "2026-03-21T10:31:07.105268+00:00"
-  },
-  {
-    "title": "[D] How do you add theoretical justification to an AI/ML paper?",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rzkuxd/d_how_do_you_add_theoretical_justification_to_an/",
-    "url_fp": "e1f12ab07bb8d7cad310ab8305cec4be",
-    "description": "Hi everyone,I’m trying to understand how to add theoretical justification to an AI/ML paper.My background is mostly in empirical modeling, so I’m comfortable with experiments, results, and analysis. But I often see papers that include formal elements like theorems, lemmas, and proofs, and I’m not su",
-    "date": "2026-03-21T10:31:07.295592+00:00"
-  },
-  {
-    "title": "[D] Has \"AI research lab\" become completely meaningless as a term?",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rz5met/d_has_ai_research_lab_become_completely/",
-    "url_fp": "b38aa535dae9ae6ce8e43ae288c45394",
-    "description": "Genuinely asking because I've been thinking about this a lot lately. Like, OpenAI calls itself a research lab. So does Google DeepMind. So do a bunch of much smaller orgs doing actual frontier research with no products at all. And so do many institutes operating out of universities. Are these all th",
-    "date": "2026-03-21T10:31:07.492516+00:00"
-  },
-  {
-    "title": "[P] Interactive 2D and 3D Visualization of GPT-2",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rz340w/p_interactive_2d_and_3d_visualization_of_gpt2/",
-    "url_fp": "5e2ed4b1edd8463d113ee16ddf68ae1f",
-    "description": "Hi everyone, I've built an interactive web visualization of GPT-2 (124M). You can check it out atllm-visualized.comIt depicts real attention scores and activations extracted from GPT-2 during a forward pass. It's mean to be an education resource that illustrates Transformer basics and concepts such ",
-    "date": "2026-03-21T10:31:07.638709+00:00"
-  },
-  {
-    "title": "[D] Seeking feedback: Safe autonomous agents for enterprise systems",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rziq9q/d_seeking_feedback_safe_autonomous_agents_for/",
-    "url_fp": "60ae8bd44737101c4028cf0b648b6489",
-    "description": "Hi all,I'm working on safe LLM agents for enterprise infrastructure and would value feedback before formalizing this into an arXiv paper.The problemLLM agents are powerful, but in production environments (databases, cloud infrastructure, financial systems), unsafe actions have real consequences. Mos",
-    "date": "2026-03-21T10:31:07.840241+00:00"
-  },
-  {
-    "title": "[R] Predicting Tetris wins",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rzmh1a/r_predicting_tetris_wins/",
-    "url_fp": "cfad6e21db921b1b94680deba7438e1e",
-    "description": "Hello!My friend and I developed 3 models for predicting a win in a Tetr.io match based on playstyle and gameplay. We used this dataset:https://www.kaggle.com/datasets/n3koasakura/tetr-io-top-players-replays, and we had 7 million rows to work with.Some interesting findings for someone who is about on",
-    "date": "2026-03-21T10:31:07.929911+00:00"
-  },
-  {
-    "title": "Performance Prediction of Antenna Control Servo System based on LSTM Network [R]",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rzlq06/performance_prediction_of_antenna_control_servo/",
-    "url_fp": "812bbdb246e9adaa97cb5a8699fddfb7",
-    "description": "https://ieeexplore.ieee.org/abstract/document/10668250Wrote a paper on how to improve performance of servo system (rotating antenna system for satellite tracking) using LSTM. inviting suggestions.!submitted by/u/divyang_space[link][comments]",
-    "date": "2026-03-21T10:31:08.165697+00:00"
-  },
-  {
-    "title": "[D] Doubt regarding CVPR camera ready submission",
-    "url": "https://www.reddit.com/r/MachineLearning/comments/1rz1n3b/d_doubt_regarding_cvpr_camera_ready_submission/",
-    "url_fp": "f312a358cfb9234061ff9da7cb53f7f8",
-    "description": "Sorry to post this query here but i will delete it later. I just submitted my cvpr camera ready paper to cps website and the status changed to submitted . But I did not get any confirmation email from cps. I had received confirmation email from the previous submissions through ieee cps portal. I jus",
-    "date": "2026-03-21T10:31:08.314268+00:00"
-  },
-  {
-    "title": "We thought our system prompt was private. Turns out anyone can extract it with the right questions.",
-    "url": "https://www.reddit.com/r/artificial/comments/1rz9yg5/we_thought_our_system_prompt_was_private_turns/",
-    "url_fp": "0c6680fffc99fff321f666138f834423",
-    "description": "So we built an internal AI tool with a pretty detailed system prompt, includes instructions on data access, user roles, response formatting, basically the entire logic of the app. We assumed this was hidden from end users.Well, turns out we are wrong. Someone in our org figured out they could just a",
-    "date": "2026-03-21T10:31:08.608061+00:00"
-  },
-  {
-    "title": "The world and AI",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzfrwc/the_world_and_ai/",
-    "url_fp": "14b93020c0565f40b2cc007a5afbe569",
-    "description": "With AI becoming more and more of a topic, does anyone here ever thing about what our kids are going to do to for jobs as they get older? I have a 1 year old and a 3 year old. I’m so nervous for them and have no idea what jobs will be available because we keep saying jobs will be replaced by AI. How",
-    "date": "2026-03-21T10:31:08.674002+00:00"
-  },
-  {
-    "title": "Nvidia \"confirms\" DLSS 5 relies on 2D frame data as testing reveals hallucinations",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzjgdh/nvidia_confirms_dlss_5_relies_on_2d_frame_data_as/",
-    "url_fp": "de033f2f4f6ebff320a39264c8b9e1fc",
-    "description": "submitted by/u/esporx[link][comments]",
-    "date": "2026-03-21T10:31:08.918333+00:00"
-  },
-  {
-    "title": "Walmart secures two AI pricing patents, raising dynamic pricing concerns",
-    "url": "https://www.reddit.com/r/artificial/comments/1rywmca/walmart_secures_two_ai_pricing_patents_raising/",
-    "url_fp": "95bdfbc014548f52b22658fccfbef6ff",
-    "description": "submitted by/u/esporx[link][comments]",
-    "date": "2026-03-21T10:31:09.140038+00:00"
-  },
-  {
-    "title": "New AI model predicts record high dipole moments in unexpected molecules",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzdcpp/new_ai_model_predicts_record_high_dipole_moments/",
-    "url_fp": "c005730c8f21fa9f9f48f6b7e8133547",
-    "description": "Chemists may soon have one less rigorous step to worry about when searching for the right molecules to accomplish their highly specific innovation needs. Scientists have now built anew machine learning modelthat can predict the electric dipole moments of diatomic molecules within seconds using nothi",
-    "date": "2026-03-21T10:31:09.362558+00:00"
-  },
-  {
-    "title": "AI tool shows promise in diagnosing advanced heart failure",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzdkwl/ai_tool_shows_promise_in_diagnosing_advanced/",
-    "url_fp": "f672f427e71b7ad0f433b1946141a174",
-    "description": "\"Applying artificial intelligence techniques to cardiac ultrasound data may make it easier to identify patients with advanced heart failure, a new study has found. The study [...] offers the prospect of better care for many thousands of patients who may be overlooked due to the difficulty of diagnos",
-    "date": "2026-03-21T10:31:09.548208+00:00"
-  },
-  {
-    "title": "Metacog: Proprioception, Not Yet Another Memory MCP: A Different Approach to Cross-Session Learning Reinforcement in AI Agents",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzmlqe/metacog_proprioception_not_yet_another_memory_mcp/",
-    "url_fp": "7978d4694ac3d9fc9926b9dc1cabcd6e",
-    "description": "TL;DR:Everyone's building memory plugins for AI coding agents. I'm not sure that stale, past memory of tasks executed is the right way forward for this application. Intelligence has metacognition, the ability to think about how you're thinking.Source (or read on):github.com/houtini-ai/metacogSo, I b",
-    "date": "2026-03-21T10:31:09.895364+00:00"
-  },
-  {
-    "title": "I put two AI voice instances in a conversation with each other. Neither figured out they were talking to another AI for 9 minutes. At 5:38 one starts explaining AI concepts to the other.",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzm9vq/i_put_two_ai_voice_instances_in_a_conversation/",
-    "url_fp": "fadf9fa64fbd308f16da1e26b0db1d76",
-    "description": "Built a platform with OpenAI's realtime voice API integrated via WebRTC. Had it running on two devices simultaneously - laptop and phone - and just said \"hello\" to kick off a conversation between them.Shimmer on one device, Alloy on the other. Two separate sessions, neither aware of what the other a",
-    "date": "2026-03-21T10:31:10.406662+00:00"
-  },
-  {
-    "title": "AI-Powered Wheelchairs: Are They Ready for Real Life?",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzkyuu/aipowered_wheelchairs_are_they_ready_for_real_life/",
-    "url_fp": "487458a0cf7fceb32d5d33cc92d586ec",
-    "description": "Wheelchair users with severe disabilities can often navigate tight spaces better than most robotic systems can. A wave of new smart-wheelchair research, including findings presented in Anaheim, Calif., earlier this month, is now testing whether AI-powered systems can, or should, fully close this gap",
-    "date": "2026-03-21T10:31:10.570888+00:00"
-  },
-  {
-    "title": "AI-powered robot learns how to harvest tomatoes more efficiently",
-    "url": "https://www.reddit.com/r/artificial/comments/1rzee1j/aipowered_robot_learns_how_to_harvest_tomatoes/",
-    "url_fp": "438a7906969131d02dbbf63117ae2a7b",
-    "description": "Farm labor shortages are pushing agriculture toward greater automation, especially when it comes to harvesting. But not all crops are easy for machines to handle. Tomatoes, for example, grow in clusters, which means a robot must carefully select ripe fruit while leaving unripe ones untouched. This r",
-    "date": "2026-03-21T10:31:10.771220+00:00"
-  },
-  {
-    "title": "Elon Musk to Owe Billions After Jury Finds He Misled Twitter Investors Before Takeover",
-    "url": "https://www.reddit.com/r/technology/comments/1rzen4g/elon_musk_to_owe_billions_after_jury_finds_he/",
-    "url_fp": "81a3b6796135e98c093367957890f802",
-    "description": "submitted by/u/Hrmbee[link][comments]",
-    "date": "2026-03-21T10:31:11.029327+00:00"
-  },
-  {
-    "title": "Microsoft announces sweeping Windows changes",
-    "url": "https://www.reddit.com/r/technology/comments/1rz66f2/microsoft_announces_sweeping_windows_changes/",
-    "url_fp": "61dfc2f8a9f5032c0bfd885b6ad81f66",
-    "description": "submitted by/u/tekz[link][comments]",
-    "date": "2026-03-21T10:31:11.169849+00:00"
-  },
-  {
-    "title": "Pentagon to adopt Palantir AI as core US military system, memo says",
-    "url": "https://www.reddit.com/r/technology/comments/1rzdefr/pentagon_to_adopt_palantir_ai_as_core_us_military/",
-    "url_fp": "aa243394a1da798e985cd767f6a2cb17",
-    "description": "submitted by/u/Shogouki[link][comments]",
-    "date": "2026-03-21T10:31:11.381875+00:00"
-  },
-  {
-    "title": "Amazon Prime Video is about to get worse — again",
-    "url": "https://www.reddit.com/r/technology/comments/1rz1ku7/amazon_prime_video_is_about_to_get_worse_again/",
-    "url_fp": "a42a85bf1419fc40ef5c06733f2fdb18",
-    "description": "submitted by/u/PrixDevnovaVillain[link][comments]",
-    "date": "2026-03-21T10:31:11.543576+00:00"
-  },
-  {
-    "title": "Thousands have swooned over this MAGA dream girl. She’s made with AI.",
-    "url": "https://www.reddit.com/r/technology/comments/1ryyz20/thousands_have_swooned_over_this_maga_dream_girl/",
-    "url_fp": "0df2bb87b92b22c66750dad0e8eb3099",
-    "description": "submitted by/u/BusyHands_[link][comments]",
-    "date": "2026-03-21T10:31:11.755511+00:00"
-  },
-  {
-    "title": "U.S President FCC lets Nexstar buy Tegna and blow way past 39% TV ownership cap | Brendan Carr lets U.S President-favorite Nexstar exceed national station ownership limit.",
-    "url": "https://www.reddit.com/r/technology/comments/1rz7fh4/us_president_fcc_lets_nexstar_buy_tegna_and_blow/",
-    "url_fp": "38b91e66b8a1f25357c23b296e56996e",
-    "description": "submitted by/u/ControlCAD[link][comments]",
-    "date": "2026-03-21T10:31:12.227187+00:00"
-  },
-  {
-    "title": "The CEO of Patreon blasts AI companies for the ‘bogus excuse’ they’re using to not pay artists",
-    "url": "https://www.reddit.com/r/technology/comments/1rzf8dv/the_ceo_of_patreon_blasts_ai_companies_for_the/",
-    "url_fp": "3545fa8c8fb31835d1a440bd9a44cd59",
-    "description": "submitted by/u/FervidBug42[link][comments]",
-    "date": "2026-03-21T10:31:12.506183+00:00"
-  },
-  {
-    "title": "RFK Jr. may replace entire panel of CDC vaccine advisors again, ally lets slip | Dr. Robert Malone, vice chair of Kennedy’s ACIP, made the claim, then retracted it, as HHS denied it.",
-    "url": "https://www.reddit.com/r/technology/comments/1rzff6h/rfk_jr_may_replace_entire_panel_of_cdc_vaccine/",
-    "url_fp": "abfe022d3005325c9c65f83e4ef272b5",
-    "description": "submitted by/u/ControlCAD[link][comments]",
-    "date": "2026-03-21T10:31:12.996067+00:00"
-  },
-  {
-    "title": "Closure of Strait of Hormuz is 'greatest global energy security threat in history,' warns IEA chief",
-    "url": "https://www.reddit.com/r/technology/comments/1rz8t7w/closure_of_strait_of_hormuz_is_greatest_global/",
-    "url_fp": "5803a89281b954278d2efb020ee6dc03",
-    "description": "submitted by/u/geoxol[link][comments]",
-    "date": "2026-03-21T10:31:13.282804+00:00"
-  },
-  {
-    "title": "New court filing reveals Pentagon told Anthropic the two sides were nearly aligned — a week after Trump declared the relationship kaput",
-    "url": "https://techcrunch.com/2026/03/20/new-court-filing-reveals-pentagon-told-anthropic-the-two-sides-were-nearly-aligned-a-week-after-trump-declared-the-relationship-kaput/",
-    "url_fp": "5c9d7ff18f00a38dcf090cd38df20f2f",
-    "description": "Anthropic submitted two sworn declarations to a California federal court late Friday afternoon, pushing back on the Pentagon's assertion that the AI company poses an \"unacceptable risk to national security\" and arguing that the government's case relies on technical misunderstandings and claims that ",
-    "date": "2026-03-21T10:31:13.663228+00:00"
-  },
-  {
-    "title": "Elon Musk misled Twitter investors while trying to get out of acquisition, jury says",
-    "url": "https://techcrunch.com/2026/03/20/elon-musk-misled-twitter-investors-while-trying-to-get-out-of-acquisition-jury-says/",
-    "url_fp": "e951f2753ad46875ad21730fa1521807",
-    "description": "At the time, Musk had tweeted that Twitter had too many bots, which is why he was trying to renege on his commitment to buy the company.",
-    "date": "2026-03-21T10:31:13.909450+00:00"
-  },
-  {
-    "title": "Microsoft rolls back some of its Copilot AI bloat on Windows",
-    "url": "https://techcrunch.com/2026/03/20/microsoft-rolls-back-some-of-its-copilot-ai-bloat-on-windows/",
-    "url_fp": "0c66a53b958ee2405110005b9d738349",
-    "description": "The company is reducing Copilot entry points on Windows, starting with Photos, Widgets, Notepad, and other apps.",
-    "date": "2026-03-21T10:31:14.097273+00:00"
-  },
-  {
-    "title": "What happened at Nvidia GTC: NemoClaw, Robot Olaf, and a $1 trillion bet",
-    "url": "https://techcrunch.com/video/what-happened-at-nvidia-gtc-nemoclaw-robot-olaf-and-a-1-trillion-bet/",
-    "url_fp": "593fa446961e90804cf2f00b825cbaf9",
-    "description": "CEO Jensen Huang took the stage at Nvidia’s GTC conference this week in his signature leather jacket to deliver a two-and-a-half-hour keynote, projecting $1 trillion in AI chip sales through 2027, declaring that every company needs an “OpenClaw strategy,” and closing with a rambling Olaf robot that ",
-    "date": "2026-03-21T10:31:14.301281+00:00"
-  },
-  {
-    "title": "Amid legal turmoil, Kalshi is temporarily banned in Nevada",
-    "url": "https://techcrunch.com/2026/03/20/amidst-legal-turmoil-kalshi-is-temporarily-banned-in-nevada/",
-    "url_fp": "5ef70fc00a652c5eee500b6a3a33c92a",
-    "description": "It's the latest escalation in a regulatory battle over the future of prediction markets.",
-    "date": "2026-03-21T10:31:14.482826+00:00"
-  },
-  {
-    "title": "Pinterest CEO calls on governments to ban social media for users under 16",
-    "url": "https://techcrunch.com/2026/03/20/pinterest-ceo-calls-on-governments-to-ban-social-media-for-users-under-16/",
-    "url_fp": "4d54cc5d2cf4558e351d9c92375645a8",
-    "description": "Pinterest’s chief compares social media to tobacco and alcohol, saying children need similar protections.",
-    "date": "2026-03-21T10:31:14.707838+00:00"
-  },
-  {
-    "title": "Why scientists can’t get a laugh",
-    "url": "https://techcrunch.com/2026/03/20/why-scientists-cant-get-a-laugh/",
-    "url_fp": "6582425e07e733cfe837d351678ec36e",
-    "description": "Humor is hard to pull off in front of a cold audience, full stop.",
-    "date": "2026-03-21T10:31:14.819102+00:00"
-  },
-  {
-    "title": "A French Navy officer accidentally leaked the location of an aircraft carrier by logging his run on Strava",
-    "url": "https://techcrunch.com/2026/03/20/a-french-navy-officer-accidentally-leaked-the-location-of-an-aircraft-carrier-by-logging-his-run-on-strava/",
-    "url_fp": "96d7202e2d907fc19abd96570dab1a77",
-    "description": "A French naval officer went on a run around the deck of the Charles de Gaulle aircraft carrier, inadvertently leaking the warship's location when he uploaded the workout to Strava.",
-    "date": "2026-03-21T10:31:15.124606+00:00"
-  },
-  {
-    "title": "Jury finds Musk owes damages to Twitter investors for his tweets",
-    "url": "https://arstechnica.com/tech-policy/2026/03/jury-agrees-that-musks-tweets-during-twitter-takeover-constituted-fraud/",
-    "url_fp": "820cc194d21e56b6618ddae463bb9f2b",
-    "description": "The verdict, while not a complete loss, could still cost him billions.",
-    "date": "2026-03-21T10:31:15.322374+00:00"
-  },
-  {
-    "title": "You're likely already infected with a brain-eating virus you've never heard of",
-    "url": "https://arstechnica.com/health/2026/03/youre-likely-already-infected-with-a-brain-eating-virus-youve-never-heard-of/",
-    "url_fp": "ff37c11665bfffb359cb7746a8c5124b",
-    "description": "Fatal brain infection was thought to be from profound immune suppression. Not anymore.",
-    "date": "2026-03-21T10:31:15.547781+00:00"
-  },
-  {
-    "title": "Once again, ULA can't deliver when the US military needs a satellite in orbit",
-    "url": "https://arstechnica.com/space/2026/03/spacex-swipes-yet-another-military-contract-from-united-launch-alliance/",
-    "url_fp": "7820c95989a1ae2c089c878167ee24d8",
-    "description": "ULA's Vulcan launch vehicle is grounded after a solid rocket booster anomaly last month.",
-    "date": "2026-03-21T10:31:15.785939+00:00"
-  },
-  {
-    "title": "Microsoft keeps insisting that it's deeply committed to the quality of Windows 11",
-    "url": "https://arstechnica.com/gadgets/2026/03/microsoft-keeps-insisting-that-its-deeply-committed-to-the-quality-of-windows-11/",
-    "url_fp": "8975631f41d121b6ae8a8d323703b183",
-    "description": "\"Reducing unnecessary Copilot entry points\" is one of Microsoft's action items.",
-    "date": "2026-03-21T10:31:16.023395+00:00"
-  },
-  {
-    "title": "Writer denies it, but publisher pulls horror novel after multiple allegations of AI use",
-    "url": "https://arstechnica.com/ai/2026/03/hachette-pulls-shy-girl-horror-novel-after-concerns-about-ai-use/",
-    "url_fp": "cc172feee571714e5cac856f588560df",
-    "description": "One of the first controversies of its kind.",
-    "date": "2026-03-21T10:31:16.280506+00:00"
-  },
-  {
-    "title": "Widely used Trivy scanner compromised in ongoing supply-chain attack",
-    "url": "https://arstechnica.com/security/2026/03/widely-used-trivy-scanner-compromised-in-ongoing-supply-chain-attack/",
-    "url_fp": "bf4effa7824e585c0889b3d9f87a3168",
-    "description": "Admins: Sorry to say, but it's likely a rotate-your-secrets kind of weekend.",
-    "date": "2026-03-21T10:31:16.479978+00:00"
-  },
-  {
-    "title": "Three ways AI is learning to understand the physical world",
-    "url": "https://venturebeat.com/technology/three-ways-ai-is-learning-to-understand-the-physical-world",
-    "url_fp": "2841dfc4f6a30fb9fdf1543a031c6a57",
-    "description": "Large language models are running into limits in domains that require an understanding of the physical world — from robotics to autonomous driving to manufacturing. That constraint is pushing investors towardworld models, withAMI Labs raising a $1.03 billion seed roundshortly afterWorld Labs secured",
-    "date": "2026-03-21T10:31:16.665284+00:00"
-  },
-  {
-    "title": "Scale AI launches Voice Showdown, the first real-world benchmark for voice AI — and the results are humbling for some top models",
-    "url": "https://venturebeat.com/data/scale-ai-launches-voice-showdown-the-first-real-world-benchmark-for-voice-ai",
-    "url_fp": "f04b2fb51db116483c0ed31f3a75dae8",
-    "description": "Voice AI is moving faster than the tools we use to measure it. Every major AI lab — OpenAI, Google DeepMind, Anthropic, xAI — is racing to ship voice models capable of natural, real-time conversation.But the benchmarks used to evaluate those models are largely still running on synthetic speech, Engl",
-    "date": "2026-03-21T10:31:17.034727+00:00"
-  },
-  {
-    "title": "Mistral's Small 4 consolidates reasoning, vision and coding into one model — at a fraction of the inference cost",
-    "url": "https://venturebeat.com/technology/mistrals-small-4-consolidates-reasoning-vision-and-coding-into-one-model-at",
-    "url_fp": "f75894c535ca53eed9d63039fa18b1b0",
-    "description": "Enterprises that have been juggling separate models for reasoning, multimodal tasks, and agentic coding may be able to simplify their stack: Mistral’s new Small 4 brings all three into a single open-source model, with adjustable reasoning levels under the hood.Small 4 enters a crowded field of small",
-    "date": "2026-03-21T10:31:17.365635+00:00"
-  },
-  {
-    "title": "'Jury Duty Presents: Company Retreat' Almost Makes Corporate Culture Seem Fun",
-    "url": "https://www.wired.com/story/jury-duty-presents-company-retreat-almost-makes-corporate-culture-seem-fun/",
-    "url_fp": "ed1efc24d5a6d148354cfa59b86d66ee",
-    "description": "The Amazon Prime prank series amplifies the hijinks of workplace dynamics, while showing how people find purpose—and community—in their jobs despite impossible situations.",
-    "date": "2026-03-21T10:31:17.590084+00:00"
-  },
-  {
-    "title": "The 19 Best EVs Coming in 2026",
-    "url": "https://www.wired.com/story/the-16-best-evs-coming-in-2026/",
-    "url_fp": "1e285cda4bc54990f54866c167b8b9b9",
-    "description": "We’re expecting fresh electrics from Rivian, Hyundai, Honda, BMW, and newcomer Slate, among others. Here are the EVs arriving this year that we’re most excited about.",
-    "date": "2026-03-21T10:31:17.688910+00:00"
-  },
-  {
-    "title": "How BYD Got EV Chargers to Work Almost as Fast as Gas Pumps",
-    "url": "https://www.wired.com/story/how-byds-ev-charger-got-even-faster-and-it-might-not-matter-as-much-as-you-think/",
-    "url_fp": "d06454ed4fb5f58bc122a430b36cb539",
-    "description": "The Chinese automaker is racing ahead of global competitors—but don’t expect to see those gains in the US anytime soon.",
-    "date": "2026-03-21T10:31:17.880063+00:00"
-  },
-  {
-    "title": "Anthropic Denies It Could Sabotage AI Tools During War",
-    "url": "https://www.wired.com/story/anthropic-denies-sabotage-ai-tools-war-claude/",
-    "url_fp": "b9be083d75898a37fbfa6b5d027aec09",
-    "description": "The Department of Defense alleges the AI developer could manipulate models in the middle of war. Company executives argue that’s impossible.",
-    "date": "2026-03-21T10:31:18.053346+00:00"
-  },
-  {
-    "title": "There Aren’t a Lot of Reasons to Get Excited About a New Amazon Smartphone",
-    "url": "https://www.wired.com/story/amazon-smartphone-rumor-2026/",
-    "url_fp": "5e2edc41aee2b66b57f5bac932fd2566",
-    "description": "The company is reportedly building a new AI-powered mobile device. If Amazon follows through on the plan, experts warn it would be next to impossible to break into a crowded market.",
-    "date": "2026-03-21T10:31:18.287332+00:00"
-  },
-  {
-    "title": "The Download: OpenAI is building a fully automated researcher, and a psychedelic trial blind spot",
-    "url": "https://www.technologyreview.com/2026/03/20/1134448/the-download-openai-building-fully-automated-researcher-psychedelic-drug-trial/",
-    "url_fp": "9564e25252701f8255850d836272d977",
-    "description": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. OpenAI is throwing everything into building a fully automated researcher  OpenAI has a new grand challenge: building an AI researcher—a fully automated agent-base",
-    "date": "2026-03-21T10:31:18.570080+00:00"
-  },
-  {
-    "title": "OpenAI is throwing everything into building a fully automated researcher",
-    "url": "https://www.technologyreview.com/2026/03/20/1134438/openai-is-throwing-everything-into-building-a-fully-automated-researcher/",
-    "url_fp": "016918fe2c916459c3a398d6eab2167c",
-    "description": "OpenAI is refocusing its research efforts and throwing its resources into a new grand challenge. The San Francisco firm has set its sights on building what it calls an AI researcher, a fully automated agent-based system that will be able to go off and tackle large, complex problems by itself. ​​Open",
-    "date": "2026-03-21T10:31:18.790867+00:00"
-  },
-  {
-    "title": "More! More! More! Tech Workers Max Out Their A.I. Use.",
-    "url": "https://www.nytimes.com/2026/03/20/technology/tokenmaxxing-ai-agents.html",
-    "url_fp": "d2ee9a6441912c21a0777c0816e25e62",
-    "description": "At a number of companies, employees compete on leaderboards to show how much A.I. they’re using. They’re racking up big bills along the way.",
-    "date": "2026-03-21T10:31:18.951223+00:00"
-  },
-  {
-    "title": "Polymarket Says It Predicts the Truth. Its Social Feeds Are Filled With Falsehoods.",
-    "url": "https://www.nytimes.com/2026/03/20/technology/polymarket-social-feeds-falsehoods.html",
-    "url_fp": "9c337b017820af893f17ec381ea3045f",
-    "description": "A review of the betting market’s social media feeds found it has published hundreds of false and misleading posts.",
-    "date": "2026-03-21T10:31:19.195438+00:00"
-  },
-  {
-    "title": "White House Unveils A.I. Policy Aimed at Blocking State Laws",
-    "url": "https://www.nytimes.com/2026/03/20/us/politics/white-house-unveils-ai-policy-aimed-at-blocking-state-laws.html",
-    "url_fp": "b08ae52fc674bad0502a4388438ec62c",
-    "description": "The Trump administration on Friday released new guidelines for federal legislation on the technology, recommending some safeguards for children and consumer protections for energy costs.",
-    "date": "2026-03-21T10:31:19.378648+00:00"
-  },
-  {
-    "title": "‘A.I.-Washing’ Layoffs? + Why L.L.M.s Can’t Write Well + Tokenmaxxing",
-    "url": "https://www.nytimes.com/2026/03/20/podcasts/hardfork-ai-washing-tokenmaxxing.html",
-    "url_fp": "432d9ad650ee4cf1afe395e7b71e4a9b",
-    "description": "Companies are using A.I. as a reason for layoffs, but the truth may be more complex.",
-    "date": "2026-03-21T10:31:19.556358+00:00"
-  },
-  {
-    "title": "What to Know About Electric Cars When Gas Prices Are Surging",
-    "url": "https://www.nytimes.com/2026/03/21/business/energy-environment/gas-prices-electric-vehicles-iran.html",
-    "url_fp": "9e6b832c4052089ae32d6f8bdb72a5fc",
-    "description": "War in Iran has disrupted global oil supplies, which is prompting some car shoppers to look for ways to climb off “the gas-price roller coaster.”",
-    "date": "2026-03-21T10:31:19.745829+00:00"
-  },
-  {
-    "title": "Elon Musk Is Responsible for Some Twitter Investor Losses, Jury Finds",
-    "url": "https://www.nytimes.com/2026/03/20/technology/elon-musk-twitter-shareholders-verdict.html",
-    "url_fp": "0c3c6110b58471f983876fa849fec993",
-    "description": "The verdict was a rare loss for Mr. Musk, who investors claimed had tried to drive down the share price of the social media company, now called X, to renegotiate his $44 billion offer.",
-    "date": "2026-03-21T10:31:19.954153+00:00"
-  },
-  {
-    "title": "The Strait of Hormuz Was Supposed to Be Too Big to Fail",
-    "url": "https://www.nytimes.com/2026/03/21/business/iran-strait-of-hormuz-oil-us-israel-choke-point.html",
-    "url_fp": "d2ceb09bb8914d33d6379f6fba45e931",
-    "description": "But at just 35 miles wide, it did. It’s just the latest evidence of how dependent the global economy is on a handful of choke points.",
-    "date": "2026-03-21T10:31:20.132491+00:00"
-  },
-  {
-    "title": "Why Energy Is Such a Potent Target in the War With Iran",
-    "url": "https://www.nytimes.com/interactive/2026/03/20/business/energy-environment/iran-war-oil-gas-attacks.html",
-    "url_fp": "9121bbf27ae20ae90f0cba1cc51c1291",
-    "description": "More than three dozen oil, natural gas and related sites have been attacked in nine countries. More strikes could keep energy prices higher for longer.",
-    "date": "2026-03-21T10:31:20.310888+00:00"
-  },
-  {
-    "title": "High Gas Prices, Driven Up by the Iran War, Loom Over the Midterms",
-    "url": "https://www.nytimes.com/2026/03/21/us/politics/gas-prices-republicans-affordability.html",
-    "url_fp": "ec9d57886cacc238b5ab9ec5e4f7c22a",
-    "description": "The war has complicated the Republican message on affordability. Democrats see an opportunity to drive their economic message while tying President Trump to an unpopular overseas conflict.",
-    "date": "2026-03-21T10:31:20.516224+00:00"
-  },
-  {
-    "title": "Striking Down Pentagon Press Limits, Judge Vindicates Independent Journalism",
-    "url": "https://www.nytimes.com/2026/03/20/us/federal-judge-constitution-press-freedom.html",
-    "url_fp": "7097b7a9343e47740ac48678ddd28564",
-    "description": "The ruling cut deeper than left-versus-right politics, declaring that the policy imposed by Defense Secretary Pete Hegseth is unconstitutional.",
-    "date": "2026-03-21T10:31:20.735897+00:00"
-  },
-  {
-    "title": "Judge Rules Pentagon Restrictions on Press Are Unconstitutional",
-    "url": "https://www.nytimes.com/2026/03/20/business/media/pentagon-press-restrictions-new-york-times.html",
-    "url_fp": "fe183799ba72184a1c53215df9f678d5",
-    "description": "A federal judge tossed parts of the Pentagon’s restrictions on news outlets, saying they violated the First Amendment, in a lawsuit brought by The New York Times.",
-    "date": "2026-03-21T10:31:20.931277+00:00"
-  },
-  {
-    "title": "President Trump’s Ballroom Architect, Roasting in the Hot Seat",
-    "url": "https://www.nytimes.com/2026/03/21/us/politics/trump-ballroom-architect.html",
-    "url_fp": "ec302c8ededd33b86cb93b0448ee1a85",
-    "description": "Shalom Baranes, who arrived in the U.S. as a Libyan refugee and went on to renovate the Pentagon, is baffling fellow architects for accepting the job. But he said some of his previous projects have drawn outrage too.",
-    "date": "2026-03-21T10:31:21.119561+00:00"
-  },
-  {
-    "title": "One Year After Trump’s $400 Million Ultimatum, a Different Columbia",
-    "url": "https://www.nytimes.com/2026/03/21/nyregion/one-year-after-trumps-400-million-ultimatum-a-different-columbia.html",
-    "url_fp": "a88c31270797586fcf6a5ccb84f464f2",
-    "description": "As they sought to respond to charges of antisemitism and harassment on campus, administrators and trustees made promises. Many have been kept, but not all.",
-    "date": "2026-03-21T10:31:21.311408+00:00"
-  },
-  {
-    "title": "No Pills or Needles, Just Paper: How Deadly Drugs Are Changing",
-    "url": "https://www.nytimes.com/2026/03/21/world/deadly-drugs-paper.html",
-    "url_fp": "69c0c619e0d055c05288e39d71065ba6",
-    "description": "Lab-made drugs soaked into the pages of letters, books and even legal documents are being smuggled behind bars, killing inmates and frustrating investigators.",
-    "date": "2026-03-21T10:31:21.498521+00:00"
-  },
-  {
-    "title": "We’re All Living in the ‘Mirror World’ Now",
-    "url": "https://www.nytimes.com/2026/03/20/opinion/ezra-klein-podcast-naomi-klein.html",
-    "url_fp": "ab91c975523659aee7224dc87241f333",
-    "description": "Naomi Klein and Ezra Klein discuss what the success of MAGA reveals about the American left.",
-    "date": "2026-03-21T10:31:21.629615+00:00"
-  },
-  {
-    "title": "OpenAI Is Toning Down The Cringe Factor Of ChatGPT But Those Smarmy AI Responses Will Still Make You Shudder - Forbes",
-    "url": "https://www.forbes.com",
-    "url_fp": "974a05326cbbafcecec1f11b22f1eb27",
-    "description": "OpenAI Is Toning Down The Cringe Factor Of ChatGPT But Those Smarmy AI Responses Will Still Make You ShudderForbes",
-    "date": "2026-03-21T10:31:21.629820+00:00"
-  },
-  {
-    "title": "OpenAI's first crack at online shopping stumbled. It's preparing for the next wave - CNBC",
-    "url": "https://www.cnbc.com",
-    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
-    "description": "OpenAI's first crack at online shopping stumbled. It's preparing for the next waveCNBC",
-    "date": "2026-03-21T10:31:21.629925+00:00"
-  },
-  {
-    "title": "OpenAI is throwing everything into building a fully automated researcher - MIT Technology Review",
-    "url": "https://www.technologyreview.com",
-    "url_fp": "9964b3e4f61927e9f57c3aec1a8f1040",
-    "description": "OpenAI is throwing everything into building a fully automated researcherMIT Technology Review",
-    "date": "2026-03-21T10:31:21.909519+00:00"
-  },
-  {
-    "title": "Anthropic Denies It Could Sabotage AI Tools During War - WIRED",
-    "url": "https://www.wired.com",
-    "url_fp": "c72d08405dc30e25e7627843e8a5d3ac",
-    "description": "Anthropic Denies It Could Sabotage AI Tools During WarWIRED",
-    "date": "2026-03-21T10:31:21.909990+00:00"
-  },
-  {
-    "title": "Claude down: Anthropic AI users hit by ‘errors’ as chatbot not working properly - AOL.com",
-    "url": "https://www.aol.com",
-    "url_fp": "9f708995b5d401084bd42712242ccf7a",
-    "description": "Claude down: Anthropic AI users hit by ‘errors’ as chatbot not working properlyAOL.com",
-    "date": "2026-03-21T10:31:21.910232+00:00"
-  },
-  {
-    "title": "Anthropic study reveals what users expect from AI and what worries them - The Indian Express",
-    "url": "https://indianexpress.com",
-    "url_fp": "280c1e9972290f99769d04439982f2db",
-    "description": "Anthropic study reveals what users expect from AI and what worries themThe Indian Express",
-    "date": "2026-03-21T10:31:21.910458+00:00"
-  },
-  {
-    "title": "Introducing the new full-stack vibe coding experience in Google AI Studio - blog.google",
-    "url": "https://blog.google",
-    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
-    "description": "Introducing the new full-stack vibe coding experience in Google AI Studioblog.google",
-    "date": "2026-03-21T10:31:21.910562+00:00"
-  },
-  {
-    "title": "'Use a gun': AI chatbots help people plan violence, report says - Mashable",
-    "url": "https://mashable.com",
-    "url_fp": "b5f07f82860eb25681a9a8a477cc1ce4",
-    "description": "'Use a gun': AI chatbots help people plan violence, report saysMashable",
-    "date": "2026-03-21T10:31:22.220358+00:00"
-  },
-  {
-    "title": "Microsoft merges Copilot units to speed AI rollout - MSN",
-    "url": "https://www.msn.com",
-    "url_fp": "2791b9f39341be4e182857a9c1319f29",
-    "description": "Microsoft merges Copilot units to speed AI rolloutMSN",
-    "date": "2026-03-21T10:31:22.220482+00:00"
-  },
-  {
-    "title": "Microsoft rolls back some of its Copilot AI bloat on Windows - TechCrunch",
-    "url": "https://techcrunch.com",
-    "url_fp": "3387be370c2448216e2ac4e9ebbda6c4",
-    "description": "Microsoft rolls back some of its Copilot AI bloat on WindowsTechCrunch",
-    "date": "2026-03-21T10:31:22.220619+00:00"
-  },
-  {
-    "title": "Microsoft won’t force Copilot in everywhere after all - Computerworld",
-    "url": "https://www.computerworld.com",
-    "url_fp": "d2ff223c8c24df729461a6821b1e71c0",
-    "description": "Microsoft won’t force Copilot in everywhere after allComputerworld",
-    "date": "2026-03-21T10:31:22.220813+00:00"
-  },
-  {
-    "title": "The Week’s 10 Biggest Funding Rounds: Investment Slows, But Security And AI Remain Top Picks - Crunchbase News",
-    "url": "https://news.crunchbase.com",
-    "url_fp": "f087ef1c2fa43cca40bcb212d1ef6ca1",
-    "description": "The Week’s 10 Biggest Funding Rounds: Investment Slows, But Security And AI Remain Top PicksCrunchbase News",
-    "date": "2026-03-21T10:31:22.221169+00:00"
-  },
-  {
-    "title": "AI Startups Capture Record 41% of $128B Venture Haul - The Tech Buzz",
-    "url": "https://www.techbuzz.ai",
-    "url_fp": "ef939d3bc6ef2bd4e508de78d0d4f040",
-    "description": "AI Startups Capture Record 41% of $128B Venture HaulThe Tech Buzz",
-    "date": "2026-03-21T10:31:22.221271+00:00"
-  },
-  {
-    "title": "Startup Wrap: MENA deals spotlight AI, expansion, and strategic consolidation - Arab News",
-    "url": "https://www.arabnews.com",
-    "url_fp": "dae944ab74af33c680a6f4e52930748f",
-    "description": "Startup Wrap: MENA deals spotlight AI, expansion, and strategic consolidationArab News",
-    "date": "2026-03-21T10:31:22.480121+00:00"
-  },
-  {
-    "title": "AI Supercomputers: Powering the Next Era of Innovation - Precedence Research",
-    "url": "https://www.precedenceresearch.com",
-    "url_fp": "4a8e120951bcdbd71c07494a6b71d62c",
-    "description": "AI Supercomputers: Powering the Next Era of InnovationPrecedence Research",
-    "date": "2026-03-21T10:31:22.707310+00:00"
-  },
-  {
-    "title": "Meet an Arm Engineer: Building AI Systems and Advancing Your Career - Built In",
-    "url": "https://builtin.com",
-    "url_fp": "856d7e203d54a949a0f1ceb814d9aaac",
-    "description": "Meet an Arm Engineer: Building AI Systems and Advancing Your CareerBuilt In",
-    "date": "2026-03-21T10:31:22.946711+00:00"
-  },
-  {
-    "title": "White House Unveils A.I. Policy Aimed at Blocking State Laws - The New York Times",
-    "url": "https://www.nytimes.com",
-    "url_fp": "55878905590e5ea6136f9730d218c235",
-    "description": "White House Unveils A.I. Policy Aimed at Blocking State LawsThe New York Times",
-    "date": "2026-03-21T10:31:22.946909+00:00"
-  },
-  {
-    "title": "White House releases AI policy blueprint for Congress - Politico",
-    "url": "https://www.politico.com",
-    "url_fp": "8c9bf0146c0792d5befcb525694a72bf",
-    "description": "White House releases AI policy blueprint for CongressPolitico",
-    "date": "2026-03-21T10:31:22.947174+00:00"
-  },
-  {
-    "title": "White House urges Congress to take a light touch on AI regulations in new legislative blueprint - Pottsville Republican Herald",
-    "url": "https://www.republicanherald.com",
-    "url_fp": "27050b7732306d408f9ac5bdec371834",
-    "description": "White House urges Congress to take a light touch on AI regulations in new legislative blueprintPottsville Republican Herald",
-    "date": "2026-03-21T10:31:23.309762+00:00"
-  },
-  {
-    "title": "Cursor quietly built its new coding model on top of Chinese open-source Kimi K2.5 - the-decoder.com",
-    "url": "https://the-decoder.com",
-    "url_fp": "1df08508b116a68316356a85390330a0",
-    "description": "Cursor quietly built its new coding model on top of Chinese open-source Kimi K2.5the-decoder.com",
-    "date": "2026-03-21T10:31:23.587154+00:00"
-  },
-  {
-    "title": "OpenAI needs to make money. Meet Fidji Simo, the 'founder-mode' executive charged with making it happen. - Business Insider",
-    "url": "https://www.businessinsider.com",
-    "url_fp": "04220288456435753371c3e6a38ca102",
-    "description": "OpenAI needs to make money. Meet Fidji Simo, the 'founder-mode' executive charged with making it happen.Business Insider",
-    "date": "2026-03-21T10:31:23.587342+00:00"
-  },
-  {
-    "title": "OpenAI Drops IH-Challenge Dataset to Harden AI Against Prompt Injection Attacks - MEXC",
-    "url": "https://www.mexc.com",
-    "url_fp": "ee6828252f343002eb9bd65d4a4a6f02",
-    "description": "OpenAI Drops IH-Challenge Dataset to Harden AI Against Prompt Injection AttacksMEXC",
-    "date": "2026-03-21T10:31:23.587523+00:00"
-  },
-  {
     "title": "Courts Using AI and Cybersecurity Advances to Improve Access to Justice - California Courts Newsroom (.gov)",
     "url": "https://newsroom.courts.ca.gov",
     "url_fp": "1d7fba759799d72c7eb8ecafa1bb40e8",
@@ -9196,5 +8405,1272 @@
     "url_fp": "ac710eed1b24c934765fd137cf800881",
     "description": "Lakers vs. Nets Time, TV & Stream – March 27San Diego Sports 760",
     "date": "2026-03-27T10:31:29.552932+00:00"
+  },
+  {
+    "title": "People inside Microsoft are fighting to drop mandatory Microsoft Account",
+    "url": "https://www.windowscentral.com/microsoft/windows-11/people-inside-microsoft-are-fighting-to-drop-windows-11s-mandatory-microsoft-account-requirements-during-setup",
+    "url_fp": "db905cbd3fe3d7dc8cc436570fde473e",
+    "description": "HN score: 649 | Comments: 495",
+    "date": "2026-03-28T10:31:01.922362+00:00"
+  },
+  {
+    "title": "Anatomy of the .claude/ folder",
+    "url": "https://blog.dailydoseofds.com/p/anatomy-of-the-claude-folder",
+    "url_fp": "d924ff4592938aa354d9c0b197632948",
+    "description": "HN score: 487 | Comments: 224",
+    "date": "2026-03-28T10:31:02.033472+00:00"
+  },
+  {
+    "title": "Make macOS consistently bad unironically",
+    "url": "https://lr0.org/blog/p/macos/",
+    "url_fp": "b2950e8dbe33248fc5cc3a3b9245870e",
+    "description": "HN score: 416 | Comments: 294",
+    "date": "2026-03-28T10:31:02.177234+00:00"
+  },
+  {
+    "title": "Desk for people who work at home with a cat",
+    "url": "https://soranews24.com/2026/03/27/japan-now-has-a-special-desk-for-people-who-work-at-home-with-a-pet-catphotos/",
+    "url_fp": "f23712a5e491a96233803bbaef24c54e",
+    "description": "HN score: 416 | Comments: 150",
+    "date": "2026-03-28T10:31:02.312512+00:00"
+  },
+  {
+    "title": "Go hard on agents, not on your filesystem",
+    "url": "https://jai.scs.stanford.edu/",
+    "url_fp": "0e84fcdc6661a4056ad4ad96a0893117",
+    "description": "HN score: 354 | Comments: 197",
+    "date": "2026-03-28T10:31:02.412526+00:00"
+  },
+  {
+    "title": "‘Energy independence feels practical’: Europeans building mini solar farms",
+    "url": "https://www.euronews.com/2026/03/26/suddenly-energy-independence-feels-practical-europeans-are-building-mini-solar-farms-at-ho",
+    "url_fp": "6e1588680bb5b9c2a8fdf4d3b389aa61",
+    "description": "HN score: 287 | Comments: 269",
+    "date": "2026-03-28T10:31:02.563172+00:00"
+  },
+  {
+    "title": "Meow.camera",
+    "url": "https://meow.camera/#4258783365322591678",
+    "url_fp": "e0dac56e01dd74efb1f78dfd045ba3c6",
+    "description": "HN score: 276 | Comments: 63",
+    "date": "2026-03-28T10:31:02.595420+00:00"
+  },
+  {
+    "title": "Iran-linked hackers breach FBI director's personal email",
+    "url": "https://www.reuters.com/world/us/iran-linked-hackers-claim-breach-of-fbi-directors-personal-email-doj-official-2026-03-27/",
+    "url_fp": "14c26922bd193b38dcc1c469ef18cbf5",
+    "description": "HN score: 259 | Comments: 377",
+    "date": "2026-03-28T10:31:02.718918+00:00"
+  },
+  {
+    "title": "LG's new 1Hz display is the secret behind a new laptop's battery life",
+    "url": "https://www.pcworld.com/article/3096432/lgs-new-1hz-display-is-the-secret-behind-a-new-laptops-battery-life.html",
+    "url_fp": "a4b955e6ed2a51ae997ac15d65b9b4ce",
+    "description": "HN score: 243 | Comments: 111",
+    "date": "2026-03-28T10:31:02.870511+00:00"
+  },
+  {
+    "title": "Explore the Hidden World of Sand",
+    "url": "https://magnifiedsand.com/",
+    "url_fp": "6750b9f8abc3cccdf8f211abc4cac0bd",
+    "description": "HN score: 238 | Comments: 39",
+    "date": "2026-03-28T10:31:02.949295+00:00"
+  },
+  {
+    "title": "Installing a Let's Encrypt TLS certificate on a Brother printer with Certbot",
+    "url": "https://owltec.ca/Other/Installing+a+Let%27s+Encrypt+TLS+certificate+on+a+Brother+printer+automatically+with+Certbot+(%26+Cloudflare)",
+    "url_fp": "2369081dc5aeb811dfe27daafcb50b47",
+    "description": "HN score: 216 | Comments: 52",
+    "date": "2026-03-28T10:31:03.113964+00:00"
+  },
+  {
+    "title": "ISBN Visualization",
+    "url": "https://annas-archive.gd/isbn-visualization?",
+    "url_fp": "3ac08338fb0bf09ff89b934fc0c259e1",
+    "description": "HN score: 170 | Comments: 27",
+    "date": "2026-03-28T10:31:03.162819+00:00"
+  },
+  {
+    "title": "AMD's Ryzen 9 9950X3D2 Dual Edition crams 208MB of cache into a single chip",
+    "url": "https://arstechnica.com/gadgets/2026/03/amds-ryzen-9-9950x3d2-dual-edition-crams-208mb-of-cache-into-a-single-chip/",
+    "url_fp": "4b7334c47a975f157ef5c5efb825878e",
+    "description": "HN score: 169 | Comments: 91",
+    "date": "2026-03-28T10:31:03.315661+00:00"
+  },
+  {
+    "title": "Nashville library launches Memory Lab for digitizing home movies",
+    "url": "https://www.axios.com/local/nashville/2026/03/16/nashville-library-digitize-home-movies",
+    "url_fp": "b7d5912e01a05be4dc47c11b610198a4",
+    "description": "HN score: 151 | Comments: 37",
+    "date": "2026-03-28T10:31:03.450628+00:00"
+  },
+  {
+    "title": "Velxio 2.0 – Emulate Arduino, ESP32, and Raspberry Pi 3 in the Browser",
+    "url": "https://github.com/davidmonterocrespo24/velxio",
+    "url_fp": "710c40b319329979f3afba06e6e7422e",
+    "description": "HN score: 150 | Comments: 44",
+    "date": "2026-03-28T10:31:03.592566+00:00"
+  },
+  {
+    "title": "Show HN: Twitch Roulette – Find live streamers who need views the most",
+    "url": "https://twitchroulette.net/",
+    "url_fp": "54d7c8803494eba5e990865f98cde13f",
+    "description": "HN score: 124 | Comments: 59",
+    "date": "2026-03-28T10:31:03.745605+00:00"
+  },
+  {
+    "title": "Building FireStriker: Making Civic Tech Free",
+    "url": "https://firestriker.org/blog/building-firestriker-why-im-making-civic-tech-free",
+    "url_fp": "52bdfaf2694d56575c936432f6d397d5",
+    "description": "HN score: 124 | Comments: 26",
+    "date": "2026-03-28T10:31:03.842278+00:00"
+  },
+  {
+    "title": "The bee that everyone wants to save",
+    "url": "https://naturalist.bearblog.dev/the-bee-that-everyone-wants-to-save/",
+    "url_fp": "42233fefb869aea0e3704de3ce40d294",
+    "description": "HN score: 107 | Comments: 26",
+    "date": "2026-03-28T10:31:03.930304+00:00"
+  },
+  {
+    "title": "Telnyx package compromised on PyPI",
+    "url": "https://telnyx.com/resources/telnyx-python-sdk-supply-chain-security-notice-march-2026",
+    "url_fp": "a34941ee3ed5251e963ba85827bad4e9",
+    "description": "HN score: 104 | Comments: 107",
+    "date": "2026-03-28T10:31:04.008924+00:00"
+  },
+  {
+    "title": "Tech stocks suffer worst week in nearly a year, driven down by war worries, Meta legal woes",
+    "url": "https://www.cnbc.com/2026/03/27/tech-stocks-iran-war-meta-verdict.html",
+    "url_fp": "adfb2b1aaae0a5c0f9986caeb645e371",
+    "description": "Meta's twin legal defeats this week and a big sell-off in Micron spurred a drop in technology stocks, which were broadly hit by rising oil prices.",
+    "date": "2026-03-28T10:31:04.198704+00:00"
+  },
+  {
+    "title": "White House launches app touting Trump's record, with some key omissions",
+    "url": "https://www.cnbc.com/2026/03/27/white-house-app-trump-iran-war-oil-gas-ice.html",
+    "url_fp": "e9c3dcf95f66455547cbddf461c2fff0",
+    "description": "The app includes a link to report tips to Immigration and Customs Enforcement.",
+    "date": "2026-03-28T10:31:04.349296+00:00"
+  },
+  {
+    "title": "Epstein victims sue Google and the Trump administration over alleged disclosure of personal information",
+    "url": "https://www.cnbc.com/2026/03/27/jeffrey-epstein-victims-sue-trump-administration-google.html",
+    "url_fp": "efc00a59d4835a44a0e5f901e26b230d",
+    "description": "A lawsuit filed in Northern California alleges that Google's AI features generated contact information for Epstein victims.",
+    "date": "2026-03-28T10:31:04.559117+00:00"
+  },
+  {
+    "title": "Beijing's surprise intervention on Meta's Manus rattles tech founders, VCs eyeing 'China shedding'",
+    "url": "https://www.cnbc.com/2026/03/27/meta-manus-china-review-singapore-washing-model-regulation-.html",
+    "url_fp": "144d03887dc33d1684496d3139f43ddf",
+    "description": "Beijing's review has fueled concerns and confusion among Chinese tech founders and investors that had quietly embraced the so-called \"Singapore-washing\" model.",
+    "date": "2026-03-28T10:31:04.748207+00:00"
+  },
+  {
+    "title": "Cybersecurity stocks fall on report Anthropic is testing a powerful new model",
+    "url": "https://www.cnbc.com/2026/03/27/anthropic-cybersecurity-stocks-ai-mythos.html",
+    "url_fp": "50e841b69f2376651b854f48d942ce1f",
+    "description": "The cybersecurity sector has slumped this year on fears that new AI will massively disrupt their business models.",
+    "date": "2026-03-28T10:31:04.909300+00:00"
+  },
+  {
+    "title": "Sony hikes PS5 prices by up to $150 citing 'pressures' in global economy",
+    "url": "https://www.cnbc.com/2026/03/27/sony-playstation-5-ps5-price-rise.html",
+    "url_fp": "9e67cef85bcc16a8142e3ff36e822678",
+    "description": "Sony, like other console makers, is contending with surging memory chip prices which have forced the company to raise prices.",
+    "date": "2026-03-28T10:31:05.058494+00:00"
+  },
+  {
+    "title": "Whoop has LeBron – now it wants your mom",
+    "url": "https://techcrunch.com/2026/03/27/whoop-has-lebron-now-it-wants-your-mom/",
+    "url_fp": "41ff33e62bad94d0866fca893e9e9830",
+    "description": "Whoop founder Will Ahmed has spent 14 years building a health wearable beloved by elite athletes, and is now racing Oura — and the FDA, and the limits of consumer medicine — to turn it into something that could one day save your life.",
+    "date": "2026-03-28T10:31:05.152956+00:00"
+  },
+  {
+    "title": "Physical Intelligence is reportedly in talks to raise $1 billion, again",
+    "url": "https://techcrunch.com/2026/03/27/physical-intelligence-is-reportedly-in-talks-to-raise-1-billion-again/",
+    "url_fp": "b81d3411df14c188c4935e8fb7e49ca6",
+    "description": "The deal would effectively double the company's $5.6 billion valuation in just four months.",
+    "date": "2026-03-28T10:31:05.302600+00:00"
+  },
+  {
+    "title": "Why SoftBank’s new $40B loan points to a 2026 OpenAI IPO",
+    "url": "https://techcrunch.com/2026/03/27/why-softbanks-new-40b-loan-points-to-a-2026-openai-ipo/",
+    "url_fp": "239f4f0a1413c514ae7637e0fe38d0a3",
+    "description": "Wall Street giants JPMorgan and Goldman Sachs are extending a 12-month, unsecured loan to the Japanese conglomerate.",
+    "date": "2026-03-28T10:31:05.420467+00:00"
+  },
+  {
+    "title": "Memory chip giant SK hynix could help end ‘RAMmageddon’ with blockbuster US IPO",
+    "url": "https://techcrunch.com/2026/03/27/memory-chip-giant-sk-hynix-could-help-end-rammageddon-with-blockbuster-us-ipo/",
+    "url_fp": "8b779cd1f72b75d15e87c25070f443d3",
+    "description": "SK hynix’s potential U.S. listing could raise $10-$14 billion to help it build more capacity, encourage others to follow, and end the 'RAMmageddon' memory shortage.",
+    "date": "2026-03-28T10:31:05.580148+00:00"
+  },
+  {
+    "title": "Waymo’s skyrocketing ridership in one chart",
+    "url": "https://techcrunch.com/2026/03/27/waymo-skyrocketing-ridership-in-one-chart/",
+    "url_fp": "f5c752d16b2fc329f8786f47ca2b090c",
+    "description": "Waymo's weekly paid robotaxi trips have increased tenfold in less than two years.",
+    "date": "2026-03-28T10:31:05.676424+00:00"
+  },
+  {
+    "title": "European Commission confirms cyberattack after hackers claim data breach",
+    "url": "https://techcrunch.com/2026/03/27/european-commission-confirms-cyberattack-after-hackers-claim-data-breach/",
+    "url_fp": "9503ac707a62abbe8c724b60a08c3959",
+    "description": "The European Union's top executive body has confirmed a cyberattack after hackers reportedly stole reams of data from the European Commission's cloud storage.",
+    "date": "2026-03-28T10:31:05.826919+00:00"
+  },
+  {
+    "title": "Aetherflux reportedly raising Series B at $2 billion valuation",
+    "url": "https://techcrunch.com/2026/03/27/aetherflux-reportedly-raising-series-b-at-2-billion-valuation/",
+    "url_fp": "3b7d4848806d854b46b79486d11a1880",
+    "description": "Index Ventures is said to be leading a $250 million to $350 million round.",
+    "date": "2026-03-28T10:31:05.962610+00:00"
+  },
+  {
+    "title": "Rivian gets another $1B from Volkswagen",
+    "url": "https://techcrunch.com/2026/03/27/rivian-gets-another-1b-from-volkswagen/",
+    "url_fp": "bbb7c0684317c869dc1bc2bc7c76bc9f",
+    "description": "The two companies have been collaborating on a joint venture that would see Rivian tech go in VW's EVs.",
+    "date": "2026-03-28T10:31:06.054085+00:00"
+  },
+  {
+    "title": "Playing Wolfenstein 3D with one hand in 2026",
+    "url": "https://arstechnica.com/gaming/2026/03/playing-wolfenstein-3d-with-one-hand-in-2026/",
+    "url_fp": "204123dd834bc5dc186d190186cb9667",
+    "description": "Over three decades later, this historical curiosity has more than a few rough edges",
+    "date": "2026-03-28T10:31:06.149139+00:00"
+  },
+  {
+    "title": "With new plugins feature, OpenAI officially takes Codex beyond coding",
+    "url": "https://arstechnica.com/ai/2026/03/openai-brings-plugins-to-codex-closing-some-of-the-gap-with-claude-code/",
+    "url_fp": "3b26adb0e52af365992666bcf66ff3fe",
+    "description": "Things are moving fast, and competitors have offered something similar for a while.",
+    "date": "2026-03-28T10:31:06.289993+00:00"
+  },
+  {
+    "title": "Outbreak linked to raw cheese grows; 9 cases total, one with kidney failure",
+    "url": "https://arstechnica.com/health/2026/03/kidney-failure-case-reported-in-raw-cheese-outbreak-maker-still-denies-link/",
+    "url_fp": "cef24c70536772eebf81a7c6ddb2a7d3",
+    "description": "Raw Farm denies link to illnesses while patients keep identifying its products.",
+    "date": "2026-03-28T10:31:06.452235+00:00"
+  },
+  {
+    "title": "Judge irate as defendant joins by Zoom while driving—then lies about it",
+    "url": "https://arstechnica.com/tech-policy/2026/03/judge-irate-as-defendant-joins-by-zoom-while-driving-then-lies-about-it/",
+    "url_fp": "e832b4ab6f056ae72e7b0074aa8b7f47",
+    "description": "\"Let me see the driver!\"",
+    "date": "2026-03-28T10:31:06.605579+00:00"
+  },
+  {
+    "title": "AV1’s open, royalty-free promise in question as Dolby sues Snapchat over codec",
+    "url": "https://arstechnica.com/gadgets/2026/03/av1s-open-royalty-free-promise-in-question-as-dolby-sues-snapchat-over-codec/",
+    "url_fp": "61e8bdec41f5901fceb1c6187a12a6e4",
+    "description": "Big Tech declaring AV1 royalty-free “doesn't mean that it is.\"",
+    "date": "2026-03-28T10:31:06.767269+00:00"
+  },
+  {
+    "title": "Hegseth, Trump had no authority to order Anthropic to be blacklisted, judge says",
+    "url": "https://arstechnica.com/tech-policy/2026/03/hegseth-trump-had-no-authority-to-order-anthropic-to-be-blacklisted-judge-says/",
+    "url_fp": "32eed2240901a157e145b9849e44eb83",
+    "description": "“I don’t know”: Department of War fails to justify blacklisting Anthropic.",
+    "date": "2026-03-28T10:31:06.934044+00:00"
+  },
+  {
+    "title": "IndexCache, a new sparse attention optimizer, delivers 1.82x faster inference on long-context AI models",
+    "url": "https://venturebeat.com/technology/indexcache-a-new-sparse-attention-optimizer-delivers-1-82x-faster-inference",
+    "url_fp": "6cde67b7e4a10c16b6e388272fe0a2eb",
+    "description": "Processing 200,000 tokens through a large language model is expensive and slow: the longer the context, the faster the costs spiral. Researchers at Tsinghua University and Z.ai havebuilt a technique called IndexCachethat cuts up to 75% of the redundant computation in sparse attention models, deliver",
+    "date": "2026-03-28T10:31:07.136855+00:00"
+  },
+  {
+    "title": "Samsung Frame Pro Review: A Good TV for a Pretty Living Room",
+    "url": "https://www.wired.com/review/samsung-frame-pro/",
+    "url_fp": "ceaeb297f31be22aed771e5cd1add7c0",
+    "description": "This is the first truly impressive art TV I’ve seen.",
+    "date": "2026-03-28T10:31:07.272521+00:00"
+  },
+  {
+    "title": "Best 360 Cameras (2026): DJI, Insta360, GoPro",
+    "url": "https://www.wired.com/gallery/best-360-cameras/",
+    "url_fp": "fdb46003f9df7d953695d631476c6b1a",
+    "description": "It’s a small world after all, and these cameras can capture all of it at once, giving you a 360-degree view.",
+    "date": "2026-03-28T10:31:07.360645+00:00"
+  },
+  {
+    "title": "Loop Earplugs Discount Codes and Deals: Save on Ear Buds and Gift Sets",
+    "url": "https://www.wired.com/story/loop-earplugs-discount-code/",
+    "url_fp": "b9dd69784da771a22e8d976ca0ccc1fa",
+    "description": "Save on Loop Earplugs, including Quiet 2 and popular gift sets for improved sleep, focus, and comfort.",
+    "date": "2026-03-28T10:31:07.516922+00:00"
+  },
+  {
+    "title": "Instacart Promo Code: Save on Groceries in March 2026",
+    "url": "https://www.wired.com/story/instacart-promo/code/",
+    "url_fp": "7875353776f1c3df5e9e2fa5a2608ef8",
+    "description": "From $0 delivery fees on your first three orders to $50 credits with the Instacart Mastercard, here is how to maximize your grocery budget this month.",
+    "date": "2026-03-28T10:31:07.633050+00:00"
+  },
+  {
+    "title": "Meta Quest Promo Codes: $50 Off | March 2026",
+    "url": "https://www.wired.com/story/meta-quest-promo-code/",
+    "url_fp": "1723d704a2df35bcf5e67392fc15833a",
+    "description": "Experience cutting-edge VR and save up to 20% with coupons for the latest games, Meta Quest 3, Ray-Ban AI glasses, and more deals.",
+    "date": "2026-03-28T10:31:07.725663+00:00"
+  },
+  {
+    "title": "A woman’s uterus has been kept alive outside the body for the first time",
+    "url": "https://www.technologyreview.com/2026/03/28/1134766/womans-uterus-kept-alive-outside-the-body-first/",
+    "url_fp": "3f52d6880f00a301e9fa99c4cd62209b",
+    "description": "“Think of this as a human body,” says Javier González. In front of me is essentially a metal box on wheels. Standing at around a meter in height, it reminds me of a stainless-steel counter in a restaurant kitchen. It is covered in flexible plastic tubing—which act as veins and arteries—connecting a ",
+    "date": "2026-03-28T10:31:07.883664+00:00"
+  },
+  {
+    "title": "The Download: the internet’s best weather app, and why people freeze their brains",
+    "url": "https://www.technologyreview.com/2026/03/27/1134755/the-download-best-weather-forecasting-app-why-people-freeze-brains/",
+    "url_fp": "fbff22a19098efbea318c66a28f3295c",
+    "description": "This is today’s edition of The Download, our weekday newsletter that provides a daily dose of what’s going on in the world of technology. How a couple of ski bums built the internet’s best weather app  The best snow-forecasting app for skiers isn’t a federally-funded service or a big-name brand. It’",
+    "date": "2026-03-28T10:31:08.052718+00:00"
+  },
+  {
+    "title": "[D] Many times I feel additional experiments during the rebuttal make my paper worse",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s5j8bg/d_many_times_i_feel_additional_experiments_during/",
+    "url_fp": "06dccd2a4e3cbe0fc22468225ac2ca7d",
+    "description": "Back in the days when I just started to review for major conferences, it was common to give and receive reviews saying \"I don't have major concerns\".In the past 3-5 years, the field has spent significant effort cracking down on low-quality reviews, which is great. But a side effect is that we don't ",
+    "date": "2026-03-28T10:31:08.223679+00:00"
+  },
+  {
+    "title": "[D] Thinking about augmentation as invariance assumptions",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s5nxwc/d_thinking_about_augmentation_as_invariance/",
+    "url_fp": "75855e6207ba1670496b3680ffb89a67",
+    "description": "Data augmentation is still used much more heuristically than it should be.A training pipeline can easily turn into a stack of intuition, older project defaults, and transforms borrowed from papers or blog posts. The hard part is not adding augmentations. The hard part is reasoning about them: what i",
+    "date": "2026-03-28T10:31:08.341096+00:00"
+  },
+  {
+    "title": "[Project] PentaNet: Pushing beyond BitNet with Native Pentanary {-2, -1, 0, 1, 2} Quantization (124M, zero-multiplier inference)",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s5l5l2/project_pentanet_pushing_beyond_bitnet_with/",
+    "url_fp": "9db6be6fa7ff79ec75a481f550d6410e",
+    "description": "Hey everyone,I've been experimenting with extreme LLM quantization following the BitNet 1.58b paper. While ternary quantization {-1, 0, 1} is great for replacing costly matrix multiplications with simple additions, I wondered if we were leaving too much model capacity on the table by overly restrict",
+    "date": "2026-03-28T10:31:08.567438+00:00"
+  },
+  {
+    "title": "[R] Controlled experiment: giving an LLM agent access to CS papers during automated hyperparameter search improves results by 3.2%",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s5jpgz/r_controlled_experiment_giving_an_llm_agent/",
+    "url_fp": "45e38bd413bee712730c9a2c0906a5c5",
+    "description": "Ran a controlled experiment measuring whether LLM coding agents benefit from access to research literature during automated experimentation.Setup:Two identical runs using Karpathy's autoresearch framework. Claude Code agent optimizing a ~7M param GPT-2 on TinyStories. M4 Pro, 100 experiments each, s",
+    "date": "2026-03-28T10:31:08.814819+00:00"
+  },
+  {
+    "title": "[D] We audited LoCoMo: 6.4% of the answer key is wrong and the judge accepts up to 63% of intentionally wrong answers",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s54cvg/d_we_audited_locomo_64_of_the_answer_key_is_wrong/",
+    "url_fp": "52b61901cda8b85dd82797fb24f88ffc",
+    "description": "Projects are still submitting new scores on LoCoMo as of March 2026.We audited it and found 6.4% of the answer key is wrong, and the LLM judge accepts up to 63% of intentionally wrong answers. LongMemEval-S is often raised as an alternative, but each question's corpus fits entirely in modern context",
+    "date": "2026-03-28T10:31:09.042911+00:00"
+  },
+  {
+    "title": "[P] Deezer showed CNN detection fails on compressed audio, here's a dual-engine approach that survives MP3",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s51amm/p_deezer_showed_cnn_detection_fails_on_compressed/",
+    "url_fp": "d828223ecc681b0323cd49c0531f5139",
+    "description": "I've been working on detecting AI-generated music and ran into the same wall that Deezer's team documented in their paper, CNN-based detection on mel-spectrograms breaks when audio is compressed to MP3.The problem:A ResNet18 trained on mel-spectrograms works well on WAV files, but real-world music i",
+    "date": "2026-03-28T10:31:09.252327+00:00"
+  },
+  {
+    "title": "[R] ACL ARR review desk rejected",
+    "url": "https://www.reddit.com/r/MachineLearning/comments/1s54zw3/r_acl_arr_review_desk_rejected/",
+    "url_fp": "07751decfe1c21acedcc889ce357005e",
+    "description": "My ACL ARR submission was desk rejected because I had two versions of the same paper in the same cycle. This happened because I mistakenly submitted twice instead of updating the original submission.About a week ago, I emailed ACL support asking how to withdraw the earlier version and keep only the ",
+    "date": "2026-03-28T10:31:09.329615+00:00"
+  },
+  {
+    "title": "Say No to Congress using AI to mass surveil US Citizens and oppose the extension of the FISA Act",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5onmr/say_no_to_congress_using_ai_to_mass_surveil_us/",
+    "url_fp": "e75a081ff8bdf27d166130128080c45c",
+    "description": "In April Congress is voting to extend the FISA Act on the 20th of April this year. The FISA Act allows the government to buy your emails, texts, and calls from corporations. With the newly established shady deal with Open AI surveillance has become even more accessible and applicable on a much more ",
+    "date": "2026-03-28T10:31:09.544974+00:00"
+  },
+  {
+    "title": "Looking for a solid ChatGPT alternative for daily work",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5v317/looking_for_a_solid_chatgpt_alternative_for_daily/",
+    "url_fp": "8f07a4306c707078efc916020204a1ee",
+    "description": "I was long juggling separate monthly subscriptions for Claude, Gemini, and GPT-4 until the costs and tab-switching became a total mess and I started paying over 100 bucks each mont. Then, I tried consolidating everything into a single hub, done that both locally and online, both api and openrouter a",
+    "date": "2026-03-28T10:31:09.663707+00:00"
+  },
+  {
+    "title": "Meet Claude Mythos: Leaked Anthropic post reveals the powerful upcoming model",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5hejt/meet_claude_mythos_leaked_anthropic_post_reveals/",
+    "url_fp": "95767065c8a25f2393f3668a2077aa51",
+    "description": "submitted by/u/boppinmule[link][comments]",
+    "date": "2026-03-28T10:31:09.820847+00:00"
+  },
+  {
+    "title": "Nobody’s talking about what Pixar’s Hoppers is actually saying about AI",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5rlc5/nobodys_talking_about_what_pixars_hoppers_is/",
+    "url_fp": "4288dac1635463274c5875b9dd5ad5df",
+    "description": "Just watched Hoppers and I’m surprised this hasn’t been picked up more widely. The parallels with AI and its risks are hard to ignore once you see them.A few things worth noting:The setup mirrors our current moment almost exactly. The lead scientist developing the world-changing technology is called",
+    "date": "2026-03-28T10:31:09.968764+00:00"
+  },
+  {
+    "title": "I have created a biologically based AI model",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5phn4/i_have_created_a_biologically_based_ai_model/",
+    "url_fp": "e0f09c85935d7ea25eae43a95403f70e",
+    "description": "I've spent the last year building NIMCP — a biologically-inspired artificial brain in C that trains six different neural network types simultaneously (spiking, liquid, convolutional, Fourier, Hamiltonian, adaptive) with gradient flow between them through learnable bridges.Some things that might be i",
+    "date": "2026-03-28T10:31:10.073766+00:00"
+  },
+  {
+    "title": "Tracker for people who quit AI companies due to safety concerns",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5jop3/tracker_for_people_who_quit_ai_companies_due_to/",
+    "url_fp": "c73ae1ba332d05b92fd68b88cd1697af",
+    "description": "Found this site that tracks researchers and executives who left OpenAI, Google, Anthropic, and others over safety concerns.It's kind of amazing to see the patterns; concerns become really obvious across companies. I love AI but do want to see regulations.The interesting part: it extracts specific pr",
+    "date": "2026-03-28T10:31:10.213329+00:00"
+  },
+  {
+    "title": "We need to teach AI the essence of being human to reduce the risk of misalignment",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5v1kn/we_need_to_teach_ai_the_essence_of_being_human_to/",
+    "url_fp": "9759840d3f47ee27ec8dd63cbd7d9b3b",
+    "description": "One part of the alignment problem is that AI does not genuinely understand what it's like to live in the world, even though it can describe it so accurately. If it doesn't understand human life, why protect or respect it?A chat model's answer to what it's like to be human is pretty unconvincing and ",
+    "date": "2026-03-28T10:31:10.391685+00:00"
+  },
+  {
+    "title": "Quality in AI precipitating a 'tipping point'",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5irfg/quality_in_ai_precipitating_a_tipping_point/",
+    "url_fp": "22ae705f106c024f0da753a82227e5e1",
+    "description": "I feel like, as the quality of the output has caught up with the level of creativity of those who use it, there is a bit of a thaw in the AI hostility. While still far from welcome generally, even here on Reddit I’ve seen many AI videos get grudging respect and even seen several on the front page, b",
+    "date": "2026-03-28T10:31:10.490805+00:00"
+  },
+  {
+    "title": "Right now AI made people work more. When you think people will work less if that will ever happen.",
+    "url": "https://www.reddit.com/r/artificial/comments/1s5cmca/right_now_ai_made_people_work_more_when_you_think/",
+    "url_fp": "831ff29e9db14f81b3caf120d51acc90",
+    "description": "Or are we stuck with works of 8 hours per day forever?submitted by/u/jordan588[link][comments]",
+    "date": "2026-03-28T10:31:10.695137+00:00"
+  },
+  {
+    "title": "How to Keep ICE Agents Out of Your Phone at the Airport",
+    "url": "https://www.reddit.com/r/technology/comments/1s5ozco/how_to_keep_ice_agents_out_of_your_phone_at_the/",
+    "url_fp": "1001272b84ca7ae9df5da19e352feb83",
+    "description": "submitted by/u/johnlsmith2005[link][comments]",
+    "date": "2026-03-28T10:31:10.823932+00:00"
+  },
+  {
+    "title": "DOJ confirms FBI Director Kash Patel’s personal email was hacked",
+    "url": "https://www.reddit.com/r/technology/comments/1s594yl/doj_confirms_fbi_director_kash_patels_personal/",
+    "url_fp": "8185658be0d7bc0aebebb9c18e76e864",
+    "description": "submitted by/u/fudge_u[link][comments]",
+    "date": "2026-03-28T10:31:10.965912+00:00"
+  },
+  {
+    "title": "The Shocking Speed of China’s Scientific Rise",
+    "url": "https://www.reddit.com/r/technology/comments/1s5tgiu/the_shocking_speed_of_chinas_scientific_rise/",
+    "url_fp": "b377615263d834e39e08427621a45d0d",
+    "description": "submitted by/u/straightdge[link][comments]",
+    "date": "2026-03-28T10:31:11.070389+00:00"
+  },
+  {
+    "title": "Kalshi ‘prediction market’ violates WA antigambling laws, AG says",
+    "url": "https://www.reddit.com/r/technology/comments/1s5dk1g/kalshi_prediction_market_violates_wa_antigambling/",
+    "url_fp": "94361a2bfbefdeee541b35556ed734ee",
+    "description": "submitted by/u/Kyunseo[link][comments]",
+    "date": "2026-03-28T10:31:11.203506+00:00"
+  },
+  {
+    "title": "The Feds Plan To Start Diluting Gasoline This May: Explained",
+    "url": "https://www.reddit.com/r/technology/comments/1s5dga4/the_feds_plan_to_start_diluting_gasoline_this_may/",
+    "url_fp": "3839a04a80188ef5003209dd5566ca3f",
+    "description": "submitted by/u/DonkeyFuel[link][comments]",
+    "date": "2026-03-28T10:31:11.337863+00:00"
+  },
+  {
+    "title": "Sony Announces Price Rises for PS5, PS5 Pro, and PlayStation Portal, Blames 'Continued Pressures in the Global Economic Landscape' / Base PS5 now $650",
+    "url": "https://www.reddit.com/r/technology/comments/1s52d01/sony_announces_price_rises_for_ps5_ps5_pro_and/",
+    "url_fp": "119066e49cb0ae712d28c92f5169c587",
+    "description": "submitted by/u/MarvelsGrantMan136[link][comments]",
+    "date": "2026-03-28T10:31:11.623568+00:00"
+  },
+  {
+    "title": "'The game industry's in a really horrible place,' Brenda Romero says: 'We were there in the '80s for the crash, and this is definitely crashier'",
+    "url": "https://www.reddit.com/r/technology/comments/1s5cktm/the_game_industrys_in_a_really_horrible_place/",
+    "url_fp": "2f78b92aaf6a968fb17fe05cd8da5d22",
+    "description": "submitted by/u/tylerthe-theatre[link][comments]",
+    "date": "2026-03-28T10:31:11.909591+00:00"
+  },
+  {
+    "title": "AI and bots have officially taken over the internet, report finds",
+    "url": "https://www.reddit.com/r/technology/comments/1s5ixya/ai_and_bots_have_officially_taken_over_the/",
+    "url_fp": "bb85108180f4c31e4ea62917c4b0c65b",
+    "description": "submitted by/u/FervidBug42[link][comments]",
+    "date": "2026-03-28T10:31:12.055816+00:00"
+  },
+  {
+    "title": "Microsoft Set for Worst Quarter Since 2008 as AI Takes Two Bites",
+    "url": "https://www.reddit.com/r/technology/comments/1s52nc8/microsoft_set_for_worst_quarter_since_2008_as_ai/",
+    "url_fp": "7cad6dd834c9391de1f22a489ab7b5fa",
+    "description": "submitted by/u/HimelTy[link][comments]",
+    "date": "2026-03-28T10:31:12.198040+00:00"
+  },
+  {
+    "title": "Micron, SanDisk Stocks Tumble After Google Unveils AI Memory Compression Breakthrough",
+    "url": "https://www.reddit.com/r/technology/comments/1s51flq/micron_sandisk_stocks_tumble_after_google_unveils/",
+    "url_fp": "34e8dfeb6986ff5dccef7309ca9cbadf",
+    "description": "submitted by/u/HimelTy[link][comments]",
+    "date": "2026-03-28T10:31:12.371253+00:00"
+  },
+  {
+    "title": "The Ezra Klein Show: How Fast Will A.I. Agents Rip Through the Economy?",
+    "url": "https://www.nytimes.com/2026/03/27/podcasts/hardfork-ezra-jack-clark.html",
+    "url_fp": "fe4b1bfa4d040a014c6e4b67d6e31e1e",
+    "description": "The Anthropic co-founder Jack Clark tells Ezra Klein what he sees coming in the new era of A.I. agents.",
+    "date": "2026-03-28T10:31:12.523203+00:00"
+  },
+  {
+    "title": "What Is YouTube’s Dominance Doing to Us? We Asked Its C.E.O.",
+    "url": "https://www.nytimes.com/2026/03/28/magazine/neal-mohan-interview.html",
+    "url_fp": "ced0960e925fe63e4a6c65f41402844d",
+    "description": "Neal Mohan on A.I. slop, parental controls and his platform’s impact on our lives.",
+    "date": "2026-03-28T10:31:12.652639+00:00"
+  },
+  {
+    "title": "Trump and Modi Had a Call About the Iran War. Elon Musk Joined Them.",
+    "url": "https://www.nytimes.com/2026/03/27/us/politics/musk-joins-call-with-trump-modi.html",
+    "url_fp": "e71dbd2a4ebc6b8bae32db252913d1d3",
+    "description": "Mr. Musk’s participation was notable because it is rare for a private citizen to be on a call between heads of state. It also suggests that Mr. Musk is back on better terms with the president.",
+    "date": "2026-03-28T10:31:12.800799+00:00"
+  },
+  {
+    "title": "U.S. Accuses NewYork-Presbyterian of Reaching Deals That Kept Costs High",
+    "url": "https://www.nytimes.com/2026/03/26/business/federal-lawsuit-newyork-presbyterian.html",
+    "url_fp": "88090af1d3318d19fdc577f0d2fb00bb",
+    "description": "The Justice Department sued the large New York health system, saying it restricted insurance companies from offering patients cheaper options.",
+    "date": "2026-03-28T10:31:12.948921+00:00"
+  },
+  {
+    "title": "Wild Ultimatums and ‘Bombing Our Little Hearts Out’: A Portrait of Trump at War",
+    "url": "https://www.nytimes.com/2026/03/28/us/politics/trump-iran-war.html",
+    "url_fp": "738938bc3c4c28bd077fa85994cac2c7",
+    "description": "President Trump has vacillated between boasting about U.S. military superiority and deep frustration that his war of choice is not always having the desired effects.",
+    "date": "2026-03-28T10:31:13.115165+00:00"
+  },
+  {
+    "title": "Strike on U.S. Base in Saudi Arabia Injures 12 American Troops, 2 Seriously, Officials Say",
+    "url": "https://www.nytimes.com/2026/03/27/us/politics/strike-us-air-base-injuries.html",
+    "url_fp": "3ca41e49f87a22c45b45133c1322649f",
+    "description": "The combined missile and drone attack amounted to one of the most serious breaches of American air defenses in the course of the monthlong war with Iran.",
+    "date": "2026-03-28T10:31:13.303287+00:00"
+  },
+  {
+    "title": "In an Asymmetrical War, Iran Seeks an Edge With Its Information War",
+    "url": "https://www.nytimes.com/2026/03/28/business/iran-propaganda-war-ai.html",
+    "url_fp": "67782f72a5ba6b363acf55a5636a95e0",
+    "description": "Propaganda and disinformation have flooded the internet in a sophisticated effort to undermine support for U.S. and Israeli attacks.",
+    "date": "2026-03-28T10:31:13.453268+00:00"
+  },
+  {
+    "title": "House Vote Sets Up Clash With the Senate on D.H.S. Funding, Prolonging Shutdown",
+    "url": "https://www.nytimes.com/2026/03/27/us/politics/house-republicans-dhs-funding-shutdown.html",
+    "url_fp": "eee1c1e6fbf49540e622af47da22343a",
+    "description": "Republicans revolted over a Senate measure to fund the Department of Homeland Security and passed a rival bill, dimming the chances of a quick end to the crisis crippling airports.",
+    "date": "2026-03-28T10:31:13.615278+00:00"
+  },
+  {
+    "title": "With Cuba Under Pressure, the Castro Dynasty Is Making a Comeback",
+    "url": "https://www.nytimes.com/2026/03/28/world/americas/castro-family-cuba-energy-crisis-trump.html",
+    "url_fp": "a1b8477ee77616f422c5622d942dc5c3",
+    "description": "As Trump officials demand changes, Castro family members are suddenly popping up across Cuba’s political scene. Some even ask: Could one be the “Cuban Delcy?”",
+    "date": "2026-03-28T10:31:13.754693+00:00"
+  },
+  {
+    "title": "Hegseth Criticized for Removing Four Officers From Promotion List",
+    "url": "https://www.nytimes.com/2026/03/27/us/politics/hegseth-generals-promotion.html",
+    "url_fp": "40f51a200b63e4b2236b52b9ab36807d",
+    "description": "Bitter rifts have opened over the defense secretary’s campaign to reverse policies that he says are prejudiced against white officers.",
+    "date": "2026-03-28T10:31:13.892835+00:00"
+  },
+  {
+    "title": "Trump Offers More Aid to Farmers, a Key Support Bloc Hurt by Tariffs and War",
+    "url": "https://www.nytimes.com/2026/03/27/us/politics/trump-farmers.html",
+    "url_fp": "26fb2f6b278838624650710d4c94997a",
+    "description": "The president announced new loan guarantees at a White House event that appeared intended to reassure a group that has found itself caught in the crosshairs of some of his major policies.",
+    "date": "2026-03-28T10:31:14.055265+00:00"
+  },
+  {
+    "title": "A Challenge for ‘No Kings’ Protests, the Third Time Around",
+    "url": "https://www.nytimes.com/2026/03/28/us/politics/no-kings-protests-trump-organizers.html",
+    "url_fp": "5fcf23b1eb7fb79511b5325456865ab2",
+    "description": "Organizers want this to be largest protest yet. But is hitting a number enough to deliver an effective political movement?",
+    "date": "2026-03-28T10:31:14.180726+00:00"
+  },
+  {
+    "title": "Why Some Teenage Girls Are Trading Medicine for MAHA",
+    "url": "https://www.nytimes.com/interactive/2026/03/27/magazine/kennedy-maha-youth-wellness-influencer.html",
+    "url_fp": "e81f8f22ab26ba4d24adc1fbe947e7a1",
+    "description": "Disillusioned with doctors, they went on a search for answers. They found supplements and a lot of red meat.",
+    "date": "2026-03-28T10:31:14.301025+00:00"
+  },
+  {
+    "title": "Many People Will Need Long-Term Care, but Most Don’t Have Insurance to Cover It",
+    "url": "https://www.nytimes.com/2026/03/27/your-money/long-term-care-insurance.html",
+    "url_fp": "dbedd82cd88f23aa214002ec70144276",
+    "description": "Care for people who can’t take care of themselves is expensive, and regular health insurance doesn’t cover the cost.",
+    "date": "2026-03-28T10:31:14.470831+00:00"
+  },
+  {
+    "title": "How the Iran War Is Costing the Economy Its Buffers",
+    "url": "https://www.nytimes.com/2026/03/27/business/dealbook/iran-war-oil-markets.html",
+    "url_fp": "b5b2692e9583ff932187b52e98cfd9f2",
+    "description": "As the U.S.-Israeli campaign enters a second month, analysts see a growing toll. One forecast predicts oil hitting $200 a barrel.",
+    "date": "2026-03-28T10:31:14.588496+00:00"
+  },
+  {
+    "title": "It’s Musk’s World Now",
+    "url": "https://www.nytimes.com/2026/03/27/opinion/elon-musk-market-henry-ford.html",
+    "url_fp": "672c2ac9abdae920757e24fc97a432b7",
+    "description": "Is Muskism the new Fordism?",
+    "date": "2026-03-28T10:31:14.640435+00:00"
+  },
+  {
+    "title": "OpenAI is narrowing its focus on things that make money - Axios",
+    "url": "https://www.axios.com",
+    "url_fp": "749087a4a2a5ca3de610717b8a354a82",
+    "description": "OpenAI is narrowing its focus on things that make moneyAxios",
+    "date": "2026-03-28T10:31:14.640606+00:00"
+  },
+  {
+    "title": "With new plugins feature, OpenAI officially takes Codex beyond coding - Ars Technica",
+    "url": "https://arstechnica.com",
+    "url_fp": "ba36fbc6b5ca233cd651e8aadec117c6",
+    "description": "With new plugins feature, OpenAI officially takes Codex beyond codingArs Technica",
+    "date": "2026-03-28T10:31:14.812771+00:00"
+  },
+  {
+    "title": "Why is OpenAI like this? - Mashable",
+    "url": "https://mashable.com",
+    "url_fp": "b5f07f82860eb25681a9a8a477cc1ce4",
+    "description": "Why is OpenAI like this?Mashable",
+    "date": "2026-03-28T10:31:14.812867+00:00"
+  },
+  {
+    "title": "Anthropic's new data shows AI skill builds over time, and that could widen the inequality gap - the-decoder.com",
+    "url": "https://the-decoder.com",
+    "url_fp": "1df08508b116a68316356a85390330a0",
+    "description": "Anthropic's new data shows AI skill builds over time, and that could widen the inequality gapthe-decoder.com",
+    "date": "2026-03-28T10:31:14.813086+00:00"
+  },
+  {
+    "title": "Cybersecurity stocks plunge as Anthropic’s ‘Claude Mythos’ leak sparks AI fear - Investing.com",
+    "url": "https://www.investing.com",
+    "url_fp": "561514cf3d07c962ff0ad6fd5d0a01d3",
+    "description": "Cybersecurity stocks plunge as Anthropic’s ‘Claude Mythos’ leak sparks AI fearInvesting.com",
+    "date": "2026-03-28T10:31:14.813227+00:00"
+  },
+  {
+    "title": "Google rolls out Search Live globally, powered by new Gemini 3.1 Flash Live AI model - MEXC",
+    "url": "https://www.mexc.com",
+    "url_fp": "ee6828252f343002eb9bd65d4a4a6f02",
+    "description": "Google rolls out Search Live globally, powered by new Gemini 3.1 Flash Live AI modelMEXC",
+    "date": "2026-03-28T10:31:14.813393+00:00"
+  },
+  {
+    "title": "Google launches global AI search with IPL deal - MSN",
+    "url": "https://www.msn.com",
+    "url_fp": "2791b9f39341be4e182857a9c1319f29",
+    "description": "Google launches global AI search with IPL dealMSN",
+    "date": "2026-03-28T10:31:14.813469+00:00"
+  },
+  {
+    "title": "Find out what’s new in the Gemini app in March's Gemini Drop. - blog.google",
+    "url": "https://blog.google",
+    "url_fp": "62d9b22ff7fe3ca1f30e2b5adf32ca66",
+    "description": "Find out what’s new in the Gemini app in March's Gemini Drop.blog.google",
+    "date": "2026-03-28T10:31:14.813642+00:00"
+  },
+  {
+    "title": "Is Workflow AI Now Native After Microsoft Embeds Copilot in Power Platform? - The Futurum Group",
+    "url": "https://futurumgroup.com",
+    "url_fp": "4f147e69c4a2eb8f322d60c65546f918",
+    "description": "Is Workflow AI Now Native After Microsoft Embeds Copilot in Power Platform?The Futurum Group",
+    "date": "2026-03-28T10:31:15.004819+00:00"
+  },
+  {
+    "title": "Microsoft Launches “Copilot Cowork” AI Agent For Workplaces [bb2a6c] - Fathom Journal",
+    "url": "https://fathomjournal.org",
+    "url_fp": "356fc301c9f085aa5061921fe07f5167",
+    "description": "Microsoft Launches “Copilot Cowork” AI Agent For Workplaces [bb2a6c]Fathom Journal",
+    "date": "2026-03-28T10:31:15.236019+00:00"
+  },
+  {
+    "title": "The Week’s 10 Biggest Funding Rounds: A Varied Week For Big Deals, Led By AI And Defense - Crunchbase News",
+    "url": "https://news.crunchbase.com",
+    "url_fp": "f087ef1c2fa43cca40bcb212d1ef6ca1",
+    "description": "The Week’s 10 Biggest Funding Rounds: A Varied Week For Big Deals, Led By AI And DefenseCrunchbase News",
+    "date": "2026-03-28T10:31:15.236263+00:00"
+  },
+  {
+    "title": "OpenAI Joins Funding for Isara's $94M Raise to Develop AI Agent Swarms - mlq.ai",
+    "url": "https://mlq.ai",
+    "url_fp": "d8efcf07e0aac144c83ca71765e495fe",
+    "description": "OpenAI Joins Funding for Isara's $94M Raise to Develop AI Agent Swarmsmlq.ai",
+    "date": "2026-03-28T10:31:15.401804+00:00"
+  },
+  {
+    "title": "The Innovation Trap: Why AI Defies Governance - Quillette",
+    "url": "https://quillette.com",
+    "url_fp": "7b6aa7e393fbca6b6812e7657162c879",
+    "description": "The Innovation Trap: Why AI Defies GovernanceQuillette",
+    "date": "2026-03-28T10:31:15.526496+00:00"
+  },
+  {
+    "title": "AI Governance: What it is and why it matters - SAS: Data and AI Solutions",
+    "url": "https://www.sas.com",
+    "url_fp": "dbe7e05dd4f140629ec4eab767825d77",
+    "description": "AI Governance: What it is and why it mattersSAS: Data and AI Solutions",
+    "date": "2026-03-28T10:31:15.687307+00:00"
+  },
+  {
+    "title": "Wells Fargo Sees Alphabet Stock Climbing 40% on Google's AI Breakthroughs - StockInvest.us",
+    "url": "https://stockinvest.us",
+    "url_fp": "20c0a4e3119146d3d296021778b12375",
+    "description": "Wells Fargo Sees Alphabet Stock Climbing 40% on Google's AI BreakthroughsStockInvest.us",
+    "date": "2026-03-28T10:31:15.864730+00:00"
+  },
+  {
+    "title": "Claude Mythos released by…? Predictions & Odds - Polymarket",
+    "url": "https://polymarket.com",
+    "url_fp": "94d203f2d48a2ece14059b95bb2dd209",
+    "description": "Claude Mythos released by…? Predictions & OddsPolymarket",
+    "date": "2026-03-28T10:31:15.865008+00:00"
+  },
+  {
+    "title": "Argonne Researchers Develop AI System to Enhance Electric Grid Efficiency and Reliability - HPCwire",
+    "url": "https://www.hpcwire.com",
+    "url_fp": "94d7f773fc411f27533bb240cb362916",
+    "description": "Argonne Researchers Develop AI System to Enhance Electric Grid Efficiency and ReliabilityHPCwire",
+    "date": "2026-03-28T10:31:16.069523+00:00"
+  },
+  {
+    "title": "Sony Raises PlayStation 5 Prices Worldwide Again - evrimagaci.org",
+    "url": "https://evrimagaci.org",
+    "url_fp": "ea8e844b9e11e0d44b2b052dad19a52e",
+    "description": "Sony Raises PlayStation 5 Prices Worldwide Againevrimagaci.org",
+    "date": "2026-03-28T10:31:16.209057+00:00"
+  },
+  {
+    "title": "Google AI Sued for Exposing Epstein Victims' Contact Info - The Tech Buzz",
+    "url": "https://www.techbuzz.ai",
+    "url_fp": "ef939d3bc6ef2bd4e508de78d0d4f040",
+    "description": "Google AI Sued for Exposing Epstein Victims' Contact InfoThe Tech Buzz",
+    "date": "2026-03-28T10:31:16.209200+00:00"
+  },
+  {
+    "title": "A Man Spent $160,000 On A BYD And Watched It Try To Drive Into Oncoming Traffic - Carscoops",
+    "url": "https://www.carscoops.com",
+    "url_fp": "5528b539044e0a21f449cac98c6f046c",
+    "description": "A Man Spent $160,000 On A BYD And Watched It Try To Drive Into Oncoming TrafficCarscoops",
+    "date": "2026-03-28T10:31:16.395842+00:00"
+  },
+  {
+    "title": "The Tesla Robotaxi Story Is A Myth: Why I'm Maintaining My Strong Sell Into Q1 Earnings - Seeking Alpha",
+    "url": "https://seekingalpha.com",
+    "url_fp": "4f758a4bfcb0ea243656cb4316ef4533",
+    "description": "The Tesla Robotaxi Story Is A Myth: Why I'm Maintaining My Strong Sell Into Q1 EarningsSeeking Alpha",
+    "date": "2026-03-28T10:31:16.396089+00:00"
+  },
+  {
+    "title": "Dow tumbles almost 800 points and enters correction, S&P 500 posts fifth straight losing week: Live updates",
+    "url": "https://www.cnbc.com/2026/03/26/stock-market-today-live-updates.html",
+    "url_fp": "29022293b72ce1fb4c9759d72c151842",
+    "description": "Wall Street is coming off a losing session in which higher oil prices and spiking Treasury yields weighed on equities.",
+    "date": "2026-03-28T10:31:16.606959+00:00"
+  },
+  {
+    "title": "Trump signs order to pay TSA employees after Congress fails to agree on DHS funding",
+    "url": "https://www.cnbc.com/2026/03/28/trump-signs-order-to-pay-tsa-employees-after-congress-disagreement.html",
+    "url_fp": "fa50b5670acc65f21dc201bc8e57bf1a",
+    "description": "Trump signed the action with an eye toward easing long security lines at many of the nation’s top airports.",
+    "date": "2026-03-28T10:31:16.786173+00:00"
+  },
+  {
+    "title": "Iran strike on U.S. base in Saudi Arabia injures 12 troops, U.S. official says: Reuters",
+    "url": "https://www.cnbc.com/2026/03/28/iran-strike-on-us-base-in-saudi-arabia-injures-12-troops-reuters.html",
+    "url_fp": "5bce84127b74f141df961b21be4e257d",
+    "description": "More than 300 U.S. military service members have been wounded since the war against Iran started on February 28.",
+    "date": "2026-03-28T10:31:16.963808+00:00"
+  },
+  {
+    "title": "'No Kings' protest rallies against Trump planned in thousands of U.S. cities",
+    "url": "https://www.cnbc.com/2026/03/28/trump-no-kings-protests.html",
+    "url_fp": "a89e45ae502dac04f7d5a48ca256ee0e",
+    "description": "More than 3,200 events are planned in all 50 states for what could be the largest single-day nonviolent protest in U.S. history, organizers said.",
+    "date": "2026-03-28T10:31:17.122184+00:00"
+  },
+  {
+    "title": "Wall Street thinks there's more downside to go as a new risk emerges in April",
+    "url": "https://www.cnbc.com/2026/03/27/few-think-the-market-has-bottomed-and-a-new-risk-is-coming-in-april.html",
+    "url_fp": "65f6891df668d1b2c1f987405ed97398",
+    "description": "With major headline risks, many doubt the market has hit its lows amid the U.S.-Iran war. But Barclays thinks the selling will look different from here.",
+    "date": "2026-03-28T10:31:17.291148+00:00"
+  },
+  {
+    "title": "This bargain fintech stock is stuck in a five-year rut. A turnaround is coming",
+    "url": "https://www.cnbc.com/2026/03/27/this-bargain-fintech-stock-is-stuck-in-a-five-year-rut-a-turnaround-is-coming.html",
+    "url_fp": "3b0621ee00cacf8b6fb004329facbfcb",
+    "description": "After a recent acquisition, the company has renewed focus and increased scale. It also could see upside from strong cash flow and stock buybacks.",
+    "date": "2026-03-28T10:31:17.454165+00:00"
+  },
+  {
+    "title": "Stocks making the biggest moves premarket: AstraZeneca, Unity Software, Coinbase & more",
+    "url": "https://www.cnbc.com/2026/03/27/stocks-making-the-biggest-moves-premarket-azn-u-coin.html",
+    "url_fp": "ee4180933729c2f76413faaedf312dc2",
+    "description": "These are the stocks posting the largest moves premarket.",
+    "date": "2026-03-28T10:31:17.627336+00:00"
+  },
+  {
+    "title": "Why one hedge fund veteran is urging investors to 'prepare for the worst'",
+    "url": "https://www.cnbc.com/2026/03/27/iran-to-economic-risks-markets-ability-to-forecast-world-in-question.html",
+    "url_fp": "22e59d3231d58da07e99ccd76317795c",
+    "description": "DBi's Andrew Beer suggests the market's crystal ball is broken.",
+    "date": "2026-03-28T10:31:17.776297+00:00"
+  },
+  {
+    "title": "Dow Jones & NASDAQ Composite close in -10% correction territory",
+    "url": "https://www.reddit.com/r/investing/comments/1s5g9vv/dow_jones_nasdaq_composite_close_in_10_correction/",
+    "url_fp": "f0c5962b70bb7ced3687befc9aba7fd9",
+    "description": "To be precise,the Dow is ~10.6% off its record of ~50.5k;the NASDAQ Composite is ~12.8% off its record of ~24k; andthe S&P 500 is ~9.1% off its record of ~7k.Due to the outsized annual returns of the last 3 years, I came into 2026 thinking the odds of a pullback or negative year were higher than nor",
+    "date": "2026-03-28T10:31:17.937657+00:00"
+  },
+  {
+    "title": "The market isn’t cheap right now. It’s just less expensive.",
+    "url": "https://www.reddit.com/r/investing/comments/1s5k7ao/the_market_isnt_cheap_right_now_its_just_less/",
+    "url_fp": "c59015fc78f8e9a84a73e0a865e64c5c",
+    "description": "The market isn’t cheap right now. It’s just less expensive.S&P 500 right now:• ~25–26x trailing P/E• ~20–21x forward P/EBoth are still well above long-term historical averages. Yeah, it’s come down from the 2021–2022 insanity, but “cheap” or “undervalued” is a massive stretch.Every time the market d",
+    "date": "2026-03-28T10:31:18.062193+00:00"
+  },
+  {
+    "title": "Why doesn't the current and previous oil situation cause a stronger desire for green energy?",
+    "url": "https://www.reddit.com/r/investing/comments/1s5ujd4/why_doesnt_the_current_and_previous_oil_situation/",
+    "url_fp": "c9960f75678d901d49cab45ec0453af9",
+    "description": "I understand the petroleum industry has the leverage, but with another oil crisis how do these tensions not cause a stronger motivation for green energy infrastructure? Not to say it doesn't have its own complications, but earlier development of wind farms, solar, battery, etc. you wouldn't have to ",
+    "date": "2026-03-28T10:31:18.255703+00:00"
+  },
+  {
+    "title": "Oil bounces over $108 and recently Congressmen sells Chevron (3/11) and Marathon (3/12). What does he know about Oil supply that we don't?",
+    "url": "https://www.reddit.com/r/investing/comments/1s5fw5p/oil_bounces_over_108_and_recently_congressmen/",
+    "url_fp": "06be5fd1642eeb10f3e29021dbc753c5",
+    "description": "David Taylor reports on 3/20 the sales 3/11 and 3/12.Does he need cash (low probability)Taking profits (could be)Is the Oil supply is about to increase and prices are about to fall (hmmm)What could he know?Opening the Straight of Hormuz would drop prices fastTrump signaling ceasefire talksTaylor sit",
+    "date": "2026-03-28T10:31:18.509853+00:00"
+  },
+  {
+    "title": "How’s everyone’s portfolio doing",
+    "url": "https://www.reddit.com/r/investing/comments/1s5tzzm/hows_everyones_portfolio_doing/",
+    "url_fp": "6054d113c4ca3086fe2a8ec430b45979",
+    "description": "As per title. How badly red/green are y'all portfolio right now after yesterday's market close?Personally for me, my portfolio hit ATH on 3 November 2025 and is since down about 39% from the high. Holding quite a few high beta names right nowFundamentally, nothing much has changed for me. Still gonn",
+    "date": "2026-03-28T10:31:18.582042+00:00"
+  },
+  {
+    "title": "Is it any better/worse to invest in fixed-income investment right now? (Treasury notes or i-bonds, CDs, etc)",
+    "url": "https://www.reddit.com/r/investing/comments/1s5sctc/is_it_any_betterworse_to_invest_in_fixedincome/",
+    "url_fp": "2c0e9204b229af91da5ec37b5df3d3bf",
+    "description": "Ended up with a larger than expected tax-return and a desire to actually start preparing for any sort of long-term financial future, and I'm looking at the wider bullshit going on and assuming stocks are currently not where I want to investing money at the moment. So, what sort of fixed-income is be",
+    "date": "2026-03-28T10:31:18.791677+00:00"
+  },
+  {
+    "title": "Started late, what are my best options?",
+    "url": "https://www.reddit.com/r/investing/comments/1s5p63d/started_late_what_are_my_best_options/",
+    "url_fp": "24e7323a2d7274ab70bbb8e2084003bc",
+    "description": "This may be kind of long, but I’ll try to sum things up. Up until 21 I had a rough life, personal things and was in and out of rehab. I just got my life “together” a few years back, including a new career. I did get into debt from a family emergency and had to take multiple loans out that I’m hardco",
+    "date": "2026-03-28T10:31:18.882730+00:00"
+  },
+  {
+    "title": "The Oil Shocks of the ’70s Changed the World. Will the Iran War Do the Same?",
+    "url": "https://www.nytimes.com/2026/03/28/business/oil-shocks-1970s-iran-war.html",
+    "url_fp": "7a306c62f11eb7bd9b8a3483df3fe530",
+    "description": "Gas lines and quadrupling oil prices freaked out American consumers. But the oil crises also transformed global finance.",
+    "date": "2026-03-28T10:31:19.046498+00:00"
+  },
+  {
+    "title": "Smaller Is Better in Silicon Valley’s ‘Tiny Team’ Moment",
+    "url": "https://www.nytimes.com/2026/03/28/business/silicon-valley-tiny-team-two-slice.html",
+    "url_fp": "6cc925e9720c854221d558a6f90fd3a2",
+    "description": "As artificial intelligence takes on more and more tasks, tech executives are embracing teams as small as two: one person plus A.I.",
+    "date": "2026-03-28T10:31:19.169121+00:00"
+  },
+  {
+    "title": "Can This Russian Bakery Survive a 3,500% Tax Increase?",
+    "url": "https://www.nytimes.com/2026/03/28/world/europe/russia-economy-small-business-tax-increase.html",
+    "url_fp": "168dc7acf82bc0b6f97644536d49a7ec",
+    "description": "The challenges faced by a small-business owner near Moscow highlight how Russia’s war-drained economy is on the doorstep of a major crisis.",
+    "date": "2026-03-28T10:31:19.283983+00:00"
+  },
+  {
+    "title": "Bank of America Pays $72.5 Million to Settle Lawsuit by Epstein Victims",
+    "url": "https://www.nytimes.com/2026/03/27/business/bank-of-america-epstein-victims-settlement.html",
+    "url_fp": "694cb09818efa352abc10a7ad89be448",
+    "description": "The suit claimed the bank had overlooked signs that Mr. Epstein’s accounts were being used to further his abuse of young women.",
+    "date": "2026-03-28T10:31:19.434862+00:00"
+  },
+  {
+    "title": "Iran Moves to Formalize Toll Plan in Strait of Hormuz",
+    "url": "https://www.nytimes.com/2026/03/27/world/middleeast/iran-hormuz-strait-tolls.html",
+    "url_fp": "06f94126979597e579aaa3fd1b0ffea3",
+    "description": "Tehran has effectively closed off the critical waterway, turning back container ships on Friday, and Iranian lawmakers are considering whether to formalize charging fees to pass.",
+    "date": "2026-03-28T10:31:19.555919+00:00"
+  },
+  {
+    "title": "The War in Ukraine Changed the World in Ways We’re Only Starting to Comprehend",
+    "url": "https://www.nytimes.com/2026/03/27/opinion/ukraine-iran-drones.html",
+    "url_fp": "41b8e6215fbe5d993995936b236cc90b",
+    "description": "Open-ended military conflict in Europe could, at some point, intersect with open-ended military conflict in the Middle East.",
+    "date": "2026-03-28T10:31:19.722176+00:00"
+  },
+  {
+    "title": "The Iran War is Revealing the Messy Middle of Our Renewable Energy Transition",
+    "url": "https://www.nytimes.com/2026/03/27/magazine/iran-war-energy-climate-change.html",
+    "url_fp": "65e3c8be62ab1c33749800d089b1322c",
+    "description": "When the world map of literal power changes, the political hierarchy shifts, too",
+    "date": "2026-03-28T10:31:19.891683+00:00"
+  },
+  {
+    "title": "Stock Market Today (LIVE): Sony Hikes PS5 Prices Again; Altria Benefits Due to Recession Resistance - The Motley Fool",
+    "url": "https://www.fool.com",
+    "url_fp": "bad54ca142f2614997ddf52fa6bfdc06",
+    "description": "Stock Market Today (LIVE): Sony Hikes PS5 Prices Again; Altria Benefits Due to Recession ResistanceThe Motley Fool",
+    "date": "2026-03-28T10:31:19.891959+00:00"
+  },
+  {
+    "title": "The Nasdaq 100 falls into correction territory as the Iran war derails the tech-led bull market - Business Insider",
+    "url": "https://www.businessinsider.com",
+    "url_fp": "04220288456435753371c3e6a38ca102",
+    "description": "The Nasdaq 100 falls into correction territory as the Iran war derails the tech-led bull marketBusiness Insider",
+    "date": "2026-03-28T10:31:19.892271+00:00"
+  },
+  {
+    "title": "Wall Street drops again to close its 5th straight losing week and its worst since the Iran war - AP News",
+    "url": "https://apnews.com",
+    "url_fp": "025300132ecca16373d0e23fc525908b",
+    "description": "Wall Street drops again to close its 5th straight losing week and its worst since the Iran warAP News",
+    "date": "2026-03-28T10:31:19.892421+00:00"
+  },
+  {
+    "title": "Dow closes in correction, S&P logs longest weekly losing streak in four years and oil settles at Iran-war highs - CNN",
+    "url": "https://www.cnn.com",
+    "url_fp": "8d215893cca08911f456711875e8e3bc",
+    "description": "Dow closes in correction, S&P logs longest weekly losing streak in four years and oil settles at Iran-war highsCNN",
+    "date": "2026-03-28T10:31:19.892686+00:00"
+  },
+  {
+    "title": "S&P 500, Nasdaq hit lowest levels in over 6 months - thestreet.com",
+    "url": "https://www.thestreet.com",
+    "url_fp": "f223c2967c476a457c1292dbbe83f6dd",
+    "description": "S&P 500, Nasdaq hit lowest levels in over 6 monthsthestreet.com",
+    "date": "2026-03-28T10:31:20.035214+00:00"
+  },
+  {
+    "title": "Is Workday's New AI Layer a Moat-Builder or Just Table Stakes for Enterprise Software (WDAY)? - simplywall.st",
+    "url": "https://simplywall.st",
+    "url_fp": "00bde8332e7e948dd256ee2976ba58dc",
+    "description": "Is Workday's New AI Layer a Moat-Builder or Just Table Stakes for Enterprise Software (WDAY)?simplywall.st",
+    "date": "2026-03-28T10:31:20.035536+00:00"
+  },
+  {
+    "title": "Stock Market Today, March 10: Nvidia Gains on Optimism Around Expanding Enterprise AI Software Platform - AOL.com",
+    "url": "https://www.aol.com",
+    "url_fp": "9f708995b5d401084bd42712242ccf7a",
+    "description": "Stock Market Today, March 10: Nvidia Gains on Optimism Around Expanding Enterprise AI Software PlatformAOL.com",
+    "date": "2026-03-28T10:31:20.035770+00:00"
+  },
+  {
+    "title": "ICYMI fintech funding round-up: Chexy, Littlefish, Happy Pay, and more - FinTech Futures",
+    "url": "https://www.fintechfutures.com",
+    "url_fp": "08c85f0537d79bc1fb840edd6890994a",
+    "description": "ICYMI fintech funding round-up: Chexy, Littlefish, Happy Pay, and moreFinTech Futures",
+    "date": "2026-03-28T10:31:20.035979+00:00"
+  },
+  {
+    "title": "Fed's Barkin says 'fog' again obscuring economic outlook - Reuters",
+    "url": "https://www.reuters.com",
+    "url_fp": "8fd0d91d9a2d47f97ea1c97174f0baff",
+    "description": "Fed's Barkin says 'fog' again obscuring economic outlookReuters",
+    "date": "2026-03-28T10:31:20.036110+00:00"
+  },
+  {
+    "title": "Resurgent Inflation Tests Faith in Fed’s Willingness to Tame It - The New York Times",
+    "url": "https://www.nytimes.com",
+    "url_fp": "55878905590e5ea6136f9730d218c235",
+    "description": "Resurgent Inflation Tests Faith in Fed’s Willingness to Tame ItThe New York Times",
+    "date": "2026-03-28T10:31:20.036270+00:00"
+  },
+  {
+    "title": "Fed’s Paulson Says Policy Credibility Needed for Economic Growth to Flourish - WSJ",
+    "url": "https://www.wsj.com",
+    "url_fp": "378c6ce938a1126c136782fdfb9c4799",
+    "description": "Fed’s Paulson Says Policy Credibility Needed for Economic Growth to FlourishWSJ",
+    "date": "2026-03-28T10:31:20.036404+00:00"
+  },
+  {
+    "title": "What is happening with interest rates in the UK? - Bank of England",
+    "url": "https://www.bankofengland.co.uk",
+    "url_fp": "2a9e9b7d93ccbc4e50f89307245045e6",
+    "description": "What is happening with interest rates in the UK?Bank of England",
+    "date": "2026-03-28T10:31:20.180818+00:00"
+  },
+  {
+    "title": "USD/CAD & USD/MXN Q2 2026 Outlook: Canadian dollar and Mexican peso begin to lose ground - FOREX.com",
+    "url": "https://www.forex.com",
+    "url_fp": "6ca59fb4fab560e8f18b488d4d931251",
+    "description": "USD/CAD & USD/MXN Q2 2026 Outlook: Canadian dollar and Mexican peso begin to lose groundFOREX.com",
+    "date": "2026-03-28T10:31:20.372430+00:00"
+  },
+  {
+    "title": "The market is starting to think the Federal Reserve's next move is raising interest rates - Yahoo Finance",
+    "url": "https://finance.yahoo.com",
+    "url_fp": "7c90c9e1fd8115b98e910c7fae70f0dd",
+    "description": "The market is starting to think the Federal Reserve's next move is raising interest ratesYahoo Finance",
+    "date": "2026-03-28T10:31:20.372672+00:00"
+  },
+  {
+    "title": "Potential Stock Market Crash Looms as Fed Faces Tough Decisions - National Today",
+    "url": "https://nationaltoday.com",
+    "url_fp": "a13df8b91a7375f0569dc626d64998db",
+    "description": "Potential Stock Market Crash Looms as Fed Faces Tough DecisionsNational Today",
+    "date": "2026-03-28T10:31:20.372844+00:00"
+  },
+  {
+    "title": "Middle East Oil Tensions Surge: 3 Shocking Drivers - Brussels Morning",
+    "url": "https://brusselsmorning.com",
+    "url_fp": "40cb79f326198e8de2585dfdd4495abe",
+    "description": "Middle East Oil Tensions Surge: 3 Shocking DriversBrussels Morning",
+    "date": "2026-03-28T10:31:20.521419+00:00"
+  },
+  {
+    "title": "Construction materials prices spike as war in Iran rages on - The Daily Reporter",
+    "url": "https://dailyreporter.com",
+    "url_fp": "6ef395450dfb0e45841e0e6e1c4b8290",
+    "description": "Construction materials prices spike as war in Iran rages onThe Daily Reporter",
+    "date": "2026-03-28T10:31:20.693227+00:00"
+  },
+  {
+    "title": "Weekly unemployment claims fall back to 330 - Vermont Business Magazine",
+    "url": "https://vermontbiz.com",
+    "url_fp": "6bcdc8e7e36607c44821024ef1412bbe",
+    "description": "Weekly unemployment claims fall back to 330Vermont Business Magazine",
+    "date": "2026-03-28T10:31:20.839499+00:00"
+  },
+  {
+    "title": "Gold (XAU/USD) Price Forecast for Today, Tomorrow, Next Week, and the Next 30 Days - LiteFinance",
+    "url": "https://www.litefinance.org",
+    "url_fp": "fe84ff6cbc97e49744dfb013aa983816",
+    "description": "Gold (XAU/USD) Price Forecast for Today, Tomorrow, Next Week, and the Next 30 DaysLiteFinance",
+    "date": "2026-03-28T10:31:21.028058+00:00"
+  },
+  {
+    "title": "Apple TV’s For All Mankind Season 5 premieres today, renewed for final season 6 - artthreat.net",
+    "url": "https://artthreat.net",
+    "url_fp": "abb9dc4e12c6a739062c5cffa6d6d815",
+    "description": "Apple TV’s For All Mankind Season 5 premieres today, renewed for final season 6artthreat.net",
+    "date": "2026-03-28T10:31:21.225288+00:00"
+  },
+  {
+    "title": "Apple discontinues a popular product. What we know. - USA Today",
+    "url": "https://www.usatoday.com",
+    "url_fp": "1e78e06ba0ab839990cb3b05aee4977b",
+    "description": "Apple discontinues a popular product. What we know.USA Today",
+    "date": "2026-03-28T10:31:21.225479+00:00"
+  },
+  {
+    "title": "How to watch Houston Astros vs. Los Angeles Angels for free on Apple TV Plus today - Cleveland.com",
+    "url": "https://www.cleveland.com",
+    "url_fp": "fbbb9f453748c9fa9eb6dcda594c244e",
+    "description": "How to watch Houston Astros vs. Los Angeles Angels for free on Apple TV Plus todayCleveland.com",
+    "date": "2026-03-28T10:31:21.428556+00:00"
+  },
+  {
+    "title": "Meta stock price falls to nearly 1-year low: 3 reasons why the Facebook parent company is sinking in 2026 - Fast Company",
+    "url": "https://www.fastcompany.com",
+    "url_fp": "6be515586344ebabd4b26d82881aa9b2",
+    "description": "Meta stock price falls to nearly 1-year low: 3 reasons why the Facebook parent company is sinking in 2026Fast Company",
+    "date": "2026-03-28T10:31:21.428774+00:00"
+  },
+  {
+    "title": "Top deals to shop starting at 40% off from Amazon, Target, Shapermint and more - abcnews.com",
+    "url": "https://abcnews.com",
+    "url_fp": "1a5aaf423204a96e272f456a84c5e319",
+    "description": "Top deals to shop starting at 40% off from Amazon, Target, Shapermint and moreabcnews.com",
+    "date": "2026-03-28T10:31:21.429140+00:00"
+  },
+  {
+    "title": "Nvidia Stock Is Now Cheaper Than the S&P 500 - Barron's",
+    "url": "https://www.barrons.com",
+    "url_fp": "1823e9fe31332eba596d653a5a7339b0",
+    "description": "Nvidia Stock Is Now Cheaper Than the S&P 500Barron's",
+    "date": "2026-03-28T10:31:21.429274+00:00"
+  },
+  {
+    "title": "Nvidia (NVDA) Stock Quotes, Company News And Chart Analysis - Investor's Business Daily",
+    "url": "https://www.investors.com",
+    "url_fp": "545362646854336a3463a9033e71efc5",
+    "description": "Nvidia (NVDA) Stock Quotes, Company News And Chart AnalysisInvestor's Business Daily",
+    "date": "2026-03-28T10:31:21.429478+00:00"
+  },
+  {
+    "title": "Microsoft Is Down 24% This Year While Spending $30B a Quarter on AI - 24/7 Wall St.",
+    "url": "https://247wallst.com",
+    "url_fp": "5174185651b0be54b91403adb571059b",
+    "description": "Microsoft Is Down 24% This Year While Spending $30B a Quarter on AI24/7 Wall St.",
+    "date": "2026-03-28T10:31:21.429558+00:00"
+  },
+  {
+    "title": "Alphabet will surge 40% as Google becomes an AI leader, Wells Fargo says - CNBC",
+    "url": "https://www.cnbc.com",
+    "url_fp": "40bf508c2a153a872d9d8fc82cb48ed7",
+    "description": "Alphabet will surge 40% as Google becomes an AI leader, Wells Fargo saysCNBC",
+    "date": "2026-03-28T10:31:21.429828+00:00"
+  },
+  {
+    "title": "Kansas City woman shot five times in chaotic Uber ride through Johnson County, Kansas, fiery crash - KMBC",
+    "url": "https://www.kmbc.com",
+    "url_fp": "5717f1f7c81b220dab059a7af75f11ed",
+    "description": "Kansas City woman shot five times in chaotic Uber ride through Johnson County, Kansas, fiery crashKMBC",
+    "date": "2026-03-28T10:31:21.641256+00:00"
+  },
+  {
+    "title": "The Uber initiative isn't consumer protection, it's a liability shield - Daily Journal",
+    "url": "https://www.dailyjournal.com",
+    "url_fp": "524af4b9b5f8778e6b095c6bf9eae4cd",
+    "description": "The Uber initiative isn't consumer protection, it's a liability shieldDaily Journal",
+    "date": "2026-03-28T10:31:21.819853+00:00"
+  },
+  {
+    "title": "Apple iPhone Fold’s Shipping Date Likely Pushed Beyond 2026 - Android Headlines",
+    "url": "https://www.androidheadlines.com",
+    "url_fp": "bc9ef931e0352fda31a2d53a0aab942e",
+    "description": "Apple iPhone Fold’s Shipping Date Likely Pushed Beyond 2026Android Headlines",
+    "date": "2026-03-28T10:31:21.980500+00:00"
+  },
+  {
+    "title": "Apple’s next big products revealed: 15+ new Apple devices set for 2026 - Macworld",
+    "url": "https://www.macworld.com",
+    "url_fp": "71ca71b73ecb4b0395d16eb64163e02b",
+    "description": "Apple’s next big products revealed: 15+ new Apple devices set for 2026Macworld",
+    "date": "2026-03-28T10:31:22.142115+00:00"
+  },
+  {
+    "title": "Apple's Foldable iPhone Likely To Ship After iPhone 18 Pro: Report - NDTV Profit",
+    "url": "https://www.ndtvprofit.com",
+    "url_fp": "eccd5ebc4cdd9574ef3d1589b2f2b210",
+    "description": "Apple's Foldable iPhone Likely To Ship After iPhone 18 Pro: ReportNDTV Profit",
+    "date": "2026-03-28T10:31:22.309417+00:00"
+  },
+  {
+    "title": "Microsoft freezes hiring after laying off thousands amid rising AI costs - The American Bazaar",
+    "url": "https://americanbazaaronline.com",
+    "url_fp": "f1e7aeeb23f5bf1f870e6ce6b9ab96a1",
+    "description": "Microsoft freezes hiring after laying off thousands amid rising AI costsThe American Bazaar",
+    "date": "2026-03-28T10:31:22.502306+00:00"
+  },
+  {
+    "title": "Performance, data and Amazon DSP define IAB NewFronts 2026 pitches - NewscastStudio",
+    "url": "https://www.newscaststudio.com",
+    "url_fp": "24e416fc05e441503fe6d4fb7429f0d7",
+    "description": "Performance, data and Amazon DSP define IAB NewFronts 2026 pitchesNewscastStudio",
+    "date": "2026-03-28T10:31:22.668530+00:00"
+  },
+  {
+    "title": "IndiGo 737 Makes Emergency Landing at New Delhi’s Indira Gandhi Airport After Engine Failure, All Passengers Safe - Travel And Tour World",
+    "url": "https://www.travelandtourworld.com",
+    "url_fp": "1b954240fedce047ff99f0fb7ae2883c",
+    "description": "IndiGo 737 Makes Emergency Landing at New Delhi’s Indira Gandhi Airport After Engine Failure, All Passengers SafeTravel And Tour World",
+    "date": "2026-03-28T10:31:22.938658+00:00"
+  },
+  {
+    "title": "IndiGo flight makes safe emergency landing at IGIA after engine failure - The Times of India",
+    "url": "https://timesofindia.indiatimes.com",
+    "url_fp": "541cc79a8638cfd34bdc56d1a27c8cd7",
+    "description": "IndiGo flight makes safe emergency landing at IGIA after engine failureThe Times of India",
+    "date": "2026-03-28T10:31:22.938941+00:00"
+  },
+  {
+    "title": "IndiGo flight makes safe emergency landing at Delhi’s IGI Airport after mid-air ‘technical snag’ - zeebiz.com",
+    "url": "https://www.zeebiz.com",
+    "url_fp": "ab332e848c7c0124cd11b8ffd5705612",
+    "description": "IndiGo flight makes safe emergency landing at Delhi’s IGI Airport after mid-air ‘technical snag’zeebiz.com",
+    "date": "2026-03-28T10:31:23.152546+00:00"
+  },
+  {
+    "title": "New York Yankees Make History In Win Over San Francisco Giants - heavy.com",
+    "url": "https://heavy.com",
+    "url_fp": "374bf1bb8fee633961da067e5c478089",
+    "description": "New York Yankees Make History In Win Over San Francisco Giantsheavy.com",
+    "date": "2026-03-28T10:31:23.152920+00:00"
+  },
+  {
+    "title": "Where to watch New York Yankees vs. San Francisco Giants: Live stream, TV channel, odds for Friday, March 27 - Yahoo Sports",
+    "url": "https://sports.yahoo.com",
+    "url_fp": "4bbd7d0db668261e182a6708e474c8dc",
+    "description": "Where to watch New York Yankees vs. San Francisco Giants: Live stream, TV channel, odds for Friday, March 27Yahoo Sports",
+    "date": "2026-03-28T10:31:23.153248+00:00"
+  },
+  {
+    "title": "Concerning Knicks trend shows what they miss most about Deuce McBride - Daily Knicks",
+    "url": "https://dailyknicks.com",
+    "url_fp": "fc37127339619a423c05ae0e84af1232",
+    "description": "Concerning Knicks trend shows what they miss most about Deuce McBrideDaily Knicks",
+    "date": "2026-03-28T10:31:23.327757+00:00"
+  },
+  {
+    "title": "2026 NBA Playoffs: Standings, bracket and clinching updates - NBA",
+    "url": "https://www.nba.com",
+    "url_fp": "5567ef57bde48e2912b076b1d46096e6",
+    "description": "2026 NBA Playoffs: Standings, bracket and clinching updatesNBA",
+    "date": "2026-03-28T10:31:23.327892+00:00"
+  },
+  {
+    "title": "2026 New York Giants Free Agency Tracker - Giants.com",
+    "url": "https://www.giants.com",
+    "url_fp": "b4494219a270e9e3292f825fb7b28f34",
+    "description": "2026 New York Giants Free Agency TrackerGiants.com",
+    "date": "2026-03-28T10:31:23.328069+00:00"
+  },
+  {
+    "title": "How much difference will Giants' focus on special teams make? - ESPN",
+    "url": "https://www.espn.com",
+    "url_fp": "f23ac12a07189adde19ca28f3d7c7b4f",
+    "description": "How much difference will Giants' focus on special teams make?ESPN",
+    "date": "2026-03-28T10:31:23.328215+00:00"
+  },
+  {
+    "title": "Five-Game Trip Concludes in Raleigh | PREVIEW - NHL.com",
+    "url": "https://www.nhl.com",
+    "url_fp": "ca477467453dc7117c5fe5b23626a73f",
+    "description": "Five-Game Trip Concludes in Raleigh | PREVIEWNHL.com",
+    "date": "2026-03-28T10:31:23.328293+00:00"
+  },
+  {
+    "title": "NHL Game Preview: New Jersey Devils at Carolina Hurricanes with Line Combinations 03/28/2026 - Inside The Rink",
+    "url": "https://insidetherink.com",
+    "url_fp": "b8eb8f2fa732bf328b9375da47f4cf6a",
+    "description": "NHL Game Preview: New Jersey Devils at Carolina Hurricanes with Line Combinations 03/28/2026Inside The Rink",
+    "date": "2026-03-28T10:31:23.539525+00:00"
+  },
+  {
+    "title": "MLB Spring Training Buzz: Orioles Extend Right-Hander Shane Baz - FOX Sports",
+    "url": "https://www.foxsports.com",
+    "url_fp": "c0ab525ee9db32d6ac110bb43787049b",
+    "description": "MLB Spring Training Buzz: Orioles Extend Right-Hander Shane BazFOX Sports",
+    "date": "2026-03-28T10:31:23.539714+00:00"
+  },
+  {
+    "title": "Blue Jays Opening Day Lineup: Batting Order, Starting Pitcher and Injury Report - Sports Illustrated",
+    "url": "https://www.si.com",
+    "url_fp": "a8a81eddc6f2e5b727240cf743034788",
+    "description": "Blue Jays Opening Day Lineup: Batting Order, Starting Pitcher and Injury ReportSports Illustrated",
+    "date": "2026-03-28T10:31:23.539900+00:00"
+  },
+  {
+    "title": "Giants’ 3 sleeper prospects to target in 2026 NFL Draft - ClutchPoints",
+    "url": "https://clutchpoints.com",
+    "url_fp": "64cae9ffb0268317cbdd4f00e613f570",
+    "description": "Giants’ 3 sleeper prospects to target in 2026 NFL DraftClutchPoints",
+    "date": "2026-03-28T10:31:23.692390+00:00"
   }
 ]

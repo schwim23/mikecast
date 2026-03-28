@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #34 — March 28, 2026</title>
+    <description>Episode #34 — This episode of MikeCast covers OpenAI's $94 million investment with Isara for AI agent swarms, Microsoft's employee backlash over Windows 11 account requirements, a cybersecurity breach involving the FBI director's email, and Wall Street's downturn amid rising oil prices and Meta's legal challenges, along with updates on Apple's product delays and Microsoft's hiring freeze.</description>
+    <pubDate>Sat, 28 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-28</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-28.mp3" type="audio/mpeg" length="4635853"/>
+    <itunes:title>MikeCast #34 — March 28, 2026</itunes:title>
+    <itunes:subtitle>Episode #34 — This episode of MikeCast covers OpenAI's $94 million investment with Isara for AI agent swarms, Microsoft's employee backlash over Windows 11 account requirements, a cybersecurity breach involving the FBI director's email, and Wall Street...</itunes:subtitle>
+    <itunes:summary>Episode #34 — This episode of MikeCast covers OpenAI's $94 million investment with Isara for AI agent swarms, Microsoft's employee backlash over Windows 11 account requirements, a cybersecurity breach involving the FBI director's email, and Wall Street's downturn amid rising oil prices and Meta's legal challenges, along with updates on Apple's product delays and Microsoft's hiring freeze.</itunes:summary>
+    <itunes:duration>289</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #33 — March 27, 2026</title>
     <description>Episode #33 — This episode covers OpenAI's ads pilot program reaching $100 million in annual recurring revenue, Anthropic's new AI model and legal victory against the Trump administration, Apple's discontinuation of the Mac Pro, a legal setback for Elon Musk's company X, rising oil prices due to geopolitical tensions, and Yankees' trade rumors involving Paul Skenes.</description>
     <pubDate>Fri, 27 Mar 2026 11:45:00 GMT</pubDate>
