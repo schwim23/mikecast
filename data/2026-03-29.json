@@ -1,0 +1,288 @@
+{
+  "date": "2026-03-29",
+  "date_display": "March 29, 2026",
+  "episode_num": 35,
+  "episode_description": "Episode #35 — This episode of MikeCast covers the White House app's privacy concerns, a new AI benchmark for physics, Fraunhofer's adhesive-free paper packaging, and persistent memory in AI systems; it also discusses the impact of the Iran war on Aluminium Bahrain and global energy markets, Uber's robotaxi expansion, Apple's AI challenge, Microsoft's privacy debate, and Toyota's EV strategy, along with updates on the Yankees and Devils in New York sports.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 29, 2026</p>\n</div>\n\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights the escalating tensions in the Middle East affecting global markets, particularly in the aluminum and oil sectors, with significant impacts on supply chains. In the tech world, issues of privacy and security are in focus, with revelations about the White House app's tracking practices and a supply chain attack on the litellm library. Meanwhile, companies like Uber and Apple are making strategic moves in the AI and autonomous vehicle sectors.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The founder of GitLab is tackling his cancer diagnosis by starting new companies, showcasing resilience and innovation in the face of personal challenges. This entrepreneurial spirit highlights the intersection of personal adversity and professional ambition, inspiring others in the tech community. <a href=\"https://sytse.com/cancer/\" style=\"color:#81d4fa;text-decoration:none;\">Hacker News</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">A security concern has emerged with the White House's new app, which was found to track users' exact locations every 4.5 minutes via a third-party server. This discovery raises significant privacy issues and questions about data handling by government applications, highlighting the need for stricter data protection measures. <a href=\"https://www.reddit.com/r/technology/comments/1s6e3dp/white_house_app_found_tracking_users_exact/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">A supply chain attack on the litellm library has been identified, affecting versions 1.82.7 and 1.82.8 on PyPI. The attack involved a malicious .pth file that could scrape sensitive information like SSH keys and AWS credentials. This incident underscores the vulnerabilities in software supply chains and the critical importance of robust security practices. <a href=\"https://www.reddit.com/r/MachineLearning/comments/1s62taq/d_litellm_supply_chain_attack_and_what_it_means/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Aluminium Bahrain, known as Alba, reported an attack on its facility by Iranian forces. As the world's largest smelter, this attack exacerbates existing pressures on global aluminum supplies, potentially leading to increased prices and supply chain disruptions worldwide. <a href=\"https://www.cnbc.com/2026/03/29/bahrain-aluminum-giant-says-iranian-attack-targeted-its-facilit.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The ongoing conflict involving Iran is causing significant disruptions in global oil and gas supplies. Despite assurances from the Trump administration that these disruptions are temporary, industry leaders express a grim outlook, anticipating prolonged impacts on energy markets. This situation highlights the geopolitical risks inherent in the global energy supply chain. <a href=\"https://www.cnbc.com/2026/03/28/iran-war-oil-companies-price-gas-diesel-strait-hormuz.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Iran war is prompting countries to reconsider their reliance on natural gas, with disruptions in the Persian Gulf pushing them towards alternatives like coal, solar, and nuclear energy. This shift could lead to a significant transformation in global energy strategies, affecting long-term energy security and sustainability. <a href=\"https://www.nytimes.com/2026/03/29/business/energy-environment/iran-war-natural-gas.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Uber is expanding its European robotaxi footprint through a partnership with Pony.ai, signaling a significant move into the autonomous vehicle market. This collaboration aims to enhance Uber's presence in the growing field of self-driving technology, potentially reshaping urban transportation in Europe. <a href=\"https://nationaltoday.com\" style=\"color:#81d4fa;text-decoration:none;\">National Today</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">As Apple celebrates its 50th anniversary, the company faces its next major challenge: artificial intelligence. Apple's focus on AI reflects the industry's broader trend towards integrating advanced technologies into consumer products, which could redefine user experiences and drive future growth. <a href=\"https://finance.yahoo.com\" style=\"color:#81d4fa;text-decoration:none;\">Yahoo Finance</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Toyota executive Templin discussed the company's goals for its electric vehicles, dubbed \"Tesla killers.\" These ambitious plans highlight Toyota's commitment to competing in the EV market, aiming to leverage its engineering prowess to capture a significant share of the growing demand for sustainable transportation. <a href=\"https://www.detroitnews.com\" style=\"color:#81d4fa;text-decoration:none;\">The Detroit News</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees faced the San Francisco Giants, with fans able to catch the game through various TV channels and streaming options. The game marked an important matchup early in the season, setting the tone for the Yankees' performance going forward. <a href=\"https://www.nytimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">In a recent NHL game, the Carolina Hurricanes defeated the New Jersey Devils 5-2. This result adds to the Devils' challenges this season, as they look to regroup and improve their standings in upcoming matches. <a href=\"https://www.nhl.com\" style=\"color:#81d4fa;text-decoration:none;\">NHL.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Geopolitical tensions in the Middle East are significantly impacting global supply chains, particularly in aluminum and oil. - Privacy concerns are heightened with revelations about government app tracking and software supply chain vulnerabilities. - Major companies are strategically investing in AI and autonomous technologies, signaling shifts in transportation and consumer tech. - The energy sector is exploring alternatives to natural gas due to geopolitical disruptions, indicating a potential shift in energy strategies.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor the impact of the Iranian attack on Aluminum Bahrain on global aluminum prices and supply chains. - Watch for developments in the Iran conflict and its effects on global oil and gas markets. - Follow Uber's progress in deploying robotaxis in Europe and the implications for urban transportation. - Keep an eye on Apple's AI initiatives and how they might influence the tech landscape over the coming years.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 29, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "articles": {
+    "Business & Markets": [
+      {
+        "title": "Bahrain aluminum giant says Iranian attack targeted its facility",
+        "url": "https://www.cnbc.com/2026/03/29/bahrain-aluminum-giant-says-iranian-attack-targeted-its-facilit.html",
+        "description": "Aluminium Bahrain, or Alba, hosts the world's largest smelter and the attack adds to the pressure on global supplies of the metal.",
+        "source": "CNBC",
+        "published": "Sun, 29 Mar 2026 09:43:54 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "The attack on Bahrain's aluminum facility threatens global supply chains, impacting metal prices and investment opportunities in tech sectors reliant on aluminum for manufacturing and innovation."
+      },
+      {
+        "title": "How the big oil and gas CEOs think the Iran war supply disruption will play out",
+        "url": "https://www.cnbc.com/2026/03/28/iran-war-oil-companies-price-gas-diesel-strait-hormuz.html",
+        "description": "The oil industry's grim outlook for global oil and gas supplies stands in contrast to the Trump administration's promise that the disruption is short term.",
+        "source": "CNBC",
+        "published": "Sat, 28 Mar 2026 19:35:46 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Understanding oil supply disruptions is crucial for tech-executive investors, as fluctuating energy prices can impact operational costs, investment strategies, and overall market stability."
+      },
+      {
+        "title": "Yemen's Houthis launch Israel strike, the first time since the U.S.-Israel war began",
+        "url": "https://www.cnbc.com/2026/03/28/yemens-houthis-launch-israel-strike-the-first-of-the-iran-war.html",
+        "description": "The entry of the Houthis in the war marks a significant escalation in the conflict as it enters its second month.",
+        "source": "CNBC",
+        "published": "Sat, 28 Mar 2026 18:57:21 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This escalation highlights geopolitical risks that could impact global markets, energy prices, and tech investments, making it crucial for investors to reassess their strategies in a volatile environment."
+      },
+      {
+        "title": "Why the Iran War May Force Countries to Rely Less on Natural Gas",
+        "url": "https://www.nytimes.com/2026/03/29/business/energy-environment/iran-war-natural-gas.html",
+        "description": "The U.S. and other exporters are poised for a windfall, but disruptions to Persian Gulf supplies are also pushing gas-buying countries to consider alternatives like coal, solar and nuclear energy.",
+        "source": "The New York Times",
+        "published": "2026-03-29T05:00:54-04:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights shifting energy dynamics, presenting investment opportunities in renewables and alternatives as countries seek stability amid geopolitical tensions affecting natural gas supplies."
+      }
+    ],
+    "NY Sports": [
+      {
+        "title": "[Updated] How to watch Yankees vs. Giants: TV channel and streaming options for March 28 - The New York Times",
+        "url": "https://www.nytimes.com",
+        "description": "How to watch Yankees vs. Giants: TV channel and streaming options for March 28The New York Times",
+        "source": "The New York Times",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the intersection of sports media and technology, crucial for investors seeking opportunities in streaming and digital content delivery in a competitive market."
+      },
+      {
+        "title": "[Updated] Hurricanes 5, Devils 2 | HIGHLIGHTS - NHL.com",
+        "url": "https://www.nhl.com",
+        "description": "Hurricanes 5, Devils 2 | HIGHLIGHTSNHL.com",
+        "source": "NHL.com",
+        "published": "",
+        "score": 10,
+        "score_reason": "Devils game result."
+      }
+    ],
+    "AI & Tech": [
+      {
+        "title": "Founder of GitLab battles cancer by founding companies",
+        "url": "https://sytse.com/cancer/",
+        "description": "HN score: 1066 | Comments: 212",
+        "source": "Hacker News",
+        "published": "2026-03-28T17:39:49Z",
+        "hn_score": 1066,
+        "hn_comments": 212,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights innovative approaches to healthcare that could inspire investment opportunities in patient-centric technologies and startups, aligning with emerging trends in personalized medicine."
+      },
+      {
+        "title": "I decompiled the White House's new app",
+        "url": "https://thereallo.dev/blog/decompiling-the-white-house-app",
+        "description": "HN score: 523 | Comments: 191",
+        "source": "Hacker News",
+        "published": "2026-03-28T15:37:17Z",
+        "hn_score": 523,
+        "hn_comments": 191,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights potential security vulnerabilities in government tech, emphasizing the need for robust cybersecurity investments and innovative solutions in the rapidly evolving digital landscape."
+      },
+      {
+        "title": "OpenCiv1 – open-source rewrite of Civ1",
+        "url": "https://github.com/rajko-horvat/OpenCiv1",
+        "description": "HN score: 149 | Comments: 42",
+        "source": "Hacker News",
+        "published": "2026-03-28T18:22:45Z",
+        "hn_score": 149,
+        "hn_comments": 42,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "OpenCiv1 exemplifies the growing trend of open-source innovation, highlighting investment opportunities in gaming and tech communities while fostering collaboration and creativity among developers."
+      },
+      {
+        "title": "Alzheimer's disease mortality among taxi and ambulance drivers (2024)",
+        "url": "https://www.bmj.com/content/387/bmj-2024-082194",
+        "description": "HN score: 131 | Comments: 76",
+        "source": "Hacker News",
+        "published": "2026-03-29T00:53:30Z",
+        "hn_score": 131,
+        "hn_comments": 76,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights emerging health trends that could influence healthcare investments and technology solutions for aging populations, particularly in urban environments like New York."
+      },
+      {
+        "title": "Android’s new sideload settings will carry over to new devices",
+        "url": "https://www.androidauthority.com/android-sideload-carry-over-3652845/",
+        "description": "HN score: 91 | Comments: 132",
+        "source": "Hacker News",
+        "published": "2026-03-28T20:28:03Z",
+        "hn_score": 91,
+        "hn_comments": 132,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights Android's evolving app security measures, impacting user trust and market dynamics, crucial for tech investors assessing mobile ecosystem stability and innovation potential."
+      },
+      {
+        "title": "A laser-based process that enables adhesive-free paper packaging",
+        "url": "https://www.fraunhofer.de/en/press/research-news/2026/march-2026/sealing-paper-packaging-without-adhesives.html",
+        "description": "HN score: 78 | Comments: 34",
+        "source": "Hacker News",
+        "published": "2026-03-28T22:50:49Z",
+        "hn_score": 78,
+        "hn_comments": 34,
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This innovation in adhesive-free paper packaging aligns with sustainability trends, presenting investment opportunities in eco-friendly technologies that enhance recycling and reduce environmental impact."
+      },
+      {
+        "title": "[R] I built a benchmark that catches LLMs breaking physics laws",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1s6keh0/r_i_built_a_benchmark_that_catches_llms_breaking/",
+        "description": "I got tired of LLMs confidently giving wrong physics answers, so I built a benchmark that generates adversarial physics questions and grades them with symbolic math (sympy + pint). No LLM-as-judge, no vibes, just math.How it works:The benchmark covers 28 physics laws (Ohm's, Newton's, Ideal Gas, Cou",
+        "source": "Reddit",
+        "published": "2026-03-29T03:25:01+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[R] GPT-5.4-mini regressed 22pp on vanilla prompting vs GPT-5-mini. Nobody noticed because benchmarks don't test this. Recursive Language Models solved it.",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1s6qtsz/r_gpt54mini_regressed_22pp_on_vanilla_prompting/",
+        "description": "GPT-5.4-mini produces shorter, terser outputs by default. Vanilla accuracy dropped from 69.5% to 47.2% across 12 tasks (1,800 evals). The official RLM implementation dropped too (69.7% to 50.2%). Our implementation - where the model writes Python to query data instead of attending to all of it with ",
+        "source": "Reddit",
+        "published": "2026-03-29T09:43:47+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[D] Litellm supply chain attack and what it means for api key management",
+        "url": "https://www.reddit.com/r/MachineLearning/comments/1s62taq/d_litellm_supply_chain_attack_and_what_it_means/",
+        "description": "If you missed it, litellm versions 1.82.7 and 1.82.8 on pypi got compromised. malicious .pth file that runs on every python process start, no import needed. it scrapes ssh keys, aws/gcp creds, k8s secrets, crypto wallets, env vars (aka all your api keys). karpathy posted about it.the attacker got in",
+        "source": "Reddit",
+        "published": "2026-03-28T15:07:16+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Persistent memory changes how people interact with AI — here's what I'm observing",
+        "url": "https://www.reddit.com/r/artificial/comments/1s6jvog/persistent_memory_changes_how_people_interact/",
+        "description": "I run a small AI companion platform and wanted to share some interesting behavioral data from users who've been using persistent cross-session memory for 2-3 months now.Some patterns I didn't expect:\"Deep single-thread\" users dominate. 56% of our most active users put 70%+ of their messages into a s",
+        "source": "Reddit",
+        "published": "2026-03-29T02:58:58+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "The AI hype misses the people who actually need it most",
+        "url": "https://www.reddit.com/r/artificial/comments/1s6fws6/the_ai_hype_misses_the_people_who_actually_need/",
+        "description": "Every day someone posts \"AI will change everything\" and it's always about agents scaling businesses, automating workflows, 10x productivity, whatever.Cool. But change everything for who?Go talk to the barber who loses 3 clients a week to no-shows and can't afford a booking system that actually works",
+        "source": "Reddit",
+        "published": "2026-03-28T23:51:38+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "I tested what happens when you give an AI coding agent access to 2 million research papers. It found techniques it couldn't have known about.",
+        "url": "https://www.reddit.com/r/artificial/comments/1s6afwm/i_tested_what_happens_when_you_give_an_ai_coding/",
+        "description": "Quick experiment I ran. Took two identical AI coding agents (Claude Code), gave them the same task — optimize a small language model. One agent worked from its built-in knowledge. The other had access to a search engine over 2M+ computer science research papers.Agent without papers:did what you'd ex",
+        "source": "Reddit",
+        "published": "2026-03-28T20:03:02+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "White House App Found Tracking Users' Exact Location Every 4.5 Minutes via Third-Party Server",
+        "url": "https://www.reddit.com/r/technology/comments/1s6e3dp/white_house_app_found_tracking_users_exact/",
+        "description": "submitted by/u/Montrel_PH[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-28T22:32:16+00:00",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "Companies": [
+      {
+        "title": "[Updated] Uber Expands European Robotaxi Footprint with Pony.ai Partnership - National Today",
+        "url": "https://nationaltoday.com",
+        "description": "Uber Expands European Robotaxi Footprint with Pony.ai PartnershipNational Today",
+        "source": "National Today",
+        "published": "",
+        "score": 100,
+        "score_reason": "Uber expands European robotaxi footprint with Pony.ai partnership, indicating a major strategic move.",
+        "why_it_matters": "This partnership signals a significant advancement in autonomous technology, presenting lucrative investment opportunities in the rapidly evolving mobility sector amidst increasing demand for innovative transportation solutions."
+      },
+      {
+        "title": "[Updated] At 50, Apple confronts its next big challenge: AI - Yahoo Finance",
+        "url": "https://finance.yahoo.com",
+        "description": "At 50, Apple confronts its next big challenge: AIYahoo Finance",
+        "source": "Yahoo Finance",
+        "published": "",
+        "score": 87,
+        "score_reason": "Apple confronts its next big challenge: AI, highlighting strategic focus on AI development.",
+        "why_it_matters": "This story highlights Apple's strategic pivot towards AI, crucial for tech investors to assess future growth and innovation potential in a rapidly evolving market landscape."
+      },
+      {
+        "title": "[Updated] MSFT Stock Today: March 29 – DMV Plate Video Revives Gov AI, Privacy Debate - Meyka",
+        "url": "https://meyka.com",
+        "description": "MSFT Stock Today: March 29 – DMV Plate Video Revives Gov AI, Privacy DebateMeyka",
+        "source": "Meyka",
+        "published": "",
+        "score": 75,
+        "score_reason": "MSFT stock influenced by AI and privacy debate, relevant to Microsoft's strategic positioning.",
+        "why_it_matters": "This story highlights the critical intersection of AI, privacy, and regulatory scrutiny, essential for tech investors navigating today's evolving landscape of ethical technology and data governance."
+      },
+      {
+        "title": "Q&A: Toyota exec Templin talks goals for \"Tesla killer\" EVs - The Detroit News",
+        "url": "https://www.detroitnews.com",
+        "description": "Q&A: Toyota exec Templin talks goals for \"Tesla killer\" EVsThe Detroit News",
+        "source": "The Detroit News",
+        "published": "",
+        "score": 60,
+        "score_reason": "Toyota's 'Tesla killer' EVs could impact Tesla's market position, relevant to Tesla's competitive landscape.",
+        "why_it_matters": "This story highlights Toyota's strategic shift towards competitive EVs, signaling potential investment opportunities in the evolving automotive landscape crucial for tech executives."
+      },
+      {
+        "title": "Five Apple anecdotes as iPhone maker marks 50 years - mykxlg.com",
+        "url": "https://www.mykxlg.com",
+        "description": "Five Apple anecdotes as iPhone maker marks 50 yearsmykxlg.com",
+        "source": "mykxlg.com",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ]
+  },
+  "mikes_picks": [],
+  "podcast_script": "Hey there, welcome to MikeCast! It's March 29, 2026, and I'm your host, Mike, here to get you up to speed on today's biggest stories. We've got a lot to cover today, so grab your coffee and let's dive right in. First up, we're looking at a major cyberattack on an aluminum giant in Bahrain that’s shaking up the global supply chain. Plus, the Iran war is causing some serious ripples in the oil and gas markets, and we've got some fascinating developments in the world of AI and tech that you won't want to miss. Let's get into it!\n\nAlright, let's kick things off with the AI and Tech scene, where there's always something buzzing. Right on front stage, we've got the founder of GitLab, who's taking on cancer in a truly unique way. Instead of slowing down, he's actually founding more companies. This story is making waves on Hacker News with a whopping 1066 upvotes and over 200 comments. It's a testament to resilience and innovation, showing how personal challenges can fuel professional creativity. It's inspiring to see someone channel adversity into creating new opportunities and solutions. \n\nNext up, let's talk about a bit of a tech mystery. Someone decompiled the White House's new app, and what they found is raising eyebrows. With an HN score of 523 and nearly 200 comments, this story is all about transparency and privacy. The decompiled app revealed some interesting, if not concerning, details about how user data might be handled. It's a reminder of the importance of scrutinizing the tech we use daily, especially when it comes to governmental apps.\n\nAnd speaking of apps, there's been a bit of a scandal with the White House app tracking users' exact locations every 4.5 minutes via a third-party server. This revelation, submitted by a Reddit user, is stirring up quite the conversation about privacy and data security. It's a stark reminder of the digital footprints we leave behind and the need for stringent data protection measures.\n\nNow, for all you gamers out there, there's an exciting development with OpenCiv1, an open-source rewrite of the classic Civilization 1 game. It's got a respectable HN score of 149 and 42 comments, showing that nostalgia for retro games is alive and well. This project not only brings back a beloved game but also opens up opportunities for modding and innovation in the gaming community.\n\nAlright, switching gears to Business & Markets. There's a lot happening on the global stage. First, an Iranian attack targeted Aluminium Bahrain, also known as Alba, which hosts the world's largest smelter. This attack is adding pressure to global aluminum supplies, which could have ripple effects across various industries that rely on this metal. It's a stark reminder of how geopolitical tensions can impact global markets.\n\nMeanwhile, the oil and gas sector is feeling the heat from the ongoing Iran war. Big oil and gas CEOs are painting a grim picture of supply disruptions, contrasting sharply with the Trump administration's assurances that these disruptions are only temporary. The Strait of Hormuz, a critical chokepoint for oil transportation, is at the center of these concerns. This situation is a classic example of how geopolitical conflicts can send shockwaves through global energy markets, affecting prices and supply chains worldwide.\n\nAnd speaking of energy, the Iran war is pushing countries to rethink their reliance on natural gas. With disruptions in Persian Gulf supplies, there's a growing interest in alternatives like coal, solar, and nuclear energy. This shift could have long-term implications for energy policies and the global push towards renewable energy sources.\n\nNow let's talk companies. Uber is making moves in Europe, expanding its robotaxi footprint through a partnership with Pony.ai. This expansion is part of Uber's broader strategy to integrate autonomous vehicles into its fleet, potentially revolutionizing urban mobility in the process. It's a significant step forward in the race towards autonomous driving technology.\n\nMeanwhile, Apple is celebrating its 50th anniversary and facing its next big challenge: AI. As the tech giant looks to the future, AI is right on front stage as a key area of focus. With its vast resources and innovative spirit, Apple is well-positioned to make significant strides in AI, potentially reshaping the tech landscape once again.\n\nOver at Microsoft, there's a bit of a stir caused by a DMV plate video that’s reviving debates about government AI and privacy. It's a reminder of the delicate balance between technological advancement and individual privacy, a topic that's increasingly on the minds of consumers and policymakers alike.\n\nAnd Toyota is making headlines with its ambitious goals for its so-called \"Tesla killer\" EVs. In a Q&A with The Detroit News, a Toyota exec laid out the company's vision for electric vehicles, aiming to challenge Tesla at the front of the EV market. It's a bold move that underscores the competitive nature of the automotive industry as it shifts towards electrification.\n\nNow, let's take a quick look at the NY Sports scene. The Yankees faced off against the Giants, and if you missed it, you can catch the game highlights and streaming options from yesterday. Meanwhile, in the NHL, the Hurricanes took down the Devils with a 5-2 victory. The Devils will be looking to bounce back in their next game. It's always exciting to see how these teams perform and what strategies they'll bring to their upcoming matches.\n\nAlright, time for Big Mike's hand-picked reads. Today, I'm highlighting a fascinating piece about a laser-based process that enables adhesive-free paper packaging. It's a sustainable innovation that could have a big impact on reducing waste in the packaging industry. Definitely worth a read if you're interested in green tech and sustainability.\n\nAnd that's a wrap for today's MikeCast! Thanks for tuning in and catching up with me. If you enjoyed the show, be sure to subscribe and leave a review. I'll be back tomorrow with more news and insights. Until then, stay curious and stay informed. Catch you later!",
+  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast, your go-to podcast for the latest in tech, business, and sports. I'm Mike, and today we've got a packed episode for you. We'll dive into the latest developments in AI, explore the impact of the Iran war on global markets, and catch up on New York sports. So, let's get started!\n\n[ELIZABETH]\n\nAlright, let's jump into today's most-watched stories in AI and Tech. First up, there's a fascinating development with the White House's new app. It's been found tracking users' exact location every 4.5 minutes via a third-party server. This raises significant privacy concerns, especially since the app is tied to a government entity. The implications for user privacy and data security are huge, and it's a reminder of the ongoing debates around tech and personal data.\n\nNext, let's talk about a new benchmark designed to catch large language models, or LLMs, breaking physics laws. This benchmark generates adversarial physics questions and grades them with symbolic math. It's a big step forward in evaluating AI's understanding of complex concepts, and it highlights the need for rigorous testing of AI systems to ensure they perform reliably in real-world applications.\n\nMoving on, there's a new laser-based process that enables adhesive-free paper packaging. This innovation from Fraunhofer could revolutionize the packaging industry by reducing reliance on adhesives, which are often not environmentally friendly. It's a great example of how technology can drive sustainable practices in industries that impact our daily lives.\n\nLastly, let's touch on persistent memory in AI systems. A small AI companion platform has shared some intriguing behavioral data from users who have been using persistent cross-session memory. It turns out, 56% of the most active users engage in deep, single-thread conversations, putting over 70% of their messages into a single topic. This insight could inform how AI companions are designed to better meet user needs.\n\nNow, shifting gears to Business & Markets. Aluminium Bahrain, or Alba, recently reported that an Iranian attack targeted its facility. Alba hosts the world's largest smelter, and this attack adds pressure to global aluminum supplies. It's a significant event that could have wide-reaching effects on the metal's availability and pricing worldwide.\n\nIn the oil and gas sector, CEOs are expressing a grim outlook for global supplies due to the Iran war. This contrasts sharply with the Trump administration's assurances that the disruption is only short-term. The ongoing conflict is causing significant uncertainty in energy markets, and consumers might feel the impact at the pump.\n\nAdditionally, the Iran war is prompting countries to reconsider their reliance on natural gas. With disruptions in Persian Gulf supplies, nations are looking at alternatives like coal, solar, and nuclear energy. This shift could have long-term implications for global energy strategies and investments.\n\nNow, let's talk Companies. Uber is expanding its European robotaxi footprint through a partnership with Pony.ai. This move strengthens Uber's position in the autonomous vehicle market and highlights the growing importance of partnerships in scaling new technologies.\n\nApple is celebrating its 50th anniversary, and it's facing its next big challenge: AI. As the company looks to integrate AI into its products and services, it will be interesting to see how it leverages its resources and expertise to stay ahead in the tech race.\n\nMicrosoft is also in the spotlight today. A DMV plate video has revived debates around government AI and privacy. This incident underscores the ongoing tension between technological advancements and privacy concerns, a topic that's increasingly relevant in our digital age.\n\nLastly, Toyota's exec Templin has been discussing their goals for \"Tesla killer\" EVs. Toyota is aiming to challenge Tesla's dominance in the electric vehicle market, and their strategy could shake up the industry dynamics.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth! Let's dive into the New York sports scene. Starting with baseball, the Yankees faced off against the Giants yesterday. If you missed it, you can catch the game highlights and streaming options online. It's always exciting to see how our teams are gearing up for the season.\n\nSwitching to hockey, the Devils had a tough game against the Hurricanes, losing 5-2. It's a setback, but there's always the next game to look forward to. The Devils will need to regroup and come back stronger.\n\nAnd that's about it for today in NY sports. Not too much happening, but we'll keep an eye out for any big updates. Back to you, Mike.\n\n[MIKE]\n\nThanks, Jesse. And that's a wrap for today's episode of MikeCast. We covered a lot of ground, from cutting-edge AI developments to the latest in business and sports. Thanks for tuning in, and be sure to join us tomorrow for more insights and updates. Have a great day, everyone!",
+  "audio_file": "MikeCast_3voice_2026-03-29.mp3",
+  "elevenlabs_audio_file": "MikeCast_3voice_2026-03-29.mp3",
+  "trending": [
+    {
+      "topic": "New AI regulation bill passed today",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+March+2026"
+    },
+    {
+      "topic": "Federal Reserve announces rate decision",
+      "x_url": "https://x.com/search?q=Fed+rate+decision+March+29+2026"
+    },
+    {
+      "topic": "Apple unveils new product lineup",
+      "x_url": "https://x.com/search?q=Apple+product+launch+March+29+2026"
+    },
+    {
+      "topic": "Global oil prices spike unexpectedly",
+      "x_url": "https://x.com/search?q=oil+price+surge+March+2026"
+    },
+    {
+      "topic": "Tesla reports quarterly earnings results",
+      "x_url": "https://x.com/search?q=Tesla+earnings+March+29+2026"
+    }
+  ],
+  "generated_at": "2026-03-29T10:32:36.422601+00:00"
+}
