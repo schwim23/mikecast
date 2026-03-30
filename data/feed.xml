@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #36 — March 30, 2026</title>
+    <description>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil prices due to Middle East tensions, Apple's $400 million investment in U.S. chipmaking, and Spencer Jones' home run in New York sports.</description>
+    <pubDate>Mon, 30 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-30</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-30.mp3" type="audio/mpeg" length="4940014"/>
+    <itunes:title>MikeCast #36 — March 30, 2026</itunes:title>
+    <itunes:subtitle>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil pric...</itunes:subtitle>
+    <itunes:summary>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil prices due to Middle East tensions, Apple's $400 million investment in U.S. chipmaking, and Spencer Jones' home run in New York sports.</itunes:summary>
+    <itunes:duration>308</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #35 — March 29, 2026</title>
     <description>Episode #35 — This episode of MikeCast covers the White House app's privacy concerns, a new AI benchmark for physics, Fraunhofer's adhesive-free paper packaging, and persistent memory in AI systems; it also discusses the impact of the Iran war on Aluminium Bahrain and global energy markets, Uber's robotaxi expansion, Apple's AI challenge, Microsoft's privacy debate, and Toyota's EV strategy, along with updates on the Yankees and Devils in New York sports.</description>
     <pubDate>Sun, 29 Mar 2026 11:45:00 GMT</pubDate>
