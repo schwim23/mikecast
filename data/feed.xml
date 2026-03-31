@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #37 — March 31, 2026</title>
+    <description>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health care, oil price spikes due to Iran tensions and Trump's threats, Uber's acquisition of Blacklane, Apple's privacy rules update, Meta's Instagram subscription test, and Netflix's potential NFL game package.</description>
+    <pubDate>Tue, 31 Mar 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-03-31</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-31.mp3" type="audio/mpeg" length="4809898"/>
+    <itunes:title>MikeCast #37 — March 31, 2026</itunes:title>
+    <itunes:subtitle>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health ca...</itunes:subtitle>
+    <itunes:summary>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health care, oil price spikes due to Iran tensions and Trump's threats, Uber's acquisition of Blacklane, Apple's privacy rules update, Meta's Instagram subscription test, and Netflix's potential NFL game package.</itunes:summary>
+    <itunes:duration>300</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #36 — March 30, 2026</title>
     <description>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil prices due to Middle East tensions, Apple's $400 million investment in U.S. chipmaking, and Spencer Jones' home run in New York sports.</description>
     <pubDate>Mon, 30 Mar 2026 11:45:00 GMT</pubDate>

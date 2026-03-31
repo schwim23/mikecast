@@ -1,0 +1,289 @@
+{
+  "date": "2026-03-31",
+  "date_display": "March 31, 2026",
+  "episode_num": 37,
+  "episode_description": "Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health care, oil price spikes due to Iran tensions and Trump's threats, Uber's acquisition of Blacklane, Apple's privacy rules update, Meta's Instagram subscription test, and Netflix's potential NFL game package.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — March 31, 2026</p>\n</div>\n\n<div style=\"background:#1e1408;border:1px solid #8B4513;border-radius:8px;padding:16px 20px;margin-bottom:24px;\"><h2 style=\"color:#ff8c00;margin:0 0 10px;font-size:1.05em;letter-spacing:.4px;\">🔥 TOP TRENDING NOW</h2><div style=\"display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #3a2a10;\"><span style=\"color:#ff8c00;font-weight:700;font-size:1.1em;min-width:22px;text-align:center;flex-shrink:0;\">1</span><div><a href=\"https://x.com/search?q=oil+price+surge+March+31+2026\" style=\"color:#ffcc80;font-weight:600;text-decoration:none;font-size:.95em;\">Global oil prices spike amid geopolitical tensions</a><span style=\"color:#888;font-size:.75em;margin-left:6px;\">↗ X</span></div></div></div>\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant developments across various sectors, including a strategic acquisition by Uber, privacy enhancements from Apple, and geopolitical tensions affecting global markets. The sports scene in New York is buzzing with updates on the Yankees and Knicks, while tech companies navigate challenges and innovations in AI and cybersecurity.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Microsoft has introduced AI upgrades, rolling out its Copilot Cowork to early-access customers. This move is part of Microsoft's broader strategy to enhance productivity tools with AI capabilities, aiming to streamline workflows and improve collaboration. The Copilot Cowork is designed to assist teams by integrating AI-driven insights directly into their daily operations, potentially transforming how businesses handle tasks and projects. <a href=\"https://www.reuters.com\" style=\"color:#81d4fa;text-decoration:none;\">Reuters</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Axios, a popular JavaScript library, suffered a security breach on NPM, where malicious versions were found to drop a remote access trojan. This incident underscores the vulnerabilities in software supply chains and the importance of robust security measures. Developers using Axios are advised to check their dependencies and update to secure versions to prevent unauthorized access and data breaches. <a href=\"https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan\" style=\"color:#81d4fa;text-decoration:none;\">Hacker News</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Governor Gavin Newsom of California signed an executive order mandating safety and privacy protocols for AI companies contracting with the state. This order aims to ensure that AI technologies used by the government are developed with stringent ethical standards, addressing concerns about data privacy and security. The move reflects increasing regulatory scrutiny over AI technologies and their societal impacts. <a href=\"https://www.nytimes.com/2026/03/30/technology/california-ai-executive-order.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI has patched a data exfiltration flaw in ChatGPT and a GitHub token vulnerability in its Codex product. These updates are crucial for maintaining the integrity and security of AI systems, especially as they become more integrated into various applications. OpenAI's proactive measures highlight the ongoing challenges in AI security and the need for continuous vigilance. <a href=\"https://thehackernews.com\" style=\"color:#81d4fa;text-decoration:none;\">The Hacker News</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The ongoing conflict involving Iran has driven oil prices to $115 a barrel, causing concern among economists about a potential global recession. The war's impact on oil supply chains is significant, with investors bracing for prolonged economic disruptions. This situation is exacerbated by geopolitical tensions, which continue to influence market stability and economic forecasts. <a href=\"https://www.nytimes.com/2026/03/30/business/dealbook/iran-war-oil-economy.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Former President Donald Trump has issued a stark warning to Iran, threatening to destroy its oil infrastructure if a peace deal to reopen the Strait of Hormuz is not reached. This escalation has contributed to the surge in oil prices and heightened global economic uncertainty. The Strait of Hormuz is a critical chokepoint for global oil shipments, and its closure could have severe implications for energy markets worldwide. <a href=\"https://www.cnbc.com/2026/03/30/trump-iran-war-obliterate-kharg-island-strait-of-hormuz-peace-deal.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Federal Reserve Chair Jerome Powell indicated that despite the oil shock, the inflation outlook remains stable, and there is currently no need to increase interest rates. Speaking at Harvard University, Powell emphasized that the central bank is closely monitoring economic indicators but sees no immediate crisis. This stance provides some reassurance to markets amid the volatility caused by geopolitical events. <a href=\"https://www.cnbc.com/2026/03/30/powell-sees-inflation-outlook-in-check-no-wider-crisis-yet-in-private-credit.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Uber Technologies has announced its intention to acquire Blacklane, a leading global chauffeur service. This acquisition aims to expand Uber's premium service offerings and strengthen its position in the high-end transportation market. By integrating Blacklane's expertise and network, Uber seeks to enhance its service portfolio and cater to a broader range of customer needs. <a href=\"https://investor.uber.com\" style=\"color:#81d4fa;text-decoration:none;\">Uber Investor Relations</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple has introduced new privacy rules governing third-party access to notifications and Live Activities. This move is part of Apple's ongoing commitment to user privacy, ensuring that third-party apps adhere to strict data protection standards. The rules are designed to give users more control over their data, reflecting Apple's proactive approach to privacy in a competitive tech landscape. <a href=\"https://9to5mac.com\" style=\"color:#81d4fa;text-decoration:none;\">9to5Mac</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Meta has begun testing a premium subscription model on Instagram, exploring new revenue streams amid changing social media dynamics. This subscription service could offer exclusive content and features to users willing to pay, potentially reshaping the platform's engagement model. Meta's experiment reflects the broader trend of social media companies diversifying their monetization strategies. <a href=\"https://techcrunch.com\" style=\"color:#81d4fa;text-decoration:none;\">TechCrunch</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees played against the Seattle Mariners, with the game taking place on March 30, 2026. Details of the game's outcome, scores, and highlights are available on MLB.com. The Yankees' next game is scheduled soon, continuing their season's journey. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Knicks received positive news regarding Miles McBride's injury scare. The latest reports suggest optimism about his recovery, providing relief to the team and fans. This development is crucial as the Knicks aim to maintain their competitive edge in the league. <a href=\"https://nypost.com\" style=\"color:#81d4fa;text-decoration:none;\">New York Post</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Geopolitical tensions are significantly impacting global oil prices and economic stability, with potential long-term effects on markets. - Tech companies are increasingly focusing on privacy and security, responding to regulatory pressures and consumer expectations. - AI advancements continue to reshape business operations, with companies like Microsoft leading the charge in integrating AI into productivity tools. - The sports industry remains dynamic, with teams managing player health and performance amid competitive pressures.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor developments in the Iran conflict and its impact on global oil markets and economic forecasts. - Keep an eye on regulatory changes in AI and tech privacy, particularly in California, which could influence national policies. - Follow Uber's acquisition of Blacklane and its implications for the ride-hailing and premium transportation sectors. - Watch for updates on the New York Knicks' roster and player health as they navigate the remainder of the season.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated March 31, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "articles": {
+    "NY Sports": [
+      {
+        "title": "[Updated] New York Yankees at Seattle Mariners Game Story, Scores/Highlights - 03/30/2026 - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "New York Yankees at Seattle Mariners Game Story, Scores/Highlights - 03/30/2026MLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the intersection of sports and technology, showcasing potential investment opportunities in sports analytics and fan engagement platforms."
+      },
+      {
+        "title": "[Updated] Zero to 600 | 10 TAKEAWAYS - NHL.com",
+        "url": "https://www.nhl.com",
+        "description": "Zero to 600 | 10 TAKEAWAYSNHL.com",
+        "source": "NHL.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights key shifts in leadership and performance within the NHL, signaling potential investment opportunities in sports tech and entertainment sectors amidst evolving fan engagement dynamics."
+      },
+      {
+        "title": "[Updated] Knicks receive optimistic Miles McBride news following latest injury scare - New York Post",
+        "url": "https://nypost.com",
+        "description": "Knicks receive optimistic Miles McBride news following latest injury scareNew York Post",
+        "source": "New York Post",
+        "published": "",
+        "score": 20,
+        "score_reason": "Knicks injury update with optimistic news for Miles McBride."
+      }
+    ],
+    "Companies": [
+      {
+        "title": "[Updated] Uber Technologies, Inc. - Uber to Acquire Global Chauffeur Service Leader Blacklane - Uber Investor Relations",
+        "url": "https://investor.uber.com",
+        "description": "Uber Technologies, Inc. - Uber to Acquire Global Chauffeur Service Leader BlacklaneUber Investor Relations",
+        "source": "Uber Investor Relations",
+        "published": "",
+        "score": 85,
+        "score_reason": "Uber to acquire global chauffeur service leader Blacklane, indicating a strategic expansion.",
+        "why_it_matters": "This acquisition positions Uber to enhance its premium service offerings and expand market share, crucial for attracting high-value customers and driving long-term growth in a competitive landscape."
+      },
+      {
+        "title": "[Updated] Apple introduces privacy rules for third-party access to notifications and Live Activities - 9to5Mac",
+        "url": "https://9to5mac.com",
+        "description": "Apple introduces privacy rules for third-party access to notifications and Live Activities9to5Mac",
+        "source": "9to5Mac",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Apple's new privacy rules reshape third-party access to user data, impacting app developers and investors by emphasizing the importance of privacy in tech innovation and user trust."
+      },
+      {
+        "title": "[Updated] Apple accidently let China users access Apple Intelligence AI features briefly, here is what went wrong - India Today",
+        "url": "https://www.indiatoday.in",
+        "description": "Apple accidently let China users access Apple Intelligence AI features briefly, here is what went wrongIndia Today",
+        "source": "India Today",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This incident highlights the critical importance of data security and regulatory compliance for tech companies operating in sensitive markets like China, impacting investment strategies and risk assessments."
+      },
+      {
+        "title": "[Updated] Meta starts testing a premium subscription on Instagram - TechCrunch",
+        "url": "https://techcrunch.com",
+        "description": "Meta starts testing a premium subscription on InstagramTechCrunch",
+        "source": "TechCrunch",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights Meta's shift towards monetization strategies, signaling potential investment opportunities in subscription-based models within the evolving social media landscape."
+      },
+      {
+        "title": "[Updated] Exclusive | Netflix, Eager for More NFL, Is Looking at a Four-Game Package - WSJ",
+        "url": "https://www.wsj.com",
+        "description": "Exclusive | Netflix, Eager for More NFL, Is Looking at a Four-Game PackageWSJ",
+        "source": "WSJ",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights Netflix's strategic move into live sports, signaling potential shifts in content consumption and investment opportunities in the evolving media landscape."
+      }
+    ],
+    "Business & Markets": [
+      {
+        "title": "Iran War’s Latest Economic Toll: Oil at $115 a Barrel",
+        "url": "https://www.nytimes.com/2026/03/30/business/dealbook/iran-war-oil-economy.html",
+        "description": "Economists and investors are increasingly pricing in a slowdown, or even a global recession, if the fighting drags on.",
+        "source": "The New York Times",
+        "published": "2026-03-30T11:38:58Z",
+        "score": 87,
+        "score_reason": "Global oil price surge to $115 a barrel due to Iran war, potential recession implications.",
+        "why_it_matters": "The escalating conflict in Iran, driving oil prices to $115 a barrel, signals potential global recession risks that could impact investment strategies and market stability for tech executives."
+      },
+      {
+        "title": "Trump says U.S. will destroy Iran’s oil wells, Kharg Island without deal to 'immediately' reopen Hormuz Strait",
+        "url": "https://www.cnbc.com/2026/03/30/trump-iran-war-obliterate-kharg-island-strait-of-hormuz-peace-deal.html",
+        "description": "Donald Trump warned the U.S. will completely obliterate all of Iran's electric generating plants, oil wells and Kharg Island if a peace deal is not reached.",
+        "source": "CNBC",
+        "published": "Mon, 30 Mar 2026 14:43:49 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights geopolitical risks that could disrupt oil supply chains, impacting global markets and energy investments crucial for tech executives navigating economic uncertainties."
+      },
+      {
+        "title": "[Updated] Trump Threatens Iran, Oil Prices Surge - heygotrade.com",
+        "url": "https://www.heygotrade.com",
+        "description": "Trump Threatens Iran, Oil Prices Surgeheygotrade.com",
+        "source": "heygotrade.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights geopolitical tensions that can significantly impact oil prices, influencing market volatility and investment strategies crucial for tech-executive investors in today's economy."
+      },
+      {
+        "title": "Powell sees inflation outlook in check, no need to hike rates because of oil shock",
+        "url": "https://www.cnbc.com/2026/03/30/powell-sees-inflation-outlook-in-check-no-wider-crisis-yet-in-private-credit.html",
+        "description": "Federal Reserve Chair Jerome Powell spoke Monday at Harvard University.",
+        "source": "CNBC",
+        "published": "Mon, 30 Mar 2026 19:34:25 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story signals stability in interest rates, crucial for tech investments, as it suggests continued access to affordable capital amidst economic uncertainties."
+      },
+      {
+        "title": "Fed Governor Miran still backs cuts, says interest rates could be 'about a point' lower this year",
+        "url": "https://www.cnbc.com/2026/03/30/fed-governor-miran-still-backs-cuts-says-interest-rates-could-be-about-a-point-lower-this-year.html",
+        "description": "Federal Reserve Governor Stephen Miran spoke Monday on CNBC's \"Squawk on the Street.\"",
+        "source": "CNBC",
+        "published": "Mon, 30 Mar 2026 14:54:18 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Interest rate cuts could enhance access to capital for tech investments, driving innovation and growth in a competitive market."
+      },
+      {
+        "title": "US paves way for private assets to be included in 401(k) retirement plans",
+        "url": "https://www.reddit.com/r/investing/comments/1s8j3ft/us_paves_way_for_private_assets_to_be_included_in/",
+        "description": "https://www.reuters.com/world/us/us-department-labor-issues-401k-guidelines-private-assets-2026-03-30/March 30 (Reuters) - The Trump administration on Monday issued a long-awaited proposed rule to open up ​retirement plans to alternative assets, paving the way for private equity and cryptocurrencies",
+        "source": "Reddit",
+        "published": "2026-03-31T09:58:28+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story matters because it signals a significant shift in retirement investment strategies, potentially unlocking new capital flows into private assets and influencing market dynamics for tech-driven financial solutions."
+      },
+      {
+        "title": "Nasdaq Speeds Up Index Entry for SpaceX, Large IPOs With New Rule",
+        "url": "https://www.reddit.com/r/investing/comments/1s7s9ta/nasdaq_speeds_up_index_entry_for_spacex_large/",
+        "description": "Nasdaq Inc. will enact a rule change designed to slash the time it takes for newly listed, large-cap companies to enter its main index, a move that will give shares of behemoths like SpaceX a faster route into funds that are pegged to the benchmark.Initial public offerings whose market capitalizatio",
+        "source": "Reddit",
+        "published": "2026-03-30T14:33:15+00:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This rule accelerates index inclusion for major IPOs like SpaceX, enhancing liquidity and investment opportunities, which is crucial for tech-focused investors seeking high-growth potential."
+      },
+      {
+        "title": "Beiersdorf to Boost Its Innovation Agenda With New, 100 Million-euro Venture Capital Fund - WWD",
+        "url": "https://wwd.com",
+        "description": "Beiersdorf to Boost Its Innovation Agenda With New, 100 Million-euro Venture Capital FundWWD",
+        "source": "WWD",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Top digital health funding: Qualified Health lands $125M - Modern Healthcare",
+        "url": "https://www.modernhealthcare.com",
+        "description": "Top digital health funding: Qualified Health lands $125MModern Healthcare",
+        "source": "Modern Healthcare",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "AI & Tech": [
+      {
+        "title": "[Updated] Microsoft unveils AI upgrades, rolls out Copilot Cowork to early-access customers - Reuters",
+        "url": "https://www.reuters.com",
+        "description": "Microsoft unveils AI upgrades, rolls out Copilot Cowork to early-access customersReuters",
+        "source": "Reuters",
+        "published": "",
+        "score": 87,
+        "score_reason": "Microsoft unveils AI upgrades, rolls out Copilot Cowork to early-access customers, indicating significant product development and potential market impact.",
+        "why_it_matters": "This story highlights Microsoft's AI advancements, signaling competitive trends that tech investors must monitor to capitalize on emerging opportunities in the rapidly evolving tech landscape."
+      },
+      {
+        "title": "Axios compromised on NPM – Malicious versions drop remote access trojan",
+        "url": "https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan",
+        "description": "HN score: 837 | Comments: 294",
+        "source": "Hacker News",
+        "published": "2026-03-31T02:54:17Z",
+        "hn_score": 837,
+        "hn_comments": 294,
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "GitHub backs down, kills Copilot pull-request ads after backlash",
+        "url": "https://www.theregister.com/2026/03/30/github_copilot_ads_pull_requests/",
+        "description": "HN score: 238 | Comments: 149",
+        "source": "Hacker News",
+        "published": "2026-03-31T05:11:24Z",
+        "hn_score": 238,
+        "hn_comments": 149,
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Iran War Chokes Off Helium Supply Critical for AI",
+        "url": "https://www.reddit.com/r/technology/comments/1s8e4m5/iran_war_chokes_off_helium_supply_critical_for_ai/",
+        "description": "submitted by/u/CommercialMassive751[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-31T05:02:02+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Newsom signs executive order requiring AI companies to have safety, privacy guardrails",
+        "url": "https://www.reddit.com/r/artificial/comments/1s8ge2h/newsom_signs_executive_order_requiring_ai/",
+        "description": "submitted by/u/Fcking_Chuck[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-31T07:12:06+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "What to Know About California’s Executive Order on A.I.",
+        "url": "https://www.nytimes.com/2026/03/30/technology/california-ai-executive-order.html",
+        "description": "Gov. Gavin Newsom, a Democrat, issued an order requiring safety and privacy guardrails for artificial intelligence companies contracting with the state.",
+        "source": "The New York Times",
+        "published": "2026-03-30T17:45:00-04:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "OpenAI Patches ChatGPT Data Exfiltration Flaw and Codex GitHub Token Vulnerability - The Hacker News",
+        "url": "https://thehackernews.com",
+        "description": "OpenAI Patches ChatGPT Data Exfiltration Flaw and Codex GitHub Token VulnerabilityThe Hacker News",
+        "source": "The Hacker News",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Jimini Health raises funding for AI chatbot targeting complex mental health care - statnews.com",
+        "url": "https://www.statnews.com",
+        "description": "Jimini Health raises funding for AI chatbot targeting complex mental health carestatnews.com",
+        "source": "statnews.com",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ]
+  },
+  "mikes_picks": [],
+  "podcast_script": "[INTRO]\n\nHey there, welcome to MikeCast! It's March 31, 2026, and I'm here to catch you up on the stories making waves today. We've got a lot to dive into, from the latest tech moves shaking up the industry to some big shifts in the business world. Oh, and if you're keeping an eye on global markets, those oil prices are definitely something to watch. So, grab your coffee, settle in, and let's get started!\n\n[AI & TECH]\n\nKicking things off in the tech world, Microsoft is making headlines with some exciting AI upgrades. They've just rolled out something called Copilot Cowork to early-access customers. Now, what does this mean? Essentially, Microsoft is enhancing its AI tools to make them more collaborative and user-friendly. This move is part of a broader strategy to integrate AI more deeply into workplace tools, helping teams work smarter and more efficiently. It's a big step forward in making AI a seamless part of our everyday work lives, and it could really change how we approach productivity.\n\nNext up, let's talk about a bit of a hiccup over at GitHub. They recently faced some backlash over ads in their Copilot pull requests. Users weren't too thrilled about seeing ads pop up in a tool that's supposed to streamline coding. After listening to the feedback, GitHub decided to pull the plug on these ads. It's a reminder of how sensitive the tech community can be to changes, especially when it comes to tools that are integral to their workflow. GitHub's quick response shows they're willing to adapt and listen to their users, which is always a good sign.\n\nNow, if you're into AI safety and privacy, you'll want to hear about California's new executive order. Governor Gavin Newsom has mandated that AI companies contracting with the state must adhere to strict safety and privacy guardrails. This is a significant move as it sets a precedent for how AI should be regulated, especially in terms of protecting user data and ensuring ethical use. It's a big deal because as AI becomes more prevalent, the need for regulation grows, and California is stepping up to lead the way.\n\nAnd lastly, OpenAI is in the spotlight for patching a couple of vulnerabilities. They recently fixed a data exfiltration flaw in ChatGPT and addressed a GitHub token vulnerability in Codex. These patches are crucial for maintaining user trust and ensuring the security of AI tools. In a world where data breaches are all too common, it's reassuring to see companies like OpenAI taking proactive steps to safeguard their platforms.\n\n[BUSINESS & MARKETS]\n\nAlright, switching gears to the business and markets scene. The big story here is the spike in oil prices, now sitting at $115 a barrel. This surge is linked to the ongoing conflict involving Iran, which is causing significant economic ripples. Economists are warning that if the conflict drags on, we could be looking at a global recession. It's a tense situation, and the markets are reacting accordingly, so it's definitely something to keep an eye on if you're invested in energy stocks or commodities.\n\nIn related news, former President Donald Trump has made some bold statements about the situation with Iran. He's threatened to destroy Iran's oil infrastructure if a peace deal isn't reached soon to reopen the Strait of Hormuz. This strait is a crucial passage for global oil shipments, and any disruption could have massive implications for the global economy. It's a high-stakes game of geopolitical chess, and the outcome could affect everything from gas prices to international relations.\n\nDespite these tensions, Federal Reserve Chair Jerome Powell is maintaining a steady hand on the economic tiller. Speaking at Harvard University, he reassured everyone that the inflation outlook is under control and there's no immediate need to hike interest rates due to the oil shock. It's a calming message amidst the chaos, suggesting that the Fed is confident in its current strategy to manage inflation without overreacting to short-term volatility.\n\n[COMPANIES]\n\nNow let's dive into the companies making waves today. Uber is making a strategic move by acquiring Blacklane, a global leader in chauffeur services. This acquisition is part of Uber's plan to expand its premium service offerings, potentially giving them a stronger foothold in the luxury transport market. It's a smart play as they look to diversify and capture more high-end customers who value comfort and reliability.\n\nOver at Apple, there's a new focus on privacy. They've introduced rules for third-party access to notifications and Live Activities. This move is all about giving users more control over their data and ensuring that third-party apps can't misuse it. It's part of Apple's ongoing commitment to privacy, which has become a key selling point for their products in a world where data security is paramount.\n\nMeanwhile, Meta is testing a premium subscription on Instagram. This could be a game-changer for content creators looking to monetize their presence on the platform. By offering exclusive content to subscribers, creators can potentially boost their earnings while giving fans more of what they love. It's an interesting development as social media platforms continue to explore new revenue streams beyond traditional advertising.\n\nAnd finally, Netflix is eyeing a bigger slice of the sports pie. They're reportedly looking at acquiring a four-game package from the NFL. This move would mark a significant expansion into live sports for Netflix, which has traditionally focused on on-demand content. If they pull it off, it could attract a whole new audience to the platform and change the way we think about streaming sports.\n\n[NY SPORTS]\n\nAlright, let's check in on the New York sports scene. The Yankees faced off against the Seattle Mariners yesterday, and it was quite the game. If you're a Yankees fan, you'll be happy to know they came out on top. Their next game is just around the corner, so keep your eyes peeled for more action.\n\nIn basketball news, the Knicks got some good news regarding Miles McBride. After a recent injury scare, it looks like things aren't as bad as feared. It's always a relief when key players are healthy and ready to contribute, especially as the season heats up.\n\nAnd for hockey fans, there's some buzz around the NHL with a piece titled \"Zero to 600\" making waves. It's packed with insights and takeaways, so if you're following the league, it's worth checking out.\n\n[MIKE'S PICKS]\n\nNow, let's dive into Big Mike's hand-picked reads. Today, I'm spotlighting an intriguing piece on how the Iran conflict is impacting the helium supply, which is critical for AI development. It's a fascinating intersection of geopolitics and technology, and it really highlights how interconnected our world has become. If you're curious about the ripple effects of global events on tech, this is a must-read.\n\n[OUTRO]\n\nAnd that's a wrap for today's episode of MikeCast! Thanks for tuning in and letting me be your guide through today's top stories. If you enjoyed the show, be sure to subscribe and share it with your friends. I'll be back tomorrow with more news and insights. Until then, stay informed and stay curious!",
+  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast on this fine March 31, 2026. I'm Mike, and we've got a packed show for you today. We'll dive into some major tech updates, including Microsoft's latest AI upgrades and California's new AI regulations. Plus, oil prices are spiking due to geopolitical tensions, and we'll break down what that means for the economy. And of course, we'll wrap things up with the latest in New York sports. Let's get started.\n\n[ELIZABETH]\n\nThanks, Mike. Today's most-watched stories are all about AI and tech. First up, Microsoft has unveiled some exciting AI upgrades, rolling out Copilot Cowork to early-access customers. This tool is designed to enhance productivity by integrating AI directly into workplace applications, allowing for more streamlined workflows and improved collaboration. It's a big move for Microsoft as they continue to push the boundaries of AI in business settings.\n\nNext, we've got an important update from California. Governor Gavin Newsom has signed an executive order requiring AI companies that contract with the state to implement safety and privacy guardrails. This move is aimed at ensuring that AI technologies are developed and used responsibly, protecting both user data and privacy. It's a significant step towards regulating AI and setting a precedent for other states to follow.\n\nIn other news, OpenAI has patched a critical flaw in ChatGPT that allowed for data exfiltration and addressed a vulnerability in Codex's GitHub token. This patch is crucial for maintaining the integrity and security of AI systems, especially as they become more integrated into various applications.\n\nLastly, Jimini Health has raised funding for an AI chatbot focused on complex mental health care. This chatbot aims to provide support for individuals dealing with mental health issues, using AI to offer personalized care and assistance. It's a promising development in the field of digital health, highlighting the growing role of AI in healthcare solutions.\n\nMoving on to business and markets, the geopolitical tensions involving Iran have led to a spike in oil prices, now sitting at $115 a barrel. This surge is causing economists and investors to brace for a potential global recession if the conflict continues. The situation is further complicated by former President Donald Trump's recent statements threatening to destroy Iran's oil infrastructure if a peace deal isn't reached soon. These developments are adding uncertainty to global markets and could have long-lasting economic impacts.\n\nFederal Reserve Chair Jerome Powell has weighed in, stating that despite the oil shock, the inflation outlook remains in check, and there's no immediate need to hike interest rates. Meanwhile, Fed Governor Stephen Miran supports potential interest rate cuts, suggesting they could be about a point lower this year. These differing perspectives highlight the ongoing debate within the Fed about how to best manage the current economic challenges.\n\nIn the world of companies, Uber is making headlines with its plan to acquire Blacklane, a global leader in chauffeur services. This acquisition aims to expand Uber's premium service offerings and strengthen its position in the global transportation market.\n\nApple is also in the spotlight, having introduced new privacy rules for third-party access to notifications and Live Activities. This move underscores Apple's commitment to user privacy and could impact how developers create apps for the Apple ecosystem.\n\nIn a surprising turn of events, Apple accidentally allowed users in China brief access to its Apple Intelligence AI features. The company has since rectified the situation, but it highlights the complexities of managing AI access across different regions.\n\nMeta is testing a premium subscription on Instagram, potentially offering users exclusive features and an ad-free experience. This test reflects Meta's ongoing efforts to diversify its revenue streams and enhance user engagement on its platforms.\n\nAnd finally, Netflix is reportedly exploring a four-game package with the NFL, eager to expand its sports content offerings. This move could mark a significant shift in how sports are streamed and consumed, as Netflix looks to capitalize on the popularity of live sports.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth. Let's jump into some New York sports action. The Yankees faced off against the Seattle Mariners yesterday, but unfortunately, the game didn't go our way. We'll be looking to bounce back in their next matchup.\n\nOver in the NBA, the Knicks received some good news regarding Miles McBride. After an injury scare, it seems like things are looking optimistic for his recovery, which is a relief for Knicks fans hoping to see him back on the court soon.\n\nIn hockey, the Devils are making headlines with their impressive performance, but there aren't any new updates from the last 24 hours. So, not much to report there today.\n\nAnd that's all for New York sports. Back to you, Mike.\n\n[MIKE]\n\nThanks, Jesse. That wraps up today's episode of MikeCast. We appreciate you tuning in and hope you found our coverage insightful. Be sure to join us tomorrow for more updates on the latest news. Until then, take care and have a great day!",
+  "audio_file": "MikeCast_3voice_2026-03-31.mp3",
+  "elevenlabs_audio_file": "MikeCast_3voice_2026-03-31.mp3",
+  "trending": [
+    {
+      "topic": "New AI regulation bill passed in Congress",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+Congress+2026"
+    },
+    {
+      "topic": "Federal Reserve announces unexpected rate decision",
+      "x_url": "https://x.com/search?q=Federal+Reserve+rate+decision+March+2026"
+    },
+    {
+      "topic": "Major tech firm unveils groundbreaking AI model",
+      "x_url": "https://x.com/search?q=new+AI+model+release+2026"
+    },
+    {
+      "topic": "Global oil prices spike amid geopolitical tensions",
+      "x_url": "https://x.com/search?q=oil+price+surge+March+31+2026"
+    },
+    {
+      "topic": "Significant merger shakes up business landscape",
+      "x_url": "https://x.com/search?q=major+business+merger+March+2026"
+    }
+  ],
+  "generated_at": "2026-03-31T10:32:53.098910+00:00"
+}
