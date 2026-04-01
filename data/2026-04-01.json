@@ -1,0 +1,278 @@
+{
+  "date": "2026-04-01",
+  "date_display": "April 01, 2026",
+  "episode_num": 38,
+  "episode_description": "Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisition of Centessa Pharmaceuticals, McCormick's merger with Unilever's food unit, Amazon's partnership with Delta Air Lines for in-flight Wi-Fi, and Apple's 50th anniversary.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — April 01, 2026</p>\n</div>\n\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant developments across various sectors. In AI & Tech, OpenAI's massive funding round positions it for accelerated growth, while Salesforce enhances Slack with AI features. Business & Markets sees geopolitical tensions impacting oil prices, and major corporate acquisitions reshaping industries. In Companies, Amazon and Apple mark milestones with strategic partnerships and reflections on history. NY Sports features potential player movements and game outcomes, keeping fans engaged with their favorite teams.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">OpenAI has closed a funding round at a staggering $852 billion valuation, raising $122 billion to drive the next phase of artificial intelligence development. This influx of capital underscores the immense confidence investors have in OpenAI's potential to lead the AI industry. The funding will likely accelerate research and development, enabling OpenAI to expand its capabilities and market presence. This development is a testament to the growing importance of AI in various sectors and its potential to transform industries. <a href=\"https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html\" style=\"color:#81d4fa;text-decoration:none;\">Hacker News</a> <a href=\"https://openai.com\" style=\"color:#81d4fa;text-decoration:none;\">OpenAI</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Salesforce has announced a major AI-driven overhaul of Slack, introducing 30 new features that enhance its functionality. This update aims to make Slack more useful for businesses by integrating advanced AI capabilities, likely improving productivity and collaboration. As companies increasingly rely on digital communication tools, Salesforce's investment in AI for Slack positions it as a more competitive option in the crowded workplace communication market. <a href=\"https://techcrunch.com/2026/03/31/salesforce-announces-an-ai-heavy-makeover-for-slack-with-30-new-features/\" style=\"color:#81d4fa;text-decoration:none;\">TechCrunch</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Anthropic has experienced a leak of part of its Claude Code's internal source code. Despite this setback, the AI model has seen widespread adoption, with its run-rate revenue reaching over $2.5 billion as of February. The leak could raise concerns about security and intellectual property protection, but the financial success of Claude Code indicates strong market demand and confidence in its capabilities. <a href=\"https://www.cnbc.com/2026/03/31/anthropic-leak-claude-code-internal-source.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Gas prices have surged past $4 per gallon as the conflict in Iran disrupts the global oil supply. This price increase reflects the geopolitical tensions affecting the energy market, with potential implications for consumers and businesses worldwide. The situation highlights the vulnerability of global oil supply chains to political instability and the need for strategic energy management. <a href=\"https://www.kernradio.com\" style=\"color:#81d4fa;text-decoration:none;\">KERN Radio</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Eli Lilly is set to acquire Centessa Pharmaceuticals for $6.3 billion, a move that will bolster its portfolio with a promising narcolepsy drug currently in midstage clinical trials. This acquisition reflects Eli Lilly's strategic focus on expanding its pipeline of innovative treatments and enhancing its position in the pharmaceutical industry. The deal underscores the ongoing trend of consolidation in the healthcare sector as companies seek to leverage new therapies and technologies. <a href=\"https://www.nytimes.com/2026/03/31/business/eli-lilly-narcolepsy-centessa.html\" style=\"color:#81d4fa;text-decoration:none;\">The New York Times</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oracle is cutting thousands of jobs as it increases its investment in AI and data center infrastructure. This restructuring is part of Oracle's strategy to enhance its capabilities in handling AI workloads, reflecting the growing importance of AI in driving business transformation. The layoffs indicate a shift in Oracle's focus towards more strategic growth areas, aligning with broader industry trends towards AI and cloud computing. <a href=\"https://www.cnbc.com/2026/03/31/oracle-layoffs-ai-spending.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Amazon Leo will power in-flight Wi-Fi for Delta Air Lines starting in 2028, marking a significant partnership between the tech giant and the airline. This collaboration will likely enhance the passenger experience by providing reliable and fast internet connectivity during flights. Amazon's involvement in in-flight Wi-Fi services demonstrates its expanding influence beyond traditional e-commerce and cloud services, positioning it as a key player in the aviation industry's digital transformation. <a href=\"https://www.aboutamazon.com\" style=\"color:#81d4fa;text-decoration:none;\">About Amazon</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple celebrates its 50th anniversary, reflecting on its transformative journey over the decades. From its early days as a personal computer pioneer to becoming a global leader in consumer electronics and services, Apple has consistently driven innovation and shaped the tech landscape. This milestone offers an opportunity to assess Apple's impact on technology and culture, as well as its future direction in a rapidly evolving industry. <a href=\"https://www.macrumors.com\" style=\"color:#81d4fa;text-decoration:none;\">MacRumors</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Odell Beckham Jr. and the Giants are reportedly interested in a potential reunion. Discussions have been ongoing, with Beckham meeting with the Giants and coach Harbaugh at recent NFL meetings. This development suggests that both parties are exploring ways to make the reunion feasible, which could significantly impact the Giants' offensive strategy. Beckham's return would likely energize the team's fan base and add depth to their roster. <a href=\"https://www.cbssports.com\" style=\"color:#81d4fa;text-decoration:none;\">CBS Sports</a> <a href=\"https://www.espn.com\" style=\"color:#81d4fa;text-decoration:none;\">ESPN</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees played against the Seattle Mariners on March 31, 2026. The game details, including scores and highlights, were covered by MLB.com, providing fans with insights into the team's performance. The Yankees' ongoing season continues to capture the attention of baseball enthusiasts, with each game contributing to their standing in the league. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">AI continues to attract massive investment, with OpenAI's funding round highlighting the sector's growth potential. - Geopolitical tensions, particularly in the Middle East, are impacting global markets, notably in energy and defense sectors. - Corporate restructuring and acquisitions are reshaping industries, as seen with Eli Lilly and Oracle's strategic moves. - Tech companies like Amazon and Salesforce are expanding their influence by integrating advanced technologies into diverse sectors.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor developments in the Iran conflict and its impact on global oil prices and geopolitical stability. - Follow OpenAI's next steps post-funding round to see how they leverage the capital for AI advancements. - Keep an eye on Oracle's restructuring efforts and the implications for its workforce and AI capabilities. - Watch for updates on Odell Beckham Jr.'s potential return to the Giants and its impact on the team's dynamics.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated April 01, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "articles": {
+    "Companies": [
+      {
+        "title": "[Updated] Amazon Leo to power in-flight Wi-Fi for Delta Air Lines starting in 2028 - About Amazon",
+        "url": "https://www.aboutamazon.com",
+        "description": "Amazon Leo to power in-flight Wi-Fi for Delta Air Lines starting in 2028About Amazon",
+        "source": "About Amazon",
+        "published": "",
+        "score": 87,
+        "score_reason": "Amazon's partnership with Delta Air Lines to provide in-flight Wi-Fi is a significant strategic move.",
+        "why_it_matters": "Amazon's partnership with Delta for in-flight Wi-Fi highlights its strategic expansion into connectivity, presenting investment opportunities in the evolving tech landscape of aviation and consumer services."
+      },
+      {
+        "title": "Apple Turns 50 Today: Reflecting on Each Decade's Biggest Moments - MacRumors",
+        "url": "https://www.macrumors.com",
+        "description": "Apple Turns 50 Today: Reflecting on Each Decade's Biggest MomentsMacRumors",
+        "source": "MacRumors",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Understanding Apple's evolution and innovation over 50 years provides insights into market trends and investment opportunities in technology and consumer electronics."
+      },
+      {
+        "title": "[Updated] The biggest myths about Apple dispelled: A look inside 5 decades of the company’s history - Fast Company",
+        "url": "https://www.fastcompany.com",
+        "description": "The biggest myths about Apple dispelled: A look inside 5 decades of the company’s historyFast Company",
+        "source": "Fast Company",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Understanding Apple's history and debunking myths can reveal strategic insights for tech investments, highlighting innovation trends and market resilience crucial for a New York investor's decision-making."
+      }
+    ],
+    "NY Sports": [
+      {
+        "title": "Odell Beckham Jr., Giants appear to share mutual interest: How sides can make reunion happen - CBS Sports",
+        "url": "https://www.cbssports.com",
+        "description": "Odell Beckham Jr., Giants appear to share mutual interest: How sides can make reunion happenCBS Sports",
+        "source": "CBS Sports",
+        "published": "",
+        "score": 60,
+        "score_reason": "Odell Beckham Jr. and Giants mutual interest in reunion.",
+        "why_it_matters": "This story highlights the intersection of sports and entertainment, showcasing potential investment opportunities in athlete branding and media partnerships that resonate with today's tech-driven consumer culture."
+      },
+      {
+        "title": "[Updated] New York Yankees at Seattle Mariners Game Story, Scores/Highlights - 03/31/2026 - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "New York Yankees at Seattle Mariners Game Story, Scores/Highlights - 03/31/2026MLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the intersection of sports and technology, showcasing opportunities for investment in data analytics, fan engagement, and digital platforms within the evolving sports industry."
+      },
+      {
+        "title": "[Updated] Sources: Beckham Jr. meets with Harbaugh, Giants at NFL meetings - ESPN",
+        "url": "https://www.espn.com",
+        "description": "Sources: Beckham Jr. meets with Harbaugh, Giants at NFL meetingsESPN",
+        "source": "ESPN",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights potential investment opportunities in sports tech and media, as high-profile athlete engagements can drive fan engagement and revenue growth in the evolving sports landscape."
+      }
+    ],
+    "AI & Tech": [
+      {
+        "title": "OpenAI closes funding round at an $852B valuation",
+        "url": "https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html",
+        "description": "HN score: 451 | Comments: 394",
+        "source": "Hacker News",
+        "published": "2026-03-31T20:07:30Z",
+        "hn_score": 451,
+        "hn_comments": 394,
+        "score": 97,
+        "score_reason": "OpenAI closes funding round at an $852B valuation, indicating strong investor confidence and significant financial backing for future AI developments.",
+        "why_it_matters": "This funding round underscores the immense growth potential of AI, signaling lucrative investment opportunities and competitive pressures for tech executives navigating the evolving landscape."
+      },
+      {
+        "title": "OpenAI raises $122 billion to accelerate the next phase of AI - OpenAI",
+        "url": "https://openai.com",
+        "description": "OpenAI raises $122 billion to accelerate the next phase of AIOpenAI",
+        "source": "OpenAI",
+        "published": "",
+        "score": 92,
+        "score_reason": "OpenAI raises $122 billion to accelerate the next phase of AI, highlighting substantial investment in AI advancement with potential business implications.",
+        "why_it_matters": "This story highlights significant investment in AI, signaling growth opportunities and competitive advantages for tech executives navigating the evolving landscape of artificial intelligence."
+      },
+      {
+        "title": "Salesforce announces an AI-heavy makeover for Slack, with 30 new features",
+        "url": "https://techcrunch.com/2026/03/31/salesforce-announces-an-ai-heavy-makeover-for-slack-with-30-new-features/",
+        "description": "Slack just got a whole lot more useful.",
+        "source": "TechCrunch",
+        "published": "Tue, 31 Mar 2026 22:46:25 +0000",
+        "score": 85,
+        "score_reason": "Salesforce announces an AI-heavy makeover for Slack with 30 new features, showcasing significant product development in AI integration.",
+        "why_it_matters": "This AI-driven enhancement of Slack positions Salesforce to capture market share, making it a critical investment opportunity for tech executives focused on innovation and productivity solutions."
+      },
+      {
+        "title": "Anthropic leaks part of Claude Code's internal source code",
+        "url": "https://www.cnbc.com/2026/03/31/anthropic-leak-claude-code-internal-source.html",
+        "description": "Claude Code has seen massive adoption over the last year, and its run-rate revenue had swelled to more than $2.5 billion as of February.",
+        "source": "CNBC",
+        "published": "Tue, 31 Mar 2026 20:56:59 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "The leak of Claude Code's source code could disrupt competitive dynamics in AI, impacting investment strategies and valuations in the rapidly evolving tech landscape."
+      },
+      {
+        "title": "Judge blocks executive order to end federal funding for PBS and NPR",
+        "url": "https://www.reddit.com/r/technology/comments/1s8w6vg/judge_blocks_executive_order_to_end_federal/",
+        "description": "submitted by/u/cmaia1503[link][comments]",
+        "source": "Reddit",
+        "published": "2026-03-31T18:44:53+00:00",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "Business & Markets": [
+      {
+        "title": "[Updated] Fed Officials Signal That Rate Cuts May Be Over - WSJ",
+        "url": "https://www.wsj.com",
+        "description": "Fed Officials Signal That Rate Cuts May Be OverWSJ",
+        "source": "WSJ",
+        "published": "",
+        "score": 97,
+        "score_reason": "Fed officials signaling the end of rate cuts is crucial for monetary policy and market expectations.",
+        "why_it_matters": "This story matters because it signals potential shifts in monetary policy that could impact investment strategies and market conditions, crucial for tech executives navigating funding and growth opportunities."
+      },
+      {
+        "title": "Gas prices surge past $4 as Iran conflict disrupts global oil supply - KERN Radio",
+        "url": "https://www.kernradio.com",
+        "description": "Gas prices surge past $4 as Iran conflict disrupts global oil supplyKERN Radio",
+        "source": "KERN Radio",
+        "published": "",
+        "score": 95,
+        "score_reason": "Global oil price surge due to Iran conflict has direct implications for inflation and economic growth.",
+        "why_it_matters": "Rising gas prices due to geopolitical tensions can impact consumer behavior and inflation, influencing investment strategies and market dynamics for tech executives in New York."
+      },
+      {
+        "title": "Eli Lilly Will Buy a Narcolepsy Drug Developer for $6.3 Billion",
+        "url": "https://www.nytimes.com/2026/03/31/business/eli-lilly-narcolepsy-centessa.html",
+        "description": "Eli Lilly plans to acquire Centessa Pharmaceuticals, which has been conducting a midstage clinical trial of its lead drug.",
+        "source": "The New York Times",
+        "published": "2026-03-31T10:49:30-04:00",
+        "score": 90,
+        "score_reason": "Eli Lilly's acquisition of Centessa Pharmaceuticals for $6.3 billion is significant M&A activity in the pharmaceutical sector.",
+        "why_it_matters": "This acquisition highlights strategic investments in innovative therapies, signaling growth opportunities in the biotech sector that tech-executive investors should consider for diversification and future returns."
+      },
+      {
+        "title": "McCormick to Combine With Unilever Food Unit to Create a Spice Giant",
+        "url": "https://www.nytimes.com/2026/03/31/business/mccormick-unilever-food-aquisition.html",
+        "description": "The deal ends Unilever’s time in the food industry and will create a multibillion-dollar group under the McCormick name.",
+        "source": "The New York Times",
+        "published": "2026-03-31T10:22:46-04:00",
+        "score": 88,
+        "score_reason": "McCormick's merger with Unilever's food unit is a major M&A deal creating a new industry leader.",
+        "why_it_matters": "This merger signals strategic consolidation in the food sector, highlighting investment opportunities in evolving consumer preferences and the growing demand for premium food products."
+      },
+      {
+        "title": "Oracle cutting thousands in latest layoff round as company continues to ramp AI spending",
+        "url": "https://www.cnbc.com/2026/03/31/oracle-layoffs-ai-spending.html",
+        "description": "Oracle has ratcheted up its capital expenditures as it builds data center infrastructure that can handle AI workloads.",
+        "source": "CNBC",
+        "published": "Tue, 31 Mar 2026 20:20:15 GMT",
+        "score": 85,
+        "score_reason": "Oracle's layoffs and increased AI spending indicate strategic shifts in tech investment.",
+        "why_it_matters": "This story highlights Oracle's strategic shift towards AI, signaling investment opportunities in tech infrastructure and the evolving landscape of enterprise solutions crucial for future growth."
+      },
+      {
+        "title": "Trump says he's considering pulling U.S. out of 'paper tiger' NATO",
+        "url": "https://www.cnbc.com/2026/04/01/trump-says-hes-considering-pulling-us-out-of-paper-tiger-nato.html",
+        "description": "The President's comments are the latest threat to America's allies after their reluctance to help reopen the Strait of Hormuz.",
+        "source": "CNBC",
+        "published": "Wed, 01 Apr 2026 10:08:20 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Stock futures are higher to start the month as optimism around Iran war ending grows: Live updates",
+        "url": "https://www.cnbc.com/2026/03/31/stock-market-today-live-updates.html",
+        "description": "Tuesday concluded both a losing month and quarter for all three major indexes.",
+        "source": "CNBC",
+        "published": "Wed, 01 Apr 2026 10:20:04 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Trump signs executive order limiting mail-in voting ahead of 2026 U.S. elections",
+        "url": "https://www.cnbc.com/2026/03/31/trump-mail-in-voting-executive-order.html",
+        "description": "Trump has put pressure on Congress to pass the SAVE America Act, a measure that would require photo identification and proof of U.S. citizenship to vote.",
+        "source": "CNBC",
+        "published": "Wed, 01 Apr 2026 00:42:07 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Warren Buffett says Iran bomb would make nuclear disaster harder to avoid",
+        "url": "https://www.cnbc.com/2026/03/31/warren-buffett-says-iran-bomb-would-make-nuclear-disaster-harder-to-avoid.html",
+        "description": "The Berkshire Hathaway chairman said the growing number of nuclear-armed states has fundamentally altered the global risk landscape.",
+        "source": "CNBC",
+        "published": "Tue, 31 Mar 2026 17:16:22 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Warren Buffett says he sold Apple too soon and would buy more of it, though not in this market",
+        "url": "https://www.cnbc.com/2026/03/31/warren-buffett-says-he-sold-apple-too-soon-and-would-buy-more-of-it-though-not-in-this-market-.html",
+        "description": "Apple remains Berkshire Hathaway's largest holding even after the conglomerate trimmed its stake at the end of last year.",
+        "source": "CNBC",
+        "published": "Tue, 31 Mar 2026 15:31:12 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Warren Buffett says he's still making calls on investments at Berkshire, flags 'tiny' new buy",
+        "url": "https://www.cnbc.com/2026/03/31/warren-buffett-says-hes-still-making-calls-on-investments-at-berkshire-flags-tiny-new-buy.html",
+        "description": "The 95-year-old investor said he still comes into the office daily and stays engaged with markets.",
+        "source": "CNBC",
+        "published": "Tue, 31 Mar 2026 15:02:49 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Huawei's cloud computing revenue dropped in 2025 as Chinese AI lagged U.S. rivals",
+        "url": "https://www.cnbc.com/2026/03/31/huawei-annual-report-2025-cloud-computing-revenue.html",
+        "description": "When including internal customers, the telecommunications giant said cloud computing revenue grew from a year ago.",
+        "source": "CNBC",
+        "published": "Tue, 31 Mar 2026 12:00:01 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "IRGC threatens strikes on US tech giants across the Middle East",
+        "url": "https://www.reddit.com/r/investing/comments/1s8r1lr/irgc_threatens_strikes_on_us_tech_giants_across/",
+        "description": "\"The Islamic Revolutionary Guard Corps (IRGC) has threatened to strike 18 US technology and defense-related companies operating in the Middle East, warning the action could begin as early as tomorrow night if Iran’s senior commanders are targeted.In a statement, the IRGC urged employees of the liste",
+        "source": "Reddit",
+        "published": "2026-03-31T15:42:39+00:00",
+        "score": 50,
+        "score_reason": ""
+      }
+    ]
+  },
+  "mikes_picks": [],
+  "podcast_script": "Hey there, welcome back to MikeCast! It's April 1st, 2026, and no, this isn't an April Fool's joke—just your daily dose of what's happening in the world. We've got some big stories to dive into today. First up, OpenAI is making waves with a massive new funding round, and Apple is celebrating a milestone birthday. Plus, we'll take a look at what's happening with gas prices and the latest from the sports world. So grab your coffee, settle in, and let's get started.\n\nAlright, kicking things off with AI & Tech, which is definitely the buzz today. OpenAI has just closed a funding round at a jaw-dropping $852 billion valuation. That's right, billion with a 'B'. The company raised a whopping $122 billion to accelerate the next phase of AI development. This is huge, not just for OpenAI but for the entire tech industry. With this kind of capital, OpenAI is set to push the boundaries of what artificial intelligence can do, potentially transforming industries from healthcare to finance. It's a clear signal that investors are betting big on AI's future, and it sets the stage for some exciting innovations ahead.\n\nIn other tech news, Salesforce has announced a major AI-heavy makeover for Slack, introducing 30 new features. This update is all about making Slack more intuitive and powerful for users. With these enhancements, Slack is poised to become an even more central tool for businesses, streamlining communication and boosting productivity. It's a smart move by Salesforce to keep Slack competitive in the ever-evolving landscape of workplace communication tools.\n\nMeanwhile, Anthropic has had a bit of a hiccup. Part of Claude Code's internal source code has leaked. Claude Code has been a major player in the AI space, with its run-rate revenue swelling to over $2.5 billion as of February. The leak is a significant issue for Anthropic, as it raises concerns about security and intellectual property. However, the company's rapid growth and adoption suggest that it will continue to be a formidable force in the AI industry.\n\nSwitching gears now to Business & Markets, where there's a lot happening. Fed officials have signaled that rate cuts may be over. This is a crucial development for anyone keeping an eye on the economy. The end of rate cuts could mean higher borrowing costs for consumers and businesses, potentially slowing down economic growth. It's a balancing act for the Fed as they try to manage inflation without stifling the economy.\n\nGas prices have surged past $4 per gallon, driven by the ongoing conflict in Iran, which is disrupting the global oil supply. This spike is hitting consumers hard at the pump and could have broader implications for the economy. As transportation costs rise, we might see a ripple effect on the prices of goods and services, adding to inflationary pressures.\n\nIn the corporate world, Eli Lilly is making a big move by acquiring Centessa Pharmaceuticals for $6.3 billion. Centessa has been working on a promising narcolepsy drug, and this acquisition could bolster Eli Lilly's portfolio in the pharmaceutical sector. It's a strategic play to expand their offerings and tap into a new market.\n\nAlright, let's dive into the Companies segment. Amazon is making headlines with its new venture, Amazon Leo, which will power in-flight Wi-Fi for Delta Air Lines starting in 2028. This partnership is set to revolutionize in-flight connectivity, offering passengers faster and more reliable internet access. It's a win-win for both companies, enhancing the travel experience for Delta's customers while expanding Amazon's reach in the tech space.\n\nToday marks a significant milestone for Apple as the company turns 50. Reflecting on its history, Apple has had some incredible moments over the decades, from the launch of the Macintosh to the iPhone revolution. It's a testament to Apple's innovation and resilience in the tech industry. Alongside the celebrations, Fast Company has taken a look at some of the biggest myths about Apple, dispelling misconceptions and shedding light on the company's journey. It's a fascinating read for anyone interested in tech history and Apple's impact on the world.\n\nNow, let's talk New York sports. The Yankees faced off against the Seattle Mariners yesterday, wrapping up the game with some exciting highlights. As for football, Odell Beckham Jr. and the Giants are in the spotlight. There's mutual interest in a reunion, and Beckham Jr. even met with Harbaugh and Giants representatives at the NFL meetings. It seems like both sides are keen on making this happen, which would be a big deal for Giants fans.\n\nAlright, before we wrap up, it's time for Big Mike's hand-picked reads. If you're looking for something interesting, check out the latest on how Salesforce is transforming Slack with AI, or dive into the details of Apple's 50-year journey. These stories offer a deeper look into how tech is shaping our world and the companies leading the charge.\n\nAnd that's a wrap for today's MikeCast! Thanks for tuning in. If you enjoyed today's episode, don't forget to subscribe and share it with your friends. We'll be back tomorrow with more news and insights. Until then, stay informed and have a great day!",
+  "conversational_script": "[MIKE]\n\nHey everyone, welcome to MikeCast, your go-to source for the latest in tech, business, and sports. I'm Mike, and today is April 1st, 2026. We've got some exciting stories lined up for you. Amazon is making a big move with Delta Air Lines, and Apple is celebrating a major milestone. Plus, OpenAI is making waves with a massive funding round. And for our sports fans, there's buzz about a potential reunion for Odell Beckham Jr. with the Giants. Let's dive right in, starting with Elizabeth and the latest in AI and tech.\n\n[ELIZABETH]\n\nThanks, Mike! Alright, today's most-watched stories are all about big moves and big money in the tech world. First up, OpenAI has closed a funding round at a staggering $852 billion valuation. This is huge news in the AI sector, as OpenAI is now one of the most valuable companies in the world. They've raised $122 billion to accelerate the next phase of AI development. This funding will help them expand their capabilities and push the boundaries of what's possible with artificial intelligence. It's a clear sign that investors are betting big on AI's future impact.\n\nMoving on, Salesforce has announced a major AI-heavy makeover for Slack, introducing 30 new features. This update is designed to make Slack more useful for businesses, integrating AI to streamline communication and productivity. It's a significant step for Salesforce as they aim to enhance their product offerings and stay competitive in the ever-evolving tech landscape.\n\nIn other news, Anthropic has had a bit of a hiccup with a leak of part of Claude Code's internal source code. Despite this setback, Claude Code has seen massive adoption over the last year, with a run-rate revenue swelling to more than $2.5 billion as of February. This leak could pose challenges, but it also highlights the growing demand and reliance on AI technologies.\n\nLastly, a judge has blocked an executive order that aimed to end federal funding for PBS and NPR. This decision is crucial as it preserves funding for public broadcasting, ensuring that these important media outlets can continue to operate and provide valuable content to the public.\n\nNow, let's shift gears to the business and markets front. The Federal Reserve has signaled that rate cuts may be over, which could have significant implications for the economy. This decision comes as the Fed assesses the current economic landscape and aims to stabilize inflation.\n\nGas prices have surged past $4 due to the ongoing conflict in Iran disrupting global oil supply. This spike in prices is affecting consumers and businesses alike, highlighting the interconnected nature of global markets and geopolitical events.\n\nIn the corporate world, Eli Lilly is making headlines with its plan to acquire Centessa Pharmaceuticals for $6.3 billion. Centessa has been conducting a midstage clinical trial of its lead drug, and this acquisition could bolster Eli Lilly's portfolio in the pharmaceutical industry.\n\nAnd in a major merger, McCormick is set to combine with Unilever's food unit, creating a spice giant. This deal marks the end of Unilever's time in the food industry and positions McCormick as a dominant player in the market.\n\nAlright, let's talk companies. Amazon is set to power in-flight Wi-Fi for Delta Air Lines starting in 2028 with their Amazon Leo technology. This partnership is a strategic move for Amazon as they expand their reach into the aviation sector, providing enhanced connectivity for travelers.\n\nMeanwhile, Apple is celebrating its 50th anniversary today. Reflecting on each decade's biggest moments, Apple has grown from a small startup to a tech behemoth, revolutionizing industries with products like the iPhone and Mac. It's a testament to their innovation and influence over the years.\n\nAdditionally, Fast Company has dispelled some of the biggest myths about Apple, offering a look inside the company's history. This insight provides a deeper understanding of Apple's journey and the challenges they've overcome to become a leader in the tech world.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n\nThanks, Elizabeth! Let's kick things off with some New York sports updates. Starting with the Giants, there's a lot of buzz around Odell Beckham Jr. and a potential reunion with the team. Reports suggest there's mutual interest between Beckham and the Giants, and he recently met with Coach Harbaugh at the NFL meetings. This could be an exciting development for Giants fans if it all comes together.\n\nNow, onto baseball. The New York Yankees played against the Seattle Mariners yesterday. Unfortunately, the Yankees didn't come out on top, but they're looking to bounce back in their next game. Keep an eye on them as they continue their season.\n\nAs for the Knicks and Devils, there's not much happening today. We'll keep you posted on any developments as they come in.\n\nThat's all for sports today. Back to you, Mike.\n\n[MIKE]\n\nThanks, Jesse. And that's a wrap for today's episode of MikeCast. We appreciate you tuning in and hope you found today's stories engaging and informative. Don't forget to subscribe and join us tomorrow for more updates on tech, business, and sports. Until then, take care and have a great day!",
+  "audio_file": "MikeCast_3voice_2026-04-01.mp3",
+  "elevenlabs_audio_file": "MikeCast_3voice_2026-04-01.mp3",
+  "trending": [
+    {
+      "topic": "New AI regulation bill passed today",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+April+2026"
+    },
+    {
+      "topic": "Federal Reserve announces rate decision",
+      "x_url": "https://x.com/search?q=Federal+Reserve+rate+decision+April+2026"
+    },
+    {
+      "topic": "Apple unveils new product lineup",
+      "x_url": "https://x.com/search?q=Apple+product+launch+April+1+2026"
+    },
+    {
+      "topic": "Stock market reacts to economic data",
+      "x_url": "https://x.com/search?q=stock+market+crash+April+2026"
+    },
+    {
+      "topic": "Global oil prices spike unexpectedly",
+      "x_url": "https://x.com/search?q=oil+price+surge+April+1+2026"
+    }
+  ],
+  "generated_at": "2026-04-01T10:32:53.152422+00:00"
+}

@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #38 — April 01, 2026</title>
+    <description>Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisition of Centessa Pharmaceuticals, McCormick's merger with Unilever's food unit, Amazon's partnership with Delta Air Lines for in-flight Wi-Fi, and Apple's 50th anniversary.</description>
+    <pubDate>Wed, 01 Apr 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-04-01</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-01.mp3" type="audio/mpeg" length="4980178"/>
+    <itunes:title>MikeCast #38 — April 01, 2026</itunes:title>
+    <itunes:subtitle>Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisit...</itunes:subtitle>
+    <itunes:summary>Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisition of Centessa Pharmaceuticals, McCormick's merger with Unilever's food unit, Amazon's partnership with Delta Air Lines for in-flight Wi-Fi, and Apple's 50th anniversary.</itunes:summary>
+    <itunes:duration>310</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #37 — March 31, 2026</title>
     <description>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health care, oil price spikes due to Iran tensions and Trump's threats, Uber's acquisition of Blacklane, Apple's privacy rules update, Meta's Instagram subscription test, and Netflix's potential NFL game package.</description>
     <pubDate>Tue, 31 Mar 2026 11:45:00 GMT</pubDate>
