@@ -1,0 +1,280 @@
+{
+  "date": "2026-04-02",
+  "date_display": "April 02, 2026",
+  "episode_num": 39,
+  "episode_description": "Episode #39 — This episode of MikeCast covers the record-breaking $300 billion in Q1 2026 startup investments driven by AI, SpaceX's confidential IPO filing targeting a $1.75 trillion valuation, NASA's successful Artemis II Moon mission launch, the Claude Code leak's impact, President Trump's speech on the U.S.-Iran conflict affecting oil prices, Tesla ending Model S and X production, Apple's 50th anniversary with new AirPods Max 2, Meta's efforts to attract creators, and labor developments involving DHL and Amazon.",
+  "html_briefing": "<!DOCTYPE html>\n<html>\n<head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head>\n<body style=\"background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;\">\n<div style=\"text-align:center;padding:24px 0;border-bottom:2px solid #4fc3f7;margin-bottom:24px;\">\n  <h1 style=\"color:#4fc3f7;margin:0;font-size:2.2em;letter-spacing:1px;\">🎙️ MikeCast</h1>\n  <p style=\"color:#888;margin:6px 0 0;font-size:1.05em;\">Daily Briefing — April 02, 2026</p>\n</div>\n\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">EXECUTIVE SUMMARY</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Today's news highlights significant developments across various sectors. In AI & Tech, SpaceX is making waves with its plans for an IPO, while NASA's Artemis II mission marks a historic lunar journey. In Business & Markets, oil prices surge amid escalating tensions between the U.S. and Iran. The Companies section reveals Tesla's production changes and Apple's milestone anniversary. Meanwhile, in NY Sports, the Knicks face a setback with a key player's absence.</p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">AI &amp; TECH</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">SpaceX has confidentially filed for an initial public offering (IPO), aiming for a valuation of approximately $1.75 trillion. This move by Elon Musk's aerospace company sets the stage for what could be a record-breaking public offering. The decision to go public comes as SpaceX continues to expand its operations and influence in the space industry. The IPO is expected to attract significant investor interest, given SpaceX's pioneering role in space exploration and satellite deployment. <a href=\"https://www.cnbc.com/2026/04/01/spacex-confidentially-files-for-ipo-setting-stage-for-record-offering.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">NASA's Artemis II mission has successfully launched, sending four astronauts to the Moon. The liftoff occurred at 6:35 pm EDT from Cape Canaveral, marking a significant milestone in NASA's lunar exploration efforts. This mission is part of NASA's broader Artemis program, which aims to establish a sustainable human presence on the Moon. The successful launch underscores NASA's commitment to advancing space exploration and could pave the way for future missions to Mars. <a href=\"https://arstechnica.com/space/2026/04/four-astronauts-depart-for-the-moon-with-a-fiery-send-off-from-cape-canaveral/\" style=\"color:#81d4fa;text-decoration:none;\">Ars Technica</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The Claude Code leak has exposed the complete architecture of a production AI agent system, revealing insights into its design and functionality. The leak, which has been widely discussed online, highlights the system's impressive $2.5 billion annual recurring revenue and 80% enterprise adoption rate. This incident has sparked discussions about the future of AI development and the implications of such leaks on intellectual property and competitive advantage. <a href=\"https://www.reddit.com/r/artificial/comments/1s9jprb/the_claude_code_leak_accidentally_published_the/\" style=\"color:#81d4fa;text-decoration:none;\">Reddit</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">BUSINESS &amp; MARKETS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Oil prices have surged, with Brent crude rising over 7% following President Trump's speech on the U.S.-Iran conflict. In his address, Trump indicated that the war might continue for another two to three weeks, fueling concerns about further escalation and its impact on global oil supply. The volatile trading environment reflects heightened geopolitical tensions and uncertainty in the energy markets. <a href=\"https://www.cnbc.com/2026/04/02/oil-prices-today-wti-brent-trump-speech-iran-war-.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Dow futures have dropped by 500 points as oil prices continue to rise in response to the U.S.-Iran conflict. The stock market's reaction underscores investor anxiety about the potential economic ramifications of prolonged geopolitical tensions. Despite a strong start to the second quarter, the ongoing conflict and its impact on energy prices are weighing heavily on market sentiment. <a href=\"https://www.cnbc.com/2026/04/01/stock-market-today-live-updates.html\" style=\"color:#81d4fa;text-decoration:none;\">CNBC</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Hopes for a swift resolution to the Iran war have dimmed following President Trump's recent address. The speech, which lacked new announcements about the conflict, has led to a spike in oil prices and increased uncertainty in global markets. The ongoing tensions are expected to have significant implications for international trade and economic stability. <a href=\"https://www.usnews.com\" style=\"color:#81d4fa;text-decoration:none;\">U.S. News & World Report</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">COMPANIES</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Tesla has announced the end of production for its Model S and Model X vehicles, with only about 600 units remaining. This decision marks a significant shift in Tesla's product strategy, as the company focuses on newer models and technologies. The move is likely to impact Tesla's customer base and could influence the electric vehicle market as a whole. <a href=\"https://electrek.co\" style=\"color:#81d4fa;text-decoration:none;\">Electrek</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Apple celebrates its 50th anniversary today, marking a significant milestone in the company's history. Over the past five decades, Apple has transformed from a small startup into a global technology leader. The company's evolution reflects its ability to innovate and adapt to changing market dynamics, solidifying its position as a dominant force in the tech industry. <a href=\"https://sherwood.news\" style=\"color:#81d4fa;text-decoration:none;\">Sherwood News</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">Amazon's cloud operations in Bahrain have reportedly suffered damage due to an Iranian strike. This incident highlights the vulnerability of global tech infrastructure amid geopolitical conflicts. The damage to Amazon's facilities could have implications for its cloud services and underscores the broader risks faced by tech companies operating in volatile regions. <a href=\"https://timesofindia.indiatimes.com\" style=\"color:#81d4fa;text-decoration:none;\">The Times of India</a></p>\n\n<h2 style=\"color:#4fc3f7;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">NY SPORTS</h2>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Knicks are facing a challenge as they lose their star guard ahead of their matchup against the Grizzlies. This absence could impact the team's performance and strategy in upcoming games. The Knicks will need to adjust their lineup and tactics to compensate for this loss as they prepare for their next game. <a href=\"https://www.si.com\" style=\"color:#81d4fa;text-decoration:none;\">Sports Illustrated</a></p>\n<p style=\"color:#ccc;line-height:1.7;margin-bottom:12px;\">The New York Yankees faced off against the Seattle Mariners, with the game taking place on April 1, 2026. The details of the game's outcome, including scores and highlights, were covered, providing fans with insights into the team's performance. The Yankees will be looking to build on this game as they continue their season. <a href=\"https://www.mlb.com\" style=\"color:#81d4fa;text-decoration:none;\">MLB.com</a></p>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">KEY TRENDS &amp; INSIGHTS</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">The ongoing U.S.-Iran conflict is significantly affecting global oil prices and market stability, underscoring the interconnectedness of geopolitical events and economic indicators. - The tech industry's vulnerability to geopolitical tensions is highlighted by the damage to Amazon's cloud operations, emphasizing the need for robust risk management strategies. - Space exploration is gaining momentum with NASA's Artemis II mission and SpaceX's IPO plans, reflecting renewed interest and investment in space technologies. - The AI sector continues to evolve rapidly, with significant investments and developments, as seen in the Claude Code leak and record venture funding.</li></ul>\n\n<h2 style=\"color:#ffb74d;border-bottom:1px solid #444;padding-bottom:6px;margin-top:28px;\">WHAT TO WATCH</h2>\n<ul style=\"color:#ccc;line-height:1.7;\"><li style=\"margin-bottom:8px;\">Monitor the impact of the U.S.-Iran conflict on global oil prices and stock markets, as ongoing tensions could lead to further economic volatility. - Keep an eye on SpaceX's IPO developments, as the company's public offering could set new records and influence the broader aerospace industry. - Watch for updates on Amazon's cloud operations in Bahrain and any potential repercussions on its services and infrastructure. - Follow the New York Knicks' performance in upcoming games as they adjust to the absence of their star guard, which could affect their standing in the league.</li></ul>\n\n\n\n\n<div style=\"text-align:center;padding:20px 0;border-top:1px solid #444;margin-top:36px;\">\n  <p style=\"color:#666;font-size:0.85em;\">MikeCast Daily Briefing • Generated April 02, 2026<br>\n  Sources: NYT, Hacker News, TechCrunch, Ars Technica, CNBC, Reddit &amp; more &bull; Powered by OpenAI GPT-4o</p>\n</div>\n</body>\n</html>",
+  "articles": {
+    "NY Sports": [
+      {
+        "title": "[Updated] Knicks Lose Star Guard Ahead of Grizzlies Matchup - Sports Illustrated",
+        "url": "https://www.si.com",
+        "description": "Knicks Lose Star Guard Ahead of Grizzlies MatchupSports Illustrated",
+        "source": "Sports Illustrated",
+        "published": "",
+        "score": 70,
+        "score_reason": "Knicks lose star guard, significant impact on team.",
+        "why_it_matters": "The Knicks' loss of a star guard impacts team performance and marketability, influencing potential investment opportunities in sports tech and fan engagement platforms."
+      },
+      {
+        "title": "[Updated] New York Yankees at Seattle Mariners Game Story, Scores/Highlights - 04/01/2026 - MLB.com",
+        "url": "https://www.mlb.com",
+        "description": "New York Yankees at Seattle Mariners Game Story, Scores/Highlights - 04/01/2026MLB.com",
+        "source": "MLB.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights the intersection of sports and technology, showcasing potential investment opportunities in data analytics and fan engagement within the booming sports industry."
+      },
+      {
+        "title": "[Updated] Norris Debates, Youth Hockey & Cats | ONE-TIME ALL STARS - NHL.com",
+        "url": "https://www.nhl.com",
+        "description": "Norris Debates, Youth Hockey & Cats | ONE-TIME ALL STARSNHL.com",
+        "source": "NHL.com",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights emerging trends in youth sports and fan engagement, crucial for tech investors seeking opportunities in sports technology and community-driven platforms."
+      }
+    ],
+    "Companies": [
+      {
+        "title": "[Updated] Tesla confirms Model S and Model X production is over — only ~600 left - Electrek",
+        "url": "https://electrek.co",
+        "description": "Tesla confirms Model S and Model X production is over — only ~600 leftElectrek",
+        "source": "Electrek",
+        "published": "",
+        "score": 87,
+        "score_reason": "Tesla confirms Model S and Model X production is over, marking a significant strategic pivot.",
+        "why_it_matters": "Tesla's cessation of Model S and X production signals a strategic pivot, highlighting market trends and innovation opportunities critical for tech investors in the evolving EV landscape."
+      },
+      {
+        "title": "[Updated] Apple’s upgraded AirPods Max 2 headphones arrive in stores today - 9to5Mac",
+        "url": "https://9to5mac.com",
+        "description": "Apple’s upgraded AirPods Max 2 headphones arrive in stores today9to5Mac",
+        "source": "9to5Mac",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "The launch of AirPods Max 2 highlights Apple's innovation strategy, signaling investment opportunities in consumer tech and audio markets amidst evolving user preferences."
+      },
+      {
+        "title": "Apple is turning 50 today and it doesn’t look a thing like its younger self - Sherwood News",
+        "url": "https://sherwood.news",
+        "description": "Apple is turning 50 today and it doesn’t look a thing like its younger selfSherwood News",
+        "source": "Sherwood News",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Apple's evolution over 50 years highlights innovation's role in market leadership, offering insights for tech investors on adaptability and long-term growth strategies in a rapidly changing landscape."
+      },
+      {
+        "title": "Meta’s bid to woo creators to Facebook just might work, despite its recent legal woes - Digiday",
+        "url": "https://digiday.com",
+        "description": "Meta’s bid to woo creators to Facebook just might work, despite its recent legal woesDigiday",
+        "source": "Digiday",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "Meta's strategy to attract creators could reshape social media dynamics, presenting lucrative investment opportunities in the evolving creator economy amidst ongoing legal challenges."
+      },
+      {
+        "title": "[Updated] Amazon cloud operations in Bahrain reportedly damaged in Iran strike - The Times of India",
+        "url": "https://timesofindia.indiatimes.com",
+        "description": "Amazon cloud operations in Bahrain reportedly damaged in Iran strikeThe Times of India",
+        "source": "The Times of India",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This incident highlights geopolitical risks affecting cloud infrastructure, crucial for tech investors to assess potential impacts on service reliability and investment stability in the region."
+      },
+      {
+        "title": "Iran Threatens to Target U.S. Tech Firms if War Continues to Escalate - Time Magazine",
+        "url": "https://time.com",
+        "description": "Iran Threatens to Target U.S. Tech Firms if War Continues to EscalateTime Magazine",
+        "source": "Time Magazine",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights potential geopolitical risks that could disrupt U.S. tech investments, emphasizing the need for strategic risk management in volatile international markets."
+      },
+      {
+        "title": "[Updated] 9th Circuit rejects Uber and Instacart's free speech challenge to worker deactivation law - Daily Journal",
+        "url": "https://www.dailyjournal.com",
+        "description": "9th Circuit rejects Uber and Instacart's free speech challenge to worker deactivation lawDaily Journal",
+        "source": "Daily Journal",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This ruling impacts gig economy regulations, influencing labor rights and operational costs for tech companies, crucial for investors assessing risk and compliance in a rapidly evolving legal landscape."
+      },
+      {
+        "title": "[Updated] Teamsters Secure DHL Wage Gains, Amazon Settlement Over Unpaid Time - WWD",
+        "url": "https://wwd.com",
+        "description": "Teamsters Secure DHL Wage Gains, Amazon Settlement Over Unpaid TimeWWD",
+        "source": "WWD",
+        "published": "",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights labor dynamics and wage trends that could impact operational costs and workforce stability in logistics and e-commerce sectors, crucial for tech investment strategies."
+      }
+    ],
+    "Business & Markets": [
+      {
+        "title": "Oil gains with Brent surging more than 7% as Trump's Iran war speech stokes fears of further escalation",
+        "url": "https://www.cnbc.com/2026/04/02/oil-prices-today-wti-brent-trump-speech-iran-war-.html",
+        "description": "Oil rose in volatile trading as Trump in his address to the nation on Iran war said that he expected the conflict to last another two to three weeks.",
+        "source": "CNBC",
+        "published": "Thu, 02 Apr 2026 10:29:37 GMT",
+        "score": 87,
+        "score_reason": "The Federal Reserve's interest rate decision in April 2026 is a key macroeconomic event with direct implications for market movements and investment strategies.",
+        "why_it_matters": "This story highlights geopolitical risks that can significantly impact oil prices, affecting energy investments and broader market stability, crucial for tech-executive investors navigating economic uncertainties."
+      },
+      {
+        "title": "Dow futures slump 500 points as oil surges after Trump address on U.S.-Iran war: Live updates",
+        "url": "https://www.cnbc.com/2026/04/01/stock-market-today-live-updates.html",
+        "description": "All three major averages rose on Wednesday to kick off the second quarter.",
+        "source": "CNBC",
+        "published": "Thu, 02 Apr 2026 10:29:06 GMT",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights market volatility driven by geopolitical tensions, crucial for tech investors to assess risk and opportunity in an uncertain economic landscape."
+      },
+      {
+        "title": "Oil Prices Spike and Stocks Tumble After Trump Vows More Iran Strikes",
+        "url": "https://www.nytimes.com/2026/04/01/business/oil-stocks-gasoline-prices-iran-trump.html",
+        "description": "President Trump claimed in a White House address that the war on Iran was “nearing completion” but made no new announcements about the conflict.",
+        "source": "The New York Times",
+        "published": "2026-04-01T22:37:46-04:00",
+        "score": 50,
+        "score_reason": "",
+        "why_it_matters": "This story highlights geopolitical risks that can impact global markets, influencing investment strategies and decision-making for tech executives amid rising oil prices and stock volatility."
+      },
+      {
+        "title": "[Updated] Oil Prices Spike and Stocks Tumble After Trump Vows More Iran Strikes - The New York Times",
+        "url": "https://www.nytimes.com",
+        "description": "Oil Prices Spike and Stocks Tumble After Trump Vows More Iran StrikesThe New York Times",
+        "source": "The New York Times",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Hopes Dim for Swift End to Iran War After Trump Speech, Oil Prices Surge - U.S. News & World Report",
+        "url": "https://www.usnews.com",
+        "description": "Hopes Dim for Swift End to Iran War After Trump Speech, Oil Prices SurgeU.S. News & World Report",
+        "source": "U.S. News & World Report",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ],
+    "AI & Tech": [
+      {
+        "title": "[Updated] Q1 2026 Shatters Venture Funding Records As AI Boom Pushes Startup Investment To $300B - Crunchbase News",
+        "url": "https://news.crunchbase.com",
+        "description": "Q1 2026 Shatters Venture Funding Records As AI Boom Pushes Startup Investment To $300BCrunchbase News",
+        "source": "Crunchbase News",
+        "published": "",
+        "score": 95,
+        "score_reason": "Q1 2026 shatters venture funding records with $300B investment in AI, indicating significant business and investment implications.",
+        "why_it_matters": "This story highlights a transformative surge in AI investment, signaling lucrative opportunities for tech-executive investors to capitalize on emerging trends and innovations in the startup ecosystem."
+      },
+      {
+        "title": "Artemis II Launch Day Updates",
+        "url": "https://www.nasa.gov/blogs/missions/2026/04/01/live-artemis-ii-launch-day-updates/",
+        "description": "HN score: 923 | Comments: 795",
+        "source": "Hacker News",
+        "published": "2026-04-01T17:11:31Z",
+        "hn_score": 923,
+        "hn_comments": 795,
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "SpaceX files to go public",
+        "url": "https://www.nytimes.com/2026/04/01/technology/spacex-ipo-elon-musk.html",
+        "description": "HN score: 318 | Comments: 429",
+        "source": "Hacker News",
+        "published": "2026-04-01T17:49:54Z",
+        "hn_score": 318,
+        "hn_comments": 429,
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "SpaceX confidentially files for IPO, setting stage for record offering",
+        "url": "https://www.cnbc.com/2026/04/01/spacex-confidentially-files-for-ipo-setting-stage-for-record-offering.html",
+        "description": "Elon Musk's SpaceX is reportedly targeting a valuation of around $1.75 trillion in its forthcoming IPO.",
+        "source": "CNBC",
+        "published": "Wed, 01 Apr 2026 18:20:27 GMT",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Artemis II, NASA's boldest mission in generations, launches crew to the Moon",
+        "url": "https://arstechnica.com/space/2026/04/four-astronauts-depart-for-the-moon-with-a-fiery-send-off-from-cape-canaveral/",
+        "description": "Liftoff of Artemis II with four astronauts occurred at 6:35 pm EDT (22:35 UTC) on Wednesday.",
+        "source": "Ars Technica",
+        "published": "Thu, 02 Apr 2026 00:04:17 +0000",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "The Claude Code leak accidentally published the first complete blueprint for production AI agents. Here's what it tells us about where this is all going.",
+        "url": "https://www.reddit.com/r/artificial/comments/1s9jprb/the_claude_code_leak_accidentally_published_the/",
+        "description": "Most coverage of the Claude Code leak focuses on the drama or the hidden features. But the bigger story is that this is the first time we've seen the complete architecture of a production-grade AI agent system running at scale ($2.5B ARR, 80% enterprise adoption). And the patterns it reveals tell us",
+        "source": "Reddit",
+        "published": "2026-04-01T12:54:08+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "Anthropic issues copyright takedown requests to remove 8,000+ copies of Claude Code source code",
+        "url": "https://www.reddit.com/r/technology/comments/1s9jljp/anthropic_issues_copyright_takedown_requests_to/",
+        "description": "submitted by/u/tekz[link][comments]",
+        "source": "Reddit",
+        "published": "2026-04-01T12:48:59+00:00",
+        "score": 50,
+        "score_reason": ""
+      },
+      {
+        "title": "[Updated] Anthropic Races to Contain Leak of Code Behind Claude AI Agent - WSJ",
+        "url": "https://www.wsj.com",
+        "description": "Anthropic Races to Contain Leak of Code Behind Claude AI AgentWSJ",
+        "source": "WSJ",
+        "published": "",
+        "score": 50,
+        "score_reason": ""
+      }
+    ]
+  },
+  "mikes_picks": [],
+  "podcast_script": "Hey there, welcome to MikeCast! It's April 2nd, 2026, and I'm your host, Mike, here to bring you the latest scoop on everything from tech to sports to business. Today, we've got some exciting stories lined up for you. SpaceX is making waves with its IPO plans, and NASA's Artemis II mission is taking us back to the Moon. Plus, we'll dive into the latest on the oil market's reaction to President Trump's speech on the Iran conflict. And don't worry, we'll wrap it all up with some New York sports updates. So, grab your coffee, settle in, and let's get started!\n\nAlright, let's kick things off with the AI & Tech world, where some major developments are unfolding. First up, SpaceX has confidentially filed for an IPO, and it's set to be a record-breaking one. Elon Musk's space venture is targeting a valuation of around $1.75 trillion. That's right, trillion with a 'T'. This move is a huge deal because SpaceX has been a private company for so long, and going public means opening up to a whole new realm of investments and scrutiny. It's a testament to the company's growth and its ambitious goals, like colonizing Mars and expanding its satellite internet service, Starlink. So, keep an eye on this one; it's going to be a game-changer in the space industry.\n\nSpeaking of space, NASA's Artemis II mission has successfully launched, sending four astronauts on a journey to the Moon. The liftoff happened at 6:35 pm EDT yesterday, and it's being hailed as NASA's boldest mission in generations. This mission is part of NASA's broader Artemis program, aiming to land humans back on the Moon and eventually pave the way for human exploration of Mars. The excitement around this mission is palpable, as it's not just about scientific exploration but also about inspiring a new generation of space enthusiasts. With Artemis II, we're taking another giant leap for mankind, and it's thrilling to watch.\n\nNow, let's talk about the Claude Code leak. This has been a hot topic in the AI community. The leak accidentally published the first complete blueprint for production AI agents, revealing the architecture of a system that's running at scale with $2.5 billion in annual recurring revenue and 80% enterprise adoption. This is significant because it gives us a glimpse into the inner workings of a high-performing AI system, which could influence future developments in AI technology. However, it's also causing quite a stir, as Anthropic, the company behind Claude, is racing to contain the leak and has issued copyright takedown requests to remove over 8,000 copies of the source code. It's a fascinating story of innovation, security, and the challenges of managing intellectual property in the digital age.\n\nAlright, switching gears to the business and markets segment. The oil market is on a rollercoaster ride right now. Oil prices have surged, with Brent crude jumping more than 7%, following President Trump's speech on the Iran conflict. In his address, Trump mentioned that he expects the conflict to last another two to three weeks, which has stoked fears of further escalation. This uncertainty is causing ripples in the markets, with Dow futures slumping 500 points. The rise in oil prices is a direct response to the geopolitical tensions, and it's impacting everything from gas prices to stock market volatility. For everyday folks, this means we might see higher prices at the pump and some turbulence in our investment portfolios. It's a reminder of how interconnected global events are with our daily lives.\n\nNow, onto the companies making headlines today. Tesla has announced that production of its Model S and Model X vehicles is officially over, with only about 600 units left. This marks the end of an era for Tesla's flagship models, which have been around for over a decade. The decision to halt production is part of Tesla's strategy to focus on its newer models and innovations. For Tesla fans, it's a bittersweet moment, but it also signals the company's commitment to evolving and staying at the forefront of the electric vehicle market.\n\nIn other news, Apple is celebrating its 50th anniversary today. Can you believe it? Half a century of innovation and transformation. The company doesn't look a thing like its younger self, having evolved from a scrappy startup in a garage to a tech giant with a massive global presence. And to mark the occasion, Apple has released its upgraded AirPods Max 2 headphones, which hit stores today. These new headphones come with enhanced features and improved sound quality, catering to audiophiles and tech enthusiasts alike. It's a fitting way to celebrate a milestone anniversary, showcasing Apple's continued focus on quality and innovation.\n\nMeanwhile, Meta is working hard to woo creators to Facebook, despite its recent legal woes. The company is rolling out new tools and incentives to attract content creators, aiming to make Facebook a go-to platform for digital content. This move is part of Meta's broader strategy to compete with platforms like TikTok and YouTube, which have been dominating the creator economy. By investing in creators, Meta hopes to boost engagement and revenue on its platform, even as it navigates legal challenges.\n\nAlright, let's wrap things up with some New York sports updates. The Knicks are facing a tough challenge as they lose their star guard ahead of their matchup against the Grizzlies. This is a big blow for the team, and fans are hoping for a strong performance despite the setback. Over in baseball, the Yankees played against the Seattle Mariners yesterday. Unfortunately, the game didn't go in their favor, but they're gearing up for their next matchup. And in hockey, there's some buzz around the Norris debates and youth hockey, as highlighted in a recent NHL.com feature. It's always exciting to see the passion and talent in the world of sports.\n\nBefore we sign off, it's time for Big Mike's hand-picked reads. Today, I'm recommending you check out the full story on the Artemis II mission. It's not just about the technical details but also the human spirit of exploration and adventure. And for those interested in the business side of things, dive deeper into the SpaceX IPO plans. It's a fascinating look at how a private company transitions to the public market and what it means for the future of space exploration.\n\nAlright, that's a wrap for today's MikeCast! Thanks for tuning in, and I hope you enjoyed our deep dive into today's top stories. Don't forget to subscribe and leave a review if you liked what you heard. I'm Mike, signing off. Catch you tomorrow for more news and insights. Have a great day!",
+  "conversational_script": "[MIKE]\n  \nHey everyone, welcome to MikeCast, your daily dive into the latest news with a dash of personality. It's April 2, 2026, and we've got a packed show for you today. We'll be talking about the big moves in AI and tech, the latest on the U.S.-Iran conflict affecting oil prices, and some major shifts in the corporate world. Plus, Jesse's got the scoop on New York sports. Let's get started.\n\n[ELIZABETH]\n  \nAlright, let's kick things off with AI and tech, where today's most-watched stories are making waves. First up, the venture capital world is buzzing as Q1 2026 has shattered records with a whopping $300 billion in startup investments, driven largely by the AI boom. This surge underscores the massive interest and confidence in AI technologies, with startups attracting unprecedented funding to push the boundaries of what's possible.\n\nNext, SpaceX is making headlines as it confidentially files for an IPO. Elon Musk's aerospace giant is reportedly targeting a valuation of around $1.75 trillion, setting the stage for what could be a record-breaking public offering. This move could significantly impact the aerospace industry and the stock market, drawing attention from investors worldwide.\n\nIn another major tech development, NASA's Artemis II mission has successfully launched, sending four astronauts to the Moon. Liftoff occurred at 6:35 pm EDT yesterday, marking a bold step forward in space exploration. This mission is part of NASA's long-term plan to establish a sustainable human presence on the Moon, paving the way for future Mars missions.\n\nFinally, the Claude Code leak has taken the tech world by storm. This leak, which accidentally published the first complete blueprint for production AI agents, reveals significant insights into the architecture of these systems. With a $2.5 billion annual recurring revenue and 80% enterprise adoption, the implications are vast, prompting Anthropic to issue copyright takedown requests to contain the leak.\n\nNow, moving on to business and markets. The oil market is in turmoil as Brent crude has surged more than 7% following President Trump's speech on the Iran war. He indicated that the conflict might last another two to three weeks, fueling fears of further escalation. This has caused a ripple effect, with Dow futures slumping 500 points, highlighting the market's sensitivity to geopolitical tensions.\n\nOn the corporate front, Tesla has confirmed that production of the Model S and Model X is officially over, with only about 600 units left. This marks the end of an era for Tesla's flagship models, as the company shifts focus to newer, more innovative vehicles.\n\nApple is celebrating its 50th anniversary today, and it's clear that the tech giant has evolved significantly from its early days. Alongside this milestone, Apple has released the upgraded AirPods Max 2 headphones, now available in stores, offering enhanced features and sound quality.\n\nMeta is making a strategic push to woo creators back to Facebook, despite its recent legal challenges. This initiative is part of a broader effort to revitalize the platform and compete more effectively with other social media giants.\n\nAnd in a significant labor development, the Teamsters have secured wage gains for DHL workers and reached a settlement with Amazon over unpaid time. This reflects ongoing efforts to improve labor conditions in the logistics and tech sectors.\n\nAlright Jesse, take it away with sports...\n\n[JESSE]\n  \nThanks, Elizabeth! Let's dive into the New York sports scene. Starting with the Knicks, they've hit a rough patch as they're set to face the Grizzlies without their star guard, who is out due to an undisclosed issue. This could be a tough matchup for the Knicks as they try to navigate this setback.\n\nOver in baseball, the Yankees played against the Seattle Mariners yesterday. It was a thrilling game with plenty of action, but unfortunately, I don't have the final score details to share. Keep an eye on their upcoming games as they continue their season.\n\nOn the ice, there's not much happening with the Devils today, but the NHL world is buzzing with debates over the Norris Trophy and some fun discussions around youth hockey and cats. It's always interesting to see the lighter side of sports.\n\nThat's all I've got for now. Back to you, Mike.\n\n[MIKE]\n  \nThanks, Jesse. And that's a wrap for today's MikeCast. We appreciate you tuning in and hope you found our coverage insightful and engaging. We'll be back tomorrow with more updates and stories that matter. Until then, stay informed and take care. Thanks for listening!",
+  "audio_file": "MikeCast_3voice_2026-04-02.mp3",
+  "elevenlabs_audio_file": "MikeCast_3voice_2026-04-02.mp3",
+  "trending": [
+    {
+      "topic": "New AI regulation bill passed today",
+      "x_url": "https://x.com/search?q=AI+regulation+bill+April+2026"
+    },
+    {
+      "topic": "Federal Reserve announces rate decision",
+      "x_url": "https://x.com/search?q=Federal+Reserve+rate+decision+April+2026"
+    },
+    {
+      "topic": "Major tech firm releases new AI model",
+      "x_url": "https://x.com/search?q=new+AI+model+release+2026"
+    },
+    {
+      "topic": "Stock market reacts to economic data",
+      "x_url": "https://x.com/search?q=stock+market+economic+data+April+2026"
+    },
+    {
+      "topic": "Global oil prices surge unexpectedly",
+      "x_url": "https://x.com/search?q=global+oil+price+surge+April+2026"
+    }
+  ],
+  "generated_at": "2026-04-02T10:32:42.121071+00:00"
+}
