@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #41 — April 04, 2026</title>
+    <description>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveiling, Blue Owl's stock drop due to massive fund redemptions, and the Artemis II mission's successful progress towards the Moon.</description>
+    <pubDate>Sat, 04 Apr 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-04-04</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-04.mp3" type="audio/mpeg" length="3516076"/>
+    <itunes:title>MikeCast #41 — April 04, 2026</itunes:title>
+    <itunes:subtitle>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveili...</itunes:subtitle>
+    <itunes:summary>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveiling, Blue Owl's stock drop due to massive fund redemptions, and the Artemis II mission's successful progress towards the Moon.</itunes:summary>
+    <itunes:duration>279</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #40 — April 03, 2026</title>
     <description>Episode #40 — This episode of MikeCast covers Google's release of Gemma 4 open models, the rise of Chinese chip companies amid U.S. tech curbs, Microsoft's new AI models challenging OpenAI and Google, OpenAI's acquisition of TBPN, President Trump's aggressive stance on Iran and firing of Attorney General Pam Bondi, JetBlue's increased bag fees, Amazon's datacenter drone hits, Tesla's stock drop, Meta's Bay Area layoffs, Microsoft's $10 billion investment in Japan, and the Yankees' game against the Miami Marlins.</description>
     <pubDate>Fri, 03 Apr 2026 11:45:00 GMT</pubDate>
