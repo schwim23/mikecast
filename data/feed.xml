@@ -23,6 +23,18 @@
     <itunes:explicit>false</itunes:explicit>
     <itunes:category text="News"/>
   <item>
+    <title>MikeCast #42 — April 05, 2026</title>
+    <description>Episode #42 — Google releases Gemini 3, intensifying the AI race with Microsoft and OpenAI; Microsoft revises its OpenAI deal and sees increased Copilot AI adoption; Galaxea AI secures $290 million in funding; the Iran conflict spikes U.S. inflation and impacts AWS data centers; Apple celebrates its 50th anniversary; and Meta appoints Xu Rui to lead AI hardware.</description>
+    <pubDate>Sun, 05 Apr 2026 11:45:00 GMT</pubDate>
+    <guid isPermaLink="false">mikecast-2026-04-05</guid>
+    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-05.mp3" type="audio/mpeg" length="3655968"/>
+    <itunes:title>MikeCast #42 — April 05, 2026</itunes:title>
+    <itunes:subtitle>Episode #42 — Google releases Gemini 3, intensifying the AI race with Microsoft and OpenAI; Microsoft revises its OpenAI deal and sees increased Copilot AI adoption; Galaxea AI secures $290 million in funding; the Iran conflict spikes U.S. inflation an...</itunes:subtitle>
+    <itunes:summary>Episode #42 — Google releases Gemini 3, intensifying the AI race with Microsoft and OpenAI; Microsoft revises its OpenAI deal and sees increased Copilot AI adoption; Galaxea AI secures $290 million in funding; the Iran conflict spikes U.S. inflation and impacts AWS data centers; Apple celebrates its 50th anniversary; and Meta appoints Xu Rui to lead AI hardware.</itunes:summary>
+    <itunes:duration>284</itunes:duration>
+    <itunes:explicit>false</itunes:explicit>
+  </item>
+  <item>
     <title>MikeCast #41 — April 04, 2026</title>
     <description>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveiling, Blue Owl's stock drop due to massive fund redemptions, and the Artemis II mission's successful progress towards the Moon.</description>
     <pubDate>Sat, 04 Apr 2026 11:45:00 GMT</pubDate>
