@@ -86,3 +86,59 @@ mikes_picks.json           — pending picks queue
 - **New RSS feed**: add to the relevant `*_RSS_FEEDS` list in `mc_config.py`
 - **Change scoring behavior**: edit `CATEGORY_SCORER_PROMPTS` in `mc_config.py`
 - **Add a Mike's Pick**: use `mikes_picks_ingest.py` (see `/mc-picks` skill)
+
+## AWS Deployment & Docker Image Updates
+
+The pipeline runs on **AWS ECS Fargate** (ephemeral task, ~20 min/day). The Docker image is in **ECR** (`602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast`). The daily schedule is managed by **EventBridge Scheduler** (`mikecast-daily`, 6:30 AM ET).
+
+### How code changes reach production
+
+Every `git push` to `main` triggers the GitHub Actions workflow (`.github/workflows/deploy.yml`), which:
+1. Builds a new Docker image from the current `main` branch
+2. Tags it with the commit SHA + `latest` and pushes to ECR
+3. Registers a new ECS task definition revision pointing to that image
+4. Updates the EventBridge Scheduler to use the new task definition ARN
+
+The next scheduled run (6:30 AM ET) will use the updated image automatically. No manual ECS steps needed.
+
+### Required GitHub Actions secrets
+
+These must be set at https://github.com/schwim23/mikecast/settings/secrets/actions:
+- `AWS_ACCESS_KEY_ID` — IAM user with ECR push + ECS task registration + EventBridge update permissions
+- `AWS_SECRET_ACCESS_KEY` — corresponding secret key
+
+### To deploy a change manually (without waiting for cron)
+
+```bash
+# Trigger an immediate ECS run with the latest task definition
+aws ecs run-task \
+  --cluster mikecast \
+  --task-definition mikecast \
+  --launch-type FARGATE \
+  --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+  --region us-east-1
+```
+
+### To check the status of the ECS task
+
+```bash
+# List recent task runs
+aws ecs list-tasks --cluster mikecast --region us-east-1
+
+# View CloudWatch logs
+aws logs tail /ecs/mikecast --follow --region us-east-1
+```
+
+### Key AWS resources
+
+| Resource | Name/ID |
+|---|---|
+| ECR repository | `mikecast` (account: 602039469166) |
+| ECS cluster | `mikecast` |
+| ECS task family | `mikecast` |
+| EventBridge Scheduler | `mikecast-daily` |
+| S3 bucket | `mikecast-io-data` |
+| CloudFront distribution | serves `mikecast.io` |
+| Scheduler IAM role | `mikecast-scheduler-role` |
+| VPC subnet | `subnet-086fe88cca1a9de84` |
+| Security group | `sg-0b075c1eea308976b` |

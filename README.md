@@ -224,6 +224,62 @@ The `run_mikecast.sh` wrapper:
 - Runs `mikecast_briefing.py` with the virtual environment
 - Commits and pushes updated data to GitHub (which updates the GitHub Pages dashboard)
 
+## AWS Deployment
+
+The pipeline runs on **AWS ECS Fargate** in addition to the local cron. ECS is the primary production environment; the local cron is a fallback.
+
+### How it works
+
+- **Container image**: stored in Amazon ECR (`602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast`)
+- **Scheduler**: EventBridge Scheduler (`mikecast-daily`) triggers the ECS task at **6:30 AM ET** daily
+- **Storage**: all pipeline outputs (JSON, audio, manifest, RSS) are written to S3 (`mikecast-io-data`) when `S3_BUCKET` is set
+- **Website**: CloudFront serves `mikecast.io` from the S3 bucket
+
+### Deploying code changes
+
+Push to `main` — that's it. The GitHub Actions workflow (`.github/workflows/deploy.yml`) automatically:
+
+1. Builds a new Docker image from `main`
+2. Tags it with the commit SHA and pushes to ECR
+3. Registers a new ECS task definition revision
+4. Updates the EventBridge Scheduler to use the new task definition
+
+The next 6:30 AM run will use the updated image. No manual AWS steps needed.
+
+**Prerequisite:** GitHub Actions secrets must be set at `Settings → Secrets → Actions`:
+- `AWS_ACCESS_KEY_ID`
+- `AWS_SECRET_ACCESS_KEY`
+
+### Running ECS manually
+
+```bash
+# Trigger an immediate run (uses latest task definition)
+aws ecs run-task \
+  --cluster mikecast \
+  --task-definition mikecast \
+  --launch-type FARGATE \
+  --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+  --region us-east-1
+
+# Stream CloudWatch logs
+aws logs tail /ecs/mikecast --follow --region us-east-1
+```
+
+### Rebuilding the Docker image manually
+
+```bash
+# Authenticate with ECR
+aws ecr get-login-password --region us-east-1 | \
+  docker login --username AWS --password-stdin 602039469166.dkr.ecr.us-east-1.amazonaws.com
+
+# Build and push
+docker build -t mikecast .
+docker tag mikecast:latest 602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast:latest
+docker push 602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast:latest
+```
+
+The Dockerfile uses `python:3.11-slim` with `ffmpeg`. The `.dockerignore` excludes `data/`, `.venv/`, and logs, keeping the image under 300 MB.
+
 ## Usage
 
 ### Generating the Daily Briefing
