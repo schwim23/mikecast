@@ -231,7 +231,11 @@ def patch_weak_sections(
     patchable = [c for c in weak_categories if c.lower() not in NEVER_PATCH_NORMALIZED]
     if len(patchable) < len(weak_categories):
         skipped = [c for c in weak_categories if c.lower() in NEVER_PATCH_NORMALIZED]
-        logger.info("Skipping critic patch for fact-sensitive categories: %s", skipped)
+        logger.warning(
+            "Skipping critic patch for %s — patching sports sections causes hallucinated "
+            "scores, players, and trades. The sports section may be low quality today.",
+            skipped,
+        )
 
     improved_html = html
 

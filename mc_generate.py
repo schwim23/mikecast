@@ -52,27 +52,34 @@ def _build_articles_context(categorised: dict[str, list[dict]]) -> str:
     return "\n".join(lines)
 
 
+def _safe_url(url: str) -> str:
+    """Return url if it starts with http:// or https://, otherwise return '#'."""
+    if url and (url.startswith("http://") or url.startswith("https://")):
+        return url
+    return "#"
+
+
 def _gpt_call(system_prompt: str, user_prompt: str, max_tokens: int = 2500) -> str:
-    """Call GPT-4o and return the response text. Returns '' on any failure."""
+    """Call GPT-4o and return the response text. Raises on failure or empty response."""
     if not OPENAI_API_KEY:
-        logger.warning("OPENAI_API_KEY not set — returning empty GPT response.")
-        return ""
-    try:
-        from openai import OpenAI
-        client = OpenAI()
-        resp = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {"role": "system", "content": system_prompt},
-                {"role": "user",   "content": user_prompt},
-            ],
-            max_tokens=max_tokens,
-            temperature=0.4,
-        )
-        return resp.choices[0].message.content.strip()
-    except Exception as exc:
-        logger.error("GPT call failed: %s", exc)
-        return ""
+        logger.error("OPENAI_API_KEY not set — cannot make GPT call.")
+        raise RuntimeError("OPENAI_API_KEY not set")
+    from openai import OpenAI
+    client = OpenAI()
+    resp = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user",   "content": user_prompt},
+        ],
+        max_tokens=max_tokens,
+        temperature=0.4,
+    )
+    text = resp.choices[0].message.content.strip()
+    if not text:
+        logger.error("GPT call returned empty response.")
+        raise RuntimeError("GPT call returned empty response")
+    return text
 
 
 # ---------------------------------------------------------------------------
@@ -200,8 +207,8 @@ def _build_trending_html(trending: list[dict]) -> str:
     items = ""
     for i, item in enumerate(trending, 1):
         topic = _html.escape(item.get("topic", ""))
-        x_url = item.get("x_url", "").strip()
-        if x_url:
+        x_url = _safe_url(item.get("x_url", "").strip())
+        if x_url != "#":
             x_url_esc = _html.escape(x_url)
             content = (
                 f'<a href="{x_url_esc}" style="color:#ffcc80;font-weight:600;'
@@ -297,8 +304,10 @@ Format rules:
 - IMPORTANT: End every story paragraph with a clickable source link in this exact format: [Source Name](URL)
   Use the exact URL provided in the article data above — do not make up or omit URLs"""
 
-    briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
-    if not briefing_text:
+    try:
+        briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
+    except Exception as exc:
+        logger.error("HTML briefing GPT call failed: %s", exc)
         briefing_text = "Unable to generate GPT briefing. See articles below."
     # Strip any markdown code fences the LLM may have accidentally included
     briefing_text = re.sub(r"```\w*\n?", "", briefing_text)
@@ -381,13 +390,13 @@ Format rules:
             'padding-bottom:6px;margin-top:28px;">🎯 Mike\'s Picks</h2>\n<ul>\n'
         )
         for p in picks:
-            title = p.get("title", "Untitled")
-            summary = p.get("summary", "")
-            url = p.get("url", "")
-            if url:
+            title = _html.escape(p.get("title", "Untitled"))
+            summary = _html.escape(p.get("summary", ""))
+            url = _safe_url(p.get("url", ""))
+            if url != "#":
                 picks_html += (
                     f'<li style="margin-bottom:10px;">'
-                    f'<a href="{url}" style="color:#ffcc80;text-decoration:none;font-weight:600;">{title}</a>'
+                    f'<a href="{_html.escape(url)}" style="color:#ffcc80;text-decoration:none;font-weight:600;">{title}</a>'
                 )
             else:
                 picks_html += (
@@ -495,7 +504,11 @@ Script requirements:
 - Do NOT include URLs in the script — this is audio only
 - Write the full script, not an outline"""
 
-    script = _gpt_call(system_prompt, user_prompt, max_tokens=4000)
+    try:
+        script = _gpt_call(system_prompt, user_prompt, max_tokens=4000)
+    except Exception as exc:
+        logger.error("Podcast script GPT call failed: %s", exc)
+        script = ""
 
     if not script:
         logger.warning("GPT podcast script generation failed — using simple fallback.")
@@ -603,7 +616,11 @@ Total length: 10-14 minutes of spoken audio. At a natural podcast pace of 140 wo
 that means a MINIMUM of 1400 words and a TARGET of 1800-2000 words. Do not stop short.
 Write the COMPLETE script with all tags. No outline, no placeholders."""
 
-    script = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
+    try:
+        script = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
+    except Exception as exc:
+        logger.error("Conversational script GPT call failed: %s", exc)
+        script = ""
 
     if not script:
         logger.warning("Conversational script generation failed — empty response.")

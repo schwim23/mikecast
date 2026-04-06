@@ -1,0 +1,98 @@
+name: Deploy to ECS
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: 602039469166.dkr.ecr.us-east-1.amazonaws.com
+  ECR_REPOSITORY: mikecast
+  ECS_CLUSTER: mikecast
+  ECS_TASK_FAMILY: mikecast
+  SCHEDULER_NAME: mikecast-daily
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Log in to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push Docker image
+        id: build-image
+        env:
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker tag $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Download current task definition
+        run: |
+          aws ecs describe-task-definition \
+            --task-definition $ECS_TASK_FAMILY \
+            --query taskDefinition \
+            --output json > task-definition.json
+
+      - name: Render new task definition with updated image
+        id: render-task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: mikecast
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Register new task definition revision
+        id: register-task-def
+        run: |
+          NEW_TASK_DEF_ARN=$(aws ecs register-task-definition \
+            --cli-input-json file://${{ steps.render-task-def.outputs.task-definition }} \
+            --query taskDefinition.taskDefinitionArn \
+            --output text)
+          echo "task_def_arn=$NEW_TASK_DEF_ARN" >> $GITHUB_OUTPUT
+
+      - name: Update EventBridge Scheduler to use new task definition
+        run: |
+          aws scheduler update-schedule \
+            --name $SCHEDULER_NAME \
+            --schedule-expression "cron(30 6 * * ? *)" \
+            --schedule-expression-timezone "America/New_York" \
+            --flexible-time-window '{"Mode":"OFF"}' \
+            --target '{
+              "Arn": "arn:aws:ecs:us-east-1:602039469166:cluster/mikecast",
+              "RoleArn": "arn:aws:iam::602039469166:role/mikecast-scheduler-role",
+              "EcsParameters": {
+                "TaskDefinitionArn": "${{ steps.register-task-def.outputs.task_def_arn }}",
+                "TaskCount": 1,
+                "LaunchType": "FARGATE",
+                "NetworkConfiguration": {
+                  "awsvpcConfiguration": {
+                    "Subnets": ["subnet-086fe88cca1a9de84"],
+                    "SecurityGroups": ["sg-0b075c1eea308976b"],
+                    "AssignPublicIp": "ENABLED"
+                  }
+                }
+              },
+              "RetryPolicy": {
+                "MaximumEventAgeInSeconds": 86400,
+                "MaximumRetryAttempts": 185
+              }
+            }' \
+            --region $AWS_REGION

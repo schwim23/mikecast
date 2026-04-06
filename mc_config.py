@@ -50,6 +50,10 @@ XAI_API_KEY = os.environ.get("XAI_API_KEY", "")
 # Date helpers (Eastern Time — matches browser / cron timezone)
 # ---------------------------------------------------------------------------
 _ET          = ZoneInfo("America/New_York")
+# NOTE: TODAY is computed once at module import time. If an ECS task starts before
+# midnight and runs past it, TODAY will reflect the wrong date for the entire run.
+# The correct fix is to pass a RunContext with a frozen date, but that requires a
+# larger refactor. For now, the cron schedule (6:45 AM ET) makes this very unlikely.
 TODAY        = datetime.now(_ET).strftime("%Y-%m-%d")
 TODAY_DISPLAY = datetime.now(_ET).strftime("%B %d, %Y")
 

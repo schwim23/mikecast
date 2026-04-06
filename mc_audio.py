@@ -8,7 +8,10 @@ Handles both TTS backends:
 Both functions return True on success, False on failure, and never raise.
 """
 
+import json
 import logging
+import subprocess
+import tempfile
 import time
 from pathlib import Path
 
@@ -95,6 +98,69 @@ def _stamp_mp3_duration(path: Path) -> None:
         logger.warning("Could not stamp MP3 duration for %s: %s", path.name, exc)
 
 
+def _normalize_loudness(path: Path, target_lufs: float = -16.0) -> None:
+    """
+    Normalize the MP3 at *path* to *target_lufs* (default −16 LUFS, the
+    Apple Podcasts / Spotify podcast standard) using ffmpeg's two-pass
+    loudnorm filter. Replaces the file in place. Logs a warning and returns
+    without modifying the file if ffmpeg is unavailable or fails — never
+    blocks delivery.
+
+    Two-pass approach:
+      Pass 1: measure actual integrated loudness, true peak, LRA.
+      Pass 2: apply linear gain using measured values for accurate normalization.
+    """
+    try:
+        # Pass 1: measure loudness stats
+        pass1 = subprocess.run(
+            [
+                "ffmpeg", "-hide_banner", "-i", str(path),
+                "-af", f"loudnorm=I={target_lufs}:TP=-1.5:LRA=11:print_format=json",
+                "-f", "null", "-",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+        # loudnorm JSON is written to stderr
+        stderr = pass1.stderr
+        json_start = stderr.rfind("{")
+        json_end = stderr.rfind("}") + 1
+        if json_start == -1 or json_end == 0:
+            logger.warning("loudnorm pass 1 produced no JSON — skipping normalization for %s", path.name)
+            return
+        stats = json.loads(stderr[json_start:json_end])
+
+        # Pass 2: apply normalization with measured values
+        with tempfile.NamedTemporaryFile(suffix=".mp3", delete=False, dir=path.parent) as tmp:
+            tmp_path = Path(tmp.name)
+        try:
+            af = (
+                f"loudnorm=I={target_lufs}:TP=-1.5:LRA=11"
+                f":measured_I={stats['input_i']}"
+                f":measured_TP={stats['input_tp']}"
+                f":measured_LRA={stats['input_lra']}"
+                f":measured_thresh={stats['input_thresh']}"
+                f":offset={stats['target_offset']}"
+                f":linear=true:print_format=summary"
+            )
+            subprocess.run(
+                ["ffmpeg", "-hide_banner", "-y", "-i", str(path), "-af", af,
+                 "-codec:a", "libmp3lame", "-q:a", "2", str(tmp_path)],
+                capture_output=True,
+                check=True,
+                timeout=180,
+            )
+            tmp_path.replace(path)
+            logger.info("Loudness normalized to %.1f LUFS: %s", target_lufs, path.name)
+        except Exception:
+            tmp_path.unlink(missing_ok=True)
+            raise
+
+    except Exception as exc:
+        logger.warning("Loudness normalization failed for %s: %s", path.name, exc)
+
+
 def _split_text_for_tts(text: str, max_chunk: int = 4000) -> list[str]:
     """
     Split *text* on sentence boundaries into chunks of at most *max_chunk*
@@ -156,6 +222,7 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
             "OpenAI TTS audio saved: %s (%.1f MB)",
             output_path, output_path.stat().st_size / 1e6,
         )
+        _normalize_loudness(output_path)
         _stamp_mp3_duration(output_path)
         return True
 
@@ -252,6 +319,7 @@ def generate_elevenlabs_audio(
             output_path, output_path.stat().st_size / 1e6, len(audio_segments),
         )
         _strip_vbr_header(output_path)
+        _normalize_loudness(output_path)
         _stamp_mp3_duration(output_path)
         return True
     except Exception as exc:

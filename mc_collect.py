@@ -17,7 +17,8 @@ import logging
 import os
 import re
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import concurrent.futures
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError, as_completed
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -47,6 +48,10 @@ def _parse_rss_feed(source_name: str, url: str, category: str, max_results: int)
     """
     resp = _safe_request(url, timeout=15)
     if resp is None:
+        return []
+
+    if len(resp.content) > 10 * 1024 * 1024:
+        logger.warning("%s RSS feed too large (%d bytes) — skipping", source_name, len(resp.content))
         return []
 
     articles = []
@@ -503,6 +508,25 @@ def deduplicate(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
 
     history.extend(new_history_entries)
     save_history(history)
+
+    # Second pass: cross-category dedup — keep first occurrence by category order
+    cross_seen_fps: set[str] = set()
+    cross_seen_titles: list[str] = []
+    for cat in deduped:
+        kept_cross: list[dict] = []
+        for art in deduped[cat]:
+            fp = url_fingerprint(art.get("url", ""))
+            if fp in cross_seen_fps:
+                logger.debug("Cross-category duplicate (url): %s", art.get("title", "")[:60])
+                continue
+            if any(title_similarity(art.get("title", ""), t) > 0.85 for t in cross_seen_titles):
+                logger.debug("Cross-category duplicate (title): %s", art.get("title", "")[:60])
+                continue
+            cross_seen_fps.add(fp)
+            cross_seen_titles.append(art.get("title", ""))
+            kept_cross.append(art)
+        deduped[cat] = kept_cross
+
     return deduped
 
 
@@ -841,11 +865,25 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
         except Exception:
             return ""
 
-    def enrich_article(_cat: str, art: dict) -> None:
-        url     = art.get("url", "")
+    def fetch_all_bodies() -> list[str]:
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            futures_b = [ex.submit(fetch_body, art.get("url", "")) for _, art in to_enrich]
+            bodies: list[str] = [""] * len(futures_b)
+            done_futures = {fut: idx for idx, fut in enumerate(futures_b)}
+            try:
+                for fut in as_completed(futures_b, timeout=120):
+                    idx = done_futures[fut]
+                    try:
+                        bodies[idx] = fut.result()
+                    except Exception:
+                        bodies[idx] = ""
+            except FuturesTimeoutError:
+                logger.warning("Enrichment body fetching timed out after 120s")
+        return bodies
+
+    def enrich_article_individual(_cat: str, art: dict, body: str) -> None:
         title   = art.get("title", "")
         desc    = art.get("description", "")
-        body    = fetch_body(url) if url else ""
         context = f"Title: {title}\nDescription: {desc}\nBody: {body[:800]}"
         try:
             resp = client.chat.completions.create(
@@ -864,13 +902,52 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
         except Exception as exc:
             logger.debug("Enrichment failed for '%s': %s", title[:50], exc)
 
-    with ThreadPoolExecutor(max_workers=8) as ex:
-        futures = [ex.submit(enrich_article, cat, art) for cat, art in to_enrich]
-        for fut in as_completed(futures):
+    bodies = fetch_all_bodies()
+
+    # Batch all articles into a single gpt-4o-mini call
+    try:
+        batch_lines = []
+        for idx, ((_cat, art), body) in enumerate(zip(to_enrich, bodies), 1):
+            title = art.get("title", "")
+            desc  = art.get("description", "")
+            batch_lines.append(
+                f"{idx}. Title: {title}\n   Description: {desc}\n   Body: {body[:400]}"
+            )
+        batch_prompt = (
+            "For each numbered article below, write ONE crisp sentence (max 30 words) explaining "
+            "why it matters to a tech-executive investor in New York today.\n"
+            "Return ONLY a JSON object mapping number (as string) to sentence, e.g. "
+            '{"1": "...", "2": "..."}.\n\n'
+            + "\n\n".join(batch_lines)
+        )
+        batch_resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": batch_prompt}],
+            max_tokens=80 * len(to_enrich),
+            temperature=0.3,
+        )
+        raw = batch_resp.choices[0].message.content.strip()
+        raw = re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = re.sub(r"\s*```$", "", raw)
+        results_map: dict = json.loads(raw)
+        for idx, (_cat, art) in enumerate(to_enrich, 1):
+            sentence = results_map.get(str(idx), "")
+            if sentence:
+                art["why_it_matters"] = sentence
+        logger.info("Batch enrichment: enriched %d articles in one call", len(to_enrich))
+    except Exception as exc:
+        logger.warning("Batch enrichment failed (%s) — falling back to individual calls", exc)
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            futures = [ex.submit(enrich_article_individual, cat, art, body)
+                       for (cat, art), body in zip(to_enrich, bodies)]
             try:
-                fut.result()
-            except Exception as exc:
-                logger.debug("Enrichment future error: %s", exc)
+                for fut in as_completed(futures, timeout=120):
+                    try:
+                        fut.result()
+                    except Exception as exc2:
+                        logger.debug("Enrichment future error: %s", exc2)
+            except FuturesTimeoutError:
+                logger.warning("Individual enrichment timed out after 120s")
 
     enriched_count = sum(1 for _, art in to_enrich if art.get("why_it_matters"))
     logger.info("Enrichment: %d/%d top articles enriched.", enriched_count, len(to_enrich))

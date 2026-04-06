@@ -36,6 +36,11 @@ def _safe_request(
                 logger.warning("Rate-limited on %s — waiting %ds", url, wait)
                 time.sleep(wait)
                 continue
+            if resp.status_code >= 500:
+                wait = 2 ** attempt
+                logger.warning("Server error %d on %s — waiting %ds", resp.status_code, url, wait)
+                time.sleep(wait)
+                continue
             resp.raise_for_status()
             return resp
         except requests.RequestException as exc:
@@ -84,15 +89,9 @@ def url_fingerprint(url: str) -> str:
 # S3 helpers (used when S3_BUCKET env var is set)
 # ---------------------------------------------------------------------------
 
-_s3_client = None
-
-
 def _get_s3():
-    global _s3_client
-    if _s3_client is None:
-        import boto3
-        _s3_client = boto3.client("s3")
-    return _s3_client
+    import boto3
+    return boto3.client("s3")
 
 
 def s3_load_json(bucket: str, key: str) -> Any | None:

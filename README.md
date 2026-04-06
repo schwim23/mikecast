@@ -1,6 +1,10 @@
 # MikeCast: Daily AI-Powered News Briefing
 
-MikeCast is an automated daily news briefing system. It runs a 10-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a podcast, and a static dashboard website.
+MikeCast is an automated daily news briefing system. It runs a 10-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a podcast, a web dashboard, and a YouTube episode.
+
+## Architecture
+
+![MikeCast Architecture](mikecast_architecture.png)
 
 ## Features
 
@@ -91,6 +95,7 @@ mikecast/
 ├── mikes_picks_ingest.py     # CLI to queue URLs, PDFs, or text into Mike's Picks
 ├── server.py                 # Flask server for local dashboard with /api/manifest
 ├── test_trending_filter.py   # Regression test for trending topic hallucination filter
+├── make_diagram.py           # Generates mikecast_architecture.png
 ├── run_mikecast.sh           # Cron wrapper: sources env, runs pipeline, commits + pushes
 ├── mikes_picks.json          # Queue for user-submitted content
 ├── briefing_history.json     # Rolling 7-day history of processed articles
@@ -160,6 +165,13 @@ export ELEVENLABS_VOICE_JESSE="voice_id_for_jesse"
 
 # Optional — enables xAI Grok adaptive search planning (Step 0)
 export XAI_API_KEY="your_xai_api_key"
+
+# Optional — enables AWS S3 mode (outputs written to S3 instead of local disk)
+export S3_BUCKET="your-s3-bucket-name"
+
+# Optional — enables YouTube upload
+export YOUTUBE_CLIENT_SECRETS="/path/to/client_secrets.json"
+export YOUTUBE_PRIVACY="public"
 ```
 
 **Note:** Cron jobs do not source `~/.bashrc`. The `run_mikecast.sh` wrapper explicitly sources `~/.profile`.
@@ -170,6 +182,8 @@ Where to get API keys:
 - `GMAIL_APP_PASSWORD`: A 16-digit App Password from Google Account (not your regular password)
 - `ELEVENLABS_API_KEY`: [ElevenLabs](https://elevenlabs.io/)
 - `XAI_API_KEY`: [xAI](https://x.ai/)
+- `S3_BUCKET`: Name of your AWS S3 bucket (must be in us-east-1 or set `AWS_DEFAULT_REGION`). Requires `boto3` and AWS credentials (`~/.aws/credentials` or IAM role).
+- `YOUTUBE_CLIENT_SECRETS`: Path to OAuth 2.0 credentials JSON from [Google Cloud Console](https://console.cloud.google.com/) with YouTube Data API v3 enabled.
 
 ### 5. Configure Git Credentials (for GitHub Pages auto-push)
 
@@ -237,13 +251,13 @@ Picks are consumed and cleared during Step 7 of the next briefing run.
 
 ### Viewing the Dashboard
 
-#### Option A: GitHub Pages (Remote, Auto-Updated)
+#### Option A: mikecast.io (Remote, Auto-Updated)
 
-After each run, the cron script pushes data to GitHub, automatically updating the public site.
+After each run, the cron script pushes data to GitHub, which triggers a sync to AWS S3 + CloudFront. The public site is served from CloudFront at:
 
-**URL:** `https://schwim23.github.io/mikecast/`
+**URL:** `https://mikecast.io/`
 
-> **Limitation:** The archive date-picker requires the `/api/manifest` endpoint, which GitHub Pages cannot serve. Today's briefing, audio player, and article links all work fine.
+Full archive navigation, audio player, and article links all work on the live site.
 
 #### Option B: Local Server (Full Functionality)
 
@@ -256,10 +270,39 @@ Then open `http://localhost:8080` in your browser. The local Flask server expose
 ### Subscribing to the Podcast RSS Feed
 
 ```
-https://schwim23.github.io/mikecast/data/feed.xml
+https://mikecast.io/data/feed.xml
 ```
 
 Add this URL to any podcast app (Overcast, Pocket Casts, Castro, etc.) to receive new episodes automatically. The feed is also available on Apple Podcasts and Spotify.
+
+### Generating a YouTube Episode
+
+`mc_youtube.py` converts the daily audio to a 1920×1080 video with the cover image and uploads it to YouTube via the Data API v3.
+
+```bash
+# First-time auth (interactive, one-time setup)
+.venv/bin/python3 mc_youtube.py --auth
+
+# Upload today's episode
+.venv/bin/python3 mc_youtube.py
+```
+
+Requires `YOUTUBE_CLIENT_SECRETS` env var pointing to your OAuth 2.0 credentials JSON from Google Cloud Console. Optional: `YOUTUBE_PRIVACY` ("public", "unlisted", or "private"; defaults to "public").
+
+### Generating Social Video Ads
+
+`mc_ad.py` generates 30-second 9:16 vertical MP4 ads (1080×1920) for Meta/Google Reels and Stories, using the 3 ElevenLabs voices with animated subtitles.
+
+```bash
+# Use today's episode
+.venv/bin/python3 mc_ad.py
+
+# Specific date
+.venv/bin/python3 mc_ad.py --date 2026-04-06
+
+# Preview script without rendering
+.venv/bin/python3 mc_ad.py --dry-run
+```
 
 ### Monitoring
 
