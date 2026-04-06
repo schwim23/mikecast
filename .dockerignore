@@ -1,0 +1,12 @@
+data/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+*.tmp
+briefing_history.json
+mikes_picks.json
+mikecast_architecture.png
+make_diagram.py
+.git/

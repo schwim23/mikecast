@@ -282,9 +282,9 @@ def publish_to_youtube(
 
     description = (
         f"{episode_description}\n\n"
-        f"📰 Full briefing: https://schwim23.github.io/mikecast/\n"
+        f"📰 Full briefing: https://mikecast.io/\n"
         f"🎙️ Subscribe on Apple Podcasts / Spotify via the RSS feed:\n"
-        f"https://schwim23.github.io/mikecast/data/feed.xml\n\n"
+        f"https://mikecast.io/data/feed.xml\n\n"
         f"MikeCast is an AI-powered daily news briefing covering AI & Tech, "
         f"Business & Markets, Companies, and NY Sports."
     )

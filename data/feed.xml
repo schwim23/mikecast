@@ -8,6 +8,7 @@
     <description>Your daily AI-powered news briefing. Personalized news across AI &amp; Tech, Business &amp; Markets, Companies, and NY Sports.</description>
     <language>en-us</language>
     <atom:link href="https://schwim23.github.io/mikecast/data/feed.xml" rel="self" type="application/rss+xml"/>
+    <itunes:new-feed-url>https://mikecast.io/data/feed.xml</itunes:new-feed-url>
     <itunes:author>MikeCast</itunes:author>
     <itunes:owner>
       <itunes:name>MikeCast</itunes:name>

@@ -54,9 +54,16 @@ TODAY        = datetime.now(_ET).strftime("%Y-%m-%d")
 TODAY_DISPLAY = datetime.now(_ET).strftime("%B %d, %Y")
 
 # ---------------------------------------------------------------------------
+# AWS
+# ---------------------------------------------------------------------------
+# Set S3_BUCKET to enable S3 mode. When set, all pipeline outputs are written
+# to S3 instead of the local filesystem. Local execution is preserved when unset.
+S3_BUCKET = os.environ.get("S3_BUCKET", "")
+
+# ---------------------------------------------------------------------------
 # Public site URL (used in RSS feed and email subscribe footer)
 # ---------------------------------------------------------------------------
-SITE_BASE_URL = "https://schwim23.github.io/mikecast/"
+SITE_BASE_URL = "https://mikecast.io/"
 
 # ---------------------------------------------------------------------------
 # News categories and Google News search queries

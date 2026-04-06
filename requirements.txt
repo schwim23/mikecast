@@ -3,3 +3,4 @@ openai
 beautifulsoup4
 lxml
 mutagen
+boto3

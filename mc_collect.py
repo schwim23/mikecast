@@ -399,7 +399,12 @@ def collect_all_news(dynamic_queries: dict[str, list[str]] | None = None) -> dic
 # ============================================================
 
 def load_history() -> list[dict]:
-    """Load the rolling 7-day article history from disk."""
+    """Load the rolling 7-day article history (S3 or local disk)."""
+    from mc_config import S3_BUCKET
+    if S3_BUCKET:
+        from mc_utils import s3_load_json
+        data = s3_load_json(S3_BUCKET, "briefing_history.json")
+        return data if isinstance(data, list) else []
     if not HISTORY_FILE.exists():
         return []
     try:
@@ -411,10 +416,15 @@ def load_history() -> list[dict]:
 
 
 def save_history(history: list[dict]) -> None:
-    """Persist history, pruning entries older than 7 days."""
+    """Persist history, pruning entries older than 7 days (S3 or local disk)."""
+    from mc_config import S3_BUCKET
     cutoff = (datetime.now(timezone.utc) - timedelta(days=7)).isoformat()
     pruned = [h for h in history if h.get("date", "") >= cutoff]
-    _atomic_write_json(HISTORY_FILE, pruned, indent=2, ensure_ascii=False)
+    if S3_BUCKET:
+        from mc_utils import s3_save_json
+        s3_save_json(S3_BUCKET, "briefing_history.json", pruned, indent=2, ensure_ascii=False)
+    else:
+        _atomic_write_json(HISTORY_FILE, pruned, indent=2, ensure_ascii=False)
 
 
 def deduplicate(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
@@ -872,7 +882,14 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
 # ============================================================
 
 def load_picks() -> list[dict]:
-    """Load unprocessed picks from mikes_picks.json."""
+    """Load unprocessed picks from mikes_picks.json (S3 or local disk)."""
+    from mc_config import S3_BUCKET
+    if S3_BUCKET:
+        from mc_utils import s3_load_json
+        data = s3_load_json(S3_BUCKET, "mikes_picks.json")
+        if not isinstance(data, list):
+            return []
+        return [p for p in data if not p.get("processed")]
     if not PICKS_FILE.exists():
         return []
     try:
@@ -884,7 +901,17 @@ def load_picks() -> list[dict]:
 
 
 def mark_picks_processed() -> None:
-    """Set processed=True on all picks so they don't appear in the next run."""
+    """Set processed=True on all picks so they don't appear in the next run (S3 or local disk)."""
+    from mc_config import S3_BUCKET
+    if S3_BUCKET:
+        from mc_utils import s3_load_json, s3_save_json
+        data = s3_load_json(S3_BUCKET, "mikes_picks.json")
+        if not isinstance(data, list):
+            return
+        for item in data:
+            item["processed"] = True
+        s3_save_json(S3_BUCKET, "mikes_picks.json", data, indent=2, ensure_ascii=False)
+        return
     if not PICKS_FILE.exists():
         return
     try:

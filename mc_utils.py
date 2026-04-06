@@ -11,6 +11,7 @@ import re
 import time
 from difflib import SequenceMatcher
 from pathlib import Path
+from typing import Any
 
 import requests
 
@@ -77,3 +78,73 @@ def url_fingerprint(url: str) -> str:
     url = re.sub(r"https?://", "", url).rstrip("/").lower()
     url = re.sub(r"[?#].*", "", url)
     return hashlib.md5(url.encode()).hexdigest()
+
+
+# ---------------------------------------------------------------------------
+# S3 helpers (used when S3_BUCKET env var is set)
+# ---------------------------------------------------------------------------
+
+_s3_client = None
+
+
+def _get_s3():
+    global _s3_client
+    if _s3_client is None:
+        import boto3
+        _s3_client = boto3.client("s3")
+    return _s3_client
+
+
+def s3_load_json(bucket: str, key: str) -> Any | None:
+    """Download and parse a JSON object from S3. Returns None if the key doesn't exist."""
+    from botocore.exceptions import ClientError
+    try:
+        resp = _get_s3().get_object(Bucket=bucket, Key=key)
+        return json.loads(resp["Body"].read())
+    except ClientError as exc:
+        if exc.response["Error"]["Code"] in ("NoSuchKey", "404"):
+            return None
+        raise
+
+
+def s3_save_json(bucket: str, key: str, data: Any, **json_kwargs) -> None:
+    """Serialize data as JSON and upload to S3."""
+    body = json.dumps(data, **json_kwargs).encode("utf-8")
+    _get_s3().put_object(Bucket=bucket, Key=key, Body=body, ContentType="application/json")
+    logger.debug("s3://%s/%s written (%d bytes)", bucket, key, len(body))
+
+
+def s3_upload_file(bucket: str, key: str, local_path: Path, content_type: str = "application/octet-stream") -> int:
+    """Upload a local file to S3. Returns the file size in bytes."""
+    size = local_path.stat().st_size
+    with open(local_path, "rb") as fh:
+        _get_s3().put_object(Bucket=bucket, Key=key, Body=fh, ContentType=content_type)
+    logger.info("Uploaded s3://%s/%s (%d bytes)", bucket, key, size)
+    return size
+
+
+def s3_upload_text(bucket: str, key: str, text: str, content_type: str = "text/plain; charset=utf-8") -> None:
+    """Upload a string as a text object to S3."""
+    body = text.encode("utf-8")
+    _get_s3().put_object(Bucket=bucket, Key=key, Body=body, ContentType=content_type)
+    logger.debug("s3://%s/%s written (%d bytes)", bucket, key, len(body))
+
+
+def s3_object_size(bucket: str, key: str) -> int:
+    """Return the content-length of an S3 object, or 0 if it doesn't exist."""
+    from botocore.exceptions import ClientError
+    try:
+        resp = _get_s3().head_object(Bucket=bucket, Key=key)
+        return resp["ContentLength"]
+    except ClientError:
+        return 0
+
+
+def s3_list_keys(bucket: str, prefix: str) -> list[str]:
+    """Return all object keys under a given prefix."""
+    paginator = _get_s3().get_paginator("list_objects_v2")
+    keys: list[str] = []
+    for page in paginator.paginate(Bucket=bucket, Prefix=prefix):
+        for obj in page.get("Contents", []):
+            keys.append(obj["Key"])
+    return keys

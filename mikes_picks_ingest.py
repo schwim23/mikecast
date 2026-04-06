@@ -37,8 +37,25 @@ logger = logging.getLogger("mikes_picks_ingest")
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _s3_bucket() -> str:
+    return os.environ.get("S3_BUCKET", "")
+
+
 def load_picks() -> list:
-    """Load existing picks from the JSON file, or return an empty list."""
+    """Load existing picks from S3 or the local JSON file."""
+    bucket = _s3_bucket()
+    if bucket:
+        import boto3
+        from botocore.exceptions import ClientError
+        s3 = boto3.client("s3")
+        try:
+            resp = s3.get_object(Bucket=bucket, Key="mikes_picks.json")
+            data = json.loads(resp["Body"].read())
+            return data if isinstance(data, list) else []
+        except ClientError as exc:
+            if exc.response["Error"]["Code"] in ("NoSuchKey", "404"):
+                return []
+            raise
     if not os.path.exists(PICKS_FILE):
         return []
     try:
@@ -54,7 +71,16 @@ def load_picks() -> list:
 
 
 def save_picks(picks: list) -> None:
-    """Persist the picks list to disk atomically."""
+    """Persist the picks list to S3 or local disk."""
+    bucket = _s3_bucket()
+    if bucket:
+        import boto3
+        body = json.dumps(picks, indent=2, ensure_ascii=False).encode("utf-8")
+        boto3.client("s3").put_object(
+            Bucket=bucket, Key="mikes_picks.json", Body=body, ContentType="application/json"
+        )
+        logger.info("Saved %d pick(s) to s3://%s/mikes_picks.json", len(picks), bucket)
+        return
     tmp = PICKS_FILE + ".tmp"
     try:
         with open(tmp, "w", encoding="utf-8") as fh:
