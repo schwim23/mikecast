@@ -4,21 +4,21 @@
   xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>MikeCast — Daily Briefing</title>
-    <link>https://schwim23.github.io/mikecast/</link>
+    <link>https://mikecast.io/</link>
     <description>Your daily AI-powered news briefing. Personalized news across AI &amp; Tech, Business &amp; Markets, Companies, and NY Sports.</description>
     <language>en-us</language>
-    <atom:link href="https://schwim23.github.io/mikecast/data/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="https://mikecast.io/data/feed.xml" rel="self" type="application/rss+xml"/>
     <itunes:new-feed-url>https://mikecast.io/data/feed.xml</itunes:new-feed-url>
     <itunes:author>MikeCast</itunes:author>
     <itunes:owner>
       <itunes:name>MikeCast</itunes:name>
       <itunes:email>michael.schwimmer@gmail.com</itunes:email>
     </itunes:owner>
-    <itunes:image href="https://schwim23.github.io/mikecast/data/cover.png"/>
+    <itunes:image href="https://mikecast.io/data/cover.png"/>
     <image>
-      <url>https://schwim23.github.io/mikecast/data/cover.png</url>
+      <url>https://mikecast.io/data/cover.png</url>
       <title>MikeCast — Daily Briefing</title>
-      <link>https://schwim23.github.io/mikecast/</link>
+      <link>https://mikecast.io/</link>
     </image>
     <itunes:summary>Your daily AI-powered news briefing.</itunes:summary>
     <itunes:explicit>false</itunes:explicit>
@@ -28,7 +28,7 @@
     <description>Episode #43 — This episode of MikeCast covers a groundbreaking neuro-symbolic AI advancement reducing energy use by 100 times, the Artemis II mission's historic lunar milestone, escalating U.S.-Iran tensions including a fighter jet incident and threats to OpenAI's data center, JPMorgan CEO Jamie Dimon's shareholder letter on geopolitical risks, Nvidia's $2 billion investment in Marvell, Tesla's stock decline, and Apple's potential phased iPhone 18 release.</description>
     <pubDate>Mon, 06 Apr 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-04-06</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-06.mp3" type="audio/mpeg" length="3673794"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-04-06.mp3" type="audio/mpeg" length="3673794"/>
     <itunes:title>MikeCast #43 — April 06, 2026</itunes:title>
     <itunes:subtitle>Episode #43 — This episode of MikeCast covers a groundbreaking neuro-symbolic AI advancement reducing energy use by 100 times, the Artemis II mission's historic lunar milestone, escalating U.S.-Iran tensions including a fighter jet incident and threats...</itunes:subtitle>
     <itunes:summary>Episode #43 — This episode of MikeCast covers a groundbreaking neuro-symbolic AI advancement reducing energy use by 100 times, the Artemis II mission's historic lunar milestone, escalating U.S.-Iran tensions including a fighter jet incident and threats to OpenAI's data center, JPMorgan CEO Jamie Dimon's shareholder letter on geopolitical risks, Nvidia's $2 billion investment in Marvell, Tesla's stock decline, and Apple's potential phased iPhone 18 release.</itunes:summary>
@@ -40,7 +40,7 @@
     <description>Episode #42 — Google releases Gemini 3, intensifying the AI race with Microsoft and OpenAI; Microsoft revises its OpenAI deal and sees increased Copilot AI adoption; Galaxea AI secures $290 million in funding; the Iran conflict spikes U.S. inflation and impacts AWS data centers; Apple celebrates its 50th anniversary; and Meta appoints Xu Rui to lead AI hardware.</description>
     <pubDate>Sun, 05 Apr 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-04-05</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-05.mp3" type="audio/mpeg" length="3655968"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-04-05.mp3" type="audio/mpeg" length="3655968"/>
     <itunes:title>MikeCast #42 — April 05, 2026</itunes:title>
     <itunes:subtitle>Episode #42 — Google releases Gemini 3, intensifying the AI race with Microsoft and OpenAI; Microsoft revises its OpenAI deal and sees increased Copilot AI adoption; Galaxea AI secures $290 million in funding; the Iran conflict spikes U.S. inflation an...</itunes:subtitle>
     <itunes:summary>Episode #42 — Google releases Gemini 3, intensifying the AI race with Microsoft and OpenAI; Microsoft revises its OpenAI deal and sees increased Copilot AI adoption; Galaxea AI secures $290 million in funding; the Iran conflict spikes U.S. inflation and impacts AWS data centers; Apple celebrates its 50th anniversary; and Meta appoints Xu Rui to lead AI hardware.</itunes:summary>
@@ -52,7 +52,7 @@
     <description>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveiling, Blue Owl's stock drop due to massive fund redemptions, and the Artemis II mission's successful progress towards the Moon.</description>
     <pubDate>Sat, 04 Apr 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-04-04</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-04.mp3" type="audio/mpeg" length="3516076"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-04-04.mp3" type="audio/mpeg" length="3516076"/>
     <itunes:title>MikeCast #41 — April 04, 2026</itunes:title>
     <itunes:subtitle>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveili...</itunes:subtitle>
     <itunes:summary>Episode #41 — This episode covers Meta's layoffs amid an AI investment pivot, Microsoft's $10 billion investment in AI data centers in Japan, OpenAI's leadership change with Greg Brockman stepping in for Fidji Simo, Apple's 2026 product roadmap unveiling, Blue Owl's stock drop due to massive fund redemptions, and the Artemis II mission's successful progress towards the Moon.</itunes:summary>
@@ -64,7 +64,7 @@
     <description>Episode #40 — This episode of MikeCast covers Google's release of Gemma 4 open models, the rise of Chinese chip companies amid U.S. tech curbs, Microsoft's new AI models challenging OpenAI and Google, OpenAI's acquisition of TBPN, President Trump's aggressive stance on Iran and firing of Attorney General Pam Bondi, JetBlue's increased bag fees, Amazon's datacenter drone hits, Tesla's stock drop, Meta's Bay Area layoffs, Microsoft's $10 billion investment in Japan, and the Yankees' game against the Miami Marlins.</description>
     <pubDate>Fri, 03 Apr 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-04-03</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-03.mp3" type="audio/mpeg" length="3824304"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-04-03.mp3" type="audio/mpeg" length="3824304"/>
     <itunes:title>MikeCast #40 — April 03, 2026</itunes:title>
     <itunes:subtitle>Episode #40 — This episode of MikeCast covers Google's release of Gemma 4 open models, the rise of Chinese chip companies amid U.S. tech curbs, Microsoft's new AI models challenging OpenAI and Google, OpenAI's acquisition of TBPN, President Trump's agg...</itunes:subtitle>
     <itunes:summary>Episode #40 — This episode of MikeCast covers Google's release of Gemma 4 open models, the rise of Chinese chip companies amid U.S. tech curbs, Microsoft's new AI models challenging OpenAI and Google, OpenAI's acquisition of TBPN, President Trump's aggressive stance on Iran and firing of Attorney General Pam Bondi, JetBlue's increased bag fees, Amazon's datacenter drone hits, Tesla's stock drop, Meta's Bay Area layoffs, Microsoft's $10 billion investment in Japan, and the Yankees' game against the Miami Marlins.</itunes:summary>
@@ -76,7 +76,7 @@
     <description>Episode #39 — This episode of MikeCast covers the record-breaking $300 billion in Q1 2026 startup investments driven by AI, SpaceX's confidential IPO filing targeting a $1.75 trillion valuation, NASA's successful Artemis II Moon mission launch, the Claude Code leak's impact, President Trump's speech on the U.S.-Iran conflict affecting oil prices, Tesla ending Model S and X production, Apple's 50th anniversary with new AirPods Max 2, Meta's efforts to attract creators, and labor developments involving DHL and Amazon.</description>
     <pubDate>Thu, 02 Apr 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-04-02</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-02.mp3" type="audio/mpeg" length="4181076"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-04-02.mp3" type="audio/mpeg" length="4181076"/>
     <itunes:title>MikeCast #39 — April 02, 2026</itunes:title>
     <itunes:subtitle>Episode #39 — This episode of MikeCast covers the record-breaking $300 billion in Q1 2026 startup investments driven by AI, SpaceX's confidential IPO filing targeting a $1.75 trillion valuation, NASA's successful Artemis II Moon mission launch, the Cla...</itunes:subtitle>
     <itunes:summary>Episode #39 — This episode of MikeCast covers the record-breaking $300 billion in Q1 2026 startup investments driven by AI, SpaceX's confidential IPO filing targeting a $1.75 trillion valuation, NASA's successful Artemis II Moon mission launch, the Claude Code leak's impact, President Trump's speech on the U.S.-Iran conflict affecting oil prices, Tesla ending Model S and X production, Apple's 50th anniversary with new AirPods Max 2, Meta's efforts to attract creators, and labor developments involving DHL and Amazon.</itunes:summary>
@@ -88,7 +88,7 @@
     <description>Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisition of Centessa Pharmaceuticals, McCormick's merger with Unilever's food unit, Amazon's partnership with Delta Air Lines for in-flight Wi-Fi, and Apple's 50th anniversary.</description>
     <pubDate>Wed, 01 Apr 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-04-01</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-04-01.mp3" type="audio/mpeg" length="4980178"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-04-01.mp3" type="audio/mpeg" length="4980178"/>
     <itunes:title>MikeCast #38 — April 01, 2026</itunes:title>
     <itunes:subtitle>Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisit...</itunes:subtitle>
     <itunes:summary>Episode #38 — This episode covers OpenAI's $852 billion valuation following a $122 billion funding round, Salesforce's AI enhancements to Slack, a source code leak at Anthropic, a judge blocking an order to end PBS and NPR funding, Eli Lilly's acquisition of Centessa Pharmaceuticals, McCormick's merger with Unilever's food unit, Amazon's partnership with Delta Air Lines for in-flight Wi-Fi, and Apple's 50th anniversary.</itunes:summary>
@@ -100,7 +100,7 @@
     <description>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health care, oil price spikes due to Iran tensions and Trump's threats, Uber's acquisition of Blacklane, Apple's privacy rules update, Meta's Instagram subscription test, and Netflix's potential NFL game package.</description>
     <pubDate>Tue, 31 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-31</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-31.mp3" type="audio/mpeg" length="4809898"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-31.mp3" type="audio/mpeg" length="4809898"/>
     <itunes:title>MikeCast #37 — March 31, 2026</itunes:title>
     <itunes:subtitle>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health ca...</itunes:subtitle>
     <itunes:summary>Episode #37 — This episode covers Microsoft's launch of Copilot Cowork for workplace productivity, California's new AI regulations under Governor Gavin Newsom, OpenAI's security patch for ChatGPT, Jimini Health's AI chatbot funding for mental health care, oil price spikes due to Iran tensions and Trump's threats, Uber's acquisition of Blacklane, Apple's privacy rules update, Meta's Instagram subscription test, and Netflix's potential NFL game package.</itunes:summary>
@@ -112,7 +112,7 @@
     <description>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil prices due to Middle East tensions, Apple's $400 million investment in U.S. chipmaking, and Spencer Jones' home run in New York sports.</description>
     <pubDate>Mon, 30 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-30</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-30.mp3" type="audio/mpeg" length="4940014"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-30.mp3" type="audio/mpeg" length="4940014"/>
     <itunes:title>MikeCast #36 — March 30, 2026</itunes:title>
     <itunes:subtitle>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil pric...</itunes:subtitle>
     <itunes:summary>Episode #36 — This episode of MikeCast covers Eli Lilly's $2.75 billion deal with Insilico for AI-developed drugs, OpenAI's shutdown of its Sora video-generation tool, Microsoft's introduction of ads in GitHub and GitLab pull requests, surging oil prices due to Middle East tensions, Apple's $400 million investment in U.S. chipmaking, and Spencer Jones' home run in New York sports.</itunes:summary>
@@ -124,7 +124,7 @@
     <description>Episode #35 — This episode of MikeCast covers the White House app's privacy concerns, a new AI benchmark for physics, Fraunhofer's adhesive-free paper packaging, and persistent memory in AI systems; it also discusses the impact of the Iran war on Aluminium Bahrain and global energy markets, Uber's robotaxi expansion, Apple's AI challenge, Microsoft's privacy debate, and Toyota's EV strategy, along with updates on the Yankees and Devils in New York sports.</description>
     <pubDate>Sun, 29 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-29</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-29.mp3" type="audio/mpeg" length="4593178"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-29.mp3" type="audio/mpeg" length="4593178"/>
     <itunes:title>MikeCast #35 — March 29, 2026</itunes:title>
     <itunes:subtitle>Episode #35 — This episode of MikeCast covers the White House app's privacy concerns, a new AI benchmark for physics, Fraunhofer's adhesive-free paper packaging, and persistent memory in AI systems; it also discusses the impact of the Iran war on Alumi...</itunes:subtitle>
     <itunes:summary>Episode #35 — This episode of MikeCast covers the White House app's privacy concerns, a new AI benchmark for physics, Fraunhofer's adhesive-free paper packaging, and persistent memory in AI systems; it also discusses the impact of the Iran war on Aluminium Bahrain and global energy markets, Uber's robotaxi expansion, Apple's AI challenge, Microsoft's privacy debate, and Toyota's EV strategy, along with updates on the Yankees and Devils in New York sports.</itunes:summary>
@@ -136,7 +136,7 @@
     <description>Episode #34 — This episode of MikeCast covers OpenAI's $94 million investment with Isara for AI agent swarms, Microsoft's employee backlash over Windows 11 account requirements, a cybersecurity breach involving the FBI director's email, and Wall Street's downturn amid rising oil prices and Meta's legal challenges, along with updates on Apple's product delays and Microsoft's hiring freeze.</description>
     <pubDate>Sat, 28 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-28</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-28.mp3" type="audio/mpeg" length="4635853"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-28.mp3" type="audio/mpeg" length="4635853"/>
     <itunes:title>MikeCast #34 — March 28, 2026</itunes:title>
     <itunes:subtitle>Episode #34 — This episode of MikeCast covers OpenAI's $94 million investment with Isara for AI agent swarms, Microsoft's employee backlash over Windows 11 account requirements, a cybersecurity breach involving the FBI director's email, and Wall Street...</itunes:subtitle>
     <itunes:summary>Episode #34 — This episode of MikeCast covers OpenAI's $94 million investment with Isara for AI agent swarms, Microsoft's employee backlash over Windows 11 account requirements, a cybersecurity breach involving the FBI director's email, and Wall Street's downturn amid rising oil prices and Meta's legal challenges, along with updates on Apple's product delays and Microsoft's hiring freeze.</itunes:summary>
@@ -148,7 +148,7 @@
     <description>Episode #33 — This episode covers OpenAI's ads pilot program reaching $100 million in annual recurring revenue, Anthropic's new AI model and legal victory against the Trump administration, Apple's discontinuation of the Mac Pro, a legal setback for Elon Musk's company X, rising oil prices due to geopolitical tensions, and Yankees' trade rumors involving Paul Skenes.</description>
     <pubDate>Fri, 27 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-27</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-27.mp3" type="audio/mpeg" length="4232119"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-27.mp3" type="audio/mpeg" length="4232119"/>
     <itunes:title>MikeCast #33 — March 27, 2026</itunes:title>
     <itunes:subtitle>Episode #33 — This episode covers OpenAI's ads pilot program reaching $100 million in annual recurring revenue, Anthropic's new AI model and legal victory against the Trump administration, Apple's discontinuation of the Mac Pro, a legal setback for Elo...</itunes:subtitle>
     <itunes:summary>Episode #33 — This episode covers OpenAI's ads pilot program reaching $100 million in annual recurring revenue, Anthropic's new AI model and legal victory against the Trump administration, Apple's discontinuation of the Mac Pro, a legal setback for Elon Musk's company X, rising oil prices due to geopolitical tensions, and Yankees' trade rumors involving Paul Skenes.</itunes:summary>
@@ -160,7 +160,7 @@
     <description>Episode #32 — This episode covers a major legal ruling against Meta over child exploitation and social media addiction, Meta's layoffs and AI acquisitions, the Pentagon's investment in Palantir's AI, rising oil prices due to Middle East tensions, the Supreme Court ruling against Trump on tariffs, AWS and Cerebras' AI partnership, Tesla's sales decline, and New York sports updates.</description>
     <pubDate>Thu, 26 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-26</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-26.mp3" type="audio/mpeg" length="5422820"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-26.mp3" type="audio/mpeg" length="5422820"/>
     <itunes:title>MikeCast #32 — March 26, 2026</itunes:title>
     <itunes:subtitle>Episode #32 — This episode covers a major legal ruling against Meta over child exploitation and social media addiction, Meta's layoffs and AI acquisitions, the Pentagon's investment in Palantir's AI, rising oil prices due to Middle East tensions, the S...</itunes:subtitle>
     <itunes:summary>Episode #32 — This episode covers a major legal ruling against Meta over child exploitation and social media addiction, Meta's layoffs and AI acquisitions, the Pentagon's investment in Palantir's AI, rising oil prices due to Middle East tensions, the Supreme Court ruling against Trump on tariffs, AWS and Cerebras' AI partnership, Tesla's sales decline, and New York sports updates.</itunes:summary>
@@ -172,7 +172,7 @@
     <description>Episode #31 — In this episode, we explore Kleiner Perkins' $3.5 billion investment in AI, Meta's stock options strategy, SK Hynix's potential U.S. listing, Arm Holdings' stock surge, SpaceX's anticipated IPO, rising recession risks, Apple's new business platform, Meta's legal challenges, Amazon's Big Spring Sale, Microsoft's stock dip, and New York sports highlights including the Knicks' victory and Ben Rice's home run.</description>
     <pubDate>Wed, 25 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-25</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-25.mp3" type="audio/mpeg" length="4024739"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-25.mp3" type="audio/mpeg" length="4024739"/>
     <itunes:title>MikeCast #31 — March 25, 2026</itunes:title>
     <itunes:subtitle>Episode #31 — In this episode, we explore Kleiner Perkins' $3.5 billion investment in AI, Meta's stock options strategy, SK Hynix's potential U.S. listing, Arm Holdings' stock surge, SpaceX's anticipated IPO, rising recession risks, Apple's new busines...</itunes:subtitle>
     <itunes:summary>Episode #31 — In this episode, we explore Kleiner Perkins' $3.5 billion investment in AI, Meta's stock options strategy, SK Hynix's potential U.S. listing, Arm Holdings' stock surge, SpaceX's anticipated IPO, rising recession risks, Apple's new business platform, Meta's legal challenges, Amazon's Big Spring Sale, Microsoft's stock dip, and New York sports highlights including the Knicks' victory and Ben Rice's home run.</itunes:summary>
@@ -184,7 +184,7 @@
     <description>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran's conflict, the U.S. halting wind farm projects with TotalEnergies, Apollo's private credit fund challenges, Apple's upcoming WWDC26, Tesla's sales rebound in Europe, Netflix streaming Yankees-Giants Opening Night, and Uber's service expansion.</description>
     <pubDate>Tue, 24 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-24</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-24.mp3" type="audio/mpeg" length="4939730"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-24.mp3" type="audio/mpeg" length="4939730"/>
     <itunes:title>MikeCast #30 — March 24, 2026</itunes:title>
     <itunes:subtitle>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran...</itunes:subtitle>
     <itunes:summary>Episode #30 — This episode of MikeCast covers Anthropic's new AI agent Claude, OpenAI's IPO preparations and reliance on Microsoft, the FCC's inclusion of foreign-made routers on its covered list, Revolut's record profits, rising oil prices due to Iran's conflict, the U.S. halting wind farm projects with TotalEnergies, Apollo's private credit fund challenges, Apple's upcoming WWDC26, Tesla's sales rebound in Europe, Netflix streaming Yankees-Giants Opening Night, and Uber's service expansion.</itunes:summary>
@@ -196,7 +196,7 @@
     <description>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion acquisition, oil market volatility due to geopolitical tensions, Google's $4 trillion market cap milestone, and updates from the New York sports scene.</description>
     <pubDate>Mon, 23 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-23</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-23.mp3" type="audio/mpeg" length="4889944"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-23.mp3" type="audio/mpeg" length="4889944"/>
     <itunes:title>MikeCast #29 — March 23, 2026</itunes:title>
     <itunes:subtitle>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion ...</itunes:subtitle>
     <itunes:summary>Episode #29 — This episode covers OpenAI's potential IPO and strategic changes, Elon Musk's chip-building collaboration between Tesla and SpaceX, Mark Zuckerberg's AI assistant project, litigation against OpenAI's ChatGPT, GE HealthCare's $2.3 billion acquisition, oil market volatility due to geopolitical tensions, Google's $4 trillion market cap milestone, and updates from the New York sports scene.</itunes:summary>
@@ -208,7 +208,7 @@
     <description>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks anticipate changes with Giannis Antetokounmpo, while Cam Skattebo's comments spark health debates.</description>
     <pubDate>Sun, 22 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-22</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-22.mp3" type="audio/mpeg" length="4921322"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-22.mp3" type="audio/mpeg" length="4921322"/>
     <itunes:title>MikeCast #28 — March 22, 2026</itunes:title>
     <itunes:subtitle>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks ...</itunes:subtitle>
     <itunes:summary>Episode #28 — OpenAI plans to nearly double its workforce to 8,000 by 2026, Elon Musk invests $20 billion in a new chip plant in Austin, Cloudflare blocks archive.today as a botnet, the White House introduces an AI regulatory framework, and the Knicks anticipate changes with Giannis Antetokounmpo, while Cam Skattebo's comments spark health debates.</itunes:summary>
@@ -220,7 +220,7 @@
     <description>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Uber's $1.25 billion deal with Rivian for robotaxis, and the FTC's warning to Apple over news curation practices.</description>
     <pubDate>Sat, 21 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-21</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-21.mp3" type="audio/mpeg" length="4329317"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-21.mp3" type="audio/mpeg" length="4329317"/>
     <itunes:title>MikeCast #27 — March 21, 2026</itunes:title>
     <itunes:subtitle>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Ube...</itunes:subtitle>
     <itunes:summary>Episode #27 — This episode of MikeCast covers OpenAI's new project for an autonomous AI researcher, Elon Musk's legal issues over misleading Twitter investors, Microsoft's rollback of Copilot AI features, the impact of the Iran conflict on markets, Uber's $1.25 billion deal with Rivian for robotaxis, and the FTC's warning to Apple over news curation practices.</itunes:summary>
@@ -232,7 +232,7 @@
     <description>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing delivery robot maker Rivr; and President Trump approves $23 billion in arms sales to Gulf nations.</description>
     <pubDate>Fri, 20 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-20</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-20.mp3" type="audio/mpeg" length="4537251"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-20.mp3" type="audio/mpeg" length="4537251"/>
     <itunes:title>MikeCast #26 — March 20, 2026</itunes:title>
     <itunes:subtitle>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing...</itunes:subtitle>
     <itunes:summary>Episode #26 — OpenAI is launching a desktop super app combining ChatGPT, a browser, and Codex; Google introduces a 24-hour process for sideloading unverified Android apps; Alibaba cuts 34% of its workforce to focus on AI; Amazon acquires stair-climbing delivery robot maker Rivr; and President Trump approves $23 billion in arms sales to Gulf nations.</itunes:summary>
@@ -244,7 +244,7 @@
     <description>Episode #25 — In this episode, OpenAI's acquisition of Astral aims to challenge Anthropic, Figma's stock drops due to Google's new product, Meta shifts to AI for content enforcement, Tesla faces scrutiny over its 'Full Self-Driving' systems, the Dow Jones crashes amid market volatility, and Uber plans a $1.25 billion investment in Rivian.</description>
     <pubDate>Thu, 19 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-19</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-19.mp3" type="audio/mpeg" length="5124653"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-19.mp3" type="audio/mpeg" length="5124653"/>
     <itunes:title>MikeCast #25 — March 19, 2026</itunes:title>
     <itunes:subtitle>Episode #25 — In this episode, OpenAI's acquisition of Astral aims to challenge Anthropic, Figma's stock drops due to Google's new product, Meta shifts to AI for content enforcement, Tesla faces scrutiny over its 'Full Self-Driving' systems, the Dow Jo...</itunes:subtitle>
     <itunes:summary>Episode #25 — In this episode, OpenAI's acquisition of Astral aims to challenge Anthropic, Figma's stock drops due to Google's new product, Meta shifts to AI for content enforcement, Tesla faces scrutiny over its 'Full Self-Driving' systems, the Dow Jones crashes amid market volatility, and Uber plans a $1.25 billion investment in Rivian.</itunes:summary>
@@ -256,7 +256,7 @@
     <description>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory strikes following Ali Larijani's death, and Tesla's $4.3 billion battery plant with LG highlight today's tech, economic, and geopolitical developments.</description>
     <pubDate>Wed, 18 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-18</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-18.mp3" type="audio/mpeg" length="4566956"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-18.mp3" type="audio/mpeg" length="4566956"/>
     <itunes:title>MikeCast #24 — March 18, 2026</itunes:title>
     <itunes:subtitle>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory st...</itunes:subtitle>
     <itunes:summary>Episode #24 — Mistral AI's release of Forge for custom AI model training, Microsoft's Xbox One being hacked by 'Bliss', Tencent's AI-driven revenue surge, Nvidia's new AI infrastructure, the Federal Reserve's unexpected rate hike, Iran's retaliatory strikes following Ali Larijani's death, and Tesla's $4.3 billion battery plant with LG highlight today's tech, economic, and geopolitical developments.</itunes:summary>
@@ -268,7 +268,7 @@
     <description>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduces its Gemini chatbot in Hong Kong, and oil prices surge amid Iran tensions affecting US markets.</description>
     <pubDate>Tue, 17 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-17</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-17.mp3" type="audio/mpeg" length="4111761"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-17.mp3" type="audio/mpeg" length="4111761"/>
     <itunes:title>MikeCast #23 — March 17, 2026</itunes:title>
     <itunes:subtitle>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduc...</itunes:subtitle>
     <itunes:summary>Episode #23 — Apple unveils a new wearable device, the Federal Reserve announces a surprise rate cut, NVIDIA expands its Open Model Families for AI advancements, Alibaba launches an enterprise AI tool, OpenAI refocuses on core projects, Google introduces its Gemini chatbot in Hong Kong, and oil prices surge amid Iran tensions affecting US markets.</itunes:summary>
@@ -280,7 +280,7 @@
     <description>Episode #22 — This episode covers the new AI regulation bill stirring debate, the Fed's decision impacting the stock market, Tesla's disappointing earnings report, OpenAI's ChatGPT analytics launch, Big Tech's carbon credit race led by Microsoft, OpenAI's AGI challenges, Anthropic's lawsuit against the Pentagon over Claude AI models, and geopolitical tensions affecting global markets.</description>
     <pubDate>Mon, 16 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-16</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-16.mp3" type="audio/mpeg" length="4984496"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-16.mp3" type="audio/mpeg" length="4984496"/>
     <itunes:title>MikeCast #22 — March 16, 2026</itunes:title>
     <itunes:subtitle>Episode #22 — This episode covers the new AI regulation bill stirring debate, the Fed's decision impacting the stock market, Tesla's disappointing earnings report, OpenAI's ChatGPT analytics launch, Big Tech's carbon credit race led by Microsoft, OpenA...</itunes:subtitle>
     <itunes:summary>Episode #22 — This episode covers the new AI regulation bill stirring debate, the Fed's decision impacting the stock market, Tesla's disappointing earnings report, OpenAI's ChatGPT analytics launch, Big Tech's carbon credit race led by Microsoft, OpenAI's AGI challenges, Anthropic's lawsuit against the Pentagon over Claude AI models, and geopolitical tensions affecting global markets.</itunes:summary>
@@ -292,7 +292,7 @@
     <description>Episode #21 — OpenAI has launched GPT-6, revolutionizing AI interactions, while Rhoda AI secures $450 million for industrial robots; Elon Musk's $134 billion claim against OpenAI faces judicial scrutiny, and Meta cuts 20% of its workforce to fund AI initiatives; the Federal Reserve lowers interest rates amid economic uncertainty linked to Middle East conflicts, impacting global oil supplies and markets.</description>
     <pubDate>Sun, 15 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-15</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-15.mp3" type="audio/mpeg" length="4237275"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-15.mp3" type="audio/mpeg" length="4237275"/>
     <itunes:title>MikeCast #21 — March 15, 2026</itunes:title>
     <itunes:subtitle>Episode #21 — OpenAI has launched GPT-6, revolutionizing AI interactions, while Rhoda AI secures $450 million for industrial robots; Elon Musk's $134 billion claim against OpenAI faces judicial scrutiny, and Meta cuts 20% of its workforce to fund AI in...</itunes:subtitle>
     <itunes:summary>Episode #21 — OpenAI has launched GPT-6, revolutionizing AI interactions, while Rhoda AI secures $450 million for industrial robots; Elon Musk's $134 billion claim against OpenAI faces judicial scrutiny, and Meta cuts 20% of its workforce to fund AI initiatives; the Federal Reserve lowers interest rates amid economic uncertainty linked to Middle East conflicts, impacting global oil supplies and markets.</itunes:summary>
@@ -304,7 +304,7 @@
     <description>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500's decline due to the Iran oil crisis, and Meta's potential layoffs linked to AI development costs.</description>
     <pubDate>Sat, 14 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-14</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-14.mp3" type="audio/mpeg" length="4880321"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-14.mp3" type="audio/mpeg" length="4880321"/>
     <itunes:title>MikeCast #20 — March 14, 2026</itunes:title>
     <itunes:subtitle>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500'...</itunes:subtitle>
     <itunes:summary>Episode #20 — This episode covers Nvidia's unveiling of a new AI chip at the GTC conference, ByteDance's strategic expansion of AI capabilities offshore amidst US sanctions, Sam Altman's concerns about AI's impact on labor-capital balance, the S&amp;P 500's decline due to the Iran oil crisis, and Meta's potential layoffs linked to AI development costs.</itunes:summary>
@@ -316,7 +316,7 @@
     <description>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil prices impact global markets, with the Dow Jones dropping significantly due to Middle East tensions; Apple reduces China App Store commission fees.</description>
     <pubDate>Fri, 13 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-13</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-13.mp3" type="audio/mpeg" length="4177027"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-13.mp3" type="audio/mpeg" length="4177027"/>
     <itunes:title>MikeCast #19 — March 13, 2026</itunes:title>
     <itunes:subtitle>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil p...</itunes:subtitle>
     <itunes:summary>Episode #19 — Tesla's sales surge in China, overtaking BYD, while Adobe CEO Shantanu Narayen steps down amid AI pressures; OpenAI's Sam Altman faces scrutiny over Defense Department collaborations; The Met releases 3D scans of art objects; rising oil prices impact global markets, with the Dow Jones dropping significantly due to Middle East tensions; Apple reduces China App Store commission fees.</itunes:summary>
@@ -328,7 +328,7 @@
     <description>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for planning air attacks on Iran, and a massive data breach exposes one billion identity records, while oil prices surge amid Iran conflict, impacting Federal Reserve rate cut plans.</description>
     <pubDate>Thu, 12 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-12</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-12.mp3" type="audio/mpeg" length="5396179"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-12.mp3" type="audio/mpeg" length="5396179"/>
     <itunes:title>MikeCast #18 — March 12, 2026</itunes:title>
     <itunes:subtitle>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for pla...</itunes:subtitle>
     <itunes:summary>Episode #18 — Google's acquisition of cybersecurity firm Wiz aims to enhance its cloud security, Meta buys AI-focused social network Moltbook to integrate AI into social interactions, the U.S. military controversially uses Anthropic’s Claude AI for planning air attacks on Iran, and a massive data breach exposes one billion identity records, while oil prices surge amid Iran conflict, impacting Federal Reserve rate cut plans.</itunes:summary>
@@ -340,7 +340,7 @@
     <description>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact of the U.S.-Iran conflict on oil prices and markets, and the passing of computer scientist Tony Hoare.</description>
     <pubDate>Wed, 11 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-11</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-11.mp3" type="audio/mpeg" length="4396258"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-11.mp3" type="audio/mpeg" length="4396258"/>
     <itunes:title>MikeCast #17 — March 11, 2026</itunes:title>
     <itunes:subtitle>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact ...</itunes:subtitle>
     <itunes:summary>Episode #17 — This episode covers Amazon's launch of a 24/7 Health AI agent for Prime members, Meta's acquisition of AI-focused social network Moltbook, Yann LeCun's $1 billion AI initiative, OpenAI's ChatGPT upgrades amid legal challenges, the impact of the U.S.-Iran conflict on oil prices and markets, and the passing of computer scientist Tony Hoare.</itunes:summary>
@@ -352,7 +352,7 @@
     <description>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bill Ackman's Pershing Square IPO filing, Hims &amp; Hers' stock surge due to a Novo Nordisk partnership, and oil market reactions to President Trump's statements on Iran.</description>
     <pubDate>Tue, 10 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-10</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-10.mp3" type="audio/mpeg" length="4732633"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-10.mp3" type="audio/mpeg" length="4732633"/>
     <itunes:title>MikeCast #16 — March 10, 2026</itunes:title>
     <itunes:subtitle>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bi...</itunes:subtitle>
     <itunes:summary>Episode #16 — This episode covers Yann LeCun's AI startup raising $1 billion, Anthropic's new Code Review feature and legal issues with the Pentagon, OpenAI's acquisition of Promptfoo amid internal challenges, the U.S. pilot program for flying cars, Bill Ackman's Pershing Square IPO filing, Hims &amp; Hers' stock surge due to a Novo Nordisk partnership, and oil market reactions to President Trump's statements on Iran.</itunes:summary>
@@ -364,7 +364,7 @@
     <description>Episode #15 — This episode covers OpenAI's acquisition of Promptfoo and its strategic focus shift, Anthropic's study on AI's impact on jobs, the launch of VeridisQuo for deepfake detection, and Nscale's $14.6 billion valuation backed by Nvidia, alongside market concerns over surging oil prices due to US-Israel-Iran tensions and Apple's latest software releases.</description>
     <pubDate>Mon, 09 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-09</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-09.mp3" type="audio/mpeg" length="4652304"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-09.mp3" type="audio/mpeg" length="4652304"/>
     <itunes:title>MikeCast #15 — March 09, 2026</itunes:title>
     <itunes:subtitle>Episode #15 — This episode covers OpenAI's acquisition of Promptfoo and its strategic focus shift, Anthropic's study on AI's impact on jobs, the launch of VeridisQuo for deepfake detection, and Nscale's $14.6 billion valuation backed by Nvidia, alongsi...</itunes:subtitle>
     <itunes:summary>Episode #15 — This episode covers OpenAI's acquisition of Promptfoo and its strategic focus shift, Anthropic's study on AI's impact on jobs, the launch of VeridisQuo for deepfake detection, and Nscale's $14.6 billion valuation backed by Nvidia, alongside market concerns over surging oil prices due to US-Israel-Iran tensions and Apple's latest software releases.</itunes:summary>
@@ -376,7 +376,7 @@
     <description>Episode #14 — NVIDIA launches Rubin, a groundbreaking AI chip, while Elon Musk faces a legal setback in California over data disclosure laws affecting xAI; OpenAI's robotics chief resigns amid surveillance concerns, and Anthropic analyzes AI's impact on jobs; Apple battles antitrust issues in India, and U.S. unemployment rises to 4.4%.</description>
     <pubDate>Sun, 08 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-08</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-08.mp3" type="audio/mpeg" length="4543945"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-08.mp3" type="audio/mpeg" length="4543945"/>
     <itunes:title>MikeCast #14 — March 08, 2026</itunes:title>
     <itunes:subtitle>Episode #14 — NVIDIA launches Rubin, a groundbreaking AI chip, while Elon Musk faces a legal setback in California over data disclosure laws affecting xAI; OpenAI's robotics chief resigns amid surveillance concerns, and Anthropic analyzes AI's impact o...</itunes:subtitle>
     <itunes:summary>Episode #14 — NVIDIA launches Rubin, a groundbreaking AI chip, while Elon Musk faces a legal setback in California over data disclosure laws affecting xAI; OpenAI's robotics chief resigns amid surveillance concerns, and Anthropic analyzes AI's impact on jobs; Apple battles antitrust issues in India, and U.S. unemployment rises to 4.4%.</itunes:summary>
@@ -388,7 +388,7 @@
     <description>Episode #13 — This episode covers Iran's ongoing conflict with the U.S. and Israel impacting oil prices and stock markets, NVIDIA's launch of Rubin and new AI chips, Google's breakthrough quantum algorithm, a record $189 billion in AI startup funding, the Teamsters' historic strike against Amazon, and Sundar Pichai's $692 million pay deal at Google.</description>
     <pubDate>Sat, 07 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-07</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_3voice_2026-03-07.mp3" type="audio/mpeg" length="4353164"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_3voice_2026-03-07.mp3" type="audio/mpeg" length="4353164"/>
     <itunes:title>MikeCast #13 — March 07, 2026</itunes:title>
     <itunes:subtitle>Episode #13 — This episode covers Iran's ongoing conflict with the U.S. and Israel impacting oil prices and stock markets, NVIDIA's launch of Rubin and new AI chips, Google's breakthrough quantum algorithm, a record $189 billion in AI startup funding, ...</itunes:subtitle>
     <itunes:summary>Episode #13 — This episode covers Iran's ongoing conflict with the U.S. and Israel impacting oil prices and stock markets, NVIDIA's launch of Rubin and new AI chips, Google's breakthrough quantum algorithm, a record $189 billion in AI startup funding, the Teamsters' historic strike against Amazon, and Sundar Pichai's $692 million pay deal at Google.</itunes:summary>
@@ -400,7 +400,7 @@
     <description>Episode #12 — The financial landscape remains volatile as weak jobs data compounds the economic uncertainty fueled by Middle East tensions, impacting both stock markets and oil prices. Meanwhile, tech giants like SoftBank and Google make headlines with major financial maneuvers and controversial AI developments. In sports, New York teams are making strategic moves with the Yankees eyeing high-profile signings and the Giants actively pursuing new talent.</description>
     <pubDate>Fri, 06 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-06</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-06.mp3" type="audio/mpeg" length="6348000"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-03-06.mp3" type="audio/mpeg" length="6348000"/>
     <itunes:title>MikeCast #12 — March 06, 2026</itunes:title>
     <itunes:subtitle>Episode #12 — The financial landscape remains volatile as weak jobs data compounds the economic uncertainty fueled by Middle East tensions, impacting both stock markets and oil prices. Meanwhile, tech giants like SoftBank and Google make headlines with...</itunes:subtitle>
     <itunes:summary>Episode #12 — The financial landscape remains volatile as weak jobs data compounds the economic uncertainty fueled by Middle East tensions, impacting both stock markets and oil prices. Meanwhile, tech giants like SoftBank and Google make headlines with major financial maneuvers and controversial AI developments. In sports, New York teams are making strategic moves with the Yankees eyeing high-profile signings and the Giants actively pursuing new talent.</itunes:summary>
@@ -412,7 +412,7 @@
     <description>Episode #11 — OpenAI's rapid advancements with GPT-5.4 highlight the ongoing race in AI capabilities, while controversy brews over military applications. Market volatility persists amid geopolitical tensions, with oil prices surging due to the Iran conflict. Major firms like Google and Amazon face significant operational and legal challenges, underlining the dynamic landscape of tech and business.</description>
     <pubDate>Thu, 05 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-05</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-05.mp3" type="audio/mpeg" length="5067360"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-03-05.mp3" type="audio/mpeg" length="5067360"/>
     <itunes:title>MikeCast #11 — March 05, 2026</itunes:title>
     <itunes:subtitle>Episode #11 — OpenAI's rapid advancements with GPT-5.4 highlight the ongoing race in AI capabilities, while controversy brews over military applications. Market volatility persists amid geopolitical tensions, with oil prices surging due to the Iran con...</itunes:subtitle>
     <itunes:summary>Episode #11 — OpenAI's rapid advancements with GPT-5.4 highlight the ongoing race in AI capabilities, while controversy brews over military applications. Market volatility persists amid geopolitical tensions, with oil prices surging due to the Iran conflict. Major firms like Google and Amazon face significant operational and legal challenges, underlining the dynamic landscape of tech and business.</itunes:summary>
@@ -424,7 +424,7 @@
     <description>Episode #10 — Today's headlines are dominated by strategic shifts and settlements in the tech industry, with Google and Epic Games resolving their long-standing app store dispute, leading to a significant reduction in commission rates. In business, AI infrastructure spending is surging, reflecting the sector's growing importance. Meanwhile, Amazon and Apple unveil innovations that could reshape their market positions. In sports, the Yankees gear up for the season with promising performances and strategic considerations.</description>
     <pubDate>Wed, 04 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-04</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-04.mp3" type="audio/mpeg" length="4954080"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-03-04.mp3" type="audio/mpeg" length="4954080"/>
     <itunes:title>MikeCast #10 — March 04, 2026</itunes:title>
     <itunes:subtitle>Episode #10 — Today's headlines are dominated by strategic shifts and settlements in the tech industry, with Google and Epic Games resolving their long-standing app store dispute, leading to a significant reduction in commission rates. In business, AI ...</itunes:subtitle>
     <itunes:summary>Episode #10 — Today's headlines are dominated by strategic shifts and settlements in the tech industry, with Google and Epic Games resolving their long-standing app store dispute, leading to a significant reduction in commission rates. In business, AI infrastructure spending is surging, reflecting the sector's growing importance. Meanwhile, Amazon and Apple unveil innovations that could reshape their market positions. In sports, the Yankees gear up for the season with promising performances and strategic considerations.</itunes:summary>
@@ -436,7 +436,7 @@
     <description>Episode #9 — Today's headlines highlight the intensifying conflict in the Middle East, its economic repercussions, and significant technological advancements. Automakers face the challenge of adapting to electric and autonomous vehicle trends, while the global economy braces for shocks from geopolitical tensions. Meanwhile, Apple and Amazon navigate new product launches and operational disruptions, respectively.</description>
     <pubDate>Tue, 03 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-03</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-03.mp3" type="audio/mpeg" length="5324640"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-03-03.mp3" type="audio/mpeg" length="5324640"/>
     <itunes:title>MikeCast #9 — March 03, 2026</itunes:title>
     <itunes:subtitle>Episode #9 — Today's headlines highlight the intensifying conflict in the Middle East, its economic repercussions, and significant technological advancements. Automakers face the challenge of adapting to electric and autonomous vehicle trends, while th...</itunes:subtitle>
     <itunes:summary>Episode #9 — Today's headlines highlight the intensifying conflict in the Middle East, its economic repercussions, and significant technological advancements. Automakers face the challenge of adapting to electric and autonomous vehicle trends, while the global economy braces for shocks from geopolitical tensions. Meanwhile, Apple and Amazon navigate new product launches and operational disruptions, respectively.</itunes:summary>
@@ -448,7 +448,7 @@
     <description>Episode #8 — Today's news is dominated by escalating tensions in the Middle East as the U.S. commits more troops to Iran, influencing both global politics and markets. In tech, the Pentagon strengthens its ties with innovators, while Apple pushes forward with new product releases. Meanwhile, the rising cost of energy and shifts in U.S. political strategies offer a glimpse into the evolving landscape of business and governance.</description>
     <pubDate>Mon, 02 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-02</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-02.mp3" type="audio/mpeg" length="5089920"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-03-02.mp3" type="audio/mpeg" length="5089920"/>
     <itunes:title>MikeCast #8 — March 02, 2026</itunes:title>
     <itunes:subtitle>Episode #8 — Today's news is dominated by escalating tensions in the Middle East as the U.S. commits more troops to Iran, influencing both global politics and markets. In tech, the Pentagon strengthens its ties with innovators, while Apple pushes forwa...</itunes:subtitle>
     <itunes:summary>Episode #8 — Today's news is dominated by escalating tensions in the Middle East as the U.S. commits more troops to Iran, influencing both global politics and markets. In tech, the Pentagon strengthens its ties with innovators, while Apple pushes forward with new product releases. Meanwhile, the rising cost of energy and shifts in U.S. political strategies offer a glimpse into the evolving landscape of business and governance.</itunes:summary>
@@ -460,7 +460,7 @@
     <description>Episode #7 — Today's landscape is marked by geopolitical upheavals and technological shifts. The assassination of key Iranian leaders, following a collaborative intelligence effort between the U.S. and Israel, is shaking global politics and regional stability. Meanwhile, the tech world is witnessing intriguing shifts with a nostalgic return to the iPod and strategic moves at the Pentagon involving OpenAI. In business, remote work innovations and the impact of geopolitical events on oil markets are in focus.</description>
     <pubDate>Sun, 01 Mar 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-03-01</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-03-01.mp3" type="audio/mpeg" length="5285760"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-03-01.mp3" type="audio/mpeg" length="5285760"/>
     <itunes:title>MikeCast #7 — March 01, 2026</itunes:title>
     <itunes:subtitle>Episode #7 — Today's landscape is marked by geopolitical upheavals and technological shifts. The assassination of key Iranian leaders, following a collaborative intelligence effort between the U.S. and Israel, is shaking global politics and regional st...</itunes:subtitle>
     <itunes:summary>Episode #7 — Today's landscape is marked by geopolitical upheavals and technological shifts. The assassination of key Iranian leaders, following a collaborative intelligence effort between the U.S. and Israel, is shaking global politics and regional stability. Meanwhile, the tech world is witnessing intriguing shifts with a nostalgic return to the iPod and strategic moves at the Pentagon involving OpenAI. In business, remote work innovations and the impact of geopolitical events on oil markets are in focus.</itunes:summary>
@@ -472,7 +472,7 @@
     <description>Episode #6 — Today's news highlights significant tensions in technology and geopolitics. The tech industry's clash with President Trump over AI usage underscores a pivotal moment for AI's role in national security. Simultaneously, U.S.-Iran tensions escalate dramatically with coordinated airstrikes by the U.S. and Israel, marking a critical juncture in international relations.</description>
     <pubDate>Sat, 28 Feb 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-02-28</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-02-28.mp3" type="audio/mpeg" length="4856640"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-02-28.mp3" type="audio/mpeg" length="4856640"/>
     <itunes:title>MikeCast #6 — February 28, 2026</itunes:title>
     <itunes:subtitle>Episode #6 — Today's news highlights significant tensions in technology and geopolitics. The tech industry's clash with President Trump over AI usage underscores a pivotal moment for AI's role in national security. Simultaneously, U.S.-Iran tensions es...</itunes:subtitle>
     <itunes:summary>Episode #6 — Today's news highlights significant tensions in technology and geopolitics. The tech industry's clash with President Trump over AI usage underscores a pivotal moment for AI's role in national security. Simultaneously, U.S.-Iran tensions escalate dramatically with coordinated airstrikes by the U.S. and Israel, marking a critical juncture in international relations.</itunes:summary>
@@ -484,7 +484,7 @@
     <description>Episode #5 — Today's news highlights significant geopolitical and technological shifts. Donald Trump's foreign policy strategies raise global tensions, particularly with Iran, while Elon Musk's vision of a "sustainable abundance" challenges economic norms. Meanwhile, AI's impact on traditional industries, from India's tech sector to the global 3-D printing market, continues to reshape business landscapes.</description>
     <pubDate>Fri, 27 Feb 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-02-27</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-02-27.mp3" type="audio/mpeg" length="5367360"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-02-27.mp3" type="audio/mpeg" length="5367360"/>
     <itunes:title>MikeCast #5 — February 27, 2026</itunes:title>
     <itunes:subtitle>Episode #5 — Today's news highlights significant geopolitical and technological shifts. Donald Trump's foreign policy strategies raise global tensions, particularly with Iran, while Elon Musk's vision of a "sustainable abundance" challenges economic no...</itunes:subtitle>
     <itunes:summary>Episode #5 — Today's news highlights significant geopolitical and technological shifts. Donald Trump's foreign policy strategies raise global tensions, particularly with Iran, while Elon Musk's vision of a "sustainable abundance" challenges economic norms. Meanwhile, AI's impact on traditional industries, from India's tech sector to the global 3-D printing market, continues to reshape business landscapes.</itunes:summary>
@@ -496,7 +496,7 @@
     <description>Episode #4 — In the tech world, Nvidia's remarkable financial performance and the pervasive influence of artificial intelligence are major highlights. The geopolitical landscape is tense with U.S.-Iran relations on edge, while Trump's policy maneuvers continue to stir domestic and economic discussions. In business, companies like Aston Martin are grappling with tariff impacts, and Meta's strategic partnerships underline the evolving AI infrastructure landscape.</description>
     <pubDate>Thu, 26 Feb 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-02-26</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-02-26.mp3" type="audio/mpeg" length="4957440"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-02-26.mp3" type="audio/mpeg" length="4957440"/>
     <itunes:title>MikeCast #4 — February 26, 2026</itunes:title>
     <itunes:subtitle>Episode #4 — In the tech world, Nvidia's remarkable financial performance and the pervasive influence of artificial intelligence are major highlights. The geopolitical landscape is tense with U.S.-Iran relations on edge, while Trump's policy maneuvers ...</itunes:subtitle>
     <itunes:summary>Episode #4 — In the tech world, Nvidia's remarkable financial performance and the pervasive influence of artificial intelligence are major highlights. The geopolitical landscape is tense with U.S.-Iran relations on edge, while Trump's policy maneuvers continue to stir domestic and economic discussions. In business, companies like Aston Martin are grappling with tariff impacts, and Meta's strategic partnerships underline the evolving AI infrastructure landscape.</itunes:summary>
@@ -508,7 +508,7 @@
     <description>Episode #3 — Today’s news highlights the evolving landscape of AI and tech, with Netflix diversifying into podcasts and Wayve securing a major investment for autonomous vehicles. In business, debates swirl around AI's economic impact, while geopolitical tensions continue to shape energy markets. In the corporate world, Apple's new App Store requirements and Meta's major partnership with AMD are in focus. Meanwhile, New York sports teams are navigating roster challenges and player performances.</description>
     <pubDate>Wed, 25 Feb 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-02-25</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-02-25.mp3" type="audio/mpeg" length="6982560"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-02-25.mp3" type="audio/mpeg" length="6982560"/>
     <itunes:title>MikeCast #3 — February 25, 2026</itunes:title>
     <itunes:subtitle>Episode #3 — Today’s news highlights the evolving landscape of AI and tech, with Netflix diversifying into podcasts and Wayve securing a major investment for autonomous vehicles. In business, debates swirl around AI's economic impact, while geopolitica...</itunes:subtitle>
     <itunes:summary>Episode #3 — Today’s news highlights the evolving landscape of AI and tech, with Netflix diversifying into podcasts and Wayve securing a major investment for autonomous vehicles. In business, debates swirl around AI's economic impact, while geopolitical tensions continue to shape energy markets. In the corporate world, Apple's new App Store requirements and Meta's major partnership with AMD are in focus. Meanwhile, New York sports teams are navigating roster challenges and player performances.</itunes:summary>
@@ -520,7 +520,7 @@
     <description>Episode #2 — In today's briefing, the tech industry faces scrutiny as revelations about Jeffrey Epstein's ties to Microsoft surface, while OpenAI expands its enterprise reach through new partnerships. Meanwhile, the business landscape is shifting with regulatory pressures on unemployment benefits and significant investments in healthcare innovation. On the companies front, Apple's manufacturing plans mark a strategic shift, and Facebook faces internal criticism over its encryption policies. In sports, New York teams are making headlines, with impressive performances from the Yankees and updates on the Knicks and Devils.</description>
     <pubDate>Tue, 24 Feb 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-02-24</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-02-24.mp3" type="audio/mpeg" length="7022400"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-02-24.mp3" type="audio/mpeg" length="7022400"/>
     <itunes:title>MikeCast #2 — February 24, 2026</itunes:title>
     <itunes:subtitle>Episode #2 — In today's briefing, the tech industry faces scrutiny as revelations about Jeffrey Epstein's ties to Microsoft surface, while OpenAI expands its enterprise reach through new partnerships. Meanwhile, the business landscape is shifting with ...</itunes:subtitle>
     <itunes:summary>Episode #2 — In today's briefing, the tech industry faces scrutiny as revelations about Jeffrey Epstein's ties to Microsoft surface, while OpenAI expands its enterprise reach through new partnerships. Meanwhile, the business landscape is shifting with regulatory pressures on unemployment benefits and significant investments in healthcare innovation. On the companies front, Apple's manufacturing plans mark a strategic shift, and Facebook faces internal criticism over its encryption policies. In sports, New York teams are making headlines, with impressive performances from the Yankees and updates on the Knicks and Devils.</itunes:summary>
@@ -532,7 +532,7 @@
     <description>Episode #1 — Today’s news highlights the ongoing challenges and innovations in technology and business. Chinese AI firms are reportedly using data from Anthropic's Claude to enhance their own AI models, reflecting global competition in AI development. Meanwhile, U.S. financial markets experience volatility with a significant drop in the Dow, and Tesla faces scrutiny over data transparency. In sports, Olympic gold medalist Jack Hughes' return generates excitement among New Jersey Devils fans.</description>
     <pubDate>Mon, 23 Feb 2026 11:45:00 GMT</pubDate>
     <guid isPermaLink="false">mikecast-2026-02-23</guid>
-    <enclosure url="https://schwim23.github.io/mikecast/data/MikeCast_2026-02-23.mp3" type="audio/mpeg" length="4421948"/>
+    <enclosure url="https://mikecast.io/data/MikeCast_2026-02-23.mp3" type="audio/mpeg" length="4421948"/>
     <itunes:title>MikeCast #1 — February 23, 2026</itunes:title>
     <itunes:subtitle>Episode #1 — Today’s news highlights the ongoing challenges and innovations in technology and business. Chinese AI firms are reportedly using data from Anthropic's Claude to enhance their own AI models, reflecting global competition in AI development. ...</itunes:subtitle>
     <itunes:summary>Episode #1 — Today’s news highlights the ongoing challenges and innovations in technology and business. Chinese AI firms are reportedly using data from Anthropic's Claude to enhance their own AI models, reflecting global competition in AI development. Meanwhile, U.S. financial markets experience volatility with a significant drop in the Dow, and Tesla faces scrutiny over data transparency. In sports, Olympic gold medalist Jack Hughes' return generates excitement among New Jersey Devils fans.</itunes:summary>
