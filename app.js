@@ -1,8 +1,7 @@
 /**
  * MikeCast Dashboard — Client-side application
- * Static version for GitHub Pages.
- * Loads briefing JSON and audio from the data/ directory in the repo.
- * Fetches data/manifest.json to populate the archive dropdown.
+ * Loads briefing JSON from /data/ via the Flask server.
+ * Fetches /api/manifest to populate the archive dropdown.
  */
 (function () {
   "use strict";
@@ -20,12 +19,11 @@
   const podcastMeta   = document.getElementById("podcast-meta");
   const noAudioEl     = document.getElementById("no-audio");
   const articlesList  = document.getElementById("articles-list");
-  const scriptToggle    = document.getElementById("script-toggle");
-  const scriptContent   = document.getElementById("script-content");
-  const scriptArrow     = document.getElementById("script-arrow");
-  const scriptText      = document.getElementById("script-text");
-  const footerDate      = document.getElementById("footer-date");
-  const podcastTitle    = document.getElementById("podcast-section-title");
+  const scriptToggle  = document.getElementById("script-toggle");
+  const scriptContent = document.getElementById("script-content");
+  const scriptArrow   = document.getElementById("script-arrow");
+  const scriptText    = document.getElementById("script-text");
+  const footerDate    = document.getElementById("footer-date");
 
   function todayStr() {
     const d = new Date();
@@ -60,11 +58,10 @@
       const data = await resp.json();
       const dates = data.dates || [];
       archiveSelect.innerHTML = '<option value="">Archive &#9662;</option>';
-      for (let i = 0; i < dates.length; i++) {
+      for (const d of dates) {
         const opt = document.createElement("option");
-        opt.value = dates[i];
-        const epNum = dates.length - i;
-        opt.textContent = `Ep. #${epNum} — ${formatDisplayDate(dates[i])}`;
+        opt.value = d;
+        opt.textContent = formatDisplayDate(d);
         archiveSelect.appendChild(opt);
       }
     } catch (e) { /* manifest unavailable */ }
@@ -86,8 +83,31 @@
     }
   }
 
+  function renderTrending(trending) {
+    const el = document.getElementById("trending-card");
+    if (!el) return;
+    if (!trending || trending.length === 0) { el.style.display = "none"; return; }
+    let html = "";
+    trending.forEach(function(item, i) {
+      const topic = escapeHtml(item.topic || "");
+      const xUrl  = escapeHtml(item.x_url || "");
+      const content = xUrl
+        ? `<a href="${xUrl}" target="_blank" rel="noopener" class="trending-title">${topic} <span class="trending-x-badge">↗ X</span></a>`
+        : `<span class="trending-title">${topic}</span>`;
+      html += `<div class="trending-item">
+        <span class="trending-rank">${i + 1}</span>
+        <div class="trending-body">${content}</div>
+      </div>`;
+    });
+    el.querySelector(".trending-list").innerHTML = html;
+    el.style.display = "block";
+  }
+
   function renderBriefing(data, dateStr) {
     loadingEl.style.display = "none";
+
+    // 0. Trending
+    renderTrending(data.trending || []);
 
     // 1. HTML briefing
     if (data.html_briefing) {
@@ -99,23 +119,21 @@
       briefingHtml.innerHTML = "<p class='muted'>No briefing content for this edition.</p>";
     }
 
-    // 2. Podcast episode title
-    if (podcastTitle) {
-      podcastTitle.textContent = data.episode_num
-        ? `🎧 Episode #${data.episode_num}`
-        : "🎧 Today's Podcast";
-    }
-
-    // 2. Podcast audio
-    if (data.audio_file) {
-      podcastPlayer.src = `data/${data.audio_file}`;
+    // 2. Podcast audio — prefer ElevenLabs 3-voice, fall back to OpenAI
+    const audioFile = data.elevenlabs_audio_file || data.audio_file;
+    if (audioFile) {
+      podcastPlayer.src = `data/${audioFile}`;
       podcastPlayer.style.display = "block";
       noAudioEl.style.display = "none";
-      if (podcastMeta) podcastMeta.textContent = "tts-1-hd \u00b7 alloy \u00b7 OpenAI";
+      if (podcastMeta) podcastMeta.textContent = data.elevenlabs_audio_file
+        ? "3-Voice \u00b7 MIKE \u00b7 ELIZABETH \u00b7 JESSE \u00b7 ElevenLabs"
+        : "Single Voice \u00b7 alloy \u00b7 OpenAI";
+      document.getElementById("episode-subscribe").style.display = "flex";
     } else {
       podcastPlayer.style.display = "none";
       noAudioEl.style.display = "block";
       if (podcastMeta) podcastMeta.textContent = "";
+      document.getElementById("episode-subscribe").style.display = "none";
     }
 
     // 3. Article links
@@ -180,6 +198,7 @@
 
   datePicker.addEventListener("change", function () { loadBriefing(this.value); });
   btnToday.addEventListener("click", function () {
+    // On "Today" click, re-fetch manifest to get latest, then load most recent
     (async () => {
       try {
         const resp = await fetch("data/manifest.json");
@@ -226,14 +245,15 @@
       if (resp.ok) {
         const data = await resp.json();
         const dates = data.dates || [];
+        // Populate archive dropdown
         archiveSelect.innerHTML = '<option value="">Archive &#9662;</option>';
-        for (let i = 0; i < dates.length; i++) {
+        for (const d of dates) {
           const opt = document.createElement("option");
-          opt.value = dates[i];
-          const epNum = dates.length - i;
-          opt.textContent = `Ep. #${epNum} — ${formatDisplayDate(dates[i])}`;
+          opt.value = d;
+          opt.textContent = formatDisplayDate(d);
           archiveSelect.appendChild(opt);
         }
+        // Use the most recent date that exists
         const latestDate = dates.length > 0 ? dates[0] : today;
         datePicker.value = latestDate;
         loadBriefing(latestDate);
