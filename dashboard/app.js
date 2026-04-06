@@ -128,12 +128,14 @@
       if (podcastMeta) podcastMeta.textContent = data.elevenlabs_audio_file
         ? "3-Voice \u00b7 MIKE \u00b7 ELIZABETH \u00b7 JESSE \u00b7 ElevenLabs"
         : "Single Voice \u00b7 alloy \u00b7 OpenAI";
-      document.getElementById("episode-subscribe").style.display = "flex";
+      const episodeSub = document.getElementById("episode-subscribe");
+      if (episodeSub) episodeSub.style.display = "flex";
     } else {
       podcastPlayer.style.display = "none";
       noAudioEl.style.display = "block";
       if (podcastMeta) podcastMeta.textContent = "";
-      document.getElementById("episode-subscribe").style.display = "none";
+      const episodeSub = document.getElementById("episode-subscribe");
+      if (episodeSub) episodeSub.style.display = "none";
     }
 
     // 3. Article links
