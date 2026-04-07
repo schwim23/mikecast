@@ -23,7 +23,7 @@ Move pipeline off local machine. Serve site at mikecast.io via CloudFront + S3. 
 | AWS-11 | Update registrar NS records → Route53; create A alias → CloudFront; update `SITE_BASE_URL` in `mc_config.py` | `aws/step-11-dns-cutover` | done |
 | AWS-12 | Monitor first automated run via CloudWatch Logs; decommission GitHub Pages + local cron | `aws/step-12-decommission` | done — local cron disabled; GitHub Pages retained as fallback |
 
-**Estimated cost:** ~$1.00/month (S3 ~$0.10, ECS Fargate ~$0.29, Route53 ~$0.50, ECR/CloudFront/EventBridge ~$0)
+**Estimated cost:** ~$1.00/month (Route53 $0.50, ECS Fargate ~$0.29, S3 ~$0.10, public IPv4 ~$0.05, ECR/CloudFront/EventBridge/VPC/CloudWatch all ~$0 at this scale — CloudWatch logs ~60MB/month well under 5GB free tier; no NAT Gateway)
 
 ---
 
