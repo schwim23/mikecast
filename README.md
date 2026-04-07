@@ -12,7 +12,12 @@ MikeCast is an automated daily news briefing system. It runs a 10-step pipeline 
 
 ## Features
 
-1. **Adaptive Search Planning (xAI Grok)**: Before collecting news, Grok-3 searches the live web to identify today's breaking stories and generate targeted queries for each category. This ensures the briefing captures fresh, time-sensitive news rather than relying solely on static search terms.
+1. **Adaptive Search Planning (xAI Grok)**: Before any news is collected, `mc_plan.py` calls the **xAI Grok API** (`grok-2` model) using its live web search capability to scan what's actually breaking right now. Grok produces two outputs that flow through the rest of the pipeline:
+
+   - **Dynamic search queries** (one set per category): replace the static keyword lists in `mc_config.py` for that run. For example, if Nvidia just announced a GPU, Grok adds a targeted query like `"Nvidia Blackwell launch"` rather than relying on the generic `"Nvidia news today"`.
+   - **Trending topics list**: up to 10 stories Grok is highly confident occurred today (it is explicitly instructed to omit anything it isn't sure about). Each topic includes the story, a confidence score, and an X/Twitter search URL.
+
+   These outputs are used downstream in two ways: (1) the dynamic queries drive the Google News + RSS fetch in Step 1, so collection is tuned to today's news rather than evergreen terms; (2) the trending topics are injected into the Step 4 scoring prompts to boost articles that match breaking stories, and into the Step 8 generation prompts as suggested context (labeled "verify before covering" — see Hallucination Mitigations). If `XAI_API_KEY` is not set, Step 0 is skipped gracefully and the pipeline falls back to the static queries in `mc_config.py`.
 
 2. **Multi-Source News Aggregation**: Pulls articles in parallel from:
    - **NYT Top Stories & Article Search APIs**: Authoritative headlines from Technology, Business, Sports, and Home sections.
@@ -52,7 +57,7 @@ MikeCast is an automated daily news briefing system. It runs a 10-step pipeline 
 ## Pipeline (10 Steps)
 
 ```
-Step 0   Plan searches       xAI Grok-3 identifies breaking stories → dynamic queries + trending topics
+Step 0   Plan searches       xAI Grok live web search → dynamic queries per category + trending topics list (skipped if XAI_API_KEY unset)
 Step 1   Collect news        Parallel fetch from all sources (NYT, RSS, Reddit, Hacker News, Google News)
 Step 2   Deduplicate         Skip articles seen in the past 7 days; drop stale articles (>3 days old)
 Step 3   Cluster             GPT-4o-mini groups near-duplicate articles
