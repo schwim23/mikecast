@@ -11,19 +11,19 @@ Move pipeline off local machine. Serve site at mikecast.io via CloudFront + S3. 
 | # | Item | Branch | Status |
 |---|------|--------|--------|
 | AWS-1 | Create `Dockerfile`, build + test locally with `docker run` | `aws/step-1-dockerfile` | done |
-| AWS-2 | Create AWS resources: S3 bucket `mikecast-io-data`, ECR repo, IAM roles | `aws/step-2-aws-resources` | partial — S3 done; ECR + IAM pending |
+| AWS-2 | Create AWS resources: S3 bucket `mikecast-io-data`, ECR repo, IAM roles | `aws/step-2-aws-resources` | done |
 | AWS-3 | Adapt `mc_deliver.py` — S3 file writes only (Gmail SMTP unchanged; move `GMAIL_APP_PASSWORD`, `GMAIL_FROM`, `GMAIL_TO` to SSM) | `aws/step-3-deliver-s3` | done |
 | AWS-4 | Adapt `mc_utils.py` — S3-backed history/picks persistence | `aws/step-4-utils-s3` | done |
 | AWS-5 | Adapt `mikes_picks_ingest.py` — read/write picks from S3 | `aws/step-5-picks-s3` | done |
-| AWS-6 | Seed S3 with existing `data/`, `briefing_history.json`, `mikes_picks.json`, `dashboard/` | `aws/step-6-seed-s3` | backlog |
-| AWS-7 | Push Docker image to ECR; create ECS cluster + task definition | `aws/step-7-ecs` | backlog |
+| AWS-6 | Seed S3 with existing `data/`, `briefing_history.json`, `mikes_picks.json`, `dashboard/` | `aws/step-6-seed-s3` | done |
+| AWS-7 | Push Docker image to ECR; create ECS cluster + task definition | `aws/step-7-ecs` | done |
 | AWS-8 | Create EventBridge Scheduler rule (6:30 AM ET, DST-aware); load secrets into SSM Parameter Store | `aws/step-8-scheduler-ssm` | done |
-| AWS-9 | Test manual ECS task run; verify output in S3 + email received | `aws/step-9-test` | backlog |
+| AWS-9 | Test manual ECS task run; verify output in S3 + email received | `aws/step-9-test` | done |
 | AWS-10 | Set up CloudFront + ACM certificate; create Route53 hosted zone for mikecast.io | `aws/step-10-cloudfront-r53` | done |
 | AWS-11 | Update registrar NS records → Route53; create A alias → CloudFront; update `SITE_BASE_URL` in `mc_config.py` | `aws/step-11-dns-cutover` | done |
-| AWS-12 | Monitor first automated run via CloudWatch Logs; decommission GitHub Pages + local cron | `aws/step-12-decommission` | backlog |
+| AWS-12 | Monitor first automated run via CloudWatch Logs; decommission GitHub Pages + local cron | `aws/step-12-decommission` | done — local cron disabled; GitHub Pages retained as fallback |
 
-**Estimated cost:** ~$2.25/month (see `aws_migration.txt` for full breakdown)
+**Estimated cost:** ~$1.00/month (S3 ~$0.10, ECS Fargate ~$0.29, Route53 ~$0.50, ECR/CloudFront/EventBridge ~$0)
 
 ---
 
@@ -59,3 +59,6 @@ Maintain a persistent `ny_sports_state.json` with ground-truth per-team facts (l
 | Item | Description |
 |------|-------------|
 | VOL-1 | Volume normalization — added `_normalize_loudness()` to `mc_audio.py`; ffmpeg two-pass loudnorm to −16 LUFS; called in both `generate_podcast_audio()` and `generate_elevenlabs_audio()` |
+| SEC-1 | Security + efficiency pass — XSS fix (`html.escape`, `_safe_url`) in `mc_generate.py`; batch enrichment (N+1 → 1 GPT call) in `mc_collect.py`; cross-category dedup; thread timeout; RSS 10MB size limit; 5xx retry in `mc_utils.py`; sports critic warning upgrade |
+| CI-1 | GitHub Actions deploy workflow (`.github/workflows/deploy.yml`) — builds Docker image on push to `main`, pushes to ECR, registers new ECS task definition, updates EventBridge Scheduler. Dedicated IAM user `mikecast-github-actions` with least-privilege policy |
+| UI-1 | Official Spotify (`blk-grn`) and Apple Podcasts (`mono-white`) badge images replacing text buttons on mikecast.io; favicon added (microphone, brand colors); CloudFront `CachingDisabled` behavior for `*.html`; fixed wrong CloudFront distribution ID in all invalidation calls |
