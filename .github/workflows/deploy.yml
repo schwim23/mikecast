@@ -12,6 +12,7 @@ env:
   ECS_CLUSTER: mikecast
   ECS_TASK_FAMILY: mikecast
   SCHEDULER_NAME: mikecast-daily
+  CLOUDFRONT_DIST_ID: EFNQM31KQHY56
 
 jobs:
   deploy:
