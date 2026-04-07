@@ -6,6 +6,10 @@ MikeCast is an automated daily news briefing system. It runs a 10-step pipeline 
 
 ![MikeCast Architecture](mikecast_architecture.png)
 
+### AWS Architecture & Data Flow
+
+![AWS Architecture](aws_architecture.png)
+
 ## Features
 
 1. **Adaptive Search Planning (xAI Grok)**: Before collecting news, Grok-3 searches the live web to identify today's breaking stories and generate targeted queries for each category. This ensures the briefing captures fresh, time-sensitive news rather than relying solely on static search terms.
