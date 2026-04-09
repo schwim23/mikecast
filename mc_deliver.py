@@ -215,7 +215,7 @@ def generate_rss_feed() -> None:
                                    duration_secs, pub_date, description, subtitle))
 
         rss = _rss_document(items)
-        s3_upload_text(S3_BUCKET, "data/feed.xml", rss, content_type="application/rss+xml; charset=utf-8")
+        s3_upload_text(S3_BUCKET, "data/feed.xml", rss, content_type="application/rss+xml; charset=utf-8", cache_control="no-cache")
         logger.info("RSS feed written to S3 (%d episodes)", len(items))
     else:
         # Build episode number map: chronological order → episode #1, #2, …

@@ -66,6 +66,7 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 - **Hallucination guards are everywhere**: every GPT prompt explicitly tells the model to only discuss articles in the input. Do not weaken these.
 - **Sports sources are allowlisted**: `SPORTS_TRUSTED_SOURCES` in `mc_config.py`. Articles from untrusted publishers (e.g. AOL) are dropped before generation.
 - **7-day dedup**: `briefing_history.json` tracks seen URLs/titles. Don't delete or corrupt this file.
+- **feed.xml must be uploaded with `Cache-Control: no-cache`**: `s3_upload_text` in `mc_utils.py` accepts a `cache_control` kwarg; `mc_deliver.py` passes `cache_control="no-cache"` for `feed.xml`. Without this, CloudFront caches the feed for 24 hours and Apple Podcasts / Spotify receive stale content. Do not remove this header.
 
 ## Output Files
 

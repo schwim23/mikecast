@@ -122,10 +122,13 @@ def s3_upload_file(bucket: str, key: str, local_path: Path, content_type: str = 
     return size
 
 
-def s3_upload_text(bucket: str, key: str, text: str, content_type: str = "text/plain; charset=utf-8") -> None:
+def s3_upload_text(bucket: str, key: str, text: str, content_type: str = "text/plain; charset=utf-8", cache_control: str | None = None) -> None:
     """Upload a string as a text object to S3."""
     body = text.encode("utf-8")
-    _get_s3().put_object(Bucket=bucket, Key=key, Body=body, ContentType=content_type)
+    kwargs: dict = dict(Bucket=bucket, Key=key, Body=body, ContentType=content_type)
+    if cache_control:
+        kwargs["CacheControl"] = cache_control
+    _get_s3().put_object(**kwargs)
     logger.debug("s3://%s/%s written (%d bytes)", bucket, key, len(body))
 
 

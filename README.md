@@ -50,7 +50,7 @@ MikeCast is an automated daily news briefing system. It runs a 10-step pipeline 
     - **Email**: HTML briefing in the body, podcast script and audio as attachments, sent via Gmail SMTP.
     - **Daily JSON**: All content saved to `data/YYYY-MM-DD.json` for the dashboard.
     - **Manifest**: `data/manifest.json` updated for dashboard date-picker navigation.
-    - **RSS Feed**: `data/feed.xml` updated as a standard podcast RSS 2.0 feed.
+    - **RSS Feed**: `data/feed.xml` updated as a standard podcast RSS 2.0 feed, uploaded to S3 with `Cache-Control: no-cache` so Apple Podcasts and Spotify always fetch the latest version rather than serving a stale CloudFront-cached copy.
 
 11. **Static Dashboard Website**: A responsive dark-themed SPA (`dashboard/`) for browsing briefings by date, with an embedded audio player and collapsible script viewer.
 
@@ -339,6 +339,8 @@ https://mikecast.io/data/feed.xml
 ```
 
 Add this URL to any podcast app (Overcast, Pocket Casts, Castro, etc.) to receive new episodes automatically. The feed is also available on Apple Podcasts and Spotify.
+
+The feed is served with `Cache-Control: no-cache` so podcast crawlers always fetch fresh content. If a platform lags (Apple typically re-polls within a few hours; Spotify can take up to 24 hours), you can request a manual refresh from [Apple Podcasts Connect](https://podcastsconnect.apple.com).
 
 ### Generating a YouTube Episode
 
