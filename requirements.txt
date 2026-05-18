@@ -4,3 +4,12 @@ beautifulsoup4
 lxml
 mutagen
 boto3
+
+# CrewAI migration (Steps 0–8b of the daily pipeline).
+# setuptools<81 keeps pkg_resources bundled (crewai 0.86 + Py3.12 still imports it).
+# crewai-tools is intentionally NOT listed — we write our own tools in crew/tools.py
+# and that separate package would pull in docker, lancedb, pypdf, python-docx, pytube,
+# tiktoken, youtube-transcript-api, stagehand — adds >700MB for zero benefit here.
+setuptools<81
+crewai==0.86.0
+pydantic>=2.0

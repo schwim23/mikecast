@@ -93,8 +93,9 @@ def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[dict]]:
                 {"role": "system", "content": _SYSTEM_PROMPT},
                 {"role": "user",   "content": _USER_PROMPT},
             ],
-            max_tokens=1000,
+            max_tokens=1500,
             temperature=0.3,
+            response_format={"type": "json_object"},
         )
 
         raw = resp.choices[0].message.content.strip()
@@ -137,6 +138,15 @@ def plan_daily_searches() -> tuple[dict[str, list[str]], str, list[dict]]:
             "%d trending stories.",
             total_queries, len(cleaned), len(trending),
         )
+        # When Grok parses fine but yields zero queries AND zero trending, the
+        # response shape is almost certainly off (wrong category keys, missing
+        # arrays). Surface the raw response so future flakes are diagnosable
+        # without rerunning a 7-minute pipeline.
+        if total_queries == 0 and not trending:
+            logger.warning(
+                "Grok returned 0 queries and 0 trending — raw response below for diagnosis:\n%s",
+                raw[:2000],
+            )
 
         trending_context = _build_trending_context(cleaned)
         return cleaned, trending_context, trending
