@@ -100,7 +100,7 @@ CATEGORIES: dict[str, list[str]] = {
         "Amazon news today", "Nvidia news today",
         "Tesla news today", "Netflix news today",
         "Microsoft news today", "Google Alphabet news",
-        "Uber news today",
+        "Uber news today", "Anthropic news today",
     ],
     "NY Sports": [
         "New York Yankees", "New York Knicks",
@@ -121,7 +121,7 @@ NYT_SECTION_TO_CATEGORY: dict[str, str] = {
 NYT_SEARCH_QUERIES: dict[str, list[str]] = {
     "AI & Tech":          ["artificial intelligence", "OpenAI Anthropic"],
     "Business & Markets": ["stock market economy", "venture capital AI"],
-    "Companies":          ["Apple Meta Amazon Nvidia Tesla", "Uber Netflix Microsoft Google"],
+    "Companies":          ["Apple Meta Amazon Nvidia Tesla Anthropic", "Uber Netflix Microsoft Google"],
     "NY Sports":          ["Yankees Knicks Giants Devils", "NBA MLB NFL sports"],
 }
 
@@ -226,7 +226,7 @@ CATEGORY_SCORER_PROMPTS: dict[str, str] = {
     ),
     "Companies": (
         "You score company-specific news for Mike, who closely follows Apple, Meta, Amazon, Nvidia, Tesla, "
-        "Microsoft, Google, Netflix, Uber. Prioritize: product announcements, earnings, leadership changes, "
+        "Microsoft, Google, Netflix, Uber, Anthropic. Prioritize: product announcements, earnings, leadership changes, "
         "strategic pivots, regulatory actions, major partnerships. "
         "Bonus: stories about those specific companies +15. "
         "Penalty: minor product updates with no strategic significance -10, obscure companies -15."
