@@ -36,12 +36,12 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
 
 6. **"Mike's Picks"**: User-submitted content (URLs, local PDFs, or raw text) queued via `mikes_picks_ingest.py` and included as a dedicated section in every briefing.
 
-7. **Multi-Format Generation** (parallel GPT-4o calls):
+7. **Multi-Format Generation** (3 Claude Sonnet 4.6 CrewAI writers in parallel; GPT-4o on `--legacy`):
    - **HTML Briefing**: Professional email with executive summary, categorized stories, and clickable links.
    - **Single-voice podcast script**: For OpenAI TTS (fallback).
    - **3-voice conversational script**: For ElevenLabs with `[MIKE]`, `[ELIZABETH]`, and `[JESSE]` speaker tags.
 
-8. **Quality Critic Pass**: A GPT-4o critic scores each category section (1–10) on depth, substance, and story count. Sections scoring below 7 are automatically regenerated with targeted prompts. NY Sports is never auto-patched — thin but honest sports coverage is preferable to GPT inventing game results from training knowledge.
+8. **Quality Critic Pass**: A GPT-4o Section Quality Scorer rates each category section (1–10) on depth, substance, and story count. Sections scoring below 7 are rewritten by a Claude Sonnet 4.6 Section Patcher (legacy path uses GPT-4o for both roles). NY Sports is never auto-patched — thin but honest sports coverage is preferable to an LLM inventing game results from training knowledge.
 
 9. **Dual-TTS Audio Generation**:
    - **ElevenLabs 3-voice** (preferred): Mike = host, Elizabeth = tech/biz, Jesse = sports. Uses `eleven_multilingual_v2`.
@@ -56,7 +56,7 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
 
 11. **Static Dashboard Website**: A responsive dark-themed SPA (`dashboard/`) for browsing briefings by date, with an embedded audio player and collapsible script viewer.
 
-12. **CrewAI agent pipeline (opt-in via `--crew`)**: Steps 0–8b can be executed by [CrewAI](https://github.com/crewAIInc/crewAI) agents instead of the procedural pipeline. A `Planning Crew`, four `Research` agents, a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + Fact-Checker), a `Writing Crew` (three Claude writers in parallel), and a `Critic Crew` (GPT-4o scorer + Claude patcher) replace the matching legacy modules. Steps 9 and 10 (audio + delivery) are unchanged. The CrewAI path is opt-in during shadow validation — default is still `--legacy`. See **CrewAI Architecture** below for full details.
+12. **CrewAI agent pipeline (default)**: Steps 0–8b are orchestrated by [CrewAI](https://github.com/crewAIInc/crewAI) agents. A `Planning Crew`, a `Research Crew` (non-sports), a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + read-only Fact-Checker), a `Writing Crew` (three Claude writers in parallel), and a `Critic Crew` (GPT-4o scorer + Claude patcher) replace the matching procedural modules. Steps 9 and 10 (audio + delivery) are shared. Run with `--legacy` for fast rollback to the procedural pipeline. See **CrewAI Architecture** below for full details.
 
 ## Pipeline (10 Steps)
 
@@ -105,11 +105,11 @@ The Researcher is capped at `max_iter=15` and `max_execution_time=180` so a rate
 
 **Podcast length**: writer Tasks target 6–7 minutes of audio (~900–1000 words total). Per-segment word budgets are in `crew/writing_crew.py`. Adjust both `_single_voice_task` and `_conversational_task` if you want a different length.
 
-**Run a CrewAI briefing:**
+**Run a briefing (CrewAI is the default):**
 
 ```bash
 # Requires ANTHROPIC_API_KEY in addition to OPENAI_API_KEY
-.venv/bin/python3 mikecast_briefing.py --crew --force
+.venv/bin/python3 mikecast_briefing.py --force
 ```
 
 **Layout** (added by this migration):
@@ -183,7 +183,7 @@ mikecast/
 │   ├── manifest.json
 │   ├── feed.xml
 │   └── cover.png
-└── crew/                     # CrewAI agent pipeline (opt-in via --crew)
+└── crew/                     # CrewAI agent pipeline (default execution path)
     ├── tools.py
     ├── llm.py
     ├── agents.py
@@ -244,7 +244,7 @@ export ELEVENLABS_VOICE_JESSE="voice_id_for_jesse"
 # Optional — enables xAI Grok adaptive search planning (Step 0)
 export XAI_API_KEY="your_xai_api_key"
 
-# Required for the CrewAI path (--crew). Optional for the default --legacy path.
+# Required for the default CrewAI pipeline. Optional only if you plan to run --legacy exclusively.
 export ANTHROPIC_API_KEY="your_anthropic_api_key"
 
 # Optional — enables AWS S3 mode (outputs written to S3 instead of local disk)
@@ -263,7 +263,7 @@ Where to get API keys:
 - `GMAIL_APP_PASSWORD`: A 16-digit App Password from Google Account (not your regular password)
 - `ELEVENLABS_API_KEY`: [ElevenLabs](https://elevenlabs.io/)
 - `XAI_API_KEY`: [xAI](https://x.ai/)
-- `ANTHROPIC_API_KEY`: [Anthropic Console](https://console.anthropic.com/) — only needed when running `--crew`
+- `ANTHROPIC_API_KEY`: [Anthropic Console](https://console.anthropic.com/) — required for the default CrewAI pipeline; only optional when running `--legacy`
 - `S3_BUCKET`: Name of your AWS S3 bucket (must be in us-east-1 or set `AWS_DEFAULT_REGION`). Requires `boto3` and AWS credentials (`~/.aws/credentials` or IAM role).
 - `YOUTUBE_CLIENT_SECRETS`: Path to OAuth 2.0 credentials JSON from [Google Cloud Console](https://console.cloud.google.com/) with YouTube Data API v3 enabled.
 
@@ -283,16 +283,16 @@ cd ~/mikecast
 .venv/bin/python3 mikecast_briefing.py
 ```
 
-To force-regenerate today's briefing if one already exists:
+This runs the default CrewAI pipeline (requires `ANTHROPIC_API_KEY`). To force-regenerate today's briefing if one already exists:
 
 ```bash
 .venv/bin/python3 mikecast_briefing.py --force
 ```
 
-To run the CrewAI agent pipeline instead of the legacy procedural one (requires `ANTHROPIC_API_KEY`):
+To roll back to the legacy procedural pipeline for a single run (no `ANTHROPIC_API_KEY` needed):
 
 ```bash
-.venv/bin/python3 mikecast_briefing.py --crew --force
+.venv/bin/python3 mikecast_briefing.py --legacy --force
 ```
 
 ### 7. Schedule the Daily Cron Job
@@ -341,7 +341,10 @@ The next 6:30 AM run will use the updated image. No manual AWS steps needed.
 ### Running ECS manually
 
 ```bash
-# Trigger an immediate run (uses latest task definition — defaults to --legacy)
+# Trigger an immediate run (uses latest task definition — runs the default CrewAI pipeline).
+# ANTHROPIC_API_KEY is sourced from SSM Parameter Store
+# (path: /mikecast/ANTHROPIC_API_KEY, SecureString) referenced from the task definition's
+# containerDefinitions[0].secrets array.
 aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
@@ -349,14 +352,13 @@ aws ecs run-task \
   --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
   --region us-east-1
 
-# Force the CrewAI path for validation. Requires ANTHROPIC_API_KEY in SSM Parameter Store
-# (path: /mikecast/ANTHROPIC_API_KEY, SecureString) referenced from the task definition's
-# containerDefinitions[0].secrets array.
+# Roll back to the legacy procedural pipeline for a single run (useful if today's CrewAI
+# run misbehaves). ANTHROPIC_API_KEY is not required for this path.
 aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
   --launch-type FARGATE \
-  --overrides '{"containerOverrides":[{"name":"mikecast","command":["python","mikecast_briefing.py","--crew","--force"]}]}' \
+  --overrides '{"containerOverrides":[{"name":"mikecast","command":["python","mikecast_briefing.py","--legacy","--force"]}]}' \
   --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
   --region us-east-1
 
