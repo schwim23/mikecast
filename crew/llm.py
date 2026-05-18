@@ -25,13 +25,20 @@ from mc_config import (
 )
 
 
-def claude_writer_llm(temperature: float = 0.4) -> LLM:
-    """Claude Sonnet for the three writer agents (long-form prose)."""
+def claude_writer_llm(temperature: float = 0.4, max_tokens: int = 6000) -> LLM:
+    """
+    Claude Sonnet for the three writer agents (long-form prose).
+
+    max_tokens defaults to 6000 — comfortable headroom for the HTML briefing
+    (~1500 words ≈ 2400 tokens) and the long-form podcast script even after
+    the agent framing overhead. The previous 4000 cap risked truncating
+    mid-script with the critic unable to detect it.
+    """
     return LLM(
         model=CLAUDE_WRITER_MODEL,
         api_key=ANTHROPIC_API_KEY or None,
         temperature=temperature,
-        max_tokens=4000,
+        max_tokens=max_tokens,
     )
 
 

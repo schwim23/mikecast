@@ -15,7 +15,7 @@ from __future__ import annotations
 
 from crewai import Agent
 
-from mc_config import CATEGORY_SCORER_PROMPTS, SPORTS_TRUSTED_SOURCES
+from mc_config import CATEGORY_SCORER_PROMPTS
 
 from crew.llm import (
     claude_writer_llm,
@@ -24,18 +24,10 @@ from crew.llm import (
     openai_scorer_llm,
 )
 from crew.tools import (
-    cluster_tool,
-    collect_all_news_tool,
-    dedup_tool,
-    enrich_tool,
     fetch_box_score_tool,
     fetch_injuries_tool,
     fetch_standings_tool,
-    filter_sports_trusted_tool,
-    filter_stale_tool,
     process_picks_tool,
-    score_tool,
-    select_top_tool,
     validate_claim_tool,
     xai_grok_search_tool,
 )
@@ -92,85 +84,16 @@ def make_planner() -> Agent:
 
 
 # ---------------------------------------------------------------------------
-# Steps 1–6 — Research Crew (one Researcher per non-sports category)
+# NY Sports specialist crew (Researcher + Fact-Checker)
 # ---------------------------------------------------------------------------
-
-def make_research_orchestrator() -> Agent:
-    """
-    Runs the deterministic collection + dedup + cluster pipeline.
-    This agent is mostly a tool-driver — it doesn't reason about content,
-    it just calls collect_all_news → deduplicate → filter_stale → cluster
-    so the per-category Researchers can score what's left.
-    """
-    return Agent(
-        role="Collection Orchestrator",
-        goal=(
-            "Run the full source collection (NYT + RSS + HN + Reddit + ESPN + "
-            "Google News), deduplicate against the rolling 7-day history, drop "
-            "stale entries, and cluster same-story duplicates. Hand the cleaned "
-            "category dict to the Researchers."
-        ),
-        backstory=(
-            "You are a senior news ops engineer. You don't write copy — you "
-            "coordinate the fetch + dedup pipeline so downstream agents work on "
-            "a clean set of unique stories."
-        ),
-        tools=[collect_all_news_tool, dedup_tool, filter_stale_tool, cluster_tool],
-        llm=openai_helper_llm(),
-        verbose=False,
-        allow_delegation=False,
-    )
-
-
-def make_category_researcher(category: str) -> Agent:
-    """A scorer + enricher specialist for one of the non-sports categories."""
-    scoring_prompt = CATEGORY_SCORER_PROMPTS.get(category, "")
-    return Agent(
-        role=f"{category} Researcher",
-        goal=(
-            f"Score and rank the {category} articles by newsworthiness and "
-            f"credibility, then enrich the top stories with a one-sentence "
-            "'why it matters' insight grounded only in article facts."
-        ),
-        backstory=(
-            f"You are an editor specialising in {category} for a New-York "
-            "based tech executive's daily briefing. Your scoring rubric:\n\n"
-            f"{scoring_prompt}\n\n"
-            f"{_HALLUCINATION_GUARD}"
-        ),
-        tools=[score_tool, select_top_tool, enrich_tool],
-        llm=openai_scorer_llm(),
-        verbose=False,
-        allow_delegation=False,
-    )
-
-
-# ---------------------------------------------------------------------------
-# Steps 1–6 — Dedicated NY Sports Crew (Gatekeeper + Researcher + Fact-Checker)
-# ---------------------------------------------------------------------------
-
-_TRUSTED_SOURCES_LIST = ", ".join(sorted(SPORTS_TRUSTED_SOURCES))
-
-
-def make_sports_gatekeeper() -> Agent:
-    return Agent(
-        role="NY Sports Gatekeeper",
-        goal=(
-            "Drop every sports article from a publisher not on the trusted-sources "
-            "allowlist BEFORE the Researcher sees it. Untrusted aggregators (AOL, "
-            "random blogs) recirculate stale fan-speculation content that has caused "
-            "hallucinated scores and trades in past briefings."
-        ),
-        backstory=(
-            "You are an obsessive newsroom standards editor. The only publishers "
-            f"you allow for NY sports are: {_TRUSTED_SOURCES_LIST}. "
-            "If an article has no source field, you drop it (fail-closed)."
-        ),
-        tools=[filter_sports_trusted_tool, filter_stale_tool],
-        llm=openai_helper_llm(),
-        verbose=False,
-        allow_delegation=False,
-    )
+# Note: a Gatekeeper / Category-Researcher / Collection-Orchestrator agent used
+# to live here. They were never instantiated by the live pipeline — the sports
+# trusted-source filter and the per-category scorer both run as deterministic
+# Python in research_crew.py / mc_collect.py. Adding LLM agents for either was
+# pure latency and prompt-context cost. If you reintroduce them, give them work
+# the legacy code cannot do (e.g. dynamic source discovery, cross-category
+# context). Don't add an agent whose only job is to drive one deterministic
+# function call.
 
 
 def make_sports_researcher() -> Agent:
@@ -178,10 +101,11 @@ def make_sports_researcher() -> Agent:
     return Agent(
         role="NY Sports Researcher",
         goal=(
-            "Score and rank Yankees / Knicks / Giants / Devils stories. When a "
-            "specific game outcome, standings position, or player status is "
-            "implied but not stated in the gathered articles, use the ESPN tools "
-            "to verify primary-source facts — never fill gaps with training knowledge."
+            "Decide which of the four NY teams (Yankees, Knicks, Giants, Devils) "
+            "have a recent game outcome, standings position, or player status "
+            "implied in today's gathered articles. For each such team, call the "
+            "matching ESPN tool to retrieve the primary-source fact. Skip teams "
+            "with no implied claim — never fill gaps with training knowledge."
         ),
         backstory=(
             "You are a sports desk editor with 20 years on the NY beat. You are "
@@ -190,14 +114,11 @@ def make_sports_researcher() -> Agent:
             f"{scoring_prompt}\n\n"
             f"{_HALLUCINATION_GUARD} {_TEAM_RULE}"
         ),
-        tools=[
-            score_tool,
-            select_top_tool,
-            enrich_tool,
-            fetch_box_score_tool,
-            fetch_standings_tool,
-            fetch_injuries_tool,
-        ],
+        # ONLY the ESPN tools — the legacy scorer/selector/enricher already ran
+        # in research_crew.py before the Researcher sees these articles. Listing
+        # them here just inflated every tool-choice prompt without changing
+        # behavior, since the Task overrides the tool list anyway.
+        tools=[fetch_box_score_tool, fetch_standings_tool, fetch_injuries_tool],
         llm=openai_scorer_llm(),
         verbose=False,
         allow_delegation=False,
@@ -211,23 +132,32 @@ def make_sports_researcher() -> Agent:
 
 
 def make_sports_fact_checker() -> Agent:
+    """
+    Used by critic_crew.run_critic_pass for observability on the NY Sports
+    section. Sentences flagged 'no' by validate_claim_against_articles are
+    logged at WARNING — NY Sports is still NEVER auto-patched, but operators
+    get a daily signal when Claude drifts from source material.
+    """
     return Agent(
         role="NY Sports Fact-Checker",
         goal=(
-            "For every sentence in the NY Sports section, verify the specific "
-            "claim is directly supported by the source articles. Reject any "
-            "patched draft that introduces an unsupported claim."
+            "For every factual sentence in the NY Sports section of today's "
+            "draft, verify the claim is directly supported by the source "
+            "articles. Log unsupported sentences so operators see drift; the "
+            "section itself is never auto-patched."
         ),
         backstory=(
             "You are a strict fact-checker. You break the writer's draft into "
             "individual factual sentences and check each one against the source "
             "articles using validate_claim_against_articles. You err on the "
-            "side of cutting unsupported lines rather than including them."
+            "side of flagging unsupported lines rather than passing them."
         ),
         tools=[validate_claim_tool],
         llm=openai_helper_llm(),
         verbose=False,
         allow_delegation=False,
+        max_iter=20,
+        max_execution_time=120,
     )
 
 
