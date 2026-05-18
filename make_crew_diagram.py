@@ -23,7 +23,7 @@ C_MUTED     = "#8b949e"
 C_WHITE     = "#f0f6fc"
 C_ARROW     = "#58a6ff"
 
-FIG_W, FIG_H = 20, 26
+FIG_W, FIG_H = 20, 28
 
 fig, ax = plt.subplots(figsize=(FIG_W, FIG_H), facecolor=BG)
 ax.set_facecolor(BG)
@@ -103,18 +103,18 @@ def section_label(x, y, text, color):
 
 
 # ── title ─────────────────────────────────────────────────────────────────────
-ax.text(FIG_W / 2, 25.3, "MikeCast — CrewAI Pipeline",
+ax.text(FIG_W / 2, 27.3, "MikeCast — CrewAI Pipeline",
         ha="center", va="center", fontsize=28, fontweight="bold", color=C_WHITE)
-ax.text(FIG_W / 2, 24.8,
+ax.text(FIG_W / 2, 26.8,
         "End-to-end daily news brief & podcast  ·  --crew execution path",
         ha="center", va="center", fontsize=13, color=C_MUTED)
-ax.plot([1, 19], [24.5, 24.5], color=BORDER, lw=1, zorder=3)
+ax.plot([1, 19], [26.5, 26.5], color=BORDER, lw=1, zorder=3)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 0 — Planning Crew
 # ══════════════════════════════════════════════════════════════════════════════
-Y0 = 23.2
+Y0 = 25.2
 box(1.0, Y0, 18, 0.95, C_XAI,
     "STEP 0  ·  Planning Crew",
     "xai_grok_search tool  →  {dynamic_queries, trending_context, trending}",
@@ -127,9 +127,9 @@ arrow(FIG_W / 2, Y0, FIG_W / 2, Y0 - 0.32)
 # ══════════════════════════════════════════════════════════════════════════════
 # STEPS 1–6 — Research (two columns: non-sports vs NY Sports)
 # ══════════════════════════════════════════════════════════════════════════════
-Y_RES_TOP = 22.6
-Y_RES_BOT = 17.0
-RES_H = Y_RES_TOP - Y_RES_BOT  # 5.6
+Y_RES_TOP = 24.4
+Y_RES_BOT = 18.4
+RES_H = Y_RES_TOP - Y_RES_BOT  # 6.0
 container = FancyBboxPatch(
     (1.0, Y_RES_BOT), 18, RES_H,
     boxstyle="round,pad=0,rounding_size=0.4",
@@ -146,11 +146,11 @@ ax.text(1.3, Y_RES_TOP - 0.6,
 
 # ─── Left column: non-sports research (procedural) ─────────────────────────
 LX, LW = 1.4, 8.6
-LY = Y_RES_TOP - 1.05
+LY = Y_RES_TOP - 1.05  # 23.35
 section_label(LX, LY, "Research Crew (non-sports)  ·  crew/research_crew.py", C_COLLECT)
 
 # Source collection bar
-LY -= 0.7
+LY -= 0.7  # 22.65
 sources = ["NYT", "20+ RSS", "Reddit", "HN", "ESPN RSS", "Google News"]
 sw = (LW - 0.2 - 0.1 * (len(sources) - 1)) / len(sources)
 for i, s in enumerate(sources):
@@ -158,8 +158,8 @@ for i, s in enumerate(sources):
 ax.text(LX + LW / 2, LY + 0.05, "Step 1  ·  collect_all_news (parallel)",
         ha="center", va="bottom", fontsize=8.5, color=C_COLLECT)
 
-# Procedural stages
-LY -= 1.0
+# Procedural stages — row 1
+LY -= 1.0  # 21.65
 stages = [
     ("Step 2 — Deduplicate\n7-day history", C_PROCESS),
     ("Step 2b — Filter stale\n(max 3 days)", C_PROCESS),
@@ -169,7 +169,8 @@ sw2 = (LW - 0.2 - 0.1 * (len(stages) - 1)) / len(stages)
 for i, (lbl, col) in enumerate(stages):
     small_box(LX + i * (sw2 + 0.1), LY - 0.7, sw2, 0.7, col, lbl, fontsize=7.5)
 
-LY -= 1.05
+# Procedural stages — row 2
+LY -= 1.05  # 20.60
 stages2 = [
     ("Step 4 — Score & Rank\nGPT-4o per category", C_SCORE),
     ("Step 5 — Select top 25\nproportional", C_PROCESS),
@@ -178,23 +179,23 @@ stages2 = [
 for i, (lbl, col) in enumerate(stages2):
     small_box(LX + i * (sw2 + 0.1), LY - 0.7, sw2, 0.7, col, lbl, fontsize=7.5)
 
-# Note
-ax.text(LX + LW / 2, LY - 0.95,
+# Italic note
+ax.text(LX + LW / 2, LY - 1.05,
         "Wraps mc_collect.* directly  ·  no LLM agents in this column",
         ha="center", va="center", fontsize=8, color=C_MUTED, style="italic")
 
-# Down arrow out of left column to Step 7
-arrow(LX + LW / 2, LY - 1.15, LX + LW / 2, Y_RES_BOT + 0.05)
+# Down arrow out of left column to container bottom
+arrow(LX + LW / 2, LY - 1.35, LX + LW / 2, Y_RES_BOT + 0.05)
 
 
 # ─── Right column: NY Sports Crew ───────────────────────────────────────────
 RX = 10.4
 RW = 8.2
-RY = Y_RES_TOP - 1.05
+RY = Y_RES_TOP - 1.05  # 23.35
 section_label(RX, RY, "NY Sports Crew  ·  crew/sports_research_crew.py", C_SPORTS)
 
 # Gatekeeper (procedural filter, same as non-sports column)
-RY -= 0.85
+RY -= 0.7  # 22.65 — align with sources bar in left column
 small_box(RX, RY - 0.55, RW, 0.55, C_SPORTS,
           "Gatekeeper  ·  SPORTS_TRUSTED_SOURCES allowlist  (filter_sports_by_trusted_sources)",
           fontsize=8)
@@ -202,48 +203,52 @@ ax.text(RX + RW / 2, RY + 0.05, "trust-list filter  ·  drops AOL & untrusted ag
         ha="center", va="bottom", fontsize=7.5, color=C_MUTED)
 
 # Researcher (real CrewAI Agent)
-RY -= 0.95
-researcher_h = 1.7
+researcher_top = 22.0
+researcher_bot = 20.0
+researcher_h = researcher_top - researcher_bot  # 2.0
 rect = FancyBboxPatch(
-    (RX, RY - researcher_h), RW, researcher_h,
+    (RX, researcher_bot), RW, researcher_h,
     boxstyle="round,pad=0,rounding_size=0.25",
     linewidth=1.6, edgecolor=C_SPORTS, facecolor=f"{C_SPORTS}22", zorder=4,
 )
 ax.add_patch(rect)
-ax.text(RX + RW / 2, RY - 0.22, "NY Sports Researcher",
+ax.text(RX + RW / 2, researcher_top - 0.25, "NY Sports Researcher",
         ha="center", va="center", fontsize=10, fontweight="bold",
         color=C_WHITE, zorder=5)
-agent_badge(RX + 0.15, RY - 0.45, "CrewAI Agent")
-llm_badge(RX + RW - 2.15, RY - 0.45, "GPT-4o", C_SCORE)
+agent_badge(RX + 0.15, researcher_top - 0.55, "CrewAI Agent")
+llm_badge(RX + RW - 2.15, researcher_top - 0.55, "GPT-4o", C_SCORE)
 
-ax.text(RX + RW / 2, RY - 0.7,
+ax.text(RX + RW / 2, researcher_top - 0.85,
         "max_iter=15  ·  max_execution_time=180s",
         ha="center", va="center", fontsize=7.5, color=C_MUTED, zorder=5)
 
-# ESPN tools row
+ax.text(RX + RW / 2, researcher_top - 1.15,
+        "ESPN site.api  ·  primary-source verification",
+        ha="center", va="center", fontsize=7.5, color=C_MUTED, zorder=5)
+
+# ESPN tools row (inside researcher box, at the bottom)
 tools = ["fetch_sports_box_score", "fetch_sports_standings", "fetch_team_injury_report"]
 tw = (RW - 0.4 - 0.15 * (len(tools) - 1)) / len(tools)
+tools_y = researcher_bot + 0.12
 for i, t in enumerate(tools):
-    small_box(RX + 0.2 + i * (tw + 0.15), RY - researcher_h + 0.1,
-              tw, 0.55, C_SPORTS, t, fontsize=6.8)
-ax.text(RX + RW / 2, RY - researcher_h + 0.78,
-        "ESPN site.api  ·  primary-source verification",
-        ha="center", va="bottom", fontsize=7.2, color=C_MUTED)
+    small_box(RX + 0.2 + i * (tw + 0.15), tools_y,
+              tw, 0.45, C_SPORTS, t, fontsize=6.8)
 
 # Output: verified_sports_facts
-RY -= researcher_h + 0.55
-small_box(RX, RY - 0.55, RW, 0.55, C_SPORTS,
+output_top = 19.45
+output_bot = 18.90
+small_box(RX, output_bot, RW, output_top - output_bot, C_SPORTS,
           "→ verified_sports_facts  {team: 'Yankees beat Red Sox 7-3 …'}",
           fontsize=8)
 
-# Down arrow out of right column to Step 7
-arrow(RX + RW / 2, RY - 0.65, RX + RW / 2, Y_RES_BOT + 0.05)
+# Down arrow out of right column to container bottom
+arrow(RX + RW / 2, output_bot - 0.05, RX + RW / 2, Y_RES_BOT + 0.05)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 7 — Picks Crew
 # ══════════════════════════════════════════════════════════════════════════════
-Y7 = 16.45
+Y7 = 17.2
 box(1.0, Y7, 18, 0.7, C_COLLECT,
     "STEP 7  ·  Picks Crew    (pass-through to mc_collect.process_picks)",
     "URLs · PDFs · raw text  →  summarised pick objects",
@@ -254,8 +259,8 @@ arrow(FIG_W / 2, Y7, FIG_W / 2, Y7 - 0.32)
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 8 — Writing Crew (3 parallel Claude agents)
 # ══════════════════════════════════════════════════════════════════════════════
-Y8 = 14.55
-write_h = 1.55
+Y8 = 14.7
+write_h = 1.7
 rect = FancyBboxPatch(
     (1.0, Y8), 18, write_h,
     boxstyle="round,pad=0,rounding_size=0.35",
@@ -275,21 +280,23 @@ writers = [
      "Tagged [MIKE]/[ELIZABETH]/[JESSE]\nELIZABETH covers tech/biz  ·  JESSE covers sports"),
 ]
 ww = (18 - 0.4 - 0.3 * 2) / 3
+inner_h = write_h - 0.55
 for i, (title, sub) in enumerate(writers):
     bx = 1.2 + i * (ww + 0.3)
+    by = Y8 + 0.15
     rect = FancyBboxPatch(
-        (bx, Y8 + 0.15), ww, write_h - 0.55,
+        (bx, by), ww, inner_h,
         boxstyle="round,pad=0,rounding_size=0.22",
         linewidth=1.3, edgecolor=C_GENERATE, facecolor=f"{C_GENERATE}28", zorder=4,
     )
     ax.add_patch(rect)
-    ax.text(bx + ww / 2, Y8 + write_h - 0.5, title,
+    ax.text(bx + ww / 2, by + inner_h - 0.22, title,
             ha="center", va="center", fontsize=9.5, fontweight="bold",
             color=C_WHITE, zorder=5)
-    ax.text(bx + ww / 2, Y8 + 0.55, sub,
+    ax.text(bx + ww / 2, by + inner_h / 2 - 0.05, sub,
             ha="center", va="center", fontsize=7.8, color=C_MUTED, zorder=5)
-    agent_badge(bx + 0.1, Y8 + 0.18, "CrewAI Agent")
-    llm_badge(bx + ww - 2.1, Y8 + 0.18, "Claude Sonnet 4.6", C_GENERATE)
+    agent_badge(bx + 0.1, by + 0.12, "CrewAI Agent")
+    llm_badge(bx + ww - 2.1, by + 0.13, "Claude Sonnet 4.6", C_GENERATE)
 
 arrow(FIG_W / 2, Y8, FIG_W / 2, Y8 - 0.32)
 
@@ -297,80 +304,82 @@ arrow(FIG_W / 2, Y8, FIG_W / 2, Y8 - 0.32)
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 8b — Critic Crew  (Scorer + Patcher + NY Sports Fact-Checker observability)
 # ══════════════════════════════════════════════════════════════════════════════
-Y8b = 11.6
-crit_h = 2.5
+Y8b = 11.0
+crit_h = 3.0
 rect = FancyBboxPatch(
     (1.0, Y8b), 18, crit_h,
     boxstyle="round,pad=0,rounding_size=0.35",
     linewidth=1.5, edgecolor=C_CRITIC, facecolor=f"{C_CRITIC}11", zorder=2,
 )
 ax.add_patch(rect)
-ax.text(1.3, Y8b + crit_h - 0.22,
+ax.text(1.3, Y8b + crit_h - 0.25,
         "STEP 8b  ·  Critic Crew",
         fontsize=11, fontweight="bold", color=C_CRITIC, zorder=4)
-ax.text(1.3, Y8b + crit_h - 0.52,
+ax.text(1.3, Y8b + crit_h - 0.58,
         "Scorer grades each category 1–10  ·  sections < 7 patched by Patcher  ·  NY Sports NEVER patched  ·  fact-check observability always runs",
         fontsize=8.5, color=C_MUTED, zorder=4)
 
-# Scorer
+# Scorer + Patcher row
+ScY = Y8b + 1.30
+sh = 1.0
 sx = 1.4
 sw = 7.6
-sh = 0.9
-ScY = Y8b + 1.0   # scorer/patcher row
+px = 11.0
+pw = 7.6
+
 rect = FancyBboxPatch(
     (sx, ScY), sw, sh,
     boxstyle="round,pad=0,rounding_size=0.22",
     linewidth=1.3, edgecolor=C_CRITIC, facecolor=f"{C_CRITIC}28", zorder=4,
 )
 ax.add_patch(rect)
-ax.text(sx + sw / 2, ScY + 0.62, "Section Quality Scorer",
+ax.text(sx + sw / 2, ScY + sh - 0.25, "Section Quality Scorer",
         ha="center", va="center", fontsize=10, fontweight="bold",
         color=C_WHITE, zorder=5)
-ax.text(sx + sw / 2, ScY + 0.3,
+ax.text(sx + sw / 2, ScY + sh / 2 - 0.05,
         "JSON: {category_scores, issues, overall_passed}",
         ha="center", va="center", fontsize=7.8, color=C_MUTED, zorder=5)
-agent_badge(sx + 0.1, ScY + 0.04, "CrewAI Agent")
-llm_badge(sx + sw - 2.1, ScY + 0.04, "GPT-4o", C_SCORE)
+agent_badge(sx + 0.12, ScY + 0.12, "CrewAI Agent")
+llm_badge(sx + sw - 2.12, ScY + 0.13, "GPT-4o", C_SCORE)
 
-# Patcher
-px = 11.0
-pw = 7.6
 rect = FancyBboxPatch(
     (px, ScY), pw, sh,
     boxstyle="round,pad=0,rounding_size=0.22",
     linewidth=1.3, edgecolor=C_CRITIC, facecolor=f"{C_CRITIC}28", zorder=4,
 )
 ax.add_patch(rect)
-ax.text(px + pw / 2, ScY + 0.62, "Section Patcher",
+ax.text(px + pw / 2, ScY + sh - 0.25, "Section Patcher",
         ha="center", va="center", fontsize=10, fontweight="bold",
         color=C_WHITE, zorder=5)
-ax.text(px + pw / 2, ScY + 0.3,
+ax.text(px + pw / 2, ScY + sh / 2 - 0.05,
         "Rewrites weak <h3>+<p> fragment  ·  per-category, NY Sports excluded",
         ha="center", va="center", fontsize=7.8, color=C_MUTED, zorder=5)
-agent_badge(px + 0.1, ScY + 0.04, "CrewAI Agent")
-llm_badge(px + pw - 2.1, ScY + 0.04, "Claude Sonnet 4.6", C_GENERATE)
+agent_badge(px + 0.12, ScY + 0.12, "CrewAI Agent")
+llm_badge(px + pw - 2.12, ScY + 0.13, "Claude Sonnet 4.6", C_GENERATE)
 
 # Scorer → Patcher arrow (conditional)
-arrow(sx + sw, ScY + 0.45, px, ScY + 0.45, color=C_CRITIC, lw=1.5)
-ax.text((sx + sw + px) / 2, ScY + 0.72, "if score < 7",
-        ha="center", va="bottom", fontsize=7.2, color=C_CRITIC, style="italic")
+arrow_y = ScY + sh - 0.30
+arrow(sx + sw + 0.05, arrow_y, px - 0.05, arrow_y, color=C_CRITIC, lw=1.5)
+ax.text((sx + sw + px) / 2, arrow_y + 0.20, "if score < 7",
+        ha="center", va="bottom", fontsize=7.4, color=C_CRITIC, style="italic")
 
 # NY Sports Fact-Checker row (read-only observability — always runs)
-FcY = Y8b + 0.18
+FcY = Y8b + 0.25
+fch = 0.85
 fcw = 17.2
 rect = FancyBboxPatch(
-    (1.4, FcY), fcw, 0.7,
+    (1.4, FcY), fcw, fch,
     boxstyle="round,pad=0,rounding_size=0.22",
     linewidth=1.3, edgecolor=C_SPORTS, facecolor=f"{C_SPORTS}22", zorder=4,
 )
 ax.add_patch(rect)
-ax.text(1.55, FcY + 0.42, "NY Sports Fact-Checker  (read-only)",
+ax.text(1.55, FcY + fch - 0.25, "NY Sports Fact-Checker  (read-only)",
         ha="left", va="center", fontsize=9.5, fontweight="bold",
         color=C_WHITE, zorder=5)
-ax.text(1.55, FcY + 0.14,
+ax.text(1.55, FcY + 0.32,
         "validate_claim_against_articles for each sentence in NY Sports HTML + [JESSE] block  ·  logs WARNING for unsupported claims  ·  never patches",
         ha="left", va="center", fontsize=7.6, color=C_MUTED, zorder=5)
-llm_badge(1.4 + fcw - 2.1, FcY + 0.16, "GPT-4o-mini", C_XAI)
+llm_badge(1.4 + fcw - 2.15, FcY + 0.15, "GPT-4o-mini", C_XAI)
 
 arrow(FIG_W / 2, Y8b, FIG_W / 2, Y8b - 0.32)
 
@@ -378,7 +387,7 @@ arrow(FIG_W / 2, Y8b, FIG_W / 2, Y8b - 0.32)
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 9 — Audio (unchanged)
 # ══════════════════════════════════════════════════════════════════════════════
-Y9 = 10.5
+Y9 = 8.8
 aud_h = 1.55
 rect = FancyBboxPatch(
     (1.0, Y9), 18, aud_h,
@@ -393,10 +402,10 @@ ax.text(1.3, Y9 + aud_h - 0.52,
         "ElevenLabs 3-voice preferred  ·  OpenAI TTS single-voice fallback",
         fontsize=8.5, color=C_MUTED, zorder=4)
 
-small_box(1.4, Y9 + 0.15, 8.6, 0.85, C_AUDIO,
+small_box(1.4, Y9 + 0.15, 8.6, 0.7, C_AUDIO,
           "ElevenLabs 3-voice MP3\nMike · Elizabeth · Jesse  ·  ★ podcast feed",
           fontsize=8.5)
-small_box(10.6, Y9 + 0.15, 8.0, 0.85, C_AUDIO,
+small_box(10.6, Y9 + 0.15, 8.0, 0.7, C_AUDIO,
           "OpenAI TTS  ·  tts-1-hd / alloy\nSingle-voice MP3  ·  email + backup",
           fontsize=8.5)
 
@@ -406,7 +415,7 @@ arrow(FIG_W / 2, Y9, FIG_W / 2, Y9 - 0.32)
 # ══════════════════════════════════════════════════════════════════════════════
 # STEP 10 — Delivery (unchanged)
 # ══════════════════════════════════════════════════════════════════════════════
-Y10 = 8.2
+Y10 = 6.3
 del_h = 1.85
 rect = FancyBboxPatch(
     (1.0, Y10), 18, del_h,
@@ -435,7 +444,7 @@ for i, (lbl, col) in enumerate(dels):
 # ══════════════════════════════════════════════════════════════════════════════
 # Final outputs
 # ══════════════════════════════════════════════════════════════════════════════
-Yout = 6.4
+Yout = 4.5
 outs = [
     (1.0,  "[ Email Briefing ]",     C_DELIVER),
     (5.0,  "[ Podcast Episode ]",    C_AUDIO),
@@ -472,7 +481,7 @@ ax.text(x + w / 2, Yout + 0.31, "[ YouTube + Ads ]",
 # ══════════════════════════════════════════════════════════════════════════════
 # Sidebar: where the real CrewAI agents live
 # ══════════════════════════════════════════════════════════════════════════════
-Ysb_top = 5.4
+Ysb_top = 3.9
 sb_h = 1.75
 rect = FancyBboxPatch(
     (1.0, Ysb_top - sb_h), 8.5, sb_h,
@@ -522,9 +531,9 @@ for i, line in enumerate(inv):
 # ══════════════════════════════════════════════════════════════════════════════
 # Legend
 # ══════════════════════════════════════════════════════════════════════════════
-Yleg = 3.1
-ax.plot([1, 19], [Yleg + 0.6, Yleg + 0.6], color=BORDER, lw=0.8, zorder=3)
-ax.text(1.2, Yleg + 0.32, "Legend",
+Yleg = 1.65
+ax.plot([1, 19], [Yleg + 0.55, Yleg + 0.55], color=BORDER, lw=0.8, zorder=3)
+ax.text(1.2, Yleg + 0.28, "Legend",
         ha="left", va="center", fontsize=10, fontweight="bold", color=C_WHITE)
 
 legend_items = [
@@ -539,7 +548,7 @@ legend_items = [
     (C_DELIVER, "Delivery"),
 ]
 lx = 3.0
-ly = Yleg + 0.32
+ly = Yleg + 0.28
 for col, lbl in legend_items:
     rect = FancyBboxPatch(
         (lx, ly - 0.13), 0.26, 0.26,
@@ -553,8 +562,8 @@ for col, lbl in legend_items:
 
 
 # Provider badges row
-Ypb = 2.3
-ax.text(1.2, Ypb + 0.15, "LLM Providers",
+Ypb = 0.75
+ax.text(1.2, Ypb + 0.20, "LLM Providers",
         ha="left", va="center", fontsize=10, fontweight="bold", color=C_WHITE)
 providers = [
     ("Anthropic Claude Sonnet 4.6", C_GENERATE, "writers, patcher"),
@@ -564,24 +573,24 @@ providers = [
     ("ElevenLabs",                  C_AUDIO,    "3-voice TTS"),
     ("OpenAI TTS (tts-1-hd)",       C_AUDIO,    "single-voice fallback"),
 ]
-px = 3.0
+px_b = 3.0
 for name, col, role in providers:
     rect = FancyBboxPatch(
-        (px, Ypb - 0.1), 2.6, 0.5,
+        (px_b, Ypb - 0.05), 2.6, 0.55,
         boxstyle="round,pad=0,rounding_size=0.12",
         linewidth=1.2, edgecolor=col, facecolor=f"{col}33", zorder=4,
     )
     ax.add_patch(rect)
-    ax.text(px + 1.3, Ypb + 0.22, name,
+    ax.text(px_b + 1.3, Ypb + 0.32, name,
             ha="center", va="center", fontsize=7.6, fontweight="bold",
             color=C_WHITE, zorder=5)
-    ax.text(px + 1.3, Ypb + 0.0, role,
+    ax.text(px_b + 1.3, Ypb + 0.10, role,
             ha="center", va="center", fontsize=6.8, color=C_MUTED, zorder=5)
-    px += 2.75
+    px_b += 2.75
 
 
 # ── watermark ─────────────────────────────────────────────────────────────────
-ax.text(FIG_W / 2, 0.6,
+ax.text(FIG_W / 2, 0.25,
         "mikecast.io   ·   --crew path   ·   shadow-validated alongside --legacy",
         ha="center", va="center", fontsize=8.5, color=C_MUTED, alpha=0.7)
 
