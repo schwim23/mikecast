@@ -31,6 +31,7 @@ from crew.tools import (
     fetch_injuries_tool,
     fetch_standings_tool,
 )
+from mc_config import TODAY, TODAY_DISPLAY
 
 logger = logging.getLogger("mikecast.crew.sports")
 
@@ -72,6 +73,7 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
     article_block = _build_sports_briefing(ny_sports)
 
     task_description = (
+        f"Today is {TODAY_DISPLAY} ({TODAY}).\n\n"
         f"Today's NY Sports articles (already filtered to trusted sources):\n\n"
         f"{article_block}\n\n"
         f"For each of these four NY teams — {', '.join(_NY_TEAMS)} — decide whether the "
@@ -79,11 +81,17 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
         "injury. If they do, call fetch_sports_box_score, fetch_sports_standings, or "
         "fetch_team_injury_report to retrieve the primary-source fact. If they don't, "
         "OMIT that team entirely.\n\n"
+        "CRITICAL — game timing: the fetch_sports_box_score tool returns BOTH a raw UTC "
+        "`date` field AND human-readable `date_et` + `relative_to_today` fields (e.g. "
+        "'TONIGHT', 'TOMORROW NIGHT', 'LAST NIGHT'). When you write timing into the "
+        "verified-facts string, use the `relative_to_today` label verbatim — NEVER infer "
+        "'tonight' or 'tomorrow' from the raw UTC date or from article copy. The label "
+        "is anchored to today in Eastern Time and is the only trustworthy source.\n\n"
         "Return ONLY a JSON object keyed by team name with short factual prose for each "
-        "team you verified. Example:\n"
+        "team you verified. Example (note how timing comes straight from relative_to_today):\n"
         "{\n"
-        '  "Yankees": "Yankees beat Red Sox 7-3 at home. Next game: tomorrow vs Orioles.",\n'
-        '  "Knicks": "Knicks 50-32, 3rd in Eastern Conference."\n'
+        '  "Yankees": "Yankees beat Red Sox 7-3 LAST NIGHT at home. Next game TOMORROW NIGHT vs Orioles.",\n'
+        '  "Knicks": "Knicks 50-32, 3rd in Eastern Conference. Next game TOMORROW NIGHT vs Cavaliers."\n'
         "}\n\n"
         "If you cannot verify anything, return {}.\n"
         "Use ONLY facts returned by the ESPN tools — never your training knowledge."
@@ -142,6 +150,8 @@ def format_verified_facts_block(verified: dict[str, str]) -> str:
     lines.append(
         "Treat these facts as ground truth alongside the articles. Do not contradict "
         "them. Do not invent additional team/player details beyond what is here or in "
-        "the articles."
+        "the articles. Game-timing words like TONIGHT, TOMORROW NIGHT, LAST NIGHT, "
+        "YESTERDAY are anchored to today's date in Eastern Time — copy them verbatim "
+        "into your script and never substitute your own timing guess from article copy."
     )
     return "\n".join(lines)

@@ -19,11 +19,17 @@ from __future__ import annotations
 
 import json
 import logging
+from datetime import datetime
 from typing import Any
 
 import requests
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
+
+try:
+    from zoneinfo import ZoneInfo
+except ImportError:  # pragma: no cover — Python <3.9 fallback, kept for parity with mc_config
+    from backports.zoneinfo import ZoneInfo  # type: ignore
 
 from mc_collect import (
     cluster_articles as _cluster_articles,
@@ -42,9 +48,53 @@ from mc_collect import (
     search_news_web as _gnews_search,
     select_top_articles as _select_top,
 )
-from mc_config import OPENAI_API_KEY, OPENAI_HELPER_MODEL
+from mc_config import OPENAI_API_KEY, OPENAI_HELPER_MODEL, TODAY
 
 logger = logging.getLogger("mikecast.crew.tools")
+
+_ET = ZoneInfo("America/New_York")
+
+
+def _localize_espn_date(raw: str) -> dict:
+    """
+    Convert an ESPN UTC ISO timestamp (e.g. ``'2026-05-19T23:00Z'``) into an
+    ET-localized view the writer can read directly:
+
+        {
+          "date_et": "Monday, May 19 at 7:00 PM ET",
+          "relative_to_today": "TOMORROW NIGHT",
+        }
+
+    The writer is anchored on TODAY (computed in America/New_York). Without
+    this conversion, raw UTC strings reach the prompt unchanged and the LLM
+    routinely mis-renders "tomorrow night" as "tonight". Returns ``{}`` if
+    ``raw`` is empty or unparseable so callers can fall back gracefully.
+    """
+    if not raw:
+        return {}
+    try:
+        dt_utc = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        dt_et = dt_utc.astimezone(_ET)
+        delta_days = (dt_et.date() - datetime.strptime(TODAY, "%Y-%m-%d").date()).days
+    except (ValueError, TypeError):
+        return {}
+
+    evening = dt_et.hour >= 16  # 4 PM ET or later → call it "night"
+    if delta_days == 0:
+        relative = "TONIGHT" if evening else "TODAY"
+    elif delta_days == 1:
+        relative = "TOMORROW NIGHT" if evening else "TOMORROW"
+    elif delta_days == -1:
+        relative = "LAST NIGHT" if evening else "YESTERDAY"
+    elif delta_days > 1:
+        relative = f"IN {delta_days} DAYS"
+    else:
+        relative = f"{abs(delta_days)} DAYS AGO"
+
+    return {
+        "date_et": dt_et.strftime("%A, %B %-d at %-I:%M %p ET"),
+        "relative_to_today": relative,
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -459,8 +509,12 @@ class FetchSportsBoxScoreTool(BaseTool):
     name: str = "fetch_sports_box_score"
     description: str = (
         "Fetch the most recent completed game for a NY team (Yankees, Knicks, "
-        "Giants, Devils) from ESPN. Returns {ok, team, opponent, score, status, "
-        "date, next_game} or {ok: False, error}."
+        "Giants, Devils) from ESPN. Returns {ok, team, status, home, away, "
+        "date (raw UTC), date_et (human-readable ET), relative_to_today "
+        "('LAST NIGHT' / 'YESTERDAY' / etc.), next_game: {opponent, date, "
+        "date_et, relative_to_today}} or {ok: False, error}. When writing "
+        "about game timing, always use relative_to_today verbatim — never "
+        "parse the raw UTC date yourself."
     )
 
     class _Input(BaseModel):
@@ -516,12 +570,19 @@ class FetchSportsBoxScoreTool(BaseTool):
             ne = next_event[0]
             ne_comp = (ne.get("competitions") or [{}])[0]
             opponents = [_name(c) for c in (ne_comp.get("competitors") or []) if _name(c) != team]
-            next_game = {"date": ne.get("date", ""), "opponent": opponents[0] if opponents else ""}
+            ne_raw = ne.get("date", "")
+            next_game = {
+                "opponent": opponents[0] if opponents else "",
+                "date": ne_raw,
+                **_localize_espn_date(ne_raw),
+            }
 
+        last_raw = last.get("date", "")
         return {
             "ok": True,
             "team": team,
-            "date": last.get("date", ""),
+            "date": last_raw,
+            **_localize_espn_date(last_raw),
             "status": comp.get("status", {}).get("type", {}).get("description", ""),
             "home": {"name": _name(home), "score": _score(home)},
             "away": {"name": _name(away), "score": _score(away)},

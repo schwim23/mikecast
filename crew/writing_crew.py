@@ -200,6 +200,20 @@ def _ny_sports_block(verified_sports_facts: dict[str, str] | None) -> str:
     return format_verified_facts_block(verified_sports_facts or {})
 
 
+# Shared anti-skip rule. The articles context already labels each category with
+# its article count ("=== COMPANIES — 4 ARTICLES (discuss ONLY these) ==="). The
+# writer has historically still output "No Companies News Available" anyway. This
+# rule blocks that exact failure mode.
+_ANTI_SKIP_RULE = (
+    "MANDATORY: every category whose header above says '1 ARTICLE' or more MUST "
+    "appear as a written section in your output. NEVER emit the phrases 'No X News "
+    "Available', 'no items today', '(empty)', or any equivalent for a category that "
+    "has articles. If a category has only 1-2 articles, write a shorter section "
+    "(one well-developed story) — do not skip it. The only category you may omit "
+    "entirely is one whose header explicitly says '0 ARTICLES'."
+)
+
+
 def _html_task(
     categorised: dict[str, list[dict]],
     picks: list[dict],
@@ -226,7 +240,8 @@ def _html_task(
         "3. KEY TRENDS & INSIGHTS — 3-5 bullets.\n"
         "4. WHAT TO WATCH — 3-4 forward-looking items.\n\n"
         "Only use facts from the article inputs. Do NOT add details from training knowledge. "
-        "Never tease — always tell the listener what actually happened."
+        "Never tease — always tell the listener what actually happened.\n\n"
+        f"{_ANTI_SKIP_RULE}"
     )
     expected = "Plain-text briefing in the 4-section format described."
     return desc, expected
@@ -261,7 +276,8 @@ def _single_voice_task(
         "  7. OUTRO (~40w) — wrap-up, sign-off.\n\n"
         "Cut anything that isn't moving the listener forward. Prefer one specific "
         "fact over two vague ones. Natural spoken language — contractions, transitions, "
-        "rhetorical questions. No stage directions. No URLs."
+        "rhetorical questions. No stage directions. No URLs.\n\n"
+        f"{_ANTI_SKIP_RULE}"
     )
     expected = "Spoken-form podcast script, 900–1000 words total."
     return desc, expected
@@ -298,7 +314,8 @@ def _conversational_task(
         "End with: \"Back to you, Mike.\"\n"
         "6. [MIKE] SIGN-OFF (~40w).\n\n"
         "Cut anything that isn't moving the listener forward. Prefer one specific "
-        "fact over two vague ones. No URLs. No stage directions. Only spoken words."
+        "fact over two vague ones. No URLs. No stage directions. Only spoken words.\n\n"
+        f"{_ANTI_SKIP_RULE}"
     )
     expected = "Tagged 3-host script with [MIKE]/[ELIZABETH]/[JESSE] on own lines, 900–1000 words total."
     return desc, expected
