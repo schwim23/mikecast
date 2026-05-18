@@ -4,7 +4,9 @@ MikeCast is an automated daily news briefing system. It runs a 10-step pipeline 
 
 ## Architecture
 
-![MikeCast Architecture](mikecast_architecture.png)
+The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy` flag is kept for fast rollback.
+
+![MikeCast CrewAI Pipeline](mikecast_crewai_architecture.png)
 
 ### AWS Architecture & Data Flow
 
@@ -73,11 +75,9 @@ Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-
 Step 10  Save & deliver      JSON → manifest → RSS feed → email
 ```
 
-## CrewAI Architecture (opt-in)
+## CrewAI Architecture
 
-![CrewAI pipeline](mikecast_crewai_architecture.png)
-
-Run with `--crew` to execute Steps 0–8b through CrewAI agents. Same outputs, same audio + delivery, different orchestration:
+The default pipeline since the cutover. Run with `--legacy` to revert to the procedural path for a single run. Both produce the same on-disk outputs and share Steps 9 (audio) + 10 (delivery).
 
 ```
 Planning Crew  →  Research Crew (non-sports)         →  Picks Crew  →  Writing Crew  →  Critic Crew
@@ -162,7 +162,7 @@ mikecast/
 ├── mikes_picks_ingest.py     # CLI to queue URLs, PDFs, or text into Mike's Picks
 ├── server.py                 # Flask server for local dashboard with /api/manifest
 ├── test_trending_filter.py   # Regression test for trending topic hallucination filter
-├── make_diagram.py           # Generates mikecast_architecture.png
+├── make_crew_diagram.py      # Generates mikecast_crewai_architecture.png
 ├── run_mikecast.sh           # Cron wrapper: sources env, runs pipeline, commits + pushes
 ├── mikes_picks.json          # Queue for user-submitted content
 ├── briefing_history.json     # Rolling 7-day history of processed articles
