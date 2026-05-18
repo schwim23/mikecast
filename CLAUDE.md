@@ -91,7 +91,7 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 - **Sports Researcher has `max_iter=15` and `max_execution_time=180`**: prevents the ESPN-tool-using agent from looping on rate-limit errors and burning >10 minutes per run. Tune if you add more ESPN tools.
 - **`_safe_request` defaults to a browser UA**: ESPN, Google News, and a few other hosts 403 the bare `python-requests` UA. Callers passing their own `headers` kwarg override the default. Don't remove this default.
 - **NY Sports Fact-Checker runs every critic pass as read-only observability**: `fact_check_ny_sports()` in `crew/critic_crew.py` extracts substantive sentences from the NY Sports HTML section and the `[JESSE]` block of the 3-voice script, then calls `validate_claim_against_articles` on each. Unsupported claims are logged at WARNING; the section is still NEVER auto-patched. Don't turn this off — it's the only signal that catches Claude drift on sports.
-- **Podcast scripts target 5–6 minutes (700–850 words)**: per-segment word budgets are in `crew/writing_crew.py` `_single_voice_task` and `_conversational_task`. If you change the target, update both Tasks plus the run_summary expectations.
+- **Podcast scripts target 6–7 minutes (900–1000 words)**: per-segment word budgets are in `crew/writing_crew.py` `_single_voice_task` and `_conversational_task`. If you change the target, update both Tasks plus the run_summary expectations.
 
 ## Output Files
 
