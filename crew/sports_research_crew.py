@@ -38,6 +38,15 @@ logger = logging.getLogger("mikecast.crew.sports")
 
 _NY_TEAMS = ["Yankees", "Knicks", "Giants", "Devils"]
 
+# Labels that mean "in the future" — anything else (LAST NIGHT, YESTERDAY,
+# "N DAYS AGO") is dropped from the upcoming-games block.
+_UPCOMING_LABELS = {"TODAY", "TONIGHT", "TOMORROW", "TOMORROW NIGHT"}
+
+# Subset of _UPCOMING_LABELS that triggers the writer's mandatory-include
+# rule. A team with a game on this list MUST appear in the NY Sports section
+# of the day's briefing.
+_MANDATORY_UPCOMING_LABELS = {"TONIGHT", "TOMORROW", "TOMORROW NIGHT"}
+
 
 def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
     """Compact NY Sports article snippets for the Researcher's prompt."""
@@ -154,4 +163,96 @@ def format_verified_facts_block(verified: dict[str, str]) -> str:
         "YESTERDAY are anchored to today's date in Eastern Time — copy them verbatim "
         "into your script and never substitute your own timing guess from article copy."
     )
+    return "\n".join(lines)
+
+
+def fetch_all_ny_upcoming_games() -> list[dict]:
+    """
+    Unconditionally fetch the next scheduled game for each NY team via ESPN.
+
+    Bypasses the LLM Researcher: the writers used to depend on article coverage
+    for upcoming-game info, which silently dropped imminent games (e.g. a Knicks
+    playoff game) whenever today's article batch happened not to mention that
+    team. This function calls fetch_box_score_tool directly for all four NY
+    teams so the next-game info flows through deterministically.
+
+    Returns a list of dicts shaped like::
+
+        {
+            "team": "Knicks",
+            "opponent": "Cavaliers",
+            "date_et": "Tuesday, May 19 at 7:00 PM ET",
+            "relative_to_today": "TOMORROW NIGHT",
+            "raw_utc": "2026-05-19T23:00Z",
+        }
+
+    Teams with no future game (off-season, no schedule data, ESPN unreachable,
+    or whose next game is already in the past) are silently omitted.
+    """
+    upcoming: list[dict] = []
+    for team in _NY_TEAMS:
+        try:
+            result = fetch_box_score_tool._run(team=team)
+        except Exception as exc:
+            logger.warning("[Upcoming Games] %s fetch failed (non-fatal): %s", team, exc)
+            continue
+        if not result.get("ok"):
+            continue
+        ng = result.get("next_game") or {}
+        rel = (ng.get("relative_to_today") or "").strip()
+        # Drop past-tense labels and anything without timing info we trust.
+        if not rel or rel not in _UPCOMING_LABELS and not rel.startswith("IN "):
+            continue
+        upcoming.append({
+            "team": team,
+            "opponent": ng.get("opponent", ""),
+            "date_et": ng.get("date_et", ""),
+            "relative_to_today": rel,
+            "raw_utc": ng.get("date", ""),
+        })
+    logger.info("[Upcoming Games] Found upcoming games for %d/%d NY teams: %s",
+                len(upcoming), len(_NY_TEAMS),
+                [g["team"] for g in upcoming])
+    return upcoming
+
+
+def format_upcoming_games_block(upcoming: list[dict]) -> str:
+    """
+    Render the upcoming-games list as a prompt block for the writers.
+    Returns "" if empty so callers can concatenate safely.
+
+    Includes an explicit MANDATORY rule: any team whose game is TONIGHT,
+    TOMORROW, or TOMORROW NIGHT must appear in the briefing's NY Sports section
+    even if no article in today's batch covers that team.
+    """
+    if not upcoming:
+        return ""
+    lines = [
+        "=== NY SPORTS — UPCOMING GAMES (verified via ESPN, anchored to today in ET) ==="
+    ]
+    has_mandatory = False
+    for g in upcoming:
+        rel = g.get("relative_to_today", "")
+        opp = g.get("opponent", "") or "TBD"
+        when = g.get("date_et", "")
+        team = g.get("team", "")
+        is_mandatory = rel in _MANDATORY_UPCOMING_LABELS
+        marker = " [MANDATORY-INCLUDE]" if is_mandatory else ""
+        has_mandatory = has_mandatory or is_mandatory
+        lines.append(f"  • {team}: {rel} ({when}) vs {opp}{marker}")
+    if has_mandatory:
+        lines.append(
+            "MANDATORY: every team above marked [MANDATORY-INCLUDE] MUST appear in the NY "
+            "Sports section of your output — one sentence is enough (who, opponent, when). "
+            "This applies EVEN IF no article in today's batch mentions that team; the "
+            "upcoming-game info above is primary-source from ESPN and is the briefing's "
+            "ground truth. Use the relative_to_today label (TONIGHT / TOMORROW / TOMORROW "
+            "NIGHT) verbatim — never substitute your own timing guess."
+        )
+    else:
+        lines.append(
+            "These are primary-source from ESPN. Use the relative_to_today label "
+            "verbatim if you mention any of these games. Never substitute your own "
+            "timing guess from article copy."
+        )
     return "\n".join(lines)

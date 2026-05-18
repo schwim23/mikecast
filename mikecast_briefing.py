@@ -154,7 +154,7 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
     from crew.picks_crew import run_picks
     from crew.planning_crew import run_planning
     from crew.research_crew import run_research
-    from crew.sports_research_crew import run_sports_research
+    from crew.sports_research_crew import fetch_all_ny_upcoming_games, run_sports_research
     from crew.writing_crew import run_writing
 
     logger.info("Step 0/10 [crew]: Planning Crew…")
@@ -179,12 +179,23 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
         logger.warning("Sports Research Crew failed (non-fatal): %s", exc)
         verified_sports_facts = {}
 
+    # Deterministic upcoming-game fetch — covers the case where today's article
+    # batch misses an imminent NY-team game (e.g. a Knicks playoff). Bypasses
+    # the LLM and pulls directly from ESPN.
+    try:
+        upcoming_ny_games = fetch_all_ny_upcoming_games()
+    except Exception as exc:
+        logger.warning("Upcoming-games fetch failed (non-fatal): %s", exc)
+        upcoming_ny_games = []
+
     logger.info("Step 7/10 [crew]: Picks Crew…")
     picks = run_picks()
 
     logger.info("Step 8/10 [crew]: Writing Crew (3 parallel Claude writers)…")
     html, single_voice_script, conversational_script = run_writing(
-        top_articles, picks, trending, verified_sports_facts=verified_sports_facts,
+        top_articles, picks, trending,
+        verified_sports_facts=verified_sports_facts,
+        upcoming_ny_games=upcoming_ny_games,
     )
 
     logger.info("Step 8b/10 [crew]: Critic Crew…")
