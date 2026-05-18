@@ -27,6 +27,33 @@ Move pipeline off local machine. Serve site at mikecast.io via CloudFront + S3. 
 
 ---
 
+## CrewAI Migration (Steps 0–8b)
+
+Replace the procedural pipeline (xAI planner → mc_collect → mc_generate → mc_critic) with a CrewAI agent architecture: per-category Researchers, a dedicated NY Sports specialist crew with ESPN primary-source tools, three Claude writers in parallel, and a GPT-4o critic + Claude patcher. Full plan: `~/.claude/plans/review-the-code-in-immutable-cherny.md`.
+
+| # | Item | Branch | Status |
+|---|------|--------|--------|
+| CREW-1 | Build crew/ package: tools.py (Pydantic), llm.py, agents.py, 6 crew files | `crewai-migration` | done |
+| CREW-2 | Rewire mikecast_briefing.py with --crew / --legacy flags (default legacy) | `crewai-migration` | done |
+| CREW-3 | Add ANTHROPIC_API_KEY + model env vars to mc_config + requirements (setuptools<81, crewai==0.86.0, pydantic>=2) | `crewai-migration` | done |
+| CREW-4 | Fix `_safe_request` default UA — ESPN/Google News had been silently 403ing for the full repo history | `crewai-migration` | done |
+| CREW-5 | Replace bot-blocked www.espn.com/espn/rss with site.api.espn.com JSON; fix score-as-dict shape; switch standings to site.web.api; filter league-wide injuries by team displayName | `crewai-migration` | done |
+| CREW-6 | Harden mc_plan: JSON-mode response_format, raise max_tokens, log raw response on empty result | `crewai-migration` | done |
+| CREW-7 | Cap Sports Researcher max_iter=15, max_execution_time=180 (prevents 12-min retry loops on rate-limit) | `crewai-migration` | done |
+| CREW-8 | Local end-to-end verification: 4 full --crew --force runs, runtime 6–7m, hallucination guards held | `crewai-migration` | done |
+| CREW-9 | Docker build verification — image content size 590MB (under plan's <600MB target) | `crewai-migration` | done |
+| CREW-10 | Open PR; merge to main → GH Actions deploys; one-shot ECS run with --crew override; verify | `crewai-migration` | pending |
+| CREW-11 | Cutover: flip mikecast_briefing.py default from --legacy to --crew after 7 consecutive clean ECS runs | `crew/cutover-default` | backlog |
+| CREW-12 | Remove --legacy and delete mc_generate / mc_critic / mc_plan modules 14 days after cutover | `crew/legacy-cleanup` | backlog |
+
+**Follow-ups (not blocking the migration):**
+
+- `legacy ESPN RSS` (`www.espn.com/espn/rss/*`) still bot-blocked. We now use `site.api.espn.com/.../news` instead. Keep an eye on that endpoint — if ESPN ever shuts it down, fallback options are very limited.
+- xAI Grok occasionally returns trending_stories: [] even when categories populate. The hardened mc_plan now logs the raw response in that case so we can diagnose.
+- Sports Researcher returns `{}` honestly when no article implies a verifiable game/standings/injury. That's correct — but it means verified-facts coverage varies day-to-day. Future enhancement: have the agent query box scores for all 4 NY teams unconditionally so the writers always have ground-truth even when articles are weak.
+
+---
+
 ## Sports Hallucination Fix
 
 Maintain a persistent `ny_sports_state.json` with ground-truth per-team facts (last result, next game, notes). Update each run from trusted articles; inject into all three generation prompts as a "KNOWN FACTS" block the LLM must not contradict.

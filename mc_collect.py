@@ -180,30 +180,34 @@ def fetch_reddit_rss() -> dict[str, list[dict]]:
 
 
 def fetch_espn_rss_feeds() -> list[dict]:
-    """Fetch ESPN RSS feeds (General, NBA, MLB, NFL, NHL). Returns a flat list."""
+    """
+    Fetch ESPN league news (NBA, MLB, NFL, NHL) from site.api.espn.com.
+
+    Despite the function/config name still saying "RSS" (kept stable for
+    callers), the actual transport is a JSON API — the legacy RSS host
+    (www.espn.com/espn/rss/*) was bot-blocked. Returns a flat list of
+    article dicts with the same shape every other source produces.
+    """
     articles: list[dict] = []
-    for feed_url, sport_label in ESPN_RSS_FEEDS:
-        resp = _safe_request(feed_url, timeout=15)
+    for api_url, sport_label in ESPN_RSS_FEEDS:
+        resp = _safe_request(api_url, timeout=15)
         if resp is None:
             logger.warning("ESPN [%s]: no response", sport_label)
             continue
         try:
-            soup  = BeautifulSoup(resp.content, "xml")
+            payload = resp.json()
+            raw_items = payload.get("articles") or []
             count = 0
-            for item in soup.find_all("item")[:8]:
-                title_tag = item.find("title")
-                link_tag  = item.find("link")
-                desc_tag  = item.find("description")
-                pub_tag   = item.find("pubDate") or item.find("pubdate")
-
-                title = title_tag.get_text(strip=True) if title_tag else ""
-                link  = (link_tag.get_text(strip=True) or link_tag.get("href", "")) if link_tag else ""
-                desc  = (
-                    BeautifulSoup(desc_tag.get_text(), "html.parser").get_text(strip=True)[:300]
-                    if desc_tag else ""
+            for item in raw_items[:8]:
+                title = (item.get("headline") or "").strip()
+                desc = (item.get("description") or "").strip()[:300]
+                pub = (item.get("published") or item.get("lastModified") or "").strip()
+                link = (
+                    item.get("links", {})
+                        .get("web", {})
+                        .get("href", "")
+                        .strip()
                 )
-                pub = pub_tag.get_text(strip=True) if pub_tag else ""
-
                 if title and link:
                     articles.append({
                         "title": title, "url": link, "description": desc,

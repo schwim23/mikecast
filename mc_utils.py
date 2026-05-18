@@ -18,6 +18,19 @@ import requests
 logger = logging.getLogger("mikecast")
 
 
+# Browser-like default UA: ESPN (and several other RSS hosts) 403 the bare
+# python-requests UA, which silently broke ESPN RSS for the entire history of
+# this project. Keep this header set MINIMAL — ESPN's bot detector returned a
+# stalling HTTP 202 when we added an explicit Accept: */* header. Callers can
+# still override by passing their own `headers`.
+_DEFAULT_HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    ),
+}
+
+
 def _safe_request(
     url: str,
     params: dict | None = None,
@@ -27,10 +40,14 @@ def _safe_request(
     """
     GET a URL with up to 3 attempts and exponential back-off on 429s.
     Returns the Response on success, None if all attempts fail.
+
+    Defaults to a browser-like User-Agent so hosts like ESPN don't 403 us.
+    Callers can pass their own headers (e.g. Reddit's custom UA) to override.
     """
+    request_headers = headers if headers is not None else _DEFAULT_HEADERS
     for attempt in range(3):
         try:
-            resp = requests.get(url, params=params, timeout=timeout, headers=headers)
+            resp = requests.get(url, params=params, timeout=timeout, headers=request_headers)
             if resp.status_code == 429:
                 wait = 2 ** attempt
                 logger.warning("Rate-limited on %s — waiting %ds", url, wait)

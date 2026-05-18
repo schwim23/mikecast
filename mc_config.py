@@ -46,6 +46,17 @@ ELEVENLABS_VOICE_JESSE     = os.environ.get("ELEVENLABS_VOICE_JESSE", "")
 # xAI — Grok-2 for adaptive search planning (optional; skip gracefully if unset)
 XAI_API_KEY = os.environ.get("XAI_API_KEY", "")
 
+# Anthropic — Claude for the CrewAI writing crew (required when running --crew)
+ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
+
+# ---------------------------------------------------------------------------
+# CrewAI model selection (LiteLLM-style model strings)
+# ---------------------------------------------------------------------------
+CLAUDE_WRITER_MODEL  = os.environ.get("CLAUDE_WRITER_MODEL",  "anthropic/claude-sonnet-4-6")
+OPENAI_SCORER_MODEL  = os.environ.get("OPENAI_SCORER_MODEL",  "openai/gpt-4o")
+OPENAI_CRITIC_MODEL  = os.environ.get("OPENAI_CRITIC_MODEL",  "openai/gpt-4o")
+OPENAI_HELPER_MODEL  = os.environ.get("OPENAI_HELPER_MODEL",  "openai/gpt-4o-mini")
+
 # ---------------------------------------------------------------------------
 # Date helpers (Eastern Time — matches browser / cron timezone)
 # ---------------------------------------------------------------------------
@@ -156,12 +167,16 @@ CNBC_RSS_FEEDS: list[tuple[str, str, str, int]] = [
     ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",  "Business & Markets", 6),
 ]
 
-# ESPN RSS feeds — real, current sports articles (date-filtered in pipeline).
+# ESPN news feeds. We switched from www.espn.com/espn/rss/* (RSS XML, blocked
+# by bot detection — every call returned HTTP 202 with an empty body) to
+# site.api.espn.com/.../{sport}/{league}/news (JSON, no challenge). Constant
+# name kept as ESPN_RSS_FEEDS so callers don't churn; format is unchanged
+# (url, sport_label) and the parser handles JSON now.
 ESPN_RSS_FEEDS: list[tuple[str, str]] = [
-    ("https://www.espn.com/espn/rss/nba/news", "NBA"),
-    ("https://www.espn.com/espn/rss/mlb/news", "MLB"),
-    ("https://www.espn.com/espn/rss/nfl/news", "NFL"),
-    ("https://www.espn.com/espn/rss/nhl/news", "NHL"),
+    ("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/news", "NBA"),
+    ("https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news",   "MLB"),
+    ("https://site.api.espn.com/apis/site/v2/sports/football/nfl/news",   "NFL"),
+    ("https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/news",     "NHL"),
 ]
 
 # Reddit Atom feeds: (subreddit, category, max_articles)
