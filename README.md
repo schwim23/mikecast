@@ -75,30 +75,35 @@ Step 10  Save & deliver      JSON → manifest → RSS feed → email
 
 ## CrewAI Architecture (opt-in)
 
+![CrewAI pipeline](mikecast_crewai_architecture.png)
+
 Run with `--crew` to execute Steps 0–8b through CrewAI agents. Same outputs, same audio + delivery, different orchestration:
 
 ```
 Planning Crew  →  Research Crew (non-sports)         →  Picks Crew  →  Writing Crew  →  Critic Crew
    (Step 0)        + NY Sports Research Crew              (Step 7)       (Step 8)        (Step 8b)
-                   (Steps 1–6)
+                   (Steps 1–6)                                                            + NY Sports
+                                                                                          Fact-Checker
+                                                                                          (read-only)
 ```
 
 **Models used (LiteLLM strings, all overridable via env):**
 
 | Role | Default model | Env var |
 |---|---|---|
-| HTML / single-voice / 3-voice writers | `anthropic/claude-sonnet-4-6` | `CLAUDE_WRITER_MODEL` |
-| Per-category scorer, section critic | `openai/gpt-4o` | `OPENAI_SCORER_MODEL`, `OPENAI_CRITIC_MODEL` |
-| Sports Gatekeeper, Fact-Checker, Picks, planner orchestration | `openai/gpt-4o-mini` | `OPENAI_HELPER_MODEL` |
-| Section patcher | `anthropic/claude-sonnet-4-6` | `CLAUDE_WRITER_MODEL` |
+| HTML / single-voice / 3-voice writers + section patcher | `anthropic/claude-sonnet-4-6` | `CLAUDE_WRITER_MODEL` |
+| Per-category scorer, section quality scorer | `openai/gpt-4o` | `OPENAI_SCORER_MODEL`, `OPENAI_CRITIC_MODEL` |
+| Picks, planner orchestration, NY Sports fact-checker | `openai/gpt-4o-mini` | `OPENAI_HELPER_MODEL` |
 
 **The NY Sports specialist crew** has tools no other crew can call:
 - `fetch_sports_box_score(team)` — most-recent completed game from `site.api.espn.com/.../teams/{team}/schedule`
 - `fetch_sports_standings(league)` — full league standings from `site.web.api.espn.com/.../standings`
 - `fetch_team_injury_report(team)` — current injury report (league-wide payload filtered by team `displayName`)
-- `validate_claim_against_articles(claim, articles)` — GPT-4o-mini structured fact-check used by the Fact-Checker
+- `validate_claim_against_articles(claim, articles)` — GPT-4o-mini structured fact-check used by the read-only Fact-Checker observability pass
 
-The Researcher is capped at `max_iter=15` and `max_execution_time=180` so a rate-limit blip can't loop for 10+ minutes. NY Sports remains in the `NEVER_PATCH_NORMALIZED` set — the critic still refuses to auto-patch that section.
+The Researcher is capped at `max_iter=15` and `max_execution_time=180` so a rate-limit blip can't loop for 10+ minutes. NY Sports remains in the `NEVER_PATCH_NORMALIZED` set — the critic still refuses to auto-patch that section. The fact-checker runs sentence-by-sentence against `validate_claim_against_articles` for both the HTML NY Sports section AND the `[JESSE]` block of the 3-voice script on every critic pass — unsupported claims are logged at WARNING but never auto-patched.
+
+**Podcast length**: writer Tasks target 5–6 minutes of audio (~700–850 words total). Per-segment word budgets are in `crew/writing_crew.py`. Adjust both `_single_voice_task` and `_conversational_task` if you want a different length.
 
 **Run a CrewAI briefing:**
 

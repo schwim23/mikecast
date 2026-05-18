@@ -420,28 +420,22 @@ _LEAGUE_TO_SPORT: dict[str, str] = {
 _ESPN_TIMEOUT = 10
 
 
-_ESPN_HEADERS = {
-    "User-Agent": (
-        "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-        "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    ),
-}
+from mc_utils import _safe_request
 
 
 def _espn_get(path: str) -> dict | None:
     """
     GET an ESPN site-api endpoint; return parsed JSON or None on failure.
-    Use for news, schedules, and team-level lookups.
+    Use for news, schedules, team-level lookups.
     """
     url = f"https://site.api.espn.com/apis/site/v2/sports/{path.lstrip('/')}"
+    resp = _safe_request(url, timeout=_ESPN_TIMEOUT)
+    if resp is None:
+        return None
     try:
-        resp = requests.get(url, timeout=_ESPN_TIMEOUT, headers=_ESPN_HEADERS)
-        if resp.status_code != 200:
-            logger.debug("ESPN %s → HTTP %s", url, resp.status_code)
-            return None
         return resp.json()
     except Exception as exc:
-        logger.debug("ESPN %s failed: %s", url, exc)
+        logger.debug("ESPN %s json parse failed: %s", url, exc)
         return None
 
 
@@ -451,14 +445,13 @@ def _espn_web_get(path: str) -> dict | None:
     The site.api version of /standings only returns {fullViewLink: ...}.
     """
     url = f"https://site.web.api.espn.com/apis/v2/sports/{path.lstrip('/')}"
+    resp = _safe_request(url, timeout=_ESPN_TIMEOUT)
+    if resp is None:
+        return None
     try:
-        resp = requests.get(url, timeout=_ESPN_TIMEOUT, headers=_ESPN_HEADERS)
-        if resp.status_code != 200:
-            logger.debug("ESPN web %s → HTTP %s", url, resp.status_code)
-            return None
         return resp.json()
     except Exception as exc:
-        logger.debug("ESPN web %s failed: %s", url, exc)
+        logger.debug("ESPN web %s json parse failed: %s", url, exc)
         return None
 
 

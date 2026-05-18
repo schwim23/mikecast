@@ -13,3 +13,6 @@ boto3
 setuptools<81
 crewai==0.86.0
 pydantic>=2.0
+
+# Dev / test only — kept in main requirements so Docker image can run pytest if needed
+pytest>=8.0

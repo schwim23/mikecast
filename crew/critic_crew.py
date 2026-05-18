@@ -21,20 +21,12 @@ from __future__ import annotations
 import json
 import logging
 import re
-from concurrent.futures import ThreadPoolExecutor
 
 from crewai import Crew, Process, Task
 
 from crew.agents import make_section_patcher, make_section_scorer
-from crew.writing_crew import (
-    _conversational_task,
-    _kickoff_single_task,
-    _single_voice_task,
-)
-from crew.agents import (
-    make_conversational_writer,
-    make_single_voice_writer,
-)
+from crew.tools import validate_claim_tool
+from crew.writing_crew import _kickoff_single_task
 from mc_critic import _extract_html_summary  # reuse the legacy HTML summariser
 
 logger = logging.getLogger("mikecast.crew.critic")
@@ -128,16 +120,24 @@ def run_critic_pass(
     verified_sports_facts: dict[str, str] | None = None,
 ) -> tuple[str, str, str]:
     """
-    Run the critic + (optional) patch pass.
+    Run the critic + (optional) patch pass + NY Sports fact-check observability.
 
     Returns (html, single_voice_script, conversational_script) — possibly
     unchanged if all sections passed.
     """
+    # Helper so every return path runs the NY Sports fact-check (read-only).
+    def _with_factcheck(h: str, s: str, c: str) -> tuple[str, str, str]:
+        try:
+            fact_check_ny_sports(h, c, top_articles)
+        except Exception as exc:
+            logger.warning("[Fact-Checker] NY Sports fact-check failed (non-fatal): %s", exc)
+        return h, s, c
+
     try:
         critique = _run_scorer(html, top_articles)
     except Exception as exc:
         logger.warning("[Critic Crew] scorer raised: %s — keeping originals", exc)
-        return html, single_voice_script, conversational_script
+        return _with_factcheck(html, single_voice_script, conversational_script)
 
     scores = critique.get("category_scores", {})
     issues = critique.get("issues", {})
@@ -152,7 +152,7 @@ def run_critic_pass(
 
     if overall_passed and not weak:
         logger.info("[Critic Crew] briefing passed — no patches needed.")
-        return html, single_voice_script, conversational_script
+        return _with_factcheck(html, single_voice_script, conversational_script)
 
     patchable = [c for c in weak if c.lower() not in _NEVER_PATCH_NORMALIZED]
     skipped = [c for c in weak if c.lower() in _NEVER_PATCH_NORMALIZED]
@@ -162,7 +162,7 @@ def run_critic_pass(
             "(prevents hallucinated scores/players/trades).", skipped,
         )
     if not patchable:
-        return html, single_voice_script, conversational_script
+        return _with_factcheck(html, single_voice_script, conversational_script)
 
     improved_html = html
     for cat in patchable:
@@ -193,22 +193,108 @@ def run_critic_pass(
         except Exception as exc:
             logger.warning("[Critic Crew] patch failed for '%s': %s", cat, exc)
 
-    # Regenerate both podcast scripts off the (unchanged) article set.
-    logger.info("[Critic Crew] regenerating podcast scripts after patches…")
-    try:
-        single_agent = make_single_voice_writer()
-        conv_agent = make_conversational_writer()
-        s_desc, s_exp = _single_voice_task(top_articles, picks, trending, verified_sports_facts)
-        c_desc, c_exp = _conversational_task(top_articles, picks, trending, verified_sports_facts)
-        with ThreadPoolExecutor(max_workers=2) as ex:
-            f_single = ex.submit(_kickoff_single_task, single_agent, s_desc, s_exp)
-            f_conv = ex.submit(_kickoff_single_task, conv_agent, c_desc, c_exp)
-            new_single = f_single.result(timeout=600) or single_voice_script
-            new_conv = f_conv.result(timeout=600) or conversational_script
-        if new_conv:
-            new_conv = re.sub(r'(\[(?:MIKE|ELIZABETH|JESSE)\])', r'\n\1\n', new_conv)
-            new_conv = re.sub(r'\n{3,}', '\n\n', new_conv).strip()
-        return improved_html, new_single, new_conv
-    except Exception as exc:
-        logger.warning("[Critic Crew] script regeneration failed (keeping originals): %s", exc)
-        return improved_html, single_voice_script, conversational_script
+    # We do NOT regenerate the podcast scripts after an HTML patch. The legacy
+    # code did, but the scripts are produced from the same article inputs as
+    # the HTML — re-rolling against unchanged inputs is a coin-flip on quality
+    # and burns ~70s + Claude tokens. If a future script critic pass scores the
+    # podcast specifically, we can regenerate based on its signal.
+    return _with_factcheck(improved_html, single_voice_script, conversational_script)
+
+
+# ---------------------------------------------------------------------------
+# NY Sports fact-check observability (no patching)
+# ---------------------------------------------------------------------------
+
+# Sentence splitter — handles "., ", "! ", "? ", and the en-dash separators
+# Claude sometimes uses. Quotation marks are dropped before splitting so a
+# sentence-final period inside quotes doesn't break the split.
+_SENTENCE_RE = re.compile(r"(?<=[.!?])\s+(?=[A-Z\[])")
+_SPEAKER_TAG_RE = re.compile(r"^\[(MIKE|ELIZABETH|JESSE)\]\s*", re.MULTILINE)
+
+
+def _extract_ny_sports_text(html: str) -> str:
+    """
+    Pull the plain text inside the NY SPORTS HTML section. Returns "" if the
+    section can't be located (writer omitted it, or the layout drifted).
+    """
+    m = re.search(
+        r"<h2[^>]*>[^<]*NY SPORTS[^<]*</h2>(.*?)(?=<h2|<div\s[^>]*text-align\s*:\s*center)",
+        html, re.DOTALL | re.IGNORECASE,
+    )
+    if not m:
+        return ""
+    inner = re.sub(r"<[^>]+>", " ", m.group(1))
+    return re.sub(r"\s+", " ", inner).strip()
+
+
+def _split_sentences(text: str) -> list[str]:
+    if not text:
+        return []
+    # Drop speaker tags so they don't end up as solo "sentences"
+    text = _SPEAKER_TAG_RE.sub("", text)
+    parts = _SENTENCE_RE.split(text)
+    # Keep only sentences with enough substance to fact-check (>=6 words, contains a digit
+    # or proper-noun-looking token). Cuts headers, transitions, generic filler.
+    keepers: list[str] = []
+    for s in parts:
+        s = s.strip()
+        if len(s.split()) < 6:
+            continue
+        if not re.search(r"\d|[A-Z][a-z]{2,}", s):
+            continue
+        keepers.append(s)
+    return keepers
+
+
+def fact_check_ny_sports(
+    html: str,
+    conversational_script: str,
+    top_articles: dict[str, list[dict]],
+) -> int:
+    """
+    Run validate_claim_against_articles on every substantive sentence in the
+    NY Sports section of the HTML briefing AND the [JESSE] block of the
+    conversational script. Logs unsupported sentences as WARNING. Does NOT
+    patch — NY Sports stays in NEVER_PATCH_NORMALIZED.
+
+    Returns the count of unsupported sentences (for the run-summary line).
+    """
+    sports_articles = top_articles.get("NY Sports") or []
+    if not sports_articles:
+        logger.info("[Fact-Checker] No NY Sports articles — skipping.")
+        return 0
+
+    html_text = _extract_ny_sports_text(html)
+    jesse_text = ""
+    if conversational_script:
+        # Grab everything between [JESSE] and the next speaker tag (or end).
+        jm = re.search(r"\[JESSE\]\s*(.+?)(?=\[(?:MIKE|ELIZABETH)\]|$)",
+                       conversational_script, re.DOTALL)
+        if jm:
+            jesse_text = jm.group(1).strip()
+
+    sentences = _split_sentences(html_text) + _split_sentences(jesse_text)
+    if not sentences:
+        logger.info("[Fact-Checker] No NY Sports sentences with substance — skipping.")
+        return 0
+
+    unsupported = 0
+    checked = 0
+    for sentence in sentences[:30]:  # hard cap so a chatty critic can't bloat the bill
+        result = validate_claim_tool._run(claim=sentence, articles=sports_articles)
+        if not result.get("ok"):
+            continue
+        checked += 1
+        if result.get("supported") == "no":
+            unsupported += 1
+            logger.warning(
+                "[Fact-Checker] UNSUPPORTED NY Sports claim: %r — reasoning: %s",
+                sentence[:200], result.get("reasoning", "")[:200],
+            )
+
+    logger.info(
+        "[Fact-Checker] NY Sports section: checked %d sentences, %d unsupported "
+        "(section NOT auto-patched — see NEVER_PATCH_NORMALIZED).",
+        checked, unsupported,
+    )
+    return unsupported
