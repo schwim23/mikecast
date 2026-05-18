@@ -103,7 +103,7 @@ Planning Crew  →  Research Crew (non-sports)         →  Picks Crew  →  Wri
 
 The Researcher is capped at `max_iter=15` and `max_execution_time=180` so a rate-limit blip can't loop for 10+ minutes. NY Sports remains in the `NEVER_PATCH_NORMALIZED` set — the critic still refuses to auto-patch that section. The fact-checker runs sentence-by-sentence against `validate_claim_against_articles` for both the HTML NY Sports section AND the `[JESSE]` block of the 3-voice script on every critic pass — unsupported claims are logged at WARNING but never auto-patched.
 
-**Podcast length**: writer Tasks target 5–6 minutes of audio (~700–850 words total). Per-segment word budgets are in `crew/writing_crew.py`. Adjust both `_single_voice_task` and `_conversational_task` if you want a different length.
+**Podcast length**: writer Tasks target 6–7 minutes of audio (~900–1000 words total). Per-segment word budgets are in `crew/writing_crew.py`. Adjust both `_single_voice_task` and `_conversational_task` if you want a different length.
 
 **Run a CrewAI briefing:**
 
