@@ -13,11 +13,11 @@ MikeCast is an automated daily news briefing system. Every morning at 6:45 AM ET
 ## How to Run
 
 ```bash
-# Legacy procedural pipeline (default — what cron runs today)
+# CrewAI pipeline (default after cutover — what cron runs now)
 source ~/.profile && .venv/bin/python3 mikecast_briefing.py
 
-# CrewAI pipeline (Steps 0–8b via crew/ agents; opt-in during shadow validation)
-source ~/.profile && .venv/bin/python3 mikecast_briefing.py --crew
+# Legacy procedural pipeline — reachable for fast rollback / debugging
+source ~/.profile && .venv/bin/python3 mikecast_briefing.py --legacy
 
 # Force regenerate today's briefing
 source ~/.profile && .venv/bin/python3 mikecast_briefing.py --force
@@ -32,7 +32,7 @@ tail -f mikecast.log
 
 The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_history.json` and pushes to GitHub after each run.
 
-`--crew` and `--legacy` are mutually exclusive. Both paths produce the same on-disk output shape (data/`YYYY-MM-DD.json`, audio file, RSS feed) and use the same Steps 9–10 for audio + delivery. Default is `--legacy` while we shadow-validate the crew path.
+`--crew` and `--legacy` are mutually exclusive. Both paths produce the same on-disk output shape (data/`YYYY-MM-DD.json`, audio file, RSS feed) and use the same Steps 9–10 for audio + delivery. Default is `--crew` after the cutover; `--legacy` remains available as a fast rollback.
 
 ## Environment Variables (all in `~/.profile`)
 
@@ -158,9 +158,9 @@ aws ecs run-task \
 
 ### CrewAI rollout state
 
-- Default path is `--legacy`. The cron-scheduled 6:30 AM ET run uses legacy.
-- `--crew` is invoked manually for validation. Outputs go to the same `data/YYYY-MM-DD.json` shape.
-- To flip the production default to `--crew`, change the default branch in `main()` in `mikecast_briefing.py` and merge to `main`. The next scheduled run will use crew automatically.
+- **Default path is `--crew`** after cutover. The 6:30 AM ET scheduled run uses the CrewAI pipeline.
+- `--legacy` is the rollback flag. Trigger a one-shot legacy run with `aws ecs run-task ... --overrides '{"containerOverrides":[{"name":"mikecast","command":["--legacy","--force"]}]}'` if today's crew run misbehaves.
+- To revert the cutover entirely, change the default branch in `main()` in `mikecast_briefing.py` from `use_crew = True` back to `use_legacy = True` and merge. The next GH Actions deploy returns the scheduler to legacy automatically.
 - `ANTHROPIC_API_KEY` must be in SSM Parameter Store (`/mikecast/ANTHROPIC_API_KEY`, SecureString) and referenced from the ECS task definition's `containerDefinitions[0].secrets`.
 
 ### To check the status of the ECS task

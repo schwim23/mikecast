@@ -264,8 +264,11 @@ def main() -> None:
         logger.error("Cannot pass both --crew and --legacy. Pick one.")
         sys.exit(2)
     if not use_crew and not use_legacy:
-        # Default to legacy during shadow validation. Flip after Part A.6 promotion.
-        use_legacy = True
+        # CUTOVER: default is now --crew. The legacy procedural pipeline is
+        # kept reachable via the explicit --legacy flag for fast rollback.
+        # To revert the cutover: change this line to `use_legacy = True` and
+        # merge; the next GH Actions deploy returns the scheduler to legacy.
+        use_crew = True
 
     path_label = "crew" if use_crew else "legacy"
 
