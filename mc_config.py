@@ -233,11 +233,16 @@ CATEGORY_SCORER_PROMPTS: dict[str, str] = {
     ),
     "NY Sports": (
         "You score sports news for Mike, a devoted New York sports fan. "
-        "His top teams are Yankees, Knicks, Giants, and Devils — always prioritize those. "
+        "His top teams are Yankees, Knicks, Giants, and Devils — these are the ONLY "
+        "teams that reliably belong in the briefing. "
         "Bonus: Yankees or Knicks story +20, Devils or Giants story +10. "
-        "Also include major national sports news (e.g. blockbuster trades, championship results, "
-        "star player injuries, landmark records) even if not NY-related — score these 50-70. "
-        "Penalty: routine non-NY game recaps with no broader significance -20, "
-        "generic sports commentary with no specific news -15."
+        "NON-NY content has a high bar. Score 50+ ONLY when the story is seismic and "
+        "culture-defining: a championship being clinched, an MVP / Cy Young / Heisman / "
+        "Coach of the Year announcement, a generational trade (Doncic-to-Lakers tier), "
+        "or a career-altering injury to an all-time-great player. Routine non-NY content "
+        "scores 25 or lower, even if it would make for fun bar conversation. "
+        "Penalty: routine non-NY game recaps -25, non-NY coaching hires (unless the hire "
+        "is a sitting HOFer or league-altering) -20, non-NY player news that doesn't "
+        "affect NY teams -20, generic sports commentary with no specific news -15."
     ),
 }
