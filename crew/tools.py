@@ -540,6 +540,16 @@ class FetchSportsBoxScoreTool(BaseTool):
             e for e in events
             if (e.get("competitions") or [{}])[0].get("status", {}).get("type", {}).get("completed")
         ]
+        # Future events ordered earliest-first. ESPN's /teams/{abbr}/schedule
+        # endpoint puts BOTH past and future games in `events`; the `nextEvent`
+        # field only exists on the bare /teams/{abbr} endpoint, so the old code
+        # at the bottom of this function never found a next game. Compute it
+        # here from the same `events` array.
+        future = sorted(
+            [e for e in events
+             if not (e.get("competitions") or [{}])[0].get("status", {}).get("type", {}).get("completed")],
+            key=lambda e: e.get("date", ""),
+        )
         if not completed:
             return {"ok": False, "error": "no completed games found", "team": team}
 
@@ -564,12 +574,20 @@ class FetchSportsBoxScoreTool(BaseTool):
 
         home, away = competitors[home_idx], competitors[away_idx]
 
-        next_event = data.get("team", {}).get("nextEvent") or []
         next_game = None
-        if next_event:
-            ne = next_event[0]
+        if future:
+            ne = future[0]
             ne_comp = (ne.get("competitions") or [{}])[0]
-            opponents = [_name(c) for c in (ne_comp.get("competitors") or []) if _name(c) != team]
+            # `team` here is the user-supplied short name (e.g. "Yankees");
+            # ESPN's competitor displayName is the full club name (e.g.
+            # "New York Yankees"). The two never compare equal directly, so
+            # the previous `!= team` filter silently let the team itself slip
+            # in as the "opponent". Use a case-insensitive substring check.
+            team_needle = team.strip().lower()
+            opponents = [
+                _name(c) for c in (ne_comp.get("competitors") or [])
+                if team_needle not in _name(c).lower()
+            ]
             ne_raw = ne.get("date", "")
             next_game = {
                 "opponent": opponents[0] if opponents else "",
