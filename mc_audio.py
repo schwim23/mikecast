@@ -10,6 +10,7 @@ Both functions return True on success, False on failure, and never raise.
 
 import json
 import logging
+import re
 import subprocess
 import tempfile
 import time
@@ -161,6 +162,89 @@ def _normalize_loudness(path: Path, target_lufs: float = -16.0) -> None:
         logger.warning("Loudness normalization failed for %s: %s", path.name, exc)
 
 
+# ---------------------------------------------------------------------------
+# Pre-TTS text normalization
+# ---------------------------------------------------------------------------
+# ElevenLabs (and to a lesser degree OpenAI TTS) sometimes produces garbled
+# audio when the script contains bare colons in times (e.g. "7:05 PM ET"),
+# bare hyphens between numbers (scores like "122-113"), or stray markdown.
+# The writer prompts already tell Claude to spell these out, but we belt-and-
+# braces here so a single slip doesn't ship to listeners.
+
+_HOUR_WORDS = {
+    1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
+    7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven", 12: "twelve",
+    0: "twelve",
+}
+_OH_MIN_WORDS = {  # 1–9 in the "oh five" form (used when minutes are single-digit)
+    1: "oh one", 2: "oh two", 3: "oh three", 4: "oh four", 5: "oh five",
+    6: "oh six", 7: "oh seven", 8: "oh eight", 9: "oh nine",
+}
+_TEEN_WORDS = {  # 10–19
+    10: "ten", 11: "eleven", 12: "twelve", 13: "thirteen", 14: "fourteen",
+    15: "fifteen", 16: "sixteen", 17: "seventeen", 18: "eighteen", 19: "nineteen",
+}
+_DIGIT_WORDS = {  # 1–9 in their bare form (used after a tens word: "forty-five")
+    1: "one", 2: "two", 3: "three", 4: "four", 5: "five",
+    6: "six", 7: "seven", 8: "eight", 9: "nine",
+}
+_TENS_WORDS = {2: "twenty", 3: "thirty", 4: "forty", 5: "fifty"}
+
+
+def _minutes_to_words(m: int) -> str:
+    if m == 0:
+        return ""
+    if m < 10:
+        return _OH_MIN_WORDS[m]
+    if m < 20:
+        return _TEEN_WORDS[m]
+    tens, ones = divmod(m, 10)
+    return _TENS_WORDS[tens] if ones == 0 else f"{_TENS_WORDS[tens]} {_DIGIT_WORDS[ones]}"
+
+
+_TIME_RE = re.compile(
+    r"\b(\d{1,2}):(\d{2})\s*(PM|AM|pm|am)?(?:\s*(ET|EST|EDT))?\b"
+)
+
+
+def _time_to_words(match: "re.Match[str]") -> str:
+    h = int(match.group(1))
+    m = int(match.group(2))
+    ampm = (match.group(3) or "").upper()
+    tz = match.group(4)
+    h12 = h % 12 or 12
+    hour_word = _HOUR_WORDS.get(h12, str(h12))
+    if m == 0:
+        out = f"{hour_word} o'clock"
+    else:
+        out = f"{hour_word} {_minutes_to_words(m)}"
+    if ampm:
+        out += f" {ampm}"
+    if tz:
+        out += " Eastern"
+    return out
+
+
+def _tts_normalize(text: str) -> str:
+    """
+    Make a script chunk less likely to garble in TTS.
+
+    - Spell out clock times (``7:05 PM ET`` → ``seven oh five PM Eastern``).
+    - Convert ``ET``/``EST``/``EDT`` suffix to ``Eastern``.
+    - Strip markdown bold/italic markers (``**x**`` and ``*x*``).
+    - Leave dollar amounts, comma-separated big numbers, and other digit
+      formats alone — modern TTS handles those reasonably well, and we don't
+      want to over-rewrite the writer's prose.
+    """
+    if not text:
+        return text
+    text = _TIME_RE.sub(_time_to_words, text)
+    # Markdown bold then italic (order matters — ** must run first).
+    text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+    text = re.sub(r"(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)", r"\1", text)
+    return text
+
+
 def _split_text_for_tts(text: str, max_chunk: int = 4000) -> list[str]:
     """
     Split *text* on sentence boundaries into chunks of at most *max_chunk*
@@ -201,7 +285,7 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
         from openai import OpenAI
         client = OpenAI()
 
-        chunks = _split_text_for_tts(script)
+        chunks = _split_text_for_tts(_tts_normalize(script))
         audio_segments: list[bytes] = []
 
         for i, chunk in enumerate(chunks):
@@ -269,7 +353,7 @@ def generate_elevenlabs_audio(
     def _tts_segment(speaker: str, text: str) -> bytes:
         """Call ElevenLabs for one speaker segment; handles chunking internally."""
         voice_id = voice_map[speaker]
-        chunks = _split_text_for_tts(text, max_chunk=4500)
+        chunks = _split_text_for_tts(_tts_normalize(text), max_chunk=4500)
         audio_parts: list[bytes] = []
         for chunk in chunks:
             url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"

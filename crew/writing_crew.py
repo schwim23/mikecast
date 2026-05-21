@@ -222,6 +222,19 @@ _ANTI_SKIP_RULE = (
     "entirely is one whose header explicitly says '0 ARTICLES'."
 )
 
+# Per-task brief reminder (full versions of TONE + TTS rules live in the agent
+# backstories — this is a short repeat so the rules don't get diluted by
+# everything else in the task description).
+_TONE_TTS_REMINDER = (
+    "TONE + TTS REMINDER (full version in your backstory): NO judgmental hyperbole "
+    "at the listener (\"what are you doing with your life\", \"you HAVE to\", etc.) — "
+    "talk ABOUT the news, not AT the audience. Spell out times (7:05 PM ET → "
+    "\"seven-oh-five PM Eastern\"), scores (122-113 → \"one twenty-two to one "
+    "thirteen\"), and dollar amounts (\"ten point nine billion dollars\"). No bare "
+    "colons in times, no bare hyphens between numbers, no markdown, no URLs, no stage "
+    "directions."
+)
+
 
 def _html_task(
     categorised: dict[str, list[dict]],
@@ -260,7 +273,8 @@ def _html_task(
         "4. WHAT TO WATCH — 3-4 forward-looking items.\n\n"
         "Only use facts from the article inputs. Do NOT add details from training knowledge. "
         "Never tease — always tell the listener what actually happened.\n\n"
-        f"{_ANTI_SKIP_RULE}"
+        f"{_ANTI_SKIP_RULE}\n\n"
+        f"{_TONE_TTS_REMINDER}"
     )
     expected = "Plain-text briefing in the 4-section format described."
     return desc, expected
@@ -305,7 +319,8 @@ def _single_voice_task(
         "Cut anything that isn't moving the listener forward. Prefer one specific "
         "fact over two vague ones. Natural spoken language — contractions, transitions, "
         "rhetorical questions. No stage directions. No URLs.\n\n"
-        f"{_ANTI_SKIP_RULE}"
+        f"{_ANTI_SKIP_RULE}\n\n"
+        f"{_TONE_TTS_REMINDER}"
     )
     expected = "Spoken-form podcast script, 900–1000 words total."
     return desc, expected
@@ -351,7 +366,8 @@ def _conversational_task(
         "6. [MIKE] SIGN-OFF (~40w).\n\n"
         "Cut anything that isn't moving the listener forward. Prefer one specific "
         "fact over two vague ones. No URLs. No stage directions. Only spoken words.\n\n"
-        f"{_ANTI_SKIP_RULE}"
+        f"{_ANTI_SKIP_RULE}\n\n"
+        f"{_TONE_TTS_REMINDER}"
     )
     expected = "Tagged 3-host script with [MIKE]/[ELIZABETH]/[JESSE] on own lines, 900–1000 words total."
     return desc, expected
