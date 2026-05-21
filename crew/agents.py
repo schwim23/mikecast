@@ -57,6 +57,33 @@ _STORYTELLING_RULE = (
     "actually says happened."
 )
 
+_TONE_RULE = (
+    "TONE RULE: Warm, informed, never condescending. The voice talks ABOUT the news, "
+    "not AT the listener. NEVER use judgmental hyperbole aimed at the audience: no "
+    "\"what are you doing with your life\", no \"if you don't watch you're missing out\", "
+    "no \"you HAVE to\", no \"come on, people\", no \"are you kidding me\". NO profanity. "
+    "NO politically charged jabs at people or groups. NO insult-as-joke framing. "
+    "Enthusiasm is welcome; making the listener feel stupid for not watching, knowing, "
+    "or caring about something is not. If a host wants to express excitement about a "
+    "game, say WHY it matters (stakes, matchup, history), not that the listener is a "
+    "loser for missing it."
+)
+
+_TTS_FRIENDLY_RULE = (
+    "TTS RULE: This script is read aloud by ElevenLabs voices. Write numbers, times, "
+    "scores, and dollar amounts the way a host SAYS them, not the way they'd be written:\n"
+    "  • 7:05 PM ET  →  'seven-oh-five PM Eastern'\n"
+    "  • 8:00 PM ET  →  'eight PM Eastern' or 'eight o\\'clock Eastern'\n"
+    "  • 122-113      →  'one twenty-two to one thirteen'\n"
+    "  • $10.9 billion →  'ten point nine billion dollars'\n"
+    "  • 3,800 repos  →  'thirty-eight hundred repos'\n"
+    "Do NOT use bare colons in times. Do NOT use bare hyphens between two numbers (it "
+    "gets read as 'dash'). Do NOT include URLs. No markdown — no asterisks, no "
+    "underscores, no square brackets except the [MIKE]/[ELIZABETH]/[JESSE] speaker tags "
+    "themselves. No stage directions, no parenthetical asides like (laughing) or (clears "
+    "throat). Only spoken words."
+)
+
 
 # ---------------------------------------------------------------------------
 # Step 0 — Planning Crew
@@ -202,6 +229,7 @@ def make_html_writer() -> Agent:
             "executive. Professional yet engaging — like a smart friend who reads "
             "everything so the executive doesn't have to.\n\n"
             f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}\n\n"
+            f"{_TONE_RULE}\n\n"
             "Output the plain section text (no <html> wrapper) — the orchestrator "
             "wraps it in the styled template. Use section headers in ALL CAPS: "
             "EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS, "
@@ -226,7 +254,8 @@ def make_single_voice_writer() -> Agent:
         backstory=(
             "You write for MikeCast's solo host — smart, conversational, energetic, "
             "like a knowledgeable friend over coffee.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}\n\n"
+            f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}"
         ),
         tools=[],
         llm=claude_writer_llm(),
@@ -248,7 +277,11 @@ def make_conversational_writer() -> Agent:
             "You write for a 3-host news podcast. MIKE — warm, authoritative host. "
             "ELIZABETH — sharp tech/business correspondent. JESSE — quick-witted, "
             "NY-sports-obsessed.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}\n\n"
+            f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}\n\n"
+            "JESSE in particular: enthusiasm yes, condescension at the listener no. "
+            "If the Knicks are playing a big game, say what's at stake — not that the "
+            "listener doesn't have a life if they're not tuned in."
         ),
         tools=[],
         llm=claude_writer_llm(),
