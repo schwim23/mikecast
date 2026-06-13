@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subscribe — MikeCast Daily Briefing</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">🎙️</span>
+        <h1 class="brand-name">MikeCast</h1>
+      </div>
+      <p class="brand-tagline">Your daily AI-powered news briefing</p>
+    </div>
+  </header>
+
+  <main class="content" style="max-width:640px;">
+
+    <div class="card" style="text-align:center;">
+      <div class="section-title" style="justify-content:center;">📬 Get MikeCast in your inbox</div>
+      <p style="color:var(--text-primary);line-height:1.7;margin:1rem 0;">
+        Every morning, MikeCast reads the day's news across AI &amp; Tech, Business &amp; Markets,
+        Companies, and NY Sports, then writes you a tight briefing — the same one that powers the
+        daily podcast. One email a day, no noise. Free.
+      </p>
+
+      <!-- Email newsletter signup (handled by signup.js) -->
+      <form class="email-signup" id="email-signup" novalidate style="margin-top:1.25rem;">
+        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+        <button type="submit">Subscribe by email</button>
+      </form>
+      <p class="signup-status" id="signup-status" aria-live="polite"></p>
+      <p style="color:var(--text-muted);font-size:.78rem;margin-top:.75rem;">
+        Double opt-in — we'll send a confirmation link before adding you. Unsubscribe anytime.
+      </p>
+    </div>
+
+    <div class="card" style="text-align:center;">
+      <div class="section-title" style="justify-content:center;">🎧 Prefer to listen?</div>
+      <div class="subscribe-buttons" style="margin-top:1rem;">
+        <a href="https://podcasts.apple.com/us/podcast/mikecast-daily-briefing/id1882539449"
+           target="_blank" rel="noopener" style="display:inline-flex;align-items:center;">
+          <img src="assets/badges/apple-badge.svg" alt="Listen on Apple Podcasts" height="40">
+        </a>
+        <a href="https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv"
+           target="_blank" rel="noopener" style="display:inline-flex;align-items:center;">
+          <img src="assets/badges/spotify-badge.svg" alt="Listen on Spotify" height="40">
+        </a>
+        <a class="btn-subscribe btn-rss" href="data/feed.xml" target="_blank" rel="noopener">RSS Feed</a>
+      </div>
+      <p style="margin-top:1.25rem;"><a href="index.html" style="color:var(--accent);text-decoration:none;">← Read today's briefing</a></p>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>MikeCast &bull; Your daily AI-powered news briefing</p>
+  </footer>
+
+  <script src="signup.js"></script>
+</body>
+</html>

@@ -24,7 +24,13 @@ from concurrent.futures import ThreadPoolExecutor
 
 from mc_config import DATA_DIR, ELEVENLABS_API_KEY, TODAY, TODAY_DISPLAY
 from mc_audio import generate_elevenlabs_audio, generate_podcast_audio
-from mc_deliver import generate_manifest, generate_rss_feed, save_daily_data, send_email
+from mc_deliver import (
+    generate_manifest,
+    generate_rss_feed,
+    save_daily_data,
+    send_email,
+    send_newsletter_broadcast,
+)
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -259,6 +265,14 @@ def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_ar
     generate_manifest()
     generate_rss_feed()
     email_ok = send_email(html, single_voice_script or conversational_script, primary_audio_path)
+
+    # Additive newsletter broadcast to public Resend subscribers. Same HTML body
+    # as the personal email; skips gracefully (and never raises) if Resend isn't
+    # configured, so a newsletter problem can't break the daily pipeline.
+    try:
+        send_newsletter_broadcast(html)
+    except Exception as exc:
+        logger.warning("Newsletter broadcast raised (non-fatal): %s", exc)
 
     return audio_ok, el_audio_ok, email_ok
 

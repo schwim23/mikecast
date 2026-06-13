@@ -81,6 +81,22 @@ Maintain a persistent `ny_sports_state.json` with ground-truth per-team facts (l
 
 ---
 
+## Email Newsletter (Resend)
+
+Turn the single-recipient Gmail briefing into a real newsletter anyone can subscribe to. Double opt-in via a Function-URL Lambda + Resend; daily broadcast added after the existing Gmail send. Full plan: `~/.claude/plans/id-like-to-add-velvety-cupcake.md`.
+
+| # | Item | Branch | Status |
+|---|------|--------|--------|
+| NL-1 | `mc_config.py` Resend env reads; `send_newsletter_broadcast()` in `mc_deliver.py` (reuses subscribe row + CAN-SPAM footer); wired into `mikecast_briefing.py` after `send_email()` | `newsletter-resend` | code done |
+| NL-2 | Frontend: inline signup form on `index.html` + `style.css`; `subscribe.html`, `confirmed.html`; shared `signup.js` | `newsletter-resend` | code done |
+| NL-3 | `lambda/newsletter_signup/` — `handler.py` (POST /signup, GET /confirm, HMAC double opt-in), `requirements.txt`, `deploy.sh`, `README.md` | `newsletter-resend` | code done |
+| NL-4 | `resend` added to `requirements.txt` | `newsletter-resend` | code done |
+| NL-5 | **Manual:** Resend account + `mikecast.io` domain DNS verify; create "MikeCast Daily" audience + full-access key | — | pending (Mike) |
+| NL-6 | **Manual:** SSM params `/mikecast/RESEND_API_KEY`, `/mikecast/RESEND_AUDIENCE_ID`, `/mikecast/SIGNUP_HMAC_SECRET`; add to ECS task def secrets/env | — | pending (Mike) |
+| NL-7 | **Manual:** create Lambda + IAM role + Function URL (CORS mikecast.io); set `CONFIRM_BASE_URL` + `MIKECAST_SIGNUP_ENDPOINT` in `signup.js`; fill CAN-SPAM postal address in `_NEWSLETTER_FOOTER` | — | pending (Mike) |
+
+---
+
 ## Done
 
 | Item | Description |

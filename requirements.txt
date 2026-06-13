@@ -4,6 +4,7 @@ beautifulsoup4
 lxml
 mutagen
 boto3
+resend
 
 # CrewAI migration (Steps 0–8b of the daily pipeline).
 # setuptools<81 keeps pkg_resources bundled (crewai 0.86 + Py3.12 still imports it).

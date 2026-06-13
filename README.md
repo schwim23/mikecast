@@ -51,6 +51,7 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
 
 10. **Delivery & Publishing**:
     - **Email**: HTML briefing in the body, podcast script and audio as attachments, sent via Gmail SMTP to the personal recipient (`GMAIL_TO`).
+    - **Newsletter broadcast** (optional, Resend): the same HTML briefing is broadcast to all confirmed public subscribers via the Resend Broadcasts API, with the Apple/Spotify/RSS subscribe row plus a CAN-SPAM footer (postal address + unsubscribe link). Additive to the Gmail send and skipped gracefully when Resend isn't configured. See **Email Newsletter** below.
     - **Daily JSON**: All content saved to `data/YYYY-MM-DD.json` for the dashboard.
     - **Manifest**: `data/manifest.json` updated for dashboard date-picker navigation.
     - **RSS Feed**: `data/feed.xml` updated as a standard podcast RSS 2.0 feed, uploaded to S3 with `Cache-Control: no-cache` so Apple Podcasts and Spotify always fetch the latest version rather than serving a stale CloudFront-cached copy.
@@ -73,7 +74,7 @@ Step 7   Mike's Picks        Process user-submitted URLs, PDFs, and text
 Step 8   Generate content    Parallel: HTML briefing + single-voice script + 3-voice script
 Step 8b  Critic pass         GPT-4o scores sections; regenerates weak ones (score < 7); NY Sports never patched
 Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-voice fallback; segments stitched into one clean MP3 via ffmpeg concat
-Step 10  Save & deliver      JSON → manifest → RSS feed → email
+Step 10  Save & deliver      JSON → manifest → RSS feed → Gmail email → Resend newsletter broadcast (optional)
 ```
 
 ## CrewAI Architecture
@@ -169,10 +170,19 @@ mikecast/
 ├── briefing_history.json     # Rolling 7-day history of processed articles
 ├── requirements.txt          # Python dependencies
 ├── CLAUDE.md                 # Claude Code context and operating constraints
-├── index.html                # GitHub Pages entry point
+├── index.html                # GitHub Pages entry point (briefing + email signup form)
+├── subscribe.html            # Dedicated newsletter landing page
+├── confirmed.html            # Post-confirmation thank-you page (handles ?error=expired)
 ├── app.js                    # GitHub Pages dashboard JavaScript
+├── signup.js                 # Email-signup handler (shared by index.html + subscribe.html)
 ├── style.css                 # GitHub Pages dashboard styles
 ├── assets/                   # Static assets (fonts for video ad generation)
+├── lambda/
+│   └── newsletter_signup/    # Signup/confirm Lambda (Function URL) between the form and Resend
+│       ├── handler.py        # POST /signup + GET /confirm (HMAC double opt-in)
+│       ├── requirements.txt  # resend (boto3 is in the Lambda runtime)
+│       ├── deploy.sh         # pip install -t build/, zip, update-function-code
+│       └── README.md         # IAM role, env vars, Function URL, setup steps
 ├── dashboard/                # Local dashboard SPA (served by server.py)
 │   ├── index.html
 │   ├── style.css
@@ -248,6 +258,13 @@ export XAI_API_KEY="your_xai_api_key"
 # Required for the default CrewAI path (--crew). Not needed for a --legacy run.
 export ANTHROPIC_API_KEY="your_anthropic_api_key"
 
+# Optional — enables the daily email newsletter broadcast (Resend). When unset,
+# the broadcast is skipped and only the personal Gmail send to GMAIL_TO runs.
+export RESEND_API_KEY="re_..."
+export RESEND_AUDIENCE_ID="your_resend_audience_id"
+export RESEND_FROM="MikeCast <mike@mikecast.io>"      # optional; this is the default
+export RESEND_REPLY_TO="michael.schwimmer@gmail.com"  # optional; this is the default
+
 # Optional — enables AWS S3 mode (outputs written to S3 instead of local disk)
 export S3_BUCKET="your-s3-bucket-name"
 
@@ -265,6 +282,7 @@ Where to get API keys:
 - `ELEVENLABS_API_KEY`: [ElevenLabs](https://elevenlabs.io/)
 - `XAI_API_KEY`: [xAI](https://x.ai/)
 - `ANTHROPIC_API_KEY`: [Anthropic Console](https://console.anthropic.com/) — required for the default `--crew` path
+- `RESEND_API_KEY` / `RESEND_AUDIENCE_ID`: [Resend](https://resend.com/) full-access API key + the "MikeCast Daily" audience id. Only needed to enable the newsletter broadcast. See **Email Newsletter** below for the full signup-form + Lambda + DNS setup.
 - `S3_BUCKET`: Name of your AWS S3 bucket (must be in us-east-1 or set `AWS_DEFAULT_REGION`). Requires `boto3` and AWS credentials (`~/.aws/credentials` or IAM role).
 - `YOUTUBE_CLIENT_SECRETS`: Path to OAuth 2.0 credentials JSON from [Google Cloud Console](https://console.cloud.google.com/) with YouTube Data API v3 enabled.
 
@@ -433,6 +451,30 @@ https://mikecast.io/data/feed.xml
 Add this URL to any podcast app (Overcast, Pocket Casts, Castro, etc.) to receive new episodes automatically. The feed is also available on Apple Podcasts and Spotify.
 
 The feed is served with `Cache-Control: no-cache` so podcast crawlers always fetch fresh content. If a platform lags (Apple typically re-polls within a few hours; Spotify can take up to 24 hours), you can request a manual refresh from [Apple Podcasts Connect](https://podcastsconnect.apple.com).
+
+### Subscribing by Email (Newsletter)
+
+Visitors can subscribe to a daily email of the same briefing at the inline form on `mikecast.io` or the dedicated `mikecast.io/subscribe.html` landing page. Signup is **double opt-in** and powered by [Resend](https://resend.com/).
+
+```
+browser form ──POST /signup──▶ Lambda ──Resend.Emails.send──▶ confirmation email
+                                                                     │
+user clicks confirm ──GET /confirm?t=…──▶ Lambda ──Resend.Contacts.create──▶ audience
+                                                  └──302──▶ mikecast.io/confirmed.html
+
+ECS daily run ──▶ mc_deliver.send_newsletter_broadcast(html) ──Resend Broadcasts──▶ all confirmed subscribers
+```
+
+- A thin Lambda (`lambda/newsletter_signup/`, Function URL) sits between the static form and Resend so the API key never reaches the browser. It HMAC-signs a 24h token, emails the confirm link, and on confirmation adds the contact to the Resend audience.
+- The daily broadcast (`send_newsletter_broadcast` in `mc_deliver.py`, called right after the Gmail send) reuses the exact HTML briefing plus the Apple/Spotify/RSS subscribe row and a CAN-SPAM footer (postal address + Resend's auto-injected unsubscribe link). It is additive — the personal Gmail send to `GMAIL_TO` is unchanged — and skips gracefully when `RESEND_API_KEY` / `RESEND_AUDIENCE_ID` are unset.
+
+**One-time setup (manual):**
+
+1. Create a Resend account; add `mikecast.io` as a sending domain and add the SPF/DKIM/DMARC DNS records to the Route53 hosted zone; wait for "Verified".
+2. Create an audience named "MikeCast Daily" (note its id) and a **full-access** API key.
+3. Store secrets in SSM: `/mikecast/RESEND_API_KEY` (SecureString), `/mikecast/RESEND_AUDIENCE_ID` (String), `/mikecast/SIGNUP_HMAC_SECRET` (SecureString). Add `RESEND_API_KEY` + `RESEND_AUDIENCE_ID` to the ECS task definition's `secrets`, and `RESEND_FROM` to its `environment`.
+4. Deploy the Lambda (see `lambda/newsletter_signup/README.md`), create its Function URL with CORS for `https://mikecast.io`, and set that URL as both the Lambda's `CONFIRM_BASE_URL` env var and `MIKECAST_SIGNUP_ENDPOINT` in `signup.js`.
+5. Fill in the real postal address in the CAN-SPAM footer (`_NEWSLETTER_FOOTER` in `mc_deliver.py`) before the first broadcast.
 
 ### Generating a YouTube Episode
 

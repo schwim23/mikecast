@@ -37,6 +37,14 @@ GMAIL_APP_PASSWORD = (
 GMAIL_FROM = os.environ.get("GMAIL_FROM", "prometheusagent23@gmail.com")
 GMAIL_TO   = os.environ.get("GMAIL_TO",   "michael.schwimmer@gmail.com")
 
+# Resend — daily email newsletter broadcast to confirmed subscribers (optional;
+# the broadcast is skipped gracefully when RESEND_API_KEY / RESEND_AUDIENCE_ID
+# are unset, so the existing Gmail send to GMAIL_TO is never affected).
+RESEND_API_KEY     = os.environ.get("RESEND_API_KEY", "")
+RESEND_AUDIENCE_ID = os.environ.get("RESEND_AUDIENCE_ID", "")
+RESEND_FROM        = os.environ.get("RESEND_FROM", "MikeCast <mike@mikecast.io>")
+RESEND_REPLY_TO    = os.environ.get("RESEND_REPLY_TO", "michael.schwimmer@gmail.com")
+
 # ElevenLabs — 3-voice podcast (Mike = host, Elizabeth = tech/biz, Jesse = sports)
 ELEVENLABS_API_KEY         = os.environ.get("ELEVENLABS_API_KEY", "")
 ELEVENLABS_VOICE_MIKE      = os.environ.get("ELEVENLABS_VOICE_MIKE", "")

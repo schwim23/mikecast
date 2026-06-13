@@ -37,6 +37,13 @@
           RSS Feed
         </a>
       </div>
+
+      <!-- Email newsletter signup -->
+      <form class="email-signup" id="email-signup" novalidate>
+        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+        <button type="submit">Subscribe by email</button>
+      </form>
+      <p class="signup-status" id="signup-status" aria-live="polite"></p>
     </div>
   </header>
 
@@ -107,5 +114,6 @@
   </footer>
 
   <script src="app.js"></script>
+  <script src="signup.js"></script>
 </body>
 </html>

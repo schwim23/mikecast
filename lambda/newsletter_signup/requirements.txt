@@ -1,0 +1,2 @@
+# boto3 is already in the Lambda runtime — only resend needs bundling.
+resend

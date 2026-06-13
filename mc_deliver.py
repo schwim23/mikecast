@@ -25,6 +25,10 @@ from mc_config import (
     GMAIL_APP_PASSWORD,
     GMAIL_FROM,
     GMAIL_TO,
+    RESEND_API_KEY,
+    RESEND_AUDIENCE_ID,
+    RESEND_FROM,
+    RESEND_REPLY_TO,
     S3_BUCKET,
     SITE_BASE_URL,
     TODAY,
@@ -353,22 +357,14 @@ def _rss_document(items: list[str]) -> str:
 # Email delivery
 # ---------------------------------------------------------------------------
 
-def send_email(
-    html_body: str,
-    podcast_script: str,
-    audio_path: Path | None,
-) -> bool:
-    """Send the HTML briefing + podcast script + audio via Gmail SMTP."""
-    if not GMAIL_APP_PASSWORD:
-        logger.warning("GMAIL_APP_PASSWORD not set — skipping email.")
-        return False
+def _subscribe_html_block() -> str:
+    """
+    The Apple / Spotify / RSS subscribe row appended to the briefing email.
 
-    msg = MIMEMultipart("mixed")
-    msg["From"] = GMAIL_FROM
-    msg["To"] = GMAIL_TO
-    msg["Subject"] = f"MikeCast Daily Briefing — {TODAY_DISPLAY}"
-
-    subscribe_html = """
+    Shared by the personal Gmail send (`send_email`) and the public newsletter
+    broadcast (`send_newsletter_broadcast`) so both render the same podcast CTAs.
+    """
+    return """
 <div style="margin:2rem auto;max-width:600px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
   <p style="color:#8b949e;font-size:13px;margin:0 0 12px;">Subscribe to MikeCast on your favourite podcast app:</p>
   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto;">
@@ -393,7 +389,24 @@ def send_email(
     </tr>
   </table>
 </div>"""
-    msg.attach(MIMEText(html_body + subscribe_html, "html", "utf-8"))
+
+
+def send_email(
+    html_body: str,
+    podcast_script: str,
+    audio_path: Path | None,
+) -> bool:
+    """Send the HTML briefing + podcast script + audio via Gmail SMTP."""
+    if not GMAIL_APP_PASSWORD:
+        logger.warning("GMAIL_APP_PASSWORD not set — skipping email.")
+        return False
+
+    msg = MIMEMultipart("mixed")
+    msg["From"] = GMAIL_FROM
+    msg["To"] = GMAIL_TO
+    msg["Subject"] = f"MikeCast Daily Briefing — {TODAY_DISPLAY}"
+
+    msg.attach(MIMEText(html_body + _subscribe_html_block(), "html", "utf-8"))
 
     # Podcast script as plain-text attachment
     script_part = MIMEText(podcast_script, "plain", "utf-8")
@@ -421,4 +434,62 @@ def send_email(
         return True
     except Exception as exc:
         logger.error("Email send failed: %s", exc)
+        return False
+
+
+# ---------------------------------------------------------------------------
+# Newsletter broadcast (Resend) — public subscribers
+# ---------------------------------------------------------------------------
+
+# Postal address is a CAN-SPAM requirement for commercial bulk email. Resend
+# swaps {{{RESEND_UNSUBSCRIBE_URL}}} for a per-recipient unsubscribe link at
+# send time, so every broadcast carries a working one-click unsubscribe.
+_NEWSLETTER_FOOTER = """
+<div style="margin:2.5rem auto 1rem;max-width:600px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#8b949e;font-size:12px;line-height:1.6;border-top:1px solid #30363d;padding-top:16px;">
+  <p style="margin:0 0 6px;">You're receiving this because you subscribed to the MikeCast daily briefing at mikecast.io.</p>
+  <p style="margin:0 0 6px;"><a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:#8b949e;text-decoration:underline;">Unsubscribe</a></p>
+  <p style="margin:0;">MikeCast &bull; [POSTAL ADDRESS REQUIRED — replace before first broadcast; CAN-SPAM mandates a real physical mailing address, a PO box is fine]</p>
+</div>"""
+
+
+def send_newsletter_broadcast(html_body: str) -> bool:
+    """
+    Broadcast today's briefing to all confirmed Resend subscribers.
+
+    Additive to `send_email` — the existing Gmail send to GMAIL_TO is unchanged.
+    The HTML body is identical to the personal email (same briefing + the
+    Apple/Spotify/RSS subscribe row); the only addition is a CAN-SPAM footer
+    with the postal address and Resend's auto-injected unsubscribe link. No
+    audio attachment — ESPs strip them and they hurt deliverability; the
+    subscribe row already points subscribers at the audio.
+
+    Skips gracefully (returns False, never raises) when Resend isn't configured
+    so a misconfigured or absent newsletter never blocks the daily pipeline.
+    """
+    if not (RESEND_API_KEY and RESEND_AUDIENCE_ID):
+        logger.info("Resend not configured (RESEND_API_KEY / RESEND_AUDIENCE_ID) — skipping newsletter broadcast.")
+        return False
+
+    try:
+        import resend
+        resend.api_key = RESEND_API_KEY
+
+        full_html = html_body + _subscribe_html_block() + _NEWSLETTER_FOOTER
+        created = resend.Broadcasts.create({
+            "audience_id": RESEND_AUDIENCE_ID,
+            "from": RESEND_FROM,
+            "reply_to": RESEND_REPLY_TO,
+            "subject": f"MikeCast — {TODAY_DISPLAY}",
+            "html": full_html,
+        })
+        broadcast_id = created.get("id") if isinstance(created, dict) else getattr(created, "id", None)
+        if not broadcast_id:
+            logger.error("Newsletter broadcast create returned no id: %r", created)
+            return False
+
+        resend.Broadcasts.send(broadcast_id)
+        logger.info("Newsletter broadcast sent (id=%s)", broadcast_id)
+        return True
+    except Exception as exc:
+        logger.error("Newsletter broadcast failed (non-fatal): %s", exc)
         return False

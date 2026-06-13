@@ -49,6 +49,10 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 | `ELEVENLABS_VOICE_ELIZABETH` | No | ElevenLabs voice ID |
 | `ELEVENLABS_VOICE_JESSE` | No | ElevenLabs voice ID |
 | `XAI_API_KEY` | No | Grok adaptive search planning (Step 0) |
+| `RESEND_API_KEY` | No | Resend key — enables the daily email newsletter broadcast |
+| `RESEND_AUDIENCE_ID` | No | Resend "MikeCast Daily" audience id (required with the key) |
+| `RESEND_FROM` | No | Newsletter sender (default `MikeCast <mike@mikecast.io>`) |
+| `RESEND_REPLY_TO` | No | Newsletter reply-to (default `michael.schwimmer@gmail.com`) |
 | `CLAUDE_WRITER_MODEL` | No | LiteLLM model string for writers (default `anthropic/claude-sonnet-4-6`) |
 | `OPENAI_SCORER_MODEL` | No | LiteLLM model string for scorers (default `openai/gpt-4o`) |
 | `OPENAI_CRITIC_MODEL` | No | LiteLLM model string for critic (default `openai/gpt-4o`) |
@@ -65,7 +69,8 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 | `mc_generate.py` | Step 8 (legacy): HTML briefing + single-voice + 3-voice scripts |
 | `mc_critic.py` | Step 8b (legacy): GPT-4o quality critic; patches weak sections |
 | `mc_audio.py` | Step 9: ElevenLabs 3-voice + OpenAI TTS fallback; `_concat_mp3_segments` stitches segments into one clean MP3 via ffmpeg (shared) |
-| `mc_deliver.py` | Step 10: JSON, manifest.json, feed.xml, email (shared) |
+| `mc_deliver.py` | Step 10: JSON, manifest.json, feed.xml, Gmail email + Resend newsletter broadcast (shared) |
+| `lambda/newsletter_signup/` | Function-URL Lambda for double-opt-in email signup (POST /signup, GET /confirm) — bridges the static form and Resend |
 | `mc_utils.py` | Shared helpers: HTTP (browser UA default), JSON I/O, text similarity, URL fingerprinting |
 | `mikes_picks_ingest.py` | CLI to add URLs/PDFs/text to the picks queue |
 | `server.py` | Flask server for local dashboard |

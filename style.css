@@ -269,6 +269,50 @@ body {
 }
 .btn-subscribe:hover { opacity: .8; }
 
+/* Email newsletter signup */
+.email-signup {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: .9rem;
+}
+.email-signup input[type="email"] {
+  padding: .5rem .8rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: .85rem;
+  min-width: 220px;
+}
+.email-signup input[type="email"]:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+.email-signup button {
+  padding: .5rem 1rem;
+  border-radius: 8px;
+  border: 0;
+  background: #f97316;
+  color: #fff;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .15s;
+}
+.email-signup button:hover { opacity: .85; }
+.email-signup button:disabled { opacity: .5; cursor: default; }
+.signup-status {
+  text-align: center;
+  font-size: .82rem;
+  color: var(--text-muted);
+  min-height: 1.1em;
+  margin-top: .5rem;
+}
+.signup-status.ok  { color: #3fb950; }
+.signup-status.err { color: #f85149; }
+
 /* Legacy small pill buttons (RSS only now) */
 .btn-apple   { background: #a855f7; color: #fff; }
 .btn-spotify { background: #1db954; color: #fff; }

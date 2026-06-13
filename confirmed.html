@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>You're in — MikeCast</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">🎙️</span>
+        <h1 class="brand-name">MikeCast</h1>
+      </div>
+      <p class="brand-tagline">Your daily AI-powered news briefing</p>
+    </div>
+  </header>
+
+  <main class="content" style="max-width:560px;">
+
+    <!-- Success state (default) -->
+    <div class="card" id="confirmed-ok" style="text-align:center;">
+      <div class="section-title" style="justify-content:center;">✅ You're in.</div>
+      <p style="color:var(--text-primary);line-height:1.7;margin:1rem 0;">
+        Tomorrow morning, your first MikeCast briefing lands in your inbox.
+        Welcome aboard.
+      </p>
+      <p style="margin-top:1rem;"><a href="index.html" style="color:var(--accent);text-decoration:none;">← Back to mikecast.io</a></p>
+    </div>
+
+    <!-- Expired / invalid-link state (shown when ?error=expired) -->
+    <div class="card" id="confirmed-expired" style="text-align:center;display:none;">
+      <div class="section-title" style="justify-content:center;">⌛ That link expired.</div>
+      <p style="color:var(--text-primary);line-height:1.7;margin:1rem 0;">
+        Confirmation links are valid for 24 hours. No problem — just sign up again
+        and we'll send a fresh one.
+      </p>
+      <form class="email-signup" id="email-signup" novalidate style="margin-top:1.25rem;">
+        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
+        <button type="submit">Subscribe by email</button>
+      </form>
+      <p class="signup-status" id="signup-status" aria-live="polite"></p>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>MikeCast &bull; Your daily AI-powered news briefing</p>
+  </footer>
+
+  <script>
+    // Toggle the expired state based on ?error=expired in the URL.
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("error") === "expired") {
+        document.getElementById("confirmed-ok").style.display = "none";
+        document.getElementById("confirmed-expired").style.display = "block";
+      }
+    })();
+  </script>
+  <script src="signup.js"></script>
+</body>
+</html>
