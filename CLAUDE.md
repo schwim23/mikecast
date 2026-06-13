@@ -64,7 +64,7 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 | `mc_collect.py` | Steps 1–6 (legacy): collect, dedupe, cluster, score, select, enrich |
 | `mc_generate.py` | Step 8 (legacy): HTML briefing + single-voice + 3-voice scripts |
 | `mc_critic.py` | Step 8b (legacy): GPT-4o quality critic; patches weak sections |
-| `mc_audio.py` | Step 9: ElevenLabs 3-voice + OpenAI TTS fallback (shared) |
+| `mc_audio.py` | Step 9: ElevenLabs 3-voice + OpenAI TTS fallback; `_concat_mp3_segments` stitches segments into one clean MP3 via ffmpeg (shared) |
 | `mc_deliver.py` | Step 10: JSON, manifest.json, feed.xml, email (shared) |
 | `mc_utils.py` | Shared helpers: HTTP (browser UA default), JSON I/O, text similarity, URL fingerprinting |
 | `mikes_picks_ingest.py` | CLI to add URLs/PDFs/text to the picks queue |
@@ -92,6 +92,8 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 - **`_safe_request` defaults to a browser UA**: ESPN, Google News, and a few other hosts 403 the bare `python-requests` UA. Callers passing their own `headers` kwarg override the default. Don't remove this default.
 - **NY Sports Fact-Checker runs every critic pass as read-only observability**: `fact_check_ny_sports()` in `crew/critic_crew.py` extracts substantive sentences from the NY Sports HTML section and the `[JESSE]` block of the 3-voice script, then calls `validate_claim_against_articles` on each. Unsupported claims are logged at WARNING; the section is still NEVER auto-patched. Don't turn this off — it's the only signal that catches Claude drift on sports.
 - **Podcast scripts target 6–7 minutes (900–1000 words)**: per-segment word budgets are in `crew/writing_crew.py` `_single_voice_task` and `_conversational_task`. If you change the target, update both Tasks plus the run_summary expectations.
+- **Audio segments are stitched by re-encoding, not raw byte concatenation**: `mc_audio._concat_mp3_segments` writes each TTS MP3 to a temp file and re-encodes one stream with ffmpeg's concat demuxer, producing a single valid `Xing`/`LAME` header and accurate duration. Raw byte-joining (the old approach) left embedded mid-stream headers that made Apple Podcasts/Spotify replay the tail. Don't revert to byte concatenation; the raw-concat path exists only as an ffmpeg-missing fallback.
+- **The critic resolves category names case-insensitively and never patches a section to empty**: the GPT scorer echoes ALL-CAPS section headers (`COMPANIES`) while `top_articles`/`categorised` are title-cased (`Companies`). Both `crew/critic_crew.py` and `mc_critic.py` build a lowercased lookup and skip the patch when no articles resolve — otherwise the patcher is handed 0 articles and emits a "No Companies News Available" placeholder over a section that had real stories. Don't go back to a plain `.get(cat)`.
 
 ## Output Files
 

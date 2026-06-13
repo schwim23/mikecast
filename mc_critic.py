@@ -239,9 +239,21 @@ def patch_weak_sections(
 
     improved_html = html
 
+    # The scorer echoes ALL-CAPS section headers ("COMPANIES") but `categorised`
+    # is keyed title-case ("Companies"); a plain .get(cat) misses and returns [],
+    # which makes the patcher emit a "No Companies News Available" placeholder
+    # over a section that had real stories. Resolve case-insensitively.
+    articles_by_norm = {k.lower(): v for k, v in categorised.items()}
+
     for cat in patchable:
-        articles = categorised.get(cat, [])
+        articles = articles_by_norm.get(cat.lower(), [])
         issue = issues.get(cat, "Section lacks depth and substance.")
+        if not articles:
+            logger.warning(
+                "Section '%s' scored weak but no articles resolved for it — leaving "
+                "the original untouched (refusing to patch to empty).", cat,
+            )
+            continue
         logger.info("Patching weak section: %s — %s", cat, issue)
 
         try:

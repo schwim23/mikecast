@@ -164,10 +164,28 @@ def run_critic_pass(
     if not patchable:
         return _with_factcheck(html, single_voice_script, conversational_script)
 
+    # The scorer echoes the briefing's ALL-CAPS section headers ("COMPANIES",
+    # "NY SPORTS"), but top_articles is keyed title-case ("Companies",
+    # "NY Sports"). Resolve case-insensitively so the patcher actually receives
+    # the section's articles — a plain top_articles.get("COMPANIES") returns []
+    # and makes the patcher emit a "No Companies News Available" placeholder,
+    # wiping a section that had real stories.
+    articles_by_norm = {k.lower(): v for k, v in top_articles.items()}
+
     improved_html = html
     for cat in patchable:
-        articles = top_articles.get(cat, [])
+        articles = articles_by_norm.get(cat.lower(), [])
         issue = issues.get(cat, "Section lacks depth and substance.")
+        if not articles:
+            # No articles resolved for a section the scorer judged weak. The
+            # section is thin, not empty — patching it would only let the
+            # patcher invent a "no news" placeholder. Leave the original.
+            logger.warning(
+                "[Critic Crew] '%s' scored weak but no articles resolved for it — "
+                "leaving the original section untouched (refusing to patch to empty).",
+                cat,
+            )
+            continue
         logger.info("[Critic Crew] patching weak section: %s — %s", cat, issue)
         try:
             new_section = _run_patcher(cat, articles, issue)

@@ -85,6 +85,8 @@ Maintain a persistent `ny_sports_state.json` with ground-truth per-team facts (l
 
 | Item | Description |
 |------|-------------|
+| AUD-2 | Audio stitching hardened — replaced raw MP3 byte-concatenation + `_strip_id3_header`/`_strip_vbr_header` surgery with `_concat_mp3_segments()` (ffmpeg concat-demuxer re-encode → one valid `Xing`/`LAME` header, accurate duration). Fixes Apple Podcasts/Spotify replaying the tail of an episode |
+| CRIT-1 | Critic Companies-wipe fixed — scorer emits ALL-CAPS category names but `top_articles`/`categorised` are title-cased, so `.get(cat)` returned `[]` and the patcher wrote "No Companies News Available" over a section with real articles. Both `crew/critic_crew.py` and `mc_critic.py` now resolve case-insensitively and skip patching to empty |
 | VOL-1 | Volume normalization — added `_normalize_loudness()` to `mc_audio.py`; ffmpeg two-pass loudnorm to −16 LUFS; called in both `generate_podcast_audio()` and `generate_elevenlabs_audio()` |
 | SEC-1 | Security + efficiency pass — XSS fix (`html.escape`, `_safe_url`) in `mc_generate.py`; batch enrichment (N+1 → 1 GPT call) in `mc_collect.py`; cross-category dedup; thread timeout; RSS 10MB size limit; 5xx retry in `mc_utils.py`; sports critic warning upgrade |
 | CI-1 | GitHub Actions deploy workflow (`.github/workflows/deploy.yml`) — builds Docker image on push to `main`, pushes to ECR, registers new ECS task definition, updates EventBridge Scheduler. Dedicated IAM user `mikecast-github-actions` with least-privilege policy |

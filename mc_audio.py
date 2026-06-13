@@ -11,6 +11,7 @@ Both functions return True on success, False on failure, and never raise.
 import json
 import logging
 import re
+import shutil
 import subprocess
 import tempfile
 import time
@@ -30,51 +31,68 @@ from mc_generate import parse_conversational_script
 logger = logging.getLogger("mikecast")
 
 
-def _strip_id3_header(data: bytes) -> bytes:
+def _concat_mp3_segments(segments: list[bytes], output_path: Path) -> bool:
     """
-    Strip an ID3v2 header from the start of *data* and return the remainder.
+    Concatenate MP3 byte *segments* into a single clean MP3 at *output_path*.
 
-    Each ElevenLabs segment is a complete MP3 file that begins with its own
-    ID3v2 header. When segments are concatenated as raw bytes, these embedded
-    headers confuse players at segment boundaries (audible glitch/skip).
-    Strip the header from all segments after the first before joining.
+    Each TTS segment (from ElevenLabs or OpenAI) is a self-contained MP3 file
+    with its own ID3 + VBR (Xing/Info) header. Joining them as raw bytes leaves
+    those embedded headers mid-stream: the leading Xing header then describes
+    only the *first* segment's frame count, so streaming players (Apple
+    Podcasts, Spotify) mis-estimate the total duration and replay the tail to
+    fill the perceived remaining time ("the end plays twice").
 
-    ID3v2 layout: 3-byte magic "ID3", 2-byte version, 1-byte flags,
-    4-byte synchsafe size. Total header = 10 + decoded_size bytes.
+    Instead we decode every segment and re-encode one continuous stream with
+    ffmpeg's concat demuxer. The result has exactly one valid Xing/LAME header
+    and an accurate duration, so seek tables are correct everywhere.
+
+    Falls back to raw byte concatenation only if ffmpeg is unavailable or the
+    concat fails — never raises, so delivery is never blocked.
     """
-    if not data[:3] == b"ID3":
-        return data
-    # Synchsafe integer: each byte uses only the low 7 bits.
-    raw = data[6:10]
-    if len(raw) < 4:
-        return data
-    size = (raw[0] << 21) | (raw[1] << 14) | (raw[2] << 7) | raw[3]
-    header_len = 10 + size
-    return data[header_len:]
+    def _raw_concat() -> bool:
+        with open(output_path, "wb") as fh:
+            for seg in segments:
+                fh.write(seg)
+        return True
 
+    if not segments:
+        logger.warning("No audio segments to concatenate for %s.", output_path.name)
+        return False
 
-def _strip_vbr_header(path: Path) -> None:
-    """
-    Nullify the Xing/Info/VBRI VBR header in the first MP3 frame.
+    if not shutil.which("ffmpeg"):
+        logger.warning(
+            "ffmpeg not found — falling back to raw MP3 concatenation for %s "
+            "(streaming players may mis-seek).", output_path.name,
+        )
+        return _raw_concat()
 
-    When ElevenLabs segments are concatenated as raw bytes, the first segment's
-    Xing header (which encodes only *that segment's* frame count) becomes the
-    VBR header for the whole file. Players read it and report the first
-    segment's duration (e.g. 21s) instead of the real file length. Clearing
-    the marker makes players fall back to bitrate×file-size estimation, which
-    is accurate enough and lets the subsequent TLEN stamp take effect.
-    """
     try:
-        data = path.read_bytes()
-        for marker in (b"Xing", b"Info", b"VBRI"):
-            pos = data[:2000].find(marker)
-            if pos != -1:
-                patched = data[:pos] + b"\x00" * len(marker) + data[pos + len(marker):]
-                path.write_bytes(patched)
-                logger.info("Stripped VBR header '%s' from %s", marker.decode(), path.name)
-                return
+        with tempfile.TemporaryDirectory(dir=output_path.parent) as td:
+            tmp = Path(td)
+            seg_paths: list[Path] = []
+            for i, seg in enumerate(segments):
+                seg_path = tmp / f"seg_{i:04d}.mp3"
+                seg_path.write_bytes(seg)
+                seg_paths.append(seg_path)
+            # concat demuxer list file; paths are simple temp names (no quoting hazards)
+            list_path = tmp / "concat.txt"
+            list_path.write_text("".join(f"file '{p.name}'\n" for p in seg_paths))
+            subprocess.run(
+                ["ffmpeg", "-hide_banner", "-y",
+                 "-f", "concat", "-safe", "0", "-i", str(list_path),
+                 "-codec:a", "libmp3lame", "-q:a", "2", str(output_path)],
+                capture_output=True,
+                check=True,
+                timeout=300,
+            )
+        logger.info("Concatenated %d segment(s) → %s", len(segments), output_path.name)
+        return True
     except Exception as exc:
-        logger.warning("Could not strip VBR header from %s: %s", path.name, exc)
+        logger.error(
+            "ffmpeg concat failed for %s (%s) — falling back to raw concatenation.",
+            output_path.name, exc,
+        )
+        return _raw_concat()
 
 
 def _stamp_mp3_duration(path: Path) -> None:
@@ -298,9 +316,8 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
             audio_segments.append(response.content)
             time.sleep(0.5)
 
-        with open(output_path, "wb") as fh:
-            for seg in audio_segments:
-                fh.write(seg)
+        if not _concat_mp3_segments(audio_segments, output_path):
+            return False
 
         logger.info(
             "OpenAI TTS audio saved: %s (%.1f MB)",
@@ -350,8 +367,13 @@ def generate_elevenlabs_audio(
         logger.warning("No segments parsed from conversational script.")
         return False
 
-    def _tts_segment(speaker: str, text: str) -> bytes:
-        """Call ElevenLabs for one speaker segment; handles chunking internally."""
+    def _tts_segment(speaker: str, text: str) -> list[bytes]:
+        """
+        Call ElevenLabs for one speaker segment, returning one MP3 blob per
+        chunk. Returning the chunks separately (rather than raw-joining them)
+        lets the caller hand every blob to the ffmpeg concat step, so even a
+        long, multi-chunk segment produces a single cleanly-framed stream.
+        """
         voice_id = voice_map[speaker]
         chunks = _split_text_for_tts(_tts_normalize(text), max_chunk=4500)
         audio_parts: list[bytes] = []
@@ -375,7 +397,7 @@ def generate_elevenlabs_audio(
             resp = requests.post(url, json=payload, headers=headers, timeout=90)
             resp.raise_for_status()
             audio_parts.append(resp.content)
-        return b"".join(audio_parts)
+        return audio_parts
 
     audio_segments: list[bytes] = []
     for i, (speaker, text) in enumerate(segments):
@@ -384,25 +406,19 @@ def generate_elevenlabs_audio(
             i + 1, len(segments), speaker, len(text),
         )
         try:
-            audio_bytes = _tts_segment(speaker, text)
-            audio_segments.append(audio_bytes)
+            audio_segments.extend(_tts_segment(speaker, text))
             time.sleep(0.3)  # gentle rate-limit buffer between segments
         except Exception as exc:
             logger.error("ElevenLabs segment %d [%s] failed: %s", i + 1, speaker, exc)
             return False
 
     try:
-        with open(output_path, "wb") as fh:
-            for i, seg in enumerate(audio_segments):
-                # Keep the first segment's ID3 header (contains metadata);
-                # strip ID3 headers from subsequent segments so embedded headers
-                # don't cause audible glitches at segment boundaries.
-                fh.write(seg if i == 0 else _strip_id3_header(seg))
+        if not _concat_mp3_segments(audio_segments, output_path):
+            return False
         logger.info(
             "ElevenLabs audio saved: %s (%.1f MB, %d segments)",
-            output_path, output_path.stat().st_size / 1e6, len(audio_segments),
+            output_path, output_path.stat().st_size / 1e6, len(segments),
         )
-        _strip_vbr_header(output_path)
         _normalize_loudness(output_path)
         _stamp_mp3_duration(output_path)
         return True

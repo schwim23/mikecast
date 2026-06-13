@@ -47,16 +47,17 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
    - **ElevenLabs 3-voice** (preferred): Mike = host, Elizabeth = tech/biz, Jesse = sports. Uses `eleven_multilingual_v2`.
    - **OpenAI TTS** (single voice, "alloy"): Generated only when ElevenLabs is unavailable or fails.
    - The ElevenLabs version is used for the RSS podcast feed when available.
+   - **Clean single-stream stitching**: each TTS call returns a self-contained MP3 (its own ID3 + VBR header). Rather than concatenating the raw bytes — which leaves multiple embedded headers mid-stream and makes streaming players (Apple Podcasts, Spotify) mis-estimate the duration and replay the tail — `mc_audio._concat_mp3_segments()` decodes every segment and re-encodes one continuous stream with ffmpeg's concat demuxer. The result has exactly one valid `Xing`/`LAME` header and an accurate duration, then gets loudness-normalized to −16 LUFS and stamped with a `TLEN` tag. If ffmpeg is missing the code falls back to raw concatenation rather than failing.
 
 10. **Delivery & Publishing**:
-    - **Email**: HTML briefing in the body, podcast script and audio as attachments, sent via Gmail SMTP.
+    - **Email**: HTML briefing in the body, podcast script and audio as attachments, sent via Gmail SMTP to the personal recipient (`GMAIL_TO`).
     - **Daily JSON**: All content saved to `data/YYYY-MM-DD.json` for the dashboard.
     - **Manifest**: `data/manifest.json` updated for dashboard date-picker navigation.
     - **RSS Feed**: `data/feed.xml` updated as a standard podcast RSS 2.0 feed, uploaded to S3 with `Cache-Control: no-cache` so Apple Podcasts and Spotify always fetch the latest version rather than serving a stale CloudFront-cached copy.
 
 11. **Static Dashboard Website**: A responsive dark-themed SPA (`dashboard/`) for browsing briefings by date, with an embedded audio player and collapsible script viewer.
 
-12. **CrewAI agent pipeline (opt-in via `--crew`)**: Steps 0–8b can be executed by [CrewAI](https://github.com/crewAIInc/crewAI) agents instead of the procedural pipeline. A `Planning Crew`, four `Research` agents, a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + Fact-Checker), a `Writing Crew` (three Claude writers in parallel), and a `Critic Crew` (GPT-4o scorer + Claude patcher) replace the matching legacy modules. Steps 9 and 10 (audio + delivery) are unchanged. The CrewAI path is opt-in during shadow validation — default is still `--legacy`. See **CrewAI Architecture** below for full details.
+12. **CrewAI agent pipeline (opt-in via `--crew`)**: Steps 0–8b can be executed by [CrewAI](https://github.com/crewAIInc/crewAI) agents instead of the procedural pipeline. A `Planning Crew`, four `Research` agents, a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + Fact-Checker), a `Writing Crew` (three Claude writers in parallel), and a `Critic Crew` (GPT-4o scorer + Claude patcher) replace the matching legacy modules. Steps 9 and 10 (audio + delivery) are unchanged. **The CrewAI path is the default since the cutover** — pass `--legacy` to revert to the procedural pipeline for a single run. See **CrewAI Architecture** below for full details.
 
 ## Pipeline (10 Steps)
 
@@ -71,7 +72,7 @@ Step 6   Enrich top 15       Fetch full body + "why it matters" via GPT-4o-mini
 Step 7   Mike's Picks        Process user-submitted URLs, PDFs, and text
 Step 8   Generate content    Parallel: HTML briefing + single-voice script + 3-voice script
 Step 8b  Critic pass         GPT-4o scores sections; regenerates weak ones (score < 7); NY Sports never patched
-Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-voice fallback
+Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-voice fallback; segments stitched into one clean MP3 via ffmpeg concat
 Step 10  Save & deliver      JSON → manifest → RSS feed → email
 ```
 
@@ -244,7 +245,7 @@ export ELEVENLABS_VOICE_JESSE="voice_id_for_jesse"
 # Optional — enables xAI Grok adaptive search planning (Step 0)
 export XAI_API_KEY="your_xai_api_key"
 
-# Required for the CrewAI path (--crew). Optional for the default --legacy path.
+# Required for the default CrewAI path (--crew). Not needed for a --legacy run.
 export ANTHROPIC_API_KEY="your_anthropic_api_key"
 
 # Optional — enables AWS S3 mode (outputs written to S3 instead of local disk)
@@ -263,7 +264,7 @@ Where to get API keys:
 - `GMAIL_APP_PASSWORD`: A 16-digit App Password from Google Account (not your regular password)
 - `ELEVENLABS_API_KEY`: [ElevenLabs](https://elevenlabs.io/)
 - `XAI_API_KEY`: [xAI](https://x.ai/)
-- `ANTHROPIC_API_KEY`: [Anthropic Console](https://console.anthropic.com/) — only needed when running `--crew`
+- `ANTHROPIC_API_KEY`: [Anthropic Console](https://console.anthropic.com/) — required for the default `--crew` path
 - `S3_BUCKET`: Name of your AWS S3 bucket (must be in us-east-1 or set `AWS_DEFAULT_REGION`). Requires `boto3` and AWS credentials (`~/.aws/credentials` or IAM role).
 - `YOUTUBE_CLIENT_SECRETS`: Path to OAuth 2.0 credentials JSON from [Google Cloud Console](https://console.cloud.google.com/) with YouTube Data API v3 enabled.
 
@@ -341,7 +342,7 @@ The next 6:30 AM run will use the updated image. No manual AWS steps needed.
 ### Running ECS manually
 
 ```bash
-# Trigger an immediate run (uses latest task definition — defaults to --legacy)
+# Trigger an immediate run (uses latest task definition — the entrypoint defaults to --crew)
 aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
@@ -349,9 +350,10 @@ aws ecs run-task \
   --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
   --region us-east-1
 
-# Force the CrewAI path for validation. Requires ANTHROPIC_API_KEY in SSM Parameter Store
-# (path: /mikecast/ANTHROPIC_API_KEY, SecureString) referenced from the task definition's
-# containerDefinitions[0].secrets array.
+# Force-regenerate today's briefing (e.g. after a code fix) on the default crew path.
+# Requires ANTHROPIC_API_KEY in SSM Parameter Store (path: /mikecast/ANTHROPIC_API_KEY,
+# SecureString) referenced from the task definition's containerDefinitions[0].secrets array.
+# Swap --crew for --legacy to force a one-shot rollback run instead.
 aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
