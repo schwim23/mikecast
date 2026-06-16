@@ -1,8 +1,8 @@
 // MikeCast email-newsletter signup — shared by index.html and subscribe.html.
 //
-// SETUP: after deploying the newsletter-signup Lambda, paste its Function URL
-// below (no trailing slash). The handler exposes POST /signup.
-const MIKECAST_SIGNUP_ENDPOINT = "https://REPLACE-WITH-LAMBDA-FUNCTION-URL";
+// SETUP: the signup endpoint is the API Gateway custom domain that fronts the
+// newsletter-signup Lambda (no trailing slash). The handler exposes POST /signup.
+const MIKECAST_SIGNUP_ENDPOINT = "https://api.mikecast.io";
 
 (function () {
   const form = document.getElementById("email-signup");
