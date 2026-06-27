@@ -50,7 +50,7 @@ Replace the procedural pipeline (xAI planner → mc_collect → mc_generate → 
 
 - `legacy ESPN RSS` (`www.espn.com/espn/rss/*`) still bot-blocked. We now use `site.api.espn.com/.../news` instead. Keep an eye on that endpoint — if ESPN ever shuts it down, fallback options are very limited.
 - xAI Grok occasionally returns trending_stories: [] even when categories populate. The hardened mc_plan now logs the raw response in that case so we can diagnose.
-- Sports Researcher returns `{}` honestly when no article implies a verifiable game/standings/injury. That's correct — but it means verified-facts coverage varies day-to-day. Future enhancement: have the agent query box scores for all 4 NY teams unconditionally so the writers always have ground-truth even when articles are weak.
+- Sports Researcher returns `{}` honestly when no article implies a verifiable game/standings/injury. That's correct — but it means verified-facts coverage varies day-to-day. ✅ **Resolved by SPO-4** — `fetch_all_ny_team_updates()` now queries box scores for all 4 NY teams unconditionally, so the writers always have ground-truth (last score + next game) even when the article batch is weak.
 
 ---
 
@@ -60,6 +60,7 @@ Maintain a persistent `ny_sports_state.json` with ground-truth per-team facts (l
 
 | # | Item | Branch | Status |
 |---|------|--------|--------|
+| SPO-4 | Deterministic per-team results + next-game: fixed `FetchSportsBoxScoreTool` next_game (only future-dated, non-completed events — was returning stale postponed past games as "next"); replaced `fetch_all_ny_upcoming_games()` with `fetch_all_ny_team_updates()` (last score **and** next game for all 4 NY teams, mandatory-include); writers must now state score + next game for any team with a game | `sports/deterministic-scores-next-game` | done |
 | SPO-1 | Add `mc_sports.py` with `extract_team_state()` + `ny_sports_state.json` schema; call after Step 6 in `mc_collect.py`; update `mc_config.py` with `NY_SPORTS_STATE_FILE` path constant | `sports/team-state-extraction` | backlog |
 | SPO-2 | In `mc_generate.py`, load `ny_sports_state.json` and prepend "KNOWN FACTS" block to NY Sports section in all three generation functions | `sports/inject-team-state` | backlog |
 | SPO-3 | Staleness guard: if state > 2 days old and no new sports articles, omit NY Sports section rather than risk fabrication; add note in HTML briefing | `sports/staleness-guard` | backlog |

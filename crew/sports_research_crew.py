@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 
 from crewai import Agent, Crew, Process, Task
 
@@ -38,14 +39,17 @@ logger = logging.getLogger("mikecast.crew.sports")
 
 _NY_TEAMS = ["Yankees", "Knicks", "Giants", "Devils"]
 
-# Labels that mean "in the future" — anything else (LAST NIGHT, YESTERDAY,
-# "N DAYS AGO") is dropped from the upcoming-games block.
-_UPCOMING_LABELS = {"TODAY", "TONIGHT", "TOMORROW", "TOMORROW NIGHT"}
+# A team's most recent completed game is only worth surfacing if it happened
+# within this many days — otherwise the "score" is stale (e.g. the Knicks'
+# last game two weeks ago once their season ended).
+_RECENT_RESULT_WINDOW_DAYS = 4
 
-# Subset of _UPCOMING_LABELS that triggers the writer's mandatory-include
-# rule. A team with a game on this list MUST appear in the NY Sports section
-# of the day's briefing.
-_MANDATORY_UPCOMING_LABELS = {"TONIGHT", "TOMORROW", "TOMORROW NIGHT"}
+# How soon an upcoming game must be to count as the team "having a game". This
+# bounds the next-game lookahead so OFF-SEASON / next-season games — which ESPN
+# may list months out — are NOT surfaced. (Mike: no next-game line in the
+# offseason.) ~8 days covers a weekly NFL cadence plus a little slack while
+# still excluding anything season-distant.
+_UPCOMING_WINDOW_DAYS = 8
 
 
 def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
@@ -166,93 +170,197 @@ def format_verified_facts_block(verified: dict[str, str]) -> str:
     return "\n".join(lines)
 
 
-def fetch_all_ny_upcoming_games() -> list[dict]:
+def _days_ago_from_label(rel: str) -> int | None:
     """
-    Unconditionally fetch the next scheduled game for each NY team via ESPN.
+    How many days ago a completed-game label refers to (0 = today). Returns
+    None for labels that aren't in the past (future games) or that we can't
+    parse. Mirrors the vocabulary _localize_espn_date emits.
+    """
+    rel = (rel or "").strip().upper()
+    if rel in ("TODAY", "TONIGHT"):
+        return 0
+    if rel in ("LAST NIGHT", "YESTERDAY"):
+        return 1
+    m = re.match(r"(\d+)\s+DAYS AGO$", rel)
+    if m:
+        return int(m.group(1))
+    return None
 
-    Bypasses the LLM Researcher: the writers used to depend on article coverage
-    for upcoming-game info, which silently dropped imminent games (e.g. a Knicks
-    playoff game) whenever today's article batch happened not to mention that
-    team. This function calls fetch_box_score_tool directly for all four NY
-    teams so the next-game info flows through deterministically.
 
-    Returns a list of dicts shaped like::
+def _format_score_summary(team: str, home: dict, away: dict) -> str:
+    """
+    Render a completed game as e.g. "New York Yankees lost to Boston Red Sox
+    6-1" (winner's score first). Falls back to a bare matchup line if the team
+    or scores can't be resolved. Returns "" if there isn't enough to say.
+    """
+    h_name, a_name = (home.get("name") or "").strip(), (away.get("name") or "").strip()
+    h_score, a_score = str(home.get("score") or "").strip(), str(away.get("score") or "").strip()
+    if not h_name or not a_name:
+        return ""
+    needle = team.strip().lower()
+    if needle in h_name.lower():
+        ny, opp, ny_s, opp_s = h_name, a_name, h_score, a_score
+    elif needle in a_name.lower():
+        ny, opp, ny_s, opp_s = a_name, h_name, a_score, h_score
+    else:
+        # Can't tell which side is the NY team — state the raw matchup.
+        return f"{a_name} {a_score}, {h_name} {h_score}".strip().rstrip(",")
+    try:
+        ny_i, opp_i = int(ny_s), int(opp_s)
+    except (TypeError, ValueError):
+        return f"{ny} vs {opp}".strip()
+    if ny_i == opp_i:
+        return f"{ny} tied {opp} {ny_s}-{opp_s}"
+    verb = "beat" if ny_i > opp_i else "lost to"
+    hi, lo = (ny_s, opp_s) if ny_i > opp_i else (opp_s, ny_s)
+    return f"{ny} {verb} {opp} {hi}-{lo}"
+
+
+def _build_last_game(team: str, result: dict) -> dict | None:
+    """Extract a recent completed game (score) from a box-score result, or None
+    if the last game is older than the recency window."""
+    rel = (result.get("relative_to_today") or "").strip()
+    days = _days_ago_from_label(rel)
+    if days is None or days > _RECENT_RESULT_WINDOW_DAYS:
+        return None
+    summary = _format_score_summary(team, result.get("home") or {}, result.get("away") or {})
+    if not summary:
+        return None
+    return {"summary": summary, "relative_to_today": rel, "date_et": result.get("date_et", "")}
+
+
+def _days_until_label(rel: str) -> int | None:
+    """
+    How many days until an upcoming-game label (0 = today). Returns None for
+    labels that aren't in the future or that we can't parse. Mirrors the
+    vocabulary _localize_espn_date emits for future games.
+    """
+    rel = (rel or "").strip().upper()
+    if rel in ("TODAY", "TONIGHT"):
+        return 0
+    if rel in ("TOMORROW", "TOMORROW NIGHT"):
+        return 1
+    m = re.match(r"IN (\d+)\s+DAYS?$", rel)
+    if m:
+        return int(m.group(1))
+    return None
+
+
+def _build_next_game(ng: dict) -> dict | None:
+    """Extract a genuine, near-term upcoming game from a box-score result's
+    next_game, or None. Past/stale labels are rejected, and games beyond
+    _UPCOMING_WINDOW_DAYS (i.e. off-season / next-season) are dropped so the
+    briefing doesn't announce a game months away."""
+    rel = (ng.get("relative_to_today") or "").strip()
+    days = _days_until_label(rel)
+    if days is None or days > _UPCOMING_WINDOW_DAYS:
+        return None
+    return {
+        "opponent": ng.get("opponent", "") or "TBD",
+        "relative_to_today": rel,
+        "date_et": ng.get("date_et", ""),
+    }
+
+
+def fetch_all_ny_team_updates() -> list[dict]:
+    """
+    Unconditionally fetch each NY team's most recent result (score) AND next
+    game from ESPN, bypassing the LLM Researcher.
+
+    The writers used to get sports info only when an article happened to mention
+    a team, so a team's score / next-game silently vanished whenever the day's
+    (AI/tech-heavy) article batch missed it — even though the Yankees play
+    almost daily in season. This pulls ground truth for all four NY teams
+    deterministically so the briefing can always state, at minimum, the score
+    and when the next game is.
+
+    Returns a list of per-team dicts::
 
         {
-            "team": "Knicks",
-            "opponent": "Cavaliers",
-            "date_et": "Tuesday, May 19 at 7:00 PM ET",
-            "relative_to_today": "TOMORROW NIGHT",
-            "raw_utc": "2026-05-19T23:00Z",
+          "team": "Yankees",
+          "last_game": {            # None if no recent completed game
+            "summary": "New York Yankees lost to Boston Red Sox 6-1",
+            "relative_to_today": "LAST NIGHT",
+            "date_et": "Friday, June 26 at 7:05 PM ET",
+          },
+          "next_game": {            # None if no upcoming game
+            "opponent": "Boston Red Sox",
+            "relative_to_today": "TODAY",
+            "date_et": "Saturday, June 27 at 1:00 PM ET",
+          },
+          "mandatory": True,        # writer MUST surface this team
         }
 
-    Teams with no future game (off-season, no schedule data, ESPN unreachable,
-    or whose next game is already in the past) are silently omitted.
+    A team is omitted only when it has neither a recent result nor an upcoming
+    game (off-season, ESPN unreachable). `mandatory` is True whenever the team
+    has a recent result or an upcoming game — i.e. it "has a game" — which the
+    writers must report (score + next game).
     """
-    upcoming: list[dict] = []
+    updates: list[dict] = []
     for team in _NY_TEAMS:
         try:
             result = fetch_box_score_tool._run(team=team)
         except Exception as exc:
-            logger.warning("[Upcoming Games] %s fetch failed (non-fatal): %s", team, exc)
+            logger.warning("[Team Updates] %s fetch failed (non-fatal): %s", team, exc)
             continue
         if not result.get("ok"):
             continue
-        ng = result.get("next_game") or {}
-        rel = (ng.get("relative_to_today") or "").strip()
-        # Drop past-tense labels and anything without timing info we trust.
-        if not rel or rel not in _UPCOMING_LABELS and not rel.startswith("IN "):
+        last_game = _build_last_game(team, result)
+        next_game = _build_next_game(result.get("next_game") or {})
+        if not last_game and not next_game:
             continue
-        upcoming.append({
+        updates.append({
             "team": team,
-            "opponent": ng.get("opponent", ""),
-            "date_et": ng.get("date_et", ""),
-            "relative_to_today": rel,
-            "raw_utc": ng.get("date", ""),
+            "last_game": last_game,
+            "next_game": next_game,
+            # A recent result or any upcoming game means the team "has a game"
+            # worth guaranteeing in the briefing.
+            "mandatory": bool(last_game or next_game),
         })
-    logger.info("[Upcoming Games] Found upcoming games for %d/%d NY teams: %s",
-                len(upcoming), len(_NY_TEAMS),
-                [g["team"] for g in upcoming])
-    return upcoming
+    logger.info("[Team Updates] Built updates for %d/%d NY teams; mandatory: %s",
+                len(updates), len(_NY_TEAMS),
+                [u["team"] for u in updates if u["mandatory"]])
+    return updates
 
 
-def format_upcoming_games_block(upcoming: list[dict]) -> str:
+def format_ny_team_updates_block(updates: list[dict]) -> str:
     """
-    Render the upcoming-games list as a prompt block for the writers.
-    Returns "" if empty so callers can concatenate safely.
+    Render the per-team results + upcoming-games list as a prompt block for the
+    writers. Returns "" if empty so callers can concatenate safely.
 
-    Includes an explicit MANDATORY rule: any team whose game is TONIGHT,
-    TOMORROW, or TOMORROW NIGHT must appear in the briefing's NY Sports section
-    even if no article in today's batch covers that team.
+    Includes an explicit MANDATORY rule: any team with a game (recent result or
+    upcoming) MUST appear in the NY Sports section — stating at minimum the last
+    score and the next game — even if no article in today's batch covers it.
     """
-    if not upcoming:
+    if not updates:
         return ""
     lines = [
-        "=== NY SPORTS — UPCOMING GAMES (verified via ESPN, anchored to today in ET) ==="
+        "=== NY SPORTS — RESULTS & UPCOMING GAMES (verified via ESPN, anchored to today in ET) ==="
     ]
     has_mandatory = False
-    for g in upcoming:
-        rel = g.get("relative_to_today", "")
-        opp = g.get("opponent", "") or "TBD"
-        when = g.get("date_et", "")
-        team = g.get("team", "")
-        is_mandatory = rel in _MANDATORY_UPCOMING_LABELS
-        marker = " [MANDATORY-INCLUDE]" if is_mandatory else ""
-        has_mandatory = has_mandatory or is_mandatory
-        lines.append(f"  • {team}: {rel} ({when}) vs {opp}{marker}")
+    for u in updates:
+        team = u.get("team", "")
+        lg, ng = u.get("last_game"), u.get("next_game")
+        parts: list[str] = []
+        if lg:
+            parts.append(f"Last game ({lg['relative_to_today']}): {lg['summary']}.")
+        if ng:
+            parts.append(f"Next game {ng['relative_to_today']} vs {ng['opponent']} ({ng['date_et']}).")
+        marker = " [MANDATORY-INCLUDE]" if u.get("mandatory") else ""
+        has_mandatory = has_mandatory or bool(u.get("mandatory"))
+        lines.append(f"  • {team}: {' '.join(parts)}{marker}")
     if has_mandatory:
         lines.append(
-            "MANDATORY: every team above marked [MANDATORY-INCLUDE] MUST appear in the NY "
-            "Sports section of your output — one sentence is enough (who, opponent, when). "
-            "This applies EVEN IF no article in today's batch mentions that team; the "
-            "upcoming-game info above is primary-source from ESPN and is the briefing's "
-            "ground truth. Use the relative_to_today label (TONIGHT / TOMORROW / TOMORROW "
-            "NIGHT) verbatim — never substitute your own timing guess."
+            "MANDATORY: every team marked [MANDATORY-INCLUDE] MUST appear in the NY Sports "
+            "section. State at minimum the score of their last game and when their next game "
+            "is — EVEN IF no article in today's batch mentions that team. These facts are "
+            "primary-source from ESPN and are the briefing's ground truth. Copy the relative "
+            "timing words (TODAY / TONIGHT / TOMORROW / TOMORROW NIGHT / LAST NIGHT / "
+            "YESTERDAY) verbatim — never substitute your own timing guess."
         )
     else:
         lines.append(
-            "These are primary-source from ESPN. Use the relative_to_today label "
-            "verbatim if you mention any of these games. Never substitute your own "
-            "timing guess from article copy."
+            "These are primary-source from ESPN. If you mention any of these games, copy the "
+            "relative timing words verbatim and never substitute your own timing guess."
         )
     return "\n".join(lines)

@@ -197,15 +197,15 @@ def _wrap_html_template(briefing_html_sections: str, trending_html: str, picks_h
 
 def _ny_sports_block(
     verified_sports_facts: dict[str, str] | None,
-    upcoming_ny_games: list[dict] | None = None,
+    ny_team_updates: list[dict] | None = None,
 ) -> str:
     from crew.sports_research_crew import (
-        format_upcoming_games_block,
+        format_ny_team_updates_block,
         format_verified_facts_block,
     )
-    upcoming = format_upcoming_games_block(upcoming_ny_games or [])
+    updates = format_ny_team_updates_block(ny_team_updates or [])
     facts = format_verified_facts_block(verified_sports_facts or {})
-    parts = [b for b in (upcoming, facts) if b]
+    parts = [b for b in (updates, facts) if b]
     return "\n\n".join(parts)
 
 
@@ -241,11 +241,11 @@ def _html_task(
     picks: list[dict],
     trending: list[dict],
     verified_sports_facts: dict[str, str] | None,
-    upcoming_ny_games: list[dict] | None = None,
+    ny_team_updates: list[dict] | None = None,
 ) -> tuple[str, str]:
     articles_context = _build_articles_context(categorised)
     picks_ctx = _picks_block(picks)
-    sports_facts = _ny_sports_block(verified_sports_facts, upcoming_ny_games)
+    sports_facts = _ny_sports_block(verified_sports_facts, ny_team_updates)
     total = sum(len(v) for v in categorised.values())
 
     desc = (
@@ -259,11 +259,13 @@ def _html_task(
         "   - At least 80 words per story (full substance — what happened, who, numbers, why it matters).\n"
         "   - Cover 3-4 stories per category that has content.\n"
         "   - End EVERY story paragraph with a clickable link: [Source Name](URL)\n"
-        "   - NY SPORTS: focus on Yankees / Knicks / Giants / Devils ONLY. Per NY team, 1-2 "
-        "     sentences IF a real story exists OR if the UPCOMING GAMES block lists that team "
-        "     with TONIGHT / TOMORROW / TOMORROW NIGHT. For an imminent upcoming game, one "
-        "     sentence (team, opponent, relative_to_today label verbatim) is enough. Skip NY "
-        "     teams only when they have neither a story nor an imminent game.\n"
+        "   - NY SPORTS: focus on Yankees / Knicks / Giants / Devils ONLY. Any team marked "
+        "     [MANDATORY-INCLUDE] in the RESULTS & UPCOMING GAMES block above MUST get at "
+        "     least one sentence stating the score of its last game and when its next game "
+        "     is — even if NO article today mentions that team. Add a second sentence if a "
+        "     real story exists. Copy the relative timing words (TODAY / TONIGHT / LAST "
+        "     NIGHT / etc.) verbatim. Skip an NY team only when it has neither a story nor "
+        "     an entry in that block.\n"
         "     Non-NY sports content is OFF by default. Include ONLY if the article is "
         "     seismic — a championship clinch, an MVP / Cy Young / Heisman / Coach of the "
         "     Year result, a Doncic-to-Lakers-tier trade, or a career-altering injury to an "
@@ -285,11 +287,11 @@ def _single_voice_task(
     picks: list[dict],
     trending: list[dict],
     verified_sports_facts: dict[str, str] | None,
-    upcoming_ny_games: list[dict] | None = None,
+    ny_team_updates: list[dict] | None = None,
 ) -> tuple[str, str]:
     articles_context = _build_articles_context(categorised)
     picks_ctx = _picks_block(picks)
-    sports_facts = _ny_sports_block(verified_sports_facts, upcoming_ny_games)
+    sports_facts = _ny_sports_block(verified_sports_facts, ny_team_updates)
     trending_block = _build_trending_prompt_block(trending)
 
     desc = (
@@ -304,12 +306,13 @@ def _single_voice_task(
         "  2. AI & TECH (~300w) — top 3 stories. Substance over completeness.\n"
         "  3. BUSINESS & MARKETS (~180w) — top 2 stories with the why-it-matters.\n"
         "  4. COMPANIES (~220w) — top 2-3 stories with personality.\n"
-        "  5. NY SPORTS (~100w) — Yankees / Knicks / Giants / Devils ONLY. Per NY team, "
-        "     1-2 sentences IF something noteworthy. "
-        "     MANDATORY: also include any team listed in the UPCOMING GAMES block with "
-        "     relative_to_today of TONIGHT, TOMORROW, or TOMORROW NIGHT, even if no "
-        "     article covers them — one sentence (team, opponent, label verbatim). "
-        "     Skip teams only when they have neither a story nor an imminent game. "
+        "  5. NY SPORTS (~100w) — Yankees / Knicks / Giants / Devils ONLY. "
+        "     MANDATORY: every team marked [MANDATORY-INCLUDE] in the RESULTS & UPCOMING "
+        "     GAMES block MUST get at least one sentence with the score of its last game "
+        "     and when its next game is, even if no article covers them. Copy the relative "
+        "     timing words (TONIGHT / LAST NIGHT / etc.) verbatim. Add a second sentence "
+        "     only if something noteworthy. Skip a team only when it has neither a story "
+        "     nor an entry in that block. "
         "     Non-NY sports is OFF by default — include ONLY if seismic (championship "
         "     clinch, MVP / Cy Young / Heisman / Coach of the Year result, Doncic-to-"
         "     Lakers-tier trade, career-altering injury to an all-time-great). Routine "
@@ -331,11 +334,11 @@ def _conversational_task(
     picks: list[dict],
     trending: list[dict],
     verified_sports_facts: dict[str, str] | None,
-    upcoming_ny_games: list[dict] | None = None,
+    ny_team_updates: list[dict] | None = None,
 ) -> tuple[str, str]:
     articles_context = _build_articles_context(categorised)
     picks_ctx = _picks_block(picks)
-    sports_facts = _ny_sports_block(verified_sports_facts, upcoming_ny_games)
+    sports_facts = _ny_sports_block(verified_sports_facts, ny_team_updates)
     trending_block = _build_trending_prompt_block(trending)
 
     desc = (
@@ -353,12 +356,13 @@ def _conversational_task(
         "3. [ELIZABETH] BUSINESS & MARKETS (~180w) — top 2 stories in depth.\n"
         "4. [ELIZABETH] COMPANIES (~210w) — top 2-3 with personality. "
         "End with: \"Alright Jesse, take it away with sports...\"\n"
-        "5. [JESSE] NY SPORTS (~100w) — Yankees / Knicks / Giants / Devils ONLY. Per "
-        "NY team, 1-2 sentences IF noteworthy. "
-        "MANDATORY: also include any team listed in the UPCOMING GAMES block with "
-        "relative_to_today of TONIGHT, TOMORROW, or TOMORROW NIGHT, even if no article "
-        "covers them — one sentence (team, opponent, label verbatim). Skip teams only "
-        "when they have neither a story nor an imminent game. Non-NY sports is OFF by "
+        "5. [JESSE] NY SPORTS (~100w) — Yankees / Knicks / Giants / Devils ONLY. "
+        "MANDATORY: every team marked [MANDATORY-INCLUDE] in the RESULTS & UPCOMING GAMES "
+        "block MUST get at least one sentence with the score of its last game and when its "
+        "next game is, even if no article covers them. Copy the relative timing words "
+        "(TONIGHT / LAST NIGHT / etc.) verbatim. Add a second sentence only if noteworthy. "
+        "Skip a team only when it has neither a story nor an entry in that block. "
+        "Non-NY sports is OFF by "
         "default — include ONLY if seismic (championship clinch, MVP / Cy Young / "
         "Heisman / Coach of the Year, Doncic-to-Lakers-tier trade, career-altering "
         "injury to an all-time-great). Routine non-NY recaps and 'fun bar conversation' "
@@ -382,7 +386,7 @@ def run_writing(
     picks: list[dict],
     trending: list[dict],
     verified_sports_facts: dict[str, str] | None = None,
-    upcoming_ny_games: list[dict] | None = None,
+    ny_team_updates: list[dict] | None = None,
 ) -> tuple[str, str, str]:
     """
     Run all three writers in parallel via ThreadPoolExecutor.
@@ -397,9 +401,9 @@ def run_writing(
     single_agent = make_single_voice_writer()
     conv_agent = make_conversational_writer()
 
-    html_desc, html_exp = _html_task(top_articles, picks, filtered_trending, verified_sports_facts, upcoming_ny_games)
-    single_desc, single_exp = _single_voice_task(top_articles, picks, filtered_trending, verified_sports_facts, upcoming_ny_games)
-    conv_desc, conv_exp = _conversational_task(top_articles, picks, filtered_trending, verified_sports_facts, upcoming_ny_games)
+    html_desc, html_exp = _html_task(top_articles, picks, filtered_trending, verified_sports_facts, ny_team_updates)
+    single_desc, single_exp = _single_voice_task(top_articles, picks, filtered_trending, verified_sports_facts, ny_team_updates)
+    conv_desc, conv_exp = _conversational_task(top_articles, picks, filtered_trending, verified_sports_facts, ny_team_updates)
 
     logger.info("[Writing Crew] launching 3 parallel Claude writers…")
     with ThreadPoolExecutor(max_workers=3) as ex:
