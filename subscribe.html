@@ -27,22 +27,21 @@
   <main class="content" style="max-width:640px;">
 
     <div class="card" style="text-align:center;">
-      <div class="section-title" style="justify-content:center;">📬 Get MikeCast in your inbox</div>
+      <div class="section-title" style="justify-content:center;">📬 Email signup is coming soon</div>
       <p style="color:var(--text-primary);line-height:1.7;margin:1rem 0;">
         Every morning, MikeCast reads the day's news across AI &amp; Tech, Business &amp; Markets,
         Companies, and NY Sports, then writes you a tight briefing — the same one that powers the
-        daily podcast. One email a day, no noise. Free.
+        daily podcast.
+      </p>
+      <p style="color:var(--text-primary);line-height:1.7;margin:1rem 0;">
+        We're putting the finishing touches on email delivery. In the meantime, listen on your
+        favorite podcast app below — and check back here soon to subscribe by email.
       </p>
 
-      <!-- Email newsletter signup (handled by signup.js) -->
-      <form class="email-signup" id="email-signup" novalidate style="margin-top:1.25rem;">
-        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-        <button type="submit">Subscribe by email</button>
-      </form>
-      <p class="signup-status" id="signup-status" aria-live="polite"></p>
-      <p style="color:var(--text-muted);font-size:.78rem;margin-top:.75rem;">
-        Double opt-in — we'll send a confirmation link before adding you. Unsubscribe anytime.
-      </p>
+      <!-- Email newsletter signup — TEMPORARILY DISABLED until email delivery is finalized.
+           Re-enable by restoring the <form class="email-signup"> + status <p> + double-opt-in
+           note here and the signup.js <script> at the bottom of this file. See BACKLOG.md
+           → Email Newsletter (NL-8). -->
     </div>
 
     <div class="card" style="text-align:center;">
@@ -67,6 +66,6 @@
     <p>MikeCast &bull; Your daily AI-powered news briefing</p>
   </footer>
 
-  <script src="signup.js"></script>
+  <!-- <script src="signup.js"></script> --> <!-- disabled with email signup, see above -->
 </body>
 </html>

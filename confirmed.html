@@ -40,14 +40,12 @@
     <div class="card" id="confirmed-expired" style="text-align:center;display:none;">
       <div class="section-title" style="justify-content:center;">⌛ That link expired.</div>
       <p style="color:var(--text-primary);line-height:1.7;margin:1rem 0;">
-        Confirmation links are valid for 24 hours. No problem — just sign up again
-        and we'll send a fresh one.
+        Confirmation links are valid for 24 hours. Email signups are paused right now while we
+        finalize delivery — please check back soon at <a href="index.html" style="color:var(--accent);text-decoration:none;">mikecast.io</a>.
       </p>
-      <form class="email-signup" id="email-signup" novalidate style="margin-top:1.25rem;">
-        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-        <button type="submit">Subscribe by email</button>
-      </form>
-      <p class="signup-status" id="signup-status" aria-live="polite"></p>
+      <!-- Email newsletter signup — TEMPORARILY DISABLED until email delivery is finalized.
+           Re-enable by restoring the <form class="email-signup"> + status <p> here and the
+           signup.js <script> below. See BACKLOG.md → Email Newsletter (NL-8). -->
     </div>
 
   </main>
@@ -66,6 +64,6 @@
       }
     })();
   </script>
-  <script src="signup.js"></script>
+  <!-- <script src="signup.js"></script> --> <!-- disabled with email signup, see above -->
 </body>
 </html>

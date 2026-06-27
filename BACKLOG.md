@@ -94,6 +94,9 @@ Turn the single-recipient Gmail briefing into a real newsletter anyone can subsc
 | NL-5 | **Manual:** Resend account + `mikecast.io` domain DNS verify; create "MikeCast Daily" audience + full-access key | — | pending (Mike) |
 | NL-6 | **Manual:** SSM params `/mikecast/RESEND_API_KEY`, `/mikecast/RESEND_AUDIENCE_ID`, `/mikecast/SIGNUP_HMAC_SECRET`; add to ECS task def secrets/env | — | pending (Mike) |
 | NL-7 | **Manual:** create Lambda + IAM role + Function URL (CORS mikecast.io); set `CONFIRM_BASE_URL` + `MIKECAST_SIGNUP_ENDPOINT` in `signup.js`; fill CAN-SPAM postal address in `_NEWSLETTER_FOOTER` | — | pending (Mike) |
+| NL-8 | **Email signup UI DISABLED** until delivery is finalized — forms + `signup.js` includes commented out in `index.html`, `subscribe.html`, `confirmed.html` (`subscribe.html` shows a "coming soon" notice). All backend code (Lambda, `send_newsletter_broadcast()`, Resend infra) is untouched. Re-enable by uncommenting the marked blocks and re-deploying the static site to S3 + CloudFront invalidation | `newsletter-resend` | done |
+
+**⚠️ Signup UI is intentionally OFF.** The daily Resend broadcast never shipped (the `newsletter-resend` branch isn't merged to `main` — see CLAUDE caveat), so the public signup form was collecting addresses for a newsletter that doesn't send. NL-8 hides the UI until NL-1's broadcast code is merged + verified end-to-end. Do not re-enable the forms before then.
 
 ---
 

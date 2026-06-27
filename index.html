@@ -38,12 +38,10 @@
         </a>
       </div>
 
-      <!-- Email newsletter signup -->
-      <form class="email-signup" id="email-signup" novalidate>
-        <input type="email" name="email" placeholder="your@email.com" autocomplete="email" required>
-        <button type="submit">Subscribe by email</button>
-      </form>
-      <p class="signup-status" id="signup-status" aria-live="polite"></p>
+      <!-- Email newsletter signup — TEMPORARILY DISABLED until email delivery is
+           finalized. Re-enable by restoring the <form class="email-signup"> + status
+           <p>, plus the signup.js <script> include below. See BACKLOG.md → Email
+           Newsletter (NL-8). -->
     </div>
   </header>
 
@@ -114,6 +112,7 @@
   </footer>
 
   <script src="app.js"></script>
-  <script src="signup.js"></script>
+  <!-- <script src="signup.js"></script> --> <!-- disabled with email signup, see header -->
+
 </body>
 </html>
