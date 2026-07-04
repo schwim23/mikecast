@@ -97,6 +97,23 @@ def _localize_espn_date(raw: str) -> dict:
     }
 
 
+def _espn_event_et_date(raw: str):
+    """
+    The ET calendar date (a ``date``) for an ESPN UTC timestamp, or ``None`` if
+    ``raw`` is empty/unparseable. Used to tell a genuine future game from a
+    stale past event that ESPN never flagged ``completed`` (e.g. a postponed /
+    suspended game), which would otherwise sort to the front of the schedule
+    and masquerade as the team's "next game".
+    """
+    if not raw:
+        return None
+    try:
+        dt_utc = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        return dt_utc.astimezone(_ET).date()
+    except (ValueError, TypeError):
+        return None
+
+
 # ---------------------------------------------------------------------------
 # Tool input unpacking helper
 # ---------------------------------------------------------------------------
@@ -545,9 +562,23 @@ class FetchSportsBoxScoreTool(BaseTool):
         # field only exists on the bare /teams/{abbr} endpoint, so the old code
         # at the bottom of this function never found a next game. Compute it
         # here from the same `events` array.
+        #
+        # A game counts as the "next game" only if it is NOT completed AND its
+        # ET date is today or later. The not-completed filter alone is not
+        # enough: ESPN leaves postponed/suspended past games un-flagged, and
+        # those sort to the front by date — so the old code returned a game from
+        # weeks ago as the "next game" (e.g. a suspended Yankees game showing up
+        # 35 days later). Anchor on TODAY (ET) to drop those.
+        today_et = datetime.strptime(TODAY, "%Y-%m-%d").date()
+
+        def _is_upcoming(e: dict) -> bool:
+            if (e.get("competitions") or [{}])[0].get("status", {}).get("type", {}).get("completed"):
+                return False
+            d = _espn_event_et_date(e.get("date", ""))
+            return d is not None and d >= today_et
+
         future = sorted(
-            [e for e in events
-             if not (e.get("competitions") or [{}])[0].get("status", {}).get("type", {}).get("completed")],
+            [e for e in events if _is_upcoming(e)],
             key=lambda e: e.get("date", ""),
         )
         if not completed:
