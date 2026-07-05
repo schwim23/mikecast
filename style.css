@@ -275,13 +275,18 @@ body {
   transition: color .15s, border-color .15s, background .15s, transform .15s;
 }
 .channel svg { display: block; }
-.channel:hover { transform: translateY(-1px); color: var(--text-primary); border-color: var(--accent); }
-/* Brand-tinted hover so each channel is recognisable on interaction */
-.channel.ch-apple:hover   { color: #c26bea; border-color: #c26bea; background: rgba(194,107,234,.12); }
-.channel.ch-spotify:hover { color: #1db954; border-color: #1db954; background: rgba(29,185,84,.12); }
-.channel.ch-rss:hover     { color: #f97316; border-color: #f97316; background: rgba(249,115,22,.12); }
-.channel.ch-x:hover       { color: #fff;    border-color: #6e7681; background: rgba(255,255,255,.10); }
-.channel.ch-ig:hover      { color: #e1306c; border-color: #e1306c; background: rgba(225,48,108,.12); }
+.channel:hover { transform: translateY(-1px); }
+/* Each channel wears its own brand color at rest (Instagram uses a gradient
+   defined inline on its SVG). Hover adds a matching border + faint fill. */
+.ch-apple   { color: #c26bea; }
+.ch-spotify { color: #1db954; }
+.ch-rss     { color: #f97316; }
+.ch-x       { color: #e6edf3; }
+.ch-apple:hover   { border-color: #c26bea; background: rgba(194,107,234,.12); }
+.ch-spotify:hover { border-color: #1db954; background: rgba(29,185,84,.12); }
+.ch-rss:hover     { border-color: #f97316; background: rgba(249,115,22,.12); }
+.ch-x:hover       { border-color: #6e7681; background: rgba(255,255,255,.10); }
+.ch-ig:hover      { border-color: #d62976; background: rgba(214,41,118,.12); }
 
 @media (max-width: 520px) {
   .bar-divider { display: none; }
