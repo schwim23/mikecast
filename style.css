@@ -275,13 +275,42 @@ body {
 }
 .social-link svg { display: block; }
 
+/* Listen row — Apple / Spotify / RSS as one consistent 40px badge trio */
 .subscribe-buttons {
   display: flex;
-  gap: .5rem;
+  gap: .6rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: .75rem;
+  align-items: center;
+  margin-top: 1rem;
 }
+.listen-badge {
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.listen-badge img {
+  height: 40px;
+  display: block;
+  border-radius: 8px;
+}
+.listen-badge:hover { transform: translateY(-1px); }
+/* RSS styled as a peer badge: dark chip, orange glyph, same height/radius */
+.listen-rss {
+  gap: .45rem;
+  padding: 0 .95rem;
+  background: #0b0f16;
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: .9rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+}
+.listen-rss svg { color: #f97316; flex-shrink: 0; }
+.listen-rss:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.35); }
 
 .btn-subscribe {
   display: inline-flex;
@@ -306,20 +335,23 @@ body {
   margin-top: .9rem;
 }
 .email-signup input[type="email"] {
-  padding: .5rem .8rem;
+  height: 40px;
+  padding: 0 .85rem;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--bg-card);
   color: var(--text-primary);
   font-size: .85rem;
-  min-width: 220px;
+  min-width: 240px;
+  box-sizing: border-box;
 }
 .email-signup input[type="email"]:focus {
   border-color: var(--accent);
   outline: none;
 }
 .email-signup button {
-  padding: .5rem 1rem;
+  height: 40px;
+  padding: 0 1.1rem;
   border-radius: 8px;
   border: 0;
   background: #f97316;
@@ -328,6 +360,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: opacity .15s;
+  box-sizing: border-box;
 }
 .email-signup button:hover { opacity: .85; }
 .email-signup button:disabled { opacity: .5; cursor: default; }
