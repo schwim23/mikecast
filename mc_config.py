@@ -54,6 +54,26 @@ ELEVENLABS_VOICE_JESSE     = os.environ.get("ELEVENLABS_VOICE_JESSE", "")
 # xAI — Grok-2 for adaptive search planning (optional; skip gracefully if unset)
 XAI_API_KEY = os.environ.get("XAI_API_KEY", "")
 
+# Social distribution — daily auto-posts to X and Instagram (all optional; each
+# channel is skipped gracefully when its credentials are unset, so an unconfigured
+# or misconfigured social channel never blocks the daily pipeline).
+#
+# X (Twitter) API v2 — OAuth 1.0a user-context, "Read and write" app permission.
+X_API_KEY             = os.environ.get("X_API_KEY", "")
+X_API_SECRET          = os.environ.get("X_API_SECRET", "")
+X_ACCESS_TOKEN        = os.environ.get("X_ACCESS_TOKEN", "")
+X_ACCESS_TOKEN_SECRET = os.environ.get("X_ACCESS_TOKEN_SECRET", "")
+
+# Instagram Graph API — Business account linked to a Facebook Page. META_ACCESS_TOKEN
+# is a system-user (non-expiring) or long-lived (60-day) token; IG_USER_ID is the
+# Instagram Business account id fetched via GET /me/accounts → page → instagram_business_account.
+META_ACCESS_TOKEN = os.environ.get("META_ACCESS_TOKEN", "")
+IG_USER_ID        = os.environ.get("IG_USER_ID", "")
+
+# CloudFront distribution that fronts mikecast.io (used for cache invalidation
+# after editing/republishing a past episode). Defaults to the live distribution.
+CLOUDFRONT_DIST_ID = os.environ.get("CLOUDFRONT_DIST_ID", "EFNQM31KQHY56")
+
 # Anthropic — Claude for the CrewAI writing crew (required when running --crew)
 ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 

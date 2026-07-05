@@ -167,3 +167,39 @@ def s3_list_keys(bucket: str, prefix: str) -> list[str]:
         for obj in page.get("Contents", []):
             keys.append(obj["Key"])
     return keys
+
+
+# ---------------------------------------------------------------------------
+# CloudFront
+# ---------------------------------------------------------------------------
+
+def invalidate_cloudfront(distribution_id: str, paths: list[str]) -> str | None:
+    """
+    Create a CloudFront invalidation for the given paths (each must start with '/').
+
+    Returns the invalidation id on success, None on failure (logged, never raised)
+    so a cache-invalidation hiccup can't break an edit/republish flow. A unique
+    caller_reference is required by the API; we derive one from the current UTC
+    timestamp so repeated calls don't collide.
+    """
+    if not distribution_id or not paths:
+        logger.info("CloudFront invalidation skipped — no distribution id or paths.")
+        return None
+    try:
+        import boto3
+        from datetime import datetime, timezone
+        caller_ref = "mikecast-" + datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S%f")
+        cf = boto3.client("cloudfront")
+        resp = cf.create_invalidation(
+            DistributionId=distribution_id,
+            InvalidationBatch={
+                "Paths": {"Quantity": len(paths), "Items": paths},
+                "CallerReference": caller_ref,
+            },
+        )
+        inv_id = resp.get("Invalidation", {}).get("Id")
+        logger.info("CloudFront invalidation created (%s) for %d path(s)", inv_id, len(paths))
+        return inv_id
+    except Exception as exc:
+        logger.error("CloudFront invalidation failed (non-fatal): %s", exc)
+        return None

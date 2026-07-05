@@ -452,7 +452,7 @@ _NEWSLETTER_FOOTER = """
 </div>"""
 
 
-def send_newsletter_broadcast(html_body: str) -> bool:
+def send_newsletter_broadcast(html_body: str) -> str | None:
     """
     Broadcast today's briefing to all confirmed Resend subscribers.
 
@@ -463,12 +463,13 @@ def send_newsletter_broadcast(html_body: str) -> bool:
     audio attachment — ESPs strip them and they hurt deliverability; the
     subscribe row already points subscribers at the audio.
 
-    Skips gracefully (returns False, never raises) when Resend isn't configured
-    so a misconfigured or absent newsletter never blocks the daily pipeline.
+    Returns the Resend broadcast id on success, or None (never raises) when Resend
+    isn't configured or the send fails, so a misconfigured or absent newsletter
+    never blocks the daily pipeline. The caller records the id in dist state.
     """
     if not (RESEND_API_KEY and RESEND_AUDIENCE_ID):
         logger.info("Resend not configured (RESEND_API_KEY / RESEND_AUDIENCE_ID) — skipping newsletter broadcast.")
-        return False
+        return None
 
     try:
         import resend
@@ -485,11 +486,11 @@ def send_newsletter_broadcast(html_body: str) -> bool:
         broadcast_id = created.get("id") if isinstance(created, dict) else getattr(created, "id", None)
         if not broadcast_id:
             logger.error("Newsletter broadcast create returned no id: %r", created)
-            return False
+            return None
 
         resend.Broadcasts.send(broadcast_id)
         logger.info("Newsletter broadcast sent (id=%s)", broadcast_id)
-        return True
+        return broadcast_id
     except Exception as exc:
         logger.error("Newsletter broadcast failed (non-fatal): %s", exc)
-        return False
+        return None

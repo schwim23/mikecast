@@ -32,6 +32,26 @@
       String(d.getDate()).padStart(2, "0");
   }
 
+  // Deep link support: mikecast.io/?date=YYYY-MM-DD opens that day's briefing.
+  // Invalid or missing dates fall through to the latest-episode default; a
+  // well-formed but non-existent date hits the normal "no briefing" error state.
+  function requestedDate() {
+    try {
+      const q = new URLSearchParams(window.location.search).get("date");
+      return q && /^\d{4}-\d{2}-\d{2}$/.test(q) ? q : null;
+    } catch (e) { return null; }
+  }
+
+  function syncUrlDate(dateStr) {
+    if (window.history && window.history.replaceState) {
+      try {
+        const url = new URL(window.location);
+        url.searchParams.set("date", dateStr);
+        window.history.replaceState({}, "", url);
+      } catch (e) { /* URL API unavailable */ }
+    }
+  }
+
   function shiftDate(dateStr, days) {
     const d = new Date(dateStr + "T12:00:00");
     d.setDate(d.getDate() + days);
@@ -196,6 +216,7 @@
 
     contentEl.style.display = "flex";
     if (archiveSelect) archiveSelect.value = dateStr;
+    syncUrlDate(dateStr);
   }
 
   datePicker.addEventListener("change", function () { loadBriefing(this.value); });
@@ -240,7 +261,9 @@
   const today = todayStr();
   datePicker.max = today;
 
-  // Load manifest first, then default to the most recent available date
+  // Load manifest first, then open the deep-linked date (?date=) if valid,
+  // otherwise default to the most recent available date.
+  const deepLinkDate = requestedDate();
   (async () => {
     try {
       const resp = await fetch("data/manifest.json");
@@ -255,17 +278,19 @@
           opt.textContent = formatDisplayDate(d);
           archiveSelect.appendChild(opt);
         }
-        // Use the most recent date that exists
-        const latestDate = dates.length > 0 ? dates[0] : today;
-        datePicker.value = latestDate;
-        loadBriefing(latestDate);
+        // Deep-linked date wins; else the most recent date that exists.
+        const target = deepLinkDate || (dates.length > 0 ? dates[0] : today);
+        datePicker.value = target;
+        loadBriefing(target);
       } else {
-        datePicker.value = today;
-        loadBriefing(today);
+        const target = deepLinkDate || today;
+        datePicker.value = target;
+        loadBriefing(target);
       }
     } catch (e) {
-      datePicker.value = today;
-      loadBriefing(today);
+      const target = deepLinkDate || today;
+      datePicker.value = target;
+      loadBriefing(target);
     }
   })();
 

@@ -1,0 +1,592 @@
+#!/usr/bin/env python3
+"""
+mc_social.py — Daily social distribution for MikeCast (X + Instagram).
+
+Posts a short summary of the day's briefing to X (Twitter) and a branded
+1080×1080 image card to Instagram, each with a deep link back to that day's
+episode (https://mikecast.io/?date=YYYY-MM-DD).
+
+Design principles (match the rest of the pipeline):
+  • Nothing here ever raises out to the daily pipeline — every channel is wrapped
+    in its own try/except and missing credentials degrade to a logged skip.
+  • First-run-of-day gating lives in mc_dist_state: `--force` regenerates copy /
+    card without re-posting; only an explicit re-post path re-posts.
+  • Copy comes from crew/distribution_crew (Claude); posting is deterministic here.
+    A crew outage falls back to a deterministic template so posting still works.
+
+Usage:
+    python3 mc_social.py                          # today's episode
+    python3 mc_social.py --date 2026-07-05        # a specific episode
+    python3 mc_social.py --dry-run               # generate copy + card, post nothing
+    python3 mc_social.py --only x                # X only (or --only ig)
+    python3 mc_social.py --force                 # re-post even if already sent today
+    python3 mc_social.py --delete-tweet 123456   # delete a tweet by id
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import logging
+import re
+import sys
+import textwrap
+import time
+from pathlib import Path
+
+import requests
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
+
+from mc_config import (
+    CLOUDFRONT_DIST_ID,
+    DATA_DIR,
+    IG_USER_ID,
+    META_ACCESS_TOKEN,
+    S3_BUCKET,
+    SCRIPT_DIR,
+    SITE_BASE_URL,
+    TODAY,
+    X_ACCESS_TOKEN,
+    X_ACCESS_TOKEN_SECRET,
+    X_API_KEY,
+    X_API_SECRET,
+)
+from mc_dist_state import (
+    channel_sent,
+    load_dist_state,
+    record_send,
+    record_social_copy,
+)
+from mc_utils import _safe_request
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s — %(message)s")
+logger = logging.getLogger("mikecast.social")
+
+# ---------------------------------------------------------------------------
+# Brand + layout constants (card is 1080×1080; palette matches mc_ad.py)
+# ---------------------------------------------------------------------------
+CARD_W = CARD_H = 1080
+ASSETS_DIR   = SCRIPT_DIR / "assets"
+FONT_BOLD    = ASSETS_DIR / "fonts" / "InterDisplay-Bold.ttf"
+FONT_REGULAR = ASSETS_DIR / "fonts" / "Inter-Medium.ttf"
+COVER_PATH   = DATA_DIR / "cover.png"
+COVER_URL    = f"{SITE_BASE_URL}data/cover.png"
+
+COLOR_BG    = (10, 14, 32)
+COLOR_CYAN  = (0, 191, 255)
+COLOR_WHITE = (255, 255, 255)
+COLOR_MUTED = (150, 165, 195)
+
+# X counts every link as 23 characters (t.co wrapping), regardless of real length.
+X_LINK_WEIGHT = 23
+X_MAX = 280
+IG_MAX = 2200  # hard IG cap; we target well under this
+IG_MAX_HASHTAGS = 8
+
+
+# ---------------------------------------------------------------------------
+# Fonts
+# ---------------------------------------------------------------------------
+
+def _font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
+    path = FONT_BOLD if bold else FONT_REGULAR
+    if path.exists():
+        return ImageFont.truetype(str(path), size)
+    for fb in ("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+               "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
+        if Path(fb).exists():
+            return ImageFont.truetype(fb, size)
+    return ImageFont.load_default()
+
+
+# ---------------------------------------------------------------------------
+# Card image
+# ---------------------------------------------------------------------------
+
+def _load_cover() -> Image.Image | None:
+    """
+    Load the MikeCast cover art. Local data/cover.png first; on Fargate (where
+    data/ is .dockerignore'd) fall back to fetching the public site copy. Returns
+    None if neither is available — the card then uses the solid brand background.
+    """
+    if COVER_PATH.exists():
+        try:
+            return Image.open(COVER_PATH).convert("RGB")
+        except Exception as exc:
+            logger.warning("Could not open local cover %s: %s", COVER_PATH, exc)
+    resp = _safe_request(COVER_URL)
+    if resp is not None:
+        try:
+            from io import BytesIO
+            return Image.open(BytesIO(resp.content)).convert("RGB")
+        except Exception as exc:
+            logger.warning("Could not decode remote cover %s: %s", COVER_URL, exc)
+    logger.warning("No cover art available — using solid background.")
+    return None
+
+
+def _card_background() -> Image.Image:
+    """Solid brand background, subtly tinted by a blurred cover if available."""
+    base = Image.new("RGB", (CARD_W, CARD_H), COLOR_BG)
+    cover = _load_cover()
+    if cover is None:
+        return base
+    scale = max(CARD_W / cover.width, CARD_H / cover.height)
+    nw, nh = int(cover.width * scale), int(cover.height * scale)
+    cover = cover.resize((nw, nh), Image.LANCZOS)
+    cx, cy = (nw - CARD_W) // 2, (nh - CARD_H) // 2
+    cover = cover.crop((cx, cy, cx + CARD_W, cy + CARD_H))
+    cover = cover.filter(ImageFilter.GaussianBlur(radius=22))
+    return Image.blend(cover, base, alpha=0.72)
+
+
+def _clean_title(title: str) -> str:
+    # Match app.js: the "[Updated] " prefix is an internal marker, not display text.
+    return re.sub(r"^\[Updated\]\s*", "", (title or "").strip())
+
+
+def _top_headlines(episode_data: dict, cap: int = 4) -> list[str]:
+    articles = episode_data.get("articles", {}) or {}
+    out: list[str] = []
+    # one from each category first (breadth), then fill from remaining
+    for arts in articles.values():
+        if arts:
+            title = _clean_title(arts[0].get("title", ""))
+            if title:
+                out.append(title)
+        if len(out) >= cap:
+            return out[:cap]
+    return out[:cap]
+
+
+def generate_card(episode_data: dict, out_path: Path) -> Path:
+    """Render a 1080×1080 branded summary card for Instagram and save to out_path."""
+    img = _card_background().convert("RGBA")
+    draw = ImageDraw.Draw(img, "RGBA")
+
+    episode_num = episode_data.get("episode_num", "?")
+    date_display = episode_data.get("date_display", TODAY)
+
+    # --- Wordmark ---
+    f_brand = _font(84, bold=True)
+    draw.text((80, 96), "MikeCast", font=f_brand, fill=COLOR_CYAN)
+
+    # --- Episode + date line ---
+    f_meta = _font(40)
+    draw.text((84, 210), f"Daily Briefing · #{episode_num}", font=f_meta, fill=COLOR_WHITE)
+
+    # --- Date badge (solid cyan pill, dark text for contrast) ---
+    f_date = _font(34, bold=True)
+    db = draw.textbbox((0, 0), date_display, font=f_date)
+    dw, dh = db[2] - db[0] + 48, db[3] - db[1] + 26
+    draw.rounded_rectangle([(84, 272), (84 + dw, 272 + dh)], radius=dh // 2, fill=COLOR_CYAN)
+    draw.text((84 + dw // 2, 272 + dh // 2), date_display, font=f_date, fill=COLOR_BG, anchor="mm")
+
+    # --- Divider ---
+    y = 272 + dh + 56
+    draw.line([(84, y), (CARD_W - 84, y)], fill=(*COLOR_MUTED, 90), width=2)
+    y += 48
+
+    # --- Top headlines ---
+    f_head = _font(46, bold=True)
+    line_h = 58
+    for headline in _top_headlines(episode_data, cap=4):
+        wrapped = textwrap.wrap(headline, width=34)[:2]
+        # cyan bullet
+        draw.ellipse([(88, y + 20), (108, y + 40)], fill=COLOR_CYAN)
+        for i, line in enumerate(wrapped):
+            draw.text((132, y + i * line_h), line, font=f_head, fill=COLOR_WHITE)
+        y += len(wrapped) * line_h + 34
+        if y > CARD_H - 200:
+            break
+
+    # --- CTA footer bar ---
+    bar_top = CARD_H - 132
+    draw.rectangle([(0, bar_top), (CARD_W, CARD_H)], fill=(0, 0, 0, 150))
+    f_cta = _font(44, bold=True)
+    draw.text((CARD_W // 2, bar_top + 66), "Full briefing → mikecast.io",
+              font=f_cta, fill=COLOR_CYAN, anchor="mm")
+
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    img.convert("RGB").save(out_path, "PNG")
+    logger.info("Card written: %s", out_path)
+    return out_path
+
+
+def upload_card(local_path: Path, date: str, suffix: str = "") -> str | None:
+    """
+    Upload the card to the site bucket and return its public URL. Returns None if
+    S3 isn't configured (Instagram needs a publicly reachable image URL).
+
+    The data/social/ prefix is invisible to the manifest/RSS regexes. `suffix`
+    lets reposts use a versioned filename (e.g. "_r1") so IG re-fetches a new URL.
+    """
+    if not S3_BUCKET:
+        logger.warning("S3_BUCKET not set — cannot upload card for a public URL.")
+        return None
+    from mc_utils import s3_upload_file
+    key = f"data/social/MikeCast_card_{date}{suffix}.png"
+    try:
+        s3_upload_file(S3_BUCKET, key, local_path, content_type="image/png")
+        return f"{SITE_BASE_URL}{key}"
+    except Exception as exc:
+        logger.error("Card upload failed: %s", exc)
+        return None
+
+
+# ---------------------------------------------------------------------------
+# Copy fitting
+# ---------------------------------------------------------------------------
+
+def _truncate_words(text: str, limit: int) -> str:
+    text = text.strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    if " " in cut:
+        cut = cut[:cut.rfind(" ")]
+    return cut.rstrip() + "…"
+
+
+def _fit_x(text: str, link: str) -> str:
+    """
+    Fit the X body + link into 280 weighted chars. The link weighs 23 regardless
+    of length, so we cap the body at 250 (250 + 1 newline + 23 link = 274 ≤ 280)
+    and append the link on its own line.
+    """
+    body_budget = X_MAX - X_LINK_WEIGHT - 1  # 1 for the newline
+    body = _truncate_words(text, body_budget)
+    return f"{body}\n{link}"
+
+
+def _fit_ig(caption: str) -> str:
+    """Cap the IG caption length and trim to at most 8 hashtags."""
+    caption = caption.strip()
+    words = caption.split()
+    hashtags = [w for w in words if w.startswith("#")]
+    if len(hashtags) > IG_MAX_HASHTAGS:
+        # drop the excess hashtags (keep the first 8, in order)
+        keep = set()
+        kept = 0
+        rebuilt = []
+        for w in words:
+            if w.startswith("#"):
+                if kept < IG_MAX_HASHTAGS:
+                    rebuilt.append(w)
+                    kept += 1
+                # else: skip
+            else:
+                rebuilt.append(w)
+        caption = " ".join(rebuilt)
+    if len(caption) > IG_MAX - 50:
+        caption = _truncate_words(caption, IG_MAX - 50)
+    return caption
+
+
+def _fallback_copy(episode_data: dict) -> dict:
+    """Deterministic copy used when the copywriter crew is unavailable."""
+    num = episode_data.get("episode_num", "?")
+    date_display = episode_data.get("date_display", TODAY)
+    desc = (episode_data.get("episode_description") or "Today's AI, business, and NY sports news.").strip()
+    base = f"MikeCast #{num} — {date_display}: {desc[:180]}"
+    return {
+        "x_text": base,
+        "ig_caption": f"{base}\n\nFull briefing at mikecast.io\n\n#MikeCast #AInews #tech",
+    }
+
+
+# ---------------------------------------------------------------------------
+# X (Twitter) API v2 — OAuth 1.0a user context
+# ---------------------------------------------------------------------------
+
+def _x_configured() -> bool:
+    return all((X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET))
+
+
+def _x_auth():
+    from requests_oauthlib import OAuth1
+    return OAuth1(X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)
+
+
+def post_to_x(text: str) -> str | None:
+    """Post a tweet. Returns the tweet id on success, None on failure."""
+    if not _x_configured():
+        logger.info("X not configured — skipping tweet.")
+        return None
+    try:
+        resp = requests.post(
+            "https://api.x.com/2/tweets",
+            auth=_x_auth(),
+            json={"text": text},
+            timeout=30,
+        )
+        if resp.status_code not in (200, 201):
+            logger.error("X post failed: %s %s", resp.status_code, resp.text[:400])
+            return None
+        tweet_id = resp.json().get("data", {}).get("id")
+        logger.info("Tweet posted: id=%s", tweet_id)
+        return tweet_id
+    except Exception as exc:
+        logger.error("X post raised: %s", exc)
+        return None
+
+
+def delete_tweet(tweet_id: str) -> bool:
+    """Delete a tweet by id. Returns True on success."""
+    if not _x_configured():
+        logger.info("X not configured — cannot delete tweet.")
+        return False
+    try:
+        resp = requests.delete(
+            f"https://api.x.com/2/tweets/{tweet_id}",
+            auth=_x_auth(),
+            timeout=30,
+        )
+        if resp.status_code != 200:
+            logger.error("Tweet delete failed: %s %s", resp.status_code, resp.text[:400])
+            return False
+        deleted = resp.json().get("data", {}).get("deleted", False)
+        logger.info("Tweet %s deleted=%s", tweet_id, deleted)
+        return bool(deleted)
+    except Exception as exc:
+        logger.error("Tweet delete raised: %s", exc)
+        return False
+
+
+# ---------------------------------------------------------------------------
+# Instagram Graph API (v21.0) — two-step container → publish
+# ---------------------------------------------------------------------------
+_GRAPH = "https://graph.facebook.com/v21.0"
+
+
+def _ig_configured() -> bool:
+    return bool(META_ACCESS_TOKEN and IG_USER_ID)
+
+
+def post_to_instagram(image_url: str, caption: str) -> tuple[str | None, str | None]:
+    """
+    Publish a single image to Instagram. Returns (media_id, container_id).
+    Both are None on failure. Requires a publicly reachable image_url.
+    """
+    if not _ig_configured():
+        logger.info("Instagram not configured — skipping post.")
+        return None, None
+    try:
+        # 1. Create media container
+        create = requests.post(
+            f"{_GRAPH}/{IG_USER_ID}/media",
+            data={"image_url": image_url, "caption": caption, "access_token": META_ACCESS_TOKEN},
+            timeout=60,
+        )
+        if create.status_code != 200:
+            logger.error("IG container create failed: %s %s", create.status_code, create.text[:400])
+            return None, None
+        container_id = create.json().get("id")
+        if not container_id:
+            logger.error("IG container create returned no id: %s", create.text[:400])
+            return None, None
+
+        # 2. Poll until the container finishes processing
+        for attempt in range(12):
+            status = requests.get(
+                f"{_GRAPH}/{container_id}",
+                params={"fields": "status_code", "access_token": META_ACCESS_TOKEN},
+                timeout=30,
+            )
+            code = status.json().get("status_code") if status.status_code == 200 else None
+            if code == "FINISHED":
+                break
+            if code == "ERROR":
+                logger.error("IG container processing errored: %s", status.text[:400])
+                return None, container_id
+            time.sleep(3)
+        else:
+            logger.error("IG container %s never reached FINISHED — aborting publish.", container_id)
+            return None, container_id
+
+        # 3. Publish
+        publish = requests.post(
+            f"{_GRAPH}/{IG_USER_ID}/media_publish",
+            data={"creation_id": container_id, "access_token": META_ACCESS_TOKEN},
+            timeout=60,
+        )
+        if publish.status_code != 200:
+            logger.error("IG publish failed: %s %s", publish.status_code, publish.text[:400])
+            return None, container_id
+        media_id = publish.json().get("id")
+        logger.info("Instagram published: media_id=%s", media_id)
+        return media_id, container_id
+    except Exception as exc:
+        logger.error("Instagram post raised: %s", exc)
+        return None, None
+
+
+# ---------------------------------------------------------------------------
+# Episode loading + deep link
+# ---------------------------------------------------------------------------
+
+def deep_link(date: str) -> str:
+    return f"{SITE_BASE_URL}?date={date}"
+
+
+def load_episode(date: str) -> dict | None:
+    """Load an episode's JSON — local file first, then S3."""
+    local = DATA_DIR / f"{date}.json"
+    if local.exists():
+        try:
+            return json.loads(local.read_text(encoding="utf-8"))
+        except Exception as exc:
+            logger.warning("Could not parse local episode %s: %s", local, exc)
+    if S3_BUCKET:
+        from mc_utils import s3_load_json
+        try:
+            return s3_load_json(S3_BUCKET, f"data/{date}.json")
+        except Exception as exc:
+            logger.warning("Could not load episode from S3 for %s: %s", date, exc)
+    return None
+
+
+def _resolve_copy(date: str, episode_data: dict, link: str, force: bool) -> dict:
+    """
+    Return {"x_text", "ig_caption"}. Reuses persisted social_copy unless --force,
+    otherwise generates via the crew (persisting before posting) and falls back to
+    a deterministic template on crew failure.
+    """
+    state = load_dist_state(date)
+    existing = state.get("social_copy")
+    if existing and not force and existing.get("x_text"):
+        logger.info("Reusing persisted social copy for %s.", date)
+        return {"x_text": existing["x_text"], "ig_caption": existing.get("ig_caption", "")}
+
+    try:
+        from crew.distribution_crew import run_distribution
+        copy = run_distribution(episode_data, link)
+    except Exception as exc:
+        logger.warning("Copywriter crew failed (%s) — using fallback template.", exc)
+        copy = _fallback_copy(episode_data)
+
+    record_social_copy(date, copy["x_text"], copy["ig_caption"])
+    return copy
+
+
+# ---------------------------------------------------------------------------
+# Orchestrator
+# ---------------------------------------------------------------------------
+
+def run_social_distribution(
+    date: str,
+    dry_run: bool = False,
+    force: bool = False,
+    only: str | None = None,
+) -> dict:
+    """
+    Post the day's briefing to X and Instagram. Each channel is independent and
+    self-contained: a failure or missing-credential skip in one never affects the
+    other, and nothing here raises out to the caller.
+
+    Gating: a channel already recorded as sent for `date` is skipped unless
+    `force`. `dry_run` generates copy + card and prints them, posting nothing.
+
+    Returns a per-channel result summary dict.
+    """
+    results: dict = {"date": date, "x": "skip", "instagram": "skip"}
+
+    episode_data = load_episode(date)
+    if not episode_data:
+        logger.error("No episode data for %s — cannot distribute.", date)
+        results["error"] = "no_episode"
+        return results
+
+    link = deep_link(date)
+
+    # Copy (shared by both channels)
+    copy = _resolve_copy(date, episode_data, link, force=force)
+    x_text = _fit_x(copy["x_text"], link)
+    ig_caption = _fit_ig(copy["ig_caption"])
+
+    want_x = only in (None, "x")
+    want_ig = only in (None, "ig")
+
+    # --- X ---
+    if want_x:
+        try:
+            if not dry_run and not force and channel_sent(load_dist_state(date), "x"):
+                logger.info("X already sent for %s — skipping (use --force).", date)
+                results["x"] = "already_sent"
+            elif dry_run:
+                logger.info("[dry-run] X text (%d chars):\n%s", len(x_text), x_text)
+                results["x"] = "dry_run"
+            else:
+                tweet_id = post_to_x(x_text)
+                if tweet_id:
+                    record_send(date, "x", {"tweet_id": tweet_id, "text": x_text})
+                    results["x"] = f"posted:{tweet_id}"
+                else:
+                    results["x"] = "not_configured_or_failed"
+        except Exception as exc:
+            logger.error("X channel raised (non-fatal): %s", exc)
+            results["x"] = "error"
+
+    # --- Instagram (needs a card image + public URL) ---
+    if want_ig:
+        try:
+            if not dry_run and not force and channel_sent(load_dist_state(date), "instagram"):
+                logger.info("Instagram already sent for %s — skipping (use --force).", date)
+                results["instagram"] = "already_sent"
+            else:
+                card_path = DATA_DIR / f"MikeCast_card_{date}.png"
+                generate_card(episode_data, card_path)
+                if dry_run:
+                    logger.info("[dry-run] IG caption (%d chars):\n%s", len(ig_caption), ig_caption)
+                    logger.info("[dry-run] card saved for visual check: %s", card_path)
+                    results["instagram"] = "dry_run"
+                else:
+                    image_url = upload_card(card_path, date)
+                    if not image_url:
+                        results["instagram"] = "no_public_url"
+                    else:
+                        media_id, container_id = post_to_instagram(image_url, ig_caption)
+                        if media_id:
+                            record_send(date, "instagram", {
+                                "media_id": media_id,
+                                "container_id": container_id,
+                                "image_url": image_url,
+                                "caption": ig_caption,
+                            })
+                            results["instagram"] = f"posted:{media_id}"
+                        else:
+                            results["instagram"] = "not_configured_or_failed"
+        except Exception as exc:
+            logger.error("Instagram channel raised (non-fatal): %s", exc)
+            results["instagram"] = "error"
+
+    logger.info("Social distribution result: %s", results)
+    return results
+
+
+# ---------------------------------------------------------------------------
+# CLI
+# ---------------------------------------------------------------------------
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Post the MikeCast daily briefing to X and Instagram",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    parser.add_argument("--date", default=TODAY, help="Episode date YYYY-MM-DD (default: today)")
+    parser.add_argument("--dry-run", action="store_true", help="Generate copy + card; post nothing")
+    parser.add_argument("--only", choices=["x", "ig"], help="Post to only one channel")
+    parser.add_argument("--force", action="store_true", help="Re-post even if already sent today")
+    parser.add_argument("--delete-tweet", metavar="ID", help="Delete a tweet by id and exit")
+    args = parser.parse_args()
+
+    if args.delete_tweet:
+        ok = delete_tweet(args.delete_tweet)
+        sys.exit(0 if ok else 1)
+
+    run_social_distribution(args.date, dry_run=args.dry_run, force=args.force, only=args.only)
+
+
+if __name__ == "__main__":
+    main()

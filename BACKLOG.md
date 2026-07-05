@@ -95,9 +95,32 @@ Turn the single-recipient Gmail briefing into a real newsletter anyone can subsc
 | NL-5 | **Manual:** Resend account + `mikecast.io` domain DNS verify; create "MikeCast Daily" audience + full-access key | — | pending (Mike) |
 | NL-6 | **Manual:** SSM params `/mikecast/RESEND_API_KEY`, `/mikecast/RESEND_AUDIENCE_ID`, `/mikecast/SIGNUP_HMAC_SECRET`; add to ECS task def secrets/env | — | pending (Mike) |
 | NL-7 | **Manual:** create Lambda + IAM role + Function URL (CORS mikecast.io); set `CONFIRM_BASE_URL` + `MIKECAST_SIGNUP_ENDPOINT` in `signup.js`; fill CAN-SPAM postal address in `_NEWSLETTER_FOOTER` | — | pending (Mike) |
-| NL-8 | **Email signup UI DISABLED** until delivery is finalized — forms + `signup.js` includes commented out in `index.html`, `subscribe.html`, `confirmed.html` (`subscribe.html` shows a "coming soon" notice). All backend code (Lambda, `send_newsletter_broadcast()`, Resend infra) is untouched. Re-enable by uncommenting the marked blocks and re-deploying the static site to S3 + CloudFront invalidation | `newsletter-resend` | done |
+| NL-8 | Email signup UI was temporarily disabled (forms commented out) until delivery finalized. **RE-ENABLED (NL-9)** now that the broadcast ships. | `newsletter-resend` | superseded |
+| NL-9 | **Signup UI RE-ENABLED** — restored the pre-NL-8 `index.html`/`subscribe.html`/`confirmed.html` (forms + `signup.js` includes) as part of the distribution work; broadcast is now gated + wired. Deploy static site to S3 + invalidate CloudFront. | `newsletter-resend` | code done |
 
-**⚠️ Signup UI is intentionally OFF.** The daily Resend broadcast never shipped (the `newsletter-resend` branch isn't merged to `main` — see CLAUDE caveat), so the public signup form was collecting addresses for a newsletter that doesn't send. NL-8 hides the UI until NL-1's broadcast code is merged + verified end-to-end. Do not re-enable the forms before then.
+---
+
+## Social Distribution (X + Instagram)
+
+Auto-post the daily briefing to X and Instagram with a deep link to that day's episode; gate all sends to first-run-of-day; add editing/reposting tooling. Full plan: `~/.claude/plans/staged-petting-hellman.md`.
+
+| # | Item | Branch | Status |
+|---|------|--------|--------|
+| SOC-1 | `mc_dist_state.py` — per-date distribution state (`data/dist/YYYY-MM-DD.json`), S3-authoritative; `channel_sent`/`record_send`/`record_social_copy`/`append_repost` | `newsletter-resend` | code done |
+| SOC-2 | First-run-of-day gating in `mikecast_briefing.py` — personal email + newsletter + social gated; `--resend` bypasses (`--force` regenerates content only) | `newsletter-resend` | code done |
+| SOC-3 | `crew/distribution_crew.py` + `make_social_copywriter()` — Claude writes X post + IG caption (strict JSON, hallucination-guarded) | `newsletter-resend` | code done |
+| SOC-4 | `mc_social.py` — PIL 1080×1080 card, S3 card upload, X post/delete (OAuth1), IG Graph two-step publish, `run_social_distribution` orchestrator + `_fit_x`/`_fit_ig` + deterministic fallback; CLI | `newsletter-resend` | code done |
+| SOC-5 | `mc_config.py` X/IG/CloudFront env reads; `Pillow` + `requests-oauthlib` in `requirements.txt` | `newsletter-resend` | code done |
+| SOC-6 | `app.js` `?date=YYYY-MM-DD` deep links (init block + `history.replaceState` on render) | `newsletter-resend` | code done |
+| SOC-7 | `mc_edit.py` — show/set-html/regen/publish/repost-social/delete-social; shared `invalidate_cloudfront()` in `mc_utils.py` | `newsletter-resend` | code done |
+| SOC-8 | **Manual (Mike):** X developer account + OAuth1 read/write keys; IG Business account + FB Page + Meta app + system-user (or 60-day) token; SSM params `/mikecast/X_API_KEY`, `X_API_SECRET`, `X_ACCESS_TOKEN`, `X_ACCESS_TOKEN_SECRET`, `META_ACCESS_TOKEN`, `IG_USER_ID` + ECS task-def secrets; add to `~/.profile`. See `SOCIAL_SETUP.md`. | — | pending (Mike) |
+
+**Deferred (future work):**
+
+| # | Item |
+|---|------|
+| SOC-Reels | Daily Instagram Reel — reuse `mc_ad.py`'s 1080×1920 video via the Graph API Reels flow (`media_type=REELS`, upload + poll + publish) once image-card posting is stable. Requires adding `mc_ad.py` deps (numpy/moviepy or ffmpeg-only) to the Docker image. |
+| SOC-YT | Daily YouTube upload — wire the existing `mc_youtube.py` into pipeline Step 11 with its own `channel_sent` gate (`"youtube": {"video_id": ...}`), OAuth refresh-token in SSM. |
 
 ---
 

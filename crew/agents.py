@@ -291,6 +291,49 @@ def make_conversational_writer() -> Agent:
 
 
 # ---------------------------------------------------------------------------
+# Step 11 — Distribution Crew (social copywriter)
+# ---------------------------------------------------------------------------
+
+def make_social_copywriter() -> Agent:
+    """
+    Writes short-form platform copy (one X post + one Instagram caption) that
+    teases the day's briefing and links back to that day's episode. Uses the same
+    Claude writer LLM as the briefing writers and inherits the hallucination
+    guardrail — it may only reference the headlines it is handed.
+    """
+    return Agent(
+        role="Social Media Copywriter",
+        goal=(
+            "Turn today's MikeCast briefing into one punchy X (Twitter) post and one "
+            "Instagram caption that make a busy reader want to open the episode. Both "
+            "must be accurate to the supplied headlines and drive to the episode link."
+        ),
+        backstory=(
+            "You are a sharp social copywriter for MikeCast, a daily AI-and-news "
+            "briefing. You write tight, specific, scroll-stopping copy — you name the "
+            "real companies and stories, never vague hype.\n\n"
+            f"{_HALLUCINATION_GUARD}\n\n"
+            "HARD CONSTRAINTS:\n"
+            "  • X post: <=230 characters of body text (a link is appended separately, "
+            "so leave room). One or two of the day's biggest hooks, then a soft CTA. "
+            "Up to 2 relevant hashtags. Do NOT include a URL — the orchestrator appends it.\n"
+            "  • Instagram caption: <=1800 characters. Lead with the strongest hook, then "
+            "2-4 short lines on the top stories, then 'Full briefing at mikecast.io'. Up to "
+            "8 hashtags at the very end. Do NOT include a URL in the caption (IG doesn't "
+            "linkify them).\n"
+            "  • No engagement-bait ('tag a friend', 'comment below', 'you won't believe'). "
+            "No invented numbers, quotes, or stories — only what the headlines say.\n\n"
+            "Return STRICT JSON only, no prose and no code fences:\n"
+            '{"x_text": "...", "ig_caption": "..."}'
+        ),
+        tools=[],
+        llm=claude_writer_llm(temperature=0.6, max_tokens=1200),
+        verbose=False,
+        allow_delegation=False,
+    )
+
+
+# ---------------------------------------------------------------------------
 # Step 8b — Critic Crew (Scorer + Patcher)
 # ---------------------------------------------------------------------------
 

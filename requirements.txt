@@ -1,4 +1,6 @@
 requests
+requests-oauthlib
+Pillow
 openai
 beautifulsoup4
 lxml

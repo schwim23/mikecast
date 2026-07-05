@@ -31,6 +31,7 @@ from mc_deliver import (
     send_email,
     send_newsletter_broadcast,
 )
+from mc_dist_state import channel_sent, load_dist_state, record_send
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -223,8 +224,15 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
 # Shared Steps 9 & 10 (audio + deliver) — unchanged by migration
 # ---------------------------------------------------------------------------
 
-def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_articles, picks, trending):
-    """Audio generation + save + RSS + email. Identical for legacy and crew paths."""
+def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_articles, picks, trending, resend=False):
+    """
+    Audio generation + save + RSS + email + social. Identical for legacy and crew paths.
+
+    First-run-of-day gating: personal email, newsletter broadcast, and social posts
+    each check per-date distribution state and skip if already sent, so a `--force`
+    rerun regenerates content WITHOUT re-emailing or re-posting. `resend=True`
+    (from `--resend`) bypasses the gate and re-sends everything.
+    """
     logger.info("Step 9/10: Generating audio…")
     audio_path = DATA_DIR / f"MikeCast_{TODAY}.mp3"
     el_audio_path = DATA_DIR / f"MikeCast_3voice_{TODAY}.mp3"
@@ -266,17 +274,43 @@ def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_ar
     )
     generate_manifest()
     generate_rss_feed()
-    email_ok = send_email(html, single_voice_script or conversational_script, primary_audio_path)
+
+    # ----- Delivery (first-run-of-day gated) -----
+    state = load_dist_state(TODAY)
+
+    # Personal Gmail send to Mike. Gated so --force reruns don't re-email.
+    if channel_sent(state, "personal_email") and not resend:
+        logger.info("Personal email already sent for %s — skipping (use --resend to re-send).", TODAY)
+        email_ok = True
+    else:
+        email_ok = send_email(html, single_voice_script or conversational_script, primary_audio_path)
+        if email_ok:
+            record_send(TODAY, "personal_email", {})
 
     # Additive newsletter broadcast to public Resend subscribers. Same HTML body
     # as the personal email; skips gracefully (and never raises) if Resend isn't
-    # configured, so a newsletter problem can't break the daily pipeline.
-    try:
-        send_newsletter_broadcast(html)
-    except Exception as exc:
-        logger.warning("Newsletter broadcast raised (non-fatal): %s", exc)
+    # configured, so a newsletter problem can't break the daily pipeline. Gated
+    # so --force reruns don't re-broadcast to subscribers.
+    if channel_sent(state, "newsletter") and not resend:
+        logger.info("Newsletter already broadcast for %s — skipping (use --resend to re-send).", TODAY)
+    else:
+        try:
+            broadcast_id = send_newsletter_broadcast(html)
+            if broadcast_id:
+                record_send(TODAY, "newsletter", {"broadcast_id": broadcast_id})
+        except Exception as exc:
+            logger.warning("Newsletter broadcast raised (non-fatal): %s", exc)
 
-    return audio_ok, el_audio_ok, email_ok
+    # ----- Step 11: social distribution (X + Instagram) -----
+    # Its own per-channel gating + graceful skips; never raises out to the pipeline.
+    social_results = {}
+    try:
+        from mc_social import run_social_distribution
+        social_results = run_social_distribution(TODAY, force=resend)
+    except Exception as exc:
+        logger.warning("Social distribution raised (non-fatal): %s", exc)
+
+    return audio_ok, el_audio_ok, email_ok, social_results
 
 
 # ---------------------------------------------------------------------------
@@ -285,6 +319,7 @@ def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_ar
 
 def main() -> None:
     force = "--force" in sys.argv
+    resend = "--resend" in sys.argv
     use_crew = "--crew" in sys.argv
     use_legacy = "--legacy" in sys.argv
     if use_crew and use_legacy:
@@ -324,18 +359,21 @@ def main() -> None:
     trending = trending_holder[0] if trending_holder else []
     total = sum(len(v) for v in top_articles.values())
 
-    audio_ok, el_audio_ok, email_ok = _run_steps_9_and_10(
+    audio_ok, el_audio_ok, email_ok, social_results = _run_steps_9_and_10(
         html, single_voice_script, conversational_script, top_articles, picks, trending,
+        resend=resend,
     )
 
     runtime_s = int(time.time() - started_at)
     logger.info(
         "Run summary [%s] — runtime: %dm%02ds | articles: %d | picks: %d | "
-        "elevenlabs: %s | openai_tts: %s | email: %s",
+        "elevenlabs: %s | openai_tts: %s | email: %s | x: %s | instagram: %s",
         path_label, runtime_s // 60, runtime_s % 60, total, len(picks),
         "ok" if el_audio_ok else ("skip" if not ELEVENLABS_API_KEY else "FAILED"),
         "ok" if audio_ok else "FAILED",
         "ok" if email_ok else "FAILED",
+        social_results.get("x", "skip"),
+        social_results.get("instagram", "skip"),
     )
     logger.info("MikeCast briefing complete.")
 
