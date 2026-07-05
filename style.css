@@ -247,6 +247,34 @@ body {
 
 .muted { color: var(--text-muted); font-size: .9rem; }
 
+/* Social follow row (header) */
+.social-follow {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .75rem;
+  margin-top: 1rem;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .4rem .85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 500;
+  transition: color .15s ease, border-color .15s ease, background .15s ease;
+}
+.social-link:hover {
+  color: var(--text-primary);
+  border-color: var(--accent);
+  background: rgba(88,166,255,.08);
+}
+.social-link svg { display: block; }
+
 .subscribe-buttons {
   display: flex;
   gap: .5rem;
