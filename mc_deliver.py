@@ -488,7 +488,9 @@ def send_newsletter_broadcast(html_body: str) -> str | None:
             logger.error("Newsletter broadcast create returned no id: %r", created)
             return None
 
-        resend.Broadcasts.send(broadcast_id)
+        # send() takes a dict and indexes params['broadcast_id'] internally —
+        # passing a bare string raises "string indices must be integers".
+        resend.Broadcasts.send({"broadcast_id": broadcast_id})
         logger.info("Newsletter broadcast sent (id=%s)", broadcast_id)
         return broadcast_id
     except Exception as exc:
