@@ -247,70 +247,45 @@ body {
 
 .muted { color: var(--text-muted); font-size: .9rem; }
 
-/* Social follow row (header) */
-.social-follow {
+/* One-line subscribe bar: email signup (primary) + channel icons (secondary) */
+.subscribe-bar {
   display: flex;
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: .75rem;
-  margin-top: 1rem;
+  gap: .8rem 1.1rem;
+  margin-top: 1.1rem;
 }
-.social-link {
+.bar-divider {
+  width: 1px;
+  height: 26px;
+  background: var(--border);
+}
+.channels { display: flex; align-items: center; gap: .45rem; }
+.channel {
+  width: 38px;
+  height: 38px;
   display: inline-flex;
   align-items: center;
-  gap: .45rem;
-  padding: .4rem .85rem;
+  justify-content: center;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 50%;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: .82rem;
-  font-weight: 500;
-  transition: color .15s ease, border-color .15s ease, background .15s ease;
+  transition: color .15s, border-color .15s, background .15s, transform .15s;
 }
-.social-link:hover {
-  color: var(--text-primary);
-  border-color: var(--accent);
-  background: rgba(88,166,255,.08);
-}
-.social-link svg { display: block; }
+.channel svg { display: block; }
+.channel:hover { transform: translateY(-1px); color: var(--text-primary); border-color: var(--accent); }
+/* Brand-tinted hover so each channel is recognisable on interaction */
+.channel.ch-apple:hover   { color: #c26bea; border-color: #c26bea; background: rgba(194,107,234,.12); }
+.channel.ch-spotify:hover { color: #1db954; border-color: #1db954; background: rgba(29,185,84,.12); }
+.channel.ch-rss:hover     { color: #f97316; border-color: #f97316; background: rgba(249,115,22,.12); }
+.channel.ch-x:hover       { color: #fff;    border-color: #6e7681; background: rgba(255,255,255,.10); }
+.channel.ch-ig:hover      { color: #e1306c; border-color: #e1306c; background: rgba(225,48,108,.12); }
 
-/* Listen row — Apple / Spotify / RSS as one consistent 40px badge trio */
-.subscribe-buttons {
-  display: flex;
-  gap: .6rem;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1rem;
+@media (max-width: 520px) {
+  .bar-divider { display: none; }
 }
-.listen-badge {
-  height: 40px;
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-.listen-badge img {
-  height: 40px;
-  display: block;
-  border-radius: 8px;
-}
-.listen-badge:hover { transform: translateY(-1px); }
-/* RSS styled as a peer badge: dark chip, orange glyph, same height/radius */
-.listen-rss {
-  gap: .45rem;
-  padding: 0 .95rem;
-  background: #0b0f16;
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  font-size: .9rem;
-  font-weight: 600;
-  letter-spacing: .01em;
-}
-.listen-rss svg { color: #f97316; flex-shrink: 0; }
-.listen-rss:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(0,0,0,.35); }
 
 .btn-subscribe {
   display: inline-flex;
@@ -332,7 +307,7 @@ body {
   gap: .5rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: .9rem;
+  margin: 0;
 }
 .email-signup input[type="email"] {
   height: 40px;
