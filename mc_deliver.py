@@ -448,7 +448,7 @@ _NEWSLETTER_FOOTER = """
 <div style="margin:2.5rem auto 1rem;max-width:600px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#8b949e;font-size:12px;line-height:1.6;border-top:1px solid #30363d;padding-top:16px;">
   <p style="margin:0 0 6px;">You're receiving this because you subscribed to the MikeCast daily briefing at mikecast.io.</p>
   <p style="margin:0 0 6px;"><a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:#8b949e;text-decoration:underline;">Unsubscribe</a></p>
-  <p style="margin:0;">MikeCast &bull; [POSTAL ADDRESS REQUIRED — replace before first broadcast; CAN-SPAM mandates a real physical mailing address, a PO box is fine]</p>
+  <p style="margin:0;">MikeCast &bull; 770 Knollwood Terrace, Westfield, NJ 07090</p>
 </div>"""
 
 
