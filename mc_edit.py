@@ -188,7 +188,7 @@ def cmd_repost_social(args) -> None:
         if not image_url:
             logger.error("Could not upload card (no public URL) — aborting IG repost.")
         else:
-            caption = mc_social._fit_ig(copy["ig_caption"])
+            caption = mc_social._build_ig_caption(copy["ig_caption"], date_display=episode.get("date_display"))
             media_id, container_id = mc_social.post_to_instagram(image_url, caption)
             if media_id:
                 append_repost(date, "ig", old.get("media_id"), media_id)

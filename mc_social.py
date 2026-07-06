@@ -314,6 +314,32 @@ def _fit_ig(caption: str) -> str:
     return caption
 
 
+def _build_ig_caption(hook: str, date_display: str | None = None) -> str:
+    """
+    Assemble the IG caption in the same shape as the tweet — a 'MikeCast Daily ·
+    {date}' header, the news hook, then a CTA — with hashtags at the very end.
+
+    Instagram does NOT hyperlink URLs in captions, so the CTA points to the short,
+    typeable domain (mikecast.io) and the bio ('link in bio') rather than a raw,
+    unclickable Spotify URL. Set the IG bio links to mikecast.io + Spotify so the
+    'link in bio' actually resolves.
+    """
+    hook = (hook or "").strip()
+    tags = list(dict.fromkeys(re.findall(r"#\w+", hook)))          # dedup, keep order
+    body = re.sub(r"#\w+", "", hook)
+    # drop any CTA/link the model may have added so we don't duplicate ours
+    body = re.sub(r"(?im)^\s*(📰|🎧|🔗)?\s*(full briefing|listen on spotify|link in bio).*$", "", body)
+    body = re.sub(r"(?i)\bfull briefing at mikecast\.io\.?", "", body)
+    body = re.sub(r"\n{3,}", "\n\n", body).strip()
+
+    header = f"🎙️ MikeCast Daily · {date_display}" if date_display else "🎙️ MikeCast Daily"
+    cta = "📰 Full briefing → mikecast.io\n🎧 Listen on Spotify — link in bio"
+    caption = "\n\n".join(p for p in (header, body, cta) if p)
+    if tags:
+        caption += "\n\n" + " ".join(tags[:IG_MAX_HASHTAGS])
+    return _fit_ig(caption)
+
+
 def _fallback_copy(episode_data: dict) -> dict:
     """
     Deterministic copy used when the copywriter crew is unavailable. The X header
@@ -325,9 +351,10 @@ def _fallback_copy(episode_data: dict) -> dict:
     desc = re.sub(r"^Episode\s*#?\d+\s*[—:-]\s*", "", desc).strip()
     if not desc:
         desc = "Today's top stories across AI, tech, business, and NY sports."
+    # header + CTA are added by _build_ig_caption; here we just supply the hook + tags
     return {
         "x_text": desc,
-        "ig_caption": f"{desc}\n\nFull briefing at mikecast.io\n\n#MikeCast #AInews #tech #news",
+        "ig_caption": f"{desc}\n\n#MikeCast #AInews #tech #news",
     }
 
 
@@ -538,7 +565,7 @@ def run_social_distribution(
     # Copy (shared by both channels)
     copy = _resolve_copy(date, episode_data, link, force=force)
     x_text = _fit_x(copy["x_text"], link, date_display=episode_data.get("date_display"))
-    ig_caption = _fit_ig(copy["ig_caption"])
+    ig_caption = _build_ig_caption(copy["ig_caption"], date_display=episode_data.get("date_display"))
 
     want_x = only in (None, "x")
     want_ig = only in (None, "ig")
