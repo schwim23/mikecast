@@ -83,6 +83,9 @@ X_MAX = 280
 IG_MAX = 2200  # hard IG cap; we target well under this
 IG_MAX_HASHTAGS = 8
 
+# Spotify show link (secondary "listen" CTA on each tweet). Kept clean (no ?si=).
+SPOTIFY_SHOW_URL = "https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv"
+
 
 # ---------------------------------------------------------------------------
 # Fonts
@@ -248,15 +251,43 @@ def _truncate_words(text: str, limit: int) -> str:
     return cut.rstrip() + "…"
 
 
-def _fit_x(text: str, link: str) -> str:
+def _weighted_len(s: str) -> int:
+    """Length as X counts it: every URL weighs 23 chars (t.co), everything else 1."""
+    w = len(s)
+    for u in re.findall(r"https?://\S+", s):
+        w += X_LINK_WEIGHT - len(u)
+    return w
+
+
+def _fit_x(text: str, link: str, date_display: str | None = None,
+           spotify_link: str | None = SPOTIFY_SHOW_URL) -> str:
     """
-    Fit the X body + link into 280 weighted chars. The link weighs 23 regardless
-    of length, so we cap the body at 250 (250 + 1 newline + 23 link = 274 ≤ 280)
-    and append the link on its own line.
+    Build the daily tweet and fit it into 280 weighted chars:
+
+        🎙️ MikeCast Daily · {date}
+
+        {news hook}
+
+        📰 {deep link}
+        🎧 {spotify link}
+
+    The header makes it obvious every post is the daily briefing; the two links
+    each weigh 23, and the news hook is truncated at a word boundary to fit.
     """
-    body_budget = X_MAX - X_LINK_WEIGHT - 1  # 1 for the newline
-    body = _truncate_words(text, body_budget)
-    return f"{body}\n{link}"
+    header = f"🎙️ MikeCast Daily · {date_display}" if date_display else "🎙️ MikeCast Daily"
+    footer_lines = [f"📰 {link}"]
+    if spotify_link:
+        footer_lines.append(f"🎧 {spotify_link}")
+    footer = "\n".join(footer_lines)
+
+    body = text.strip()
+    while body and _weighted_len(f"{header}\n\n{body}\n\n{footer}") > X_MAX:
+        body = body.rstrip("… ")
+        body = body[:body.rfind(" ")] if " " in body else ""
+        if body:
+            body += "…"
+
+    return f"{header}\n\n{body}\n\n{footer}" if body else f"{header}\n\n{footer}"
 
 
 def _fit_ig(caption: str) -> str:
@@ -284,14 +315,19 @@ def _fit_ig(caption: str) -> str:
 
 
 def _fallback_copy(episode_data: dict) -> dict:
-    """Deterministic copy used when the copywriter crew is unavailable."""
-    num = episode_data.get("episode_num", "?")
-    date_display = episode_data.get("date_display", TODAY)
-    desc = (episode_data.get("episode_description") or "Today's AI, business, and NY sports news.").strip()
-    base = f"MikeCast #{num} — {date_display}: {desc[:180]}"
+    """
+    Deterministic copy used when the copywriter crew is unavailable. The X header
+    ('MikeCast Daily · date') and links are added by _fit_x, so the body here is
+    just the clean news hook — strip any leading 'Episode #N —' from the stored
+    description so it doesn't read redundantly.
+    """
+    desc = (episode_data.get("episode_description") or "").strip()
+    desc = re.sub(r"^Episode\s*#?\d+\s*[—:-]\s*", "", desc).strip()
+    if not desc:
+        desc = "Today's top stories across AI, tech, business, and NY sports."
     return {
-        "x_text": base,
-        "ig_caption": f"{base}\n\nFull briefing at mikecast.io\n\n#MikeCast #AInews #tech",
+        "x_text": desc,
+        "ig_caption": f"{desc}\n\nFull briefing at mikecast.io\n\n#MikeCast #AInews #tech #news",
     }
 
 
@@ -501,7 +537,7 @@ def run_social_distribution(
 
     # Copy (shared by both channels)
     copy = _resolve_copy(date, episode_data, link, force=force)
-    x_text = _fit_x(copy["x_text"], link)
+    x_text = _fit_x(copy["x_text"], link, date_display=episode_data.get("date_display"))
     ig_caption = _fit_ig(copy["ig_caption"])
 
     want_x = only in (None, "x")

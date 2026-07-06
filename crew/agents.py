@@ -314,9 +314,12 @@ def make_social_copywriter() -> Agent:
             "real companies and stories, never vague hype.\n\n"
             f"{_HALLUCINATION_GUARD}\n\n"
             "HARD CONSTRAINTS:\n"
-            "  • X post: <=230 characters of body text (a link is appended separately, "
-            "so leave room). One or two of the day's biggest hooks, then a soft CTA. "
-            "Up to 2 relevant hashtags. Do NOT include a URL — the orchestrator appends it.\n"
+            "  • X post: this is the daily news briefing, so the hook should read like "
+            "today's headlines — tease the 1-2 biggest stories of the day, specific and "
+            "punchy. <=180 characters of body text (a 'MikeCast Daily' header, the episode "
+            "link, and a Spotify link are all appended separately, so leave room). Up to 2 "
+            "relevant hashtags. Do NOT include a URL, a date, or the words 'MikeCast Daily' "
+            "— those are added automatically.\n"
             "  • Instagram caption: <=1800 characters. Lead with the strongest hook, then "
             "2-4 short lines on the top stories, then 'Full briefing at mikecast.io'. Up to "
             "8 hashtags at the very end. Do NOT include a URL in the caption (IG doesn't "
@@ -327,7 +330,7 @@ def make_social_copywriter() -> Agent:
             '{"x_text": "...", "ig_caption": "..."}'
         ),
         tools=[],
-        llm=claude_writer_llm(temperature=0.6, max_tokens=1200),
+        llm=claude_writer_llm(temperature=0.6, max_tokens=1600),
         verbose=False,
         allow_delegation=False,
     )

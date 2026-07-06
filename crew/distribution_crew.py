@@ -38,13 +38,34 @@ def _headlines_block(episode_data: dict, per_cat: int = 2, cap: int = 8) -> str:
 
 
 def _strip_json(raw: str) -> dict:
-    """Parse the agent's JSON output, tolerating ``` fences and surrounding prose."""
+    """
+    Parse the agent's JSON output, tolerating ``` fences, surrounding prose, and
+    the common LLM failure modes (literal newlines in string values, a truncated
+    trailing string). Falls back to regex-extracting the two fields we need.
+    """
     text = re.sub(r"```\w*\n?", "", raw or "").strip()
-    # Grab the outermost {...} if the model wrapped it in prose.
     match = re.search(r"\{.*\}", text, re.DOTALL)
     if match:
         text = match.group(0)
-    return json.loads(text)
+
+    # strict=False tolerates literal control chars (newlines) inside strings.
+    try:
+        return json.loads(text, strict=False)
+    except Exception:
+        pass
+
+    # Last resort: pull out the two fields directly. Handles unterminated/truncated
+    # JSON (e.g. the model got cut off mid-caption) by grabbing what's there.
+    def grab(key: str) -> str:
+        m = re.search(rf'"{key}"\s*:\s*"(.*?)"\s*[,}}]', text, re.DOTALL)
+        if not m:
+            m = re.search(rf'"{key}"\s*:\s*"(.*)', text, re.DOTALL)  # truncated tail
+        return m.group(1).replace('\\"', '"').replace("\\n", "\n").strip() if m else ""
+
+    x_text, ig_caption = grab("x_text"), grab("ig_caption")
+    if not x_text and not ig_caption:
+        raise ValueError(f"Could not parse copywriter output: {raw!r}")
+    return {"x_text": x_text, "ig_caption": ig_caption}
 
 
 def run_distribution(episode_data: dict, link: str) -> dict:

@@ -163,7 +163,7 @@ def cmd_repost_social(args) -> None:
         if old_id:
             logger.info("Deleting old tweet %s…", old_id)
             mc_social.delete_tweet(old_id)
-        x_text = mc_social._fit_x(copy["x_text"], link)
+        x_text = mc_social._fit_x(copy["x_text"], link, date_display=episode.get("date_display"))
         new_id = mc_social.post_to_x(x_text)
         if new_id:
             append_repost(date, "x", old_id, new_id)
