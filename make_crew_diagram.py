@@ -23,12 +23,14 @@ C_MUTED     = "#8b949e"
 C_WHITE     = "#f0f6fc"
 C_ARROW     = "#58a6ff"
 
-FIG_W, FIG_H = 20, 28
+C_SOCIAL    = "#14b8a6"   # teal    – social distribution (X + Instagram)
+
+FIG_W, FIG_H = 20, 30
 
 fig, ax = plt.subplots(figsize=(FIG_W, FIG_H), facecolor=BG)
 ax.set_facecolor(BG)
 ax.set_xlim(0, FIG_W)
-ax.set_ylim(0, FIG_H)
+ax.set_ylim(-2, 28)   # extra room at the bottom for Step 11 + repacked footer
 ax.axis("off")
 
 
@@ -427,62 +429,99 @@ ax.text(1.3, Y10 + del_h - 0.22,
         "STEP 10  ·  Save & Deliver    (shared with --legacy path)",
         fontsize=11, fontweight="bold", color=C_DELIVER, zorder=4)
 ax.text(1.3, Y10 + del_h - 0.52,
-        "Persist JSON  ·  upload to S3 + CloudFront (feed.xml with Cache-Control: no-cache)  ·  send email",
+        "Persist JSON  ·  S3 + CloudFront (feed.xml no-cache)  ·  Gmail send + Resend newsletter broadcast  ·  all sends gated first-run-of-day (mc_dist_state)",
         fontsize=8.5, color=C_MUTED, zorder=4)
 
 dels = [
     ("Gmail SMTP\nHTML email + audio", C_DELIVER),
+    ("Resend Newsletter\nbroadcast to subscribers", C_DELIVER),
     ("S3 + CloudFront\ndata/YYYY-MM-DD.json", C_DELIVER),
     ("manifest.json\nArchive index", C_DELIVER),
     ("RSS 2.0 feed.xml\nPodcast subscription", C_DELIVER),
 ]
-dw = (18 - 0.4 - 0.2 * 3) / 4
+dw = (18 - 0.4 - 0.2 * 4) / 5
 for i, (lbl, col) in enumerate(dels):
-    small_box(1.2 + i * (dw + 0.2), Y10 + 0.15, dw, 0.95, col, lbl, fontsize=8.5)
+    small_box(1.2 + i * (dw + 0.2), Y10 + 0.15, dw, 0.95, col, lbl, fontsize=8.0)
+
+arrow(FIG_W / 2, Y10, FIG_W / 2, Y10 - 0.32)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# Final outputs
+# STEP 11 — Social Distribution (X + Instagram)
 # ══════════════════════════════════════════════════════════════════════════════
-Yout = 4.5
+Y11 = 4.55
+soc_h = 1.35
+rect = FancyBboxPatch(
+    (1.0, Y11), 18, soc_h,
+    boxstyle="round,pad=0,rounding_size=0.35",
+    linewidth=1.5, edgecolor=C_SOCIAL, facecolor=f"{C_SOCIAL}11", zorder=2,
+)
+ax.add_patch(rect)
+ax.text(1.3, Y11 + soc_h - 0.22,
+        "STEP 11  ·  Social Distribution    (mc_social.py + Distribution Crew)",
+        fontsize=11, fontweight="bold", color=C_SOCIAL, zorder=4)
+ax.text(1.3, Y11 + soc_h - 0.50,
+        "Claude social copywriter writes the copy  ·  each channel gated first-run-of-day  ·  deep-links to mikecast.io/?date=…",
+        fontsize=8.3, color=C_MUTED, zorder=4)
+
+# X + Instagram channel boxes
+socw = (18 - 0.4 - 0.3) / 2
+sxb = 1.2
+for i, (title, sub) in enumerate([
+    ("X  ·  @mikecastai", "'MikeCast Daily' post  ·  hook + deep link + Spotify  ·  API v2 / OAuth 1.0a"),
+    ("Instagram  ·  @mikecastai", "1080×1080 branded card (Pillow)  ·  Graph API container → publish"),
+]):
+    bx = sxb + i * (socw + 0.3)
+    by = Y11 + 0.12
+    small_box(bx, by, socw, 0.62, C_SOCIAL, "", fontsize=8)
+    ax.text(bx + socw / 2, by + 0.44, title,
+            ha="center", va="center", fontsize=9.2, fontweight="bold",
+            color=C_WHITE, zorder=6)
+    ax.text(bx + socw / 2, by + 0.18, sub,
+            ha="center", va="center", fontsize=7.2, color=C_MUTED, zorder=6)
+agent_badge(14.35, Y11 + soc_h - 0.38, "Distribution Crew")
+llm_badge(16.75, Y11 + soc_h - 0.37, "Claude Sonnet 4.6", C_GENERATE)
+
+arrow(FIG_W / 2, Y11, FIG_W / 2, Y11 - 0.32)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# Final outputs (all channels)
+# ══════════════════════════════════════════════════════════════════════════════
+Yout = 2.9
 outs = [
-    (1.0,  "[ Email Briefing ]",     C_DELIVER),
-    (5.0,  "[ Podcast Episode ]",    C_AUDIO),
-    (9.0,  "[ Web Dashboard ]",      C_COLLECT),
-    (13.0, "[ RSS / Apple Podcasts ]", C_XAI),
+    ("Email",       C_DELIVER),
+    ("Newsletter",  C_DELIVER),
+    ("Podcast",     C_AUDIO),
+    ("Web",         C_COLLECT),
+    ("RSS / Apple", C_XAI),
+    ("X",           C_SOCIAL),
+    ("Instagram",   C_SOCIAL),
+    ("YouTube",     C_GENERATE),
 ]
-for x, lbl, col in outs:
-    arrow(x + 1.75, Y10, x + 1.75, Yout + 0.62)
-    w = 3.5
+n_out = len(outs)
+gap = 0.25
+ow = (18 - gap * (n_out - 1)) / n_out
+for i, (lbl, col) in enumerate(outs):
+    x = 1.0 + i * (ow + gap)
+    src_y = Y11 if col == C_SOCIAL else Y10
+    arrow(x + ow / 2, src_y, x + ow / 2, Yout + 0.62, color=f"{col}", lw=1.2)
     rect = FancyBboxPatch(
-        (x, Yout), w, 0.62,
-        boxstyle="round,pad=0,rounding_size=0.25",
+        (x, Yout), ow, 0.62,
+        boxstyle="round,pad=0,rounding_size=0.2",
         linewidth=1.5, edgecolor=col, facecolor=f"{col}33", zorder=3,
     )
     ax.add_patch(rect)
-    ax.text(x + w / 2, Yout + 0.31, lbl,
-            ha="center", va="center", fontsize=8.8, fontweight="bold",
+    ax.text(x + ow / 2, Yout + 0.31, lbl,
+            ha="center", va="center", fontsize=8.5, fontweight="bold",
             color=C_WHITE, zorder=4)
-
-# YouTube/social (separate downstream)
-x = 17.0
-w = 2.6
-rect = FancyBboxPatch(
-    (x, Yout), w, 0.62,
-    boxstyle="round,pad=0,rounding_size=0.25",
-    linewidth=1.5, edgecolor=C_GENERATE, facecolor=f"{C_GENERATE}33", zorder=3,
-)
-ax.add_patch(rect)
-ax.text(x + w / 2, Yout + 0.31, "[ YouTube + Ads ]",
-        ha="center", va="center", fontsize=8.5, fontweight="bold",
-        color=C_WHITE, zorder=4)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
 # Sidebar: where the real CrewAI agents live
 # ══════════════════════════════════════════════════════════════════════════════
-Ysb_top = 3.9
-sb_h = 1.75
+Ysb_top = 2.3
+sb_h = 1.95
 rect = FancyBboxPatch(
     (1.0, Ysb_top - sb_h), 8.5, sb_h,
     boxstyle="round,pad=0,rounding_size=0.3",
@@ -500,6 +539,7 @@ live_agents = [
     "•  HTML / Single-Voice / 3-Voice Writers  (Claude × 3 parallel)",
     "•  Section Quality Scorer  (GPT-4o)",
     "•  Section Patcher  (Claude, NY Sports excluded)",
+    "•  Social Copywriter  (Claude, Step 11 — X + IG copy)",
 ]
 for i, line in enumerate(live_agents):
     ax.text(1.4, Ysb_top - 0.85 - i * 0.22, line,
@@ -531,7 +571,7 @@ for i, line in enumerate(inv):
 # ══════════════════════════════════════════════════════════════════════════════
 # Legend
 # ══════════════════════════════════════════════════════════════════════════════
-Yleg = 1.65
+Yleg = -0.35
 ax.plot([1, 19], [Yleg + 0.55, Yleg + 0.55], color=BORDER, lw=0.8, zorder=3)
 ax.text(1.2, Yleg + 0.28, "Legend",
         ha="left", va="center", fontsize=10, fontweight="bold", color=C_WHITE)
@@ -546,8 +586,9 @@ legend_items = [
     (C_CRITIC,  "Critic"),
     (C_AUDIO,   "Audio / TTS"),
     (C_DELIVER, "Delivery"),
+    (C_SOCIAL,  "Social (X/IG)"),
 ]
-lx = 3.0
+lx = 2.6
 ly = Yleg + 0.28
 for col, lbl in legend_items:
     rect = FancyBboxPatch(
@@ -556,17 +597,17 @@ for col, lbl in legend_items:
         linewidth=1, edgecolor=col, facecolor=f"{col}55", zorder=4,
     )
     ax.add_patch(rect)
-    ax.text(lx + 0.35, ly, lbl, ha="left", va="center",
-            fontsize=8, color=C_MUTED, zorder=4)
-    lx += 1.85
+    ax.text(lx + 0.32, ly, lbl, ha="left", va="center",
+            fontsize=7.6, color=C_MUTED, zorder=4)
+    lx += 1.64
 
 
 # Provider badges row
-Ypb = 0.75
+Ypb = -1.2
 ax.text(1.2, Ypb + 0.20, "LLM Providers",
         ha="left", va="center", fontsize=10, fontweight="bold", color=C_WHITE)
 providers = [
-    ("Anthropic Claude Sonnet 4.6", C_GENERATE, "writers, patcher"),
+    ("Anthropic Claude Sonnet 4.6", C_GENERATE, "writers, patcher, social copy"),
     ("OpenAI GPT-4o",               C_SCORE,    "scorers, critic"),
     ("OpenAI GPT-4o-mini",          C_PROCESS,  "cluster, enrich, planner, picks"),
     ("xAI Grok-3",                  C_XAI,      "live web + X search"),
@@ -590,7 +631,7 @@ for name, col, role in providers:
 
 
 # ── watermark ─────────────────────────────────────────────────────────────────
-ax.text(FIG_W / 2, 0.25,
+ax.text(FIG_W / 2, -1.8,
         "mikecast.io   ·   --crew path   ·   shadow-validated alongside --legacy",
         ha="center", va="center", fontsize=8.5, color=C_MUTED, alpha=0.7)
 
