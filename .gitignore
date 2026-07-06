@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .env
+
+# Internal ops runbooks — keep local, not on public GitHub
+NEWSLETTER_SETUP.md
+SOCIAL_SETUP.md

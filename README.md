@@ -64,7 +64,7 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
     - **X**: a "🎙️ MikeCast Daily · {date}" tweet — a Claude-written news hook plus the episode deep link and the Spotify show link (posted via the X API v2, OAuth 1.0a).
     - **Instagram**: a branded **1080×1080 image card** (generated with Pillow) published via the Instagram Graph API two-step container→publish flow, with a matching caption. IG doesn't linkify caption URLs, so the CTA points to the site + "link in bio."
     - **Copy** is written by the new `Distribution Crew` (a Claude social copywriter, hallucination-guarded), with deterministic headers/links/fallbacks added in code so an LLM blip never blocks posting.
-    - Each channel skips gracefully with a logged message when its credentials aren't set. See **Social Distribution** and `SOCIAL_SETUP.md`.
+    - Each channel skips gracefully with a logged message when its credentials aren't set. See **Social Distribution** below.
 
 14. **First-run-of-day send gating & post editing**:
     - **Idempotent sends** (`mc_dist_state.py`): per-date state at `data/dist/YYYY-MM-DD.json` records which channels (personal email, newsletter, X, Instagram) have already fired, so a `--force` regeneration never re-emails subscribers or re-posts to social. `--force --resend` bypasses the gate.
@@ -187,8 +187,6 @@ mikecast/
 ├── briefing_history.json     # Rolling 7-day history of processed articles
 ├── requirements.txt          # Python dependencies
 ├── CLAUDE.md                 # Claude Code context and operating constraints
-├── NEWSLETTER_SETUP.md       # Resend/Lambda/DNS newsletter setup runbook
-├── SOCIAL_SETUP.md           # X + Instagram credential/setup runbook (Phase 0)
 ├── index.html                # GitHub Pages entry point (briefing + email signup + social follow icons)
 ├── subscribe.html            # Dedicated newsletter landing page
 ├── confirmed.html            # Post-confirmation thank-you page (handles ?error=expired)
@@ -301,7 +299,7 @@ export IG_USER_ID="1784..."
 
 # Optional — CloudFront distribution fronting mikecast.io (used by mc_edit.py to
 # invalidate the cache after republishing a past episode). Defaults to the live one.
-export CLOUDFRONT_DIST_ID="EFNQM31KQHY56"
+export CLOUDFRONT_DIST_ID="<CLOUDFRONT_DIST_ID>"
 
 # Optional — enables AWS S3 mode (outputs written to S3 instead of local disk)
 export S3_BUCKET="your-s3-bucket-name"
@@ -311,7 +309,7 @@ export YOUTUBE_CLIENT_SECRETS="/path/to/client_secrets.json"
 export YOUTUBE_PRIVACY="public"
 ```
 
-> See `SOCIAL_SETUP.md` for the full X and Instagram credential walkthrough (developer accounts, OAuth 1.0a keys, Meta system-user token, and the SSM parameters + ECS task-def secrets used in production).
+> **Social credentials:** X needs an X API v2 developer app with OAuth 1.0a "Read and write" keys; Instagram needs a Meta Business app with a system-user (or long-lived) token whose IG Business account is linked to a Facebook Page. Store all six values in SSM Parameter Store and reference them from the ECS task definition's `secrets`. Each channel is skipped gracefully when its credentials are absent.
 
 **Note:** Cron jobs do not source `~/.bashrc`. The `run_mikecast.sh` wrapper explicitly sources `~/.profile`.
 
@@ -377,7 +375,7 @@ The pipeline runs on **AWS ECS Fargate** in addition to the local cron. ECS is t
 
 ### How it works
 
-- **Container image**: stored in Amazon ECR (`602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast`)
+- **Container image**: stored in Amazon ECR (`<ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/mikecast`)
 - **Scheduler**: EventBridge Scheduler (`mikecast-daily`) triggers the ECS task at **6:30 AM ET** daily
 - **Storage**: all pipeline outputs (JSON, audio, manifest, RSS) are written to S3 (`mikecast-io-data`) when `S3_BUCKET` is set
 - **Website**: CloudFront serves `mikecast.io` from the S3 bucket
@@ -405,7 +403,7 @@ aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
   --launch-type FARGATE \
-  --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+  --network-configuration 'awsvpcConfiguration={subnets=[<SUBNET_ID>],securityGroups=[<SECURITY_GROUP_ID>],assignPublicIp=ENABLED}' \
   --region us-east-1
 
 # Force-regenerate today's briefing (e.g. after a code fix) on the default crew path.
@@ -417,7 +415,7 @@ aws ecs run-task \
   --task-definition mikecast \
   --launch-type FARGATE \
   --overrides '{"containerOverrides":[{"name":"mikecast","command":["python","mikecast_briefing.py","--crew","--force"]}]}' \
-  --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+  --network-configuration 'awsvpcConfiguration={subnets=[<SUBNET_ID>],securityGroups=[<SECURITY_GROUP_ID>],assignPublicIp=ENABLED}' \
   --region us-east-1
 
 # Stream CloudWatch logs
@@ -429,12 +427,12 @@ aws logs tail /ecs/mikecast --follow --region us-east-1
 ```bash
 # Authenticate with ECR
 aws ecr get-login-password --region us-east-1 | \
-  docker login --username AWS --password-stdin 602039469166.dkr.ecr.us-east-1.amazonaws.com
+  docker login --username AWS --password-stdin <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com
 
 # Build and push
 docker build -t mikecast .
-docker tag mikecast:latest 602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast:latest
-docker push 602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast:latest
+docker tag mikecast:latest <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/mikecast:latest
+docker push <ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/mikecast:latest
 ```
 
 The Dockerfile uses `python:3.11-slim` with `ffmpeg`. The `.dockerignore` excludes `data/`, `.venv/`, and logs, keeping the image under 300 MB.
@@ -536,7 +534,7 @@ Step 11 auto-posts the day's briefing to **X** and **Instagram**, each linking t
 - **Copy** comes from `crew/distribution_crew.py` (a Claude social copywriter). Headers, links, length-fitting, and a deterministic fallback template are handled in code, so an LLM outage never blocks posting.
 - **Gating**: `mc_dist_state.py` records each channel's send per date, so daily `--force` reruns don't double-post. `--resend` on the main pipeline forces re-sends.
 
-See `SOCIAL_SETUP.md` for the full credential setup.
+See the environment-variables section above for the required X and Instagram credentials.
 
 ### Editing / Reposting a Past Episode
 
