@@ -49,6 +49,36 @@ def _esc(s: str) -> str:
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def _audio_duration_secs(audio_path: Path) -> int:
+    """
+    Read an MP3's duration in whole seconds from a *local* file: the ID3 TLEN
+    tag first (stamped at generation time in mc_audio), then a frame scan via
+    mutagen. Returns 0 when the file is missing or unreadable.
+
+    This is only reliable when the audio file is on local disk. On ephemeral
+    Fargate that is true ONLY for the episode generated in the current run, so
+    callers persist the result into the episode JSON (see save_daily_data) and
+    the RSS builder reads it back from there rather than re-deriving it — past
+    episodes' audio no longer exists locally by the time the feed is rebuilt.
+    """
+    if not audio_path.exists():
+        return 0
+    try:
+        from mutagen.mp3 import MP3
+        from mutagen.id3 import ID3
+        try:
+            tags = ID3(audio_path)
+            tlen = tags.get("TLEN")
+            if tlen:
+                return int(str(tlen)) // 1000
+        except Exception:
+            pass
+        return int(MP3(audio_path).info.length)
+    except Exception as exc:
+        logger.warning("Could not read duration for %s: %s", audio_path.name, exc)
+        return 0
+
+
 # ---------------------------------------------------------------------------
 # Data persistence
 # ---------------------------------------------------------------------------
@@ -91,6 +121,19 @@ def save_daily_data(
     episode_description = generate_episode_description(desc_source, episode_num)
     logger.info("Episode description: %s", episode_description)
 
+    # Read (and persist) the audio duration NOW, while the file is on local disk.
+    # The RSS builder can't re-derive it on ephemeral Fargate — by the time the
+    # feed is rebuilt, only the current run's audio still exists locally, so every
+    # other episode would report itunes:duration=0. Spotify then estimates length
+    # from file-size/bitrate on a VBR file, overshoots, and replays the tail to
+    # fill the gap (Apple decodes real frames and is unaffected). Storing the true
+    # duration here keeps itunes:duration correct on every feed rebuild.
+    feed_audio_file = elevenlabs_audio_filename or audio_filename
+    audio_duration_secs = (
+        _audio_duration_secs(DATA_DIR / feed_audio_file) if feed_audio_file else 0
+    )
+    logger.info("Audio duration for %s: %ds", feed_audio_file, audio_duration_secs)
+
     data = {
         "date": TODAY,
         "date_display": TODAY_DISPLAY,
@@ -103,6 +146,7 @@ def save_daily_data(
         "conversational_script": conversational_script,
         "audio_file": audio_filename,
         "elevenlabs_audio_file": elevenlabs_audio_filename,
+        "audio_duration_secs": audio_duration_secs,
         "trending": trending or [],
         "generated_at": datetime.now(timezone.utc).isoformat(),
     }
@@ -184,24 +228,13 @@ def generate_rss_feed() -> None:
             audio_url = f"{SITE_BASE_URL}data/{audio_file}"
             file_size = s3_object_size(S3_BUCKET, f"data/{audio_file}")
 
-            # Duration: read from local file if available (ECS TODO: store in episode JSON)
-            duration_secs = 0
-            audio_path = DATA_DIR / audio_file
-            if audio_path.exists():
-                try:
-                    from mutagen.mp3 import MP3
-                    from mutagen.id3 import ID3
-                    try:
-                        tags = ID3(audio_path)
-                        tlen = tags.get("TLEN")
-                        if tlen:
-                            duration_secs = int(str(tlen)) // 1000
-                    except Exception:
-                        pass
-                    if not duration_secs:
-                        duration_secs = int(MP3(audio_path).info.length)
-                except Exception as exc:
-                    logger.warning("Could not read duration for %s: %s", audio_file, exc)
+            # Prefer the duration persisted in the episode JSON (written by
+            # save_daily_data while the audio was local). Only fall back to reading
+            # a local file — which won't exist for past episodes on Fargate — when
+            # the field is absent (older episodes generated before this was added).
+            duration_secs = data.get("audio_duration_secs") or 0
+            if not duration_secs:
+                duration_secs = _audio_duration_secs(DATA_DIR / audio_file)
 
             try:
                 dt = datetime.strptime(date_str, "%Y-%m-%d").replace(
@@ -245,22 +278,11 @@ def generate_rss_feed() -> None:
             audio_path = DATA_DIR / audio_file
             file_size = audio_path.stat().st_size if audio_path.exists() else 0
 
-            duration_secs = 0
-            if audio_path.exists():
-                try:
-                    from mutagen.mp3 import MP3
-                    from mutagen.id3 import ID3
-                    try:
-                        tags = ID3(audio_path)
-                        tlen = tags.get("TLEN")
-                        if tlen:
-                            duration_secs = int(str(tlen)) // 1000
-                    except Exception:
-                        pass
-                    if not duration_secs:
-                        duration_secs = int(MP3(audio_path).info.length)
-                except Exception as exc:
-                    logger.warning("Could not read duration for %s: %s", audio_file, exc)
+            # Prefer the persisted duration (see save_daily_data); fall back to the
+            # local file only for older episodes that predate the stored field.
+            duration_secs = data.get("audio_duration_secs") or 0
+            if not duration_secs:
+                duration_secs = _audio_duration_secs(audio_path)
 
             try:
                 dt = datetime.strptime(date_str, "%Y-%m-%d").replace(

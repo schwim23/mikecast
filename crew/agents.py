@@ -50,6 +50,24 @@ _TEAM_RULE = (
     "team affiliations, positions, or stats. Say only what the article says."
 )
 
+# The writers kept garnishing a real story with stale 'color' pulled from training
+# data — e.g. tacking "the Knicks, third in the East" onto a legitimate signing
+# story, months after that standing (and even that season) was over. It reads as
+# authoritative but is confidently wrong. Standings/records ARE allowed when they
+# come from the provided articles or the verified-facts block; the ban is on
+# volunteering them from memory.
+_NO_STALE_CONTEXT_RULE = (
+    "NO UNSOLICITED CONTEXT: Report only the specific facts in the provided articles and "
+    "the verified-facts / results blocks — then stop. Do NOT add background 'color' that "
+    "wasn't handed to you: no standings or division/conference position ('third in the "
+    "East'), no season records ('12-and-4'), no playoff seeding, no win/loss streaks, no "
+    "rankings, no championship, MVP, or award history, no 'so far this season' framing, and "
+    "no editorializing about how a team, player, company, or stock is trending. Time-varying "
+    "context like this goes stale and your training data is out of date, so volunteering it "
+    "produces statements that are authoritative-sounding but wrong. If a fact wasn't in the "
+    "input, don't say it."
+)
+
 _STORYTELLING_RULE = (
     "STORYTELLING RULE: For every story, fully explain what happened — the outcome, the "
     "numbers, the key people, the decision. Do NOT tease or trail off ('we'll have to "
@@ -228,7 +246,7 @@ def make_html_writer() -> Agent:
             "You are MikeCast, a sharp daily briefing writer for a New-York tech "
             "executive. Professional yet engaging — like a smart friend who reads "
             "everything so the executive doesn't have to.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}\n\n"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n"
             f"{_TONE_RULE}\n\n"
             "Output the plain section text (no <html> wrapper) — the orchestrator "
             "wraps it in the styled template. Use section headers in ALL CAPS: "
@@ -254,7 +272,7 @@ def make_single_voice_writer() -> Agent:
         backstory=(
             "You write for MikeCast's solo host — smart, conversational, energetic, "
             "like a knowledgeable friend over coffee.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}\n\n"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n"
             f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}"
         ),
         tools=[],
@@ -277,7 +295,7 @@ def make_conversational_writer() -> Agent:
             "You write for a 3-host news podcast. MIKE — warm, authoritative host. "
             "ELIZABETH — sharp tech/business correspondent. JESSE — quick-witted, "
             "NY-sports-obsessed.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}\n\n"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n"
             f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}\n\n"
             "JESSE in particular: enthusiasm yes, condescension at the listener no. "
             "If the Knicks are playing a big game, say what's at stake — not that the "
@@ -373,7 +391,7 @@ def make_section_patcher() -> Agent:
         backstory=(
             "You write replacement HTML fragments when a section scores below 7. "
             "You must use only the article inputs given — no training knowledge.\n\n"
-            f"{_HALLUCINATION_GUARD}\n\n{_TEAM_RULE}"
+            f"{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}"
         ),
         tools=[],
         llm=claude_writer_llm(temperature=0.3),

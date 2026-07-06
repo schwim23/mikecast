@@ -226,6 +226,10 @@ _ANTI_SKIP_RULE = (
 # backstories — this is a short repeat so the rules don't get diluted by
 # everything else in the task description).
 _TONE_TTS_REMINDER = (
+    "NO STALE COLOR: state only the facts you were given — never add standings, "
+    "records, seedings, rankings, streaks, or award/championship history from memory "
+    "(e.g. do NOT call a team 'third in the East' unless that exact standing is in the "
+    "input); it goes stale and reads as confidently wrong.\n"
     "TONE + TTS REMINDER (full version in your backstory): NO judgmental hyperbole "
     "at the listener (\"what are you doing with your life\", \"you HAVE to\", etc.) — "
     "talk ABOUT the news, not AT the audience. Spell out times (7:05 PM ET → "
