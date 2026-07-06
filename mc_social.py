@@ -333,7 +333,7 @@ def _build_ig_caption(hook: str, date_display: str | None = None) -> str:
     body = re.sub(r"\n{3,}", "\n\n", body).strip()
 
     header = f"🎙️ MikeCast Daily · {date_display}" if date_display else "🎙️ MikeCast Daily"
-    cta = "📰 Full briefing → mikecast.io\n🎧 Listen on Spotify — link in bio"
+    cta = "📰 Full briefing → mikecast.io\n🎧 Listen — link in bio"
     caption = "\n\n".join(p for p in (header, body, cta) if p)
     if tags:
         caption += "\n\n" + " ".join(tags[:IG_MAX_HASHTAGS])
