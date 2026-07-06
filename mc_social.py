@@ -83,6 +83,18 @@ X_MAX = 280
 IG_MAX = 2200  # hard IG cap; we target well under this
 IG_MAX_HASHTAGS = 8
 
+# A hashtag is '#' followed by a LETTER or underscore, then word chars. The
+# letter-leading requirement is deliberate: it stops an inline episode reference
+# like "Episode #134" from being scooped up as a hashtag (which used to strip the
+# number out of the sentence, prepend "#134" to the tag block, and push a real
+# hashtag off the end of the 8-tag cap).
+_HASHTAG_RE = re.compile(r"#[A-Za-z_]\w*")
+
+
+def _is_hashtag(word: str) -> bool:
+    """True if a whitespace-delimited token is a real hashtag (# + letter/underscore)."""
+    return bool(re.match(r"#[A-Za-z_]", word))
+
 # Spotify show link (secondary "listen" CTA on each tweet). Kept clean (no ?si=).
 SPOTIFY_SHOW_URL = "https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv"
 
@@ -294,14 +306,13 @@ def _fit_ig(caption: str) -> str:
     """Cap the IG caption length and trim to at most 8 hashtags."""
     caption = caption.strip()
     words = caption.split()
-    hashtags = [w for w in words if w.startswith("#")]
+    hashtags = [w for w in words if _is_hashtag(w)]
     if len(hashtags) > IG_MAX_HASHTAGS:
         # drop the excess hashtags (keep the first 8, in order)
-        keep = set()
         kept = 0
         rebuilt = []
         for w in words:
-            if w.startswith("#"):
+            if _is_hashtag(w):
                 if kept < IG_MAX_HASHTAGS:
                     rebuilt.append(w)
                     kept += 1
@@ -325,8 +336,8 @@ def _build_ig_caption(hook: str, date_display: str | None = None) -> str:
     'link in bio' actually resolves.
     """
     hook = (hook or "").strip()
-    tags = list(dict.fromkeys(re.findall(r"#\w+", hook)))          # dedup, keep order
-    body = re.sub(r"#\w+", "", hook)
+    tags = list(dict.fromkeys(_HASHTAG_RE.findall(hook)))          # dedup, keep order
+    body = _HASHTAG_RE.sub("", hook)
     # drop any CTA/link the model may have added so we don't duplicate ours
     body = re.sub(r"(?im)^\s*(📰|🎧|🔗)?\s*(full briefing|listen on spotify|link in bio).*$", "", body)
     body = re.sub(r"(?i)\bfull briefing at mikecast\.io\.?", "", body)
