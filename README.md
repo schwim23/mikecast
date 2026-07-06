@@ -1,6 +1,6 @@
 # MikeCast: Daily AI-Powered News Briefing
 
-MikeCast is an automated daily news briefing system. It runs a 10-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a podcast, a web dashboard, and a YouTube episode.
+MikeCast is an automated daily news briefing system. It runs an 11-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a subscriber newsletter, a podcast, a web dashboard, a YouTube episode, and automatic daily posts to X and Instagram.
 
 ## Architecture
 
@@ -58,9 +58,21 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
 
 11. **Static Dashboard Website**: A responsive dark-themed SPA (`dashboard/`) for browsing briefings by date, with an embedded audio player and collapsible script viewer.
 
-12. **CrewAI agent pipeline (opt-in via `--crew`)**: Steps 0–8b can be executed by [CrewAI](https://github.com/crewAIInc/crewAI) agents instead of the procedural pipeline. A `Planning Crew`, four `Research` agents, a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + Fact-Checker), a `Writing Crew` (three Claude writers in parallel), and a `Critic Crew` (GPT-4o scorer + Claude patcher) replace the matching legacy modules. Steps 9 and 10 (audio + delivery) are unchanged. **The CrewAI path is the default since the cutover** — pass `--legacy` to revert to the procedural pipeline for a single run. See **CrewAI Architecture** below for full details.
+12. **CrewAI agent pipeline (opt-in via `--crew`)**: Steps 0–8b can be executed by [CrewAI](https://github.com/crewAIInc/crewAI) agents instead of the procedural pipeline. A `Planning Crew`, four `Research` agents, a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + Fact-Checker), a `Writing Crew` (three Claude writers in parallel), a `Critic Crew` (GPT-4o scorer + Claude patcher), and a `Distribution Crew` (Claude social copywriter, Step 11) replace or extend the matching legacy modules. Steps 9 and 10 (audio + delivery) are unchanged. **The CrewAI path is the default since the cutover** — pass `--legacy` to revert to the procedural pipeline for a single run. See **CrewAI Architecture** below for full details.
 
-## Pipeline (10 Steps)
+13. **Automatic social distribution (X + Instagram)** — Step 11: after delivery, MikeCast auto-posts the day's briefing to **X** ([@mikecastai](https://x.com/mikecastai)) and **Instagram** ([@mikecastai](https://www.instagram.com/mikecastai/)), each linking back to that day's episode.
+    - **X**: a "🎙️ MikeCast Daily · {date}" tweet — a Claude-written news hook plus the episode deep link and the Spotify show link (posted via the X API v2, OAuth 1.0a).
+    - **Instagram**: a branded **1080×1080 image card** (generated with Pillow) published via the Instagram Graph API two-step container→publish flow, with a matching caption. IG doesn't linkify caption URLs, so the CTA points to the site + "link in bio."
+    - **Copy** is written by the new `Distribution Crew` (a Claude social copywriter, hallucination-guarded), with deterministic headers/links/fallbacks added in code so an LLM blip never blocks posting.
+    - Each channel skips gracefully with a logged message when its credentials aren't set. See **Social Distribution** and `SOCIAL_SETUP.md`.
+
+14. **First-run-of-day send gating & post editing**:
+    - **Idempotent sends** (`mc_dist_state.py`): per-date state at `data/dist/YYYY-MM-DD.json` records which channels (personal email, newsletter, X, Instagram) have already fired, so a `--force` regeneration never re-emails subscribers or re-posts to social. `--force --resend` bypasses the gate.
+    - **`?date=YYYY-MM-DD` deep links**: `app.js` opens a specific episode directly (used by every social link).
+    - **`mc_edit.py`**: edit/republish a past episode (HTML → JSON + manifest + RSS + CloudFront invalidation) and delete/repost its social posts.
+    - **Homepage**: single-row subscribe bar (email signup + Apple/Spotify/RSS/X/Instagram icons in brand colors) with `?date=` deep-link support.
+
+## Pipeline (11 Steps)
 
 ```
 Step 0   Plan searches       xAI Grok live web search → dynamic queries per category + trending topics list (skipped if XAI_API_KEY unset)
@@ -74,7 +86,8 @@ Step 7   Mike's Picks        Process user-submitted URLs, PDFs, and text
 Step 8   Generate content    Parallel: HTML briefing + single-voice script + 3-voice script
 Step 8b  Critic pass         GPT-4o scores sections; regenerates weak ones (score < 7); NY Sports never patched
 Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-voice fallback; segments stitched into one clean MP3 via ffmpeg concat
-Step 10  Save & deliver      JSON → manifest → RSS feed → Gmail email → Resend newsletter broadcast (optional)
+Step 10  Save & deliver      JSON → manifest → RSS feed → Gmail email → Resend newsletter broadcast (optional); all sends gated first-run-of-day
+Step 11  Social distribution Auto-post to X + Instagram with a deep link back to the episode (optional; skipped if creds unset)
 ```
 
 ## CrewAI Architecture
@@ -82,18 +95,18 @@ Step 10  Save & deliver      JSON → manifest → RSS feed → Gmail email → 
 The default pipeline since the cutover. Run with `--legacy` to revert to the procedural path for a single run. Both produce the same on-disk outputs and share Steps 9 (audio) + 10 (delivery).
 
 ```
-Planning Crew  →  Research Crew (non-sports)         →  Picks Crew  →  Writing Crew  →  Critic Crew
-   (Step 0)        + NY Sports Research Crew              (Step 7)       (Step 8)        (Step 8b)
-                   (Steps 1–6)                                                            + NY Sports
-                                                                                          Fact-Checker
-                                                                                          (read-only)
+Planning Crew  →  Research Crew (non-sports)  →  Picks Crew  →  Writing Crew  →  Critic Crew  →  Distribution Crew
+   (Step 0)        + NY Sports Research Crew       (Step 7)       (Step 8)        (Step 8b)       (Step 11)
+                   (Steps 1–6)                                                    + NY Sports      social copywriter
+                                                                                  Fact-Checker     (X + IG copy)
+                                                                                  (read-only)
 ```
 
 **Models used (LiteLLM strings, all overridable via env):**
 
 | Role | Default model | Env var |
 |---|---|---|
-| HTML / single-voice / 3-voice writers + section patcher | `anthropic/claude-sonnet-4-6` | `CLAUDE_WRITER_MODEL` |
+| HTML / single-voice / 3-voice writers + section patcher + social copywriter | `anthropic/claude-sonnet-4-6` | `CLAUDE_WRITER_MODEL` |
 | Per-category scorer, section quality scorer | `openai/gpt-4o` | `OPENAI_SCORER_MODEL`, `OPENAI_CRITIC_MODEL` |
 | Picks, planner orchestration, NY Sports fact-checker | `openai/gpt-4o-mini` | `OPENAI_HELPER_MODEL` |
 
@@ -128,7 +141,8 @@ crew/
 ├── sports_research_crew.py # Steps 1–6 for NY Sports (Gatekeeper + Researcher + Fact-Checker)
 ├── picks_crew.py         # Step 7
 ├── writing_crew.py       # Step 8 — 3 Claude writers in parallel
-└── critic_crew.py        # Step 8b — Scorer + Patcher (NY Sports never patched)
+├── critic_crew.py        # Step 8b — Scorer + Patcher (NY Sports never patched)
+└── distribution_crew.py  # Step 11 — Claude social copywriter (X post + IG caption)
 ```
 
 ## Hallucination Mitigations
@@ -150,15 +164,18 @@ Preventing LLM hallucinations in a fully automated pipeline requires defense at 
 
 ```
 mikecast/
-├── mikecast_briefing.py      # Main entry point — orchestrates the full 10-step pipeline
+├── mikecast_briefing.py      # Main entry point — orchestrates the full 11-step pipeline
 ├── mc_config.py              # Configuration, constants, env vars, category definitions
 ├── mc_plan.py                # xAI Grok adaptive search planning (Step 0)
 ├── mc_collect.py             # News collection, dedup, clustering, scoring, enrichment (Steps 1–6)
 ├── mc_generate.py            # GPT-4o content generation: HTML + podcast scripts (Step 8)
 ├── mc_critic.py              # Post-generation quality critic pass (Step 8b)
 ├── mc_audio.py               # TTS audio: ElevenLabs 3-voice + OpenAI fallback (Step 9)
-├── mc_deliver.py             # Save JSON, manifest, RSS feed, send email (Step 10)
-├── mc_utils.py               # Shared utility helpers (HTTP, JSON, text similarity)
+├── mc_deliver.py             # Save JSON, manifest, RSS feed, email + Resend newsletter (Step 10)
+├── mc_dist_state.py          # Per-date distribution state; first-run-of-day send gating
+├── mc_social.py              # X + Instagram posting: card generation, orchestrator, CLI (Step 11)
+├── mc_edit.py                # Edit/republish a past episode + delete/repost its social posts
+├── mc_utils.py               # Shared helpers (HTTP, JSON, text similarity, CloudFront invalidation)
 ├── mc_ad.py                  # 30-second vertical video ad generator (Meta/Google formats)
 ├── mc_youtube.py             # YouTube upload utilities
 ├── mikes_picks_ingest.py     # CLI to queue URLs, PDFs, or text into Mike's Picks
@@ -170,7 +187,9 @@ mikecast/
 ├── briefing_history.json     # Rolling 7-day history of processed articles
 ├── requirements.txt          # Python dependencies
 ├── CLAUDE.md                 # Claude Code context and operating constraints
-├── index.html                # GitHub Pages entry point (briefing + email signup form)
+├── NEWSLETTER_SETUP.md       # Resend/Lambda/DNS newsletter setup runbook
+├── SOCIAL_SETUP.md           # X + Instagram credential/setup runbook (Phase 0)
+├── index.html                # GitHub Pages entry point (briefing + email signup + social follow icons)
 ├── subscribe.html            # Dedicated newsletter landing page
 ├── confirmed.html            # Post-confirmation thank-you page (handles ?error=expired)
 ├── app.js                    # GitHub Pages dashboard JavaScript
@@ -187,13 +206,15 @@ mikecast/
 │   ├── index.html
 │   ├── style.css
 │   └── app.js
-├── data/                     # Daily JSON files + audio + manifest + RSS
+├── data/                     # Daily JSON files + audio + manifest + RSS + distribution state
 │   ├── YYYY-MM-DD.json
 │   ├── MikeCast_YYYY-MM-DD.mp3
 │   ├── MikeCast_3voice_YYYY-MM-DD.mp3
 │   ├── manifest.json
 │   ├── feed.xml
-│   └── cover.png
+│   ├── cover.png
+│   ├── dist/YYYY-MM-DD.json   # per-date send state (email/newsletter/X/IG)
+│   └── social/               # generated 1080×1080 Instagram cards
 └── crew/                     # CrewAI agent pipeline (opt-in via --crew)
     ├── tools.py
     ├── llm.py
@@ -204,7 +225,8 @@ mikecast/
     ├── sports_research_crew.py
     ├── picks_crew.py
     ├── writing_crew.py
-    └── critic_crew.py
+    ├── critic_crew.py
+    └── distribution_crew.py
 ```
 
 ## Setup and Installation
@@ -265,6 +287,22 @@ export RESEND_AUDIENCE_ID="your_resend_audience_id"
 export RESEND_FROM="MikeCast <mike@mikecast.io>"      # optional; this is the default
 export RESEND_REPLY_TO="michael.schwimmer@gmail.com"  # optional; this is the default
 
+# Optional — enables the daily X (Twitter) auto-post (Step 11). OAuth 1.0a,
+# "Read and write" app permission. Skipped gracefully when unset.
+export X_API_KEY="..."
+export X_API_SECRET="..."
+export X_ACCESS_TOKEN="..."
+export X_ACCESS_TOKEN_SECRET="..."
+
+# Optional — enables the daily Instagram auto-post (Step 11). Meta system-user
+# (or long-lived) token + the IG Business account id. Skipped gracefully when unset.
+export META_ACCESS_TOKEN="..."
+export IG_USER_ID="1784..."
+
+# Optional — CloudFront distribution fronting mikecast.io (used by mc_edit.py to
+# invalidate the cache after republishing a past episode). Defaults to the live one.
+export CLOUDFRONT_DIST_ID="EFNQM31KQHY56"
+
 # Optional — enables AWS S3 mode (outputs written to S3 instead of local disk)
 export S3_BUCKET="your-s3-bucket-name"
 
@@ -272,6 +310,8 @@ export S3_BUCKET="your-s3-bucket-name"
 export YOUTUBE_CLIENT_SECRETS="/path/to/client_secrets.json"
 export YOUTUBE_PRIVACY="public"
 ```
+
+> See `SOCIAL_SETUP.md` for the full X and Instagram credential walkthrough (developer accounts, OAuth 1.0a keys, Meta system-user token, and the SSM parameters + ECS task-def secrets used in production).
 
 **Note:** Cron jobs do not source `~/.bashrc`. The `run_mikecast.sh` wrapper explicitly sources `~/.profile`.
 
@@ -475,6 +515,43 @@ ECS daily run ──▶ mc_deliver.send_newsletter_broadcast(html) ──Resend 
 3. Store secrets in SSM: `/mikecast/RESEND_API_KEY` (SecureString), `/mikecast/RESEND_AUDIENCE_ID` (String), `/mikecast/SIGNUP_HMAC_SECRET` (SecureString). Add `RESEND_API_KEY` + `RESEND_AUDIENCE_ID` to the ECS task definition's `secrets`, and `RESEND_FROM` to its `environment`.
 4. Deploy the Lambda (see `lambda/newsletter_signup/README.md`), create its Function URL with CORS for `https://mikecast.io`, and set that URL as both the Lambda's `CONFIRM_BASE_URL` env var and `MIKECAST_SIGNUP_ENDPOINT` in `signup.js`.
 5. Fill in the real postal address in the CAN-SPAM footer (`_NEWSLETTER_FOOTER` in `mc_deliver.py`) before the first broadcast.
+
+### Social Distribution (X + Instagram)
+
+Step 11 auto-posts the day's briefing to **X** and **Instagram**, each linking to that episode. It runs at the end of the daily pipeline and is also usable standalone via `mc_social.py`:
+
+```bash
+# Preview copy + card for a date without posting (writes the IG card locally)
+.venv/bin/python3 mc_social.py --date 2026-07-05 --dry-run
+
+# Post now (both channels); --only x / --only ig to limit; --force re-posts
+.venv/bin/python3 mc_social.py --date 2026-07-05 --only x --force
+
+# Delete a tweet
+.venv/bin/python3 mc_social.py --delete-tweet <tweet_id>
+```
+
+- **X**: a `🎙️ MikeCast Daily · {date}` tweet — Claude-written news hook + the episode deep link (`mikecast.io/?date=…`) + the Spotify show link, fit to 280 weighted chars (each URL counts as 23).
+- **Instagram**: a branded 1080×1080 card (Pillow) uploaded to `s3://…/data/social/` for a public URL, then published via the Graph API container→publish flow, with a caption mirroring the tweet. IG captions don't linkify URLs, so the CTA is `mikecast.io` + "link in bio".
+- **Copy** comes from `crew/distribution_crew.py` (a Claude social copywriter). Headers, links, length-fitting, and a deterministic fallback template are handled in code, so an LLM outage never blocks posting.
+- **Gating**: `mc_dist_state.py` records each channel's send per date, so daily `--force` reruns don't double-post. `--resend` on the main pipeline forces re-sends.
+
+See `SOCIAL_SETUP.md` for the full credential setup.
+
+### Editing / Reposting a Past Episode
+
+`mc_edit.py` edits a published episode and manages its social posts, operating strictly on `--date`:
+
+```bash
+mc_edit.py show          --date 2026-07-01                    # print meta + HTML
+mc_edit.py set-html      --date 2026-07-01 --file fixed.html  # replace the briefing HTML
+mc_edit.py regen         --date 2026-07-01                    # re-run the writing crew (HTML only)
+mc_edit.py publish       --date 2026-07-01                    # push JSON to S3 + rebuild manifest/RSS + invalidate CloudFront
+mc_edit.py repost-social --date 2026-07-01 [--only x|ig] [--reuse-copy]
+mc_edit.py delete-social --date 2026-07-01 [--only x]
+```
+
+Edits preserve `episode_num`/`audio_file` and stamp `edited_at`. X reposts delete-then-repost via the API; Instagram has no delete API, so `repost-social`/`delete-social` prompt you to remove the old post in the app first.
 
 ### Generating a YouTube Episode
 
