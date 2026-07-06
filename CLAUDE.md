@@ -122,7 +122,7 @@ mikes_picks.json           — pending picks queue
 
 ## AWS Deployment & Docker Image Updates
 
-The pipeline runs on **AWS ECS Fargate** (ephemeral task, ~20 min/day). The Docker image is in **ECR** (`602039469166.dkr.ecr.us-east-1.amazonaws.com/mikecast`). The daily schedule is managed by **EventBridge Scheduler** (`mikecast-daily`, 6:30 AM ET).
+The pipeline runs on **AWS ECS Fargate** (ephemeral task, ~20 min/day). The Docker image is in **ECR** (`<ACCOUNT_ID>.dkr.ecr.us-east-1.amazonaws.com/mikecast`). The daily schedule is managed by **EventBridge Scheduler** (`mikecast-daily`, 6:30 AM ET).
 
 ### How code changes reach production
 
@@ -148,7 +148,7 @@ aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
   --launch-type FARGATE \
-  --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+  --network-configuration 'awsvpcConfiguration={subnets=[<SUBNET_ID>],securityGroups=[<SECURITY_GROUP_ID>],assignPublicIp=ENABLED}' \
   --region us-east-1
 
 # Same task, but force the CrewAI path. Required after a fresh deploy to shake out
@@ -159,7 +159,7 @@ aws ecs run-task \
   --task-definition mikecast \
   --launch-type FARGATE \
   --overrides '{"containerOverrides":[{"name":"mikecast","command":["python","mikecast_briefing.py","--crew","--force"]}]}' \
-  --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+  --network-configuration 'awsvpcConfiguration={subnets=[<SUBNET_ID>],securityGroups=[<SECURITY_GROUP_ID>],assignPublicIp=ENABLED}' \
   --region us-east-1
 ```
 
@@ -184,12 +184,12 @@ aws logs tail /ecs/mikecast --follow --region us-east-1
 
 | Resource | Name/ID |
 |---|---|
-| ECR repository | `mikecast` (account: 602039469166) |
+| ECR repository | `mikecast` (account: <ACCOUNT_ID>) |
 | ECS cluster | `mikecast` |
 | ECS task family | `mikecast` |
 | EventBridge Scheduler | `mikecast-daily` |
 | S3 bucket | `mikecast-io-data` |
 | CloudFront distribution | serves `mikecast.io` |
 | Scheduler IAM role | `mikecast-scheduler-role` |
-| VPC subnet | `subnet-086fe88cca1a9de84` |
-| Security group | `sg-0b075c1eea308976b` |
+| VPC subnet | `<SUBNET_ID>` |
+| Security group | `<SECURITY_GROUP_ID>` |
