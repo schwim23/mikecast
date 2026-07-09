@@ -144,7 +144,9 @@ def cmd_repost_social(args) -> None:
     # Resolve copy
     if args.reuse_copy and state.get("social_copy"):
         copy = {"x_text": state["social_copy"].get("x_text", ""),
-                "ig_caption": state["social_copy"].get("ig_caption", "")}
+                "ig_caption": state["social_copy"].get("ig_caption", ""),
+                "card_bullets": state["social_copy"].get("card_bullets")
+                or mc_social._top_headlines(episode, cap=3)}
         logger.info("Reusing persisted social copy.")
     else:
         try:
@@ -153,7 +155,8 @@ def cmd_repost_social(args) -> None:
         except Exception as exc:
             logger.warning("Copywriter crew failed (%s) — using fallback template.", exc)
             copy = mc_social._fallback_copy(episode)
-        record_social_copy(date, copy["x_text"], copy["ig_caption"])
+        copy.setdefault("card_bullets", mc_social._top_headlines(episode, cap=3))
+        record_social_copy(date, copy["x_text"], copy["ig_caption"], copy.get("card_bullets"))
 
     want_x = args.only in (None, "x")
     want_ig = args.only in (None, "ig")
@@ -183,7 +186,7 @@ def cmd_repost_social(args) -> None:
                 pass
         n = len([r for r in state.get("repost_history", []) if r.get("channel") == "ig"]) + 1
         card_path = DATA_DIR / f"MikeCast_card_{date}_r{n}.png"
-        mc_social.generate_card(episode, card_path)
+        mc_social.generate_card(episode, card_path, bullets=copy.get("card_bullets"))
         image_url = mc_social.upload_card(card_path, date, suffix=f"_r{n}")
         if not image_url:
             logger.error("Could not upload card (no public URL) — aborting IG repost.")

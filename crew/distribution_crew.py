@@ -87,10 +87,13 @@ def run_distribution(episode_data: dict, link: str) -> dict:
         f"{description_block}"
         f"Today's top headlines (use ONLY these — do not invent others):\n{headlines}\n\n"
         f"The episode link (do NOT put it in the copy — the system appends it): {link}\n\n"
-        "Produce one X (Twitter) post and one Instagram caption per your constraints. "
-        "Return STRICT JSON only: {\"x_text\": \"...\", \"ig_caption\": \"...\"}"
+        "Produce one X (Twitter) post, one Instagram caption, and card_bullets per your "
+        "constraints. card_bullets are the THREE biggest stories of the day (ranked most "
+        "important first), taken from the episode description above — not one headline per "
+        "topic. Return STRICT JSON only: "
+        "{\"x_text\": \"...\", \"ig_caption\": \"...\", \"card_bullets\": [\"...\", \"...\", \"...\"]}"
     )
-    expected = 'Strict JSON with keys "x_text" and "ig_caption".'
+    expected = 'Strict JSON with keys "x_text", "ig_caption", and "card_bullets" (list of 3).'
 
     agent = make_social_copywriter()
     task = Task(description=desc, expected_output=expected, agent=agent)
@@ -105,8 +108,14 @@ def run_distribution(episode_data: dict, link: str) -> dict:
     if not x_text and not ig_caption:
         raise ValueError(f"Copywriter returned empty copy: {raw!r}")
 
+    raw_bullets = parsed.get("card_bullets") or []
+    if isinstance(raw_bullets, str):
+        # tolerate a newline/semicolon-delimited string instead of a JSON array
+        raw_bullets = re.split(r"[\n;]+", raw_bullets)
+    card_bullets = [b.strip(" -•\t").strip() for b in raw_bullets if isinstance(b, str) and b.strip()][:3]
+
     logger.info(
-        "[Distribution Crew] x_text=%d chars, ig_caption=%d chars",
-        len(x_text), len(ig_caption),
+        "[Distribution Crew] x_text=%d chars, ig_caption=%d chars, %d card bullets",
+        len(x_text), len(ig_caption), len(card_bullets),
     )
-    return {"x_text": x_text, "ig_caption": ig_caption}
+    return {"x_text": x_text, "ig_caption": ig_caption, "card_bullets": card_bullets}

@@ -160,22 +160,51 @@ def _clean_title(title: str) -> str:
     return re.sub(r"^\[Updated\]\s*", "", (title or "").strip())
 
 
-def _top_headlines(episode_data: dict, cap: int = 4) -> list[str]:
+def _top_headlines(episode_data: dict, cap: int = 3) -> list[str]:
+    """
+    Fallback card bullets: the day's *highest-scored* stories across every
+    category (importance-ranked), used when the copywriter crew didn't supply
+    curated ``card_bullets``.
+
+    Previously this took ``arts[0]`` from each category in dict order, which is
+    breadth-first and reads as arbitrary ("random what shows up"). Ranking by
+    the scorer's ``score`` surfaces the actual top stories of the day instead.
+    """
     articles = episode_data.get("articles", {}) or {}
-    out: list[str] = []
-    # one from each category first (breadth), then fill from remaining
+    ranked: list[tuple[float, str]] = []
     for arts in articles.values():
-        if arts:
-            title = _clean_title(arts[0].get("title", ""))
-            if title:
-                out.append(title)
+        for a in arts or []:
+            title = _clean_title(a.get("title", ""))
+            if not title:
+                continue
+            try:
+                score = float(a.get("score") or 0)
+            except (TypeError, ValueError):
+                score = 0.0
+            ranked.append((score, title))
+    ranked.sort(key=lambda t: t[0], reverse=True)
+    # de-dupe titles while preserving the score order
+    seen: set[str] = set()
+    out: list[str] = []
+    for _, title in ranked:
+        if title not in seen:
+            seen.add(title)
+            out.append(title)
         if len(out) >= cap:
-            return out[:cap]
+            break
     return out[:cap]
 
 
-def generate_card(episode_data: dict, out_path: Path) -> Path:
-    """Render a 1080×1080 branded summary card for Instagram and save to out_path."""
+def generate_card(episode_data: dict, out_path: Path,
+                  bullets: list[str] | None = None) -> Path:
+    """
+    Render a 1080×1080 branded summary card for Instagram and save to out_path.
+
+    ``bullets`` are the (up to 3) headline lines to show. Pass the copywriter
+    crew's curated ``card_bullets`` — the day's top-3 stories from the briefing
+    summary. When omitted, fall back to the highest-scored stories of the day
+    (``_top_headlines``) rather than one-per-category breadth.
+    """
     img = _card_background().convert("RGBA")
     draw = ImageDraw.Draw(img, "RGBA")
 
@@ -203,9 +232,12 @@ def generate_card(episode_data: dict, out_path: Path) -> Path:
     y += 48
 
     # --- Top headlines ---
+    card_lines = [_clean_title(b) for b in (bullets or []) if b and b.strip()][:3]
+    if not card_lines:
+        card_lines = _top_headlines(episode_data, cap=3)
     f_head = _font(46, bold=True)
     line_h = 58
-    for headline in _top_headlines(episode_data, cap=4):
+    for headline in card_lines:
         wrapped = textwrap.wrap(headline, width=34)[:2]
         # cyan bullet
         draw.ellipse([(88, y + 20), (108, y + 40)], fill=COLOR_CYAN)
@@ -366,6 +398,8 @@ def _fallback_copy(episode_data: dict) -> dict:
     return {
         "x_text": desc,
         "ig_caption": f"{desc}\n\n#MikeCast #AInews #tech #news",
+        # score-ranked top stories so the card isn't blank / arbitrary on fallback
+        "card_bullets": _top_headlines(episode_data, cap=3),
     }
 
 
@@ -530,7 +564,12 @@ def _resolve_copy(date: str, episode_data: dict, link: str, force: bool) -> dict
     existing = state.get("social_copy")
     if existing and not force and existing.get("x_text"):
         logger.info("Reusing persisted social copy for %s.", date)
-        return {"x_text": existing["x_text"], "ig_caption": existing.get("ig_caption", "")}
+        return {
+            "x_text": existing["x_text"],
+            "ig_caption": existing.get("ig_caption", ""),
+            # older persisted copy predates card_bullets — fall back to ranked stories
+            "card_bullets": existing.get("card_bullets") or _top_headlines(episode_data, cap=3),
+        }
 
     try:
         from crew.distribution_crew import run_distribution
@@ -539,7 +578,8 @@ def _resolve_copy(date: str, episode_data: dict, link: str, force: bool) -> dict
         logger.warning("Copywriter crew failed (%s) — using fallback template.", exc)
         copy = _fallback_copy(episode_data)
 
-    record_social_copy(date, copy["x_text"], copy["ig_caption"])
+    copy.setdefault("card_bullets", _top_headlines(episode_data, cap=3))
+    record_social_copy(date, copy["x_text"], copy["ig_caption"], copy.get("card_bullets"))
     return copy
 
 
@@ -609,7 +649,7 @@ def run_social_distribution(
                 results["instagram"] = "already_sent"
             else:
                 card_path = DATA_DIR / f"MikeCast_card_{date}.png"
-                generate_card(episode_data, card_path)
+                generate_card(episode_data, card_path, bullets=copy.get("card_bullets"))
                 if dry_run:
                     logger.info("[dry-run] IG caption (%d chars):\n%s", len(ig_caption), ig_caption)
                     logger.info("[dry-run] card saved for visual check: %s", card_path)

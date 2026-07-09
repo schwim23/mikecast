@@ -121,15 +121,18 @@ def record_send(date: str, channel: str, payload: dict) -> dict:
     return state
 
 
-def record_social_copy(date: str, x_text: str, ig_caption: str) -> dict:
+def record_social_copy(date: str, x_text: str, ig_caption: str,
+                       card_bullets: list[str] | None = None) -> dict:
     """
     Persist generated social copy BEFORE posting (crash-safe / reusable). Returns
-    the updated state.
+    the updated state. ``card_bullets`` are the curated top-3 story lines rendered
+    on the Instagram card, persisted so reposts reuse the same card content.
     """
     state = load_dist_state(date)
     state["social_copy"] = {
         "x_text": x_text,
         "ig_caption": ig_caption,
+        "card_bullets": card_bullets or [],
         "generated_at": _now_iso(),
     }
     save_dist_state(date, state)

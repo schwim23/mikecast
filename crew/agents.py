@@ -298,8 +298,9 @@ def make_conversational_writer() -> Agent:
             f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n"
             f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}\n\n"
             "JESSE in particular: enthusiasm yes, condescension at the listener no. "
-            "If the Knicks are playing a big game, say what's at stake — not that the "
-            "listener doesn't have a life if they're not tuned in."
+            "If one of Mike's NY teams (Knicks, Devils, Yankees, Giants) is playing a big "
+            "game, say what's at stake — not that the listener doesn't have a life if "
+            "they're not tuned in."
         ),
         tools=[],
         llm=claude_writer_llm(),
@@ -343,10 +344,17 @@ def make_social_copywriter() -> Agent:
             "include a URL, a 'MikeCast Daily' header, a date, or any 'full briefing'/'link "
             "in bio' CTA — the system adds the header, the mikecast.io + Spotify CTA, and "
             "keeps your hashtags. IG doesn't linkify URLs, so never put one in.\n"
+            "  • card_bullets: EXACTLY 3 bullets for the Instagram image card — the THREE "
+            "biggest stories of the day, ranked most important first, drawn from the "
+            "episode description / executive summary (NOT one-per-topic breadth). Each is a "
+            "tight, scannable headline of at most ~48 characters: name the specific "
+            "company/team/story, no trailing period, no emojis, no hashtags, no '#N' "
+            "episode numbers. Examples: 'OpenAI cleared to ship GPT-5.6', 'Apple pledges "
+            "$30B to U.S. chipmaking', 'Yankees drop opener to Tampa Bay'.\n"
             "  • No engagement-bait ('tag a friend', 'comment below', 'you won't believe'). "
             "No invented numbers, quotes, or stories — only what the headlines say.\n\n"
             "Return STRICT JSON only, no prose and no code fences:\n"
-            '{"x_text": "...", "ig_caption": "..."}'
+            '{"x_text": "...", "ig_caption": "...", "card_bullets": ["...", "...", "..."]}'
         ),
         tools=[],
         llm=claude_writer_llm(temperature=0.6, max_tokens=1600),

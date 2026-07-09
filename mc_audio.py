@@ -46,6 +46,15 @@ def _concat_mp3_segments(segments: list[bytes], output_path: Path) -> bool:
     ffmpeg's concat demuxer. The result has exactly one valid Xing/LAME header
     and an accurate duration, so seek tables are correct everywhere.
 
+    We also re-encode as **constant bitrate** (CBR, 128 kbps, 44.1 kHz) rather
+    than VBR. A metadata-perfect VBR MP3 (correct Xing frame count + accurate
+    itunes:duration) STILL makes Spotify replay the last ~20 seconds: Spotify
+    ignores both and estimates length from file-size ÷ bitrate, overshoots on a
+    VBR file, and loops the tail to fill the phantom time (Apple decodes real
+    frames and is fine). For CBR, size ÷ bitrate equals the true duration
+    exactly, so every player — Spotify included — agrees. Don't switch back to
+    VBR (``-q:a``); it reintroduces the tail-replay on Spotify.
+
     Falls back to raw byte concatenation only if ffmpeg is unavailable or the
     concat fails — never raises, so delivery is never blocked.
     """
@@ -80,7 +89,10 @@ def _concat_mp3_segments(segments: list[bytes], output_path: Path) -> bool:
             subprocess.run(
                 ["ffmpeg", "-hide_banner", "-y",
                  "-f", "concat", "-safe", "0", "-i", str(list_path),
-                 "-codec:a", "libmp3lame", "-q:a", "2", str(output_path)],
+                 # CBR 128k @ 44.1kHz — see docstring: keeps Spotify from
+                 # mis-estimating a VBR file's length and replaying the tail.
+                 "-codec:a", "libmp3lame", "-b:a", "128k", "-ar", "44100",
+                 str(output_path)],
                 capture_output=True,
                 check=True,
                 timeout=300,
@@ -165,7 +177,11 @@ def _normalize_loudness(path: Path, target_lufs: float = -16.0) -> None:
             )
             subprocess.run(
                 ["ffmpeg", "-hide_banner", "-y", "-i", str(path), "-af", af,
-                 "-codec:a", "libmp3lame", "-q:a", "2", str(tmp_path)],
+                 # CBR 128k @ 44.1kHz — this is the final encode of the shipped
+                 # episode, so it must stay constant-bitrate (see
+                 # _concat_mp3_segments docstring re: Spotify tail-replay).
+                 "-codec:a", "libmp3lame", "-b:a", "128k", "-ar", "44100",
+                 str(tmp_path)],
                 capture_output=True,
                 check=True,
                 timeout=180,

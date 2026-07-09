@@ -90,21 +90,24 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
         f"Today's NY Sports articles (already filtered to trusted sources):\n\n"
         f"{article_block}\n\n"
         f"For each of these four NY teams — {', '.join(_NY_TEAMS)} — decide whether the "
-        "articles above mention a recent game outcome, standings position, or player "
-        "injury. If they do, call fetch_sports_box_score, fetch_sports_standings, or "
-        "fetch_team_injury_report to retrieve the primary-source fact. If they don't, "
-        "OMIT that team entirely.\n\n"
+        "articles above point to a development in the LAST 24 HOURS: a game result, a "
+        "trade/signing, a coaching or roster move, or a player injury. If they do, call "
+        "fetch_sports_box_score, fetch_sports_standings, or fetch_team_injury_report to "
+        "retrieve the primary-source fact. If they don't, OMIT that team entirely.\n\n"
         "CRITICAL — game timing: the fetch_sports_box_score tool returns BOTH a raw UTC "
         "`date` field AND human-readable `date_et` + `relative_to_today` fields (e.g. "
         "'TONIGHT', 'TOMORROW NIGHT', 'LAST NIGHT'). When you write timing into the "
         "verified-facts string, use the `relative_to_today` label verbatim — NEVER infer "
         "'tonight' or 'tomorrow' from the raw UTC date or from article copy. The label "
         "is anchored to today in Eastern Time and is the only trustworthy source.\n\n"
-        "Return ONLY a JSON object keyed by team name with short factual prose for each "
-        "team you verified. Example (note how timing comes straight from relative_to_today):\n"
+        "Report the last game's score and the next game (if the team is in season). Do NOT "
+        "volunteer standings, records, seeds, or streaks unless a tool returned that exact "
+        "figure and an article raised it — stale training-data 'color' is banned. Return "
+        "ONLY a JSON object keyed by team name with short factual prose for each team you "
+        "verified. Example (note how timing comes straight from relative_to_today):\n"
         "{\n"
         '  "Yankees": "Yankees beat Red Sox 7-3 LAST NIGHT at home. Next game TOMORROW NIGHT vs Orioles.",\n'
-        '  "Knicks": "Knicks 50-32, 3rd in Eastern Conference. Next game TOMORROW NIGHT vs Cavaliers."\n'
+        '  "Devils": "Devils lost to Rangers 4-2 LAST NIGHT. Next game TOMORROW vs Islanders."\n'
         "}\n\n"
         "If you cannot verify anything, return {}.\n"
         "Use ONLY facts returned by the ESPN tools — never your training knowledge."
@@ -335,7 +338,11 @@ def format_ny_team_updates_block(updates: list[dict]) -> str:
     if not updates:
         return ""
     lines = [
-        "=== NY SPORTS — RESULTS & UPCOMING GAMES (verified via ESPN, anchored to today in ET) ==="
+        "=== NY SPORTS — RESULTS & UPCOMING GAMES (verified via ESPN, anchored to today in ET) ===",
+        "Only in-season NY teams appear below (a recent result or an upcoming game within "
+        "the season window). Each in-season team lists its last score and its NEXT game. "
+        "Any of the four NY teams (Knicks / Devils / Yankees / Giants) NOT listed here is "
+        "out of season or idle — do NOT invent a score, a next game, or any update for it.",
     ]
     has_mandatory = False
     for u in updates:
