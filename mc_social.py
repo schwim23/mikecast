@@ -595,6 +595,50 @@ def _ig_configured() -> bool:
     return bool(META_ACCESS_TOKEN and IG_USER_ID)
 
 
+# Meta Graph intermittently returns transient failures on otherwise-valid requests
+# — a 5xx, or an OAuthException with is_transient=true (e.g. code 2, "An unexpected
+# error has occurred. Please retry your request later."). A single one used to drop
+# the entire daily IG post, so retry the create/publish calls with backoff.
+_IG_RETRY_DELAYS = (3, 8, 20)  # seconds between the 3 retries after the first try
+
+
+def _ig_transient(resp: "requests.Response") -> bool:
+    """True if a Graph response is a transient failure worth retrying."""
+    if resp.status_code >= 500:
+        return True
+    try:
+        err = resp.json().get("error", {})
+    except Exception:
+        return False
+    return bool(err.get("is_transient")) or err.get("code") == 2
+
+
+def _graph_post(url: str, data: dict, timeout: int = 60, label: str = "IG call"):
+    """
+    POST to the Graph API, retrying transient failures with backoff. Returns the
+    final Response (which may be non-200 on a permanent error or after exhausting
+    retries), or None if every attempt raised an exception.
+    """
+    attempts = len(_IG_RETRY_DELAYS) + 1
+    last = None
+    for i in range(attempts):
+        try:
+            last = requests.post(url, data=data, timeout=timeout)
+        except Exception as exc:
+            logger.warning("%s raised (attempt %d/%d): %s", label, i + 1, attempts, exc)
+            last = None
+        if last is not None:
+            if last.status_code == 200:
+                return last
+            if not _ig_transient(last):
+                return last  # permanent error — let the caller log and bail
+            logger.warning("%s transient %s (attempt %d/%d): %s",
+                           label, last.status_code, i + 1, attempts, last.text[:200])
+        if i < attempts - 1:
+            time.sleep(_IG_RETRY_DELAYS[i])
+    return last
+
+
 def post_to_instagram(image_url: str, caption: str) -> tuple[str | None, str | None]:
     """
     Publish a single image to Instagram. Returns (media_id, container_id).
@@ -604,14 +648,16 @@ def post_to_instagram(image_url: str, caption: str) -> tuple[str | None, str | N
         logger.info("Instagram not configured — skipping post.")
         return None, None
     try:
-        # 1. Create media container
-        create = requests.post(
+        # 1. Create media container (retries transient Graph failures)
+        create = _graph_post(
             f"{_GRAPH}/{IG_USER_ID}/media",
-            data={"image_url": image_url, "caption": caption, "access_token": META_ACCESS_TOKEN},
-            timeout=60,
+            {"image_url": image_url, "caption": caption, "access_token": META_ACCESS_TOKEN},
+            timeout=60, label="IG container create",
         )
-        if create.status_code != 200:
-            logger.error("IG container create failed: %s %s", create.status_code, create.text[:400])
+        if create is None or create.status_code != 200:
+            logger.error("IG container create failed: %s %s",
+                         getattr(create, "status_code", "no-response"),
+                         getattr(create, "text", "")[:400])
             return None, None
         container_id = create.json().get("id")
         if not container_id:
@@ -636,14 +682,16 @@ def post_to_instagram(image_url: str, caption: str) -> tuple[str | None, str | N
             logger.error("IG container %s never reached FINISHED — aborting publish.", container_id)
             return None, container_id
 
-        # 3. Publish
-        publish = requests.post(
+        # 3. Publish (retries transient Graph failures)
+        publish = _graph_post(
             f"{_GRAPH}/{IG_USER_ID}/media_publish",
-            data={"creation_id": container_id, "access_token": META_ACCESS_TOKEN},
-            timeout=60,
+            {"creation_id": container_id, "access_token": META_ACCESS_TOKEN},
+            timeout=60, label="IG publish",
         )
-        if publish.status_code != 200:
-            logger.error("IG publish failed: %s %s", publish.status_code, publish.text[:400])
+        if publish is None or publish.status_code != 200:
+            logger.error("IG publish failed: %s %s",
+                         getattr(publish, "status_code", "no-response"),
+                         getattr(publish, "text", "")[:400])
             return None, container_id
         media_id = publish.json().get("id")
         logger.info("Instagram published: media_id=%s", media_id)
@@ -666,20 +714,22 @@ def post_reel_to_instagram(video_url: str, caption: str) -> tuple[str | None, st
         logger.info("Instagram not configured — skipping reel.")
         return None, None
     try:
-        # 1. Create the REELS media container
-        create = requests.post(
+        # 1. Create the REELS media container (retries transient Graph failures)
+        create = _graph_post(
             f"{_GRAPH}/{IG_USER_ID}/media",
-            data={
+            {
                 "media_type": "REELS",
                 "video_url": video_url,
                 "caption": caption,
                 "share_to_feed": "true",
                 "access_token": META_ACCESS_TOKEN,
             },
-            timeout=60,
+            timeout=60, label="IG reel container create",
         )
-        if create.status_code != 200:
-            logger.error("IG reel container create failed: %s %s", create.status_code, create.text[:400])
+        if create is None or create.status_code != 200:
+            logger.error("IG reel container create failed: %s %s",
+                         getattr(create, "status_code", "no-response"),
+                         getattr(create, "text", "")[:400])
             return None, None
         container_id = create.json().get("id")
         if not container_id:
@@ -704,14 +754,16 @@ def post_reel_to_instagram(video_url: str, caption: str) -> tuple[str | None, st
             logger.error("IG reel container %s never reached FINISHED — aborting publish.", container_id)
             return None, container_id
 
-        # 3. Publish
-        publish = requests.post(
+        # 3. Publish (retries transient Graph failures)
+        publish = _graph_post(
             f"{_GRAPH}/{IG_USER_ID}/media_publish",
-            data={"creation_id": container_id, "access_token": META_ACCESS_TOKEN},
-            timeout=60,
+            {"creation_id": container_id, "access_token": META_ACCESS_TOKEN},
+            timeout=60, label="IG reel publish",
         )
-        if publish.status_code != 200:
-            logger.error("IG reel publish failed: %s %s", publish.status_code, publish.text[:400])
+        if publish is None or publish.status_code != 200:
+            logger.error("IG reel publish failed: %s %s",
+                         getattr(publish, "status_code", "no-response"),
+                         getattr(publish, "text", "")[:400])
             return None, container_id
         media_id = publish.json().get("id")
         logger.info("Instagram Reel published: media_id=%s", media_id)
