@@ -70,6 +70,12 @@ X_ACCESS_TOKEN_SECRET = os.environ.get("X_ACCESS_TOKEN_SECRET", "")
 META_ACCESS_TOKEN = os.environ.get("META_ACCESS_TOKEN", "")
 IG_USER_ID        = os.environ.get("IG_USER_ID", "")
 
+# Daily social media kind: "card" (static 1080×1080 image) or "reel" (9:16 vertical
+# video with podcast audio + burned-in captions). Defaults to "card" so the proven
+# path stays live; flip to "reel" via the ECS task-def env AFTER a live IG test —
+# no code deploy needed. A reel-build failure always falls back to the card.
+SOCIAL_MEDIA_KIND = os.environ.get("SOCIAL_MEDIA_KIND", "card").strip().lower()
+
 # CloudFront distribution that fronts mikecast.io (used for cache invalidation
 # after editing/republishing a past episode). Defaults to the live distribution.
 CLOUDFRONT_DIST_ID = os.environ.get("CLOUDFRONT_DIST_ID", "EFNQM31KQHY56")

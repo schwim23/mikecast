@@ -8,6 +8,12 @@ mutagen
 boto3
 resend
 
+# Social video reels (mc_video.py / mc_ad.py) — 9:16 MP4 render with burned-in
+# captions. moviepy pulls imageio-ffmpeg (bundled ffmpeg) + numpy; the daily
+# pipeline only imports these lazily when SOCIAL_MEDIA_KIND=reel.
+numpy
+moviepy>=2.0
+
 # CrewAI migration (Steps 0–8b of the daily pipeline).
 # setuptools<81 keeps pkg_resources bundled (crewai 0.86 + Py3.12 still imports it).
 # crewai-tools is intentionally NOT listed — we write our own tools in crew/tools.py

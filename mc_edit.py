@@ -133,6 +133,7 @@ def cmd_publish(args) -> None:
 
 
 def cmd_repost_social(args) -> None:
+    from mc_config import SOCIAL_MEDIA_KIND
     from mc_dist_state import append_repost, load_dist_state, record_send, record_social_copy
     import mc_social
 
@@ -140,6 +141,16 @@ def cmd_repost_social(args) -> None:
     episode = _require(date)
     link = mc_social.deep_link(date)
     state = load_dist_state(date)
+    media = (args.media or SOCIAL_MEDIA_KIND or "card").strip().lower()
+
+    # Build the reel once (shared by X + IG) when reposting as a reel.
+    reel_path = None
+    if media == "reel":
+        from mc_video import build_daily_reel
+        reel_path = build_daily_reel(episode, DATA_DIR / f"MikeCast_reel_{date}.mp4")
+        if not reel_path:
+            logger.warning("Reel build failed — reposting as card/text instead.")
+            media = "card"
 
     # Resolve copy
     if args.reuse_copy and state.get("social_copy"):
@@ -167,10 +178,18 @@ def cmd_repost_social(args) -> None:
             logger.info("Deleting old tweet %s…", old_id)
             mc_social.delete_tweet(old_id)
         x_text = mc_social._fit_x(copy["x_text"], link, date_display=episode.get("date_display"))
-        new_id = mc_social.post_to_x(x_text)
+        media_ids = None
+        if reel_path:
+            vid = mc_social.upload_video_to_x(reel_path)
+            if vid:
+                media_ids = [vid]
+            else:
+                logger.info("X video upload unavailable — reposting text+link only.")
+        new_id = mc_social.post_to_x(x_text, media_ids=media_ids)
         if new_id:
             append_repost(date, "x", old_id, new_id)
-            record_send(date, "x", {"tweet_id": new_id, "text": x_text})
+            record_send(date, "x", {"tweet_id": new_id, "text": x_text,
+                                    "media": "reel" if media_ids else "text"})
             logger.info("Reposted to X: %s", new_id)
         else:
             logger.error("X repost failed (see above).")
@@ -185,23 +204,39 @@ def cmd_repost_social(args) -> None:
             except EOFError:
                 pass
         n = len([r for r in state.get("repost_history", []) if r.get("channel") == "ig"]) + 1
-        card_path = DATA_DIR / f"MikeCast_card_{date}_r{n}.png"
-        mc_social.generate_card(episode, card_path, bullets=copy.get("card_bullets"))
-        image_url = mc_social.upload_card(card_path, date, suffix=f"_r{n}")
-        if not image_url:
-            logger.error("Could not upload card (no public URL) — aborting IG repost.")
-        else:
-            caption = mc_social._build_ig_caption(copy["ig_caption"], date_display=episode.get("date_display"))
-            media_id, container_id = mc_social.post_to_instagram(image_url, caption)
-            if media_id:
-                append_repost(date, "ig", old.get("media_id"), media_id)
-                record_send(date, "instagram", {
-                    "media_id": media_id, "container_id": container_id,
-                    "image_url": image_url, "caption": caption,
-                })
-                logger.info("Reposted to Instagram: %s", media_id)
+        caption = mc_social._build_ig_caption(copy["ig_caption"], date_display=episode.get("date_display"))
+        if reel_path:
+            reel_url = mc_social.upload_reel(reel_path, date, suffix=f"_r{n}")
+            if not reel_url:
+                logger.error("Could not upload reel (no public URL) — aborting IG repost.")
             else:
-                logger.error("Instagram repost failed (see above).")
+                media_id, container_id = mc_social.post_reel_to_instagram(reel_url, caption)
+                if media_id:
+                    append_repost(date, "ig", old.get("media_id"), media_id)
+                    record_send(date, "instagram", {
+                        "media_id": media_id, "container_id": container_id,
+                        "video_url": reel_url, "caption": caption, "media": "reel",
+                    })
+                    logger.info("Reposted Reel to Instagram: %s", media_id)
+                else:
+                    logger.error("Instagram reel repost failed (see above).")
+        else:
+            card_path = DATA_DIR / f"MikeCast_card_{date}_r{n}.png"
+            mc_social.generate_card(episode, card_path, bullets=copy.get("card_bullets"))
+            image_url = mc_social.upload_card(card_path, date, suffix=f"_r{n}")
+            if not image_url:
+                logger.error("Could not upload card (no public URL) — aborting IG repost.")
+            else:
+                media_id, container_id = mc_social.post_to_instagram(image_url, caption)
+                if media_id:
+                    append_repost(date, "ig", old.get("media_id"), media_id)
+                    record_send(date, "instagram", {
+                        "media_id": media_id, "container_id": container_id,
+                        "image_url": image_url, "caption": caption, "media": "card",
+                    })
+                    logger.info("Reposted to Instagram: %s", media_id)
+                else:
+                    logger.error("Instagram repost failed (see above).")
 
 
 def cmd_delete_social(args) -> None:
@@ -244,7 +279,7 @@ def main() -> None:
     p = sub.add_parser("set-html"); p.add_argument("--date", required=True); p.add_argument("--file", required=True); p.set_defaults(func=cmd_set_html)
     p = sub.add_parser("regen"); p.add_argument("--date", required=True); p.set_defaults(func=cmd_regen)
     p = sub.add_parser("publish"); p.add_argument("--date", required=True); p.set_defaults(func=cmd_publish)
-    p = sub.add_parser("repost-social"); p.add_argument("--date", required=True); p.add_argument("--only", choices=["x", "ig"]); p.add_argument("--reuse-copy", action="store_true"); p.set_defaults(func=cmd_repost_social)
+    p = sub.add_parser("repost-social"); p.add_argument("--date", required=True); p.add_argument("--only", choices=["x", "ig"]); p.add_argument("--reuse-copy", action="store_true"); p.add_argument("--media", choices=["card", "reel"], default=None); p.set_defaults(func=cmd_repost_social)
     p = sub.add_parser("delete-social"); p.add_argument("--date", required=True); p.add_argument("--only", choices=["x", "ig"]); p.set_defaults(func=cmd_delete_social)
 
     args = parser.parse_args()
