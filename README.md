@@ -61,8 +61,9 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
 12. **CrewAI agent pipeline (opt-in via `--crew`)**: Steps 0–8b can be executed by [CrewAI](https://github.com/crewAIInc/crewAI) agents instead of the procedural pipeline. A `Planning Crew`, four `Research` agents, a dedicated `NY Sports Research Crew` (Gatekeeper + Researcher with ESPN box-score / standings / injury tools + Fact-Checker), a `Writing Crew` (three Claude writers in parallel), a `Critic Crew` (GPT-4o scorer + Claude patcher), and a `Distribution Crew` (Claude social copywriter, Step 11) replace or extend the matching legacy modules. Steps 9 and 10 (audio + delivery) are unchanged. **The CrewAI path is the default since the cutover** — pass `--legacy` to revert to the procedural pipeline for a single run. See **CrewAI Architecture** below for full details.
 
 13. **Automatic social distribution (X + Instagram)** — Step 11: after delivery, MikeCast auto-posts the day's briefing to **X** ([@mikecastai](https://x.com/mikecastai)) and **Instagram** ([@mikecastai](https://www.instagram.com/mikecastai/)), each linking back to that day's episode.
-    - **X**: a "🎙️ MikeCast Daily · {date}" tweet — a Claude-written news hook plus the episode deep link and the Spotify show link (posted via the X API v2, OAuth 1.0a).
-    - **Instagram**: a branded **1080×1080 image card** (generated with Pillow) published via the Instagram Graph API two-step container→publish flow, with a matching caption. IG doesn't linkify caption URLs, so the CTA points to the site + "link in bio."
+    - **X**: a "🎙️ MikeCast Daily · {date}" tweet — a Claude-written news hook plus the episode deep link and the Spotify show link (posted via the X API v2, OAuth 1.0a). Optionally with the day's reel attached (chunked video upload; best-effort on the free tier).
+    - **Instagram**: either a branded **1080×1080 image card** (default) or a **9:16 vertical Reel** (see below), published via the Instagram Graph API container→publish flow, with a matching caption. IG doesn't linkify caption URLs, so the CTA points to the site + "link in bio."
+    - **Social video reels** — the daily asset kind is chosen by `SOCIAL_MEDIA_KIND` (`card` or `reel`, default `card`). A **reel** is a 9:16 vertical video that plays the podcast audio with **burned-in captions** (muted-proof, since IG/X autoplay is silent), built from the cold-open of the day's script by `mc_video.py`. A reel that can't be built falls back to the card (IG) and a plain text+link tweet (X), so the daily run never breaks. See **Social Distribution** below.
     - **Copy** is written by the new `Distribution Crew` (a Claude social copywriter, hallucination-guarded), with deterministic headers/links/fallbacks added in code so an LLM blip never blocks posting.
     - Each channel skips gracefully with a logged message when its credentials aren't set. See **Social Distribution** below.
 
@@ -173,7 +174,9 @@ mikecast/
 ├── mc_audio.py               # TTS audio: ElevenLabs 3-voice + OpenAI fallback (Step 9)
 ├── mc_deliver.py             # Save JSON, manifest, RSS feed, email + Resend newsletter (Step 10)
 ├── mc_dist_state.py          # Per-date distribution state; first-run-of-day send gating
-├── mc_social.py              # X + Instagram posting: card generation, orchestrator, CLI (Step 11)
+├── mc_social.py              # X + Instagram posting: card/reel, orchestrator, CLI (Step 11)
+├── mc_video.py               # Shared 9:16 reel renderer (captioned video) — used by mc_social + mc_ad
+├── mc_ad.py                  # Standalone 30s promo video CLI (uses the mc_video engine)
 ├── mc_edit.py                # Edit/republish a past episode + delete/repost its social posts
 ├── mc_utils.py               # Shared helpers (HTTP, JSON, text similarity, CloudFront invalidation)
 ├── mc_ad.py                  # 30-second vertical video ad generator (Meta/Google formats)
@@ -212,7 +215,7 @@ mikecast/
 │   ├── feed.xml
 │   ├── cover.png
 │   ├── dist/YYYY-MM-DD.json   # per-date send state (email/newsletter/X/IG)
-│   └── social/               # generated 1080×1080 Instagram cards
+│   └── social/               # generated Instagram cards (PNG) + reels (MP4)
 └── crew/                     # CrewAI agent pipeline (opt-in via --crew)
     ├── tools.py
     ├── llm.py
@@ -296,6 +299,11 @@ export X_ACCESS_TOKEN_SECRET="..."
 # (or long-lived) token + the IG Business account id. Skipped gracefully when unset.
 export META_ACCESS_TOKEN="..."
 export IG_USER_ID="1784..."
+
+# Optional — daily social asset kind: "card" (static 1080×1080 image, default) or
+# "reel" (9:16 video with podcast audio + burned-in captions). Flipping this to
+# "reel" needs no code deploy; a reel that can't be built falls back to the card.
+export SOCIAL_MEDIA_KIND="card"
 
 # Optional — CloudFront distribution fronting mikecast.io (used by mc_edit.py to
 # invalidate the cache after republishing a past episode). Defaults to the live one.
@@ -525,16 +533,20 @@ Step 11 auto-posts the day's briefing to **X** and **Instagram**, each linking t
 # Post now (both channels); --only x / --only ig to limit; --force re-posts
 .venv/bin/python3 mc_social.py --date 2026-07-05 --only x --force
 
+# Post a 9:16 video reel instead of the static card (default kind is SOCIAL_MEDIA_KIND)
+.venv/bin/python3 mc_social.py --date 2026-07-05 --media reel --only ig --dry-run
+
 # Delete a tweet
 .venv/bin/python3 mc_social.py --delete-tweet <tweet_id>
 ```
 
-- **X**: a `🎙️ MikeCast Daily · {date}` tweet — Claude-written news hook + the episode deep link (`mikecast.io/?date=…`) + the Spotify show link, fit to 280 weighted chars (each URL counts as 23).
+- **X**: a `🎙️ MikeCast Daily · {date}` tweet — Claude-written news hook + the episode deep link (`mikecast.io/?date=…`) + the Spotify show link, fit to 280 weighted chars (each URL counts as 23). With `--media reel`, the day's video is attached via chunked upload (best-effort; falls back to a text+link tweet on the free-tier rate limit).
 - **Instagram**: a branded 1080×1080 card (Pillow) uploaded to `s3://…/data/social/` for a public URL, then published via the Graph API container→publish flow, with a caption mirroring the tweet. IG captions don't linkify URLs, so the CTA is `mikecast.io` + "link in bio".
+- **Reels** (`--media reel` or `SOCIAL_MEDIA_KIND=reel`): `mc_video.py` renders a 1080×1920 H.264/AAC MP4 from the cold-open of the day's `conversational_script` — the real podcast voices re-TTS'd, with **burned-in captions synced to the audio by construction** (one clip per caption cue, held for its share of the segment's duration; no Whisper needed) over the brand background. Encoded `+faststart` (moov atom front-loaded) so Instagram accepts it, uploaded to `s3://…/data/social/`, and published to IG as `media_type=REELS`. **A reel that can't be built falls back to the card (IG) / text+link (X)** — the daily run never breaks. The shared renderer also backs the standalone promo CLI (`mc_ad.py`).
 - **Copy** comes from `crew/distribution_crew.py` (a Claude social copywriter). Headers, links, length-fitting, and a deterministic fallback template are handled in code, so an LLM outage never blocks posting.
-- **Gating**: `mc_dist_state.py` records each channel's send per date, so daily `--force` reruns don't double-post. `--resend` on the main pipeline forces re-sends.
+- **Gating**: `mc_dist_state.py` records each channel's send per date (with the media kind), so daily `--force` reruns don't double-post. `--resend` on the main pipeline forces re-sends.
 
-See the environment-variables section above for the required X and Instagram credentials.
+See the environment-variables section above for the required X and Instagram credentials. Reels additionally require the ElevenLabs voice credentials (for the re-TTS'd audio) and `moviepy`/`ffmpeg` (both in `requirements.txt` and the Docker image).
 
 ### Editing / Reposting a Past Episode
 
@@ -545,7 +557,7 @@ mc_edit.py show          --date 2026-07-01                    # print meta + HTM
 mc_edit.py set-html      --date 2026-07-01 --file fixed.html  # replace the briefing HTML
 mc_edit.py regen         --date 2026-07-01                    # re-run the writing crew (HTML only)
 mc_edit.py publish       --date 2026-07-01                    # push JSON to S3 + rebuild manifest/RSS + invalidate CloudFront
-mc_edit.py repost-social --date 2026-07-01 [--only x|ig] [--reuse-copy]
+mc_edit.py repost-social --date 2026-07-01 [--only x|ig] [--reuse-copy] [--media card|reel]
 mc_edit.py delete-social --date 2026-07-01 [--only x]
 ```
 
@@ -567,7 +579,7 @@ Requires `YOUTUBE_CLIENT_SECRETS` env var pointing to your OAuth 2.0 credentials
 
 ### Generating Social Video Ads
 
-`mc_ad.py` generates 30-second 9:16 vertical MP4 ads (1080×1920) for Meta/Google Reels and Stories, using the 3 ElevenLabs voices with animated subtitles.
+`mc_ad.py` generates 30-second 9:16 vertical MP4 ads (1080×1920) for Meta/Google Reels and Stories, using the 3 ElevenLabs voices with burned-in captions. It shares the render engine in `mc_video.py` with the daily social reels (see **Social Distribution** above) — the difference is that `mc_ad.py` writes a fresh GPT-4o promo script, while the daily reel uses the cold-open of the real episode.
 
 ```bash
 # Use today's episode
