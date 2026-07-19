@@ -20,7 +20,12 @@ Usage:
     python3 mc_social.py --dry-run               # generate copy + card, post nothing
     python3 mc_social.py --only x                # X only (or --only ig)
     python3 mc_social.py --force                 # re-post even if already sent today
+    python3 mc_social.py --media reel            # post a 9:16 video reel (default: card)
     python3 mc_social.py --delete-tweet 123456   # delete a tweet by id
+
+The daily asset kind is "card" (static 1080×1080 image) or "reel" (9:16 video with
+podcast audio + burned-in captions). A reel that can't be built falls back to the
+card (Instagram) and a plain text+link tweet (X), so the daily run never breaks.
 """
 
 from __future__ import annotations
@@ -45,6 +50,7 @@ from mc_config import (
     S3_BUCKET,
     SCRIPT_DIR,
     SITE_BASE_URL,
+    SOCIAL_MEDIA_KIND,
     TODAY,
     X_ACCESS_TOKEN,
     X_ACCESS_TOKEN_SECRET,
@@ -281,6 +287,27 @@ def upload_card(local_path: Path, date: str, suffix: str = "") -> str | None:
         return None
 
 
+def upload_reel(local_path: Path, date: str, suffix: str = "") -> str | None:
+    """
+    Upload the reel MP4 to the site bucket and return its public URL. Returns None
+    if S3 isn't configured (Instagram Reels needs a publicly reachable video_url).
+
+    Same data/social/ prefix as the card (invisible to the manifest/RSS regexes);
+    `suffix` lets reposts use a versioned filename so IG re-fetches a fresh URL.
+    """
+    if not S3_BUCKET:
+        logger.warning("S3_BUCKET not set — cannot upload reel for a public URL.")
+        return None
+    from mc_utils import s3_upload_file
+    key = f"data/social/MikeCast_reel_{date}{suffix}.mp4"
+    try:
+        s3_upload_file(S3_BUCKET, key, local_path, content_type="video/mp4")
+        return f"{SITE_BASE_URL}{key}"
+    except Exception as exc:
+        logger.error("Reel upload failed: %s", exc)
+        return None
+
+
 # ---------------------------------------------------------------------------
 # Copy fitting
 # ---------------------------------------------------------------------------
@@ -416,26 +443,123 @@ def _x_auth():
     return OAuth1(X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET)
 
 
-def post_to_x(text: str) -> str | None:
-    """Post a tweet. Returns the tweet id on success, None on failure."""
+def post_to_x(text: str, media_ids: list[str] | None = None) -> str | None:
+    """Post a tweet, optionally with attached media. Returns the tweet id on
+    success, None on failure."""
     if not _x_configured():
         logger.info("X not configured — skipping tweet.")
         return None
+    body: dict = {"text": text}
+    if media_ids:
+        body["media"] = {"media_ids": media_ids}
     try:
         resp = requests.post(
             "https://api.x.com/2/tweets",
             auth=_x_auth(),
-            json={"text": text},
+            json=body,
             timeout=30,
         )
         if resp.status_code not in (200, 201):
             logger.error("X post failed: %s %s", resp.status_code, resp.text[:400])
             return None
         tweet_id = resp.json().get("data", {}).get("id")
-        logger.info("Tweet posted: id=%s", tweet_id)
+        logger.info("Tweet posted: id=%s%s", tweet_id, " (with media)" if media_ids else "")
         return tweet_id
     except Exception as exc:
         logger.error("X post raised: %s", exc)
+        return None
+
+
+# X media upload (chunked). Free tier caps INIT/FINALIZE at ~17/24h, so treat X
+# video as best-effort: any failure returns None and the caller posts a plain
+# text+link tweet instead. Uses the v1.1 chunked upload endpoint, which remains
+# the OAuth1 path for attaching video to a v2 tweet.
+_X_UPLOAD_URL = "https://upload.twitter.com/1.1/media/upload.json"
+_X_CHUNK_BYTES = 4 * 1024 * 1024  # 4MB per APPEND (under the 5MB limit)
+
+
+def upload_video_to_x(path: Path) -> str | None:
+    """
+    Upload an MP4 to X via chunked INIT/APPEND/FINALIZE(/STATUS) as
+    media_category=amplify_video and return the media_id, or None on any failure
+    (unconfigured, rate-limited, processing error). Never raises.
+    """
+    if not _x_configured():
+        logger.info("X not configured — skipping video upload.")
+        return None
+    try:
+        total_bytes = path.stat().st_size
+        auth = _x_auth()
+
+        # INIT
+        init = requests.post(
+            _X_UPLOAD_URL, auth=auth,
+            data={
+                "command": "INIT",
+                "total_bytes": total_bytes,
+                "media_type": "video/mp4",
+                "media_category": "amplify_video",
+            },
+            timeout=60,
+        )
+        if init.status_code not in (200, 201, 202):
+            logger.error("X video INIT failed: %s %s", init.status_code, init.text[:400])
+            return None
+        media_id = init.json().get("media_id_string")
+        if not media_id:
+            logger.error("X video INIT returned no media_id: %s", init.text[:400])
+            return None
+
+        # APPEND (chunked)
+        with open(path, "rb") as fh:
+            seg = 0
+            while True:
+                chunk = fh.read(_X_CHUNK_BYTES)
+                if not chunk:
+                    break
+                ap = requests.post(
+                    _X_UPLOAD_URL, auth=auth,
+                    data={"command": "APPEND", "media_id": media_id, "segment_index": seg},
+                    files={"media": chunk},
+                    timeout=120,
+                )
+                if ap.status_code not in (200, 201, 204):
+                    logger.error("X video APPEND seg %d failed: %s %s", seg, ap.status_code, ap.text[:300])
+                    return None
+                seg += 1
+
+        # FINALIZE
+        fin = requests.post(
+            _X_UPLOAD_URL, auth=auth,
+            data={"command": "FINALIZE", "media_id": media_id},
+            timeout=60,
+        )
+        if fin.status_code not in (200, 201):
+            logger.error("X video FINALIZE failed: %s %s", fin.status_code, fin.text[:400])
+            return None
+
+        # STATUS poll (if async transcoding is required)
+        info = fin.json().get("processing_info")
+        while info and info.get("state") in ("pending", "in_progress"):
+            wait = int(info.get("check_after_secs", 5))
+            time.sleep(min(wait, 15))
+            st = requests.get(
+                _X_UPLOAD_URL, auth=auth,
+                params={"command": "STATUS", "media_id": media_id},
+                timeout=30,
+            )
+            if st.status_code != 200:
+                logger.error("X video STATUS failed: %s %s", st.status_code, st.text[:300])
+                return None
+            info = st.json().get("processing_info")
+        if info and info.get("state") == "failed":
+            logger.error("X video processing failed: %s", info)
+            return None
+
+        logger.info("X video uploaded: media_id=%s", media_id)
+        return media_id
+    except Exception as exc:
+        logger.error("X video upload raised: %s", exc)
         return None
 
 
@@ -529,6 +653,74 @@ def post_to_instagram(image_url: str, caption: str) -> tuple[str | None, str | N
         return None, None
 
 
+def post_reel_to_instagram(video_url: str, caption: str) -> tuple[str | None, str | None]:
+    """
+    Publish a Reel to Instagram. Returns (media_id, container_id); both None on
+    failure. Requires a publicly reachable video_url (9:16, 5–90s, faststart MP4).
+
+    Same 3-step container→poll→publish flow as the image post, but with
+    media_type=REELS and a longer poll loop — video transcoding is much slower
+    than image processing.
+    """
+    if not _ig_configured():
+        logger.info("Instagram not configured — skipping reel.")
+        return None, None
+    try:
+        # 1. Create the REELS media container
+        create = requests.post(
+            f"{_GRAPH}/{IG_USER_ID}/media",
+            data={
+                "media_type": "REELS",
+                "video_url": video_url,
+                "caption": caption,
+                "share_to_feed": "true",
+                "access_token": META_ACCESS_TOKEN,
+            },
+            timeout=60,
+        )
+        if create.status_code != 200:
+            logger.error("IG reel container create failed: %s %s", create.status_code, create.text[:400])
+            return None, None
+        container_id = create.json().get("id")
+        if not container_id:
+            logger.error("IG reel container returned no id: %s", create.text[:400])
+            return None, None
+
+        # 2. Poll until the container finishes transcoding (video is slow → ~2 min)
+        for attempt in range(24):
+            status = requests.get(
+                f"{_GRAPH}/{container_id}",
+                params={"fields": "status_code", "access_token": META_ACCESS_TOKEN},
+                timeout=30,
+            )
+            code = status.json().get("status_code") if status.status_code == 200 else None
+            if code == "FINISHED":
+                break
+            if code == "ERROR":
+                logger.error("IG reel container errored: %s", status.text[:400])
+                return None, container_id
+            time.sleep(5)
+        else:
+            logger.error("IG reel container %s never reached FINISHED — aborting publish.", container_id)
+            return None, container_id
+
+        # 3. Publish
+        publish = requests.post(
+            f"{_GRAPH}/{IG_USER_ID}/media_publish",
+            data={"creation_id": container_id, "access_token": META_ACCESS_TOKEN},
+            timeout=60,
+        )
+        if publish.status_code != 200:
+            logger.error("IG reel publish failed: %s %s", publish.status_code, publish.text[:400])
+            return None, container_id
+        media_id = publish.json().get("id")
+        logger.info("Instagram Reel published: media_id=%s", media_id)
+        return media_id, container_id
+    except Exception as exc:
+        logger.error("Instagram reel post raised: %s", exc)
+        return None, None
+
+
 # ---------------------------------------------------------------------------
 # Episode loading + deep link
 # ---------------------------------------------------------------------------
@@ -587,23 +779,50 @@ def _resolve_copy(date: str, episode_data: dict, link: str, force: bool) -> dict
 # Orchestrator
 # ---------------------------------------------------------------------------
 
+def _maybe_build_reel(date: str, episode_data: dict, dry_run: bool):
+    """
+    Build the day's reel once (shared by X + IG) and upload it for IG's public URL.
+    Returns (reel_path, reel_url). Either may be None: a None reel_path means the
+    reel couldn't be built (missing ElevenLabs creds, no script, render error) and
+    every channel falls back to card/text. reel_url is None in dry-run (nothing is
+    uploaded) — the local reel_path is still returned for visual inspection.
+    """
+    from mc_video import build_daily_reel
+    reel_path = build_daily_reel(episode_data, DATA_DIR / f"MikeCast_reel_{date}.mp4")
+    if not reel_path:
+        logger.warning("Reel build failed for %s — falling back to card/text.", date)
+        return None, None
+    reel_url = None if dry_run else upload_reel(reel_path, date)
+    return reel_path, reel_url
+
+
 def run_social_distribution(
     date: str,
     dry_run: bool = False,
     force: bool = False,
     only: str | None = None,
+    media: str | None = None,
 ) -> dict:
     """
     Post the day's briefing to X and Instagram. Each channel is independent and
     self-contained: a failure or missing-credential skip in one never affects the
     other, and nothing here raises out to the caller.
 
+    ``media`` selects the daily asset: "card" (static 1080×1080 image) or "reel"
+    (9:16 video with podcast audio + burned-in captions). Defaults to
+    SOCIAL_MEDIA_KIND. A reel that can't be built falls back to the card (IG) and
+    a plain text+link tweet (X), so the daily run never breaks.
+
     Gating: a channel already recorded as sent for `date` is skipped unless
-    `force`. `dry_run` generates copy + card and prints them, posting nothing.
+    `force`. `dry_run` generates copy + asset and prints them, posting nothing.
 
     Returns a per-channel result summary dict.
     """
-    results: dict = {"date": date, "x": "skip", "instagram": "skip"}
+    media = (media or SOCIAL_MEDIA_KIND or "card").strip().lower()
+    if media not in ("card", "reel"):
+        logger.warning("Unknown media kind %r — defaulting to card.", media)
+        media = "card"
+    results: dict = {"date": date, "media": media, "x": "skip", "instagram": "skip"}
 
     episode_data = load_episode(date)
     if not episode_data:
@@ -621,6 +840,24 @@ def run_social_distribution(
     want_x = only in (None, "x")
     want_ig = only in (None, "ig")
 
+    # --- Reel asset (built once, shared by X + IG) ---
+    reel_path = reel_url = None
+    if media == "reel" and (want_x or want_ig):
+        state = load_dist_state(date)
+        # Only spend TTS/render if a channel actually still needs to post.
+        need = dry_run or force or (
+            (want_x and not channel_sent(state, "x")) or
+            (want_ig and not channel_sent(state, "instagram"))
+        )
+        if need:
+            try:
+                reel_path, reel_url = _maybe_build_reel(date, episode_data, dry_run)
+            except Exception as exc:
+                logger.error("Reel prep raised (non-fatal): %s", exc)
+        if reel_path is None:
+            media = "card"  # hard fallback for the rest of this run
+            results["media"] = "card (reel-fallback)"
+
     # --- X ---
     if want_x:
         try:
@@ -629,25 +866,54 @@ def run_social_distribution(
                 results["x"] = "already_sent"
             elif dry_run:
                 logger.info("[dry-run] X text (%d chars):\n%s", len(x_text), x_text)
+                if reel_path:
+                    logger.info("[dry-run] reel saved for visual check: %s", reel_path)
                 results["x"] = "dry_run"
             else:
-                tweet_id = post_to_x(x_text)
+                media_ids = None
+                if reel_path:
+                    vid = upload_video_to_x(reel_path)
+                    if vid:
+                        media_ids = [vid]
+                    else:
+                        logger.info("X video upload unavailable — posting text+link only.")
+                tweet_id = post_to_x(x_text, media_ids=media_ids)
                 if tweet_id:
-                    record_send(date, "x", {"tweet_id": tweet_id, "text": x_text})
-                    results["x"] = f"posted:{tweet_id}"
+                    record_send(date, "x", {
+                        "tweet_id": tweet_id, "text": x_text,
+                        "media": "reel" if media_ids else "text",
+                    })
+                    results["x"] = f"posted:{tweet_id}" + ("+video" if media_ids else "")
                 else:
                     results["x"] = "not_configured_or_failed"
         except Exception as exc:
             logger.error("X channel raised (non-fatal): %s", exc)
             results["x"] = "error"
 
-    # --- Instagram (needs a card image + public URL) ---
+    # --- Instagram (Reel via public video URL, else card image) ---
     if want_ig:
         try:
             if not dry_run and not force and channel_sent(load_dist_state(date), "instagram"):
                 logger.info("Instagram already sent for %s — skipping (use --force).", date)
                 results["instagram"] = "already_sent"
+            elif reel_path and (reel_url or dry_run):
+                # Reel path
+                if dry_run:
+                    logger.info("[dry-run] IG caption (%d chars):\n%s", len(ig_caption), ig_caption)
+                    logger.info("[dry-run] reel saved for visual check: %s", reel_path)
+                    results["instagram"] = "dry_run"
+                else:
+                    media_id, container_id = post_reel_to_instagram(reel_url, ig_caption)
+                    if media_id:
+                        record_send(date, "instagram", {
+                            "media_id": media_id, "container_id": container_id,
+                            "video_url": reel_url, "caption": ig_caption, "media": "reel",
+                        })
+                        results["instagram"] = f"posted:{media_id}+reel"
+                    else:
+                        results["instagram"] = "not_configured_or_failed"
             else:
+                # Card path (media=="card" or reel/url unavailable)
                 card_path = DATA_DIR / f"MikeCast_card_{date}.png"
                 generate_card(episode_data, card_path, bullets=copy.get("card_bullets"))
                 if dry_run:
@@ -662,10 +928,8 @@ def run_social_distribution(
                         media_id, container_id = post_to_instagram(image_url, ig_caption)
                         if media_id:
                             record_send(date, "instagram", {
-                                "media_id": media_id,
-                                "container_id": container_id,
-                                "image_url": image_url,
-                                "caption": ig_caption,
+                                "media_id": media_id, "container_id": container_id,
+                                "image_url": image_url, "caption": ig_caption, "media": "card",
                             })
                             results["instagram"] = f"posted:{media_id}"
                         else:
@@ -692,6 +956,8 @@ def main() -> None:
     parser.add_argument("--dry-run", action="store_true", help="Generate copy + card; post nothing")
     parser.add_argument("--only", choices=["x", "ig"], help="Post to only one channel")
     parser.add_argument("--force", action="store_true", help="Re-post even if already sent today")
+    parser.add_argument("--media", choices=["card", "reel"], default=None,
+                        help="Daily asset kind (default: SOCIAL_MEDIA_KIND env, else card)")
     parser.add_argument("--delete-tweet", metavar="ID", help="Delete a tweet by id and exit")
     args = parser.parse_args()
 
@@ -699,7 +965,8 @@ def main() -> None:
         ok = delete_tweet(args.delete_tweet)
         sys.exit(0 if ok else 1)
 
-    run_social_distribution(args.date, dry_run=args.dry_run, force=args.force, only=args.only)
+    run_social_distribution(args.date, dry_run=args.dry_run, force=args.force,
+                            only=args.only, media=args.media)
 
 
 if __name__ == "__main__":
