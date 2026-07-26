@@ -22,6 +22,7 @@ if _ROOT not in sys.path:
 from mc_video import (  # noqa: E402
     REEL_MAX_SEGMENTS,
     _select_cold_open,
+    _truncate_to_words,
     chunk_caption,
 )
 
@@ -89,6 +90,36 @@ class TestSelectColdOpen:
         segs = self._segs(10, words_each=6)
         chosen = _select_cold_open(segs, target_secs=30)
         assert chosen == segs[: len(chosen)]
+
+    def test_truncates_overflowing_segment_instead_of_dropping(self):
+        # A short intro followed by a long segment must NOT collapse to the intro
+        # only — the long segment is truncated to fit, not dropped. (This is the
+        # 15s-intro-only regression the SOC-Reel-Audio fix addresses.)
+        intro = ("MIKE", "Good morning. Welcome back.")           # 4 words
+        long_body = " ".join(f"Sentence number {i} here." for i in range(60))  # ~240 words
+        segs = [intro, ("ELIZABETH", long_body)]
+        chosen = _select_cold_open(segs, target_secs=20)          # 20 * 2.5 = 50-word budget
+        assert len(chosen) == 2                                    # long segment kept, not dropped
+        assert chosen[0] == intro
+        trimmed = chosen[1][1]
+        assert len(trimmed.split()) < len(long_body.split())      # it was truncated
+        assert trimmed.rstrip().endswith(".")                     # cut on a sentence boundary
+
+
+class TestTruncateToWords:
+
+    def test_keeps_whole_sentences_within_budget(self):
+        text = "One two three. Four five six. Seven eight nine."
+        out = _truncate_to_words(text, 6)          # ~2 sentences fit
+        assert out == "One two three. Four five six."
+
+    def test_always_returns_at_least_the_first_sentence(self):
+        text = "This first sentence is already longer than the tiny budget. Second."
+        out = _truncate_to_words(text, 3)
+        assert out.startswith("This first sentence")
+
+    def test_no_punctuation_returns_the_whole_text(self):
+        assert _truncate_to_words("just some words no periods", 2) == "just some words no periods"
 
 
 if __name__ == "__main__":
