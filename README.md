@@ -63,7 +63,7 @@ The default execution path is the CrewAI agent pipeline (`--crew`). A `--legacy`
 13. **Automatic social distribution (X + Instagram)** — Step 11: after delivery, MikeCast auto-posts the day's briefing to **X** ([@mikecastai](https://x.com/mikecastai)) and **Instagram** ([@mikecastai](https://www.instagram.com/mikecastai/)), each linking back to that day's episode.
     - **X**: a "🎙️ MikeCast Daily · {date}" tweet — a Claude-written news hook plus the episode deep link and the Spotify show link (posted via the X API v2, OAuth 1.0a). Optionally with the day's reel attached (chunked video upload; best-effort on the free tier).
     - **Instagram**: either a branded **1080×1080 image card** (default) or a **9:16 vertical Reel** (see below), published via the Instagram Graph API container→publish flow, with a matching caption. IG doesn't linkify caption URLs, so the CTA points to the site + "link in bio."
-    - **Social video reels** — the daily asset kind is chosen by `SOCIAL_MEDIA_KIND` (`card` or `reel`, default `card`). A **reel** is a 9:16 vertical video that plays the podcast audio with **burned-in captions** (muted-proof, since IG/X autoplay is silent), built from the cold-open of the day's script by `mc_video.py`. A reel that can't be built falls back to the card (IG) and a plain text+link tweet (X), so the daily run never breaks. See **Social Distribution** below.
+    - **Social video reels** — the daily asset kind is chosen by `SOCIAL_MEDIA_KIND` (`card` or `reel`; code default `card`, and the **live production run is set to `reel`**). A **reel** is a 9:16 vertical video that plays the podcast audio with **burned-in captions** (muted-proof, since IG/X autoplay is silent), built from the cold-open of the day's script by `mc_video.py`, and posted to Instagram (as a Reel) and X (chunked video, with a text+link fallback). A reel that can't be built falls back to the card (IG) and a plain text+link tweet (X), so the daily run never breaks. See **Social Distribution** below.
     - **Copy** is written by the new `Distribution Crew` (a Claude social copywriter, hallucination-guarded), with deterministic headers/links/fallbacks added in code so an LLM blip never blocks posting.
     - Each channel skips gracefully with a logged message when its credentials aren't set. See **Social Distribution** below.
 
@@ -300,10 +300,12 @@ export X_ACCESS_TOKEN_SECRET="..."
 export META_ACCESS_TOKEN="..."
 export IG_USER_ID="1784..."
 
-# Optional — daily social asset kind: "card" (static 1080×1080 image, default) or
-# "reel" (9:16 video with podcast audio + burned-in captions). Flipping this to
-# "reel" needs no code deploy; a reel that can't be built falls back to the card.
-export SOCIAL_MEDIA_KIND="card"
+# Optional — daily social asset kind: "card" (static 1080×1080 image) or "reel"
+# (9:16 video with podcast audio + burned-in captions). Code default is "card";
+# the deployed ECS task-def sets "reel", so the live daily run posts a reel to IG
+# + X. Flipping it needs no code deploy; a reel that can't be built falls back to
+# the card (IG) / text+link (X).
+export SOCIAL_MEDIA_KIND="reel"
 
 # Optional — CloudFront distribution fronting mikecast.io (used by mc_edit.py to
 # invalidate the cache after republishing a past episode). Defaults to the live one.
