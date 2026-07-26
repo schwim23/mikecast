@@ -384,10 +384,20 @@ def _fit_ig(caption: str) -> str:
     return caption
 
 
-def _build_ig_caption(hook: str, date_display: str | None = None) -> str:
+def _build_ig_caption(
+    hook: str, date_display: str | None = None, headlines: list[str] | None = None,
+) -> str:
     """
     Assemble the IG caption in the same shape as the tweet — a 'MikeCast Daily ·
-    {date}' header, the news hook, then a CTA — with hashtags at the very end.
+    {date}' header, the news hook, a top-stories bullet list, then a CTA — with
+    hashtags at the very end.
+
+    ``headlines`` (the day's card_bullets) are the caption's own text, separate
+    from the reel video itself — the IG counterpart to what the tweet body
+    already does on X, and a skimmable stand-in for the static card's headline
+    list now that the reel's burned-in captions are just the spoken cold-open
+    rather than a highlights summary. IG's 2200-char caption cap has plenty of
+    room for this (unlike X's 280, where the hook alone already fights for space).
 
     Instagram does NOT hyperlink URLs in captions, so the CTA points to the short,
     typeable domain (mikecast.io) and the bio ('link in bio') rather than a raw,
@@ -403,8 +413,12 @@ def _build_ig_caption(hook: str, date_display: str | None = None) -> str:
     body = re.sub(r"\n{3,}", "\n\n", body).strip()
 
     header = f"🎙️ MikeCast Daily · {date_display}" if date_display else "🎙️ MikeCast Daily"
+    headline_lines = [_clean_title(h) for h in (headlines or []) if h and h.strip()][:3]
+    stories = "\n".join(f"• {h}" for h in headline_lines)
+    if stories:
+        stories = f"Today's top stories:\n{stories}"
     cta = "📰 Full briefing → mikecast.io\n🎧 Listen — link in bio"
-    caption = "\n\n".join(p for p in (header, body, cta) if p)
+    caption = "\n\n".join(p for p in (header, body, stories, cta) if p)
     if tags:
         caption += "\n\n" + " ".join(tags[:IG_MAX_HASHTAGS])
     return _fit_ig(caption)
@@ -831,16 +845,21 @@ def _resolve_copy(date: str, episode_data: dict, link: str, force: bool) -> dict
 # Orchestrator
 # ---------------------------------------------------------------------------
 
-def _maybe_build_reel(date: str, episode_data: dict, dry_run: bool):
+def _maybe_build_reel(date: str, episode_data: dict, dry_run: bool, headlines: list[str] | None = None):
     """
     Build the day's reel once (shared by X + IG) and upload it for IG's public URL.
     Returns (reel_path, reel_url). Either may be None: a None reel_path means the
     reel couldn't be built (missing ElevenLabs creds, no script, render error) and
     every channel falls back to card/text. reel_url is None in dry-run (nothing is
     uploaded) — the local reel_path is still returned for visual inspection.
+
+    ``headlines`` (the day's card_bullets) puts a "Today's Top Stories" title
+    slate ahead of the cold-open, same data the static card used to show.
     """
     from mc_video import build_daily_reel
-    reel_path = build_daily_reel(episode_data, DATA_DIR / f"MikeCast_reel_{date}.mp4")
+    reel_path = build_daily_reel(
+        episode_data, DATA_DIR / f"MikeCast_reel_{date}.mp4", headlines=headlines,
+    )
     if not reel_path:
         logger.warning("Reel build failed for %s — falling back to card/text.", date)
         return None, None
@@ -887,7 +906,11 @@ def run_social_distribution(
     # Copy (shared by both channels)
     copy = _resolve_copy(date, episode_data, link, force=force)
     x_text = _fit_x(copy["x_text"], link, date_display=episode_data.get("date_display"))
-    ig_caption = _build_ig_caption(copy["ig_caption"], date_display=episode_data.get("date_display"))
+    ig_caption = _build_ig_caption(
+        copy["ig_caption"],
+        date_display=episode_data.get("date_display"),
+        headlines=copy.get("card_bullets"),
+    )
 
     want_x = only in (None, "x")
     want_ig = only in (None, "ig")
@@ -903,7 +926,9 @@ def run_social_distribution(
         )
         if need:
             try:
-                reel_path, reel_url = _maybe_build_reel(date, episode_data, dry_run)
+                reel_path, reel_url = _maybe_build_reel(
+                    date, episode_data, dry_run, headlines=copy.get("card_bullets"),
+                )
             except Exception as exc:
                 logger.error("Reel prep raised (non-fatal): %s", exc)
         if reel_path is None:

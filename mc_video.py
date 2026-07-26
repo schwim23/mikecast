@@ -168,6 +168,44 @@ def _draw_wave(draw: ImageDraw.ImageDraw, cx: int, cy: int, color: tuple) -> Non
 
 
 # ---------------------------------------------------------------------------
+# Shared frame elements (logo, date badge, CTA bar) — used by both the per-cue
+# caption frame and the headline slate frame.
+# ---------------------------------------------------------------------------
+
+def _draw_logo(img: Image.Image, logo: Image.Image | None, logo_y: int = 100) -> int:
+    """Paste the centered cover logo at ``logo_y``; returns its bottom y."""
+    if logo is not None:
+        lx = (VIDEO_W - logo.width) // 2
+        img.paste(logo, (lx, logo_y), logo)
+        return logo_y + logo.height
+    return logo_y
+
+
+def _draw_date_badge(draw: ImageDraw.ImageDraw, top_y: int, date_str: str) -> int:
+    """Draw the centered date pill starting at ``top_y``; returns its bottom y."""
+    f_date = _font(36)
+    bbox   = draw.textbbox((0, 0), date_str, font=f_date)
+    dw, dh = bbox[2] - bbox[0] + 50, bbox[3] - bbox[1] + 22
+    draw.rounded_rectangle(
+        [(VIDEO_W // 2 - dw // 2, top_y), (VIDEO_W // 2 + dw // 2, top_y + dh)],
+        radius=dh // 2, fill=(0, 0, 0, 160),
+    )
+    draw.text((VIDEO_W // 2, top_y + dh // 2), date_str,
+              font=f_date, fill=COLOR_CYAN, anchor="mm")
+    return top_y + dh
+
+
+def _draw_cta_bar(draw: ImageDraw.ImageDraw) -> None:
+    """Draw the fixed bottom brand/CTA bar shared by every frame."""
+    cta_top = VIDEO_H - 175
+    draw.rectangle([(0, cta_top), (VIDEO_W, VIDEO_H)], fill=(0, 0, 0, 220))
+    draw.text((VIDEO_W // 2, cta_top + 55), "MikeCast Daily Briefing",
+              font=_font(46, bold=True), fill=COLOR_CYAN, anchor="mm")
+    draw.text((VIDEO_W // 2, cta_top + 118), "Full episode → mikecast.io",
+              font=_font(36), fill=(180, 190, 210), anchor="mm")
+
+
+# ---------------------------------------------------------------------------
 # Frame renderer (one composed RGB frame for a single caption cue)
 # ---------------------------------------------------------------------------
 
@@ -183,29 +221,11 @@ def render_frame(
     draw = ImageDraw.Draw(img, "RGBA")
     color = SPEAKER_COLORS.get(speaker, COLOR_CYAN)
 
-    # --- Logo ---
-    logo_y = 100
-    if logo is not None:
-        lx = (VIDEO_W - logo.width) // 2
-        img.paste(logo, (lx, logo_y), logo)
-        logo_bottom = logo_y + logo.height
-    else:
-        logo_bottom = logo_y
-
-    # --- Date badge ---
-    date_y = logo_bottom + 30
-    f_date = _font(36)
-    bbox   = draw.textbbox((0, 0), date_str, font=f_date)
-    dw, dh = bbox[2] - bbox[0] + 50, bbox[3] - bbox[1] + 22
-    draw.rounded_rectangle(
-        [(VIDEO_W // 2 - dw // 2, date_y), (VIDEO_W // 2 + dw // 2, date_y + dh)],
-        radius=dh // 2, fill=(0, 0, 0, 160),
-    )
-    draw.text((VIDEO_W // 2, date_y + dh // 2), date_str,
-              font=f_date, fill=COLOR_CYAN, anchor="mm")
+    logo_bottom = _draw_logo(img, logo)
+    date_bottom = _draw_date_badge(draw, logo_bottom + 30, date_str)
 
     # --- Sound wave ---
-    wave_y = date_y + dh + 70
+    wave_y = date_bottom + 70
     _draw_wave(draw, VIDEO_W // 2, wave_y, color)
 
     # --- Speaker pill ---
@@ -236,14 +256,71 @@ def render_frame(
         draw.text((VIDEO_W // 2, sub_top + i * line_h + line_h // 2),
                   line, font=f_sub, fill=COLOR_WHITE, anchor="mm")
 
-    # --- CTA bottom bar ---
-    cta_top = VIDEO_H - 175
-    draw.rectangle([(0, cta_top), (VIDEO_W, VIDEO_H)], fill=(0, 0, 0, 220))
-    draw.text((VIDEO_W // 2, cta_top + 55), "MikeCast Daily Briefing",
-              font=_font(46, bold=True), fill=COLOR_CYAN, anchor="mm")
-    draw.text((VIDEO_W // 2, cta_top + 118), "Full episode → mikecast.io",
-              font=_font(36), fill=(180, 190, 210), anchor="mm")
+    _draw_cta_bar(draw)
+    return np.array(img.convert("RGB"))
 
+
+# ---------------------------------------------------------------------------
+# Headline slate — a static "Today's Top Stories" opening frame for the reel,
+# so the day's highlights are visible even muted / at a glance, the way the
+# static card used to show them before reels replaced it as the default.
+# ---------------------------------------------------------------------------
+
+SLATE_SECS = 3.5  # how long the slate holds before the captioned cold-open begins
+
+
+def _truncate_words(text: str, limit: int) -> str:
+    """Word-boundary truncate with an ellipsis, so a long headline never gets
+    silently cut mid-word/mid-thought inside the slate's fixed 2-line bullets."""
+    text = text.strip()
+    if len(text) <= limit:
+        return text
+    cut = text[:limit]
+    if " " in cut:
+        cut = cut[:cut.rfind(" ")]
+    return cut.rstrip() + "…"
+
+
+def render_slate_frame(
+    bg: Image.Image,
+    logo: Image.Image | None,
+    headlines: list[str],
+    date_str: str,
+) -> np.ndarray:
+    """Compose the opening 'Today's Top Stories' slate → RGB numpy array."""
+    img  = bg.copy().convert("RGBA")
+    draw = ImageDraw.Draw(img, "RGBA")
+
+    logo_bottom = _draw_logo(img, logo)
+
+    # --- Title ---
+    title_y = logo_bottom + 60
+    draw.text((VIDEO_W // 2, title_y), "TODAY'S TOP STORIES",
+              font=_font(52, bold=True), fill=COLOR_CYAN, anchor="mm")
+
+    date_bottom = _draw_date_badge(draw, title_y + 45, date_str)
+
+    # --- Headline bullets ---
+    f_head  = _font(50, bold=True)
+    line_h  = 64
+    wrap_width, max_lines = 28, 2
+    trimmed = [_truncate_words(h.strip(), wrap_width * max_lines) for h in headlines[:3] if h and h.strip()]
+    wrapped = [textwrap.wrap(h, width=wrap_width)[:max_lines] for h in trimmed]
+    block_h = sum(len(w) * line_h + 40 for w in wrapped)
+
+    panel_top = date_bottom + 60
+    draw.rounded_rectangle(
+        [(60, panel_top), (VIDEO_W - 60, panel_top + block_h + 40)],
+        radius=28, fill=(0, 0, 0, 190),
+    )
+    cy = panel_top + 40
+    for lines in wrapped:
+        draw.ellipse([(96, cy + 14), (120, cy + 38)], fill=COLOR_CYAN)
+        for i, line in enumerate(lines):
+            draw.text((140, cy + i * line_h), line, font=f_head, fill=COLOR_WHITE)
+        cy += len(lines) * line_h + 40
+
+    _draw_cta_bar(draw)
     return np.array(img.convert("RGB"))
 
 
@@ -352,6 +429,7 @@ def render_captioned_video(
     segments: list[tuple[str, str, Path, float]],
     out_path: Path,
     date_display: str,
+    headlines: list[str] | None = None,
 ) -> Path:
     """
     Render a 1080×1920 H.264/AAC MP4 from pre-rendered per-segment audio.
@@ -361,9 +439,15 @@ def render_captioned_video(
     its proportional share of the segment's audio duration, so captions stay in
     sync with the audio by construction. The full audio is the segments played
     back-to-back. Output is faststart'd for Instagram.
+
+    ``headlines``, if given, prepends a silent ``SLATE_SECS`` "Today's Top
+    Stories" title card ahead of the captioned cold-open — the highlights stay
+    visible for a beat even muted / thumbnail-only, the way the static card did
+    before reels replaced it. Omitted (default) for callers like mc_ad.py that
+    have no daily headlines to show.
     """
     from moviepy import (
-        AudioFileClip, ImageClip, concatenate_audioclips, concatenate_videoclips,
+        AudioClip, AudioFileClip, ImageClip, concatenate_audioclips, concatenate_videoclips,
     )
 
     background = _build_background()
@@ -371,6 +455,16 @@ def render_captioned_video(
 
     video_clips = []
     audio_clips = []
+
+    headlines = [h for h in (headlines or []) if h and h.strip()]
+    if headlines:
+        slate_frame = render_slate_frame(background, logo, headlines, date_display)
+        video_clips.append(ImageClip(slate_frame, duration=SLATE_SECS).with_fps(FPS))
+        audio_clips.append(AudioClip(
+            frame_function=lambda t: np.array([0.0, 0.0]),
+            duration=SLATE_SECS, fps=44100,
+        ))
+
     for speaker, text, audio_path, duration in segments:
         duration = max(float(duration), 0.5)
         cues = chunk_caption(text) or [text]
@@ -483,6 +577,7 @@ def build_daily_reel(
     episode_data: dict,
     out_path: Path,
     target_secs: float = REEL_TARGET_SECS,
+    headlines: list[str] | None = None,
 ) -> Path | None:
     """
     Build the day's Instagram Reel / X video from the cold-open of the episode's
@@ -493,6 +588,9 @@ def build_daily_reel(
     Per-segment episode audio isn't cached by mc_audio (it concatenates in-memory
     bytes then discards them), so we re-TTS the handful of cold-open segments here.
     Cost is a few segments of ElevenLabs audio per day (~60–75s).
+
+    ``headlines`` (the day's top-3 stories, e.g. ``card_bullets``), if given, are
+    shown on a title slate ahead of the cold-open — see ``render_captioned_video``.
     """
     if not elevenlabs_configured():
         logger.info("ElevenLabs not configured — cannot build reel; will use card.")
@@ -526,7 +624,7 @@ def build_daily_reel(
 
         if not rendered:
             return None
-        return render_captioned_video(rendered, out_path, date_display)
+        return render_captioned_video(rendered, out_path, date_display, headlines=headlines)
     except Exception as exc:
         logger.error("Reel build failed (%s) — caller will fall back to card.", exc)
         return None
