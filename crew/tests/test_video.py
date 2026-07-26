@@ -21,9 +21,13 @@ if _ROOT not in sys.path:
 
 from mc_video import (  # noqa: E402
     REEL_MAX_SEGMENTS,
+    VIDEO_H,
+    VIDEO_W,
     _select_cold_open,
     _truncate_to_words,
+    _truncate_words,
     chunk_caption,
+    render_slate_frame,
 )
 
 
@@ -120,6 +124,48 @@ class TestTruncateToWords:
 
     def test_no_punctuation_returns_the_whole_text(self):
         assert _truncate_to_words("just some words no periods", 2) == "just some words no periods"
+
+
+class TestTruncateWords:
+
+    def test_short_text_passes_through_unchanged(self):
+        assert _truncate_words("OpenAI ships a new model", 60) == "OpenAI ships a new model"
+
+    def test_long_text_truncates_at_word_boundary_with_ellipsis(self):
+        text = "OpenAI announces new frontier model with major reasoning gains"
+        out = _truncate_words(text, 60)
+        assert out.endswith("…")
+        assert not out.rstrip("…").endswith(" ")
+        # never splits a word — everything before the ellipsis is whole words from the source
+        assert text.startswith(out.rstrip("…").rstrip())
+
+    def test_empty_text_returns_empty(self):
+        assert _truncate_words("", 60) == ""
+
+
+class TestRenderSlateFrame:
+    """The 'Today's Top Stories' opening slate — headline text separate from
+    the reel's live captions, so the day's highlights survive muted/at-a-glance
+    viewing the way the static card used to before reels replaced it."""
+
+    def test_returns_full_size_rgb_frame(self):
+        headlines = ["Story one", "Story two", "Story three"]
+        frame = render_slate_frame(bg=_solid_bg(), logo=None, headlines=headlines, date_str="Jan 1, 2026")
+        assert frame.shape == (VIDEO_H, VIDEO_W, 3)
+
+    def test_handles_no_headlines_without_crashing(self):
+        frame = render_slate_frame(bg=_solid_bg(), logo=None, headlines=[], date_str="Jan 1, 2026")
+        assert frame.shape == (VIDEO_H, VIDEO_W, 3)
+
+    def test_handles_a_long_headline_without_crashing(self):
+        long_headline = "A" * 200
+        frame = render_slate_frame(bg=_solid_bg(), logo=None, headlines=[long_headline], date_str="Jan 1, 2026")
+        assert frame.shape == (VIDEO_H, VIDEO_W, 3)
+
+
+def _solid_bg():
+    from PIL import Image
+    return Image.new("RGB", (VIDEO_W, VIDEO_H), (10, 14, 32))
 
 
 if __name__ == "__main__":

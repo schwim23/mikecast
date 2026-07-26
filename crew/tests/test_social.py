@@ -88,5 +88,38 @@ class TestIgTransientClassifier:
         assert mc_social._ig_transient(_resp(400, {"error": {"code": 190}})) is False
 
 
+class TestBuildIgCaption:
+    """The IG caption's own 'Today's top stories' bullet block — its own text,
+    separate from the reel video, mirroring what the tweet body does on X. This
+    is the caption-side counterpart to render_slate_frame's on-video slate."""
+
+    def test_includes_headline_bullets(self):
+        caption = mc_social._build_ig_caption(
+            "Big day in tech and sports.", date_display="Jan 1, 2026",
+            headlines=["Story one happened", "Story two happened", "Story three happened"],
+        )
+        assert "Today's top stories:" in caption
+        assert "• Story one happened" in caption
+        assert "• Story two happened" in caption
+        assert "• Story three happened" in caption
+
+    def test_caps_at_three_headlines(self):
+        caption = mc_social._build_ig_caption(
+            "Hook.", date_display="Jan 1, 2026",
+            headlines=["One", "Two", "Three", "Four"],
+        )
+        assert "• Four" not in caption
+
+    def test_no_headlines_omits_the_block(self):
+        caption = mc_social._build_ig_caption("Hook.", date_display="Jan 1, 2026", headlines=None)
+        assert "Today's top stories:" not in caption
+
+    def test_headline_block_still_precedes_cta(self):
+        caption = mc_social._build_ig_caption(
+            "Hook.", date_display="Jan 1, 2026", headlines=["Story one"],
+        )
+        assert caption.index("Story one") < caption.index("Full briefing")
+
+
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-v"]))
