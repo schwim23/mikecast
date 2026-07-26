@@ -89,17 +89,22 @@ X_MAX = 280
 IG_MAX = 2200  # hard IG cap; we target well under this
 IG_MAX_HASHTAGS = 8
 
-# A hashtag is '#' followed by a LETTER or underscore, then word chars. The
-# letter-leading requirement is deliberate: it stops an inline episode reference
-# like "Episode #134" from being scooped up as a hashtag (which used to strip the
-# number out of the sentence, prepend "#134" to the tag block, and push a real
-# hashtag off the end of the 8-tag cap).
-_HASHTAG_RE = re.compile(r"#[A-Za-z_]\w*")
+# A hashtag is '#' followed by word chars containing AT LEAST ONE letter or
+# underscore — the letter may appear anywhere, not just first. Requiring a letter
+# *somewhere* is what stops an inline episode reference like "Episode #134" from
+# being scooped up as a hashtag (which used to strip the number out of the
+# sentence, prepend "#134" to the tag block, and push a real hashtag off the end
+# of the 8-tag cap). Requiring it in *first* position was too strict: it left
+# digit-leading tags like #76ers / #49ers stranded mid-sentence with the
+# whitespace of the tags removed around them, and absent from the tag block.
+_HASHTAG_RE = re.compile(r"#(?=\w*[A-Za-z_])\w+")
 
 
 def _is_hashtag(word: str) -> bool:
-    """True if a whitespace-delimited token is a real hashtag (# + letter/underscore)."""
-    return bool(re.match(r"#[A-Za-z_]", word))
+    """True if a whitespace-delimited token is a real hashtag (# + word chars
+    including at least one letter/underscore). Trailing punctuation is fine —
+    '#134.' is still not a hashtag because '.' isn't a word char."""
+    return bool(_HASHTAG_RE.match(word))
 
 # Spotify show link (secondary "listen" CTA on each tweet). Kept clean (no ?si=).
 SPOTIFY_SHOW_URL = "https://open.spotify.com/show/3SEexX9wC3nr4xStYK2jOv"
@@ -410,6 +415,11 @@ def _build_ig_caption(
     # drop any CTA/link the model may have added so we don't duplicate ours
     body = re.sub(r"(?im)^\s*(📰|🎧|🔗)?\s*(full briefing|listen on spotify|link in bio).*$", "", body)
     body = re.sub(r"(?i)\bfull briefing at mikecast\.io\.?", "", body)
+    # Lifting tags out of the copy leaves their surrounding spaces behind — a run
+    # of blanks mid-sentence, or a trailing-whitespace-only line where the tag
+    # block used to be. Collapse both so the body reads clean.
+    body = re.sub(r"[ \t]{2,}", " ", body)
+    body = re.sub(r"[ \t]+\n", "\n", body)
     body = re.sub(r"\n{3,}", "\n\n", body).strip()
 
     header = f"🎙️ MikeCast Daily · {date_display}" if date_display else "🎙️ MikeCast Daily"
