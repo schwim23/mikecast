@@ -121,5 +121,42 @@ class TestBuildIgCaption:
         assert caption.index("Story one") < caption.index("Full briefing")
 
 
+class TestHashtagExtraction:
+    """A hashtag needs a letter SOMEWHERE, not necessarily first. Digit-leading
+    tags (#76ers, #49ers) are real and belong in the trailing tag block; a bare
+    numeric episode reference (#134) is not a tag and must stay in the sentence."""
+
+    def test_digit_leading_tag_is_a_hashtag(self):
+        assert mc_social._is_hashtag("#76ers") is True
+        assert mc_social._HASHTAG_RE.findall("go #76ers and #AI") == ["#76ers", "#AI"]
+
+    def test_numeric_episode_ref_is_not_a_hashtag(self):
+        assert mc_social._is_hashtag("#134") is False
+        assert mc_social._is_hashtag("#134.") is False
+        assert mc_social._HASHTAG_RE.findall("Episode #134 is live") == []
+
+    def test_digit_leading_tag_moves_to_the_tag_block(self):
+        caption = mc_social._build_ig_caption(
+            "LeBron is a Sixer.\n\n#AI #76ers #MikeCast", date_display="Jan 1, 2026",
+        )
+        body, tags = caption.rsplit("\n\n", 1)
+        assert "#76ers" not in body        # not stranded mid-caption
+        assert tags == "#AI #76ers #MikeCast"
+
+    def test_numeric_ref_stays_in_the_sentence(self):
+        caption = mc_social._build_ig_caption(
+            "Episode #134 is live.\n\n#AI", date_display="Jan 1, 2026",
+        )
+        assert "Episode #134 is live." in caption
+
+    def test_lifted_tags_leave_no_whitespace_scar(self):
+        caption = mc_social._build_ig_caption(
+            "Mid #AI sentence tag.\n\n#76ers #MikeCast", date_display="Jan 1, 2026",
+        )
+        assert "Mid sentence tag." in caption
+        assert "  " not in caption        # no double-space anywhere
+        assert " \n" not in caption       # no trailing-whitespace lines
+
+
 if __name__ == "__main__":
     sys.exit(pytest.main([__file__, "-v"]))
