@@ -415,25 +415,68 @@ def render_captioned_video(
 # Daily reel builder — cold-open of the real episode script
 # ---------------------------------------------------------------------------
 
+_WORDS_PER_SEC = 2.5  # conservative estimate for cold-open budgeting
+
+
+def _split_sentences(text: str) -> list[str]:
+    """Split into sentences, keeping terminal punctuation. Falls back to the whole
+    text as a single 'sentence' when there's no sentence-ending punctuation."""
+    parts = re.split(r"(?<=[.!?…])\s+", text.strip())
+    return [p.strip() for p in parts if p.strip()]
+
+
+def _truncate_to_words(text: str, max_words: float) -> str:
+    """
+    Return the leading whole sentences whose cumulative word count stays within
+    ``max_words``. Always returns at least the first sentence (so a caption never
+    cuts mid-sentence), even if that one sentence already exceeds ``max_words``.
+    """
+    out: list[str] = []
+    words = 0
+    for s in _split_sentences(text):
+        w = len(s.split())
+        if out and words + w > max_words:
+            break
+        out.append(s)
+        words += w
+        if words >= max_words:
+            break
+    return " ".join(out)
+
+
 def _select_cold_open(
     segments: list[tuple[str, str]],
     target_secs: float = REEL_TARGET_SECS,
     max_segments: int = REEL_MAX_SEGMENTS,
 ) -> list[tuple[str, str]]:
     """
-    Pick the leading (cold-open) segments that fit ~target_secs of speech,
-    estimating ~2.5 words/sec. Whole segments only (never cut mid-segment — that
-    keeps caption/audio sync trivial). Always returns at least one segment.
+    Build the cold-open teaser from the leading segments, up to ~target_secs of
+    speech (estimating ~2.5 words/sec). Whole segments are kept while they fit; the
+    segment that would overflow the budget is **truncated to its first few
+    sentences rather than dropped** — otherwise a short host intro followed by a
+    long segment yields a thin, intro-only reel (e.g. a 15s "good morning" clip).
+    Truncation is at sentence boundaries, so caption/audio sync stays exact.
+    Always returns at least one (possibly truncated) segment.
     """
+    budget = target_secs * _WORDS_PER_SEC
     chosen: list[tuple[str, str]] = []
-    words = 0
-    budget = target_secs * 2.5
+    used = 0.0
     for speaker, text in segments:
-        if chosen and (words >= budget or len(chosen) >= max_segments):
+        if used >= budget or len(chosen) >= max_segments:
             break
-        chosen.append((speaker, text))
-        words += len(text.split())
-    return chosen or segments[:1]
+        seg_words = len(text.split())
+        if used + seg_words <= budget:
+            chosen.append((speaker, text))
+            used += seg_words
+        else:
+            trimmed = _truncate_to_words(text, budget - used)
+            if trimmed:
+                chosen.append((speaker, trimmed))
+            break
+    if not chosen and segments:
+        speaker, text = segments[0]
+        chosen = [(speaker, _truncate_to_words(text, budget) or text)]
+    return chosen
 
 
 def build_daily_reel(
