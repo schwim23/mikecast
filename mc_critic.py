@@ -216,11 +216,13 @@ def patch_weak_sections(
     picks: list[dict],
     weak_categories: list[str],
     issues: dict[str, str],
-) -> tuple[str, str, str]:
+) -> tuple[str, str, str, list[str]]:
     """
     Regenerate HTML sections for weak categories, then regenerate podcast scripts.
 
-    Returns (improved_html, improved_single_voice, improved_conversational).
+    Returns (improved_html, improved_single_voice, improved_conversational,
+    patched_categories) — patched_categories lists which sections were
+    actually rewritten (for Datadog metrics; purely observational).
     """
     from mc_generate import generate_conversational_script, generate_podcast_script
 
@@ -238,6 +240,7 @@ def patch_weak_sections(
         )
 
     improved_html = html
+    patched_categories: list[str] = []
 
     # The scorer echoes ALL-CAPS section headers ("COMPANIES") but `categorised`
     # is keyed title-case ("Companies"); a plain .get(cat) misses and returns [],
@@ -275,6 +278,7 @@ def patch_weak_sections(
                     flags=re.DOTALL | re.IGNORECASE,
                 )
                 logger.info("Patched HTML section for: %s", cat)
+                patched_categories.append(cat)
             else:
                 logger.warning("Could not locate HTML section for '%s' — skipping patch.", cat)
 
@@ -302,12 +306,25 @@ def patch_weak_sections(
         improved_single = single_voice_script
         improved_conv   = conversational_script
 
-    return improved_html, improved_single, improved_conv
+    return improved_html, improved_single, improved_conv, patched_categories
 
 
 # ---------------------------------------------------------------------------
 # Orchestrator
 # ---------------------------------------------------------------------------
+
+_NEVER_PATCH_NORMALIZED = {"ny sports"}
+
+
+def _critic_metrics(scores: dict, weak: list[str], patched: list[str] | None = None) -> dict:
+    """Build the Datadog metrics dict for a critic run — purely observational."""
+    return {
+        "category_scores": scores,
+        "weak_categories": weak,
+        "patched_categories": patched or [],
+        "ny_sports_skipped": any(c.lower() in _NEVER_PATCH_NORMALIZED for c in weak),
+    }
+
 
 def run_critic_pass(
     html: str,
@@ -315,14 +332,17 @@ def run_critic_pass(
     conversational_script: str,
     categorised: dict[str, list[dict]],
     picks: list[dict],
-) -> tuple[str, str, str]:
+) -> tuple[str, str, str, dict]:
     """
     Orchestrate the full critic pass: evaluate → optionally patch weak sections.
 
-    Max 1 pass (no loop). Returns inputs unchanged if passed=True or on exception.
+    Max 1 pass (no loop). Returns (html, single_voice_script,
+    conversational_script, metrics) — inputs unchanged if passed=True or on
+    exception. metrics is for Datadog submission; see _critic_metrics().
     """
     try:
         critique = critique_briefing(html, categorised)
+        scores = critique.get("category_scores", {})
 
         logger.info(
             "Critic results — passed: %s | weak: %s",
@@ -332,15 +352,15 @@ def run_critic_pass(
 
         if critique["passed"]:
             logger.info("Briefing passed quality check — no patches needed.")
-            return html, single_voice_script, conversational_script
+            return html, single_voice_script, conversational_script, _critic_metrics(scores, [])
 
         weak = critique.get("weak_categories", [])
         issues = critique.get("issues", {})
 
         if not weak:
-            return html, single_voice_script, conversational_script
+            return html, single_voice_script, conversational_script, _critic_metrics(scores, weak)
 
-        return patch_weak_sections(
+        improved_html, improved_single, improved_conv, patched = patch_weak_sections(
             html,
             single_voice_script,
             conversational_script,
@@ -349,7 +369,8 @@ def run_critic_pass(
             weak,
             issues,
         )
+        return improved_html, improved_single, improved_conv, _critic_metrics(scores, weak, patched)
 
     except Exception as exc:
         logger.warning("Critic pass failed entirely (returning originals): %s", exc)
-        return html, single_voice_script, conversational_script
+        return html, single_voice_script, conversational_script, _critic_metrics({}, [])

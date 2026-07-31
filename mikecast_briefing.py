@@ -17,6 +17,7 @@ All secrets are read from environment variables — nothing is hardcoded.
 Run with --force to regenerate today's briefing even if one already exists.
 """
 
+import json
 import logging
 import sys
 import time
@@ -32,6 +33,7 @@ from mc_deliver import (
     send_newsletter_broadcast,
 )
 from mc_dist_state import channel_sent, load_dist_state, record_send
+from mc_metrics import submit_run_metrics
 from mc_tracing import init_tracing, shutdown_tracing, step_span
 
 # ---------------------------------------------------------------------------
@@ -49,7 +51,8 @@ logger = logging.getLogger("mikecast")
 # ---------------------------------------------------------------------------
 
 def _run_legacy_steps_0_to_8b(trending_holder: list):
-    """Legacy procedural pipeline. Returns (html, single_script, conv_script, top_articles, picks)."""
+    """Legacy procedural pipeline. Returns (html, single_script, conv_script, top_articles,
+    picks, article_stats, critic_metrics) — the last two are for Datadog metrics."""
     from mc_collect import (
         cluster_articles,
         collect_all_news,
@@ -100,6 +103,7 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
         deduped = deduplicate(raw_news)
         deduped = filter_stale_articles(deduped, max_age_days=3)
         deduped = filter_sports_by_trusted_sources(deduped)
+        deduped_total = sum(len(v) for v in deduped.values())
 
         logger.info("Step 3/10: Clustering duplicate stories…")
         clustered = cluster_articles(deduped)
@@ -117,6 +121,8 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
 
         logger.info("Step 6/10: Enriching top stories…")
         top_articles = enrich_top_stories(top_articles, top_n=15)
+
+        article_stats = {"raw_collected": raw_total, "deduped": deduped_total, "selected": total}
 
     with step_span("picks", "legacy"):
         logger.info("Step 7/10: Processing Mike's Picks…")
@@ -146,16 +152,17 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
             except Exception as exc:
                 logger.error("Conversational script generation failed: %s", exc)
 
+    critic_metrics: dict = {}
     with step_span("critic", "legacy", **{"mikecast.ny_sports_never_patched": True}):
         logger.info("Step 8b/10: Running quality critic pass…")
         try:
-            html, single_voice_script, conversational_script = run_critic_pass(
+            html, single_voice_script, conversational_script, critic_metrics = run_critic_pass(
                 html, single_voice_script, conversational_script, top_articles, picks,
             )
         except Exception as exc:
             logger.warning("Critic pass failed entirely (non-fatal): %s", exc)
 
-    return html, single_voice_script, conversational_script, top_articles, picks
+    return html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics
 
 
 # ---------------------------------------------------------------------------
@@ -163,7 +170,8 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
 # ---------------------------------------------------------------------------
 
 def _run_crew_steps_0_to_8b(trending_holder: list):
-    """CrewAI pipeline. Returns (html, single_script, conv_script, top_articles, picks)."""
+    """CrewAI pipeline. Returns (html, single_script, conv_script, top_articles, picks,
+    article_stats, critic_metrics) — the last two are for Datadog metrics."""
     from crew.critic_crew import run_critic_pass as crew_run_critic_pass
     from crew.picks_crew import run_picks
     from crew.planning_crew import run_planning
@@ -178,7 +186,7 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
 
     with step_span("collect", "crew"):
         logger.info("Steps 1–6/10 [crew]: Research Crew…")
-        top_articles = run_research(
+        top_articles, article_stats = run_research(
             dynamic_queries=dynamic_queries,
             trending_context=trending_context,
             total_target=25,
@@ -219,10 +227,11 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
             ny_team_updates=ny_team_updates,
         )
 
+    critic_metrics: dict = {}
     with step_span("critic", "crew", **{"mikecast.ny_sports_never_patched": True}):
         logger.info("Step 8b/10 [crew]: Critic Crew…")
         try:
-            html, single_voice_script, conversational_script = crew_run_critic_pass(
+            html, single_voice_script, conversational_script, critic_metrics = crew_run_critic_pass(
                 html, single_voice_script, conversational_script,
                 top_articles, picks, trending,
                 verified_sports_facts=verified_sports_facts,
@@ -230,7 +239,7 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
         except Exception as exc:
             logger.warning("Critic Crew failed entirely (non-fatal): %s", exc)
 
-    return html, single_voice_script, conversational_script, top_articles, picks
+    return html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics
 
 
 # ---------------------------------------------------------------------------
@@ -374,9 +383,9 @@ def main() -> None:
             root_span.set_attribute("mikecast.date", TODAY)
 
             if use_crew:
-                html, single_voice_script, conversational_script, top_articles, picks = _run_crew_steps_0_to_8b(trending_holder)
+                html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics = _run_crew_steps_0_to_8b(trending_holder)
             else:
-                html, single_voice_script, conversational_script, top_articles, picks = _run_legacy_steps_0_to_8b(trending_holder)
+                html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics = _run_legacy_steps_0_to_8b(trending_holder)
 
             trending = trending_holder[0] if trending_holder else []
             total = sum(len(v) for v in top_articles.values())
@@ -384,6 +393,21 @@ def main() -> None:
             audio_ok, el_audio_ok, email_ok, social_results = _run_steps_9_and_10(
                 html, single_voice_script, conversational_script, top_articles, picks, trending,
                 path_label, resend=resend,
+            )
+
+            # save_daily_data() (inside _run_steps_9_and_10) already computed and
+            # persisted the true audio duration — read it back rather than
+            # touching mc_deliver.py's itunes:duration logic a second time.
+            audio_duration_secs = 0
+            try:
+                with open(DATA_DIR / f"{TODAY}.json") as f:
+                    audio_duration_secs = json.load(f).get("audio_duration_secs", 0)
+            except Exception as exc:
+                logger.warning("Could not read back audio_duration_secs for metrics (non-fatal): %s", exc)
+
+            submit_run_metrics(
+                path_label, TODAY, article_stats, critic_metrics,
+                audio_duration_secs, social_results,
             )
     finally:
         shutdown_tracing()

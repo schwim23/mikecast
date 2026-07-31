@@ -118,26 +118,39 @@ def run_critic_pass(
     picks: list[dict],
     trending: list[dict],
     verified_sports_facts: dict[str, str] | None = None,
-) -> tuple[str, str, str]:
+) -> tuple[str, str, str, dict]:
     """
     Run the critic + (optional) patch pass + NY Sports fact-check observability.
 
-    Returns (html, single_voice_script, conversational_script) — possibly
-    unchanged if all sections passed.
+    Returns (html, single_voice_script, conversational_script, metrics) —
+    html/scripts possibly unchanged if all sections passed. metrics is
+    {"category_scores": {...}, "weak_categories": [...],
+    "patched_categories": [...], "ny_sports_skipped": bool} for Datadog
+    submission — purely observational, computed from values already derived
+    for logging; no scoring/threshold/patch logic changes.
     """
+    def _empty_metrics(scores: dict | None = None, weak: list | None = None) -> dict:
+        weak = weak or []
+        return {
+            "category_scores": scores or {},
+            "weak_categories": weak,
+            "patched_categories": [],
+            "ny_sports_skipped": any(c.lower() in _NEVER_PATCH_NORMALIZED for c in weak),
+        }
+
     # Helper so every return path runs the NY Sports fact-check (read-only).
-    def _with_factcheck(h: str, s: str, c: str) -> tuple[str, str, str]:
+    def _with_factcheck(h: str, s: str, c: str, metrics: dict) -> tuple[str, str, str, dict]:
         try:
             fact_check_ny_sports(h, c, top_articles)
         except Exception as exc:
             logger.warning("[Fact-Checker] NY Sports fact-check failed (non-fatal): %s", exc)
-        return h, s, c
+        return h, s, c, metrics
 
     try:
         critique = _run_scorer(html, top_articles)
     except Exception as exc:
         logger.warning("[Critic Crew] scorer raised: %s — keeping originals", exc)
-        return _with_factcheck(html, single_voice_script, conversational_script)
+        return _with_factcheck(html, single_voice_script, conversational_script, _empty_metrics())
 
     scores = critique.get("category_scores", {})
     issues = critique.get("issues", {})
@@ -152,7 +165,8 @@ def run_critic_pass(
 
     if overall_passed and not weak:
         logger.info("[Critic Crew] briefing passed — no patches needed.")
-        return _with_factcheck(html, single_voice_script, conversational_script)
+        return _with_factcheck(html, single_voice_script, conversational_script,
+                                _empty_metrics(scores, weak))
 
     patchable = [c for c in weak if c.lower() not in _NEVER_PATCH_NORMALIZED]
     skipped = [c for c in weak if c.lower() in _NEVER_PATCH_NORMALIZED]
@@ -162,7 +176,8 @@ def run_critic_pass(
             "(prevents hallucinated scores/players/trades).", skipped,
         )
     if not patchable:
-        return _with_factcheck(html, single_voice_script, conversational_script)
+        return _with_factcheck(html, single_voice_script, conversational_script,
+                                _empty_metrics(scores, weak))
 
     # The scorer echoes the briefing's ALL-CAPS section headers ("COMPANIES",
     # "NY SPORTS"), but top_articles is keyed title-case ("Companies",
@@ -173,6 +188,7 @@ def run_critic_pass(
     articles_by_norm = {k.lower(): v for k, v in top_articles.items()}
 
     improved_html = html
+    patched_categories: list[str] = []
     for cat in patchable:
         articles = articles_by_norm.get(cat.lower(), [])
         issue = issues.get(cat, "Section lacks depth and substance.")
@@ -206,6 +222,7 @@ def run_critic_pass(
                     flags=re.DOTALL | re.IGNORECASE,
                 )
                 logger.info("[Critic Crew] patched section: %s", cat)
+                patched_categories.append(cat)
             else:
                 logger.warning("[Critic Crew] could not locate HTML section for '%s' — skip", cat)
         except Exception as exc:
@@ -216,7 +233,9 @@ def run_critic_pass(
     # the HTML — re-rolling against unchanged inputs is a coin-flip on quality
     # and burns ~70s + Claude tokens. If a future script critic pass scores the
     # podcast specifically, we can regenerate based on its signal.
-    return _with_factcheck(improved_html, single_voice_script, conversational_script)
+    metrics = _empty_metrics(scores, weak)
+    metrics["patched_categories"] = patched_categories
+    return _with_factcheck(improved_html, single_voice_script, conversational_script, metrics)
 
 
 # ---------------------------------------------------------------------------

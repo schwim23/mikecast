@@ -40,12 +40,14 @@ def run_research(
     *,
     total_target: int = 25,
     enrich_top_n: int = 15,
-) -> dict[str, list[dict]]:
+) -> tuple[dict[str, list[dict]], dict[str, int]]:
     """
     Run the full research pipeline (Steps 1–6) for ALL categories, including
     NY Sports. The NY Sports section is then refined by sports_research_crew.
 
-    Returns top_articles: {category: [ranked + enriched article dicts]}.
+    Returns (top_articles, stats) — top_articles is
+    {category: [ranked + enriched article dicts]}; stats is
+    {"raw_collected": int, "deduped": int, "selected": int} for metrics.
     """
     logger.info("[Research Crew] Step 1: collect_all_news (dynamic_queries=%d cats)",
                 len(dynamic_queries or {}))
@@ -53,7 +55,7 @@ def run_research(
     raw_total = sum(len(v) for v in raw_news.values())
     if raw_total == 0:
         logger.critical("[Research Crew] No articles collected — returning empty.")
-        return {}
+        return {}, {"raw_collected": 0, "deduped": 0, "selected": 0}
 
     logger.info("[Research Crew] Step 2: deduplicate (raw=%d)", raw_total)
     deduped = deduplicate(raw_news)
@@ -63,6 +65,7 @@ def run_research(
 
     logger.info("[Research Crew] Step 2c: filter_sports_by_trusted_sources")
     deduped = filter_sports_by_trusted_sources(deduped)
+    deduped_total = sum(len(v) for v in deduped.values())
 
     logger.info("[Research Crew] Step 3: cluster_articles")
     clustered = cluster_articles(deduped)
@@ -79,4 +82,5 @@ def run_research(
     logger.info("[Research Crew] Step 6: enrich_top_stories (top_n=%d)", enrich_top_n)
     enriched = enrich_top_stories(selected, top_n=enrich_top_n)
 
-    return enriched
+    stats = {"raw_collected": raw_total, "deduped": deduped_total, "selected": total}
+    return enriched, stats
