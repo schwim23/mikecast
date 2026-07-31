@@ -32,6 +32,7 @@ from mc_deliver import (
     send_newsletter_broadcast,
 )
 from mc_dist_state import channel_sent, load_dist_state, record_send
+from mc_tracing import init_tracing, shutdown_tracing, step_span
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -72,81 +73,87 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
     dynamic_queries: dict[str, list[str]] = {}
     trending_context: str = ""
     trending: list[dict] = []
-    try:
-        dynamic_queries, trending_context, trending = plan_daily_searches()
-        if dynamic_queries:
-            total_dyn = sum(len(v) for v in dynamic_queries.values())
-            logger.info("Planning complete: %d dynamic queries generated.", total_dyn)
-        else:
-            logger.info("Planning skipped or returned no queries (XAI_API_KEY may not be set).")
-    except Exception as exc:
-        logger.warning("Planning step failed (non-fatal): %s", exc)
+    with step_span("plan", "legacy"):
+        try:
+            dynamic_queries, trending_context, trending = plan_daily_searches()
+            if dynamic_queries:
+                total_dyn = sum(len(v) for v in dynamic_queries.values())
+                logger.info("Planning complete: %d dynamic queries generated.", total_dyn)
+            else:
+                logger.info("Planning skipped or returned no queries (XAI_API_KEY may not be set).")
+        except Exception as exc:
+            logger.warning("Planning step failed (non-fatal): %s", exc)
 
     trending_holder.append(trending)
 
-    logger.info("Step 1/10: Collecting news…")
-    raw_news = collect_all_news(dynamic_queries=dynamic_queries or None)
-    raw_total = sum(len(v) for v in raw_news.values())
-    if raw_total == 0:
-        logger.critical("No articles collected from any source — aborting.")
-        sys.exit(1)
-    if raw_total < 5:
-        logger.warning("Very few articles collected (%d) — possible widespread API failure.", raw_total)
+    with step_span("collect", "legacy"):
+        logger.info("Step 1/10: Collecting news…")
+        raw_news = collect_all_news(dynamic_queries=dynamic_queries or None)
+        raw_total = sum(len(v) for v in raw_news.values())
+        if raw_total == 0:
+            logger.critical("No articles collected from any source — aborting.")
+            sys.exit(1)
+        if raw_total < 5:
+            logger.warning("Very few articles collected (%d) — possible widespread API failure.", raw_total)
 
-    logger.info("Step 2/10: Deduplicating…")
-    deduped = deduplicate(raw_news)
-    deduped = filter_stale_articles(deduped, max_age_days=3)
-    deduped = filter_sports_by_trusted_sources(deduped)
+        logger.info("Step 2/10: Deduplicating…")
+        deduped = deduplicate(raw_news)
+        deduped = filter_stale_articles(deduped, max_age_days=3)
+        deduped = filter_sports_by_trusted_sources(deduped)
 
-    logger.info("Step 3/10: Clustering duplicate stories…")
-    clustered = cluster_articles(deduped)
+        logger.info("Step 3/10: Clustering duplicate stories…")
+        clustered = cluster_articles(deduped)
 
-    logger.info("Step 4/10: Scoring and ranking articles…")
-    scored = score_and_rank_articles(clustered, trending_context=trending_context)
+    with step_span("score_select_enrich", "legacy"):
+        logger.info("Step 4/10: Scoring and ranking articles…")
+        scored = score_and_rank_articles(clustered, trending_context=trending_context)
 
-    logger.info("Step 5/10: Selecting top articles…")
-    top_articles = select_top_articles(scored, total=25)
-    total = sum(len(v) for v in top_articles.values())
-    logger.info("Selected %d articles across %d categories.", total, len(top_articles))
-    if total == 0:
-        logger.warning("All articles were duplicates — briefing will have no new stories.")
+        logger.info("Step 5/10: Selecting top articles…")
+        top_articles = select_top_articles(scored, total=25)
+        total = sum(len(v) for v in top_articles.values())
+        logger.info("Selected %d articles across %d categories.", total, len(top_articles))
+        if total == 0:
+            logger.warning("All articles were duplicates — briefing will have no new stories.")
 
-    logger.info("Step 6/10: Enriching top stories…")
-    top_articles = enrich_top_stories(top_articles, top_n=15)
+        logger.info("Step 6/10: Enriching top stories…")
+        top_articles = enrich_top_stories(top_articles, top_n=15)
 
-    logger.info("Step 7/10: Processing Mike's Picks…")
-    picks = process_picks()
+    with step_span("picks", "legacy"):
+        logger.info("Step 7/10: Processing Mike's Picks…")
+        picks = process_picks()
 
-    logger.info("Step 8/10: Generating HTML briefing and podcast scripts…")
-    html: str = ""
-    single_voice_script: str = ""
-    conversational_script: str = ""
+    with step_span("generate", "legacy"):
+        logger.info("Step 8/10: Generating HTML briefing and podcast scripts…")
+        html: str = ""
+        single_voice_script: str = ""
+        conversational_script: str = ""
 
-    with ThreadPoolExecutor(max_workers=3) as ex:
-        f_html = ex.submit(generate_html_briefing, top_articles, picks, trending)
-        f_single = ex.submit(generate_podcast_script, top_articles, picks, trending)
-        f_conv = ex.submit(generate_conversational_script, top_articles, picks, trending)
+        with ThreadPoolExecutor(max_workers=3) as ex:
+            f_html = ex.submit(generate_html_briefing, top_articles, picks, trending)
+            f_single = ex.submit(generate_podcast_script, top_articles, picks, trending)
+            f_conv = ex.submit(generate_conversational_script, top_articles, picks, trending)
+            try:
+                html = f_html.result()
+            except Exception as exc:
+                logger.error("HTML briefing generation failed: %s", exc)
+                html = "<p>Briefing generation failed.</p>"
+            try:
+                single_voice_script = f_single.result()
+            except Exception as exc:
+                logger.error("Single-voice script generation failed: %s", exc)
+            try:
+                conversational_script = f_conv.result()
+            except Exception as exc:
+                logger.error("Conversational script generation failed: %s", exc)
+
+    with step_span("critic", "legacy", **{"mikecast.ny_sports_never_patched": True}):
+        logger.info("Step 8b/10: Running quality critic pass…")
         try:
-            html = f_html.result()
+            html, single_voice_script, conversational_script = run_critic_pass(
+                html, single_voice_script, conversational_script, top_articles, picks,
+            )
         except Exception as exc:
-            logger.error("HTML briefing generation failed: %s", exc)
-            html = "<p>Briefing generation failed.</p>"
-        try:
-            single_voice_script = f_single.result()
-        except Exception as exc:
-            logger.error("Single-voice script generation failed: %s", exc)
-        try:
-            conversational_script = f_conv.result()
-        except Exception as exc:
-            logger.error("Conversational script generation failed: %s", exc)
-
-    logger.info("Step 8b/10: Running quality critic pass…")
-    try:
-        html, single_voice_script, conversational_script = run_critic_pass(
-            html, single_voice_script, conversational_script, top_articles, picks,
-        )
-    except Exception as exc:
-        logger.warning("Critic pass failed entirely (non-fatal): %s", exc)
+            logger.warning("Critic pass failed entirely (non-fatal): %s", exc)
 
     return html, single_voice_script, conversational_script, top_articles, picks
 
@@ -164,58 +171,64 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
     from crew.sports_research_crew import fetch_all_ny_team_updates, run_sports_research
     from crew.writing_crew import run_writing
 
-    logger.info("Step 0/10 [crew]: Planning Crew…")
-    dynamic_queries, trending_context, trending = run_planning()
+    with step_span("plan", "crew"):
+        logger.info("Step 0/10 [crew]: Planning Crew…")
+        dynamic_queries, trending_context, trending = run_planning()
     trending_holder.append(trending)
 
-    logger.info("Steps 1–6/10 [crew]: Research Crew…")
-    top_articles = run_research(
-        dynamic_queries=dynamic_queries,
-        trending_context=trending_context,
-        total_target=25,
-        enrich_top_n=15,
-    )
-    total = sum(len(v) for v in top_articles.values())
-    if total == 0:
-        logger.warning("Research Crew returned no articles — briefing will be sparse.")
+    with step_span("collect", "crew"):
+        logger.info("Steps 1–6/10 [crew]: Research Crew…")
+        top_articles = run_research(
+            dynamic_queries=dynamic_queries,
+            trending_context=trending_context,
+            total_target=25,
+            enrich_top_n=15,
+        )
+        total = sum(len(v) for v in top_articles.values())
+        if total == 0:
+            logger.warning("Research Crew returned no articles — briefing will be sparse.")
 
-    logger.info("Steps 1–6/10 [crew]: NY Sports Research Crew (Gatekeeper + Researcher)…")
-    try:
-        verified_sports_facts = run_sports_research(top_articles)
-    except Exception as exc:
-        logger.warning("Sports Research Crew failed (non-fatal): %s", exc)
-        verified_sports_facts = {}
+    with step_span("sports_research", "crew"):
+        logger.info("Steps 1–6/10 [crew]: NY Sports Research Crew (Gatekeeper + Researcher)…")
+        try:
+            verified_sports_facts = run_sports_research(top_articles)
+        except Exception as exc:
+            logger.warning("Sports Research Crew failed (non-fatal): %s", exc)
+            verified_sports_facts = {}
 
-    # Deterministic per-team results + next-game fetch — covers the case where
-    # today's article batch misses an NY team that nonetheless has a game (e.g.
-    # the Yankees, who play almost daily in season). Bypasses the LLM and pulls
-    # last score + next game directly from ESPN so the briefing can always state
-    # the score and when the next game is.
-    try:
-        ny_team_updates = fetch_all_ny_team_updates()
-    except Exception as exc:
-        logger.warning("NY team-updates fetch failed (non-fatal): %s", exc)
-        ny_team_updates = []
+        # Deterministic per-team results + next-game fetch — covers the case where
+        # today's article batch misses an NY team that nonetheless has a game (e.g.
+        # the Yankees, who play almost daily in season). Bypasses the LLM and pulls
+        # last score + next game directly from ESPN so the briefing can always state
+        # the score and when the next game is.
+        try:
+            ny_team_updates = fetch_all_ny_team_updates()
+        except Exception as exc:
+            logger.warning("NY team-updates fetch failed (non-fatal): %s", exc)
+            ny_team_updates = []
 
-    logger.info("Step 7/10 [crew]: Picks Crew…")
-    picks = run_picks()
+    with step_span("picks", "crew"):
+        logger.info("Step 7/10 [crew]: Picks Crew…")
+        picks = run_picks()
 
-    logger.info("Step 8/10 [crew]: Writing Crew (3 parallel Claude writers)…")
-    html, single_voice_script, conversational_script = run_writing(
-        top_articles, picks, trending,
-        verified_sports_facts=verified_sports_facts,
-        ny_team_updates=ny_team_updates,
-    )
-
-    logger.info("Step 8b/10 [crew]: Critic Crew…")
-    try:
-        html, single_voice_script, conversational_script = crew_run_critic_pass(
-            html, single_voice_script, conversational_script,
+    with step_span("generate", "crew"):
+        logger.info("Step 8/10 [crew]: Writing Crew (3 parallel Claude writers)…")
+        html, single_voice_script, conversational_script = run_writing(
             top_articles, picks, trending,
             verified_sports_facts=verified_sports_facts,
+            ny_team_updates=ny_team_updates,
         )
-    except Exception as exc:
-        logger.warning("Critic Crew failed entirely (non-fatal): %s", exc)
+
+    with step_span("critic", "crew", **{"mikecast.ny_sports_never_patched": True}):
+        logger.info("Step 8b/10 [crew]: Critic Crew…")
+        try:
+            html, single_voice_script, conversational_script = crew_run_critic_pass(
+                html, single_voice_script, conversational_script,
+                top_articles, picks, trending,
+                verified_sports_facts=verified_sports_facts,
+            )
+        except Exception as exc:
+            logger.warning("Critic Crew failed entirely (non-fatal): %s", exc)
 
     return html, single_voice_script, conversational_script, top_articles, picks
 
@@ -224,7 +237,7 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
 # Shared Steps 9 & 10 (audio + deliver) — unchanged by migration
 # ---------------------------------------------------------------------------
 
-def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_articles, picks, trending, resend=False):
+def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_articles, picks, trending, pipeline_path, resend=False):
     """
     Audio generation + save + RSS + email + social. Identical for legacy and crew paths.
 
@@ -233,82 +246,85 @@ def _run_steps_9_and_10(html, single_voice_script, conversational_script, top_ar
     rerun regenerates content WITHOUT re-emailing or re-posting. `resend=True`
     (from `--resend`) bypasses the gate and re-sends everything.
     """
-    logger.info("Step 9/10: Generating audio…")
-    audio_path = DATA_DIR / f"MikeCast_{TODAY}.mp3"
-    el_audio_path = DATA_DIR / f"MikeCast_3voice_{TODAY}.mp3"
-    audio_ok = False
-    el_audio_ok = False
-    audio_filename = None
-    el_audio_filename = None
+    with step_span("audio", pipeline_path):
+        logger.info("Step 9/10: Generating audio…")
+        audio_path = DATA_DIR / f"MikeCast_{TODAY}.mp3"
+        el_audio_path = DATA_DIR / f"MikeCast_3voice_{TODAY}.mp3"
+        audio_ok = False
+        el_audio_ok = False
+        audio_filename = None
+        el_audio_filename = None
 
-    if conversational_script and ELEVENLABS_API_KEY:
-        logger.info("Generating ElevenLabs 3-voice audio…")
-        el_audio_ok = generate_elevenlabs_audio(conversational_script, el_audio_path)
-        if not el_audio_ok and el_audio_path.exists():
-            el_audio_path.unlink()
-            logger.warning("Removed partial ElevenLabs audio: %s", el_audio_path)
-        el_audio_filename = el_audio_path.name if el_audio_ok else None
+        if conversational_script and ELEVENLABS_API_KEY:
+            logger.info("Generating ElevenLabs 3-voice audio…")
+            el_audio_ok = generate_elevenlabs_audio(conversational_script, el_audio_path)
+            if not el_audio_ok and el_audio_path.exists():
+                el_audio_path.unlink()
+                logger.warning("Removed partial ElevenLabs audio: %s", el_audio_path)
+            el_audio_filename = el_audio_path.name if el_audio_ok else None
 
-    script_for_tts = single_voice_script or conversational_script
-    if script_for_tts and not el_audio_ok:
-        logger.info("Generating OpenAI TTS single-voice audio (ElevenLabs unavailable)…")
-        audio_ok = generate_podcast_audio(script_for_tts, audio_path)
-        if not audio_ok and audio_path.exists():
-            audio_path.unlink()
-            logger.warning("Removed partial OpenAI TTS audio: %s", audio_path)
-        audio_filename = audio_path.name if audio_ok else None
+        script_for_tts = single_voice_script or conversational_script
+        if script_for_tts and not el_audio_ok:
+            logger.info("Generating OpenAI TTS single-voice audio (ElevenLabs unavailable)…")
+            audio_ok = generate_podcast_audio(script_for_tts, audio_path)
+            if not audio_ok and audio_path.exists():
+                audio_path.unlink()
+                logger.warning("Removed partial OpenAI TTS audio: %s", audio_path)
+            audio_filename = audio_path.name if audio_ok else None
 
-    primary_audio_file = el_audio_filename or audio_filename
-    primary_audio_path = el_audio_path if el_audio_ok else (audio_path if audio_ok else None)
+        primary_audio_file = el_audio_filename or audio_filename
+        primary_audio_path = el_audio_path if el_audio_ok else (audio_path if audio_ok else None)
 
-    logger.info("Step 10/10: Saving data & sending email…")
-    save_daily_data(
-        html,
-        top_articles,
-        picks,
-        single_voice_script,
-        primary_audio_file,
-        conversational_script=conversational_script,
-        elevenlabs_audio_filename=el_audio_filename,
-        trending=trending,
-    )
-    generate_manifest()
-    generate_rss_feed()
+    with step_span("deliver", pipeline_path):
+        logger.info("Step 10/10: Saving data & sending email…")
+        save_daily_data(
+            html,
+            top_articles,
+            picks,
+            single_voice_script,
+            primary_audio_file,
+            conversational_script=conversational_script,
+            elevenlabs_audio_filename=el_audio_filename,
+            trending=trending,
+        )
+        generate_manifest()
+        generate_rss_feed()
 
-    # ----- Delivery (first-run-of-day gated) -----
-    state = load_dist_state(TODAY)
+        # ----- Delivery (first-run-of-day gated) -----
+        state = load_dist_state(TODAY)
 
-    # Personal Gmail send to Mike. Gated so --force reruns don't re-email.
-    if channel_sent(state, "personal_email") and not resend:
-        logger.info("Personal email already sent for %s — skipping (use --resend to re-send).", TODAY)
-        email_ok = True
-    else:
-        email_ok = send_email(html, single_voice_script or conversational_script, primary_audio_path)
-        if email_ok:
-            record_send(TODAY, "personal_email", {})
+        # Personal Gmail send to Mike. Gated so --force reruns don't re-email.
+        if channel_sent(state, "personal_email") and not resend:
+            logger.info("Personal email already sent for %s — skipping (use --resend to re-send).", TODAY)
+            email_ok = True
+        else:
+            email_ok = send_email(html, single_voice_script or conversational_script, primary_audio_path)
+            if email_ok:
+                record_send(TODAY, "personal_email", {})
 
-    # Additive newsletter broadcast to public Resend subscribers. Same HTML body
-    # as the personal email; skips gracefully (and never raises) if Resend isn't
-    # configured, so a newsletter problem can't break the daily pipeline. Gated
-    # so --force reruns don't re-broadcast to subscribers.
-    if channel_sent(state, "newsletter") and not resend:
-        logger.info("Newsletter already broadcast for %s — skipping (use --resend to re-send).", TODAY)
-    else:
-        try:
-            broadcast_id = send_newsletter_broadcast(html)
-            if broadcast_id:
-                record_send(TODAY, "newsletter", {"broadcast_id": broadcast_id})
-        except Exception as exc:
-            logger.warning("Newsletter broadcast raised (non-fatal): %s", exc)
+        # Additive newsletter broadcast to public Resend subscribers. Same HTML body
+        # as the personal email; skips gracefully (and never raises) if Resend isn't
+        # configured, so a newsletter problem can't break the daily pipeline. Gated
+        # so --force reruns don't re-broadcast to subscribers.
+        if channel_sent(state, "newsletter") and not resend:
+            logger.info("Newsletter already broadcast for %s — skipping (use --resend to re-send).", TODAY)
+        else:
+            try:
+                broadcast_id = send_newsletter_broadcast(html)
+                if broadcast_id:
+                    record_send(TODAY, "newsletter", {"broadcast_id": broadcast_id})
+            except Exception as exc:
+                logger.warning("Newsletter broadcast raised (non-fatal): %s", exc)
 
     # ----- Step 11: social distribution (X + Instagram) -----
     # Its own per-channel gating + graceful skips; never raises out to the pipeline.
     social_results = {}
-    try:
-        from mc_social import run_social_distribution
-        social_results = run_social_distribution(TODAY, force=resend)
-    except Exception as exc:
-        logger.warning("Social distribution raised (non-fatal): %s", exc)
+    with step_span("distribute", pipeline_path):
+        try:
+            from mc_social import run_social_distribution
+            social_results = run_social_distribution(TODAY, force=resend)
+        except Exception as exc:
+            logger.warning("Social distribution raised (non-fatal): %s", exc)
 
     return audio_ok, el_audio_ok, email_ok, social_results
 
@@ -351,18 +367,26 @@ def main() -> None:
     started_at = time.time()
     trending_holder: list = []
 
-    if use_crew:
-        html, single_voice_script, conversational_script, top_articles, picks = _run_crew_steps_0_to_8b(trending_holder)
-    else:
-        html, single_voice_script, conversational_script, top_articles, picks = _run_legacy_steps_0_to_8b(trending_holder)
+    tracer = init_tracing()
+    try:
+        with tracer.start_as_current_span("mikecast.daily_run") as root_span:
+            root_span.set_attribute("mikecast.pipeline_path", path_label)
+            root_span.set_attribute("mikecast.date", TODAY)
 
-    trending = trending_holder[0] if trending_holder else []
-    total = sum(len(v) for v in top_articles.values())
+            if use_crew:
+                html, single_voice_script, conversational_script, top_articles, picks = _run_crew_steps_0_to_8b(trending_holder)
+            else:
+                html, single_voice_script, conversational_script, top_articles, picks = _run_legacy_steps_0_to_8b(trending_holder)
 
-    audio_ok, el_audio_ok, email_ok, social_results = _run_steps_9_and_10(
-        html, single_voice_script, conversational_script, top_articles, picks, trending,
-        resend=resend,
-    )
+            trending = trending_holder[0] if trending_holder else []
+            total = sum(len(v) for v in top_articles.values())
+
+            audio_ok, el_audio_ok, email_ok, social_results = _run_steps_9_and_10(
+                html, single_voice_script, conversational_script, top_articles, picks, trending,
+                path_label, resend=resend,
+            )
+    finally:
+        shutdown_tracing()
 
     runtime_s = int(time.time() - started_at)
     logger.info(

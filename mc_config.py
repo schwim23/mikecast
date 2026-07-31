@@ -70,6 +70,11 @@ X_ACCESS_TOKEN_SECRET = os.environ.get("X_ACCESS_TOKEN_SECRET", "")
 META_ACCESS_TOKEN = os.environ.get("META_ACCESS_TOKEN", "")
 IG_USER_ID        = os.environ.get("IG_USER_ID", "")
 
+# Datadog — agentless OTel tracing of the daily pipeline (optional; see
+# DATADOG_PLAN.md). Tracing is a no-op when DD_API_KEY is unset.
+DD_API_KEY = os.environ.get("DD_API_KEY", "")
+DD_SITE    = os.environ.get("DD_SITE", "datadoghq.com")
+
 # Daily social media kind: "card" (static 1080×1080 image) or "reel" (9:16 vertical
 # video with podcast audio + burned-in captions). Defaults to "card" so the proven
 # path stays live; flip to "reel" via the ECS task-def env AFTER a live IG test —
