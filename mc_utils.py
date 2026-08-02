@@ -123,10 +123,13 @@ def s3_load_json(bucket: str, key: str) -> Any | None:
         raise
 
 
-def s3_save_json(bucket: str, key: str, data: Any, **json_kwargs) -> None:
+def s3_save_json(bucket: str, key: str, data: Any, cache_control: str | None = None, **json_kwargs) -> None:
     """Serialize data as JSON and upload to S3."""
     body = json.dumps(data, **json_kwargs).encode("utf-8")
-    _get_s3().put_object(Bucket=bucket, Key=key, Body=body, ContentType="application/json")
+    kwargs: dict = dict(Bucket=bucket, Key=key, Body=body, ContentType="application/json")
+    if cache_control:
+        kwargs["CacheControl"] = cache_control
+    _get_s3().put_object(**kwargs)
     logger.debug("s3://%s/%s written (%d bytes)", bucket, key, len(body))
 
 

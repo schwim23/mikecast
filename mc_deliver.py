@@ -21,6 +21,7 @@ from pathlib import Path
 from bs4 import BeautifulSoup
 
 from mc_config import (
+    CLOUDFRONT_DIST_ID,
     DATA_DIR,
     GMAIL_APP_PASSWORD,
     GMAIL_FROM,
@@ -35,7 +36,7 @@ from mc_config import (
     TODAY_DISPLAY,
 )
 from mc_generate import generate_episode_description
-from mc_utils import _atomic_write_json
+from mc_utils import _atomic_write_json, invalidate_cloudfront
 
 logger = logging.getLogger("mikecast")
 
@@ -182,7 +183,11 @@ def generate_manifest() -> None:
             [k[5:-5] for k in all_keys if re.match(r"data/\d{4}-\d{2}-\d{2}\.json$", k)],
             reverse=True,
         )
-        s3_save_json(S3_BUCKET, "data/manifest.json", {"dates": dates}, indent=2)
+        # Without Cache-Control, CloudFront serves this from cache for a full day
+        # (same staleness issue feed.xml has below) — Synthetics and the site both
+        # saw yesterday's date for hours after a run completed until this was added.
+        s3_save_json(S3_BUCKET, "data/manifest.json", {"dates": dates}, indent=2, cache_control="no-cache")
+        invalidate_cloudfront(CLOUDFRONT_DIST_ID, ["/data/manifest.json"])
     else:
         dates = sorted(
             [p.stem for p in DATA_DIR.glob("????-??-??.json")],
