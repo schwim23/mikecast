@@ -13,7 +13,6 @@ pipeline step via `step_span()`.
 """
 
 import logging
-import socket
 from contextlib import contextmanager
 
 from opentelemetry import trace
@@ -41,9 +40,11 @@ def init_tracing(service_name: str = "mikecast", env: str = "production") -> tra
     resource = Resource.create({
         "service.name": service_name,
         "deployment.environment": env,
-        # Ephemeral Fargate task, not a persistent host — without this Datadog
-        # flags every span "issue_type:empty_hostname" and the host facet is blank.
-        "host.name": socket.gethostname(),
+        # Fixed, not socket.gethostname(): Fargate assigns a new container
+        # hostname on every task launch, and Datadog's APM host billing can
+        # key off host.name on trace data. A real hostname here would report
+        # a new "host" every day; this pins it to one stable host instead.
+        "host.name": "mikecast-fargate",
     })
     _provider = TracerProvider(resource=resource)
     exporter = OTLPSpanExporter(
