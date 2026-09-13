@@ -5,3 +5,7 @@ __pycache__/
 # Internal ops runbooks — keep local, not on public GitHub
 NEWSLETTER_SETUP.md
 SOCIAL_SETUP.md
+
+# Eval harness generated data — captured fixtures / replay outputs, not source
+eval/fixtures/live/
+eval/out/

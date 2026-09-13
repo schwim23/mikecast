@@ -35,6 +35,8 @@ from mc_deliver import (
 from mc_dist_state import channel_sent, load_dist_state, record_send
 from mc_metrics import submit_run_metrics
 from mc_tracing import init_tracing, shutdown_tracing, step_span
+from eval.dump import dump_fixture
+from eval.dump import enabled as eval_dump_enabled
 
 # ---------------------------------------------------------------------------
 # Logging
@@ -226,8 +228,23 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
             verified_sports_facts=verified_sports_facts,
             ny_team_updates=ny_team_updates,
         )
+        dump_fixture("writer", TODAY, {
+            "input": {
+                "top_articles": top_articles,
+                "picks": picks,
+                "trending": trending,
+                "verified_sports_facts": verified_sports_facts,
+                "ny_team_updates": ny_team_updates,
+            },
+            "output": {
+                "html": html,
+                "single_voice_script": single_voice_script,
+                "conversational_script": conversational_script,
+            },
+        })
 
     critic_metrics: dict = {}
+    pre_critic_html, pre_critic_single, pre_critic_conv = html, single_voice_script, conversational_script
     with step_span("critic", "crew", **{"mikecast.ny_sports_never_patched": True}):
         logger.info("Step 8b/10 [crew]: Critic Crew…")
         try:
@@ -238,6 +255,23 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
             )
         except Exception as exc:
             logger.warning("Critic Crew failed entirely (non-fatal): %s", exc)
+        dump_fixture("critic", TODAY, {
+            "input": {
+                "html": pre_critic_html,
+                "single_voice_script": pre_critic_single,
+                "conversational_script": pre_critic_conv,
+                "top_articles": top_articles,
+                "picks": picks,
+                "trending": trending,
+                "verified_sports_facts": verified_sports_facts,
+            },
+            "output": {
+                "html": html,
+                "single_voice_script": single_voice_script,
+                "conversational_script": conversational_script,
+                "critic_metrics": critic_metrics,
+            },
+        })
 
     return html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics
 
@@ -347,6 +381,10 @@ def main() -> None:
     resend = "--resend" in sys.argv
     use_crew = "--crew" in sys.argv
     use_legacy = "--legacy" in sys.argv
+    eval_only = "--eval-only" in sys.argv
+    if "--dump-eval-fixture" in sys.argv:
+        import os
+        os.environ["MIKECAST_DUMP_EVAL_FIXTURE"] = "1"
     if use_crew and use_legacy:
         logger.error("Cannot pass both --crew and --legacy. Pick one.")
         sys.exit(2)
@@ -363,9 +401,10 @@ def main() -> None:
     logger.info("MikeCast Daily Briefing — %s — path=%s", TODAY_DISPLAY, path_label)
     logger.info("=" * 60)
 
-    # Idempotency guard
+    # Idempotency guard — skipped for --eval-only, which never reads or writes
+    # today's published data/manifest/RSS and is safe to run any number of times.
     daily_path = DATA_DIR / f"{TODAY}.json"
-    if daily_path.exists() and not force:
+    if daily_path.exists() and not force and not eval_only:
         logger.warning(
             "Today's briefing (%s) already exists. "
             "Re-run with --force to regenerate. Exiting.",
@@ -381,6 +420,7 @@ def main() -> None:
         with tracer.start_as_current_span("mikecast.daily_run") as root_span:
             root_span.set_attribute("mikecast.pipeline_path", path_label)
             root_span.set_attribute("mikecast.date", TODAY)
+            root_span.set_attribute("mikecast.eval_only", eval_only)
 
             if use_crew:
                 html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics = _run_crew_steps_0_to_8b(trending_holder)
@@ -390,39 +430,52 @@ def main() -> None:
             trending = trending_holder[0] if trending_holder else []
             total = sum(len(v) for v in top_articles.values())
 
-            audio_ok, el_audio_ok, email_ok, social_results = _run_steps_9_and_10(
-                html, single_voice_script, conversational_script, top_articles, picks, trending,
-                path_label, resend=resend,
-            )
+            # --eval-only stops here — no audio, no S3 data/manifest/RSS write,
+            # no email, no social, no Datadog run metrics. Used for capturing
+            # eval fixtures (--dump-eval-fixture) without touching anything
+            # already published for today. See MODEL_EVAL_PLAN.md.
+            if not eval_only:
+                audio_ok, el_audio_ok, email_ok, social_results = _run_steps_9_and_10(
+                    html, single_voice_script, conversational_script, top_articles, picks, trending,
+                    path_label, resend=resend,
+                )
 
-            # save_daily_data() (inside _run_steps_9_and_10) already computed and
-            # persisted the true audio duration — read it back rather than
-            # touching mc_deliver.py's itunes:duration logic a second time.
-            audio_duration_secs = 0
-            try:
-                with open(DATA_DIR / f"{TODAY}.json") as f:
-                    audio_duration_secs = json.load(f).get("audio_duration_secs", 0)
-            except Exception as exc:
-                logger.warning("Could not read back audio_duration_secs for metrics (non-fatal): %s", exc)
+                # save_daily_data() (inside _run_steps_9_and_10) already computed and
+                # persisted the true audio duration — read it back rather than
+                # touching mc_deliver.py's itunes:duration logic a second time.
+                audio_duration_secs = 0
+                try:
+                    with open(DATA_DIR / f"{TODAY}.json") as f:
+                        audio_duration_secs = json.load(f).get("audio_duration_secs", 0)
+                except Exception as exc:
+                    logger.warning("Could not read back audio_duration_secs for metrics (non-fatal): %s", exc)
 
-            submit_run_metrics(
-                path_label, TODAY, article_stats, critic_metrics,
-                audio_duration_secs, social_results,
-            )
+                submit_run_metrics(
+                    path_label, TODAY, article_stats, critic_metrics,
+                    audio_duration_secs, social_results,
+                )
     finally:
         shutdown_tracing()
 
     runtime_s = int(time.time() - started_at)
-    logger.info(
-        "Run summary [%s] — runtime: %dm%02ds | articles: %d | picks: %d | "
-        "elevenlabs: %s | openai_tts: %s | email: %s | x: %s | instagram: %s",
-        path_label, runtime_s // 60, runtime_s % 60, total, len(picks),
-        "ok" if el_audio_ok else ("skip" if not ELEVENLABS_API_KEY else "FAILED"),
-        "ok" if audio_ok else "FAILED",
-        "ok" if email_ok else "FAILED",
-        social_results.get("x", "skip"),
-        social_results.get("instagram", "skip"),
-    )
+    if eval_only:
+        logger.info(
+            "Eval-only run summary [%s] — runtime: %dm%02ds | articles: %d | picks: %d | "
+            "fixtures dumped: %s",
+            path_label, runtime_s // 60, runtime_s % 60, total, len(picks),
+            "yes" if eval_dump_enabled() else "no (pass --dump-eval-fixture too)",
+        )
+    else:
+        logger.info(
+            "Run summary [%s] — runtime: %dm%02ds | articles: %d | picks: %d | "
+            "elevenlabs: %s | openai_tts: %s | email: %s | x: %s | instagram: %s",
+            path_label, runtime_s // 60, runtime_s % 60, total, len(picks),
+            "ok" if el_audio_ok else ("skip" if not ELEVENLABS_API_KEY else "FAILED"),
+            "ok" if audio_ok else "FAILED",
+            "ok" if email_ok else "FAILED",
+            social_results.get("x", "skip"),
+            social_results.get("instagram", "skip"),
+        )
     logger.info("MikeCast briefing complete.")
 
 

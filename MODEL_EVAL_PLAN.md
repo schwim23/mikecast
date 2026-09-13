@@ -1,0 +1,374 @@
+# MikeCast — Model Evaluation & Testing Plan
+
+**Status:** IN PROGRESS — Phase 0 fixture-capture plumbing built 2026-09-13, not yet run · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0a. Session log — 2026-09-13 (resume here)
+
+**Confirmed eval matrix for this cycle** (each role evaluated independently — never
+promote two roles off one combined verdict):
+
+| Role | Baseline | Candidates | Notes |
+|---|---|---|---|
+| **Writer** | `anthropic/claude-sonnet-4-6` | `anthropic/claude-sonnet-5`, `openai/gpt-5.6-sol` | Both swappable via `CLAUDE_WRITER_MODEL` env var / LLM override — no code change. |
+| **Critic** (scorer only, not the patcher) | `openai/gpt-4o` | `openai/gpt-5.6-terra`, `anthropic/claude-sonnet-5` | Only `make_section_scorer()`'s `openai_critic_llm()` is in scope. `make_section_patcher()` stays on `claude_writer_llm()` (unchanged) — patching weak sections is writer-model surface, already covered separately. |
+| **Helper** (NY Sports fact-checker only) | `openai/gpt-4o-mini` | `openai/gpt-5.6-luna` | **OpenAI-only** — see §1b, a Claude candidate was explicitly descoped 2026-09-13. |
+
+New OpenAI model tier reference (fetched 2026-09-13 from developers.openai.com):
+`gpt-6-astra` ($10/$50, most capable), `gpt-5.6-sol` ($4/$20, complex professional
+tasks), `gpt-5.6-terra` ($2/$12, balanced), `gpt-5.6-luna` ($0.20/$1.20, cost-sensitive).
+Claude pricing confirmed via the `claude-api` skill: `claude-sonnet-4-6` $3/$15,
+`claude-sonnet-5` $2/$10, `claude-haiku-4-5` $1/$5 (not in the current matrix, available
+if a Helper-role Claude candidate is revisited).
+
+**Dashboard requirement confirmed 2026-09-13** (was already an open item in the old §8,
+now locked in as a requirement): user wants one dashboard showing runs per role, models
+tested, and scores. This is Phase 3+4 combined (see §8) — **not built yet**, because
+there's no run data to show until Phase 0 (fixture capture) and Phase 1 (replay) produce
+some. Build it once the first replay run has scores.
+
+### §1b. New finding: the "Helper" role is mostly dead code
+
+While wiring fixture capture, discovered that of the three agents built with
+`openai_helper_llm()` in `crew/agents.py` — `make_planner`, `make_sports_fact_checker`,
+`make_picks_processor` — **none are ever instantiated in the live pipeline** (verified by
+grep — zero call sites outside their own definitions). The only place `OPENAI_HELPER_MODEL`
+is actually read at runtime is `crew/tools.py::ValidateClaimTool._run` (the NY Sports
+fact-checker tool, `validate_claim_against_articles`), and that call site uses the raw
+`openai.OpenAI()` SDK client directly — not CrewAI/LiteLLM — including a strict
+`response_format={"type":"json_object"}` JSON-mode contract that doesn't map cleanly onto
+Anthropic. Making it provider-agnostic would mean rewriting the JSON-extraction contract
+for a piece of code that gates sports-hallucination fact-checking (CLAUDE.md: "Hallucination
+guards are everywhere... Do not weaken these"). Decision: **skip a Claude candidate for
+Helper this cycle** — only test `gpt-4o-mini` (baseline) vs `gpt-5.6-luna` (candidate), both
+via the existing raw-OpenAI code path with `OPENAI_HELPER_MODEL` overridden. Revisit the
+LiteLLM rewrite as its own deliberate, reviewed change if a Claude Helper candidate is
+wanted later.
+
+### Progress so far (files created/edited 2026-09-13)
+
+- **`eval/pricing.py`** — done. Pricing table (`$/1M` in/out) for every model in the matrix
+  above, keyed by LiteLLM-style model string, plus a `cost_usd()` helper.
+- **`eval/dump.py`** — done. `dump_fixture(role, date, payload)` writes
+  `eval/fixtures/live/<date>/<role>.json`, gated on `MIKECAST_DUMP_EVAL_FIXTURE=1` env var
+  (no-op otherwise, safe to call unconditionally from production code).
+- **`eval/fixtures/manifest.yaml`** — scaffolded, empty `dates: []` list — populate after a
+  few days of live capture per Phase 0.
+- **`mikecast_briefing.py`** — edited `_run_crew_steps_0_to_8b`: added
+  `from eval.dump import dump_fixture`, a `--dump-eval-fixture` CLI flag (sets
+  `MIKECAST_DUMP_EVAL_FIXTURE=1`), and two `dump_fixture(...)` calls — one right after
+  `run_writing(...)` capturing the writer's exact input (top_articles, picks, trending,
+  verified_sports_facts, ny_team_updates) and output (html, both scripts), and one right
+  after `crew_run_critic_pass(...)` capturing the critic's pre/post html+scripts,
+  top_articles/picks/trending inputs, and `critic_metrics`. Verified the file still parses
+  and imports cleanly (`ast.parse` + a real `import mikecast_briefing` with `sys.argv`
+  stubbed) — **not yet exercised against a real run.**
+- **Helper-role fixture capture — NOT YET DONE.** Plan is to add a fixture dump inside
+  `crew/critic_crew.py::fact_check_ny_sports()` (it already computes the exact sentence
+  list + `validate_claim_tool` verdicts needed) — deferred when the session paused.
+
+### Concrete next steps (in order)
+
+1. **Add Helper-role fixture capture** in `crew/critic_crew.py::fact_check_ny_sports()` —
+   dump `{"input": {sentences, sports_articles}, "output": {per-sentence verdicts}}` via
+   `eval.dump.dump_fixture("helper", TODAY, ...)`. Needs `from mc_config import TODAY`
+   added to that file (not currently imported there).
+2. **Get fixture capture actually running daily.** `--dump-eval-fixture` only takes effect
+   if it's on the command line that runs each morning. Two candidate runners exist and
+   neither has been checked/edited yet:
+   - `~/mikecast/run_mikecast.sh` (local cron wrapper — check `crontab -l` for whether this
+     even fires, vs. being legacy)
+   - The AWS ECS Fargate scheduled task (`mikecast-daily` EventBridge Scheduler) — the real
+     production runner per `CLAUDE.md`. Adding the flag there means editing the task
+     definition's command override or the default entrypoint, then a deploy.
+   Whichever is authoritative, add `--dump-eval-fixture` to it and let it run for ~5
+   mornings (Phase 0 requirement) before Phase 1 has anything to replay.
+3. **Decide on one immediate manual capture run.** Running
+   `mikecast_briefing.py --crew --dump-eval-fixture` right now would capture today's
+   fixture immediately instead of waiting for tomorrow's cron — but it's a real production
+   run: costs real NYT/OpenAI/Anthropic/ElevenLabs API money, takes ~20 minutes, and (since
+   no briefing exists yet for 2026-09-13 as of this session) would send the real email
+   newsletter and post to X/Instagram, not just regenerate content. **Confirm with Mike
+   before running this** — don't trigger it unilaterally.
+4. **Build `eval/run_eval.py`** (Phase 1). Design decided but not yet written: replay each
+   role's stage against a captured fixture with the model swapped via
+   `unittest.mock.patch("crew.agents.<factory_name>", return_value=LLM(model=candidate, ...))`
+   — `claude_writer_llm` for writer, `openai_critic_llm` for critic's scorer only. This
+   avoids touching `crew/llm.py`'s production model-selection logic; the mock target is the
+   name imported into `crew.agents`'s namespace (`from crew.llm import claude_writer_llm`,
+   etc.), not `crew.llm.claude_writer_llm` itself. For cross-provider candidates, derive
+   `api_key` from the model string's prefix (`anthropic/` → `ANTHROPIC_API_KEY`,
+   `openai/` → `OPENAI_API_KEY`) rather than hardcoding one, since the existing factories in
+   `crew/llm.py` assume the key matches their fixed provider. For token/cost capture:
+   CrewAI 0.86.0's `Crew.calculate_usage_metrics()` (returns `UsageMetrics` with
+   `prompt_tokens`/`completion_tokens`/`total_tokens`/`cached_prompt_tokens`) only works if
+   you still hold a reference to the `Crew` object — `run_writing`/`run_critic_pass` don't
+   return theirs, so plan to monkeypatch `crewai.Crew.kickoff` to record each instantiated
+   `Crew` into a list during the replay call, then sum usage across them afterward.
+5. **Build the results dashboard** (Phase 3+4 combined, per user request 2026-09-13) once
+   step 4 produces real `scores.json` data — a local Flask app (mirroring `server.py`'s
+   existing pattern) showing runs per role, models tested, and scores/cost/hallucination
+   deltas. Still open: local-only vs. reachable elsewhere (per original §8 note).
+
+---
+
+Purpose: a repeatable, **manually-initiated** process to decide — with confidence — whether to
+swap a new LLM into any of MikeCast's four LLM roles when a new model ships (e.g. a new Opus/
+Sonnet for the writer, a new GPT/Gemini for the scorer/critic). Combines automated scoring with a
+blind side-by-side human review, and treats **cost as a first-class gate**.
+
+---
+
+## 0. Why this is tractable (context for cold resume)
+
+- **Every model is swappable by env var, no code change.** See `mc_config.py`:
+  - `CLAUDE_WRITER_MODEL`  (default `anthropic/claude-sonnet-4-6`)
+  - `OPENAI_SCORER_MODEL`  (default `openai/gpt-4o`)
+  - `OPENAI_CRITIC_MODEL`  (default `openai/gpt-4o`)
+  - `OPENAI_HELPER_MODEL`  (default `openai/gpt-4o-mini`)
+  - (also `XAI_API_KEY` Grok planner, Step 0 — out of scope for v1)
+  - LLM factory: `crew/llm.py` (`claude_writer_llm`, `openai_scorer_llm`, `openai_critic_llm`, `openai_helper_llm`).
+- **Two hardest eval primitives already exist and are reusable:**
+  - GPT critic scorer — scores each section 1–10 on depth/analysis/substance (`mc_critic.py::critique_briefing`; crew version `crew/critic_crew.py`). Weak threshold = 7.
+  - Sports fact-checker — `validate_claim_against_articles` (wired via `crew/critic_crew.py::fact_check_ny_sports`, tool in `crew/tools.py`). Currently sports-only; extend to all sections for eval.
+- **~140 historical episode JSONs** in `data/YYYY-MM-DD.json` capture real inputs→outputs.
+  Top-level keys: `date, date_display, episode_num, episode_description, html_briefing, articles,
+  mikes_picks, podcast_script, conversational_script, audio_file, elevenlabs_audio_file, trending,
+  generated_at`. NOTE: this only snapshots the **final selected** `articles`, not each role's exact
+  input — hence Phase 0 gold-fixture capture below.
+- **Rollout/rollback muscle already exists:** env-var swap in SSM/task-def, `--legacy` flag, `--force`
+  + per-date dist state (`mc_dist_state.py`) for safe shadow runs.
+
+---
+
+## 1. The swap surface — four independent evals
+
+Evaluate one role at a time (keep attribution). Same harness, `--role` flag.
+
+| Role | Current model | Primary failure mode if a swap is bad | Risk |
+|---|---|---|---|
+| **Writer** (Claude) | `claude-sonnet-4-6` | Hallucination, voice/persona drift, format break, word-budget miss | **Highest** |
+| **Scorer** (GPT-4o) | `gpt-4o` | Wrong stories selected/ranked | Med |
+| **Critic** (GPT-4o) | `gpt-4o` | Misses weak sections / bad patches | Med |
+| **Helper** (GPT-4o-mini) | `gpt-4o-mini` | Weak gatekeeper/fact-check/summarize | Low |
+
+Rule of thumb: **never swap more than one role per eval cycle.**
+
+**Priority order (set 2026-09-06): Writer first, end-to-end (Phases 0–5 below), before Research.**
+Research eval is real but lower priority — it needs a prerequisite code fix before it's even
+possible (see §1a) and its output (a story selection/ranking, not prose) needs a different eval
+approach than the writer's grounding/voice checks.
+
+### 1a. "Research" is not one role — three sub-components, one not yet swappable
+
+What looks like a single "Scorer" row above is actually three separate pieces, discovered while
+scoping this eval (2026-09-06):
+
+| Sub-component | File / function | Model today | Swappable via env var? |
+|---|---|---|---|
+| Article scoring/ranking (Step 4, all categories) | `mc_collect.py::score_and_rank_articles` | `gpt-4o` | **No — hardcoded** `model="gpt-4o"` in a raw `OpenAI()` client call. `OPENAI_SCORER_MODEL` is defined in `mc_config.py` but never read here. |
+| Enrichment (top-8 "why it matters") | `mc_collect.py::enrich_top_stories` | `gpt-4o-mini` | **No — hardcoded** `model="gpt-4o-mini"`, same pattern. `OPENAI_HELPER_MODEL` not read here. |
+| NY Sports Researcher (ESPN tool agent) | `crew/sports_research_crew.py` via `crew/agents.py::make_sports_researcher` | `OPENAI_SCORER_MODEL` | **Yes** — already goes through `crew/llm.py::openai_scorer_llm()`. |
+
+**Prerequisite fix for a research eval:** before scoring/ranking or enrichment can be A/B'd against
+a candidate model, `score_and_rank_articles` and `enrich_top_stories` need to read
+`OPENAI_SCORER_MODEL` / `OPENAI_HELPER_MODEL` from `mc_config.py` instead of hardcoding
+`"gpt-4o"` / `"gpt-4o-mini"`. Small, mechanical change — do it as the first step of the research
+eval phase, not before (no need to block on it while the writer eval is being built).
+
+**Why research needs a different eval design than the writer:**
+- Scoring/ranking and enrichment produce a *selection*, not prose — there's no hallucination/
+  voice-grounding check that applies. Instead:
+  - **Top-N precision/recall or rank correlation** against a small hand-curated gold set (Mike
+    labels "the actually-good stories" for a handful of fixture days once, reuse forever), OR
+  - **Cheaper, no-labeling alternative:** blind pairwise preference — show baseline's top-8
+    headlines+categories vs. candidate's top-8 (no full prose) in the same blind-review dashboard
+    built for the writer, and just pick which day's story lineup is better.
+- The NY Sports Researcher is actually the *easiest* piece to eval objectively: its inputs (ESPN
+  tool responses) are deterministic and fixture-capturable, so "did the verified-facts string only
+  state what the tool actually returned" is a mechanical check, not a judgment call — stricter and
+  cheaper than the writer's grounding gate.
+- Reuses the same dashboard/harness infrastructure built for the writer (Phases 1–4) — research
+  just needs its own fixture adapter (raw article pool in, ranked selection out, instead of
+  briefing HTML in/out) and its own scoring functions in `score.py`, added as **Phase 6** once the
+  writer eval loop is proven end-to-end.
+
+---
+
+## 2. Quality dimensions, ranked by MikeCast risk
+
+1. **Factual grounding / hallucination** — #1 risk. Sports is *never* auto-patched because GPT
+   invents scores/players/trades (see CLAUDE.md "Key Constraints"). This is a **hard gate.**
+2. **Format & contract adherence** — valid HTML sections, JSON fields the crews return
+   (`card_bullets`==3, category scores), podcast 900–1000 words / 6–7 min, no truncation.
+3. **Editorial quality** — depth, analysis-beyond-headlines, substance (what the critic scores 1–10).
+4. **Voice / persona** — Mike / Elizabeth / Jesse consistency and tone (hard to auto-judge → human gate).
+5. **Cost & latency** — Fargate ~20-min/day budget; cost projected to real once-a-day volume.
+6. **Reliability** — JSON parses, no crashes, retries behave.
+
+---
+
+## 3. Process — three gates, cheapest first
+
+**Gate A — Offline replay (automated).** Replay N curated historical episodes through *only the
+candidate role* (fixed inputs) for both candidate and baseline models. Deterministic on input, cheap,
+repeatable.
+
+**Gate B — Automated scoring (candidate vs. incumbent).**
+- Hallucination: extended `validate_claim_against_articles` over all sections → unsupported-claim count.
+- Format contract checks.
+- Editorial: existing critic scorer 1–10.
+- LLM-judge: blind randomized A/B, per dimension.
+- Cost/latency: tokens + wall-clock → $/day and $/month delta.
+
+**Gate C — Human side-by-side + shadow run.** Blind A/B review of rendered briefing + both podcast
+scripts (+ optional audio) with a human score written back into the scorecard. Then an optional
+shadow production run (candidate generates in parallel, not delivered) for a few real mornings.
+
+---
+
+## 4. Build plan — phases & concrete file specs
+
+### Directory layout
+```
+eval/
+  fixtures/manifest.yaml     # curated historical dates, each labeled with the scenario it stresses
+  pricing.py                 # model string → ($/1M input, $/1M output); refresh at build time, not stale
+  run_eval.py                # replay a role+model over fixtures → outputs + token/latency/cost meta
+  judge.py                   # blind A/B LLM-judge (randomized order, per-dimension)
+  score.py                   # automated scoring → scores.json
+  review.py                  # local Flask side-by-side UI; human scores (blinded)
+  out/<run_id>/
+    <model>/<date>.{html,podcast.txt,conversational.txt,meta.json}
+    scores.json              # automated + human, merged
+    report.md                # comparison table + verdict
+MODEL_EVAL.md                # scorecard template + append-only decision log
+```
+
+### Phase 0 — Gold fixtures  *(needs a few live mornings — start first)*
+- Add a `--dump-eval-fixture` flag to `mikecast_briefing.py` that writes **each role's exact input and
+  output** for the next ~5 daily runs into `eval/fixtures/live/<date>/<role>.json`. (Stored episode
+  JSON lacks per-role inputs; this captures them faithfully.)
+- Curate ~15–20 dates into `eval/fixtures/manifest.yaml`, each labeled with the scenario it stresses:
+  heavy NY-sports day, thin-news weekend, big-AI-news day, a Mike's-Picks day, a day the critic
+  previously patched, a high-`trending` day.
+- Populate the currently-empty `crew/tests/fixtures/`.
+
+### Phase 1 — `run_eval.py`
+- CLI: `python eval/run_eval.py --role writer --model anthropic/claude-opus-4-8 \
+        --baseline anthropic/claude-sonnet-4-6 --fixtures eval/fixtures/manifest.yaml --k 3`
+- For each fixture: reconstruct that role's input (adapter per role), invoke *only that role* via the
+  existing crew stage with the model string overridden (candidate and baseline separately).
+  - writer → `crew/writing_crew.py` (html + single-voice + conversational)
+  - scorer → per-category scorer over the fixture's raw article pool
+  - critic → `crew/critic_crew.py` over a fixture briefing
+  - helper → gatekeeper / fact-check / picks summarize
+- Run each fixture **k=2–3×** (writer temp=0.4) to capture variance.
+- Record tokens + wall-clock; compute cost from `eval/pricing.py`. Write outputs + `meta.json`.
+
+### Phase 2 — `score.py` (automated)
+Per output, emit into `scores.json`:
+- **Grounding (HARD GATE):** extend `validate_claim_against_articles` to all sections; extract
+  substantive sentences from HTML + both scripts; validate each against that episode's `articles`.
+  Count unsupported claims. **Fail if candidate adds ANY net-new unsupported claim vs. baseline.**
+- **Format contract:** HTML parses (BeautifulSoup), required `<h2>`s present, no truncation, podcast
+  900–1000 words, `card_bullets`==3, role JSON fields present.
+- **Editorial:** existing critic scorer → per-section 1–10 → mean + weak-section count.
+- **LLM-judge:** `eval/judge.py`, blind randomized A/B on grounding/depth/voice → win rate.
+  Randomize A/B order to kill position bias; store mapping separately.
+- **Cost/latency:** from `meta.json` → per-episode, projected $/day and $/month delta vs. baseline.
+
+### Phase 3 — `review.py` (human-in-the-loop score)
+- Small Flask app (mirror `server.py`) rendering **baseline vs. candidate side-by-side as blinded
+  "A"/"B"**: rendered HTML briefing + both podcast scripts.
+- `--with-audio` (opt-in, burns ElevenLabs credits): generate + play candidate audio via `mc_audio.py`.
+- Human enters **1–5 per side + a forced A/B winner + notes** (scale TBD — see §7).
+- Writes a `human` block into `scores.json`; reveals the A/B→model mapping only after scoring.
+
+### Phase 4 — Report + decision
+- `score.py` merges automated + human → `report.md` comparison table: hard gates, editorial,
+  judge win-rate, human score, **cost ($/mo delta)**.
+- **Promotion rule (all must hold):**
+  1. 0 net-new hallucinations (hard gate)
+  2. 100% format-contract pass
+  3. Editorial ≥ baseline within noise
+  4. Human score ≥ baseline
+  5. Cost within monthly ceiling (see §7)
+- Append verdict + numbers to `MODEL_EVAL.md` (auditable decision log).
+
+### Phase 5 — Rollout / rollback runbook
+- Promote = flip the SSM param / task-def env var for that role → deploy → watch one live run.
+- Old model string stays one line away for instant revert (same as `--legacy` rollback).
+- No automation, no polling — you initiate every eval and every promotion.
+
+### Phase 6 — Research eval  *(lower priority — after the writer loop is proven, see §1a)*
+- Prerequisite fix: wire `OPENAI_SCORER_MODEL` into `score_and_rank_articles` and
+  `OPENAI_HELPER_MODEL` into `enrich_top_stories` (both in `mc_collect.py`), replacing the
+  hardcoded `"gpt-4o"` / `"gpt-4o-mini"` strings.
+- New fixture adapter: raw deduped/clustered article pool in → ranked+scored selection out (no
+  briefing HTML/prose involved).
+- `score.py` additions: top-N precision/recall or rank correlation vs. a small hand-labeled gold
+  set; for the NY Sports Researcher, a tool-fidelity check (verified-facts string vs. what the
+  ESPN fixture tools actually returned — stricter and more mechanical than the writer's grounding
+  gate).
+- `review.py` reuse: same blind side-by-side dashboard, but rendering top-8 headlines+categories
+  instead of full HTML/scripts, for the no-labeling pairwise-preference path.
+
+---
+
+## 5. Caveats / gotchas to remember
+
+- **Replay fidelity depends on fixture richness.** Historical JSON lacks per-role inputs → Phase 0
+  `--dump-eval-fixture` is a prerequisite for a faithful writer/scorer/critic eval.
+- **Temperature > 0 for the writer (0.4).** Do k samples per fixture; compare distributions, not single runs.
+- **Do NOT weaken hallucination guards** to make a model "pass." The guards are the product.
+- **Sports section is never auto-patched** — eval it, but don't add a patch path for it.
+- **Cost pricing goes stale.** Refresh `eval/pricing.py` from current provider pricing at build time
+  (use the `claude-api` skill for Claude model ids/pricing; check OpenAI pricing page for GPT).
+
+---
+
+## 6. How to run an eval (once built) — quick runbook
+
+```bash
+# 1. (one-time / periodically) collect gold fixtures over ~5 live mornings
+#    add --dump-eval-fixture to the daily run, then curate manifest.yaml
+
+# 2. replay a candidate vs. baseline for one role
+python eval/run_eval.py --role writer \
+  --model anthropic/claude-opus-4-8 --baseline anthropic/claude-sonnet-4-6 --k 3
+
+# 3. automated scoring
+python eval/score.py --run <run_id>
+
+# 4. blind human review (optionally with audio)
+python eval/review.py --run <run_id> --with-audio   # → http://localhost:8080
+
+# 5. read the verdict, then record the decision
+open eval/out/<run_id>/report.md
+# append outcome to MODEL_EVAL.md; if promoting, flip the env var in SSM/task-def + deploy
+```
+
+---
+
+## 7. Open decisions (defaults noted — confirm on resume)
+
+1. **Cost ceiling that trips the gate** — default: *≤ 1.5× current monthly LLM spend*.
+   → Replace with Mike's real number.
+2. **Human score scale** — default: **1–5 per side + forced A/B pick**. (Alt: 1–10.)
+
+---
+
+## 8. Next action on resume
+
+Start **Phase 0 + Phase 1** for the **writer role only**: add `--dump-eval-fixture` to
+`mikecast_briefing.py`, write `eval/fixtures/manifest.yaml`, and build `eval/run_eval.py` +
+`eval/pricing.py`. Phase 0 needs a few live mornings of fixture capture, so kicking it off first
+unblocks everything else. Research eval (Phase 6, §1a) comes after the writer loop — including
+results — is proven end-to-end; don't start the `score_and_rank_articles`/`enrich_top_stories`
+env-var fix until then.
+
+Results dashboard: fold Phase 3 (`review.py`, blind A/B human scoring) and Phase 4 (`report.md`)
+into one small web app rather than a markdown file + separate script — same app serves the blind
+scoring page and a results view (score trends, cost deltas, hallucination counts) once a run is
+scored. Still open: whether that dashboard is local-only (`localhost`, matching `server.py`'s
+existing pattern) or needs to be reachable elsewhere — confirm before building Phase 3.

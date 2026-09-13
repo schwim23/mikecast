@@ -27,6 +27,8 @@ from crewai import Crew, Process, Task
 from crew.agents import make_section_patcher, make_section_scorer
 from crew.tools import validate_claim_tool
 from crew.writing_crew import _kickoff_single_task
+from eval.dump import dump_fixture
+from mc_config import TODAY
 from mc_critic import _extract_html_summary  # reuse the legacy HTML summariser
 
 logger = logging.getLogger("mikecast.crew.critic")
@@ -317,8 +319,10 @@ def fact_check_ny_sports(
 
     unsupported = 0
     checked = 0
+    verdicts: list[dict] = []
     for sentence in sentences[:30]:  # hard cap so a chatty critic can't bloat the bill
         result = validate_claim_tool._run(claim=sentence, articles=sports_articles)
+        verdicts.append({"sentence": sentence, **result})
         if not result.get("ok"):
             continue
         checked += 1
@@ -334,4 +338,8 @@ def fact_check_ny_sports(
         "(section NOT auto-patched — see NEVER_PATCH_NORMALIZED).",
         checked, unsupported,
     )
+    dump_fixture("helper", TODAY, {
+        "input": {"sentences": sentences[:30], "sports_articles": sports_articles},
+        "output": {"verdicts": verdicts, "checked": checked, "unsupported": unsupported},
+    })
     return unsupported

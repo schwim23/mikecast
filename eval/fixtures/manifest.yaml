@@ -1,0 +1,15 @@
+# Curated fixture dates for offline replay eval (Phase 0/1, MODEL_EVAL_PLAN.md).
+#
+# Each entry names a date whose per-role fixture JSON exists under
+# eval/fixtures/live/<date>/<role>.json (captured via `--dump-eval-fixture` on
+# mikecast_briefing.py) plus the scenario it stresses. Populate this after a
+# few days of live capture have accumulated — empty for now.
+#
+# dates:
+#   - date: 2026-09-14
+#     scenario: heavy NY-sports day
+#   - date: 2026-09-15
+#     scenario: thin-news weekend
+#   - date: 2026-09-16
+#     scenario: big-AI-news day
+dates: []
