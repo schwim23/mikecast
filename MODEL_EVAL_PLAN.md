@@ -1,6 +1,47 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — first real Phase 1 comparison run completed 2026-09-13 for all three roles (writer/critic/helper) against today's fixture · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phase 1 (replay) + a first Phase 4 dashboard both live 2026-09-13 · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0d. Session log continued — 2026-09-13, dashboard v1 live
+
+Built `eval/build_dashboard.py` — renders every `eval/out/<run_id>/summary.json` into a
+single static HTML page (dark theme matching `mikecast.io`'s existing style) and uploads it
+via `mc_utils.s3_upload_text` to `s3://mikecast-io-data/evals/index.html`. Confirmed live at
+**https://mikecast.io/evals/index.html** (200 via CloudFront, per §0b's routing finding — no
+CloudFront change needed for this path shape).
+
+**Deliberately cost/latency only right now** — the page says so explicitly in a banner rather
+than implying a quality verdict it can't back up. Before building it, deleted the two stale
+run directories left over from the pre-fix bugs in §0c (`writer_..._1789340892`,
+`helper_..._1789342706` — both had a `summary.json` with garbage 0-cost/0-output data from
+before the temperature/max_tokens fixes) plus two empty directories from the killed
+`gpt-5.6-terra` hang attempts, so the dashboard only shows the 3 valid post-fix runs.
+
+**Not yet done:** `run_eval.py` doesn't upload `summary.json` to S3 the way `eval/dump.py`
+uploads fixtures — so right now the dashboard can only show runs from whatever machine last
+ran `eval/run_eval.py` locally. If eval runs start happening from more than one place, give
+`run_eval.py` the same local+S3 write pattern as `eval/dump.py` before that becomes a problem.
+
+**`eval/build_dashboard.py` is uncommitted** as of this log entry — ask before committing (this
+session's own rule).
+
+### Concrete next steps (revised again)
+
+1. Decide whether to commit `eval/build_dashboard.py`.
+2. Repeat the ECS fixture-capture run across a few more mornings (Phase 0 needs variety —
+   today's fixture was a thin/preseason NY-sports day) before results mean much beyond one
+   day's snapshot.
+3. Build Phase 2 (`eval/score.py`) — hallucination/grounding hard gate, format-contract checks,
+   editorial critic score, LLM-judge blind A/B. This is what actually answers "is the candidate
+   *good*," not just "is it fast/cheap" — not started.
+4. Extend `build_dashboard.py` to render Phase 2's scores once they exist, and consider giving
+   `run_eval.py` an S3 write path for `summary.json` (see above) if eval runs happen from more
+   than one place.
+5. Give CrewAI's critic-scorer agent (and any other tool-less agent) a structured-output
+   execution mode so incompatible models (like `gpt-5.6-terra`) fail fast/cleanly instead of
+   hanging — needed before `gpt-5.6-terra` can be meaningfully tested for critic.
+
+## 0c. Session log continued — 2026-09-13, first real replay run + bugs found
 
 ## 0c. Session log continued — 2026-09-13, first real replay run + bugs found
 
