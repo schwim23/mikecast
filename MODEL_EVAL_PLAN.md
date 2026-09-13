@@ -1,6 +1,99 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phase 0 + Phase 1 built and deployed 2026-09-13; no real fixtures captured yet · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — first real Phase 1 comparison run completed 2026-09-13 for all three roles (writer/critic/helper) against today's fixture · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0c. Session log continued — 2026-09-13, first real replay run + bugs found
+
+Ran the ECS ad-hoc fixture-capture task (§0b command), confirmed via
+`aws s3 ls s3://mikecast-io-data/eval/fixtures/live/2026-09-13/` — `writer.json` (43KB),
+`critic.json` (71KB), `helper.json` (5KB) all present. Then ran `eval/run_eval.py` for real
+against that fixture, for all three roles. **`run_eval.py` needs `S3_BUCKET=mikecast-io-data`
+set when run from a local shell** (only set as an ECS task-def env var, not in `~/.profile`) —
+its S3 fallback silently can't fire without it and raises "No fixture... checked ... and S3."
+
+**Three real bugs found and fixed while running this — not previously caught because nothing
+had exercised a real API call with these candidate models before:**
+
+1. **`anthropic/claude-sonnet-5` and `openai/gpt-5.6-sol` both reject a non-default
+   `temperature`** ("temperature is deprecated for this model" / "Only the default (1) value is
+   supported"). `eval/run_eval.py::_make_llm` hardcoded `temperature=0.4`/`0.2` for every model —
+   every writer/critic call to these two candidates was silently failing and falling back to an
+   empty string (the existing `_kickoff_single_task`/`_run_scorer` try/except swallows the
+   exception), producing a "successful" run with garbage 0-cost, 34-char output. **Fixed:**
+   `_make_llm` now omits `temperature` entirely for a denylist (`claude-sonnet-5`,
+   `claude-opus-5`, `claude-fable-5`, `claude-fable-5-1`) and a prefix check
+   (`openai/gpt-5.6-*`, `openai/gpt-6-*`).
+2. **`openai/gpt-5.6-terra` hangs indefinitely as a CrewAI agent** for the critic scorer
+   (`make_section_scorer`, no-tool task). It doesn't reliably emit CrewAI's expected
+   `Thought:/Action:`/`Final Answer:` ReAct scaffolding, so CrewAI's format-correction retry
+   loop never terminates — confirmed twice, killed manually after 6-10 minutes each time,
+   burning real API spend both times. **`make_section_scorer` has no `max_execution_time`**,
+   unlike `make_sports_researcher` (180s cap) elsewhere in `crew/agents.py` — this is a **latent
+   production robustness gap**, not just an eval-harness problem: if a future real model swap
+   hit this, the live critic step could hang with no wall-clock safety net. Decision: **excluded
+   `gpt-5.6-terra` from the critic-role eval matrix** (confirmed incompatible with CrewAI's
+   default agent executor for this task shape, not just slow) rather than keep retrying.
+   Added a `REPLAY_TIMEOUT_S = 240` wall-clock guard to `run_eval.py`'s main loop —
+   **first attempt was broken**: `with ThreadPoolExecutor() as ex:` blocks on `__exit__`
+   (`shutdown(wait=True)`) waiting for the stuck thread regardless of the `.result(timeout=)`
+   catch, so it still hung 6+ minutes past the "cap." Fixed to `ex.shutdown(wait=False)` in a
+   `finally`. Not fully bulletproof — CPython's `concurrent.futures` registers worker threads
+   globally and joins them at interpreter exit regardless of `shutdown(wait=False)`, so a
+   genuinely-stuck call could still block the process from exiting even with this fix. If
+   `gpt-5.6-terra` (or a similar model) needs testing later, the real fix is giving CrewAI a
+   structured-output/function-calling execution mode instead of the default ReAct-style prompt,
+   not a longer timeout.
+3. **`openai/gpt-5.6-luna` broke the real NY Sports fact-checker** — `crew/tools.py`'s
+   `ValidateClaimTool._run` calls the raw OpenAI SDK directly (not LiteLLM) with `max_tokens=200`
+   and `temperature=0`, both hardcoded. `gpt-5.6-luna` rejects `max_tokens` ("Use
+   'max_completion_tokens' instead") and — per finding 1's pattern — would likely also reject
+   `temperature=0`. **This is a production bug, not just an eval-harness one**: if
+   `OPENAI_HELPER_MODEL` were ever set to `gpt-5.6-luna` in production, the real fact-checker
+   (the only signal that catches Claude drift on NY Sports, per CLAUDE.md) would silently break.
+   **Fixed directly in `crew/tools.py`**: switched to `max_completion_tokens` (OpenAI's current
+   parameter, backward-compatible with `gpt-4o`/`gpt-4o-mini` too) unconditionally, and made
+   `temperature` conditional — omitted for `gpt-5.6-*`/`gpt-6-*` model prefixes.
+
+**Real comparison results, 2026-09-13 fixture, after the fixes above:**
+
+| Role | Model | Avg latency | Avg cost | Notes |
+|---|---|---|---|---|
+| Writer (k=2) | `claude-sonnet-4-6` (baseline) | 66.4s | $0.117 | |
+| Writer (k=2) | `claude-sonnet-5` (candidate) | 54.5s | $0.122 | Faster, slightly pricier per-episode despite lower per-token rate — likely more output tokens |
+| Writer (k=2) | `gpt-5.6-sol` (candidate) | 67.0s | $0.193 | Most expensive, as expected from its tier |
+| Critic (k=1) | `gpt-4o` (baseline) | 6.9s | $0.0018 | Scored NY Sports 5/10 |
+| Critic (k=1) | `claude-sonnet-5` (candidate) | 8.7s | $0.0036 | Scored NY Sports 3/10 (stricter) — both correctly skipped patching it |
+| Critic (k=1) | `gpt-5.6-terra` (candidate) | — | — | **Excluded** — see bug 2 |
+| Helper (k=1) | `gpt-4o-mini` (baseline) | 5.9s | $0.0004 | |
+| Helper (k=1) | `gpt-5.6-luna` (candidate) | 13.4s | $0.0013 | |
+
+No automated scoring yet (Phase 2, `eval/score.py` — hallucination/grounding hard gate, format
+contract, editorial score, LLM-judge — not built). The numbers above are cost/latency only; a
+promotion decision needs Phase 2 + Phase 3 (human review) per §3's three gates, not just this.
+
+**Files changed this pass (uncommitted as of this log entry):**
+- `eval/run_eval.py` — temperature denylist/prefix logic in `_make_llm`; `REPLAY_TIMEOUT_S`
+  wall-clock guard (with the `shutdown(wait=False)` fix) around the main replay loop.
+- `crew/tools.py` — `ValidateClaimTool._run`: `max_completion_tokens` instead of `max_tokens`,
+  conditional `temperature`.
+
+### Concrete next steps (revised again)
+
+1. **Decide whether to commit + deploy the two bug fixes above.** The `crew/tools.py` fix in
+   particular is a real production correctness fix (independent of the eval project — it fixes
+   a genuine forward-compatibility gap in the fact-checker), not just eval-harness code. Not
+   done yet — ask Mike first, per this session's own "only commit when asked" rule.
+2. Repeat the ECS fixture-capture run across a few more mornings (Phase 0 needs variety —
+   heavy-sports day, thin-news day, big-AI-news day, etc.) before Phase 1 replay results mean
+   much beyond a single day's snapshot.
+3. Build Phase 2 (`eval/score.py`) — hallucination/grounding hard gate, format-contract checks,
+   editorial critic score, LLM-judge blind A/B. Not started.
+4. Build the results dashboard (Phase 3+4 combined, static render to
+   `s3://mikecast-io-data/evals/index.html` per §0b's hosting decision) — now has real
+   `summary.json` data to render for the first time (3 run directories under `eval/out/`).
+5. Consider giving CrewAI's critic-scorer agent (and any other tool-less agent) a structured-
+   output execution mode so incompatible models (like `gpt-5.6-terra`) fail fast/cleanly instead
+   of hanging — needed before `gpt-5.6-terra` can be meaningfully tested for critic.
 
 ## 0b. Session log continued — 2026-09-13, later in the session
 

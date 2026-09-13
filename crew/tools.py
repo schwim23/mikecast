@@ -791,16 +791,25 @@ class ValidateClaimTool(BaseTool):
             # Strip the LiteLLM "openai/" prefix if present — the openai SDK
             # doesn't accept provider-prefixed model strings directly.
             model = OPENAI_HELPER_MODEL.replace("openai/", "", 1)
-            resp = client.chat.completions.create(
-                model=model,
-                messages=[
+            # Newer model generations (confirmed 2026-09-13 for gpt-5.6-*) reject
+            # `max_tokens` ("Use 'max_completion_tokens' instead") and reject any
+            # non-default `temperature` ("Only the default (1) value is supported").
+            # `max_completion_tokens` is OpenAI's current parameter name and works
+            # across the whole model range including gpt-4o/gpt-4o-mini, so it's a
+            # safe unconditional rename; temperature is only safe to send for
+            # older models, so it's included conditionally.
+            kwargs = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": system},
                     {"role": "user",   "content": user},
                 ],
-                max_tokens=200,
-                temperature=0,
-                response_format={"type": "json_object"},
-            )
+                "max_completion_tokens": 200,
+                "response_format": {"type": "json_object"},
+            }
+            if not model.startswith(("gpt-5.6-", "gpt-6-")):
+                kwargs["temperature"] = 0
+            resp = client.chat.completions.create(**kwargs)
             raw = resp.choices[0].message.content.strip()
             parsed = json.loads(raw)
             usage = {}

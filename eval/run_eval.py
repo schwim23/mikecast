@@ -33,11 +33,19 @@ import logging
 import sys
 import time
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as FuturesTimeoutError
 from pathlib import Path
 from unittest import mock
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("mikecast.eval.run_eval")
+
+# Hard wall-clock cap per replay call — see the comment at its use site in main().
+# 240s covers the slowest legitimate case observed (writer: ~70s; critic with several
+# sequential section patches: a handful x ~30-60s each) with margin, while still
+# bounding a genuinely stuck model/framework incompatibility loop.
+REPLAY_TIMEOUT_S = 240
 
 # Allow running as `python eval/run_eval.py` from anywhere — the mikecast repo root
 # (parent of eval/) needs to be on sys.path for `import mc_config`, `import crew.*`, etc.
@@ -82,6 +90,27 @@ def load_fixture(role: str, date: str) -> dict:
 # Model plumbing
 # ---------------------------------------------------------------------------
 
+# Some newer-generation models reject any temperature value other than their
+# default — confirmed 2026-09-13 for anthropic/claude-sonnet-5 ("temperature is
+# deprecated for this model") and openai/gpt-5.6-sol ("Only the default (1)
+# value is supported"). Omit temperature entirely for these rather than
+# passing a value the API 400s on — a silent per-call failure otherwise, since
+# _kickoff_single_task/_run_scorer swallow the exception and return "".
+_NO_CUSTOM_TEMPERATURE_MODELS = {
+    "anthropic/claude-sonnet-5",
+    "anthropic/claude-opus-5",
+    "anthropic/claude-fable-5",
+    "anthropic/claude-fable-5-1",
+}
+_NO_CUSTOM_TEMPERATURE_PREFIXES = ("openai/gpt-5.6-", "openai/gpt-6-")
+
+
+def _supports_custom_temperature(model: str) -> bool:
+    if model in _NO_CUSTOM_TEMPERATURE_MODELS:
+        return False
+    return not model.startswith(_NO_CUSTOM_TEMPERATURE_PREFIXES)
+
+
 def _make_llm(model: str, temperature: float, max_tokens: int):
     from crewai import LLM
     from mc_config import ANTHROPIC_API_KEY, OPENAI_API_KEY
@@ -92,7 +121,12 @@ def _make_llm(model: str, temperature: float, max_tokens: int):
         api_key = OPENAI_API_KEY or None
     else:
         raise ValueError(f"Unrecognized model provider prefix in {model!r} (expected anthropic/ or openai/)")
-    return LLM(model=model, api_key=api_key, temperature=temperature, max_tokens=max_tokens)
+    kwargs = {"model": model, "api_key": api_key, "max_tokens": max_tokens}
+    if _supports_custom_temperature(model):
+        kwargs["temperature"] = temperature
+    else:
+        logger.info("Omitting temperature override for %s — model rejects a non-default value.", model)
+    return LLM(**kwargs)
 
 
 class _CrewCapture:
@@ -325,7 +359,37 @@ def main() -> None:
         for i in range(args.k):
             logger.info("  run %d/%d...", i + 1, args.k)
             try:
-                result = replay_fn(fixture, model)
+                # Hard wall-clock cap. Some newer models don't reliably emit
+                # CrewAI's expected Thought:/Action:/Final Answer: scaffolding for
+                # a no-tool task and CrewAI retries the format-correction prompt —
+                # confirmed 2026-09-13 with openai/gpt-5.6-terra on the critic
+                # scorer (make_section_scorer has no max_execution_time, unlike
+                # make_sports_researcher's 180s cap), which hung for 10+ minutes
+                # making repeated calls before being killed manually. Without this
+                # timeout a single incompatible candidate model can burn unbounded
+                # real API spend and block the whole eval run.
+                #
+                # NOT a `with ThreadPoolExecutor() as ex:` block — its __exit__ calls
+                # shutdown(wait=True), which blocks until the stuck worker thread
+                # finishes, defeating the timeout entirely (confirmed 2026-09-13: the
+                # first version of this guard used `with` and still hung for 6+
+                # minutes). shutdown(wait=False) abandons the stuck thread instead —
+                # it keeps running (and keeps spending API calls) in the background
+                # until it errors out or the process exits, but the harness itself
+                # moves on immediately rather than blocking on it.
+                ex = ThreadPoolExecutor(max_workers=1)
+                try:
+                    result = ex.submit(replay_fn, fixture, model).result(timeout=REPLAY_TIMEOUT_S)
+                finally:
+                    ex.shutdown(wait=False)
+            except FuturesTimeoutError:
+                logger.error(
+                    "  TIMED OUT after %ds — %s likely isn't producing CrewAI's expected "
+                    "agent-loop format (see MODEL_EVAL_PLAN.md). Skipping this run.",
+                    REPLAY_TIMEOUT_S, model,
+                )
+                metas.append({"model": model, "k_index": i, "error": f"timed out after {REPLAY_TIMEOUT_S}s"})
+                continue
             except Exception as exc:
                 logger.error("  FAILED: %s", exc)
                 metas.append({"model": model, "k_index": i, "error": str(exc)})
