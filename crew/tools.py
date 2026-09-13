@@ -803,11 +803,18 @@ class ValidateClaimTool(BaseTool):
             )
             raw = resp.choices[0].message.content.strip()
             parsed = json.loads(raw)
+            usage = {}
+            if resp.usage:
+                usage = {
+                    "prompt_tokens": resp.usage.prompt_tokens,
+                    "completion_tokens": resp.usage.completion_tokens,
+                }
             return {
                 "ok": True,
                 "supported": parsed.get("supported", "unclear"),
                 "evidence": parsed.get("evidence", "")[:400],
                 "reasoning": parsed.get("reasoning", "")[:400],
+                "usage": usage,
             }
         except Exception as exc:
             logger.warning("validate_claim_against_articles failed: %s", exc)
