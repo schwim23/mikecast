@@ -1,6 +1,78 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phase 0 fixture-capture plumbing built 2026-09-13, not yet run · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phase 0 + Phase 1 built and deployed 2026-09-13; no real fixtures captured yet · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0b. Session log continued — 2026-09-13, later in the session
+
+- **Deployed to production, twice, both confirmed live via ECR/ECS:**
+  - `6cc1c08` — Phase 0 (fixture capture + `--eval-only`/`--dump-eval-fixture` flags). Confirmed
+    task-def revision 62 + `mikecast-daily` scheduler both point at this image.
+  - `fca2790` — Phase 1 (`eval/run_eval.py` + `ValidateClaimTool` usage-tracking addition).
+    Pushed; deploy.yml will auto-build/register/repoint same as the first push (not
+    individually re-verified — same pipeline, no reason to expect a different outcome).
+  - **Both deploys are behavior-neutral for the daily 6:30 AM run** — every new code path is
+    gated behind flags/env vars that default off.
+- **`eval/run_eval.py` (Phase 1) — built and verified, but only with synthetic data.**
+  Confirmed: CLI/`--help` work, the `helper`-role OpenAI-only guard fires correctly, the
+  missing-fixture error is clean (not a raw traceback), all three `mock.patch` targets
+  (`crew.agents.claude_writer_llm`, `crew.agents.openai_critic_llm`,
+  `crew.tools.OPENAI_HELPER_MODEL`) resolve and actually take effect, and the per-model
+  usage/cost attribution logic is correct (unit-tested with fake Crew/Agent stubs — confirmed
+  it correctly separates a critic replay's swapped-scorer cost from the patcher's unswapped
+  cost, pricing each against its own model). **Not yet run against a real fixture or a real
+  API call — that's the next step, and it costs real money the moment it happens.**
+- **AWS ad-hoc fixture-capture run — ready, but blocked by Claude Code's auto-mode
+  classifier** (flagged `aws ecs run-task` as a "Production Deploy" action). The exact command
+  was handed to Mike to run directly:
+  ```bash
+  aws ecs run-task \
+    --cluster mikecast --task-definition mikecast --launch-type FARGATE \
+    --overrides '{"containerOverrides":[{"name":"mikecast","command":["python","mikecast_briefing.py","--crew","--eval-only","--dump-eval-fixture"]}]}' \
+    --network-configuration 'awsvpcConfiguration={subnets=[subnet-086fe88cca1a9de84],securityGroups=[sg-0b075c1eea308976b],assignPublicIp=ENABLED}' \
+    --region us-east-1
+  ```
+  **Status as of end of session: not yet run.** Repeat ~5 mornings for Phase 0's fixture
+  variety requirement (§4 Phase 0), or run it multiple times same-day for repeated writer
+  variance (k-sampling) — it's idempotent/side-effect-free (`--eval-only` never touches
+  published data), safe to run as often as wanted.
+- **Dashboard hosting — decided:** public, unlisted path at `mikecast.io/evals`, no auth
+  (confirmed with Mike 2026-09-13 — cost/model data isn't sensitive, just not
+  listener-facing). Static render-and-upload to S3 (`mikecast-io-data`), same pattern as
+  `feed.xml`/`manifest.json` in `mc_deliver.py` — **not** a live Flask app for the results
+  view. Checked the live CloudFront distribution (`EFNQM31KQHY56`): single S3 origin, no
+  CloudFront Function/Lambda@Edge, `DefaultRootObject: index.html` applies to `/` only —
+  confirmed via the existing (already-live, apparently orphaned) `dashboard/` folder in the
+  same bucket: `/dashboard` and `/dashboard/` both 403, only `/dashboard/index.html` resolves
+  (200). So **without any CloudFront change**, the eval dashboard is reachable at
+  `mikecast.io/evals/index.html` the moment something is uploaded to `s3://mikecast-io-data/evals/index.html`.
+  For the cleaner bare `/evals` URL, a CloudFront Function (viewer-request, directory-index
+  rewrite) would need to be created and attached to the default cache behavior — **deferred
+  until there's real dashboard content to serve**; command drafted and handed to Mike but not
+  run. The Phase 3 blind human-scoring page (`review.py`) stays local-only (Flask, like
+  `server.py`) since it needs to accept input, not just serve static files — only the
+  read-only results view goes to S3/`mikecast.io/evals`.
+
+### Concrete next steps (revised, supersedes the 0a list where it overlaps)
+
+1. **Run the AWS `ecs run-task` command above** (Mike, directly — blocked for Claude Code by
+   the auto-mode classifier) to capture the first real writer/critic/helper fixtures. Repeat
+   across a few mornings per Phase 0.
+2. **Run `eval/run_eval.py` against a real fixture** once captured — this is the first time
+   any of this costs real API money end-to-end via the harness itself, e.g.:
+   ```bash
+   python eval/run_eval.py --role writer --date <date> \
+     --baseline anthropic/claude-sonnet-4-6 \
+     --candidate anthropic/claude-sonnet-5 --candidate openai/gpt-5.6-sol --k 3
+   ```
+3. **Build Phase 2 (`eval/score.py`)** — automated scoring (hallucination/grounding hard
+   gate, format-contract checks, editorial critic score, LLM-judge blind A/B) — not started.
+4. **Build the results dashboard** (Phase 3+4 combined) — a script that turns
+   `eval/out/<run_id>/summary.json` (+ eventual `scores.json` from Phase 2) into a static
+   page, uploads it to `s3://mikecast-io-data/evals/index.html`. Not started — no real scores
+   exist yet to render.
+5. **Optional later polish:** the CloudFront Function for the bare `/evals` URL (command
+   drafted above, in the 0b log) — only worth doing once the dashboard is real and gets
+   revisited/shared often enough that the URL ergonomics matter.
 
 ## 0a. Session log — 2026-09-13 (resume here)
 
