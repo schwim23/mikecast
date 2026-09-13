@@ -146,6 +146,45 @@ crew/
 └── distribution_crew.py  # Step 11 — Claude social copywriter (X post + IG caption)
 ```
 
+## Model Evaluation
+
+A manually-initiated harness (`eval/`) for deciding, with evidence, whether to swap a new
+candidate model into one of the three swappable LLM roles above (Writer, Critic, Helper) —
+never more than one role per eval cycle. Full design, decision log, and running list of
+model-compatibility findings: **`MODEL_EVAL_PLAN.md`**.
+
+**How it works:**
+
+1. **Capture a fixture** — run the pipeline with `--eval-only --dump-eval-fixture` to record
+   each role's exact input/output for the day, without touching anything already published
+   (no email, no social, no RSS/manifest write):
+   ```bash
+   .venv/bin/python3 mikecast_briefing.py --crew --eval-only --dump-eval-fixture
+   ```
+   On ECS (the production runner has no persistent disk), fixtures land in
+   `s3://mikecast-io-data/eval/fixtures/live/<date>/<role>.json` in addition to a local copy.
+2. **Replay it** against a baseline and one or more candidate models with `eval/run_eval.py`
+   (needs `S3_BUCKET=mikecast-io-data` set if run from a local shell, since that's normally
+   only an ECS task-def env var):
+   ```bash
+   S3_BUCKET=mikecast-io-data .venv/bin/python3 eval/run_eval.py \
+     --role writer --date 2026-09-13 \
+     --baseline anthropic/claude-sonnet-4-6 \
+     --candidate anthropic/claude-sonnet-5 --candidate openai/gpt-5.6-sol --k 2
+   ```
+   `--role` is one of `writer` / `critic` / `helper`. Output (per-run latency, token usage,
+   cost, and the generated content) is written to `eval/out/<run_id>/`.
+3. **Score and review** (Phase 2/3 — automated hallucination/format/editorial scoring and a
+   blind human A/B pass) and the **results dashboard** (Phase 4, a static page at
+   `mikecast.io/evals`) are designed but not yet built — see `MODEL_EVAL_PLAN.md` for status.
+
+**Known model-compatibility gotchas** (see `MODEL_EVAL_PLAN.md` for the full write-up):
+newer-generation models (e.g. `claude-sonnet-5`, `gpt-5.6-*`) reject a non-default
+`temperature`; some don't reliably follow CrewAI's default ReAct agent-loop text format for a
+no-tool task and can hang indefinitely (confirmed with `gpt-5.6-terra` as a critic scorer);
+`gpt-5.6-*` also requires `max_completion_tokens` instead of `max_tokens` on raw OpenAI SDK
+calls (fixed in `crew/tools.py`'s fact-checker).
+
 ## Hallucination Mitigations
 
 Preventing LLM hallucinations in a fully automated pipeline requires defense at every layer. The following guards are active:
@@ -216,18 +255,24 @@ mikecast/
 │   ├── cover.png
 │   ├── dist/YYYY-MM-DD.json   # per-date send state (email/newsletter/X/IG)
 │   └── social/               # generated Instagram cards (PNG) + reels (MP4)
-└── crew/                     # CrewAI agent pipeline (opt-in via --crew)
-    ├── tools.py
-    ├── llm.py
-    ├── agents.py
-    ├── context.py
-    ├── planning_crew.py
-    ├── research_crew.py
-    ├── sports_research_crew.py
-    ├── picks_crew.py
-    ├── writing_crew.py
-    ├── critic_crew.py
-    └── distribution_crew.py
+├── crew/                     # CrewAI agent pipeline (opt-in via --crew)
+│   ├── tools.py
+│   ├── llm.py
+│   ├── agents.py
+│   ├── context.py
+│   ├── planning_crew.py
+│   ├── research_crew.py
+│   ├── sports_research_crew.py
+│   ├── picks_crew.py
+│   ├── writing_crew.py
+│   ├── critic_crew.py
+│   └── distribution_crew.py
+└── eval/                     # Manual model-eval harness (see Model Evaluation above)
+    ├── dump.py                # Fixture capture (--dump-eval-fixture), local + S3
+    ├── pricing.py             # $/1M-token pricing table for cost comparisons
+    ├── run_eval.py            # Phase 1 replay harness — baseline vs. candidate models
+    ├── fixtures/manifest.yaml # Curated fixture dates for repeatable replay
+    └── out/<run_id>/          # Per-run outputs + summary.json
 ```
 
 ## Setup and Installation
