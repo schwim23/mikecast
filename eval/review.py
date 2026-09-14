@@ -18,6 +18,9 @@ burns real ElevenLabs credits and the plan marks it explicitly opt-in.
 Usage:
   python eval/review.py --run writer_2026-09-13_1789344065        # -> http://localhost:8081
   python eval/review.py --run writer_2026-09-13_1789344065 --port 8090
+  python eval/review.py --latest writer                            # today's run, no run_id needed
+                                                                     # (reads eval/out/latest.json,
+                                                                     # written by run_daily_eval.sh)
 """
 
 from __future__ import annotations
@@ -243,14 +246,31 @@ def create_app(run_id: str):
     return app
 
 
+def _resolve_latest(role: str) -> str:
+    """Reads eval/out/latest.json (written by run_daily_eval.sh each morning)
+    so a run_id never needs to be copy-pasted by hand for the daily review."""
+    latest_path = OUT_DIR / "latest.json"
+    if not latest_path.exists():
+        raise SystemExit(f"{latest_path} doesn't exist yet — has run_daily_eval.sh run at least once? Use --run instead.")
+    latest = json.loads(latest_path.read_text())
+    key = f"{role}_run"
+    run_id = latest.get(key)
+    if not run_id:
+        raise SystemExit(f"{latest_path} has no {key!r} (date={latest.get('date')!r}) — use --run instead.")
+    return run_id
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--run", required=True, help="run_id, e.g. writer_2026-09-13_1789344065")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--run", help="run_id, e.g. writer_2026-09-13_1789344065")
+    group.add_argument("--latest", choices=["writer", "critic"], help="Use today's run for this role from eval/out/latest.json instead of an exact run_id")
     parser.add_argument("--port", type=int, default=8081, help="Local port (default 8081 — server.py already uses 8080)")
     args = parser.parse_args()
 
-    app = create_app(args.run)
-    print(f"Blind review for {args.run} -> http://localhost:{args.port}")
+    run_id = args.run or _resolve_latest(args.latest)
+    app = create_app(run_id)
+    print(f"Blind review for {run_id} -> http://localhost:{args.port}")
     app.run(host="127.0.0.1", port=args.port, debug=False)
 
 

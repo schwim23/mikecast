@@ -4,8 +4,11 @@
 # Runs the full baseline-vs-candidate matrix for writer/critic/helper against
 # today's auto-captured fixture (see MODEL_EVAL_PLAN.md §0j — the daily ECS
 # run writes eval fixtures to S3 automatically now), scores writer/critic,
-# and rebuilds the results dashboard. Self-expires after STOP_DATE so a
-# short trial period doesn't need to be remembered and manually removed.
+# rebuilds the results dashboard, and writes today's run_ids to
+# eval/out/latest.json so `eval/review.py --latest writer` (or critic) can
+# find them without a run_id being copy-pasted by hand. Self-expires after
+# STOP_DATE so a short trial period doesn't need to be remembered and
+# manually removed.
 #
 # Costs real API money every time it runs (writer runs especially).
 #
@@ -53,9 +56,9 @@ CRITIC_RUN=$(.venv/bin/python3 eval/run_eval.py --role critic --date "$TODAY" \
     --candidate openai/gpt-5.6-terra --candidate anthropic/claude-sonnet-5 | tee /dev/stderr | run_id)
 
 echo "--- helper ---"
-.venv/bin/python3 eval/run_eval.py --role helper --date "$TODAY" \
+HELPER_RUN=$(.venv/bin/python3 eval/run_eval.py --role helper --date "$TODAY" \
     --baseline openai/gpt-4o-mini \
-    --candidate openai/gpt-5.6-luna --candidate anthropic/claude-haiku-4-5
+    --candidate openai/gpt-5.6-luna --candidate anthropic/claude-haiku-4-5 | tee /dev/stderr | run_id)
 
 echo "--- scoring ---"
 if [[ -n "${WRITER_RUN:-}" ]]; then
@@ -71,5 +74,18 @@ fi
 
 echo "--- dashboard ---"
 .venv/bin/python3 eval/build_dashboard.py
+
+# So the human-review step doesn't need `ls -t eval/out/ | head` and a guess
+# each morning — always today's exact run_ids, at a fixed, predictable path.
+cat > eval/out/latest.json <<EOF
+{
+  "date": "$TODAY",
+  "generated_at": "$(date -u +%FT%TZ)",
+  "writer_run": "${WRITER_RUN:-}",
+  "critic_run": "${CRITIC_RUN:-}",
+  "helper_run": "${HELPER_RUN:-}"
+}
+EOF
+echo "Wrote eval/out/latest.json"
 
 echo "===== $(date) — done ====="

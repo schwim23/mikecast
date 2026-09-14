@@ -190,9 +190,12 @@ model-compatibility findings: **`MODEL_EVAL_PLAN.md`**.
    score per side plus a forced winner, and reveals the true mapping only after submitting:
    ```bash
    .venv/bin/python3 eval/review.py --run <run_id>   # -> http://localhost:8081
+   .venv/bin/python3 eval/review.py --latest writer  # today's run, no run_id needed
    ```
-   (Needs `pip install flask` — not in `requirements.txt`, same as `server.py`'s local
-   dashboard.) LLM-judge blind A/B is designed but not yet built.
+   `--latest writer`/`critic` reads `eval/out/latest.json` (written by `run_daily_eval.sh`
+   each morning) instead of needing a run_id copy-pasted by hand. (Needs `pip install flask`
+   — not in `requirements.txt`, same as `server.py`'s local dashboard.) LLM-judge blind A/B is
+   designed but not yet built.
 5. **Results dashboard** (`eval/build_dashboard.py`) — renders every run's cost/latency and
    (once scored) quality gates into a static page at **https://mikecast.io/evals/index.html**:
    ```bash
