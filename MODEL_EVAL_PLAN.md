@@ -1,6 +1,54 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — first real human review pass completed 2026-09-14 (writer + critic); no candidate cleared all 4 gates on this fixture day · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — human review completed 2026-09-14 for all three roles; no candidate promoted on this fixture day · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0q. Session log continued — 2026-09-14, Helper review + a real bug it surfaced
+
+Extended `eval/review.py` to support the Helper role, which §0k's original design left out —
+its output (per-sentence fact-check verdicts) isn't prose two sides can be read side-by-side
+for, so it needed a different view: same sentence shown once, both models' blinded verdict +
+reasoning underneath, instead of the iframe-based writer/critic template. Same 1-5 + winner +
+notes submission shape, so `human_scores.json` stays consistent across all three roles.
+
+**Click-testing it immediately surfaced a real bug**, not a UI issue: `gpt-5.6-luna` was
+returning completely empty completions for 3 of 11 sentences (up from 1/7 in §0j) — showing up
+in the review UI as an error message ("Expecting value: line 1 column 1") masquerading as the
+model's "reasoning." Root cause: the exact same max_tokens-too-small pattern as the writer's
+6000→9000 fix in §0f, just for a much smaller task — `crew/tools.py`'s fact-checker hardcoded
+`max_tokens=200`, and one successful call had already used 195/200. Bumped to 500, regenerated
+today's helper run, verified all 11 calls now succeed (several using 250-280+ tokens — well
+past the old ceiling, confirming the cause). Also fixed the exception handler to capture
+`usage()` before the JSON parse can raise, so a repeat of this is diagnosable, not a guess.
+
+**Helper human review results** (baseline `gpt-4o-mini`, no automated Gate/Format/Editorial
+scoring exists for this role — human judgment is the only signal):
+
+| | `gpt-5.6-luna` | `claude-haiku-4-5` |
+|---|---|---|
+| Human score vs baseline (3) | FAIL (2) — "scoring was really bad on side b" | Tie (3) |
+
+`gpt-5.6-luna` clearly underperforms on judgment quality, independent of the empty-completion
+bug (that was fixed before this review ran). `claude-haiku-4-5` is a genuine contender.
+
+**Full session tally across all three roles, 2026-09-14 fixture — nothing promoted today**:
+writer's `claude-sonnet-5` (3/4 gates) and critic's `claude-sonnet-5` (tied human, close
+editorial miss) are the two closest calls, both worth re-testing once more fixture-day variety
+accumulates. `gpt-5.6-sol`, `gpt-5.6-terra`, and `gpt-5.6-luna` all underperformed more clearly
+in human review despite passing some automated checks — a reminder that the automated gates
+alone would have looked more promising than the human judgment turned out to be.
+
+### Concrete next steps (revised again)
+
+1. Let the daily cron (through 2026-09-20) keep accumulating fixture-day variety, then repeat
+   human review — `claude-sonnet-5` (writer + critic) deserves a second look across different
+   news days given how close it came both times.
+2. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+3. Decide whether to fix the writer-prompt grounding gap (§0l) and the Giants-game timeliness
+   gap (§0p) — both production quality issues independent of any model-swap question.
+4. Consider whether Helper needs its own lightweight automated check (e.g. agreement rate with
+   baseline verdicts) now that it has a review UI but no score.py coverage at all.
+
+## 0p. Session log continued — 2026-09-14, first real human review (writer + critic)
 
 ## 0p. Session log continued — 2026-09-14, first real human review (writer + critic)
 
