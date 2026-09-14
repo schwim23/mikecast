@@ -14,3 +14,9 @@ COPY . .
 # No secrets are baked into the image.
 
 ENTRYPOINT ["python", "mikecast_briefing.py"]
+# --dump-eval-fixture is purely additive (captures each role's exact input/output
+# for the model-eval harness to S3 — see MODEL_EVAL_PLAN.md) and never skips or
+# changes audio/delivery/email/social. Runs on the real daily briefing by default
+# so fixtures accumulate automatically; a command override (manual runs, --force,
+# --eval-only) replaces this CMD entirely, unaffected.
+CMD ["--dump-eval-fixture"]

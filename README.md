@@ -156,9 +156,12 @@ model-compatibility findings: **`MODEL_EVAL_PLAN.md`**.
 
 **How it works:**
 
-1. **Capture a fixture** — run the pipeline with `--eval-only --dump-eval-fixture` to record
-   each role's exact input/output for the day, without touching anything already published
-   (no email, no social, no RSS/manifest write):
+1. **Fixtures capture automatically** — the Docker image's default `CMD` includes
+   `--dump-eval-fixture` (purely additive; never skips or changes audio/delivery/email/social),
+   so the real daily 6:30 AM run writes each role's exact input/output for the day to S3 with
+   no manual step. To capture one on demand instead (e.g. testing locally, or without waiting
+   for the schedule), add `--eval-only` too — it skips everything already-published (no email,
+   no social, no RSS/manifest write):
    ```bash
    .venv/bin/python3 mikecast_briefing.py --crew --eval-only --dump-eval-fixture
    ```

@@ -1,6 +1,48 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; all three roles now support any model; scorer hardened against a gpt-4o format quirk · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; fixture capture now runs automatically every morning · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0j. Session log continued — 2026-09-13, daily fixture capture finally made automatic
+
+**Realized the gap**: every fixture captured this session came from a manually-triggered
+one-off `aws ecs run-task --overrides` command (§0b). The actual 6:30 AM daily scheduled task
+had **no command override at all** — `describe-task-definition` showed `command: null,
+entryPoint: null`, meaning it just runs the Dockerfile's bare `ENTRYPOINT ["python",
+"mikecast_briefing.py"]` with zero flags. Nothing about the real daily run was capturing
+fixtures; Phase 0's "let it run for ~5 mornings" was never actually going to happen on its own.
+
+Also checked `.github/workflows/deploy.yml`: it downloads the **current live** task
+definition and only patches the image tag before re-registering — it never resets `command`.
+So a one-off AWS CLI edit to the live task-def would technically work and persist across
+future deploys, but wouldn't show up anywhere in git — invisible to any future session reading
+this repo.
+
+**Fix**: added a default `CMD ["--dump-eval-fixture"]` to the `Dockerfile`, after the
+existing `ENTRYPOINT`. `--dump-eval-fixture` is purely additive — captures each role's
+input/output to S3, never skips or changes audio/delivery/email/social — so this makes the
+**real daily production run** also write fixtures automatically, with no schedule changes, no
+separate cron, and no ongoing manual effort. Any command override (manual `--force` runs, the
+`--eval-only` ad-hoc eval runs from earlier today) replaces the Docker `CMD` entirely and is
+unaffected. Verified the flag-detection logic once more in isolation before committing.
+
+This is git-tracked and takes effect on the next deploy (this push) — tomorrow's 6:30 AM run
+should be the first fully-automatic fixture capture, no manual ECS command needed.
+
+### Concrete next steps (revised again)
+
+1. Confirm tomorrow morning that `s3://mikecast-io-data/eval/fixtures/live/<tomorrow's date>/`
+   has all three role JSONs, without anyone running anything manually.
+2. Do a real human review pass with `eval/review.py` — the last missing piece before an actual
+   promotion decision per §4's rule.
+3. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+4. Once a few more days of fixture variety exist, re-run the writer/critic evals across
+   multiple dates (not just 2026-09-13's single thin/preseason day) before drawing any
+   conclusion about which candidate model is actually better.
+5. Consider whether `eval/build_dashboard.py` should run on some cadence too (e.g. appended to
+   the daily task, or a separate small scheduled job) once there's enough data that rebuilding
+   it manually each time gets tedious — not needed yet.
+
+## 0i. Session log continued — 2026-09-13, Helper role Claude candidate finally tested
 
 ## 0i. Session log continued — 2026-09-13, Helper role Claude candidate finally tested
 
