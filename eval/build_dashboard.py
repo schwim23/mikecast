@@ -122,6 +122,13 @@ def render(runs: list[dict]) -> str:
   td.num.fail {{ color:#ff8a80; font-weight:600; }}
   footer {{ margin-top:32px; color:#666; font-size:0.85em; border-top:1px solid #444; padding-top:16px; }}
   footer a {{ color:#81d4fa; }}
+  details {{ margin-bottom:20px; }}
+  summary {{ cursor:pointer; color:#81d4fa; font-weight:600; padding:4px 0; }}
+  dl {{ background:#22223a; border:1px solid #444; border-radius:6px; padding:16px 20px; margin-top:8px; }}
+  dt {{ color:#4fc3f7; font-weight:600; margin-top:12px; }}
+  dt:first-child {{ margin-top:0; }}
+  dd {{ margin:2px 0 0; color:#ccc; line-height:1.5; }}
+  dd code {{ background:#1a1a2e; padding:1px 5px; border-radius:3px; }}
 </style>
 </head>
 <body>
@@ -136,6 +143,51 @@ def render(runs: list[dict]) -> str:
     A/B and human review (Phase 3) aren't built yet. See <code>MODEL_EVAL_PLAN.md</code> in the
     repo for the full design, promotion rule, and decision log.
   </div>
+
+  <details>
+    <summary>What do these columns mean?</summary>
+    <dl>
+      <dt>Role</dt>
+      <dd>Which of the three swappable LLM roles this row tests — <code>writer</code> (HTML
+        briefing + podcast scripts), <code>critic</code> (section scorer that decides what
+        gets patched), or <code>helper</code> (NY Sports fact-checker).</dd>
+      <dt>Fixture date</dt>
+      <dd>Which day's captured real production input (articles, picks, trending, etc.) was
+        replayed — a snapshot, not live data.</dd>
+      <dt>Model</dt>
+      <dd>The exact LiteLLM-style model string tested (e.g. <code>anthropic/claude-sonnet-5</code>).</dd>
+      <dt>Label</dt>
+      <dd><code>baseline</code> = the model currently live in production for that role.
+        <code>candidate</code> = a model being evaluated as a possible replacement.</dd>
+      <dt>Avg latency</dt>
+      <dd>Average wall-clock time per replay call, averaged across the <code>k</code> repeats
+        (writer runs use k=2+ to capture variance; critic/helper typically use k=1).</dd>
+      <dt>Avg cost</dt>
+      <dd>Average $ per replay call, computed from actual token usage × <code>eval/pricing.py</code>'s
+        rate table.</dd>
+      <dt>Failures</dt>
+      <dd>How many of the <code>k</code> repeats errored or timed out, shown as <code>x/k</code>.</dd>
+      <dt>Gate</dt>
+      <dd>PASS/FAIL on the hallucination hard gate — every substantive sentence in the output
+        is checked against the source articles; a candidate <strong>FAILS</strong> if it has
+        <em>more</em> unsupported claims than the baseline. Baseline is always PASS by
+        definition.</dd>
+      <dt>Format</dt>
+      <dd>OK/FAIL on the format contract — HTML parses, all 7 required sections present, not
+        truncated, podcast script in the 900-1000 word target, all 3 speaker tags present in
+        the conversational script.</dd>
+      <dt>Grounding</dt>
+      <dd><code>X/Y unsupported</code> — of <code>Y</code> sentences checked against source
+        articles, <code>X</code> came back unsupported (a hallucination signal). This is the
+        raw count behind the Gate column; lower is better.</dd>
+      <dt>Editorial</dt>
+      <dd>Mean 1-10 quality score across categories (depth/analysis/substance), from the same
+        scorer the production critic uses.</dd>
+      <dt>Run ID</dt>
+      <dd>The harness run identifier — matches the <code>eval/out/&lt;run_id&gt;/</code>
+        directory if you want to inspect the raw generated content behind any row.</dd>
+    </dl>
+  </details>
 
   <table>
     <thead>
