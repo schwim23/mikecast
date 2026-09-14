@@ -1,6 +1,33 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; critic role now supports any model, including gpt-5.6-terra; scorer hardened against a gpt-4o format quirk · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; all three roles now support any model; scorer hardened against a gpt-4o format quirk · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0i. Session log continued — 2026-09-13, Helper role Claude candidate finally tested
+
+Closed the last open item from §0g: ran a real `claude-haiku-4-5` candidate for the Helper
+role (`gpt-4o-mini` baseline, `gpt-5.6-luna` + `claude-haiku-4-5` candidates — matching the
+2-candidate pattern already used for writer/critic). **0 failures for `claude-haiku-4-5`** —
+confirms the LiteLLM rewrite from §0g genuinely works cross-provider, not just in theory. One
+transient hiccup: `gpt-5.6-luna` got an empty completion on 1 of 7 sentence checks
+(`json.loads` raised "Expecting value: line 1 column 1"), handled gracefully by the existing
+`{"ok": false, ...}` fallback and not counted as a run failure — didn't recur on the other 6,
+not investigated further unless it becomes systematic. New run:
+`helper_2026-09-13_1789346385` (superseded and deleted the old 2-model run). Dashboard
+rebuilt and redeployed — the eval matrix is now genuinely complete: every role has a baseline
+plus 2 candidates tested successfully.
+
+### Concrete next steps (revised again)
+
+1. Do a real human review pass with `eval/review.py` — the last missing piece before an
+   actual promotion decision per §4's rule.
+2. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+3. Repeat fixture capture on a few more mornings for variety (Phase 0) — every fixture used so
+   far is the same 2026-09-13 thin/preseason NY-sports day.
+4. Extend `eval/score.py` to cover the Helper role too, if a meaningful metric is worth
+   defining for fact-check verdicts (e.g. agreement rate with the baseline's verdicts) — not
+   scoped yet, current Phase 2 is writer/critic only by design (§4).
+
+## 0h. Session log continued — 2026-09-13, hardened the scorer against gpt-4o's nested-dict quirk
 
 ## 0h. Session log continued — 2026-09-13, hardened the scorer against gpt-4o's nested-dict quirk
 
