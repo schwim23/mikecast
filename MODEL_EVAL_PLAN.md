@@ -1,6 +1,49 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — first real cron-triggered run completed 2026-09-14; logging bug found and fixed · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — dashboard header corrected; mikecast.io/evals now resolves directly (CloudFront Function) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0m. Session log continued — 2026-09-14, dashboard header fixed + mikecast.io/evals now resolves
+
+**Dashboard header was stale.** `eval/build_dashboard.py`'s notice banner and docstring still said
+quality scoring and human review were "not built yet" — true when originally written (§0d), false
+since §0e/§0f built them. Corrected: Phase 2 (`score.py`) is built and runs automatically every
+morning; Phase 3 (`review.py`) is built but **no real review has actually been completed** yet
+(a more precise claim than "not built" — someone still has to sit down and do it); LLM-judge
+blind A/B remains the one genuinely unbuilt piece. Rebuilt and redeployed.
+
+**Fixed `mikecast.io/evals` not resolving** (§0b flagged this and deferred it "until there's
+real dashboard content to serve" — there is now). Root cause, confirmed against the live
+distribution config: CloudFront's `DefaultRootObject: index.html` only ever applies to the
+distribution's true root `/`, not to subdirectories, and the origin is S3's REST API endpoint
+(not the separate static-website-hosting endpoint), so S3 has no directory-index concept
+either — nothing was rewriting `/evals` or `/evals/` to the actual object key
+`evals/index.html`. Confirmed this was **site-wide**, not `/evals`-specific: `/dashboard` had
+the identical 403/403/200 pattern.
+
+**Fix**: a CloudFront Function (`cloudfront-index-rewrite.js`, viewer-request, sub-millisecond)
+that rewrites a URI ending in `/` or with no file extension to append `index.html`. Tested
+against 5 cases *before* publishing or attaching it live — `/evals`, `/evals/`, `/`,
+`/subscribe.html`, `/data/2026-07-05.json` — confirmed only the two directory-style paths get
+rewritten; everything with a real file extension (critically `feed.xml` and the dated episode
+JSON files) passes through untouched. Published to `LIVE` stage, attached to the default cache
+behavior, deployed. Verified against the real site after rollout: `/evals`, `/evals/`, and
+`/dashboard` all now 200 with the correct content (checked the actual `<title>` and confirmed
+`feed.xml`'s real RSS content is unaffected, not just status codes).
+
+**Files added/changed, uncommitted as of this log entry**: `cloudfront-index-rewrite.js` (new
+— the function source, kept in the repo as the record of what's actually deployed, since this
+config now lives in AWS, not git, and nothing else documents it).
+
+### Concrete next steps (revised again)
+
+1. Commit `cloudfront-index-rewrite.js` and this log entry.
+2. Do a real human review pass with `eval/review.py` — still the last missing piece before an
+   actual promotion decision.
+3. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+4. Decide whether to fix the writer-prompt grounding gap found in §0l (background-knowledge
+   injection in analytical sections).
+
+## 0l. Session log — 2026-09-14, first real cron run + a logging bug
 
 ## 0l. Session log — 2026-09-14, first real cron run + a logging bug
 
