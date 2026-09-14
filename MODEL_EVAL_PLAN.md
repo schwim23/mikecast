@@ -1,6 +1,80 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — dashboard now shows human review scores; all 4 gates visible in one place · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — post-trial roadmap planned for the agents beyond writer/critic/helper · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0s. Session log continued — 2026-09-14, roadmap for the rest of the crew agents
+
+Mike asked for a POV on evaluating the other CrewAI agents beyond writer/critic/helper, and
+then asked that everything discussed — including the already-known article-scoring hardcode —
+be formally queued up for after the current trial (2026-09-20), not lost to chat. Full
+inventory of what exists, and the priority order agreed on:
+
+**1. NY Sports Researcher — next up after the trial.** `make_sports_researcher()`
+(`crew/sports_research_crew.py`) uses `openai_scorer_llm()` / `OPENAI_SCORER_MODEL` — a
+**fourth swappable lever, distinct from the three already tested** (Critic tests
+`OPENAI_CRITIC_MODEL`, not this one — same default value, `gpt-4o`, but a separate env var and
+a separate role). Already scoped in §1a/Phase 6 as the *easiest* piece to eval objectively,
+because its inputs (ESPN tool responses) are deterministic and its output is a
+verified-facts string that should say nothing beyond what the tools returned — a mechanical
+**tool-fidelity check**, not a hallucination/format check against source articles. Concretely,
+starting this needs:
+  - A new fixture-capture point (`eval/dump.py` currently only captures writer/critic/helper)
+    snapshotting the ESPN tool call+response pairs alongside the researcher's final
+    `verified_sports_facts` output.
+  - A new check in `eval/score.py` (or a sibling module) comparing each stated fact against
+    what the tools actually returned — not `validate_claim_against_articles`, since there's no
+    "articles" here, just tool output.
+  - Candidate models: reuse `gpt-5.6-terra` / `claude-sonnet-5` (same tier already validated
+    for Critic) unless the sports-specific tool-calling behavior argues for something else.
+  - Whether it still needs a human-review pass on top of the mechanical check, or whether
+    "does the fact trace to a real tool call" is objective enough to skip that gate for this
+    role specifically — open question, decide when building it.
+
+**2. Article scorer/ranker + enricher — the known hardcode, formally queued, not dropped.**
+`mc_collect.py::score_and_rank_articles` and `::enrich_top_stories` hardcode `"gpt-4o"` /
+`"gpt-4o-mini"` instead of reading `OPENAI_SCORER_MODEL` / `OPENAI_HELPER_MODEL` — this was
+already flagged in §1a as this eval's **prerequisite fix**, small and mechanical, "do it as the
+first step of the research eval phase, not before." Still true. Once unblocked, this needs its
+own fixture shape entirely (raw deduped article pool in → ranked/scored selection out, no
+prose) and its own scoring approach — precision/recall or rank correlation against a small
+hand-labeled gold set Mike curates once, or the cheaper no-labeling alternative: blind pairwise
+preference on which day's top-8 story lineup is better, reusing `review.py`'s blind-A/B
+infrastructure with a new content type instead of full HTML/scripts. Sequenced **after** the
+Sports Researcher, per the original plan's own ordering rationale (§1a): different eval shape,
+higher build cost, lower risk than Writer was.
+
+**3. Distribution Crew (social copywriter) — real, but lower priority, and why.**
+`make_social_copywriter()` uses `claude_writer_llm(temperature=0.6, max_tokens=1600)` — i.e.
+**the same `CLAUDE_WRITER_MODEL` env var as the Writer role**, just different sampling
+params. A Writer-role promotion decision already implicitly changes this agent's model too —
+there's no separate lever to pull. A dedicated eval track would only be answering "is this
+model *also* good at short punchy social copy," which is a real question but a smaller one.
+Not queued as its own phase; revisit only if a promoted writer model's social copy turns out
+noticeably worse than its briefing prose.
+
+**4. Planning Crew (`make_planner`, Daily Search Planner) — not worth a dedicated track.**
+Thin wrapper around the `xai_grok_search` tool; the actual work is Grok's live search, not the
+orchestrating LLM. Explicitly deprioritized, no plan to revisit unless something changes.
+
+**Why sequenced after 2026-09-20, not now**: every added role multiplies both daily API cost
+and Mike's review time, and the current 3-role trial (writer/critic/helper) hasn't produced a
+real promotion decision yet. Finishing that first beats fragmenting attention across five
+roles with weaker signal on all of them.
+
+### Concrete next steps (revised again)
+
+1. **When the trial wraps (2026-09-20 or when a promotion decision is reached, whichever
+   first)**: build NY Sports Researcher fixture capture + tool-fidelity scoring (item 1 above).
+2. Then: the `mc_collect.py` env-var prerequisite fix, followed by the article-scorer/enricher
+   eval with its own fixture shape and gold-set-or-pairwise scoring approach (item 2 above).
+3. Continue the writer/critic/helper trial in the meantime: selective review (not daily) on
+   `claude-sonnet-5` across a few more different-feeling fixture days.
+4. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started, lower urgency than
+   items 1-2 above.
+5. Decide whether to fix the writer-prompt grounding gap (§0l) and the Giants-game timeliness
+   gap (§0p) — production quality issues, independent of any model-swap question.
+
+## 0r. Session log continued — 2026-09-14, human scores added to the dashboard
 
 ## 0r. Session log continued — 2026-09-14, human scores added to the dashboard
 
