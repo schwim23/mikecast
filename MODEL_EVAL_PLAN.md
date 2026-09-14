@@ -1,6 +1,40 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; critic role now supports any model, including gpt-5.6-terra · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; critic role now supports any model, including gpt-5.6-terra; scorer hardened against a gpt-4o format quirk · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0h. Session log continued — 2026-09-13, hardened the scorer against gpt-4o's nested-dict quirk
+
+Fixed the finding from §0g: added `_normalize_category_scores()` in `crew/critic_crew.py` —
+when `_run_scorer`'s parsed JSON has a dict (not a number) as a category's score, it flattens
+to the mean of that dict's numeric sub-values (still a 1-10-scale number) and logs a WARNING,
+instead of silently leaving a value that fails every downstream `isinstance(score, (int,
+float))` check. Also strengthened the prompt itself ("Each category_scores value MUST be a
+single number 1-10 — NOT an object/dict of sub-scores") — belt-and-suspenders, since the code
+fix is what actually guarantees correctness regardless of prompt compliance.
+
+**Verified with unit-style checks** against the exact real nested-dict shape observed in
+§0g (`{"COMPANIES": {"depth": 8, "analysis": 7, "substance": 7}}` → flattens to `7.3`;
+`{"NY SPORTS": {"depth": 3, ...}}` → `3.0`), a mixed nested+flat input, and an already-flat
+input (left unchanged). Then re-ran the critic eval for real (3 models, one clean run:
+`critic_2026-09-13_1789346036`, superseding the two partial runs from §0g/interim testing) —
+gpt-4o returned flat scores this time (the bug is intermittent, didn't reproduce live), but all
+three models now show real editorial scores (6.5/6.5/6.5) instead of `None`, and `gpt-5.6-terra`
+completed cleanly and triggered a real patch on a weak "Companies" section. Dashboard rebuilt
+and redeployed with this final clean 3-model dataset.
+
+**Files changed, uncommitted as of this log entry:** `crew/critic_crew.py`.
+
+### Concrete next steps (revised again)
+
+1. Commit the hardening fix.
+2. Test a real Claude candidate for the Helper role now that it's supported (e.g.
+   `claude-haiku-4-5` vs. `gpt-4o-mini`) — lifted in §0g but not yet exercised.
+3. Do a real human review pass with `eval/review.py` — still the last missing piece before an
+   actual promotion decision.
+4. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+5. Repeat fixture capture on a few more mornings for variety (Phase 0).
+
+## 0g. Session log continued — 2026-09-13, gpt-5.6-terra hang fixed + fact-checker made provider-agnostic
 
 ## 0g. Session log continued — 2026-09-13, gpt-5.6-terra hang fixed + fact-checker made provider-agnostic
 

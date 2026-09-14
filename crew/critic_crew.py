@@ -80,6 +80,36 @@ def _llm_complete(llm, messages: list[dict]) -> tuple[str, dict]:
     return text, usage
 
 
+def _normalize_category_scores(category_scores: dict) -> dict:
+    """
+    The scorer is asked for a flat int per category (e.g. {"AI & Tech": 8}), but
+    gpt-4o has been observed (confirmed 2026-09-13, MODEL_EVAL_PLAN.md §0g) to
+    intermittently return a nested per-metric dict instead
+    (e.g. {"COMPANIES": {"depth": 8, "analysis": 7, "substance": 7}}) despite the
+    prompt's explicit example. Every downstream weak-section check is
+    `isinstance(score, (int, float))`, so an un-normalized nested dict silently
+    makes that category look never-scored (never flagged weak) — a genuinely weak
+    section could skip patching with no visible error. Flatten to the mean of the
+    dict's numeric sub-values (still a 1-10-scale number) instead of dropping it,
+    and log it — this should not happen per the prompt, so it's worth seeing.
+    """
+    normalized: dict = {}
+    for cat, score in category_scores.items():
+        if isinstance(score, dict):
+            numeric_vals = [v for v in score.values() if isinstance(v, (int, float))]
+            if numeric_vals:
+                flat = round(sum(numeric_vals) / len(numeric_vals), 1)
+                logger.warning(
+                    "[Critic Crew] scorer returned a nested dict for '%s' (%s) instead of a "
+                    "flat score — flattening to the mean (%.1f). See MODEL_EVAL_PLAN.md §0g.",
+                    cat, score, flat,
+                )
+                normalized[cat] = flat
+                continue
+        normalized[cat] = score
+    return normalized
+
+
 def _run_scorer(html: str, categorised: dict[str, list[dict]]) -> tuple[dict, dict]:
     """Returns (result, usage) — result is {category_scores, issues, overall_passed}."""
     summary = _extract_html_summary(html, categorised)
@@ -96,7 +126,8 @@ def _run_scorer(html: str, categorised: dict[str, list[dict]]) -> tuple[dict, di
         "  - substance: does it include specific facts, numbers, or implications?\n\n"
         "A score of 7+ means acceptable. Below 7 means the section needs improvement.\n\n"
         f"BRIEFING SUMMARY:\n{summary}\n\n"
-        "Return ONLY valid JSON (no markdown, no commentary):\n"
+        "Return ONLY valid JSON (no markdown, no commentary). Each category_scores value "
+        "MUST be a single number 1-10 — NOT an object/dict of sub-scores:\n"
         '{"category_scores": {"AI & Tech": 8, ...}, '
         '"issues": {"Business & Markets": "Only 1 story, lacks analysis"}, '
         '"overall_passed": true}'
@@ -106,7 +137,10 @@ def _run_scorer(html: str, categorised: dict[str, list[dict]]) -> tuple[dict, di
         raw = raw.strip()
         if raw.startswith("```"):
             raw = "\n".join(line for line in raw.splitlines() if not line.strip().startswith("```")).strip()
-        return json.loads(raw), usage
+        parsed = json.loads(raw)
+        if isinstance(parsed.get("category_scores"), dict):
+            parsed["category_scores"] = _normalize_category_scores(parsed["category_scores"])
+        return parsed, usage
     except Exception as exc:
         logger.warning("[Critic Crew] scorer failed (non-fatal): %s", exc)
         return {"category_scores": {}, "issues": {}, "overall_passed": True}, {"prompt_tokens": 0, "completion_tokens": 0}
