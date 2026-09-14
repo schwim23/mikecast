@@ -1,6 +1,63 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — filtering/sorting click-tested live and one more bug found+fixed · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — first real human review pass completed 2026-09-14 (writer + critic); no candidate cleared all 4 gates on this fixture day · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0p. Session log continued — 2026-09-14, first real human review (writer + critic)
+
+Mike did the actual blind review — the last missing piece before a real promotion
+verdict — for both writer and critic roles, against the 2026-09-14 fixture
+(`writer_2026-09-14_1789387203`, `critic_2026-09-14_1789387634`). Real
+`human_scores.json` now exists for both, replacing the test data from earlier sessions.
+
+**Writer** (baseline `claude-sonnet-4-6`):
+
+| Gate | `claude-sonnet-5` | `gpt-5.6-sol` |
+|---|---|---|
+| 1. Zero net-new hallucinations | PASS | PASS |
+| 2. 100% format contract | PASS | FAIL (884-word podcast, below 900 floor) |
+| 3. Editorial ≥ baseline (5.5) | PASS (6.5) | FAIL (5.0) |
+| 4. Human score ≥ baseline (4) | **FAIL (3)** | **FAIL (3)** |
+
+Neither candidate clears all four — `claude-sonnet-5` is the closer call (3 of 4), `gpt-5.6-sol`
+fails three. Mike's review note, independent of the model comparison: **both sides missed that
+the Giants game had already happened** — a real timeliness/freshness gap in the writer
+pipeline itself (affected the baseline too, not a candidate-specific issue).
+
+**Critic** (baseline `gpt-4o`):
+
+| Gate | `gpt-5.6-terra` | `claude-sonnet-5` |
+|---|---|---|
+| 1. Zero net-new hallucinations | PASS | PASS |
+| 2. 100% format contract | PASS | PASS |
+| 3. Editorial ≥ baseline (6.5) | FAIL (5.5) | FAIL (6.0 — close) |
+| 4. Human score ≥ baseline (4) | **FAIL (2)** | PASS (4, tied — "slight but not clear advantage") |
+
+Neither clears all four, but for substantively different reasons — this is the more interesting
+finding than the raw scores. `gpt-5.6-terra` judged the COMPANIES section as fine when it
+genuinely wasn't (Mike's note: "unconfirmed date... less clear on the Tesla timing") — the
+baseline caught and patched the same weakness. That's a real, documented critic-judgment
+miss, not a close call. `claude-sonnet-5` is genuinely competitive — ties the baseline on
+human score, comes within 0.5 on editorial — and would be worth re-testing across more
+fixture days.
+
+**Verdict as of today: no promotion for either role.** All four gates, every time, is the
+rule — a 3-of-4 near-miss (`claude-sonnet-5` in both roles) doesn't get a pass. This is one
+fixture day; Phase 0's original ask for day-variety (heavy-sports day, big-AI-news day, thin
+weekend) still matters before treating any of this as conclusive, especially for the
+close calls.
+
+### Concrete next steps (revised again)
+
+1. Let the daily cron (through 2026-09-20) keep accumulating fixture-day variety, then repeat
+   human review on a couple more days before drawing a real conclusion — `claude-sonnet-5`
+   in particular deserves a second look on a different kind of news day given how close it
+   came in both roles.
+2. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+3. Decide whether to fix the writer-prompt grounding gap found in §0l, and separately the
+   Giants-game timeliness gap found in this review — both are production quality issues
+   independent of any model-swap question.
+
+## 0o. Session log continued — 2026-09-14, real click-test + one more bug found
 
 ## 0o. Session log continued — 2026-09-14, real click-test + one more bug found
 
