@@ -177,7 +177,7 @@ def score_grounding(html: str, top_articles: dict[str, list[dict]]) -> dict:
 def score_editorial(html: str, top_articles: dict[str, list[dict]]) -> dict:
     from crew.critic_crew import _run_scorer
 
-    result = _run_scorer(html, top_articles)
+    result, _usage = _run_scorer(html, top_articles)
     scores = result.get("category_scores", {})
     numeric = [v for v in scores.values() if isinstance(v, (int, float))]
     return {

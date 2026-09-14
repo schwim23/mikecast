@@ -1,6 +1,78 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phases 0, 1, 2, 3, and 4 (partial) all built and exercised 2026-09-13 · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; critic role now supports any model, including gpt-5.6-terra · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0g. Session log continued — 2026-09-13, gpt-5.6-terra hang fixed + fact-checker made provider-agnostic
+
+**Root-caused the gpt-5.6-terra hang for real** (§0c flagged it, didn't fix it) by reading
+crewai 0.86.0's own source (`agents/crew_agent_executor.py::_invoke_loop`): when
+`_format_answer()` raises `OutputParserException` (the model didn't produce CrewAI's expected
+`Thought:/Action:`/`Final Answer:` text), the `except OutputParserException` handler appends
+the error and recurses back into `_invoke_loop()` — **with no check against `self.max_iter`
+at all**. Only the successful-parse path increments `self.iterations`. A model that can't
+reliably produce that format loops with no exit condition, and no timeout on our side can fix
+a loop with no bound — confirmed this is a framework bug, not a tuning problem.
+
+**Real fix**: the critic scorer needs no tools and only ever returns JSON, so CrewAI's
+Agent/Task/Crew wrapper (built for multi-step tool-use reasoning) was pure overhead — and
+exactly the overhead causing the incompatibility. Rewrote
+`crew/critic_crew.py::_run_scorer` to bypass it entirely: a new `_llm_complete()` helper calls
+`litellm.completion()` directly with a plain user-message prompt, no ReAct format required at
+all. This works identically across every provider LiteLLM supports. Removed the now-dead
+`make_section_scorer()` Agent from `crew/agents.py` (left a comment explaining why, matching
+the existing pattern for the removed Gatekeeper agent).
+
+**Verified against the real bug**: re-ran the critic eval with `gpt-5.6-terra` included —
+completed in 33.8s (previously: killed after 6-10 min, twice, still hanging). It correctly
+scored sections, triggered a real patch on a weak "Companies" section, and correctly skipped
+patching NY Sports. All three critic models (`gpt-4o`, `gpt-5.6-terra`, `claude-sonnet-5`) now
+work. New run: `critic_2026-09-13_1789345471` (superseded and deleted the earlier 2-model run).
+
+**Rewrote the NY Sports fact-checker to support any model** (`crew/tools.py::ValidateClaimTool`)
+— it called the raw OpenAI SDK directly, which is why a Claude candidate was descoped for the
+Helper role in §1b. Switched to `litellm.completion()`, which (confirmed by direct test)
+**automatically normalizes `max_tokens` per-provider** — so the manual `max_completion_tokens`
+workaround from §0c is now unnecessary now that we're not calling the raw SDK. Dropped the
+OpenAI-specific `response_format={"type":"json_object"}` entirely (inconsistent across
+LiteLLM/Anthropic) in favor of the same "Return ONLY valid JSON" + markdown-fence-strip pattern
+already proven reliable in the scorer. **The OpenAI-only restriction on the Helper role eval is
+now lifted** — `eval/run_eval.py`'s `OPENAI_ONLY_ROLES` check is removed. (Not yet re-tested
+with an actual Claude helper candidate this session — the fix is verified by code review +
+the existing OpenAI-model helper eval still passing, not by a fresh cross-provider run.)
+
+**New shared module**: `crew/model_compat.py` — centralizes `supports_custom_temperature()`
+and `api_key_for_model()`, previously duplicated ad hoc in `eval/run_eval.py`. Now used by
+`eval/run_eval.py`, `crew/critic_crew.py::_llm_complete`, and `crew/tools.py::ValidateClaimTool`
+so these compatibility rules can't drift across the three call sites again.
+
+**New finding, not yet fixed**: `gpt-4o` (the current production critic/judge model)
+intermittently returns **nested per-metric dicts** instead of flat integers for
+`category_scores` (e.g. `{"COMPANIES": {"depth": 8, "analysis": 7, "substance": 7}}` instead of
+`{"COMPANIES": 8}`). Since the weak-section check is `isinstance(score, (int, float))`, this
+silently produces `weak=[]` regardless of actual quality — **a genuinely weak section could go
+unpatched in production with no visible error**. Reproduced live in this session's critic run
+(all three `_run_scorer` editorial-rescoring calls in `critic_2026-09-13_1789345471`'s
+`scores.json` came back with `mean_score: None` because of this). Not a regression from
+anything changed this session — this is a pre-existing gpt-4o compliance gap, surfaced by
+directly reading real critic output rather than trusting the summary line. **Not fixed** —
+would need either stricter prompt engineering, a JSON-schema-validated response step, or a
+retry-on-malformed-output loop in `_run_scorer`. Flagged to Mike; fix pending his call.
+
+**Files changed, uncommitted as of this log entry**: `crew/model_compat.py` (new),
+`crew/critic_crew.py`, `crew/agents.py`, `crew/tools.py`, `eval/run_eval.py`, `eval/score.py`.
+
+### Concrete next steps (revised again)
+
+1. Decide whether to fix the gpt-4o nested-score-format issue above.
+2. Commit everything from this pass.
+3. Test a real Claude candidate for the Helper role now that it's supported (e.g.
+   `claude-haiku-4-5` vs. `gpt-4o-mini`) — the restriction was lifted but not yet exercised.
+4. Do a real human review pass with `eval/review.py` (still the last missing piece before an
+   actual promotion decision).
+5. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+6. Repeat fixture capture on a few more mornings for variety (Phase 0).
+
+## 0f. Session log continued — 2026-09-13, format-contract root cause fixed + Phase 3 built
 
 ## 0f. Session log continued — 2026-09-13, format-contract root cause fixed + Phase 3 built
 

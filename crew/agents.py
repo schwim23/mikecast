@@ -366,25 +366,15 @@ def make_social_copywriter() -> Agent:
 # ---------------------------------------------------------------------------
 # Step 8b — Critic Crew (Scorer + Patcher)
 # ---------------------------------------------------------------------------
-
-def make_section_scorer() -> Agent:
-    return Agent(
-        role="Section Quality Scorer",
-        goal=(
-            "Score each category section of the HTML briefing 1-10 on depth, "
-            "analysis, and substance. A score below 7 means the section needs to "
-            "be rewritten by the Section Patcher."
-        ),
-        backstory=(
-            "You are a quality editor for a daily news briefing. You score sections "
-            "1-10 (7+ = acceptable). You return strict JSON: "
-            '{"category_scores": {...}, "issues": {...}, "overall_passed": bool}.'
-        ),
-        tools=[],
-        llm=openai_critic_llm(),
-        verbose=False,
-        allow_delegation=False,
-    )
+# Note: a make_section_scorer() Agent used to live here. Removed 2026-09-13 —
+# CrewAI's Agent/Task/Crew executor wraps every call in a ReAct-style
+# "Thought:/Action:"/"Final Answer:" text format, and its format-error retry
+# path has no max_iter bound (see crew/critic_crew.py::_llm_complete's
+# docstring), so a model that doesn't reliably produce that format (confirmed
+# with gpt-5.6-terra) hangs forever. The scorer needs no tools and only ever
+# returns JSON, so crew/critic_crew.py::_run_scorer now calls
+# crew.agents.openai_critic_llm() directly via a plain LiteLLM completion
+# instead — works identically across every provider, no ReAct dependency.
 
 
 def make_section_patcher() -> Agent:

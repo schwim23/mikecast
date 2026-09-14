@@ -48,7 +48,7 @@ from mc_collect import (
     search_news_web as _gnews_search,
     select_top_articles as _select_top,
 )
-from mc_config import OPENAI_API_KEY, OPENAI_HELPER_MODEL, TODAY
+from mc_config import OPENAI_HELPER_MODEL, TODAY
 
 logger = logging.getLogger("mikecast.crew.tools")
 
@@ -736,8 +736,8 @@ class FetchTeamInjuryReportTool(BaseTool):
 class ValidateClaimTool(BaseTool):
     name: str = "validate_claim_against_articles"
     description: str = (
-        "Ask GPT-4o-mini whether a specific factual claim is directly supported by the "
-        "provided source articles. Returns "
+        "Ask the configured helper model (OPENAI_HELPER_MODEL — any provider) whether a "
+        "specific factual claim is directly supported by the provided source articles. Returns "
         "{ok: bool, supported: 'yes'|'no'|'unclear', evidence: 'quoted snippet', reasoning: '...'}. "
         "Use for fact-checking writer output before it reaches the listener."
     )
@@ -758,13 +758,15 @@ class ValidateClaimTool(BaseTool):
             return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": "missing claim"}
         if not isinstance(articles, list):
             return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": "articles must be a list"}
-        if not OPENAI_API_KEY:
-            return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": "OPENAI_API_KEY unset"}
         if not articles:
             return {"ok": True, "supported": "no", "evidence": "", "reasoning": "no source articles provided"}
 
-        from openai import OpenAI
-        client = OpenAI()
+        from crew.model_compat import api_key_for_model, supports_custom_temperature
+
+        model = OPENAI_HELPER_MODEL
+        api_key = api_key_for_model(model)
+        if not api_key:
+            return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": f"no API key configured for {model!r}"}
 
         # Compact article block (title + description only — bodies are too long for a fast checker)
         lines: list[str] = []
@@ -780,7 +782,7 @@ class ValidateClaimTool(BaseTool):
             "supported by at least one article. A claim is supported only if its specific "
             "subject, predicate, and any numeric or named details all appear in an article. "
             "Generic topical overlap is NOT support. "
-            "Return ONLY valid JSON: "
+            "Return ONLY valid JSON, no markdown, no commentary: "
             '{"supported": "yes" | "no" | "unclear", '
             '"evidence": "<short snippet from the supporting article, or empty>", '
             '"reasoning": "<one sentence>"}'
@@ -788,32 +790,36 @@ class ValidateClaimTool(BaseTool):
         user = f"CLAIM:\n{claim}\n\nSOURCE ARTICLES:\n{article_block}"
 
         try:
-            # Strip the LiteLLM "openai/" prefix if present — the openai SDK
-            # doesn't accept provider-prefixed model strings directly.
-            model = OPENAI_HELPER_MODEL.replace("openai/", "", 1)
-            # Newer model generations (confirmed 2026-09-13 for gpt-5.6-*) reject
-            # `max_tokens` ("Use 'max_completion_tokens' instead") and reject any
-            # non-default `temperature` ("Only the default (1) value is supported").
-            # `max_completion_tokens` is OpenAI's current parameter name and works
-            # across the whole model range including gpt-4o/gpt-4o-mini, so it's a
-            # safe unconditional rename; temperature is only safe to send for
-            # older models, so it's included conditionally.
-            kwargs = {
+            import litellm
+
+            # Routed through LiteLLM (not the raw OpenAI SDK) so this works with
+            # ANY provider — confirmed 2026-09-13 that LiteLLM also normalizes
+            # max_tokens per-provider automatically (gpt-5.6-* needs
+            # max_completion_tokens; LiteLLM handles the translation internally,
+            # unlike a raw client.chat.completions.create() call). Newer model
+            # generations reject a non-default temperature, so it's conditional.
+            # response_format is deliberately NOT set — it's provider-specific and
+            # inconsistent across LiteLLM/Anthropic; the "Return ONLY valid JSON"
+            # instruction plus the markdown-fence strip below is the same reliable,
+            # provider-agnostic pattern crew/critic_crew.py's scorer already uses.
+            params = {
                 "model": model,
+                "api_key": api_key,
                 "messages": [
                     {"role": "system", "content": system},
-                    {"role": "user",   "content": user},
+                    {"role": "user", "content": user},
                 ],
-                "max_completion_tokens": 200,
-                "response_format": {"type": "json_object"},
+                "max_tokens": 200,
             }
-            if not model.startswith(("gpt-5.6-", "gpt-6-")):
-                kwargs["temperature"] = 0
-            resp = client.chat.completions.create(**kwargs)
-            raw = resp.choices[0].message.content.strip()
+            if supports_custom_temperature(model):
+                params["temperature"] = 0
+            resp = litellm.completion(**params)
+            raw = (resp.choices[0].message.content or "").strip()
+            if raw.startswith("```"):
+                raw = "\n".join(line for line in raw.splitlines() if not line.strip().startswith("```")).strip()
             parsed = json.loads(raw)
             usage = {}
-            if resp.usage:
+            if getattr(resp, "usage", None):
                 usage = {
                     "prompt_tokens": resp.usage.prompt_tokens,
                     "completion_tokens": resp.usage.completion_tokens,

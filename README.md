@@ -135,6 +135,7 @@ crew/
 ├── __init__.py
 ├── tools.py              # All CrewAI tools — wraps legacy fetchers + 4 new ESPN/fact-check tools
 ├── llm.py                # CrewAI LLM factory
+├── model_compat.py       # Shared cross-model compatibility rules (temperature, API key by provider)
 ├── agents.py             # Agent personas; backstories reuse legacy hallucination guards verbatim
 ├── context.py            # Re-exports legacy prompt helpers (_build_articles_context, etc.)
 ├── planning_crew.py      # Step 0
@@ -195,12 +196,18 @@ model-compatibility findings: **`MODEL_EVAL_PLAN.md`**.
    S3_BUCKET=mikecast-io-data .venv/bin/python3 eval/build_dashboard.py
    ```
 
-**Known model-compatibility gotchas** (see `MODEL_EVAL_PLAN.md` for the full write-up):
-newer-generation models (e.g. `claude-sonnet-5`, `gpt-5.6-*`) reject a non-default
-`temperature`; some don't reliably follow CrewAI's default ReAct agent-loop text format for a
-no-tool task and can hang indefinitely (confirmed with `gpt-5.6-terra` as a critic scorer);
-`gpt-5.6-*` also requires `max_completion_tokens` instead of `max_tokens` on raw OpenAI SDK
-calls (fixed in `crew/tools.py`'s fact-checker).
+**Known model-compatibility gotchas** (see `MODEL_EVAL_PLAN.md` for the full write-up, and
+`crew/model_compat.py` for the shared handling): newer-generation models (e.g.
+`claude-sonnet-5`, `gpt-5.6-*`) reject a non-default `temperature` — handled uniformly via
+`crew.model_compat.supports_custom_temperature()`. Some don't reliably follow CrewAI's default
+ReAct agent-loop text format for a no-tool task and can hang indefinitely — CrewAI's own
+format-error retry path has no `max_iter` bound (confirmed against crewai 0.86.0's source),
+so this isn't fixable with a longer timeout. Fixed for the critic scorer by bypassing
+CrewAI's Agent/Task/Crew wrapper entirely (`crew/critic_crew.py::_llm_complete`, a plain
+LiteLLM completion call — no tools needed, so no ReAct format needed either). The NY Sports
+fact-checker (`crew/tools.py::ValidateClaimTool`) now also routes through LiteLLM instead of
+the raw OpenAI SDK, so it works with any provider and gets `max_tokens`/`max_completion_tokens`
+normalized automatically.
 
 ## Hallucination Mitigations
 
@@ -275,6 +282,7 @@ mikecast/
 ├── crew/                     # CrewAI agent pipeline (opt-in via --crew)
 │   ├── tools.py
 │   ├── llm.py
+│   ├── model_compat.py
 │   ├── agents.py
 │   ├── context.py
 │   ├── planning_crew.py

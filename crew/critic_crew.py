@@ -24,7 +24,9 @@ import re
 
 from crewai import Crew, Process, Task
 
-from crew.agents import make_section_patcher, make_section_scorer
+from crew import agents as _agents
+from crew.agents import make_section_patcher
+from crew.model_compat import supports_custom_temperature
 from crew.tools import validate_claim_tool
 from crew.writing_crew import _kickoff_single_task
 from eval.dump import dump_fixture
@@ -42,36 +44,72 @@ _WEAK_THRESHOLD = 7
 # Scorer
 # ---------------------------------------------------------------------------
 
-def _run_scorer(html: str, categorised: dict[str, list[dict]]) -> dict:
+def _llm_complete(llm, messages: list[dict]) -> tuple[str, dict]:
+    """
+    Direct LiteLLM completion — deliberately bypasses CrewAI's Agent/Task/Crew
+    ReAct-style executor. Needed because that executor's format-error retry
+    path has NO max_iter bound (confirmed 2026-09-13 against installed crewai
+    0.86.0, agents/crew_agent_executor.py::_invoke_loop: the `except
+    OutputParserException` branch recurses back into _invoke_loop without
+    checking self.iterations against self.max_iter — only the successful-parse
+    path increments that counter). A model that doesn't reliably produce the
+    "Thought:/Action:"/"Final Answer:" text CrewAI expects for a no-tool task
+    (confirmed with gpt-5.6-terra as this scorer) hangs forever retrying the
+    FORMAT, not the actual task — no timeout on our side can fix a loop with no
+    exit condition. A plain completion call has no such format requirement and
+    works identically across every provider LiteLLM supports.
+    """
+    import litellm
+
+    params = {
+        "model": llm.model,
+        "api_key": llm.api_key,
+        "messages": messages,
+        "max_tokens": llm.max_tokens,
+    }
+    if llm.temperature is not None and supports_custom_temperature(llm.model):
+        params["temperature"] = llm.temperature
+    resp = litellm.completion(**params)
+    text = resp.choices[0].message.content or ""
+    usage = {"prompt_tokens": 0, "completion_tokens": 0}
+    if getattr(resp, "usage", None):
+        usage = {
+            "prompt_tokens": resp.usage.prompt_tokens,
+            "completion_tokens": resp.usage.completion_tokens,
+        }
+    return text, usage
+
+
+def _run_scorer(html: str, categorised: dict[str, list[dict]]) -> tuple[dict, dict]:
+    """Returns (result, usage) — result is {category_scores, issues, overall_passed}."""
     summary = _extract_html_summary(html, categorised)
-    scorer = make_section_scorer()
-    task = Task(
-        description=(
-            "Below is a compact summary of today's MikeCast HTML briefing. Score each "
-            "category section 1-10 on:\n"
-            "  - depth: does it have 3+ substantive stories?\n"
-            "  - analysis: does it go beyond mere headlines?\n"
-            "  - substance: does it include specific facts, numbers, or implications?\n\n"
-            "A score of 7+ means acceptable. Below 7 means the section needs improvement.\n\n"
-            f"BRIEFING SUMMARY:\n{summary}\n\n"
-            "Return ONLY valid JSON (no markdown, no commentary):\n"
-            '{"category_scores": {"AI & Tech": 8, ...}, '
-            '"issues": {"Business & Markets": "Only 1 story, lacks analysis"}, '
-            '"overall_passed": true}'
-        ),
-        expected_output='JSON object with category_scores, issues, overall_passed.',
-        agent=scorer,
+    # Called via the crew.agents module reference (not imported directly) so
+    # eval/run_eval.py's `mock.patch("crew.agents.openai_critic_llm", ...)`
+    # still takes effect here — same "patch where it's used" requirement that
+    # applied when this LLM was built inside an Agent defined in crew.agents.
+    llm = _agents.openai_critic_llm()
+    prompt = (
+        "Below is a compact summary of today's MikeCast HTML briefing. Score each "
+        "category section 1-10 on:\n"
+        "  - depth: does it have 3+ substantive stories?\n"
+        "  - analysis: does it go beyond mere headlines?\n"
+        "  - substance: does it include specific facts, numbers, or implications?\n\n"
+        "A score of 7+ means acceptable. Below 7 means the section needs improvement.\n\n"
+        f"BRIEFING SUMMARY:\n{summary}\n\n"
+        "Return ONLY valid JSON (no markdown, no commentary):\n"
+        '{"category_scores": {"AI & Tech": 8, ...}, '
+        '"issues": {"Business & Markets": "Only 1 story, lacks analysis"}, '
+        '"overall_passed": true}'
     )
-    crew = Crew(agents=[scorer], tasks=[task], process=Process.sequential, verbose=False)
     try:
-        result = crew.kickoff()
-        raw = (getattr(result, "raw", None) or str(result)).strip()
+        raw, usage = _llm_complete(llm, [{"role": "user", "content": prompt}])
+        raw = raw.strip()
         if raw.startswith("```"):
             raw = "\n".join(line for line in raw.splitlines() if not line.strip().startswith("```")).strip()
-        return json.loads(raw)
+        return json.loads(raw), usage
     except Exception as exc:
         logger.warning("[Critic Crew] scorer failed (non-fatal): %s", exc)
-        return {"category_scores": {}, "issues": {}, "overall_passed": True}
+        return {"category_scores": {}, "issues": {}, "overall_passed": True}, {"prompt_tokens": 0, "completion_tokens": 0}
 
 
 # ---------------------------------------------------------------------------
@@ -131,13 +169,14 @@ def run_critic_pass(
     submission — purely observational, computed from values already derived
     for logging; no scoring/threshold/patch logic changes.
     """
-    def _empty_metrics(scores: dict | None = None, weak: list | None = None) -> dict:
+    def _empty_metrics(scores: dict | None = None, weak: list | None = None, scorer_usage: dict | None = None) -> dict:
         weak = weak or []
         return {
             "category_scores": scores or {},
             "weak_categories": weak,
             "patched_categories": [],
             "ny_sports_skipped": any(c.lower() in _NEVER_PATCH_NORMALIZED for c in weak),
+            "scorer_usage": scorer_usage or {},
         }
 
     # Helper so every return path runs the NY Sports fact-check (read-only).
@@ -149,7 +188,7 @@ def run_critic_pass(
         return h, s, c, metrics
 
     try:
-        critique = _run_scorer(html, top_articles)
+        critique, scorer_usage = _run_scorer(html, top_articles)
     except Exception as exc:
         logger.warning("[Critic Crew] scorer raised: %s — keeping originals", exc)
         return _with_factcheck(html, single_voice_script, conversational_script, _empty_metrics())
@@ -168,7 +207,7 @@ def run_critic_pass(
     if overall_passed and not weak:
         logger.info("[Critic Crew] briefing passed — no patches needed.")
         return _with_factcheck(html, single_voice_script, conversational_script,
-                                _empty_metrics(scores, weak))
+                                _empty_metrics(scores, weak, scorer_usage))
 
     patchable = [c for c in weak if c.lower() not in _NEVER_PATCH_NORMALIZED]
     skipped = [c for c in weak if c.lower() in _NEVER_PATCH_NORMALIZED]
@@ -179,7 +218,7 @@ def run_critic_pass(
         )
     if not patchable:
         return _with_factcheck(html, single_voice_script, conversational_script,
-                                _empty_metrics(scores, weak))
+                                _empty_metrics(scores, weak, scorer_usage))
 
     # The scorer echoes the briefing's ALL-CAPS section headers ("COMPANIES",
     # "NY SPORTS"), but top_articles is keyed title-case ("Companies",
@@ -235,7 +274,7 @@ def run_critic_pass(
     # the HTML — re-rolling against unchanged inputs is a coin-flip on quality
     # and burns ~70s + Claude tokens. If a future script critic pass scores the
     # podcast specifically, we can regenerate based on its signal.
-    metrics = _empty_metrics(scores, weak)
+    metrics = _empty_metrics(scores, weak, scorer_usage)
     metrics["patched_categories"] = patched_categories
     return _with_factcheck(improved_html, single_voice_script, conversational_script, metrics)
 

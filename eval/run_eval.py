@@ -96,33 +96,19 @@ def load_fixture(role: str, date: str) -> dict:
 # value is supported"). Omit temperature entirely for these rather than
 # passing a value the API 400s on — a silent per-call failure otherwise, since
 # _kickoff_single_task/_run_scorer swallow the exception and return "".
-_NO_CUSTOM_TEMPERATURE_MODELS = {
-    "anthropic/claude-sonnet-5",
-    "anthropic/claude-opus-5",
-    "anthropic/claude-fable-5",
-    "anthropic/claude-fable-5-1",
-}
-_NO_CUSTOM_TEMPERATURE_PREFIXES = ("openai/gpt-5.6-", "openai/gpt-6-")
-
-
-def _supports_custom_temperature(model: str) -> bool:
-    if model in _NO_CUSTOM_TEMPERATURE_MODELS:
-        return False
-    return not model.startswith(_NO_CUSTOM_TEMPERATURE_PREFIXES)
-
+# Logic lives in crew/model_compat.py — shared with crew/critic_crew.py and
+# crew/tools.py so the compatibility rules can't drift across the three.
 
 def _make_llm(model: str, temperature: float, max_tokens: int):
     from crewai import LLM
-    from mc_config import ANTHROPIC_API_KEY, OPENAI_API_KEY
 
-    if model.startswith("anthropic/"):
-        api_key = ANTHROPIC_API_KEY or None
-    elif model.startswith("openai/"):
-        api_key = OPENAI_API_KEY or None
-    else:
+    from crew.model_compat import api_key_for_model, supports_custom_temperature
+
+    api_key = api_key_for_model(model)
+    if api_key is None and not model.startswith(("anthropic/", "openai/")):
         raise ValueError(f"Unrecognized model provider prefix in {model!r} (expected anthropic/ or openai/)")
     kwargs = {"model": model, "api_key": api_key, "max_tokens": max_tokens}
-    if _supports_custom_temperature(model):
+    if supports_custom_temperature(model):
         kwargs["temperature"] = temperature
     else:
         logger.info("Omitting temperature override for %s — model rejects a non-default value.", model)
@@ -230,22 +216,37 @@ def replay_critic(fixture: dict, model: str) -> dict:
             verified_sports_facts=inp.get("verified_sports_facts"),
         )
     latency_s = time.time() - t0
+
+    # The scorer bypasses CrewAI's Crew/Agent entirely (see
+    # crew/critic_crew.py::_llm_complete) to avoid the ReAct-format hang, so
+    # _CrewCapture never sees it — only the patcher's Crew (if a section got
+    # patched) would show up there, under ITS OWN model, not this one. Merge
+    # the scorer's usage (returned via critic_metrics) in under the candidate
+    # model explicitly.
+    usage_by_model = _usage_by_model(cap.crews)
+    scorer_usage = metrics.get("scorer_usage") or {}
+    if scorer_usage:
+        bucket = usage_by_model.setdefault(model, {"prompt_tokens": 0, "completion_tokens": 0, "cached_prompt_tokens": 0})
+        bucket["prompt_tokens"] += scorer_usage.get("prompt_tokens", 0)
+        bucket["completion_tokens"] += scorer_usage.get("completion_tokens", 0)
+
     return {
         "outputs": {
             "html": html, "single_voice_script": single, "conversational_script": conv,
             "critic_metrics": metrics,
         },
         "latency_s": latency_s,
-        "usage_by_model": _usage_by_model(cap.crews),
+        "usage_by_model": usage_by_model,
     }
 
 
 def replay_helper(fixture: dict, model: str) -> dict:
-    # Helper role's only live call site (crew/tools.py::ValidateClaimTool) uses the
-    # raw OpenAI SDK directly, not CrewAI — OpenAI-only candidates, see
-    # MODEL_EVAL_PLAN.md §1b. Patch the module-level constant it reads (it was bound
-    # by value at import time via `from mc_config import OPENAI_HELPER_MODEL`, so
-    # setting the env var alone would have no effect here).
+    # Helper role's only live call site (crew/tools.py::ValidateClaimTool) now
+    # routes through LiteLLM (fixed 2026-09-13 — was the raw OpenAI SDK, which
+    # was OpenAI-only), so any provider works here too. Patch the module-level
+    # constant it reads (it was bound by value at import time via
+    # `from mc_config import OPENAI_HELPER_MODEL`, so setting the env var alone
+    # would have no effect here).
     from crew.tools import validate_claim_tool
 
     inp = fixture["input"]
@@ -277,7 +278,6 @@ def replay_helper(fixture: dict, model: str) -> dict:
 
 
 REPLAY_FNS = {"writer": replay_writer, "critic": replay_critic, "helper": replay_helper}
-OPENAI_ONLY_ROLES = {"helper"}  # see MODEL_EVAL_PLAN.md §1b
 
 
 # ---------------------------------------------------------------------------
@@ -330,14 +330,6 @@ def main() -> None:
                          help="Candidate model string; repeatable")
     parser.add_argument("--k", type=int, default=1, help="Repeats per model (writer: use 2-3 to capture variance)")
     args = parser.parse_args()
-
-    if args.role in OPENAI_ONLY_ROLES:
-        for m in [args.baseline, *args.candidates]:
-            if not m.startswith("openai/"):
-                parser.error(
-                    f"role={args.role!r} only supports openai/* models (its live code path "
-                    f"calls the raw OpenAI SDK directly) — got {m!r}. See MODEL_EVAL_PLAN.md §1b."
-                )
 
     try:
         fixture = load_fixture(args.role, args.date)
