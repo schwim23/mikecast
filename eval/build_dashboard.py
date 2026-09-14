@@ -6,11 +6,13 @@ Renders every eval/out/<run_id>/summary.json into a single static HTML page and
 uploads it to S3 at evals/index.html (reachable at mikecast.io/evals/index.html —
 see MODEL_EVAL_PLAN.md §0b for why no CloudFront change is needed for that path).
 
-Cost/latency only for now. Quality scores (Phase 2, eval/score.py — grounding/
-hallucination hard gate, format-contract checks, editorial score, LLM-judge) are
-not built yet, so the page says so explicitly rather than implying a verdict it
-can't back up. A promotion decision needs Phase 2 + Phase 3 (human review) per
-the plan's three gates (§3), not this page alone.
+Phase 2 (eval/score.py — grounding/hallucination hard gate, format-contract
+checks, editorial score) is built and runs automatically every morning via
+eval/run_daily_eval.sh. Phase 3 (eval/review.py, blind human A/B) is also
+built, but no real review has been completed yet — someone still has to
+actually run it. LLM-judge blind A/B is the one piece of Gate B not built.
+A promotion decision needs a completed human review on top of these
+automated scores, not this page alone — see the plan's promotion rule (§4).
 
 Usage:
   S3_BUCKET=mikecast-io-data python eval/build_dashboard.py
@@ -133,15 +135,18 @@ def render(runs: list[dict]) -> str:
 </head>
 <body>
   <h1>🎙️ MikeCast Model Eval Results</h1>
-  <p class="subtitle">Phase 1 replay results — baseline vs. candidate models, per role</p>
+  <p class="subtitle">Replay + automated scoring — baseline vs. candidate models, per role</p>
 
   <div class="notice">
     <strong>Not a promotion decision by itself.</strong> Gate/Format/Grounding/Editorial
-    columns come from <code>eval/score.py</code> (Phase 2) when a run has been scored — a
-    "—" means it hasn't been scored yet. <strong>Helper-role runs are never scored here</strong>
-    (their output is already a fact-check artifact, not prose to fact-check). Blind LLM-judge
-    A/B and human review (Phase 3) aren't built yet. See <code>MODEL_EVAL_PLAN.md</code> in the
-    repo for the full design, promotion rule, and decision log.
+    columns come from <code>eval/score.py</code> (Phase 2, built — runs automatically every
+    morning) — a "—" means that run hasn't been scored. <strong>Helper-role runs are never
+    scored here</strong> (their output is already a fact-check artifact, not prose to
+    fact-check). Blind human review (<code>eval/review.py</code>, Phase 3) is built too, but
+    <strong>no run below has actually been through it yet</strong> — someone still has to sit
+    down and do it. Blind LLM-judge A/B is the one piece not built. See
+    <code>MODEL_EVAL_PLAN.md</code> in the repo for the full design, promotion rule, and
+    decision log.
   </div>
 
   <details>
