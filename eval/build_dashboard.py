@@ -154,7 +154,8 @@ def render(runs: list[dict]) -> str:
     font-family:inherit; text-decoration:underline; padding:0; margin-left:auto;
   }}
   #row-count {{ color:#888; font-size:0.85em; }}
-  table {{ width:100%; border-collapse:collapse; font-size:0.92em; }}
+  .table-scroll {{ overflow-x:auto; }}
+  table {{ width:100%; min-width:900px; border-collapse:collapse; font-size:0.92em; }}
   th, td {{ padding:8px 10px; text-align:left; border-bottom:1px solid #333; }}
   th {{ color:#4fc3f7; border-bottom:1px solid #4fc3f7; font-weight:600; cursor:pointer; user-select:none; white-space:nowrap; }}
   th:hover {{ color:#81d4fa; }}
@@ -269,6 +270,7 @@ def render(runs: list[dict]) -> str:
   </div>
   <p id="row-count"></p>
 
+  <div class="table-scroll">
   <table id="results-table">
     <thead>
       <tr>
@@ -290,6 +292,7 @@ def render(runs: list[dict]) -> str:
       {rows_html}
     </tbody>
   </table>
+  </div>
 
   <script>
   (function() {{

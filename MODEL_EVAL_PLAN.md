@@ -1,6 +1,34 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — dashboard now has client-side filtering + sorting · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — filtering/sorting click-tested live and one more bug found+fixed · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0o. Session log continued — 2026-09-14, real click-test + one more bug found
+
+Browser extension connected this time — did the actual click-test §0n recommended, on the
+live site, not a local file. Confirmed working: role chips, sort ascending/descending (with
+correct ▲/▼ indicators), the Gate "Unscored" fix (shows exactly the 6 never-scored helper
+rows, distinct from "All"), the model search box, combined filters (Gate=Unscored +
+search="sonnet-5" correctly shows 0 rows since no helper candidate matches), and Reset
+(clears filters, correctly leaves the active sort alone).
+
+**Found a real bug the click-test caught that the Node logic test couldn't**: the `<table>`
+had no scroll container of its own, so at the actual page's current width (784px, table needs
+~900px+ for 12 columns) the whole page body scrolled horizontally — confirmed via
+`document.documentElement.scrollWidth > clientWidth` returning `true`. This predates the
+filter/sort work (Phase 4's original table never had one either) but only surfaced now because
+this was the first time the page was actually opened in a browser and measured. Fixed: wrapped
+the table in a `.table-scroll { overflow-x: auto }` div with `min-width: 900px` on the table
+itself — verified after redeploying that `document.documentElement` no longer overflows, only
+the table's own scroll container does.
+
+### Concrete next steps (revised again)
+
+1. Do a real human review pass with `eval/review.py` — still the last missing piece before an
+   actual promotion decision.
+2. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+3. Decide whether to fix the writer-prompt grounding gap found in §0l.
+
+## 0n. Session log continued — 2026-09-14, dashboard filtering + sorting
 
 ## 0n. Session log continued — 2026-09-14, dashboard filtering + sorting
 
