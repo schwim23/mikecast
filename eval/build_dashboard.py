@@ -43,11 +43,37 @@ def _load_runs() -> list[dict]:
         run = json.loads(f.read_text())
         scores_f = d / "scores.json"
         run["scores"] = json.loads(scores_f.read_text())["models"] if scores_f.exists() else {}
+        human_f = d / "human_scores.json"
+        run["human_scores"] = json.loads(human_f.read_text()) if human_f.exists() else {}
         runs.append(run)
     return sorted(runs, key=lambda r: (r["role"], r["date"], r["run_id"]))
 
 
-def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: dict | None) -> str:
+def _human_summary_for_model(model: str, human_scores: dict) -> dict | None:
+    """Averages this model's own score across every pair record it appears in
+    this run (a baseline is scored once per candidate it's paired against —
+    usually the same each time, but not necessarily). For a candidate (exactly
+    one pairing per run), 'gate' reflects whether it beat/tied/lost the
+    baseline in that pairing — a baseline is the reference point, not
+    something that passes/fails against itself, so its 'gate' stays None."""
+    own_scores: list[int] = []
+    gate: str | None = None
+    for record in human_scores.values():
+        if record["a_model"] == model:
+            own_score, other_score = record["score_a"], record["score_b"]
+        elif record["b_model"] == model:
+            own_score, other_score = record["score_b"], record["score_a"]
+        else:
+            continue
+        own_scores.append(own_score)
+        if record["candidate_model"] == model:
+            gate = "pass" if own_score > other_score else "tie" if own_score == other_score else "fail"
+    if not own_scores:
+        return None
+    return {"score": sum(own_scores) / len(own_scores), "gate": gate, "n": len(own_scores)}
+
+
+def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: dict | None, human: dict | None) -> str:
     e = html.escape
     latency = f'{r["avg_latency_s"]:.1f}s' if r["avg_latency_s"] is not None else "—"
     cost = f'${r["avg_cost_usd"]:.4f}' if r["avg_cost_usd"] is not None else "—"
@@ -89,6 +115,16 @@ def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: 
             editorial=score["editorial"]["mean_score"] if score["editorial"]["mean_score"] is not None else "",
         )
 
+    if human is None:
+        human_cell = '<td class="num">—</td>'
+        data_attrs["human"] = ""
+    else:
+        h_gate = human["gate"]
+        tag = f' <span class="tag {"pass" if h_gate == "pass" else "tie-tag" if h_gate == "tie" else "fail-tag"}">{h_gate.upper()}</span>' if h_gate else ""
+        n_note = f' <span class="n-note">(avg of {human["n"]})</span>' if human["n"] > 1 else ""
+        human_cell = f'<td class="num">{human["score"]:.1f}{tag}{n_note}</td>'
+        data_attrs["human"] = human["score"]
+
     data_str = " ".join(f'data-{k}="{e(str(v))}"' for k, v in data_attrs.items())
 
     return (
@@ -99,7 +135,7 @@ def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: 
         f'<td class="num">{e(latency)}</td>'
         f'<td class="num">{e(cost)}</td>'
         f'<td class="num{fail_class}">{r["failures"]}/{k}</td>'
-        f'{gate_cell}{fmt_cell}{ground_cell}{edit_cell}'
+        f'{gate_cell}{fmt_cell}{ground_cell}{edit_cell}{human_cell}'
         f'<td class="run-id">{e(run_id)}</td>'
         f'</tr>'
     )
@@ -109,9 +145,11 @@ def render(runs: list[dict]) -> str:
     rows = []
     for run in runs:
         scores = run.get("scores", {})
+        human_scores = run.get("human_scores", {})
         for model, r in run["results"].items():
-            rows.append(_row(run["role"], run["date"], run["run_id"], run["k"], model, r, scores.get(model)))
-    rows_html = "\n".join(rows) if rows else '<tr><td colspan="12" class="empty">No runs yet.</td></tr>'
+            human = _human_summary_for_model(model, human_scores)
+            rows.append(_row(run["role"], run["date"], run["run_id"], run["k"], model, r, scores.get(model), human))
+    rows_html = "\n".join(rows) if rows else '<tr><td colspan="13" class="empty">No runs yet.</td></tr>'
 
     return f"""<!doctype html>
 <html lang="en">
@@ -172,6 +210,8 @@ def render(runs: list[dict]) -> str:
   .tag.candidate {{ background:#1e4a5f; color:#81d4fa; }}
   .tag.pass {{ background:#1b4d3e; color:#81f0ae; }}
   .tag.fail-tag {{ background:#4d1b2e; color:#ff8a80; }}
+  .tag.tie-tag {{ background:#3a3a55; color:#ccc; }}
+  .n-note {{ color:#777; font-size:0.85em; }}
   td.num.fail {{ color:#ff8a80; font-weight:600; }}
   footer {{ margin-top:32px; color:#666; font-size:0.85em; border-top:1px solid #444; padding-top:16px; }}
   footer a {{ color:#81d4fa; }}
@@ -191,13 +231,12 @@ def render(runs: list[dict]) -> str:
   <div class="notice">
     <strong>Not a promotion decision by itself.</strong> Gate/Format/Grounding/Editorial
     columns come from <code>eval/score.py</code> (Phase 2, built — runs automatically every
-    morning) — a "—" means that run hasn't been scored. <strong>Helper-role runs are never
-    scored here</strong> (their output is already a fact-check artifact, not prose to
-    fact-check). Blind human review (<code>eval/review.py</code>, Phase 3) is built too, but
-    <strong>no run below has actually been through it yet</strong> — someone still has to sit
-    down and do it. Blind LLM-judge A/B is the one piece not built. See
-    <code>MODEL_EVAL_PLAN.md</code> in the repo for the full design, promotion rule, and
-    decision log.
+    morning) — a "—" means that run hasn't been scored; <strong>never populated for Helper</strong>
+    (its output is already a fact-check artifact, not prose to score this way). The Human
+    column comes from <code>eval/review.py</code>'s blind A/B (Phase 3) — a "—" means nobody's
+    reviewed that row yet. Blind LLM-judge A/B is the one piece not built. Promotion needs all
+    four gates to hold — see <code>MODEL_EVAL_PLAN.md</code> in the repo for the full design,
+    promotion rule, and decision log.
   </div>
 
   <details>
@@ -239,6 +278,14 @@ def render(runs: list[dict]) -> str:
       <dt>Editorial</dt>
       <dd>Mean 1-10 quality score across categories (depth/analysis/substance), from the same
         scorer the production critic uses.</dd>
+      <dt>Human</dt>
+      <dd>A person's blind 1-5 score (<code>eval/review.py</code>) — baseline and candidate are
+        shown unlabeled as "A"/"B" and only revealed after scoring. A candidate's tag shows
+        whether it beat (<span class="tag pass">PASS</span>), tied
+        (<span class="tag tie-tag">TIE</span>), or lost (<span class="tag fail-tag">FAIL</span>)
+        to the baseline in that specific pairing — a baseline has no tag, since it's the
+        reference point. A model reviewed against more than one candidate shows the average
+        of those scores, marked <code>(avg of N)</code>.</dd>
       <dt>Run ID</dt>
       <dd>The harness run identifier — matches the <code>eval/out/&lt;run_id&gt;/</code>
         directory if you want to inspect the raw generated content behind any row.</dd>
@@ -285,6 +332,7 @@ def render(runs: list[dict]) -> str:
         <th data-key="format" data-type="text">Format<span class="arrow"></span></th>
         <th data-key="grounding" data-type="num">Grounding<span class="arrow"></span></th>
         <th data-key="editorial" data-type="num">Editorial<span class="arrow"></span></th>
+        <th data-key="human" data-type="num">Human<span class="arrow"></span></th>
         <th data-key="runid" data-type="text">Run ID<span class="arrow"></span></th>
       </tr>
     </thead>

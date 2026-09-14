@@ -1,6 +1,38 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — human review completed 2026-09-14 for all three roles; no candidate promoted on this fixture day · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — dashboard now shows human review scores; all 4 gates visible in one place · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0r. Session log continued — 2026-09-14, human scores added to the dashboard
+
+Closed the last display gap: `human_scores.json` existed per run but the dashboard never
+rendered it. Added a **Human** column — a per-model average of its own 1-5 score across every
+pair it appeared in that run (a baseline gets scored once per candidate it's paired against,
+so `(avg of N)` shows when N>1), plus a PASS/TIE/FAIL tag on candidate rows showing whether it
+beat, tied, or lost to the baseline in that specific pairing. Baseline rows get no tag — it's
+the reference point, not something that passes/fails against itself. `—` for anything not yet
+reviewed.
+
+Verified the data-extraction logic in isolation against today's real recorded scores before
+touching the page at all — every value matched what was reported to Mike live during the
+review sessions. Then click-tested the deployed page: unreviewed 2026-09-13 rows correctly
+show `—`, 2026-09-14 rows show the right averages/tags (`gpt-5.6-terra`: 2.0 FAIL,
+`claude-sonnet-5`: 4.0 TIE, etc.), Helper rows correctly show `—` for the automated columns
+(never scored) while still showing real Human values, and sorting by Human works including the
+unscored-sinks-to-bottom rule already used for Editorial.
+
+**All four gates from §4's promotion rule are now visible in one place** for the first time —
+Gate, Format, Editorial, and Human side by side per model row.
+
+### Concrete next steps (revised again)
+
+1. Let the daily cron (through 2026-09-20) keep accumulating fixture-day variety; review
+   selectively rather than daily — focus on `claude-sonnet-5` (writer + critic) across a few
+   more different-feeling news days rather than re-reviewing already-clear losers.
+2. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+3. Decide whether to fix the writer-prompt grounding gap (§0l) and the Giants-game timeliness
+   gap (§0p) — both production quality issues independent of any model-swap question.
+
+## 0q. Session log continued — 2026-09-14, Helper review + a real bug it surfaced
 
 ## 0q. Session log continued — 2026-09-14, Helper review + a real bug it surfaced
 
