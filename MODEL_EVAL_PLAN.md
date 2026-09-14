@@ -1,6 +1,56 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; fixture capture AND daily comparison/scoring/dashboard now automatic via local cron through 2026-09-20 · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — first real cron-triggered run completed 2026-09-14; logging bug found and fixed · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0l. Session log — 2026-09-14, first real cron run + a logging bug
+
+The 8:00 AM ET cron fired for real for the first time and completed successfully — 6 runs
+total on the dashboard (3 from 2026-09-13, 3 new from today), `eval/out/latest.json` written
+correctly. Reviewed the actual results:
+
+- **Critic and Helper: fully clean** — all 3 models each, 0 failures, all gates pass.
+- **Writer: one real format failure.** `gpt-5.6-sol` produced 884 and 838-word podcast scripts
+  (both k0 and k1, both under the 900 floor). Checked the raw text — not truncated, ends on a
+  complete sign-off both times. Two independent samples under the floor is a real, reproducible
+  characteristic of this model for this task, not the truncation bug from §0f (that was
+  `claude-sonnet-5` hitting a token ceiling; this is `gpt-5.6-sol` just writing shorter).
+- **"Low grounding scores" investigated — not new hallucination, and not a candidate-model
+  regression.** Pulled the actual flagged sentences from today's baseline
+  (`claude-sonnet-4-6`): the writer is injecting background knowledge not present in the
+  source articles (e.g. explaining what zero-knowledge proofs are, editorializing "critics
+  argue that CEOs urging a slowdown are asking regulators to freeze the competitive
+  landscape"). This is a real violation of CLAUDE.md's "do NOT add details from training
+  knowledge" rule — but it shows up in the **current production baseline** at basically the
+  same rate as every candidate. Not a regression from anything this session touched: it's a
+  pre-existing writer-prompt characteristic that was invisible until Phase 2 generalized the
+  grounding check beyond NY Sports (the only section production's real fact-checker has ever
+  covered). Arguably the most useful finding this harness has produced — a real production
+  quality gap, independent of any model-swap question. **Not fixed** — a prompt change is a
+  production behavior change, out of scope for this pass; flagged to Mike.
+
+**Found and fixed a real bug in `run_daily_eval.sh` itself**: the log was missing the
+`--- writer ---`/`--- critic ---`/`--- helper ---` section markers, even though the run
+completed correctly. Root cause: `X | tee /dev/stderr | run_id` inside `$(...)` races against
+the script's own `echo` statements — both are separate processes appending into the same log
+file concurrently, and lines went missing or got cut mid-word. Confirmed **not** a Python
+stdout-buffering issue — `PYTHONUNBUFFERED=1` did not fix it in an isolated repro. Real fix:
+redirect each `run_eval.py` call to a dedicated temp file (a single writer, no concurrency),
+`cat` the temp file into the log only after the command fully completes, then extract the
+run_id from the temp file. Verified with an isolated repro before and after (broke reliably
+without the fix, clean every time with it) and a full dry run using a fake multi-line command
+matching `run_eval.py`'s real output shape.
+
+### Concrete next steps (revised again)
+
+1. Confirm tomorrow's cron log has the section markers correctly (first real exercise of the
+   fix under actual cron, not just a dry run).
+2. Decide whether to fix the writer-prompt grounding gap found above (background-knowledge
+   injection in analytical sections) — a production prompt change, not an eval-harness one.
+3. Do a real human review pass with `eval/review.py` — still the last missing piece before an
+   actual promotion decision.
+4. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+
+## 0k. Session log continued — 2026-09-13, daily comparison run automated (1-week trial)
 
 ## 0k. Session log continued — 2026-09-13, daily comparison run automated (1-week trial)
 

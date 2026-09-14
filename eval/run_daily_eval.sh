@@ -39,26 +39,40 @@ if ! aws s3 ls "s3://mikecast-io-data/eval/fixtures/live/${TODAY}/writer.json" >
     exit 0
 fi
 
-run_id() {
-    # run_eval.py's last stdout line is "Full output: eval/out/<run_id>" — pull
-    # the run_id back out rather than re-deriving/guessing the timestamp.
-    grep -oP 'Full output: \K.*' | xargs -I{} basename {}
+# run_id() used to pipe through `tee /dev/stderr` so the log got the full output
+# while a variable captured just the run_id — but that races against this
+# script's own `echo` statements writing into the SAME log file (both are
+# separate processes appending concurrently), so lines went missing or got cut
+# mid-word (confirmed 2026-09-14, MODEL_EVAL_PLAN.md). A temp file has exactly
+# one writer at a time — the racing writer and the mystery are both gone by
+# construction, not by tuning buffering (stdbuf/PYTHONUNBUFFERED did NOT fix it).
+run_step() {
+    # $1 = step label, $2 = output variable name to set with the parsed run_id,
+    # rest = the command. Redirects to a temp file, dumps it to the log (this
+    # script's only writer at that moment), extracts the run_id, cleans up.
+    local label="$1" outvar="$2"; shift 2
+    local tmp; tmp=$(mktemp)
+    echo "--- $label ---"
+    "$@" > "$tmp" 2>&1
+    cat "$tmp"
+    printf -v "$outvar" '%s' "$(grep -oP 'Full output: \K.*' "$tmp" | xargs -I{} basename {})"
+    rm -f "$tmp"
 }
 
-echo "--- writer ---"
-WRITER_RUN=$(.venv/bin/python3 eval/run_eval.py --role writer --date "$TODAY" \
+run_step writer WRITER_RUN \
+    .venv/bin/python3 eval/run_eval.py --role writer --date "$TODAY" \
     --baseline anthropic/claude-sonnet-4-6 \
-    --candidate anthropic/claude-sonnet-5 --candidate openai/gpt-5.6-sol --k 2 | tee /dev/stderr | run_id)
+    --candidate anthropic/claude-sonnet-5 --candidate openai/gpt-5.6-sol --k 2
 
-echo "--- critic ---"
-CRITIC_RUN=$(.venv/bin/python3 eval/run_eval.py --role critic --date "$TODAY" \
+run_step critic CRITIC_RUN \
+    .venv/bin/python3 eval/run_eval.py --role critic --date "$TODAY" \
     --baseline openai/gpt-4o \
-    --candidate openai/gpt-5.6-terra --candidate anthropic/claude-sonnet-5 | tee /dev/stderr | run_id)
+    --candidate openai/gpt-5.6-terra --candidate anthropic/claude-sonnet-5
 
-echo "--- helper ---"
-HELPER_RUN=$(.venv/bin/python3 eval/run_eval.py --role helper --date "$TODAY" \
+run_step helper HELPER_RUN \
+    .venv/bin/python3 eval/run_eval.py --role helper --date "$TODAY" \
     --baseline openai/gpt-4o-mini \
-    --candidate openai/gpt-5.6-luna --candidate anthropic/claude-haiku-4-5 | tee /dev/stderr | run_id)
+    --candidate openai/gpt-5.6-luna --candidate anthropic/claude-haiku-4-5
 
 echo "--- scoring ---"
 if [[ -n "${WRITER_RUN:-}" ]]; then
