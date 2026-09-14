@@ -9,8 +9,12 @@ scoring) — the rendered HTML briefing (in an iframe) plus both podcast scripts
 A human enters a 1-5 score per side, a forced A/B winner, and optional notes.
 Scores are written to eval/out/<run_id>/human_scores.json.
 
-Scoped to "writer"/"critic" roles only, same as eval/score.py — "helper" has no
-prose to review side-by-side.
+Writer/critic show the rendered HTML briefing + both scripts side by side, since
+those roles produce prose. Helper produces per-sentence fact-check verdicts
+instead — same input sentences for baseline and candidate, so what differs is
+the judgment (supported: yes/no/unclear + reasoning), not the text — so its
+review page shows each sentence once with both models' blinded verdict and
+reasoning underneath, not an iframe.
 
 --with-audio (generate + play candidate audio) is NOT built — deferred, since it
 burns real ElevenLabs credits and the plan marks it explicitly opt-in.
@@ -21,6 +25,7 @@ Usage:
   python eval/review.py --latest writer                            # today's run, no run_id needed
                                                                      # (reads eval/out/latest.json,
                                                                      # written by run_daily_eval.sh)
+  python eval/review.py --latest helper                             # sentence-by-sentence verdict view
 """
 
 from __future__ import annotations
@@ -37,7 +42,7 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 OUT_DIR = Path(__file__).parent / "out"
-_SCORABLE_ROLES = {"writer", "critic"}
+_REVIEWABLE_ROLES = {"writer", "critic", "helper"}
 
 
 def _safe_name(model: str) -> str:
@@ -59,24 +64,34 @@ def _a_is_baseline(pair_id: str) -> bool:
 def load_run(run_id: str) -> dict:
     run_dir = OUT_DIR / run_id
     summary = json.loads((run_dir / "summary.json").read_text())
-    if summary["role"] not in _SCORABLE_ROLES:
-        raise ValueError(f"role={summary['role']!r} has no prose to review — only {_SCORABLE_ROLES}")
+    if summary["role"] not in _REVIEWABLE_ROLES:
+        raise ValueError(f"role={summary['role']!r} not reviewable — only {_REVIEWABLE_ROLES}")
     return summary
+
+
+def _read_prose(k0: Path, date: str) -> dict:
+    return {
+        "html": (k0 / f"{date}.html").read_text(),
+        "podcast": (k0 / f"{date}.podcast.txt").read_text() if (k0 / f"{date}.podcast.txt").exists() else "",
+        "conversational": (k0 / f"{date}.conversational.txt").read_text() if (k0 / f"{date}.conversational.txt").exists() else "",
+    }
+
+
+def _read_verdicts(k0: Path, date: str) -> dict:
+    data = json.loads((k0 / f"{date}.verdicts.json").read_text())
+    return {"verdicts": data.get("verdicts", [])}
 
 
 def build_pairs(run_id: str, summary: dict) -> list[dict]:
     date = summary["date"]
+    role = summary["role"]
     run_dir = OUT_DIR / run_id
     baseline_model = next(m for m, r in summary["results"].items() if r["label"] == "baseline")
     candidates = [m for m, r in summary["results"].items() if r["label"] == "candidate"]
 
     def _read(model: str) -> dict:
         k0 = sorted((run_dir / _safe_name(model)).glob("k*"))[0]
-        return {
-            "html": (k0 / f"{date}.html").read_text(),
-            "podcast": (k0 / f"{date}.podcast.txt").read_text() if (k0 / f"{date}.podcast.txt").exists() else "",
-            "conversational": (k0 / f"{date}.conversational.txt").read_text() if (k0 / f"{date}.conversational.txt").exists() else "",
-        }
+        return _read_verdicts(k0, date) if role == "helper" else _read_prose(k0, date)
 
     baseline_content = _read(baseline_model)
     pairs = []
@@ -177,6 +192,60 @@ def create_app(run_id: str):
     </body></html>
     """
 
+    HELPER_REVIEW_TMPL = """
+    <!doctype html><html><head><title>Review — {{ pair_id }}</title>
+    <style>
+      body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:900px;margin:auto;padding:24px;}
+      h1{color:#4fc3f7}
+      .sentence{background:#22223a;border:1px solid #444;border-radius:6px;padding:14px 16px;margin-bottom:14px;}
+      .claim{color:#e0e0e0;margin-bottom:10px;}
+      .verdicts{display:flex;gap:14px}
+      .verdict{flex:1;min-width:0;background:#1a1a2e;border:1px solid #333;border-radius:6px;padding:10px 12px;}
+      .verdict h4{margin:0 0 4px;color:#ffb74d;font-size:0.9em}
+      .tag{display:inline-block;padding:1px 8px;border-radius:100px;font-size:0.8em;font-weight:600;margin-bottom:6px}
+      .tag.yes{background:#1b4d3e;color:#81f0ae}
+      .tag.no{background:#4d1b2e;color:#ff8a80}
+      .tag.unclear{background:#3a3a55;color:#bbb}
+      .reasoning{color:#aaa;font-size:0.88em;margin-top:4px}
+      label{display:block;margin-top:10px}
+      select,textarea,button{background:#22223a;color:#e0e0e0;border:1px solid #444;border-radius:4px;padding:6px}
+      textarea{width:100%;height:60px}
+      button{margin-top:16px;padding:10px 20px;background:#1e4a5f;color:#81d4fa;cursor:pointer;font-weight:600}
+      .scorebox{background:#22223a;border:1px solid #444;border-radius:6px;padding:16px;margin-top:16px}
+    </style></head><body>
+    <h1>Blind Review — pair {{ pair_id }}</h1>
+    <p>Same sentences were checked against the same source articles for both sides — only the
+    verdict and reasoning differ. Score which side's fact-checking judgment was more accurate.
+    The model mapping is hidden until you submit.</p>
+    {% for row in rows %}
+    <div class="sentence">
+      <div class="claim">&ldquo;{{ row.sentence }}&rdquo;</div>
+      <div class="verdicts">
+        <div class="verdict">
+          <h4>Side A</h4>
+          <span class="tag {{ row.a.supported }}">{{ row.a.supported }}</span>
+          <div class="reasoning">{{ row.a.reasoning }}</div>
+        </div>
+        <div class="verdict">
+          <h4>Side B</h4>
+          <span class="tag {{ row.b.supported }}">{{ row.b.supported }}</span>
+          <div class="reasoning">{{ row.b.reasoning }}</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+    <form class="scorebox" method="post">
+      <label>Side A score (1-5, overall fact-checking judgment): <select name="score_a">{% for i in range(1,6) %}<option value="{{i}}">{{i}}</option>{% endfor %}</select></label>
+      <label>Side B score (1-5): <select name="score_b">{% for i in range(1,6) %}<option value="{{i}}">{{i}}</option>{% endfor %}</select></label>
+      <label>Overall winner:
+        <select name="winner"><option value="A">Side A</option><option value="B">Side B</option><option value="tie">Tie</option></select>
+      </label>
+      <label>Notes: <textarea name="notes"></textarea></label>
+      <button type="submit">Submit &amp; reveal</button>
+    </form>
+    </body></html>
+    """
+
     REVEAL_TMPL = """
     <!doctype html><html><head><title>Revealed</title>
     <style>body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:640px;margin:auto;padding:24px}
@@ -226,6 +295,13 @@ def create_app(run_id: str):
             save_human_score(run_id, pair_id, record)
             return redirect(url_for("revealed", pair_id=pair_id))
 
+        if summary["role"] == "helper":
+            rows = [
+                {"sentence": a_v["sentence"], "a": a_v, "b": b_v}
+                for a_v, b_v in zip(a_content["verdicts"], b_content["verdicts"])
+            ]
+            return render_template_string(HELPER_REVIEW_TMPL, pair_id=pair_id, rows=rows)
+
         return render_template_string(
             REVIEW_TMPL, pair_id=pair_id,
             a_html=a_content["html"], a_podcast=a_content["podcast"], a_conv=a_content["conversational"],
@@ -264,7 +340,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--run", help="run_id, e.g. writer_2026-09-13_1789344065")
-    group.add_argument("--latest", choices=["writer", "critic"], help="Use today's run for this role from eval/out/latest.json instead of an exact run_id")
+    group.add_argument("--latest", choices=["writer", "critic", "helper"], help="Use today's run for this role from eval/out/latest.json instead of an exact run_id")
     parser.add_argument("--port", type=int, default=8081, help="Local port (default 8081 — server.py already uses 8080)")
     args = parser.parse_args()
 

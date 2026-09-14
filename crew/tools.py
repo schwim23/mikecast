@@ -789,6 +789,7 @@ class ValidateClaimTool(BaseTool):
         )
         user = f"CLAIM:\n{claim}\n\nSOURCE ARTICLES:\n{article_block}"
 
+        usage: dict = {}  # populated as soon as the response arrives, kept even if parsing the JSON fails below
         try:
             import litellm
 
@@ -809,21 +810,30 @@ class ValidateClaimTool(BaseTool):
                     {"role": "system", "content": system},
                     {"role": "user", "content": user},
                 ],
-                "max_tokens": 200,
+                # 200 was too tight for gpt-5.6-luna (confirmed 2026-09-14): one
+                # successful call used 195/200 tokens, and several calls came back
+                # with completely empty content ("Expecting value: line 1 column 1"
+                # — a zero-length response, not a truncated one) — the same
+                # max_tokens-too-small class of bug as the writer's 6000->9000 fix
+                # in crew/llm.py, just for a much smaller task. Bumped with a wide
+                # safety margin since the absolute cost difference is negligible.
+                "max_tokens": 500,
             }
             if supports_custom_temperature(model):
                 params["temperature"] = 0
             resp = litellm.completion(**params)
-            raw = (resp.choices[0].message.content or "").strip()
-            if raw.startswith("```"):
-                raw = "\n".join(line for line in raw.splitlines() if not line.strip().startswith("```")).strip()
-            parsed = json.loads(raw)
-            usage = {}
+            # Captured before the JSON parse (which can raise) so a failure still
+            # tells us how many tokens the model actually used — needed to confirm
+            # whether a max_tokens ceiling is the cause next time this happens.
             if getattr(resp, "usage", None):
                 usage = {
                     "prompt_tokens": resp.usage.prompt_tokens,
                     "completion_tokens": resp.usage.completion_tokens,
                 }
+            raw = (resp.choices[0].message.content or "").strip()
+            if raw.startswith("```"):
+                raw = "\n".join(line for line in raw.splitlines() if not line.strip().startswith("```")).strip()
+            parsed = json.loads(raw)
             return {
                 "ok": True,
                 "supported": parsed.get("supported", "unclear"),
@@ -833,7 +843,7 @@ class ValidateClaimTool(BaseTool):
             }
         except Exception as exc:
             logger.warning("validate_claim_against_articles failed: %s", exc)
-            return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": str(exc)[:200]}
+            return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": str(exc)[:200], "usage": usage}
 
 
 # ---------------------------------------------------------------------------
