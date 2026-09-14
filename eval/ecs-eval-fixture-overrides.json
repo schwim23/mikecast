@@ -1,0 +1,8 @@
+{
+  "containerOverrides": [
+    {
+      "name": "mikecast",
+      "command": ["python", "mikecast_briefing.py", "--crew", "--eval-only", "--dump-eval-fixture"]
+    }
+  ]
+}

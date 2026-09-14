@@ -174,9 +174,26 @@ model-compatibility findings: **`MODEL_EVAL_PLAN.md`**.
    ```
    `--role` is one of `writer` / `critic` / `helper`. Output (per-run latency, token usage,
    cost, and the generated content) is written to `eval/out/<run_id>/`.
-3. **Score and review** (Phase 2/3 — automated hallucination/format/editorial scoring and a
-   blind human A/B pass) and the **results dashboard** (Phase 4, a static page at
-   `mikecast.io/evals`) are designed but not yet built — see `MODEL_EVAL_PLAN.md` for status.
+3. **Score it automatically** (`eval/score.py`, writer/critic roles only) — grounding/
+   hallucination hard gate (generalizes the production NY-Sports fact-checker to every
+   section), format-contract checks (required sections, word counts, speaker tags), and
+   editorial scoring (reuses the production critic scorer):
+   ```bash
+   S3_BUCKET=mikecast-io-data .venv/bin/python3 eval/score.py --run <run_id>
+   ```
+4. **Blind human review** (`eval/review.py`, writer/critic roles only) — a local Flask app
+   (default port 8081) that pairs baseline vs. each candidate as blinded "A"/"B", takes a 1-5
+   score per side plus a forced winner, and reveals the true mapping only after submitting:
+   ```bash
+   .venv/bin/python3 eval/review.py --run <run_id>   # -> http://localhost:8081
+   ```
+   (Needs `pip install flask` — not in `requirements.txt`, same as `server.py`'s local
+   dashboard.) LLM-judge blind A/B is designed but not yet built.
+5. **Results dashboard** (`eval/build_dashboard.py`) — renders every run's cost/latency and
+   (once scored) quality gates into a static page at **https://mikecast.io/evals/index.html**:
+   ```bash
+   S3_BUCKET=mikecast-io-data .venv/bin/python3 eval/build_dashboard.py
+   ```
 
 **Known model-compatibility gotchas** (see `MODEL_EVAL_PLAN.md` for the full write-up):
 newer-generation models (e.g. `claude-sonnet-5`, `gpt-5.6-*`) reject a non-default
@@ -271,8 +288,11 @@ mikecast/
     ├── dump.py                # Fixture capture (--dump-eval-fixture), local + S3
     ├── pricing.py             # $/1M-token pricing table for cost comparisons
     ├── run_eval.py            # Phase 1 replay harness — baseline vs. candidate models
+    ├── score.py               # Phase 2 — grounding/format/editorial automated scoring
+    ├── review.py              # Phase 3 — local Flask blind A/B human review
+    ├── build_dashboard.py     # Phase 4 — static results page -> mikecast.io/evals
     ├── fixtures/manifest.yaml # Curated fixture dates for repeatable replay
-    └── out/<run_id>/          # Per-run outputs + summary.json
+    └── out/<run_id>/          # Per-run outputs + summary.json + scores.json
 ```
 
 ## Setup and Installation

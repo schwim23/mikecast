@@ -25,14 +25,21 @@ from mc_config import (
 )
 
 
-def claude_writer_llm(temperature: float = 0.4, max_tokens: int = 6000) -> LLM:
+def claude_writer_llm(temperature: float = 0.4, max_tokens: int = 9000) -> LLM:
     """
     Claude Sonnet for the three writer agents (long-form prose).
 
-    max_tokens defaults to 6000 — comfortable headroom for the HTML briefing
+    max_tokens defaults to 9000 — comfortable headroom for the HTML briefing
     (~1500 words ≈ 2400 tokens) and the long-form podcast script even after
     the agent framing overhead. The previous 4000 cap risked truncating
-    mid-script with the critic unable to detect it.
+    mid-script with the critic unable to detect it. Raised from 6000 to 9000
+    on 2026-09-13 after confirming (via the model-eval harness, see
+    MODEL_EVAL_PLAN.md) that claude-sonnet-5's tokenizer uses ~1.4x as many
+    tokens as claude-sonnet-4-6 for the same input/output — 6000 truncated its
+    HTML briefing mid-word, silently dropping the last section. CLAUDE_WRITER_MODEL
+    is still claude-sonnet-4-6 by default, which used well under 6000 anyway, so
+    this is a forward-compatibility headroom increase, not a behavior change for
+    the current default model.
     """
     return LLM(
         model=CLAUDE_WRITER_MODEL,

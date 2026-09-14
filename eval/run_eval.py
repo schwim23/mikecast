@@ -201,7 +201,7 @@ def replay_writer(fixture: dict, model: str) -> dict:
     from crew.writing_crew import run_writing
 
     inp = fixture["input"]
-    llm = _make_llm(model, temperature=0.4, max_tokens=6000)
+    llm = _make_llm(model, temperature=0.4, max_tokens=9000)  # matches crew/llm.py::claude_writer_llm
     t0 = time.time()
     with mock.patch("crew.agents.claude_writer_llm", return_value=llm), _CrewCapture() as cap:
         html, single, conv = run_writing(

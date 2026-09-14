@@ -1,6 +1,129 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phase 1 (replay) + a first Phase 4 dashboard both live 2026-09-13 · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phases 0, 1, 2, 3, and 4 (partial) all built and exercised 2026-09-13 · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0f. Session log continued — 2026-09-13, format-contract root cause fixed + Phase 3 built
+
+**Root-caused and fixed the writer format-contract failure from §0e** — it was a real
+truncation bug, not a prompt-compliance gap. `claude-sonnet-5`'s HTML output literally cut off
+mid-word ("...Anthropic fin") because that one call hit `max_tokens=6000`. Its tokenizer uses
+~1.4x as many tokens as `claude-sonnet-4-6`'s for identical input (17,499 vs 12,269 prompt
+tokens for the same fixture) — 6000 output tokens, comfortable for the baseline, wasn't enough
+headroom for Sonnet 5's HTML task. `gpt-5.6-sol` was never truncated (its scripts end on
+complete sentences) — its earlier short podcast word count was normal k0 sample variance, not
+a systemic issue; a re-run landed within the 900-1000 target.
+
+**Fixed in both places** (same forward-compatibility pattern as §0c's bugs — this is a latent
+production risk too, not just an eval-harness issue): bumped `max_tokens` from 6000 to 9000 in
+`crew/llm.py::claude_writer_llm` (the actual production writer LLM factory) and the matching
+value in `eval/run_eval.py::replay_writer`. Safe for the current default model
+(`claude-sonnet-4-6` uses well under 6000 anyway) — this is a ceiling increase, not a behavior
+change, so no cost/output impact unless a model actually needs the extra room.
+
+**Verified the fix**: re-ran the writer eval (new `run_id`: `writer_2026-09-13_1789344065`,
+replacing the truncated one) and re-scored — `claude-sonnet-5`'s HTML now has all 7 sections,
+all three models land within the 900-1000 word podcast target (937/913/909), format contract
+now passes for all three. Dashboard rebuilt and redeployed with the corrected data.
+
+**Built Phase 3** (`eval/review.py`) — a local Flask app (port 8081 by default, since
+`server.py` already uses 8080) mirroring the design in §4: pairs the baseline against each
+candidate, shows both as blinded "A"/"B" (HTML briefing in an iframe + both podcast scripts,
+side by side), the human enters a 1-5 score per side + forced A/B winner + notes, and the
+model mapping is revealed only after submitting. Scores land in
+`eval/out/<run_id>/human_scores.json`. Scoped to `writer`/`critic` roles only, same as
+`score.py` — `helper` has no prose to review. `--with-audio` (opt-in, burns ElevenLabs
+credits, per the original design) is **not built** — deferred.
+
+**Verified end-to-end** (test data cleaned up afterward, not a real review): started the
+server against `writer_2026-09-13_1789344065`, confirmed the index page listed both candidate
+pairs, fetched a review page and confirmed both HTML briefings render in their iframes, POSTed
+a test score, confirmed the 302 redirect to `/revealed/<pair_id>` shows the correct true
+model mapping and winner, and confirmed `human_scores.json` persisted all fields correctly.
+
+**Note**: `flask` isn't in `requirements.txt` — installed it locally to test, matching the
+existing pattern where `README.md` already documents it as a separate manual
+`pip install flask` step for `server.py`'s local dashboard. Not added to the ECS
+image/requirements since production doesn't need it.
+
+**Files added/changed this pass, uncommitted as of this log entry:** `crew/llm.py`
+(max_tokens fix), `eval/run_eval.py` (matching max_tokens fix), `eval/review.py` (new,
+Phase 3), plus the already-uncommitted `eval/score.py` and `build_dashboard.py` score columns
+from §0e.
+
+### Concrete next steps (revised again)
+
+1. Decide whether to commit everything above.
+2. Do a real human review pass with `eval/review.py` (the test run in this log entry doesn't
+   count) — this is the last missing piece before a real promotion decision per §4's rule.
+3. Build the LLM-judge blind A/B (Gate B's 4th check, `eval/judge.py`) — still not started;
+   optional relative to human review, but cheaper to run repeatedly.
+4. Repeat fixture capture on a few more mornings for variety (Phase 0) — today's was a thin
+   preseason NY-sports day.
+5. Extend `build_dashboard.py` to surface human review results once some exist.
+6. Give CrewAI's critic-scorer agent a structured-output execution mode so incompatible
+   models (like `gpt-5.6-terra`) fail fast instead of hanging — needed before `gpt-5.6-terra`
+   can be tested for critic.
+
+## 0e. Session log continued — 2026-09-13, Phase 2 (automated scoring) built
+
+Built `eval/score.py` — scores a `run_eval.py` run's k0 output per model against three of
+Gate B's four checks (§3): **format contract** (HTML parses, all 7 required `<h2>` sections
+present, not truncated, podcast word count in 900-1000, all 3 speaker tags present — all
+deterministic, no API calls), **grounding/hallucination** (the hard gate — generalizes the
+production NY-Sports-only fact-checker to every HTML section via the same
+`validate_claim_against_articles` tool, capped at 40 sentences/model; a candidate fails the
+gate if it has MORE unsupported claims than the baseline), and **editorial** (reuses
+`crew/critic_crew.py::_run_scorer`, the same 1-10 category scorer critic uses in production).
+Only scores k0 — scoring makes real LLM calls and k-repeats exist for cost/latency variance,
+not to be rescored k times. Scopes to `writer`/`critic` roles only (`helper`'s output is
+already a fact-check artifact, not prose to fact-check against).
+
+**NOT built**: LLM-judge blind A/B (Gate B's 4th check, `eval/judge.py`) and Phase 3 human
+review. `score.py` alone is not a promotion decision — the dashboard notice says this
+explicitly.
+
+**Ran it for real against both existing runs — found a genuine format-contract issue, not a
+scoring bug:**
+
+| Role | Model | Gate | Format | Grounding | Editorial |
+|---|---|---|---|---|---|
+| Writer | `claude-sonnet-4-6` (baseline) | PASS | OK | 5/40 unsupported | 6.5 |
+| Writer | `claude-sonnet-5` | PASS | **FAIL** | 3/32 unsupported | 6.5 |
+| Writer | `gpt-5.6-sol` | PASS | **FAIL** | 3/40 unsupported | 6.5 |
+| Critic | `gpt-4o` (baseline) | PASS | OK | 5/40 unsupported | 6.5 |
+| Critic | `claude-sonnet-5` | PASS | OK | 5/40 unsupported | 6.5 |
+
+**Writer finding:** `claude-sonnet-5` dropped the entire "WHAT TO WATCH" section on this
+fixture; both writer candidates came in under the 900-1000 word podcast target (847 and 800
+words vs. baseline's 991). Both still pass the grounding hard gate (fewer unsupported claims
+than baseline). This is one sample (k0, one fixture day) — real signal, but not yet enough to
+conclude the models can't hit the contract; worth checking across the k1 run and more fixture
+days before drawing a conclusion.
+
+**Critic finding:** identical grounding/editorial numbers for both critic models — expected,
+not a bug: NY Sports was the only weak section either flagged, and it's never patched, so no
+prose actually changed between the two runs. This eval tests the scorer's *judgment* (did it
+correctly flag the weak section), not rewritten output.
+
+Extended `eval/build_dashboard.py` to render `scores.json` when present (new Gate/Format/
+Grounding/Editorial columns; "—" for unscored runs/helper role) and redeployed —
+still live at https://mikecast.io/evals/index.html.
+
+**Files added/changed this pass, uncommitted as of this log entry:** `eval/score.py` (new),
+`eval/build_dashboard.py` (score columns).
+
+### Concrete next steps (revised again)
+
+1. Decide whether to commit `eval/score.py` + the `build_dashboard.py` score-column update.
+2. Score the k1 writer run too (currently score.py only does k0) to see if the word-count/
+   missing-section finding holds up or was a one-off sample.
+3. Repeat fixture capture on a few more mornings for variety (Phase 0) — today's was a thin
+   preseason NY-sports day.
+4. Build the LLM-judge blind A/B (Gate B's 4th check) and Phase 3 human review — the two
+   pieces still missing before a real promotion decision can be made per §4's promotion rule.
+5. Give CrewAI's critic-scorer agent a structured-output execution mode so incompatible
+   models (like `gpt-5.6-terra`) fail fast instead of hanging — needed before `gpt-5.6-terra`
+   can be tested for critic.
 
 ## 0d. Session log continued — 2026-09-13, dashboard v1 live
 
