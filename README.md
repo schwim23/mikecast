@@ -199,6 +199,13 @@ model-compatibility findings: **`MODEL_EVAL_PLAN.md`**.
    S3_BUCKET=mikecast-io-data .venv/bin/python3 eval/build_dashboard.py
    ```
 
+Steps 2-5 aren't scheduled by default — the plan's Phase 5 is intentionally
+manually-initiated ("no automation, no polling"). `eval/run_daily_eval.sh` is a local cron
+wrapper that runs the full matrix (steps 2-5) daily against whatever fixture landed that
+morning; it self-expires (a hardcoded `STOP_DATE`, edit or remove to keep going) rather than
+needing the crontab entry remembered and removed manually. It spends real API money every day
+it runs. Log: `eval/daily_eval.log`.
+
 **Known model-compatibility gotchas** (see `MODEL_EVAL_PLAN.md` for the full write-up, and
 `crew/model_compat.py` for the shared handling): newer-generation models (e.g.
 `claude-sonnet-5`, `gpt-5.6-*`) reject a non-default `temperature` — handled uniformly via

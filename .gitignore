@@ -9,3 +9,4 @@ SOCIAL_SETUP.md
 # Eval harness generated data — captured fixtures / replay outputs, not source
 eval/fixtures/live/
 eval/out/
+eval/daily_eval.log

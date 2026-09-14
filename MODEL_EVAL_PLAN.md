@@ -1,6 +1,53 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; fixture capture now runs automatically every morning · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+**Status:** IN PROGRESS — Phases 0-4 all built and exercised 2026-09-13; fixture capture AND daily comparison/scoring/dashboard now automatic via local cron through 2026-09-20 · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13 · **Owner:** Mike
+
+## 0k. Session log continued — 2026-09-13, daily comparison run automated (1-week trial)
+
+Mike asked for a cron job to run the full comparison/scoring/dashboard sequence daily for a
+week, on top of §0j's automatic fixture capture. Built `eval/run_daily_eval.sh`:
+
+- Sources `~/.profile`, sets `S3_BUCKET=mikecast-io-data`.
+- Guards against a missing fixture (skips gracefully with a log message instead of a
+  confusing downstream traceback — covers the daily ECS run failing, running late, or the
+  `--dump-eval-fixture` CMD getting reverted).
+- Runs the same fixed matrix used all session for `writer` (k=2), `critic`, and `helper`
+  against that day's fixture; scores writer + critic; rebuilds the dashboard.
+- **Self-expires**: checks `today > STOP_DATE` (hardcoded `2026-09-20`, one week out) and
+  no-ops past it, rather than requiring anyone to remember to remove the crontab entry. The
+  crontab entry itself has a comment noting this.
+
+Installed via crontab: `0 8 * * *` (8:00 AM ET — this machine's timezone is confirmed
+`America/New_York`, matching production's 6:30 AM ET schedule; 8:00 gives ~90 min buffer for
+the daily ECS run, including audio/delivery, to finish and write fixtures before this fires).
+Appended to the existing crontab without disturbing other entries (a disabled legacy
+`run_mikecast.sh` line — confirmed local cron is NOT how production actually runs anymore,
+that's ECS/EventBridge now — plus unrelated golf-booking cron jobs). Log:
+`eval/daily_eval.log` (gitignored, added alongside `eval/out/`/`eval/fixtures/live/`).
+
+**This spends real API money every day it runs** (writer runs especially — roughly
+$0.30-0.50/day based on this session's actual numbers) — accepted as the cost of getting a
+week of fixture-day variety without a manual step each morning, per Mike's explicit ask.
+
+Verified before installing: script syntax (`bash -n`), the `run_id` extraction from
+`run_eval.py`'s "Full output: ..." line (isolated test), the `STOP_DATE` comparison logic
+(both before/after cases), and the S3 fixture-existence check (both found/not-found cases).
+**Not yet verified with a real cron-triggered run** — first real firing is tomorrow 8 AM ET;
+check `eval/daily_eval.log` then.
+
+### Concrete next steps (revised again)
+
+1. Check `eval/daily_eval.log` after the first real cron firing (tomorrow ~8 AM ET) — confirm
+   it found the fixture, ran all three roles, scored writer/critic, and rebuilt the dashboard
+   without error.
+2. After a few days, look at the dashboard across multiple fixture dates — this is the actual
+   payoff of the automation (variety Phase 0 wanted, without a manual step each morning).
+3. Before 2026-09-20: decide whether to extend `STOP_DATE`, let it lapse, or promote a model
+   based on what's accumulated (still needs human review — `eval/review.py` — before an actual
+   promotion decision per §4's rule; that part is NOT automated and still needs a manual pass).
+4. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+
+## 0j. Session log continued — 2026-09-13, daily fixture capture finally made automatic
 
 ## 0j. Session log continued — 2026-09-13, daily fixture capture finally made automatic
 
