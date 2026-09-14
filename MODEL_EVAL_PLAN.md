@@ -1,6 +1,36 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — dashboard header corrected; mikecast.io/evals now resolves directly (CloudFront Function) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** IN PROGRESS — dashboard now has client-side filtering + sorting · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0n. Session log continued — 2026-09-14, dashboard filtering + sorting
+
+Added client-side filtering (role chips, Gate pass/fail/unscored dropdown, model-name search)
+and click-to-sort on every column header, all vanilla JS embedded in `build_dashboard.py`'s
+rendered page — no libraries, no build step, no server, since this is a static page. Each
+`<tr>` carries raw `data-*` values (not the formatted display text) so the script never has to
+re-parse `"$0.1126"` or `"6/40"` back out of rendered strings.
+
+**Testing note**: no browser extension was connected this session, so this couldn't be
+click-tested in a real browser as the UI-change guidance prefers. Verified instead with: (1)
+`node --check` on the extracted `<script>` block for syntax, (2) a faithful logic unit test —
+the exact filter predicate and sort comparator copy-pasted out of the real script, run in
+plain Node against realistic row data matching today's actual runs, covering role/gate/search
+filtering, numeric ascending/descending sort, text sort, and the unscored-rows-always-sink-to-
+the-bottom rule regardless of sort direction — all passed. Caught and fixed one real bug this
+way before deploying: the Gate filter's "Unscored" and "All" `<option>`s both had `value=""`,
+which would have made selecting "Unscored" behave identically to "All". **Recommend an actual
+click-test in a browser next session** once the extension is connected — the logic is verified,
+the rendering/interaction wiring itself is not.
+
+### Concrete next steps (revised again)
+
+1. Click-test the filter/sort UI in a real browser once available.
+2. Do a real human review pass with `eval/review.py` — still the last missing piece before an
+   actual promotion decision.
+3. Build the LLM-judge blind A/B (Gate B's 4th check) — still not started.
+4. Decide whether to fix the writer-prompt grounding gap found in §0l.
+
+## 0m. Session log continued — 2026-09-14, dashboard header fixed + mikecast.io/evals now resolves
 
 ## 0m. Session log continued — 2026-09-14, dashboard header fixed + mikecast.io/evals now resolves
 
