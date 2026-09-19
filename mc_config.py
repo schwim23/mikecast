@@ -212,10 +212,10 @@ CNBC_RSS_FEEDS: list[tuple[str, str, str, int]] = [
 # name kept as ESPN_RSS_FEEDS so callers don't churn; format is unchanged
 # (url, sport_label) and the parser handles JSON now.
 ESPN_RSS_FEEDS: list[tuple[str, str]] = [
-    ("https://site.api.espn.com/apis/site/v2/sports/basketball/nba/news", "NBA"),
-    ("https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/news",   "MLB"),
-    ("https://site.api.espn.com/apis/site/v2/sports/football/nfl/news",   "NFL"),
-    ("https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/news",     "NHL"),
+    ("https://site.web.api.espn.com/apis/site/v2/sports/basketball/nba/news", "NBA"),
+    ("https://site.web.api.espn.com/apis/site/v2/sports/baseball/mlb/news",   "MLB"),
+    ("https://site.web.api.espn.com/apis/site/v2/sports/football/nfl/news",   "NFL"),
+    ("https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/news",     "NHL"),
 ]
 
 # Reddit Atom feeds: (subreddit, category, max_articles)

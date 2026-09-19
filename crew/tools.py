@@ -495,7 +495,9 @@ def _espn_get(path: str) -> dict | None:
     GET an ESPN site-api endpoint; return parsed JSON or None on failure.
     Use for news, schedules, team-level lookups.
     """
-    url = f"https://site.api.espn.com/apis/site/v2/sports/{path.lstrip('/')}"
+    # site.web.api.espn.com, NOT site.api.espn.com: the latter has 403'd every request
+    # from our IPs since ~2026-08-05 (prod logs) — same JSON shape on this host.
+    url = f"https://site.web.api.espn.com/apis/site/v2/sports/{path.lstrip('/')}"
     resp = _safe_request(url, timeout=_ESPN_TIMEOUT)
     if resp is None:
         return None

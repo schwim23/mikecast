@@ -50,6 +50,9 @@ _NY_TEAMS = ["Yankees", "Knicks", "Giants", "Devils"]
 # within this many days — otherwise the "score" is stale (e.g. the Knicks'
 # last game two weeks ago once their season ended).
 _RECENT_RESULT_WINDOW_DAYS = 4
+# NFL teams play weekly (Sun/Mon), so a 4-day window drops the Giants' result by
+# Thursday — the briefing then talked about the game with no score. Use a full week.
+_RECENT_RESULT_WINDOW_DAYS_BY_TEAM = {"Giants": 7}
 
 # How soon an upcoming game must be to count as the team "having a game". This
 # bounds the next-game lookahead so OFF-SEASON / next-season games — which ESPN
@@ -154,6 +157,23 @@ def _run_tool_loop(researcher: Agent, task_description: str, usage_out: dict | N
     raise RuntimeError(f"researcher did not finish within {_MAX_TOOL_ITERATIONS} tool iterations")
 
 
+_LEAGUE_OF_TEAM = {"yankees": "mlb", "knicks": "nba", "giants": "nfl", "devils": "nhl"}
+
+
+def _teams_with_ok_tool_call(tool_calls: list[dict]) -> set[str]:
+    """Lowercased team names backed by at least one successful ESPN tool response —
+    a team-arg match, or a standings call for the team's league."""
+    ok: set[str] = set()
+    for c in tool_calls:
+        if not (isinstance(c.get("result"), dict) and c["result"].get("ok")):
+            continue
+        args = {k: str(v).strip().lower() for k, v in (c.get("args") or {}).items()}
+        for team, league in _LEAGUE_OF_TEAM.items():
+            if args.get("team") == team or args.get("league") == league:
+                ok.add(team)
+    return ok
+
+
 def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
     """Compact NY Sports article snippets for the Researcher's prompt."""
     if not ny_sports_articles:
@@ -161,7 +181,7 @@ def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
     lines: list[str] = []
     for i, art in enumerate(ny_sports_articles[:30], 1):
         title = (art.get("title") or "").replace("[Updated] ", "")
-        desc = (art.get("description") or "")[:200]
+        desc = (art.get("description") or "")[:300]
         source = art.get("source") or ""
         lines.append(f"[{i}] {title}\n     Source: {source}\n     {desc}")
     return "\n\n".join(lines)
@@ -192,11 +212,15 @@ def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | N
         f"Today is {TODAY_DISPLAY} ({TODAY}).\n\n"
         f"Today's NY Sports articles (already filtered to trusted sources):\n\n"
         f"{article_block}\n\n"
-        f"For each of these four NY teams — {', '.join(_NY_TEAMS)} — decide whether the "
-        "articles above point to a development in the LAST 24 HOURS: a game result, a "
-        "trade/signing, a coaching or roster move, or a player injury. If they do, call "
-        "fetch_sports_box_score, fetch_sports_standings, or fetch_team_injury_report to "
-        "retrieve the primary-source fact. If they don't, OMIT that team entirely.\n\n"
+        f"For each of these four NY teams — {', '.join(_NY_TEAMS)} — that the articles above "
+        "mention (any game, trade, signing, roster move, or injury story), call "
+        "fetch_sports_box_score to get the primary-source last game and next game. Do this "
+        "even when the article is not about a game: the briefing must state the score of a "
+        "team's last game and when it plays next. Also call fetch_team_injury_report or "
+        "fetch_sports_standings ONLY when an article raised an injury or standings claim. "
+        "Omit a team only if the articles never mention it OR its tool call returned "
+        "{ok: false} / no recent or upcoming game (e.g. off-season). The articles tell you "
+        "which teams to look up — every fact you write must come from the tool responses.\n\n"
         "CRITICAL — game timing: the fetch_sports_box_score tool returns BOTH a raw UTC "
         "`date` field AND human-readable `date_et` + `relative_to_today` fields (e.g. "
         "'TONIGHT', 'TOMORROW NIGHT', 'LAST NIGHT'). When you write timing into the "
@@ -207,10 +231,12 @@ def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | N
         "volunteer standings, records, seeds, or streaks unless a tool returned that exact "
         "figure and an article raised it — stale training-data 'color' is banned. Return "
         "ONLY a JSON object keyed by team name with short factual prose for each team you "
-        "verified. Example (note how timing comes straight from relative_to_today):\n"
+        "verified. Put the timing label FIRST and end the score sentence with a period, so a "
+        "score is never run together with a timing word ('7-3 LAST NIGHT' reads as numbers). "
+        "Example (timing comes straight from relative_to_today):\n"
         "{\n"
-        '  "Yankees": "Yankees beat Red Sox 7-3 LAST NIGHT at home. Next game TOMORROW NIGHT vs Orioles.",\n'
-        '  "Devils": "Devils lost to Rangers 4-2 LAST NIGHT. Next game TOMORROW vs Islanders."\n'
+        '  "Yankees": "LAST NIGHT: Yankees beat Red Sox 7-3 at home. Next game TOMORROW NIGHT vs Orioles.",\n'
+        '  "Devils": "LAST NIGHT: Devils lost to Rangers 4-2. Next game TOMORROW vs Islanders."\n'
         "}\n\n"
         "If you cannot verify anything, return {}.\n"
         "Use ONLY facts returned by the ESPN tools — never your training knowledge."
@@ -218,7 +244,9 @@ def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | N
 
     tool_calls: list[dict] = []
     try:
-        with (_record_tool_calls(tool_calls) if _dump_enabled() else nullcontext()):
+        # Always record (cheap): needed for the honest-labeling filter below, and for
+        # fixture capture when MIKECAST_DUMP_EVAL_FIXTURE=1.
+        with _record_tool_calls(tool_calls):
             raw = _run_tool_loop(researcher, task_description, usage_out)
         raw = raw.strip()
         # Strip code fences if any
@@ -234,6 +262,16 @@ def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | N
             for k, v in verified.items()
             if isinstance(v, str) and v.strip()
         }
+        # Honest labeling: the block handed to the writers is headed "verified via ESPN",
+        # so drop any team whose facts weren't backed by a SUCCESSFUL tool call this run
+        # (2026-09-15: with ESPN down the Researcher emitted "Yankees played the Twins on
+        # 09/14" straight from article copy, stamped as ESPN-verified).
+        ok_teams = _teams_with_ok_tool_call(tool_calls)
+        dropped = [t for t in cleaned if t.lower() not in ok_teams]
+        for t in dropped:
+            del cleaned[t]
+        if dropped:
+            logger.warning("[Sports Research] Dropped unverified team(s) (no successful ESPN call): %s", dropped)
         logger.info("[Sports Research] Verified primary-source facts for %d team(s): %s",
                     len(cleaned), list(cleaned.keys()))
         dump_fixture("sports_researcher", TODAY, {
@@ -262,7 +300,8 @@ def format_verified_facts_block(verified: dict[str, str]) -> str:
         "them. Do not invent additional team/player details beyond what is here or in "
         "the articles. Game-timing words like TONIGHT, TOMORROW NIGHT, LAST NIGHT, "
         "YESTERDAY are anchored to today's date in Eastern Time — copy them verbatim "
-        "into your script and never substitute your own timing guess from article copy."
+        "into your script and never substitute your own timing guess from article copy. "
+        "Do not print this block's heading or any tag like [ESPN verified] in your text."
     )
     return "\n".join(lines)
 
@@ -318,7 +357,7 @@ def _build_last_game(team: str, result: dict) -> dict | None:
     if the last game is older than the recency window."""
     rel = (result.get("relative_to_today") or "").strip()
     days = _days_ago_from_label(rel)
-    if days is None or days > _RECENT_RESULT_WINDOW_DAYS:
+    if days is None or days > _RECENT_RESULT_WINDOW_DAYS_BY_TEAM.get(team, _RECENT_RESULT_WINDOW_DAYS):
         return None
     summary = _format_score_summary(team, result.get("home") or {}, result.get("away") or {})
     if not summary:
@@ -457,7 +496,8 @@ def format_ny_team_updates_block(updates: list[dict]) -> str:
             "is — EVEN IF no article in today's batch mentions that team. These facts are "
             "primary-source from ESPN and are the briefing's ground truth. Copy the relative "
             "timing words (TODAY / TONIGHT / TOMORROW / TOMORROW NIGHT / LAST NIGHT / "
-            "YESTERDAY) verbatim — never substitute your own timing guess."
+            "YESTERDAY) verbatim — never substitute your own timing guess. Do not print this "
+            "block's heading or any tag like [ESPN verified] in your text."
         )
     else:
         lines.append(

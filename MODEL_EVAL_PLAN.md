@@ -2,6 +2,41 @@
 
 **Status:** Trial CLOSED 2026-09-18 (writer+critic -> sonnet-5). Sports Researcher eval built, awaiting first real fixture (§0t) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
 
+## 0u. Session log continued — 2026-09-18 (late), sports data outage + Sports Researcher prompt audit
+
+Mike reported the newsletter/podcast miss games or mention them with no scores. Root cause,
+confirmed from prod CloudWatch logs (`/ecs/mikecast`): **ESPN's `site.api.espn.com` has returned
+403 to every request from our IPs since ~2026-08-05** (before that only the Yankees fetch worked).
+`[Team Updates] Built updates for 0/4 NY teams` every day since, and the Researcher had nothing
+to fetch — so the writers only had scores when an article happened to print one. Fix:
+`site.web.api.espn.com` serves the same JSON shape and works (`crew/tools.py::_espn_get`,
+`mc_config.py` ESPN news feeds). Giants' result window widened 4 -> 7 days (NFL plays weekly).
+
+**Researcher prompt audit — bugs found & fixed:**
+  - `_HALLUCINATION_GUARD` ("only discuss stories in the provided articles… no scores not in the
+    articles") contradicted the Researcher's job; replaced with `_RESEARCHER_GUARD` (facts must
+    come from tool responses; articles only pick which teams to look up).
+  - Backstory embedded the NY Sports *article-scoring rubric* — irrelevant noise, removed.
+  - Task said "LAST 24 HOURS… OMIT the team if no development" while also saying "report the last
+    score + next game" — contradictory, and a 5-day-old Giants result was never reported. Rewritten.
+  - "Verified via ESPN" was stamped on facts with NO successful tool call (9/15: "Yankees played the
+    Twins on 09/14" from article copy while ESPN was down). Now dropped unless a successful tool
+    call backs the team (`_teams_with_ok_tool_call`).
+  - Example format "7-3 LAST NIGHT" ran scores into timing words ("28-20 5 DAYS AGO" -> "twenty
+    eight to twenty five days ago"). Timing label now first.
+
+**Writer prompt bugs found & fixed:** the HTML/newsletter task received the TTS reminder to spell
+out scores/times ("five to four", "nine forty PM Eastern") — now gets a written-briefing
+reminder (digits). Writers invented an "[ESPN verified]" tag — now forbidden. Writers announced
+missing info ("The article does not include the final score") — `_NO_STALE_CONTEXT_RULE` now
+bans narrating missing info. Spoken scripts now say time before score.
+
+**First real Sports Researcher eval (fixture 2026-09-18, k=2, live ESPN data):** gpt-4o, sonnet-5,
+gpt-5.6-terra, gpt-5.6-sol all PASS with identical facts (Giants 28-20). One team in one day is not
+enough to differentiate; costs $0.0086 / $0.0146 / $0.0075 / $0.0144. Needs in-season multi-team
+days. Replay of the 9/18 writer with restored data now states Yankees + Giants scores and next
+games in the HTML and both scripts (before: no scores at all).
+
 ## 0t. Session log continued — 2026-09-18, trial closed, writer+critic promoted, Sports Researcher eval built
 
 **Decisions.** Trial reviewed (6 days automated + 9/14 human A/B). Mike chose to promote

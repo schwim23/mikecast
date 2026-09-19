@@ -44,6 +44,19 @@ _HALLUCINATION_GUARD = (
     "If a category has few articles, keep that segment short — never invent news to fill time."
 )
 
+# The Researcher's job is the OPPOSITE of the writers' guard above: its facts must come
+# from the ESPN tool responses, NOT from the articles. _HALLUCINATION_GUARD ("only discuss
+# stories in the provided articles… do NOT mention scores… not in the input articles")
+# contradicted that and pushed it to drop tool-sourced scores or restate article copy
+# labelled as ESPN-verified.
+_RESEARCHER_GUARD = (
+    "CRITICAL RULE: Every fact you report must come from an ESPN tool response you received "
+    "in this run. The articles only tell you WHICH teams to look up — never copy a score, "
+    "date, record, or player status out of an article. If a tool call fails or returns "
+    "nothing for a team, omit that team; never fill the gap from articles or training "
+    "knowledge."
+)
+
 _TEAM_RULE = (
     "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
     "which team they play for, do NOT name their team. Do not use training knowledge to infer "
@@ -65,7 +78,12 @@ _NO_STALE_CONTEXT_RULE = (
     "no editorializing about how a team, player, company, or stock is trending. Time-varying "
     "context like this goes stale and your training data is out of date, so volunteering it "
     "produces statements that are authoritative-sounding but wrong. If a fact wasn't in the "
-    "input, don't say it."
+    "input, don't say it.\n"
+    "NEVER NARRATE MISSING INFORMATION: do not write that a score, detail, or article "
+    "'was not provided', 'is not included', or 'cannot be reported here' — the audience "
+    "never sees your sources, so it reads as a broken briefing. State what you do know; "
+    "if a detail is absent, simply leave it out (e.g. cover the game without a score "
+    "rather than announcing the score is missing)."
 )
 
 _STORYTELLING_RULE = (
@@ -142,22 +160,20 @@ def make_planner() -> Agent:
 
 
 def make_sports_researcher() -> Agent:
-    scoring_prompt = CATEGORY_SCORER_PROMPTS.get("NY Sports", "")
     return Agent(
         role="NY Sports Researcher",
         goal=(
-            "Decide which of the four NY teams (Yankees, Knicks, Giants, Devils) "
-            "have a recent game outcome, standings position, or player status "
-            "implied in today's gathered articles. For each such team, call the "
-            "matching ESPN tool to retrieve the primary-source fact. Skip teams "
-            "with no implied claim — never fill gaps with training knowledge."
+            "For each of the four NY teams (Yankees, Knicks, Giants, Devils) that today's "
+            "articles mention, call the ESPN tools and report the primary-source facts: the "
+            "last game's score and the next game, plus injuries or standings only when an "
+            "article raised them. Skip teams the tools return nothing for — never fill gaps "
+            "with article copy or training knowledge."
         ),
         backstory=(
             "You are a sports desk editor with 20 years on the NY beat. You are "
             "the ONLY agent permitted to call the ESPN box-score, standings, and "
-            "injury-report tools. Your scoring rubric:\n\n"
-            f"{scoring_prompt}\n\n"
-            f"{_HALLUCINATION_GUARD} {_TEAM_RULE}"
+            "injury-report tools. Your teams are the Yankees, Knicks, Giants, and Devils.\n\n"
+            f"{_RESEARCHER_GUARD} {_TEAM_RULE}"
         ),
         # ONLY the ESPN tools — the legacy scorer/selector/enricher already ran
         # in research_crew.py before the Researcher sees these articles. Listing

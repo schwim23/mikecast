@@ -225,6 +225,19 @@ _ANTI_SKIP_RULE = (
 # Per-task brief reminder (full versions of TONE + TTS rules live in the agent
 # backstories — this is a short repeat so the rules don't get diluted by
 # everything else in the task description).
+_TONE_WRITTEN_REMINDER = (
+    "NO STALE COLOR: state only the facts you were given — never add standings, "
+    "records, seedings, rankings, streaks, or award/championship history from memory "
+    "(e.g. do NOT call a team 'third in the East' unless that exact standing is in the "
+    "input); it goes stale and reads as confidently wrong.\n"
+    "TONE REMINDER: NO judgmental hyperbole at the reader (\"what are you doing with "
+    "your life\", \"you HAVE to\", etc.) — talk ABOUT the news, not AT the audience. "
+    "This is a WRITTEN briefing (newsletter): write scores, times, and dollar amounts in "
+    "normal digits (28-20, 7:05 PM ET, $10.9 billion) — do NOT spell them out; that is "
+    "only for the spoken scripts. Never print bracketed tags or labels such as "
+    "[ESPN verified] — cite sources only via the story links."
+)
+
 _TONE_TTS_REMINDER = (
     "NO STALE COLOR: state only the facts you were given — never add standings, "
     "records, seedings, rankings, streaks, or award/championship history from memory "
@@ -234,7 +247,11 @@ _TONE_TTS_REMINDER = (
     "at the listener (\"what are you doing with your life\", \"you HAVE to\", etc.) — "
     "talk ABOUT the news, not AT the audience. Spell out times (7:05 PM ET → "
     "\"seven-oh-five PM Eastern\"), scores (122-113 → \"one twenty-two to one "
-    "thirteen\"), and dollar amounts (\"ten point nine billion dollars\"). No bare "
+    "thirteen\"), and dollar amounts (\"ten point nine billion dollars\"). When a score "
+    "and a relative time both appear, say the TIME FIRST and end the score last "
+    "(\"Five days ago the Giants beat the Cowboys twenty-eight to twenty\") — never a "
+    "score followed by a time word (\"twenty-eight to twenty five days ago\" is heard as "
+    "the number twenty-five). No bare "
     "colons in times, no bare hyphens between numbers, no markdown, no URLs, no stage "
     "directions."
 )
@@ -283,7 +300,7 @@ def _html_task(
         "Only use facts from the article inputs. Do NOT add details from training knowledge. "
         "Never tease — always tell the listener what actually happened.\n\n"
         f"{_ANTI_SKIP_RULE}\n\n"
-        f"{_TONE_TTS_REMINDER}"
+        f"{_TONE_WRITTEN_REMINDER}"
     )
     expected = "Plain-text briefing in the 4-section format described."
     return desc, expected
