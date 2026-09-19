@@ -159,10 +159,20 @@ aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
   --launch-type FARGATE \
-  --overrides '{"containerOverrides":[{"name":"mikecast","command":["python","mikecast_briefing.py","--crew","--force"]}]}' \
+  --overrides '{"containerOverrides":[{"name":"mikecast","command":["--crew","--force"]}]}' \
   --network-configuration 'awsvpcConfiguration={subnets=[<SUBNET_ID>],securityGroups=[<SECURITY_GROUP_ID>],assignPublicIp=ENABLED}' \
   --region us-east-1
 ```
+
+> **WARNING — `command` overrides are ARGUMENTS to `mikecast_briefing.py`, not a new command.**
+> The image has `ENTRYPOINT ["python", "mikecast_briefing.py"]` and `CMD ["--dump-eval-fixture"]`, so a
+> `command` override *replaces only the CMD*. `["python","-c","..."]` does NOT run your snippet — the
+> full daily pipeline runs (audio, S3 uploads, manifest/feed rewrite, and any un-deduped sends).
+> Happened 2026-09-18: a "one-off ESPN check" regenerated and overwrote that day's episode in S3.
+> To run something other than the briefing, override the entrypoint too:
+> `--overrides '{"containerOverrides":[{"name":"mikecast","entryPoint":["python","-c"],"command":["print(1)"]}]}'`
+> (test with a harmless snippet first). Email/newsletter/X/IG are dedup-guarded per date; the episode
+> JSON, MP3, `manifest.json` and `feed.xml` are NOT — S3 versioning is on if you need to roll back.
 
 ### CrewAI rollout state
 
