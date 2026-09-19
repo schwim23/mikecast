@@ -234,8 +234,11 @@ def _score_sports_run(run_id: str, run_dir: Path, summary: dict) -> dict:
     base = next((s for s in scores["models"].values() if s["label"] == "baseline"), None)
     for s in scores["models"].values():
         # Gate: no MORE unsupported claims / uncalled teams than the baseline.
+        # A silent failure (researcher errors are swallowed -> {}) must not read as a
+        # pass: a candidate that states nothing while the baseline stated facts FAILS.
         s["hard_gate_passed"] = base is None or s["label"] == "baseline" or (
-            s["tool_fidelity"]["unsupported"] <= base["tool_fidelity"]["unsupported"]
+            not (s["tool_fidelity"]["facts"] == 0 and base["tool_fidelity"]["facts"] > 0)
+            and s["tool_fidelity"]["unsupported"] <= base["tool_fidelity"]["unsupported"]
             and len(s["tool_fidelity"]["teams_without_tool_call"]) <= len(base["tool_fidelity"]["teams_without_tool_call"]))
     return scores
 

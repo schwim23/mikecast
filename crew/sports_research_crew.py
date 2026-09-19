@@ -27,7 +27,7 @@ import re
 from contextlib import contextmanager, nullcontext
 from unittest import mock
 
-from crewai import Agent, Crew, Process, Task
+from crewai import Agent
 
 from crew.agents import make_sports_researcher
 from crew.tools import (
@@ -84,6 +84,76 @@ def _record_tool_calls(calls: list[dict]):
             p.stop()
 
 
+_MAX_TOOL_ITERATIONS = 15      # worst case ≈ 4 teams × 3 tools + synthesis, with headroom
+_TOOL_LOOP_DEADLINE_S = 180    # wall-clock cap, same as the old CrewAI max_execution_time
+_ESPN_TOOLS = (fetch_box_score_tool, fetch_standings_tool, fetch_injuries_tool)
+
+
+def _tool_specs() -> list[dict]:
+    """OpenAI-style function specs (LiteLLM translates per provider) built from the
+    existing tool classes so the model sees the same names/descriptions/args."""
+    return [
+        {"type": "function", "function": {
+            "name": t.name, "description": t.description,
+            "parameters": t.args_schema.model_json_schema(),
+        }}
+        for t in _ESPN_TOOLS
+    ]
+
+
+def _run_tool_loop(researcher: Agent, task_description: str, usage_out: dict | None = None) -> str:
+    """
+    Native tool-calling loop via LiteLLM, replacing CrewAI's text-based ReAct
+    executor for this agent. That executor appends each tool Observation as an
+    *assistant* message, so the next request ends on an assistant turn (assistant
+    prefill) — which claude-sonnet-5 rejects, and whose format-retry path also has
+    no iteration bound (see critic_crew._llm_complete). Native tool calling works
+    identically across providers. Model/key/temperature/max_tokens are read off the
+    Agent's llm so the eval harness's `crew.agents.openai_scorer_llm` patch applies.
+    """
+    import time
+
+    import litellm
+
+    from crew.model_compat import supports_custom_temperature
+
+    llm = researcher.llm
+    tools_by_name = {t.name: t for t in _ESPN_TOOLS}
+    messages: list[dict] = [
+        {"role": "system", "content": f"You are a {researcher.role}.\n\n{researcher.backstory}\n\nYour goal: {researcher.goal}"},
+        {"role": "user", "content": task_description},
+    ]
+    params: dict = {"model": llm.model, "api_key": llm.api_key, "max_tokens": llm.max_tokens,
+                    "tools": _tool_specs(), "timeout": 60}
+    if llm.temperature is not None and supports_custom_temperature(llm.model):
+        params["temperature"] = llm.temperature
+    if llm.model.startswith("openai/gpt-5.6-"):
+        # OpenAI rejects function tools on /v1/chat/completions while reasoning is on.
+        params["reasoning_effort"] = "none"
+
+    deadline = time.time() + _TOOL_LOOP_DEADLINE_S
+    for _ in range(_MAX_TOOL_ITERATIONS):
+        if time.time() > deadline:
+            raise TimeoutError(f"researcher exceeded {_TOOL_LOOP_DEADLINE_S}s")
+        resp = litellm.completion(messages=messages, **params)
+        if usage_out is not None and getattr(resp, "usage", None):
+            usage_out["prompt_tokens"] = usage_out.get("prompt_tokens", 0) + resp.usage.prompt_tokens
+            usage_out["completion_tokens"] = usage_out.get("completion_tokens", 0) + resp.usage.completion_tokens
+        msg = resp.choices[0].message
+        if not msg.tool_calls:
+            return (msg.content or "").strip()
+        messages.append(msg.model_dump(exclude_none=True))
+        for tc in msg.tool_calls:
+            tool = tools_by_name.get(tc.function.name)
+            try:
+                args = json.loads(tc.function.arguments or "{}")
+                result = tool._run(**args) if tool else {"ok": False, "error": f"unknown tool {tc.function.name}"}
+            except Exception as exc:
+                result = {"ok": False, "error": str(exc)}
+            messages.append({"role": "tool", "tool_call_id": tc.id, "content": json.dumps(result, default=str)})
+    raise RuntimeError(f"researcher did not finish within {_MAX_TOOL_ITERATIONS} tool iterations")
+
+
 def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
     """Compact NY Sports article snippets for the Researcher's prompt."""
     if not ny_sports_articles:
@@ -97,7 +167,7 @@ def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
     return "\n\n".join(lines)
 
 
-def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
+def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | None = None) -> dict[str, str]:
     """
     Run the NY Sports Researcher against today's NY Sports articles. Use the
     ESPN tools to verify per-team primary-source facts.
@@ -107,7 +177,8 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
     context. Teams with no verifiable activity are omitted.
 
     Falls back to an empty dict if the Researcher call fails or if no NY
-    Sports articles exist for today.
+    Sports articles exist for today. `usage_out`, if given, accumulates
+    {prompt_tokens, completion_tokens} across the tool loop (eval harness cost).
     """
     ny_sports = top_articles.get("NY Sports") or []
     if not ny_sports:
@@ -145,26 +216,10 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
         "Use ONLY facts returned by the ESPN tools — never your training knowledge."
     )
 
-    task = Task(
-        description=task_description,
-        expected_output='A JSON object: {team_name: "verified facts string"} — possibly empty.',
-        agent=researcher,
-        tools=[fetch_box_score_tool, fetch_standings_tool, fetch_injuries_tool],
-    )
-
-    crew = Crew(
-        agents=[researcher],
-        tasks=[task],
-        process=Process.sequential,
-        verbose=False,
-    )
-
     tool_calls: list[dict] = []
     try:
         with (_record_tool_calls(tool_calls) if _dump_enabled() else nullcontext()):
-            result = crew.kickoff()
-        # CrewAI result is a CrewOutput; .raw / str() should give us the JSON
-        raw = getattr(result, "raw", None) or str(result)
+            raw = _run_tool_loop(researcher, task_description, usage_out)
         raw = raw.strip()
         # Strip code fences if any
         if raw.startswith("```"):

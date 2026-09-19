@@ -24,12 +24,23 @@ with env vars `CLAUDE_WRITER_MODEL` / `OPENAI_CRITIC_MODEL`.
   - ESPN returns 403 to this machine's IP, so a real fixture can only come from the ECS run — first
     real one lands the morning after the capture code deploys. Plumbing was verified with
     `eval/fixtures/live/synthetic-plumbing-test/` (SYNTHETIC — not evidence).
-  - **`claude-sonnet-5` cannot be the Sports Researcher under CrewAI**: its tool loop uses assistant
+  - **(FIXED same day — see below) `claude-sonnet-5` could not be the Sports Researcher under CrewAI**: its tool loop uses assistant
     prefill, which Sonnet 5 rejects ("does not support assistant message prefill") — run_sports_research
     swallows this and returns `{}`. Same class of problem as gpt-5.6-terra. Candidates need either a
     non-CrewAI direct-LiteLLM tool loop (as critic_crew did) or an OpenAI-only candidate set.
   - The fidelity check catches wrong numbers/timing but NOT unsupported non-numeric claims (gpt-4o put
     a Devils signing from an article into the facts with no tool call). Needs an LLM/tool-trace check.
+
+**Prefill fix (same day).** Root cause: CrewAI 0.86's text-based ReAct executor appends each tool
+Observation as an *assistant* message, so the next request ends on an assistant turn (prefill),
+which Sonnet 5 rejects. `run_sports_research` now runs a native LiteLLM tool-calling loop
+(`_run_tool_loop`, crew/sports_research_crew.py) — same prompt/tools/args, provider-agnostic, bounded
+(15 iterations, 180s). Verified on the synthetic fixture: gpt-4o, claude-sonnet-5, gpt-5.6-terra and
+gpt-5.6-sol all run (gpt-5.6-* needs `reasoning_effort="none"` with function tools). The scorer now
+FAILs a candidate that outputs nothing when the baseline stated facts (silent-failure guard).
+Dashboard (`build_dashboard.py`) gained a Sports Researcher chip/row rendering and skips
+`synthetic*` fixtures. **Not yet validated on real ESPN data or deployed** — the loop replaces the
+production researcher path.
 
 ### Concrete next steps (revised again)
 1. Push the capture code (deploys), wait one daily run, then run the first real Sports Researcher eval.

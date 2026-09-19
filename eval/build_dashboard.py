@@ -7,8 +7,8 @@ uploads it to S3 at evals/index.html (reachable at mikecast.io/evals/index.html 
 see MODEL_EVAL_PLAN.md §0b for why no CloudFront change is needed for that path).
 
 Phase 2 (eval/score.py — grounding/hallucination hard gate, format-contract
-checks, editorial score) is built and runs automatically every morning via
-eval/run_daily_eval.sh. Phase 3 (eval/review.py, blind human A/B) is also
+checks, editorial score) is built; eval/run_daily_eval.sh (trial cron, removed
+2026-09-18) used to run it every morning. Phase 3 (eval/review.py, blind human A/B) is also
 built, but no real review has been completed yet — someone still has to
 actually run it. LLM-judge blind A/B is the one piece of Gate B not built.
 A promotion decision needs a completed human review on top of these
@@ -41,6 +41,8 @@ def _load_runs() -> list[dict]:
         if not (d.is_dir() and f.exists()):
             continue
         run = json.loads(f.read_text())
+        if str(run.get("date", "")).startswith("synthetic"):
+            continue  # plumbing-test fixtures aren't evidence — keep them off the page
         scores_f = d / "scores.json"
         run["scores"] = json.loads(scores_f.read_text())["models"] if scores_f.exists() else {}
         human_f = d / "human_scores.json"
@@ -100,6 +102,16 @@ def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: 
         ground_cell = '<td class="num">—</td>'
         edit_cell = '<td class="num">—</td>'
         data_attrs.update(gate="", format="", grounding="", editorial="")
+    elif "tool_fidelity" in score:
+        # Sports Researcher: no format/editorial checks — only the mechanical
+        # tool-fidelity check (facts whose numbers/timing the ESPN tools never returned).
+        gate_ok = score["hard_gate_passed"]
+        t = score["tool_fidelity"]
+        gate_cell = f'<td class="num"><span class="tag {"pass" if gate_ok else "fail-tag"}">{"PASS" if gate_ok else "FAIL"}</span></td>'
+        fmt_cell = '<td class="num">—</td>'
+        ground_cell = f'<td class="num{" fail" if t["unsupported"] else ""}">{t["unsupported"]}/{t["facts"]}</td>'
+        edit_cell = '<td class="num">—</td>'
+        data_attrs.update(gate="pass" if gate_ok else "fail", format="", grounding=t["unsupported"], editorial="")
     else:
         gate_ok = score["hard_gate_passed"]
         fmt_ok = score["format_contract"]["passed"]
@@ -230,8 +242,8 @@ def render(runs: list[dict]) -> str:
 
   <div class="notice">
     <strong>Not a promotion decision by itself.</strong> Gate/Format/Grounding/Editorial
-    columns come from <code>eval/score.py</code> (Phase 2, built — runs automatically every
-    morning) — a "—" means that run hasn't been scored; <strong>never populated for Helper</strong>
+    columns come from <code>eval/score.py</code> (Phase 2, built — run manually now that the daily
+    trial cron has ended) — a "—" means that run hasn't been scored; <strong>never populated for Helper</strong>
     (its output is already a fact-check artifact, not prose to score this way). The Human
     column comes from <code>eval/review.py</code>'s blind A/B (Phase 3) — a "—" means nobody's
     reviewed that row yet. Blind LLM-judge A/B is the one piece not built. Promotion needs all
@@ -243,9 +255,10 @@ def render(runs: list[dict]) -> str:
     <summary>What do these columns mean?</summary>
     <dl>
       <dt>Role</dt>
-      <dd>Which of the three swappable LLM roles this row tests — <code>writer</code> (HTML
+      <dd>Which swappable LLM role this row tests — <code>writer</code> (HTML
         briefing + podcast scripts), <code>critic</code> (section scorer that decides what
-        gets patched), or <code>helper</code> (NY Sports fact-checker).</dd>
+        gets patched), <code>helper</code> (NY Sports fact-checker), or
+        <code>sports_researcher</code> (calls ESPN tools to verify NY team facts).</dd>
       <dt>Fixture date</dt>
       <dd>Which day's captured real production input (articles, picks, trending, etc.) was
         replayed — a snapshot, not live data.</dd>
@@ -274,7 +287,10 @@ def render(runs: list[dict]) -> str:
       <dt>Grounding</dt>
       <dd><code>X/Y unsupported</code> — of <code>Y</code> sentences checked against source
         articles, <code>X</code> came back unsupported (a hallucination signal). This is the
-        raw count behind the Gate column; lower is better.</dd>
+        raw count behind the Gate column; lower is better. For <code>sports_researcher</code>
+        rows, <code>Y</code> is the number of team facts stated and <code>X</code> counts numbers or
+        timing words (TONIGHT, LAST NIGHT…) that the ESPN tools never returned; Format and
+        Editorial don't apply.</dd>
       <dt>Editorial</dt>
       <dd>Mean 1-10 quality score across categories (depth/analysis/substance), from the same
         scorer the production critic uses.</dd>
@@ -299,6 +315,7 @@ def render(runs: list[dict]) -> str:
       <button class="chip" data-filter-role="writer">Writer</button>
       <button class="chip" data-filter-role="critic">Critic</button>
       <button class="chip" data-filter-role="helper">Helper</button>
+      <button class="chip" data-filter-role="sports_researcher">Sports Researcher</button>
     </div>
     <div class="toolbar-group">
       <span class="toolbar-label">Gate</span>

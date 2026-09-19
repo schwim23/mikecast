@@ -306,15 +306,20 @@ def replay_sports_researcher(fixture: dict, model: str) -> dict:
     for p in patches:
         p.start()
     try:
-        with mock.patch("crew.agents.openai_scorer_llm", return_value=llm), _CrewCapture() as cap:
-            verified = run_sports_research({"NY Sports": fixture["input"]["ny_sports_articles"]})
+        usage: dict = {}
+        with mock.patch("crew.agents.openai_scorer_llm", return_value=llm):
+            verified = run_sports_research({"NY Sports": fixture["input"]["ny_sports_articles"]}, usage_out=usage)
     finally:
         for p in patches:
             p.stop()
     return {
         "outputs": {"verified_sports_facts": verified},
         "latency_s": time.time() - t0,
-        "usage_by_model": _usage_by_model(cap.crews),
+        # The tool loop calls LiteLLM directly (no CrewAI Crew), so _CrewCapture sees
+        # nothing — usage comes back through usage_out instead.
+        "usage_by_model": {model: {"prompt_tokens": usage.get("prompt_tokens", 0),
+                                   "completion_tokens": usage.get("completion_tokens", 0),
+                                   "cached_prompt_tokens": 0}},
     }
 
 
