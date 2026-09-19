@@ -53,9 +53,9 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 | `RESEND_AUDIENCE_ID` | No | Resend "MikeCast Daily" audience id (required with the key) |
 | `RESEND_FROM` | No | Newsletter sender (default `MikeCast <mike@mikecast.io>`) |
 | `RESEND_REPLY_TO` | No | Newsletter reply-to (default `michael.schwimmer@gmail.com`) |
-| `CLAUDE_WRITER_MODEL` | No | LiteLLM model string for writers (default `anthropic/claude-sonnet-4-6`) |
+| `CLAUDE_WRITER_MODEL` | No | LiteLLM model string for writers (default `anthropic/claude-sonnet-5`) |
 | `OPENAI_SCORER_MODEL` | No | LiteLLM model string for scorers (default `openai/gpt-4o`) |
-| `OPENAI_CRITIC_MODEL` | No | LiteLLM model string for critic (default `openai/gpt-4o`) |
+| `OPENAI_CRITIC_MODEL` | No | LiteLLM model string for critic (default `anthropic/claude-sonnet-5`) |
 | `OPENAI_HELPER_MODEL` | No | LiteLLM model string for helpers (default `openai/gpt-4o-mini`) |
 
 ## Module Map

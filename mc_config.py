@@ -91,9 +91,9 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 # ---------------------------------------------------------------------------
 # CrewAI model selection (LiteLLM-style model strings)
 # ---------------------------------------------------------------------------
-CLAUDE_WRITER_MODEL  = os.environ.get("CLAUDE_WRITER_MODEL",  "anthropic/claude-sonnet-4-6")
+CLAUDE_WRITER_MODEL  = os.environ.get("CLAUDE_WRITER_MODEL",  "anthropic/claude-sonnet-5")
 OPENAI_SCORER_MODEL  = os.environ.get("OPENAI_SCORER_MODEL",  "openai/gpt-4o")
-OPENAI_CRITIC_MODEL  = os.environ.get("OPENAI_CRITIC_MODEL",  "openai/gpt-4o")
+OPENAI_CRITIC_MODEL  = os.environ.get("OPENAI_CRITIC_MODEL",  "anthropic/claude-sonnet-5")
 OPENAI_HELPER_MODEL  = os.environ.get("OPENAI_HELPER_MODEL",  "openai/gpt-4o-mini")
 
 # ---------------------------------------------------------------------------

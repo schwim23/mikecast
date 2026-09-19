@@ -107,7 +107,7 @@ Planning Crew  →  Research Crew (non-sports)  →  Picks Crew  →  Writing Cr
 
 | Role | Default model | Env var |
 |---|---|---|
-| HTML / single-voice / 3-voice writers + section patcher + social copywriter | `anthropic/claude-sonnet-4-6` | `CLAUDE_WRITER_MODEL` |
+| HTML / single-voice / 3-voice writers + section patcher + social copywriter | `anthropic/claude-sonnet-5` | `CLAUDE_WRITER_MODEL` |
 | Per-category scorer, section quality scorer | `openai/gpt-4o` | `OPENAI_SCORER_MODEL`, `OPENAI_CRITIC_MODEL` |
 | Picks, planner orchestration, NY Sports fact-checker | `openai/gpt-4o-mini` | `OPENAI_HELPER_MODEL` |
 

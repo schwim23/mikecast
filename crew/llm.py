@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from crewai import LLM
 
+from crew.model_compat import api_key_for_model, supports_custom_temperature
 from mc_config import (
     ANTHROPIC_API_KEY,
     CLAUDE_WRITER_MODEL,
@@ -41,12 +42,10 @@ def claude_writer_llm(temperature: float = 0.4, max_tokens: int = 9000) -> LLM:
     this is a forward-compatibility headroom increase, not a behavior change for
     the current default model.
     """
-    return LLM(
-        model=CLAUDE_WRITER_MODEL,
-        api_key=ANTHROPIC_API_KEY or None,
-        temperature=temperature,
-        max_tokens=max_tokens,
-    )
+    kwargs = {"model": CLAUDE_WRITER_MODEL, "api_key": ANTHROPIC_API_KEY or None, "max_tokens": max_tokens}
+    if supports_custom_temperature(CLAUDE_WRITER_MODEL):
+        kwargs["temperature"] = temperature
+    return LLM(**kwargs)
 
 
 def openai_scorer_llm(temperature: float = 0.2) -> LLM:
@@ -60,13 +59,11 @@ def openai_scorer_llm(temperature: float = 0.2) -> LLM:
 
 
 def openai_critic_llm(temperature: float = 0.2) -> LLM:
-    """GPT-4o for the section critic / scorer."""
-    return LLM(
-        model=OPENAI_CRITIC_MODEL,
-        api_key=OPENAI_API_KEY or None,
-        temperature=temperature,
-        max_tokens=1500,
-    )
+    """Section critic / scorer — provider-agnostic (model string picks the API key)."""
+    kwargs = {"model": OPENAI_CRITIC_MODEL, "api_key": api_key_for_model(OPENAI_CRITIC_MODEL), "max_tokens": 1500}
+    if supports_custom_temperature(OPENAI_CRITIC_MODEL):
+        kwargs["temperature"] = temperature
+    return LLM(**kwargs)
 
 
 def openai_helper_llm(temperature: float = 0.2) -> LLM:
