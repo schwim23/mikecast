@@ -471,7 +471,9 @@ def main() -> None:
             "elevenlabs: %s | openai_tts: %s | email: %s | x: %s | instagram: %s",
             path_label, runtime_s // 60, runtime_s % 60, total, len(picks),
             "ok" if el_audio_ok else ("skip" if not ELEVENLABS_API_KEY else "FAILED"),
-            "ok" if audio_ok else "FAILED",
+            # OpenAI TTS is only the backup — it never runs when ElevenLabs succeeded, so
+            # "not attempted" is "skip", not "FAILED" (it read FAILED on every good run).
+            "ok" if audio_ok else ("skip" if el_audio_ok else "FAILED"),
             "ok" if email_ok else "FAILED",
             social_results.get("x", "skip"),
             social_results.get("instagram", "skip"),
