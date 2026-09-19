@@ -28,12 +28,36 @@ from bs4 import BeautifulSoup
 from mc_config import (
     CATEGORIES, CATEGORY_SCORER_PROMPTS, CNBC_RSS_FEEDS, ESPN_RSS_FEEDS,
     HISTORY_FILE, NYT_API_KEY, NYT_SEARCH_QUERIES, NYT_SECTION_TO_CATEGORY,
-    NYT_SECTIONS, OPENAI_API_KEY, PICKS_FILE, REDDIT_FEEDS, REDDIT_USER_AGENT,
+    NYT_SECTIONS, OPENAI_API_KEY, OPENAI_HELPER_MODEL, OPENAI_SCORER_MODEL, PICKS_FILE, REDDIT_FEEDS, REDDIT_USER_AGENT,
     SCORE_BATCH_SIZE, SOURCE_TIERS, TECH_RSS_FEEDS, WIRE_RSS_FEEDS,
 )
 from mc_utils import _atomic_write_json, _safe_request, title_similarity, url_fingerprint
 
 logger = logging.getLogger("mikecast")
+
+
+class _LLMClient:
+    """Drop-in for `OpenAI()` in this module's `client.chat.completions.create(...)`
+    calls, routed through LiteLLM so OPENAI_SCORER_MODEL / OPENAI_HELPER_MODEL can
+    name any provider (MODEL_EVAL_PLAN.md §1a prerequisite). Omits `temperature`
+    for models that reject a non-default value; gpt-4o/-mini behave as before."""
+
+    class _Completions:
+        @staticmethod
+        def create(model, **kwargs):
+            import litellm
+            from crew.model_compat import api_key_for_model, supports_custom_temperature
+            if not supports_custom_temperature(model):
+                kwargs.pop("temperature", None)
+            return litellm.completion(model=model, api_key=api_key_for_model(model), **kwargs)
+
+    class _Chat:
+        completions = None
+
+    def __init__(self):
+        self.chat = self._Chat()
+        self.chat.completions = self._Completions()
+
 
 
 # ============================================================
@@ -648,8 +672,7 @@ def cluster_articles(categorised: dict[str, list[dict]]) -> dict[str, list[dict]
     if not OPENAI_API_KEY:
         return categorised
 
-    from openai import OpenAI
-    client = OpenAI()
+    client = _LLMClient()
 
     def cluster_category(cat: str, articles: list[dict]) -> list[dict]:
         if len(articles) <= 5:
@@ -660,7 +683,7 @@ def cluster_articles(categorised: dict[str, list[dict]]) -> dict[str, list[dict]
         )
         try:
             resp = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model=OPENAI_HELPER_MODEL,
                 messages=[{
                     "role": "user",
                     "content": (
@@ -755,8 +778,7 @@ def score_and_rank_articles(
         logger.warning("OPENAI_API_KEY not set — skipping LLM scoring.")
         return categorised
 
-    from openai import OpenAI
-    client = OpenAI()
+    client = _LLMClient()
 
     # Appended to every category's system prompt to enforce JSON output format
     scorer_suffix = (
@@ -787,7 +809,7 @@ def score_and_rank_articles(
             batch = articles[batch_start: batch_start + SCORE_BATCH_SIZE]
             try:
                 resp = client.chat.completions.create(
-                    model="gpt-4o",
+                    model=OPENAI_SCORER_MODEL,
                     messages=[
                         {"role": "system", "content": system_prompt},
                         {"role": "user",   "content": _build_scoring_prompt(batch)},
@@ -851,8 +873,7 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
     if not OPENAI_API_KEY:
         return articles
 
-    from openai import OpenAI
-    client = OpenAI()
+    client = _LLMClient()
 
     all_arts = [(cat, art) for cat, arts in articles.items() for art in arts]
     all_arts.sort(key=lambda x: x[1].get("score", 50), reverse=True)
@@ -891,7 +912,7 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
         context = f"Title: {title}\nDescription: {desc}\nBody: {body[:800]}"
         try:
             resp = client.chat.completions.create(
-                model="gpt-4o-mini",
+                model=OPENAI_HELPER_MODEL,
                 messages=[{
                     "role": "user",
                     "content": (
@@ -925,7 +946,7 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
             + "\n\n".join(batch_lines)
         )
         batch_resp = client.chat.completions.create(
-            model="gpt-4o-mini",
+            model=OPENAI_HELPER_MODEL,
             messages=[{"role": "user", "content": batch_prompt}],
             max_tokens=80 * len(to_enrich),
             temperature=0.3,

@@ -1,6 +1,41 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** IN PROGRESS — post-trial roadmap planned for the agents beyond writer/critic/helper · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** Trial CLOSED 2026-09-18 (writer+critic -> sonnet-5). Sports Researcher eval built, awaiting first real fixture (§0t) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0t. Session log continued — 2026-09-18, trial closed, writer+critic promoted, Sports Researcher eval built
+
+**Decisions.** Trial reviewed (6 days automated + 9/14 human A/B). Mike chose to promote
+`anthropic/claude-sonnet-5` for **Writer and Critic** (human review had slightly favored 4-6 for
+writer, 4 vs 3; automated scores/latency favored Sonnet 5) — shipped as commit 04049e3 / task-def
+rev 86. Helper stays `gpt-4o-mini`. `crew/llm.py` now omits `temperature` for models that reject
+it and derives the critic's API key from its model string. The daily eval cron was **removed**
+(backup of crontab in scratchpad); fixture capture is in the ECS run and is unaffected. Roll back
+with env vars `CLAUDE_WRITER_MODEL` / `OPENAI_CRITIC_MODEL`.
+
+**Built (uncommitted-to-main until pushed):**
+  - `mc_collect.py` prerequisite fix (§1a): the four hardcoded `gpt-4o`/`gpt-4o-mini` sites now read
+    `OPENAI_SCORER_MODEL` / `OPENAI_HELPER_MODEL` via a LiteLLM shim (`_LLMClient`), provider-agnostic.
+  - Sports Researcher eval: `crew/sports_research_crew.py` records ESPN tool calls+responses when
+    `MIKECAST_DUMP_EVAL_FIXTURE=1` -> `sports_researcher.json`; `eval/run_eval.py --role
+    sports_researcher` replays them offline; `eval/score.py` adds a mechanical tool-fidelity check
+    (numbers + timing labels must appear in tool output).
+
+**Findings.**
+  - ESPN returns 403 to this machine's IP, so a real fixture can only come from the ECS run — first
+    real one lands the morning after the capture code deploys. Plumbing was verified with
+    `eval/fixtures/live/synthetic-plumbing-test/` (SYNTHETIC — not evidence).
+  - **`claude-sonnet-5` cannot be the Sports Researcher under CrewAI**: its tool loop uses assistant
+    prefill, which Sonnet 5 rejects ("does not support assistant message prefill") — run_sports_research
+    swallows this and returns `{}`. Same class of problem as gpt-5.6-terra. Candidates need either a
+    non-CrewAI direct-LiteLLM tool loop (as critic_crew did) or an OpenAI-only candidate set.
+  - The fidelity check catches wrong numbers/timing but NOT unsupported non-numeric claims (gpt-4o put
+    a Devils signing from an article into the facts with no tool call). Needs an LLM/tool-trace check.
+
+### Concrete next steps (revised again)
+1. Push the capture code (deploys), wait one daily run, then run the first real Sports Researcher eval.
+2. Decide: rewrite the Researcher as a direct-LiteLLM tool loop (unlocks Sonnet 5) vs OpenAI-only.
+3. Article scorer/enricher eval (fixture shape + gold set or pairwise) — prerequisite fix now done.
+4. LLM-judge blind A/B; writer grounding gap (§0l); Giants-game timeliness gap (§0p).
 
 ## 0s. Session log continued — 2026-09-14, roadmap for the rest of the crew agents
 

@@ -24,14 +24,21 @@ import json
 import logging
 import re
 
+from contextlib import contextmanager, nullcontext
+from unittest import mock
+
 from crewai import Agent, Crew, Process, Task
 
 from crew.agents import make_sports_researcher
 from crew.tools import (
+    FetchSportsBoxScoreTool,
+    FetchSportsStandingsTool,
+    FetchTeamInjuryReportTool,
     fetch_box_score_tool,
     fetch_injuries_tool,
     fetch_standings_tool,
 )
+from eval.dump import dump_fixture, enabled as _dump_enabled
 from mc_config import TODAY, TODAY_DISPLAY
 
 logger = logging.getLogger("mikecast.crew.sports")
@@ -50,6 +57,31 @@ _RECENT_RESULT_WINDOW_DAYS = 4
 # offseason.) ~8 days covers a weekly NFL cadence plus a little slack while
 # still excluding anything season-distant.
 _UPCOMING_WINDOW_DAYS = 8
+
+
+@contextmanager
+def _record_tool_calls(calls: list[dict]):
+    """Record every ESPN tool call + response made during the block (eval fixture
+    capture — the replay serves these back so the eval is deterministic)."""
+    patches = []
+    for cls, name in ((FetchSportsBoxScoreTool, "fetch_sports_box_score"),
+                      (FetchSportsStandingsTool, "fetch_sports_standings"),
+                      (FetchTeamInjuryReportTool, "fetch_team_injury_report")):
+        orig = cls._run
+
+        def wrapper(self, *a, _orig=orig, _name=name, **kw):
+            result = _orig(self, *a, **kw)
+            calls.append({"tool": _name, "args": kw, "result": result})
+            return result
+
+        patches.append(mock.patch.object(cls, "_run", wrapper))
+    for p in patches:
+        p.start()
+    try:
+        yield
+    finally:
+        for p in patches:
+            p.stop()
 
 
 def _build_sports_briefing(ny_sports_articles: list[dict]) -> str:
@@ -127,8 +159,10 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
         verbose=False,
     )
 
+    tool_calls: list[dict] = []
     try:
-        result = crew.kickoff()
+        with (_record_tool_calls(tool_calls) if _dump_enabled() else nullcontext()):
+            result = crew.kickoff()
         # CrewAI result is a CrewOutput; .raw / str() should give us the JSON
         raw = getattr(result, "raw", None) or str(result)
         raw = raw.strip()
@@ -147,6 +181,11 @@ def run_sports_research(top_articles: dict[str, list[dict]]) -> dict[str, str]:
         }
         logger.info("[Sports Research] Verified primary-source facts for %d team(s): %s",
                     len(cleaned), list(cleaned.keys()))
+        dump_fixture("sports_researcher", TODAY, {
+            "input": {"ny_sports_articles": ny_sports[:30]},
+            "tool_calls": tool_calls,
+            "output": {"verified_sports_facts": cleaned},
+        })
         return cleaned
     except Exception as exc:
         logger.warning("[Sports Research] Researcher run failed (non-fatal): %s", exc)

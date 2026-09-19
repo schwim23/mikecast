@@ -277,7 +277,49 @@ def replay_helper(fixture: dict, model: str) -> dict:
     }
 
 
-REPLAY_FNS = {"writer": replay_writer, "critic": replay_critic, "helper": replay_helper}
+def _recorded_tool_patches(tool_calls: list[dict]):
+    """Patch the three ESPN tools to serve back the fixture's recorded responses
+    (matched on tool + lowercased args) so the replay is deterministic and offline.
+    A call the fixture never recorded gets an explicit not-recorded error."""
+    from crew.tools import FetchSportsBoxScoreTool, FetchSportsStandingsTool, FetchTeamInjuryReportTool
+
+    def _key(tool, args):
+        return tool, json.dumps({k: str(v).strip().lower() for k, v in sorted(args.items())})
+
+    table = {_key(c["tool"], c["args"]): c["result"] for c in tool_calls}
+    patches = []
+    for cls, name in ((FetchSportsBoxScoreTool, "fetch_sports_box_score"),
+                      (FetchSportsStandingsTool, "fetch_sports_standings"),
+                      (FetchTeamInjuryReportTool, "fetch_team_injury_report")):
+        def served(self, *a, _name=name, **kw):
+            return table.get(_key(_name, kw), {"ok": False, "error": "not in recorded fixture"})
+        patches.append(mock.patch.object(cls, "_run", served))
+    return patches
+
+
+def replay_sports_researcher(fixture: dict, model: str) -> dict:
+    from crew.sports_research_crew import run_sports_research
+
+    llm = _make_llm(model, temperature=0.2, max_tokens=2000)  # matches crew/llm.py::openai_scorer_llm
+    patches = _recorded_tool_patches(fixture["tool_calls"])
+    t0 = time.time()
+    for p in patches:
+        p.start()
+    try:
+        with mock.patch("crew.agents.openai_scorer_llm", return_value=llm), _CrewCapture() as cap:
+            verified = run_sports_research({"NY Sports": fixture["input"]["ny_sports_articles"]})
+    finally:
+        for p in patches:
+            p.stop()
+    return {
+        "outputs": {"verified_sports_facts": verified},
+        "latency_s": time.time() - t0,
+        "usage_by_model": _usage_by_model(cap.crews),
+    }
+
+
+REPLAY_FNS = {"writer": replay_writer, "critic": replay_critic, "helper": replay_helper,
+              "sports_researcher": replay_sports_researcher}
 
 
 # ---------------------------------------------------------------------------
@@ -301,6 +343,8 @@ def _write_run(run_dir: Path, model: str, k_index: int, date: str, role: str, re
             (model_dir / f"{date}.critic_metrics.json").write_text(
                 json.dumps(outputs.get("critic_metrics", {}), indent=2)
             )
+    elif role == "sports_researcher":
+        (model_dir / f"{date}.facts.json").write_text(json.dumps(outputs, indent=2))
     else:  # helper
         (model_dir / f"{date}.verdicts.json").write_text(json.dumps(outputs, indent=2))
 

@@ -60,7 +60,7 @@ _REQUIRED_H2_SECTIONS = [
 _SYNTHESIS_SECTIONS = {"executive summary", "key trends & insights", "what to watch"}
 _PODCAST_WORD_MIN, _PODCAST_WORD_MAX = 900, 1000
 _MAX_GROUNDING_CHECKS_PER_MODEL = 40
-_SCORABLE_ROLES = {"writer", "critic"}
+_SCORABLE_ROLES = {"writer", "critic", "sports_researcher"}
 
 
 def _split_sentences(text: str) -> list[str]:
@@ -188,6 +188,58 @@ def score_editorial(html: str, top_articles: dict[str, list[dict]]) -> dict:
     }
 
 
+# ---------------------------------------------------------------------------
+# Sports Researcher — mechanical tool-fidelity check (no LLM, no articles)
+# ---------------------------------------------------------------------------
+
+_TIMING_LABELS = ("TOMORROW NIGHT", "LAST NIGHT", "TONIGHT", "TOMORROW", "YESTERDAY")
+_NUMBER_RE = re.compile(r"\d+")
+
+
+def score_tool_fidelity(verified: dict[str, str], tool_calls: list[dict]) -> dict:
+    """Every number and every timing word (TONIGHT / LAST NIGHT / ...) in a stated
+    fact must appear in what the ESPN tools actually returned, and each team named
+    must have had at least one tool call. Stricter than "sounds right": a stated
+    score, record or date the tools never returned counts as unsupported."""
+    tool_text = json.dumps([c["result"] for c in tool_calls]).upper()
+    called_teams = {str(c["args"].get("team", "")).lower() for c in tool_calls if c["tool"] == "fetch_sports_box_score"}
+    unsupported, uncalled = [], []
+    for team, fact in verified.items():
+        if team.lower() not in called_teams and team.lower() not in " ".join(str(c["args"]).lower() for c in tool_calls):
+            uncalled.append(team)
+        upper = fact.upper()
+        for label in _TIMING_LABELS:
+            if label in upper and label not in tool_text:
+                unsupported.append({"team": team, "claim": label, "kind": "timing"})
+        for n in set(_NUMBER_RE.findall(fact)):
+            if not re.search(rf"(?<!\d){n}(?!\d)", tool_text):
+                unsupported.append({"team": team, "claim": n, "kind": "number"})
+    return {"facts": len(verified), "teams": sorted(verified), "unsupported": len(unsupported),
+            "unsupported_detail": unsupported, "teams_without_tool_call": uncalled}
+
+
+def _score_sports_run(run_id: str, run_dir: Path, summary: dict) -> dict:
+    from eval.run_eval import _safe_name, load_fixture
+
+    date = summary["date"]
+    fixture = load_fixture("sports_researcher", date)
+    scores: dict = {"run_id": run_id, "role": "sports_researcher", "date": date, "models": {}}
+    for model, r in summary["results"].items():
+        facts_path = next(iter(sorted((run_dir / _safe_name(model)).glob(f"k*/{date}.facts.json"))), None)
+        if facts_path is None:
+            continue
+        verified = json.loads(facts_path.read_text())["verified_sports_facts"]
+        scores["models"][model] = {"label": r["label"],
+                                   "tool_fidelity": score_tool_fidelity(verified, fixture["tool_calls"])}
+    base = next((s for s in scores["models"].values() if s["label"] == "baseline"), None)
+    for s in scores["models"].values():
+        # Gate: no MORE unsupported claims / uncalled teams than the baseline.
+        s["hard_gate_passed"] = base is None or s["label"] == "baseline" or (
+            s["tool_fidelity"]["unsupported"] <= base["tool_fidelity"]["unsupported"]
+            and len(s["tool_fidelity"]["teams_without_tool_call"]) <= len(base["tool_fidelity"]["teams_without_tool_call"]))
+    return scores
+
+
 def score_run(run_id: str) -> dict:
     from eval.run_eval import _safe_name, load_fixture
 
@@ -197,6 +249,8 @@ def score_run(run_id: str) -> dict:
     if role not in _SCORABLE_ROLES:
         raise ValueError(f"role={role!r} isn't scorable by this script (only {_SCORABLE_ROLES}) — see module docstring")
 
+    if role == "sports_researcher":
+        return _score_sports_run(run_id, run_dir, summary)
     fixture = load_fixture(role, date)
     top_articles = fixture["input"]["top_articles"]
 
@@ -247,6 +301,15 @@ def main() -> None:
     scores = score_run(args.run)
     out_path = OUT_DIR / args.run / "scores.json"
     out_path.write_text(json.dumps(scores, indent=2))
+
+    if scores["role"] == "sports_researcher":
+        print(f"\n{'model':<32} {'gate':<6} {'teams':<6} unsupported / uncalled")
+        for model, s in scores["models"].items():
+            f = s["tool_fidelity"]
+            print(f"{model:<32} {'PASS' if s['hard_gate_passed'] else 'FAIL':<6} {f['facts']:<6} "
+                  f"{f['unsupported']} / {len(f['teams_without_tool_call'])}")
+        print(f"\nFull scores: {out_path}")
+        return
 
     print(f"\n{'model':<32} {'gate':<6} {'fmt':<5} {'grounded':<12} {'editorial':<10}")
     for model, s in scores["models"].items():
