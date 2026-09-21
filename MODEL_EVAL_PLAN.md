@@ -16,6 +16,7 @@ stories in today's input. **Result (sonnet-5 writer replay, 3 fixtures): 10/116 
 unsupported** (2 of the remaining 4 are harness artifacts — the footer/source-list line is scored
 as a claim in WHAT TO WATCH; worth excluding in `_extract_sections`). Podcast word-count miss
 on the thin 9/16 fixture (842 -> 854, floor 900) is pre-existing and unchanged.
+**Scorer artifacts fixed** (`eval/score.py`): template footer and source-link-label runs are no longer scored as claims, and the fixture's `verified_sports_facts` now count as a grounding source for NY Sports. 9/16 replay: 2/35 -> 0/34 unsupported; the remaining real hits on 9/16-9/18 are ~1 per fixture. Note historical grounding numbers on the dashboard predate this and are not comparable.
 Giants-game timeliness gap (§0p): addressed by the 9/18 ESPN host fix + Researcher fixes; verify
 against a real briefing, no further change made.
 

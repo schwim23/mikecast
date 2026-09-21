@@ -90,7 +90,10 @@ def _extract_sections(html: str) -> dict[str, str]:
         for sib in h2.find_next_siblings():
             if sib.name == "h2":
                 break
-            parts.append(sib.get_text(" ", strip=True))
+            text = sib.get_text(" ", strip=True)
+            if "MikeCast Daily Briefing" in text and "Generated" in text:
+                continue  # template footer (date + source list) — not writer claims
+            parts.append(text)
         sections[header] = " ".join(parts)
     return sections
 
@@ -144,6 +147,14 @@ def score_format_contract(html: str, single_script: str, conv_script: str) -> di
     return checks
 
 
+def _is_source_list(sentence: str) -> bool:
+    """A run of source-name link labels ('Ars Technica Techzine Global Pulse 2.0 inc42.com') —
+    the per-story attribution links, not a claim. Nearly every word is Capitalised or a domain."""
+    words = sentence.split()
+    capish = sum(1 for w in words if w[:1].isupper() or w[:1].isdigit() or re.search(r"\.(com|org|net|io)\b", w))
+    return bool(words) and capish / len(words) >= 0.8
+
+
 def score_grounding(html: str, top_articles: dict[str, list[dict]]) -> dict:
     from crew.tools import validate_claim_tool
 
@@ -160,6 +171,8 @@ def score_grounding(html: str, top_articles: dict[str, list[dict]]) -> dict:
         for sentence in _split_sentences(text):
             if checked >= _MAX_GROUNDING_CHECKS_PER_MODEL:
                 break
+            if _is_source_list(sentence):
+                continue
             result = validate_claim_tool._run(claim=sentence, articles=articles)
             if not result.get("ok"):
                 continue
@@ -391,6 +404,13 @@ def score_run(run_id: str) -> dict:
         return _score_article_run(run_id, run_dir, summary)
     fixture = load_fixture(role, date)
     top_articles = fixture["input"]["top_articles"]
+    # The Researcher's ESPN-verified facts are a legitimate source the writers are told to use —
+    # without them a correctly-stated score reads as "unsupported" in NY Sports.
+    facts = fixture["input"].get("verified_sports_facts") or {}
+    if facts:
+        top_articles = {**top_articles, "NY Sports": list(top_articles.get("NY Sports", [])) + [
+            {"title": f"ESPN verified facts: {team}", "description": text, "source": "ESPN", "url": ""}
+            for team, text in facts.items()]}
 
     scores: dict = {"run_id": run_id, "role": role, "date": date, "models": {}}
     for model, r in summary["results"].items():
