@@ -83,7 +83,15 @@ _NO_STALE_CONTEXT_RULE = (
     "'was not provided', 'is not included', or 'cannot be reported here' — the audience "
     "never sees your sources, so it reads as a broken briefing. State what you do know; "
     "if a detail is absent, simply leave it out (e.g. cover the game without a score "
-    "rather than announcing the score is missing)."
+    "rather than announcing the score is missing).\n"
+    "NO INTERPRETIVE GLOSS: every sentence must be traceable to something a provided article "
+    "states. Do not tack on a 'so what' sentence after a story — no explaining WHY something "
+    "happened or WHY markets moved unless an article says so, no claims about what it signals "
+    "('a competitive differentiator', 'mounting pressure', 'a contrasting view', 'markets are "
+    "in a holding pattern'), and no comparing or connecting two stories unless an article "
+    "does. End the story when the article's facts end. KEY TRENDS and WHAT TO WATCH may tie "
+    "stories together, but only across stories in today's input, naming them, and without "
+    "asserting facts beyond what those articles say."
 )
 
 _STORYTELLING_RULE = (

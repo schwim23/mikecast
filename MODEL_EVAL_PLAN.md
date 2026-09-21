@@ -2,6 +2,23 @@
 
 **Status:** Trial CLOSED 2026-09-18; scorer/enricher eval built 2026-09-21 (writer+critic -> sonnet-5). Sports Researcher eval built, awaiting first real fixture (§0t) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
 
+## 0w. Session log continued — 2026-09-21, writer grounding gap (§0l) fixed
+
+Diagnosis from the flagged sentences (Sonnet 5 writer, fixtures 9/16-9/18): the violations were
+not invented events but **interpretive "so what" glosses** appended to real stories ("becoming a
+competitive differentiator", "mounting regulatory pressure", "markets are frozen in a holding
+pattern", "the initial sell-off reflected concern that…") plus narrated missing info. The
+existing guards banned outside *facts* and stale *color* but not this. Added a **NO INTERPRETIVE
+GLOSS** clause to `_NO_STALE_CONTEXT_RULE` (crew/agents.py, shared by all writers/critic patcher):
+every sentence traceable to an article; no unsupported why/what-it-signals; no linking stories
+unless an article does; KEY TRENDS / WHAT TO WATCH may tie stories together only across named
+stories in today's input. **Result (sonnet-5 writer replay, 3 fixtures): 10/116 -> 4/108
+unsupported** (2 of the remaining 4 are harness artifacts — the footer/source-list line is scored
+as a claim in WHAT TO WATCH; worth excluding in `_extract_sections`). Podcast word-count miss
+on the thin 9/16 fixture (842 -> 854, floor 900) is pre-existing and unchanged.
+Giants-game timeliness gap (§0p): addressed by the 9/18 ESPN host fix + Researcher fixes; verify
+against a real briefing, no further change made.
+
 ## 0v. Session log continued — 2026-09-21, Sonnet 5 empty-researcher root cause, scorer/enricher eval built
 
 **Sonnet 5 "empty" on the 9/21 Sports Researcher fixture: not a model bug.** No article that day named a NY team (article 2 was the *San Francisco* Giants), so per the prompt ("teams the articles mention") Sonnet 5 correctly made no tool calls and answered in prose; `json.loads` failed and `run_sports_research` swallowed it into `{}`. gpt-4o "passed" partly by conflating the SF Giants with the NY Giants. Fixed: prompt now says look up EACH of the four teams regardless of articles (with a look-alike warning), and the JSON parser takes the outermost `{...}` when a model prefaces its answer with prose. Both models now return the Giants facts on the 9/21 replay.
