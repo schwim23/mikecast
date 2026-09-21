@@ -212,15 +212,15 @@ def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | N
         f"Today is {TODAY_DISPLAY} ({TODAY}).\n\n"
         f"Today's NY Sports articles (already filtered to trusted sources):\n\n"
         f"{article_block}\n\n"
-        f"For each of these four NY teams — {', '.join(_NY_TEAMS)} — that the articles above "
-        "mention (any game, trade, signing, roster move, or injury story), call "
-        "fetch_sports_box_score to get the primary-source last game and next game. Do this "
-        "even when the article is not about a game: the briefing must state the score of a "
-        "team's last game and when it plays next. Also call fetch_team_injury_report or "
+        f"For EACH of these four NY teams — {', '.join(_NY_TEAMS)} — call "
+        "fetch_sports_box_score to get the primary-source last game and next game, whether or "
+        "not today's articles mention the team: the briefing must state the score of a "
+        "team's last game and when it plays next. (Beware look-alikes: an article about the "
+        "San Francisco Giants or the Jets is NOT about the NY Giants — it neither counts as "
+        "a mention nor needs to; look the team up anyway.) Also call fetch_team_injury_report or "
         "fetch_sports_standings ONLY when an article raised an injury or standings claim. "
-        "Omit a team only if the articles never mention it OR its tool call returned "
-        "{ok: false} / no recent or upcoming game (e.g. off-season). The articles tell you "
-        "which teams to look up — every fact you write must come from the tool responses.\n\n"
+        "Omit a team only if its tool call returned {ok: false} / no recent or upcoming game "
+        "(e.g. off-season). Every fact you write must come from the tool responses.\n\n"
         "CRITICAL — game timing: the fetch_sports_box_score tool returns BOTH a raw UTC "
         "`date` field AND human-readable `date_et` + `relative_to_today` fields (e.g. "
         "'TONIGHT', 'TOMORROW NIGHT', 'LAST NIGHT'). When you write timing into the "
@@ -252,6 +252,9 @@ def run_sports_research(top_articles: dict[str, list[dict]], usage_out: dict | N
         # Strip code fences if any
         if raw.startswith("```"):
             raw = "\n".join(line for line in raw.splitlines() if not line.strip().startswith("```")).strip()
+        # Some models (claude-sonnet-5) reason in prose before the JSON — take the outermost object.
+        if not raw.startswith("{") and "{" in raw and "}" in raw:
+            raw = raw[raw.index("{"): raw.rindex("}") + 1]
         verified = json.loads(raw)
         if not isinstance(verified, dict):
             logger.warning("[Sports Research] Non-dict output: %r — discarding", raw[:200])

@@ -112,6 +112,31 @@ def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: 
         ground_cell = f'<td class="num{" fail" if t["unsupported"] else ""}">{t["unsupported"]}/{t["facts"]}</td>'
         edit_cell = '<td class="num">—</td>'
         data_attrs.update(gate="pass" if gate_ok else "fail", format="", grounding=t["unsupported"], editorial="")
+    elif "scorer" in score:
+        # Article scorer: Format col = Spearman rank agreement vs baseline, Grounding col =
+        # scores that fell back to the default (unscored), Editorial col = top-8 overlap vs baseline.
+        gate_ok = score["hard_gate_passed"]
+        sc = score["scorer"]
+        unscored = round((1 - sc["coverage"]) * sc["articles"])
+        rho = sc.get("spearman_vs_baseline")
+        ov = sc.get("top8_overlap_vs_baseline")
+        gate_cell = f'<td class="num"><span class="tag {"pass" if gate_ok else "fail-tag"}">{"PASS" if gate_ok else "FAIL"}</span></td>'
+        fmt_cell = f'<td class="num">{"ρ " + str(rho) if rho is not None else "—"}</td>'
+        ground_cell = f'<td class="num{" fail" if unscored else ""}">{unscored}/{sc["articles"]}</td>'
+        edit_cell = f'<td class="num">{str(ov) + "/8" if ov is not None else "—"}</td>'
+        data_attrs.update(gate="pass" if gate_ok else "fail", format=rho if rho is not None else "",
+                          grounding=unscored, editorial=ov if ov is not None else "")
+    elif "enricher" in score:
+        # Article enricher: Format col = lines over 30 words or multi-sentence, Grounding col =
+        # lines with a number absent from the source, Editorial not applicable.
+        gate_ok = score["hard_gate_passed"]
+        en = score["enricher"]
+        badfmt = en["over_30_words"] + en["multi_sentence"]
+        gate_cell = f'<td class="num"><span class="tag {"pass" if gate_ok else "fail-tag"}">{"PASS" if gate_ok else "FAIL"}</span></td>'
+        fmt_cell = f'<td class="num{" fail" if badfmt else ""}">{badfmt}/{en["articles"]}</td>'
+        ground_cell = f'<td class="num{" fail" if en["unsupported"] else ""}">{en["unsupported"]}/{en["articles"]}</td>'
+        edit_cell = '<td class="num">—</td>'
+        data_attrs.update(gate="pass" if gate_ok else "fail", format=badfmt, grounding=en["unsupported"], editorial="")
     else:
         gate_ok = score["hard_gate_passed"]
         fmt_ok = score["format_contract"]["passed"]
@@ -258,7 +283,9 @@ def render(runs: list[dict]) -> str:
       <dd>Which swappable LLM role this row tests — <code>writer</code> (HTML
         briefing + podcast scripts), <code>critic</code> (section scorer that decides what
         gets patched), <code>helper</code> (NY Sports fact-checker), or
-        <code>sports_researcher</code> (calls ESPN tools to verify NY team facts).</dd>
+        <code>sports_researcher</code> (calls ESPN tools to verify NY team facts),
+        <code>article_scorer</code> (1-100 relevance scoring that decides the day's story lineup),
+        <code>article_enricher</code> ("why it matters" lines).</dd>
       <dt>Fixture date</dt>
       <dd>Which day's captured real production input (articles, picks, trending, etc.) was
         replayed — a snapshot, not live data.</dd>
@@ -290,7 +317,11 @@ def render(runs: list[dict]) -> str:
         raw count behind the Gate column; lower is better. For <code>sports_researcher</code>
         rows, <code>Y</code> is the number of team facts stated and <code>X</code> counts numbers or
         timing words (TONIGHT, LAST NIGHT…) that the ESPN tools never returned; Format and
-        Editorial don't apply.</dd>
+        Editorial don't apply. For <code>article_scorer</code> rows, Format is the Spearman
+        rank correlation (ρ) vs the baseline, Grounding is articles left unscored (default 50 after
+        a failed batch), and Editorial is how many of the baseline's top 8 the model also picks.
+        For <code>article_enricher</code> rows, Format counts "why it matters" lines over 30 words or
+        multi-sentence, and Grounding counts lines containing a number absent from the source.</dd>
       <dt>Editorial</dt>
       <dd>Mean 1-10 quality score across categories (depth/analysis/substance), from the same
         scorer the production critic uses.</dd>
@@ -316,6 +347,8 @@ def render(runs: list[dict]) -> str:
       <button class="chip" data-filter-role="critic">Critic</button>
       <button class="chip" data-filter-role="helper">Helper</button>
       <button class="chip" data-filter-role="sports_researcher">Sports Researcher</button>
+      <button class="chip" data-filter-role="article_scorer">Article Scorer</button>
+      <button class="chip" data-filter-role="article_enricher">Article Enricher</button>
     </div>
     <div class="toolbar-group">
       <span class="toolbar-label">Gate</span>

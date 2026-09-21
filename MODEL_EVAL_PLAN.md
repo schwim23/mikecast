@@ -1,6 +1,12 @@
 # MikeCast — Model Evaluation & Testing Plan
 
-**Status:** Trial CLOSED 2026-09-18 (writer+critic -> sonnet-5). Sports Researcher eval built, awaiting first real fixture (§0t) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+**Status:** Trial CLOSED 2026-09-18; scorer/enricher eval built 2026-09-21 (writer+critic -> sonnet-5). Sports Researcher eval built, awaiting first real fixture (§0t) · **Author:** planning session 2026-07-12, revised 2026-09-06, 2026-09-13, 2026-09-14 · **Owner:** Mike
+
+## 0v. Session log continued — 2026-09-21, Sonnet 5 empty-researcher root cause, scorer/enricher eval built
+
+**Sonnet 5 "empty" on the 9/21 Sports Researcher fixture: not a model bug.** No article that day named a NY team (article 2 was the *San Francisco* Giants), so per the prompt ("teams the articles mention") Sonnet 5 correctly made no tool calls and answered in prose; `json.loads` failed and `run_sports_research` swallowed it into `{}`. gpt-4o "passed" partly by conflating the SF Giants with the NY Giants. Fixed: prompt now says look up EACH of the four teams regardless of articles (with a look-alike warning), and the JSON parser takes the outermost `{...}` when a model prefaces its answer with prose. Both models now return the Giants facts on the 9/21 replay.
+
+**Scorer/enricher eval (roadmap item 2) built.** `mc_collect.py` captures `article_scorer` (pre-score pool + trending context -> scores) and `article_enricher` (top-N articles WITH fetched bodies -> why_it_matters) fixtures under `MIKECAST_DUMP_EVAL_FIXTURE=1`. `run_eval.py --role article_scorer|article_enricher`; `score.py` mechanical checks — scorer: coverage (real score vs default-50 fallback), spread, Spearman + top-25 Jaccard + top-8 overlap vs baseline (reported, not gated: baseline isn't ground truth); enricher: coverage, <=30 words, single sentence, numbers must appear in title/desc/body (gate), unsupported capitalised entities informational only. No human review / gold set yet — add blind pairwise on top-8 lineups if the mechanical checks don't separate models. Smoke test on a synthetic fixture (`synthetic-article-eval`, hidden from dashboard): all candidates pass; Sonnet 5 scores harder (mean ~50 vs 63) and agrees least with gpt-4o (rho 0.51 vs 0.77 terra). Cron `run_daily_article_eval.sh` (8:20am, expires 2026-10-05); sports cron extended to 2026-10-05 to catch multi-team in-season days. Real fixtures appear the morning after the capture code deploys.
 
 ## 0u. Session log continued — 2026-09-18 (late), sports data outage + Sports Researcher prompt audit
 

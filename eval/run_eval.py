@@ -323,8 +323,93 @@ def replay_sports_researcher(fixture: dict, model: str) -> dict:
     }
 
 
+class _LiteLLMUsage:
+    """Context manager: accumulates token usage across every litellm.completion call made
+    while active (mc_collect's scorer/enricher call LiteLLM directly, so _CrewCapture sees nothing)."""
+
+    def __enter__(self):
+        import threading
+
+        import litellm
+        self.prompt = self.completion = 0
+        self._lock = threading.Lock()
+        self._orig = litellm.completion
+
+        def spy(*a, **kw):
+            resp = self._orig(*a, **kw)
+            u = getattr(resp, "usage", None)
+            if u:
+                with self._lock:
+                    self.prompt += u.prompt_tokens
+                    self.completion += u.completion_tokens
+            return resp
+        litellm.completion = spy
+        return self
+
+    def __exit__(self, *exc):
+        import litellm
+        litellm.completion = self._orig
+
+    def by_model(self, model: str) -> dict:
+        return {model: {"prompt_tokens": self.prompt, "completion_tokens": self.completion,
+                        "cached_prompt_tokens": 0}}
+
+
+def replay_article_scorer(fixture: dict, model: str) -> dict:
+    import copy
+
+    import mc_collect
+
+    inp = fixture["input"]
+    categorised = copy.deepcopy(inp["categorised"])
+    t0 = time.time()
+    with mock.patch.object(mc_collect, "OPENAI_SCORER_MODEL", model), \
+         mock.patch.object(mc_collect, "OPENAI_API_KEY", "set"), _LiteLLMUsage() as usage:
+        scored = mc_collect.score_and_rank_articles(categorised, trending_context=inp.get("trending_context", ""))
+    return {
+        "outputs": {"scored": {cat: [{"url": a.get("url"), "title": a.get("title"),
+                                      "score": a.get("score"), "score_reason": a.get("score_reason", "")}
+                                     for a in arts] for cat, arts in scored.items()}},
+        "latency_s": time.time() - t0,
+        "usage_by_model": usage.by_model(model),
+    }
+
+
+def replay_article_enricher(fixture: dict, model: str) -> dict:
+    import mc_collect
+
+    arts = fixture["input"]["articles"]
+    by_url = {a["url"]: a["body"] for a in arts}
+
+    class _Resp:
+        def __init__(self, body):
+            self.text = f"<html><body><p>{body}</p></body></html>"
+
+    def fake_get(url, *a, **kw):
+        return _Resp(by_url.get(url, ""))
+
+    # Rebuild the {category: [article]} shape; descending scores preserve the captured order,
+    # since enrich_top_stories re-sorts by score.
+    articles: dict[str, list[dict]] = {}
+    for i, a in enumerate(arts):
+        articles.setdefault(a["category"], []).append(
+            {"title": a["title"], "description": a["description"], "url": a["url"], "score": 1000 - i})
+    t0 = time.time()
+    with mock.patch.object(mc_collect, "OPENAI_HELPER_MODEL", model), \
+         mock.patch.object(mc_collect, "OPENAI_API_KEY", "set"), \
+         mock.patch.object(mc_collect.requests, "get", fake_get), _LiteLLMUsage() as usage:
+        out = mc_collect.enrich_top_stories(articles, top_n=len(arts))
+    by_title = {a["url"]: a.get("why_it_matters", "") for cat in out.values() for a in cat}
+    return {
+        "outputs": {"why_it_matters": [by_title.get(a["url"], "") for a in arts]},
+        "latency_s": time.time() - t0,
+        "usage_by_model": usage.by_model(model),
+    }
+
+
 REPLAY_FNS = {"writer": replay_writer, "critic": replay_critic, "helper": replay_helper,
-              "sports_researcher": replay_sports_researcher}
+              "sports_researcher": replay_sports_researcher,
+              "article_scorer": replay_article_scorer, "article_enricher": replay_article_enricher}
 
 
 # ---------------------------------------------------------------------------
@@ -350,6 +435,8 @@ def _write_run(run_dir: Path, model: str, k_index: int, date: str, role: str, re
             )
     elif role == "sports_researcher":
         (model_dir / f"{date}.facts.json").write_text(json.dumps(outputs, indent=2))
+    elif role in ("article_scorer", "article_enricher"):
+        (model_dir / f"{date}.{role}.json").write_text(json.dumps(outputs, indent=2))
     else:  # helper
         (model_dir / f"{date}.verdicts.json").write_text(json.dumps(outputs, indent=2))
 

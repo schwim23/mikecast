@@ -12,6 +12,7 @@ Pipeline order:
   process_picks()          → load and summarise Mike's hand-picked items
 """
 
+import copy
 import json
 import logging
 import os
@@ -32,6 +33,7 @@ from mc_config import (
     SCORE_BATCH_SIZE, SOURCE_TIERS, TECH_RSS_FEEDS, WIRE_RSS_FEEDS,
 )
 from mc_utils import _atomic_write_json, _safe_request, title_similarity, url_fingerprint
+from eval.dump import dump_fixture, enabled as _dump_enabled
 
 logger = logging.getLogger("mikecast")
 
@@ -780,6 +782,10 @@ def score_and_rank_articles(
 
     client = _LLMClient()
 
+    # Eval fixture capture (MODEL_EVAL_PLAN.md): snapshot the pool BEFORE scoring mutates it.
+    scorer_input = ({"categorised": copy.deepcopy(categorised), "trending_context": trending_context}
+                    if _dump_enabled() else None)
+
     # Appended to every category's system prompt to enforce JSON output format
     scorer_suffix = (
         "\n\nReturn ONLY a JSON array with no markdown, no explanation outside JSON:\n"
@@ -854,6 +860,13 @@ def score_and_rank_articles(
         "Scoring complete: %d articles across %d categories, avg score=%.1f",
         len(all_arts), len(result), avg,
     )
+    if scorer_input is not None:
+        dump_fixture("article_scorer", TODAY, {
+            "input": scorer_input,
+            "output": {"scored": {cat: [{"url": a.get("url"), "title": a.get("title"),
+                                         "score": a.get("score"), "score_reason": a.get("score_reason")}
+                                        for a in arts] for cat, arts in result.items()}},
+        })
     return result
 
 
@@ -928,6 +941,10 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
             logger.debug("Enrichment failed for '%s': %s", title[:50], exc)
 
     bodies = fetch_all_bodies()
+    # Bodies are live-fetched, so the fixture must record them for a deterministic replay.
+    enrich_input = ([{"category": cat, "title": art.get("title", ""), "description": art.get("description", ""),
+                      "url": art.get("url", ""), "body": body} for (cat, art), body in zip(to_enrich, bodies)]
+                    if _dump_enabled() else None)
 
     # Batch all articles into a single gpt-4o-mini call
     try:
@@ -976,6 +993,11 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
 
     enriched_count = sum(1 for _, art in to_enrich if art.get("why_it_matters"))
     logger.info("Enrichment: %d/%d top articles enriched.", enriched_count, len(to_enrich))
+    if enrich_input is not None:
+        dump_fixture("article_enricher", TODAY, {
+            "input": {"articles": enrich_input},
+            "output": {"why_it_matters": [art.get("why_it_matters", "") for _, art in to_enrich]},
+        })
     return articles
 
 
