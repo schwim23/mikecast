@@ -19,6 +19,10 @@ reasoning underneath, not an iframe.
 --with-audio (generate + play candidate audio) is NOT built — deferred, since it
 burns real ElevenLabs credits and the plan marks it explicitly opt-in.
 
+sports_researcher shows each verified team fact (team -> one-line result/next-game string)
+blinded side-by-side, since its output is short structured fact strings, not prose —
+same shape as the helper view but keyed by team instead of sentence.
+
 Usage:
   python eval/review.py --run writer_2026-09-13_1789344065        # -> http://localhost:8081
   python eval/review.py --run writer_2026-09-13_1789344065 --port 8090
@@ -26,6 +30,15 @@ Usage:
                                                                      # (reads eval/out/latest.json,
                                                                      # written by run_daily_eval.sh)
   python eval/review.py --latest helper                             # sentence-by-sentence verdict view
+  python eval/review.py --last-days sports_researcher 5             # pool the last 5 daily sports_researcher
+                                                                     # runs into one review session — useful
+                                                                     # when the mechanical gate alone doesn't
+                                                                     # separate candidates on any single day
+                                                                     # (run_daily_sports_eval.sh doesn't
+                                                                     # register into out/latest.json, so
+                                                                     # --latest sports_researcher falls back
+                                                                     # to the most recent out/sports_researcher_*
+                                                                     # dir automatically)
 """
 
 from __future__ import annotations
@@ -42,7 +55,7 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 OUT_DIR = Path(__file__).parent / "out"
-_REVIEWABLE_ROLES = {"writer", "critic", "helper"}
+_REVIEWABLE_ROLES = {"writer", "critic", "helper", "sports_researcher"}
 
 
 def _safe_name(model: str) -> str:
@@ -82,6 +95,11 @@ def _read_verdicts(k0: Path, date: str) -> dict:
     return {"verdicts": data.get("verdicts", [])}
 
 
+def _read_facts(k0: Path, date: str) -> dict:
+    data = json.loads((k0 / f"{date}.facts.json").read_text())
+    return {"facts": data.get("verified_sports_facts", {})}
+
+
 def build_pairs(run_id: str, summary: dict) -> list[dict]:
     date = summary["date"]
     role = summary["role"]
@@ -91,7 +109,11 @@ def build_pairs(run_id: str, summary: dict) -> list[dict]:
 
     def _read(model: str) -> dict:
         k0 = sorted((run_dir / _safe_name(model)).glob("k*"))[0]
-        return _read_verdicts(k0, date) if role == "helper" else _read_prose(k0, date)
+        if role == "helper":
+            return _read_verdicts(k0, date)
+        if role == "sports_researcher":
+            return _read_facts(k0, date)
+        return _read_prose(k0, date)
 
     baseline_content = _read(baseline_model)
     pairs = []
@@ -124,28 +146,53 @@ def save_human_score(run_id: str, pair_id: str, record: dict) -> None:
     p.write_text(json.dumps(scores, indent=2))
 
 
-def create_app(run_id: str):
+def create_app(run_ids: list[str]):
+    from itertools import groupby
+
     from flask import Flask, redirect, render_template_string, request, url_for
 
     app = Flask(__name__)
-    summary = load_run(run_id)
-    pairs_by_id = {p["pair_id"]: p for p in build_pairs(run_id, summary)}
+    summaries = {rid: load_run(rid) for rid in run_ids}
+    roles = {s["role"] for s in summaries.values()}
+    if len(roles) > 1:
+        raise SystemExit(f"--run mixes roles {sorted(roles)} — pool runs from a single role at a time.")
+    role = roles.pop()
+
+    pairs_by_key: dict[str, dict] = {}
+    for rid in run_ids:
+        summary = summaries[rid]
+        for p in build_pairs(rid, summary):
+            p["run_id"] = rid
+            p["date"] = summary["date"]
+            key = f"{rid}::{p['pair_id']}"
+            p["key"] = key
+            pairs_by_key[key] = p
+
+    def _scored_keys() -> set[str]:
+        keys = set()
+        for rid in run_ids:
+            for pid in load_human_scores(rid):
+                keys.add(f"{rid}::{pid}")
+        return keys
 
     INDEX_TMPL = """
     <!doctype html><html><head><title>MikeCast Eval Review</title>
     <style>
       body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:720px;margin:auto;padding:24px;}
-      h1{color:#4fc3f7} a{color:#81d4fa} li{margin-bottom:10px}
+      h1{color:#4fc3f7} h3{color:#ffb74d;margin-top:20px} a{color:#81d4fa} li{margin-bottom:10px}
       .done{color:#81f0ae}
     </style></head><body>
-    <h1>🎙️ MikeCast Eval Review — {{ role }} / {{ date }}</h1>
-    <p>Run: <code>{{ run_id }}</code></p>
+    <h1>🎙️ MikeCast Eval Review — {{ role }}</h1>
+    <p>{{ run_ids|length }} run(s) pooled: {% for rid in run_ids %}<code>{{ rid }}</code>{% if not loop.last %}, {% endif %}{% endfor %}</p>
+    {% for date, ps in grouped %}
+    <h3>{{ date }}</h3>
     <ul>
-    {% for p in pairs %}
-      <li><a href="{{ url_for('review_pair', pair_id=p.pair_id) }}">baseline vs candidate #{{ loop.index }}</a>
-      {% if p.pair_id in scored %}<span class="done">&nbsp;&#10003; scored</span>{% endif %}</li>
+    {% for p in ps %}
+      <li><a href="{{ url_for('review_pair', key=p.key) }}">baseline vs candidate #{{ loop.index }}</a>
+      {% if p.key in scored %}<span class="done">&nbsp;&#10003; scored</span>{% endif %}</li>
     {% endfor %}
     </ul>
+    {% endfor %}
     </body></html>
     """
 
@@ -246,6 +293,48 @@ def create_app(run_id: str):
     </body></html>
     """
 
+    SPORTS_REVIEW_TMPL = """
+    <!doctype html><html><head><title>Review — {{ pair_id }}</title>
+    <style>
+      body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:900px;margin:auto;padding:24px;}
+      h1{color:#4fc3f7}
+      .team{background:#22223a;border:1px solid #444;border-radius:6px;padding:14px 16px;margin-bottom:14px;}
+      .team h3{margin:0 0 10px;color:#e0e0e0}
+      .facts{display:flex;gap:14px}
+      .fact{flex:1;min-width:0;background:#1a1a2e;border:1px solid #333;border-radius:6px;padding:10px 12px;}
+      .fact h4{margin:0 0 6px;color:#ffb74d;font-size:0.9em}
+      label{display:block;margin-top:10px}
+      select,textarea,button{background:#22223a;color:#e0e0e0;border:1px solid #444;border-radius:4px;padding:6px}
+      textarea{width:100%;height:60px}
+      button{margin-top:16px;padding:10px 20px;background:#1e4a5f;color:#81d4fa;cursor:pointer;font-weight:600}
+      .scorebox{background:#22223a;border:1px solid #444;border-radius:6px;padding:16px;margin-top:16px}
+    </style></head><body>
+    <h1>Blind Review — pair {{ pair_id }} ({{ date }})</h1>
+    <p>Same date, same source data — only the model's summarization of the verified fact differs.
+    Look for wrong day-math ("2 days ago" vs actual), swapped opponent/score, or awkward phrasing.
+    The mechanical scorer already passed both sides on tool fidelity, so this is catching what it can't.
+    The model mapping is hidden until you submit.</p>
+    {% for row in rows %}
+    <div class="team">
+      <h3>{{ row.team }}</h3>
+      <div class="facts">
+        <div class="fact"><h4>Side A</h4>{{ row.a }}</div>
+        <div class="fact"><h4>Side B</h4>{{ row.b }}</div>
+      </div>
+    </div>
+    {% endfor %}
+    <form class="scorebox" method="post">
+      <label>Side A score (1-5, accuracy + clarity): <select name="score_a">{% for i in range(1,6) %}<option value="{{i}}">{{i}}</option>{% endfor %}</select></label>
+      <label>Side B score (1-5): <select name="score_b">{% for i in range(1,6) %}<option value="{{i}}">{{i}}</option>{% endfor %}</select></label>
+      <label>Overall winner:
+        <select name="winner"><option value="A">Side A</option><option value="B">Side B</option><option value="tie">Tie</option></select>
+      </label>
+      <label>Notes: <textarea name="notes"></textarea></label>
+      <button type="submit">Submit &amp; reveal</button>
+    </form>
+    </body></html>
+    """
+
     REVEAL_TMPL = """
     <!doctype html><html><head><title>Revealed</title>
     <style>body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:640px;margin:auto;padding:24px}
@@ -260,17 +349,17 @@ def create_app(run_id: str):
 
     @app.route("/")
     def index():
-        scored = set(load_human_scores(run_id).keys())
+        grouped = [(date, list(ps)) for date, ps in groupby(pairs_by_key.values(), key=lambda p: p["date"])]
         return render_template_string(
-            INDEX_TMPL, role=summary["role"], date=summary["date"], run_id=run_id,
-            pairs=list(pairs_by_id.values()), scored=scored,
+            INDEX_TMPL, role=role, run_ids=run_ids, grouped=grouped, scored=_scored_keys(),
         )
 
-    @app.route("/review/<pair_id>", methods=["GET", "POST"])
-    def review_pair(pair_id):
-        pair = pairs_by_id.get(pair_id)
+    @app.route("/review/<path:key>", methods=["GET", "POST"])
+    def review_pair(key):
+        pair = pairs_by_key.get(key)
         if not pair:
             return "Unknown pair", 404
+        run_id, pair_id = key.split("::", 1)
 
         a_content = pair["baseline_content"] if pair["a_is_baseline"] else pair["candidate_content"]
         b_content = pair["candidate_content"] if pair["a_is_baseline"] else pair["baseline_content"]
@@ -293,14 +382,22 @@ def create_app(run_id: str):
                 "scored_at": datetime.now(timezone.utc).isoformat(),
             }
             save_human_score(run_id, pair_id, record)
-            return redirect(url_for("revealed", pair_id=pair_id))
+            return redirect(url_for("revealed", key=key))
 
-        if summary["role"] == "helper":
+        if role == "helper":
             rows = [
                 {"sentence": a_v["sentence"], "a": a_v, "b": b_v}
                 for a_v, b_v in zip(a_content["verdicts"], b_content["verdicts"])
             ]
             return render_template_string(HELPER_REVIEW_TMPL, pair_id=pair_id, rows=rows)
+
+        if role == "sports_researcher":
+            teams = sorted(set(a_content["facts"]) | set(b_content["facts"]))
+            rows = [
+                {"team": t, "a": a_content["facts"].get(t, "(no fact reported)"), "b": b_content["facts"].get(t, "(no fact reported)")}
+                for t in teams
+            ]
+            return render_template_string(SPORTS_REVIEW_TMPL, pair_id=pair_id, date=pair["date"], rows=rows)
 
         return render_template_string(
             REVIEW_TMPL, pair_id=pair_id,
@@ -308,11 +405,12 @@ def create_app(run_id: str):
             b_html=b_content["html"], b_podcast=b_content["podcast"], b_conv=b_content["conversational"],
         )
 
-    @app.route("/revealed/<pair_id>")
-    def revealed(pair_id):
+    @app.route("/revealed/<path:key>")
+    def revealed(key):
+        run_id, pair_id = key.split("::", 1)
         record = load_human_scores(run_id).get(pair_id)
         if not record:
-            return redirect(url_for("review_pair", pair_id=pair_id))
+            return redirect(url_for("review_pair", key=key))
         return render_template_string(
             REVEAL_TMPL, a_model=record["a_model"], b_model=record["b_model"],
             a_is_baseline=record["a_model"] == record["baseline_model"],
@@ -322,31 +420,65 @@ def create_app(run_id: str):
     return app
 
 
+def _dated_runs(role: str) -> list[Path]:
+    """out/<role>_YYYY-MM-DD_<ts> dirs for this role, oldest first, excluding
+    synthetic/plumbing-test runs (their run_id has no YYYY-MM-DD date segment)."""
+    candidates = []
+    for p in sorted(OUT_DIR.glob(f"{role}_*")):
+        if not p.is_dir():
+            continue
+        rest = p.name[len(role) + 1:]  # "2026-09-22_1790079302" or "synthetic-plumbing-test_..."
+        if rest.startswith("synthetic"):
+            continue
+        candidates.append(p)
+    return candidates
+
+
 def _resolve_latest(role: str) -> str:
-    """Reads eval/out/latest.json (written by run_daily_eval.sh each morning)
-    so a run_id never needs to be copy-pasted by hand for the daily review."""
+    """Reads eval/out/latest.json (written by run_daily_eval.sh each morning) when
+    present for this role; falls back to the most recent out/<role>_* dir otherwise
+    (run_daily_sports_eval.sh / run_daily_article_eval.sh don't register into
+    latest.json — only the writer/critic/helper trial's run_daily_eval.sh does)."""
     latest_path = OUT_DIR / "latest.json"
-    if not latest_path.exists():
-        raise SystemExit(f"{latest_path} doesn't exist yet — has run_daily_eval.sh run at least once? Use --run instead.")
-    latest = json.loads(latest_path.read_text())
-    key = f"{role}_run"
-    run_id = latest.get(key)
-    if not run_id:
-        raise SystemExit(f"{latest_path} has no {key!r} (date={latest.get('date')!r}) — use --run instead.")
-    return run_id
+    if latest_path.exists():
+        latest = json.loads(latest_path.read_text())
+        run_id = latest.get(f"{role}_run")
+        if run_id:
+            return run_id
+    dated = _dated_runs(role)
+    if not dated:
+        raise SystemExit(f"No {role} runs found under {OUT_DIR} and no {role}_run in {latest_path}. Use --run instead.")
+    return dated[-1].name
+
+
+def _resolve_last_n(role: str, n: int) -> list[str]:
+    dated = _dated_runs(role)
+    if not dated:
+        raise SystemExit(f"No {role} runs found under {OUT_DIR}.")
+    return [p.name for p in dated[-n:]]
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument("--run", help="run_id, e.g. writer_2026-09-13_1789344065")
-    group.add_argument("--latest", choices=["writer", "critic", "helper"], help="Use today's run for this role from eval/out/latest.json instead of an exact run_id")
+    group.add_argument("--run", nargs="+", help="one or more run_ids, e.g. writer_2026-09-13_1789344065 (pooled into one session if more than one)")
+    group.add_argument("--latest", choices=["writer", "critic", "helper", "sports_researcher"], help="Use today's run for this role instead of an exact run_id")
+    group.add_argument("--last-days", nargs=2, metavar=("ROLE", "N"), help="Pool the last N daily runs for ROLE into one review session, e.g. --last-days sports_researcher 5")
     parser.add_argument("--port", type=int, default=8081, help="Local port (default 8081 — server.py already uses 8080)")
     args = parser.parse_args()
 
-    run_id = args.run or _resolve_latest(args.latest)
-    app = create_app(run_id)
-    print(f"Blind review for {run_id} -> http://localhost:{args.port}")
+    if args.run:
+        run_ids = args.run
+    elif args.latest:
+        run_ids = [_resolve_latest(args.latest)]
+    else:
+        role, n = args.last_days
+        run_ids = _resolve_last_n(role, int(n))
+
+    app = create_app(run_ids)
+    print(f"Blind review for {len(run_ids)} run(s) -> http://localhost:{args.port}")
+    for rid in run_ids:
+        print(f"  {rid}")
     app.run(host="127.0.0.1", port=args.port, debug=False)
 
 
