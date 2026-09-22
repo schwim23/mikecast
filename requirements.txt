@@ -26,6 +26,12 @@ pydantic>=2.0
 # Dev / test only — kept in main requirements so Docker image can run pytest if needed
 pytest>=8.0
 
+# server.py — local dashboard only (not used by the deployed ECS pipeline,
+# which runs mikecast_briefing.py). Listed so `pip install -r requirements.txt`
+# is enough to run it, and so the CI import-smoke test (crew/tests/test_smoke_imports.py)
+# passes on a clean install instead of only on a dev machine with it installed out-of-band.
+flask
+
 # Datadog tracing (mc_tracing.py) — agentless OTLP export straight to Datadog's
 # intake, no Agent/Collector. Pinned explicitly rather than relying on crewai's
 # transitive opentelemetry-sdk dep, which could disappear on a crewai upgrade.
