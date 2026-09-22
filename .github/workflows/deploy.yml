@@ -15,8 +15,28 @@ env:
   CLOUDFRONT_DIST_ID: EFNQM31KQHY56
 
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run test suite
+        run: python -m pytest crew/tests/ -v
+
   deploy:
     name: Build and Deploy
+    needs: test
     runs-on: ubuntu-latest
 
     steps:
