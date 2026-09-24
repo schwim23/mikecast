@@ -33,6 +33,10 @@ if str(_REPO_ROOT) not in sys.path:
 
 OUT_DIR = Path(__file__).parent / "out"
 
+# Last day the daily eval crons (run_daily_sports_eval.sh / run_daily_article_eval.sh) fire.
+# Nothing rebuilds the page after that, so the banner flips to "concluded" client-side.
+TRIAL_END = "2026-10-05"
+
 
 def _load_runs() -> list[dict]:
     runs = []
@@ -178,6 +182,12 @@ def _row(role: str, date: str, run_id: str, k: int, model: str, r: dict, score: 
     )
 
 
+def _fmt_date(iso: str) -> str:
+    from datetime import date
+    d = date.fromisoformat(iso)
+    return f"{d:%b} {d.day}, {d.year}"
+
+
 def render(runs: list[dict]) -> str:
     rows = []
     for run in runs:
@@ -193,6 +203,7 @@ def render(runs: list[dict]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>MikeCast Model Eval Results</title>
 <style>
   body {{
@@ -206,6 +217,8 @@ def render(runs: list[dict]) -> str:
     border-radius:6px; padding:14px 18px; margin-bottom:28px; color:#ddd; line-height:1.6;
   }}
   .notice a {{ color:#81d4fa; }}
+  .trial-status {{ border-left-color:#4fc3f7; }}
+  .trial-status ul {{ margin:6px 0 0; padding-left:20px; }}
   .toolbar {{
     display:flex; flex-wrap:wrap; align-items:center; gap:10px 18px;
     background:#22223a; border:1px solid #444; border-radius:8px;
@@ -264,6 +277,25 @@ def render(runs: list[dict]) -> str:
 <body>
   <h1>🎙️ MikeCast Model Eval Results</h1>
   <p class="subtitle">Replay + automated scoring — baseline vs. candidate models, per role</p>
+
+  <div class="notice trial-status">
+    <strong id="trial-status-text">Trial in progress — daily sports-researcher and article
+      scorer/enricher evals run through {_fmt_date(TRIAL_END)}.</strong>
+    Decisions so far:
+    <ul>
+      <li>Writer + critic → <code>claude-sonnet-5</code> (2026-09-18)</li>
+      <li>Helper → stays <code>gpt-4o-mini</code> (2026-09-18)</li>
+      <li>Article scorer + sports researcher → <code>gpt-5.6-terra</code> (2026-09-24; gpt-4o
+        silently left ~1/3 of articles unscored)</li>
+      <li>Article enricher → stays <code>gpt-4o-mini</code> (ties every check, 20x+ cheaper)</li>
+    </ul>
+  </div>
+  <script>
+    if (new Date() > new Date("{TRIAL_END}T23:59:59-04:00")) {{
+      document.getElementById("trial-status-text").textContent =
+        "Trial concluded {_fmt_date(TRIAL_END)} — results below are final; no further runs.";
+    }}
+  </script>
 
   <div class="notice">
     <strong>Not a promotion decision by itself.</strong> Gate/Format/Grounding/Editorial
