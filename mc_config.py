@@ -92,7 +92,9 @@ ANTHROPIC_API_KEY = os.environ.get("ANTHROPIC_API_KEY", "")
 # CrewAI model selection (LiteLLM-style model strings)
 # ---------------------------------------------------------------------------
 CLAUDE_WRITER_MODEL  = os.environ.get("CLAUDE_WRITER_MODEL",  "anthropic/claude-sonnet-5")
-OPENAI_SCORER_MODEL  = os.environ.get("OPENAI_SCORER_MODEL",  "openai/gpt-4o")
+# gpt-5.6-terra since 2026-09-24: gpt-4o silently skipped ~1/3 of articles per run (see MODEL_EVAL_PLAN.md).
+# Also drives the Sports Researcher agent (crew/llm.py openai_scorer_llm).
+OPENAI_SCORER_MODEL  = os.environ.get("OPENAI_SCORER_MODEL",  "openai/gpt-5.6-terra")
 OPENAI_CRITIC_MODEL  = os.environ.get("OPENAI_CRITIC_MODEL",  "anthropic/claude-sonnet-5")
 OPENAI_HELPER_MODEL  = os.environ.get("OPENAI_HELPER_MODEL",  "openai/gpt-4o-mini")
 

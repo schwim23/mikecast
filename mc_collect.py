@@ -6,7 +6,7 @@ Pipeline order:
   collect_all_news()       → raw articles from all sources
   deduplicate()            → remove articles seen in the last 7 days
   cluster_articles()       → merge same-story duplicates (gpt-4o-mini)
-  score_and_rank_articles()→ per-category relevance scores (gpt-4o)
+  score_and_rank_articles()→ per-category relevance scores (OPENAI_SCORER_MODEL)
   enrich_top_stories()     → add "why it matters" to the top-N stories
   select_top_articles()    → trim to a target total across categories
   process_picks()          → load and summarise Mike's hand-picked items
@@ -732,7 +732,7 @@ def cluster_articles(categorised: dict[str, list[dict]]) -> dict[str, list[dict]
 
 
 # ============================================================
-# Scoring (gpt-4o — per-category parallel agents)
+# Scoring (OPENAI_SCORER_MODEL — per-category parallel agents)
 # ============================================================
 
 def _build_scoring_prompt(batch: list[dict]) -> str:
@@ -811,27 +811,41 @@ def score_and_rank_articles(
             "newsworthiness, credibility, and relevance to a tech executive."
         )) + scorer_suffix
 
+        def score_batch(batch: list[dict]) -> None:
+            resp = client.chat.completions.create(
+                model=OPENAI_SCORER_MODEL,
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user",   "content": _build_scoring_prompt(batch)},
+                ],
+                max_tokens=1500,
+                temperature=0.2,
+            )
+            raw = resp.choices[0].message.content.strip()
+            raw = re.sub(r"^```(?:json)?\s*", "", raw)
+            raw = re.sub(r"\s*```$", "", raw)
+            scores  = json.loads(raw)
+            id_map  = {item["id"]: item for item in scores}
+            for art in batch:
+                if art["_score_id"] in id_map:
+                    art["score"]        = int(id_map[art["_score_id"]].get("score", 50))
+                    art["score_reason"] = id_map[art["_score_id"]].get("reason", "")
+
         for batch_start in range(0, len(articles), SCORE_BATCH_SIZE):
             batch = articles[batch_start: batch_start + SCORE_BATCH_SIZE]
             try:
-                resp = client.chat.completions.create(
-                    model=OPENAI_SCORER_MODEL,
-                    messages=[
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user",   "content": _build_scoring_prompt(batch)},
-                    ],
-                    max_tokens=1500,
-                    temperature=0.2,
-                )
-                raw = resp.choices[0].message.content.strip()
-                raw = re.sub(r"^```(?:json)?\s*", "", raw)
-                raw = re.sub(r"\s*```$", "", raw)
-                scores  = json.loads(raw)
-                id_map  = {item["id"]: item for item in scores}
-                for art in batch:
-                    if art["_score_id"] in id_map:
-                        art["score"]        = int(id_map[art["_score_id"]].get("score", 50))
-                        art["score_reason"] = id_map[art["_score_id"]].get("reason", "")
+                score_batch(batch)
+                # Models can return valid JSON that silently omits articles (gpt-4o skipped
+                # ~1/3 of each run, 2026-09-22..24) — retry the omitted ones once.
+                missing = [a for a in batch if not a["score_reason"]]
+                if missing:
+                    logger.warning("Scorer omitted %d/%d articles [%s] — retrying them",
+                                   len(missing), len(batch), cat)
+                    score_batch(missing)
+                    still = sum(1 for a in missing if not a["score_reason"])
+                    if still:
+                        logger.warning("Scorer still omitted %d articles [%s] — left at default 50",
+                                       still, cat)
                 logger.info("Scored [%s] %d articles", cat, len(batch))
             except Exception as exc:
                 logger.warning("Scoring failed [%s] batch %d: %s", cat, batch_start, exc)
