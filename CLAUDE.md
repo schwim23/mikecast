@@ -34,7 +34,7 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 
 `--crew` and `--legacy` are mutually exclusive. Both paths produce the same on-disk output shape (data/`YYYY-MM-DD.json`, audio file, RSS feed) and use the same Steps 9–10 for audio + delivery. Default is `--crew` after the cutover; `--legacy` remains available as a fast rollback.
 
-## Environment Variables (all in `~/.profile`)
+## Environment Variables (in `~/.profile`, except `ANTHROPIC_API_KEY` — see below)
 
 | Variable | Required | Purpose |
 |---|---|---|
@@ -43,7 +43,7 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 | `GMAIL_APP_PASSWORD` | Yes | Gmail SMTP (16-digit app password) |
 | `GMAIL_FROM` | Yes | Sender address |
 | `GMAIL_TO` | Yes | Recipient address |
-| `ANTHROPIC_API_KEY` | Crew only | Claude for the writing crew (HTML + both podcast scripts) |
+| `ANTHROPIC_API_KEY` | Crew only | Claude for the writing crew (HTML + both podcast scripts). Locally lives in git-ignored `mikecast/.env` (loaded by `mc_config.py` via python-dotenv), NOT `~/.profile` — a globally exported key forces Claude Code onto API-key auth. Prod gets it from SSM via the task def. |
 | `ELEVENLABS_API_KEY` | No | 3-voice audio (Mike/Elizabeth/Jesse) |
 | `ELEVENLABS_VOICE_MIKE` | No | ElevenLabs voice ID |
 | `ELEVENLABS_VOICE_ELIZABETH` | No | ElevenLabs voice ID |

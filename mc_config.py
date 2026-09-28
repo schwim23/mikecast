@@ -10,6 +10,14 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+# Local dev: pick up secrets from a git-ignored .env next to this file.
+# Real environment variables win (override=False), so Fargate is unaffected.
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parent / ".env", override=False)
+except ImportError:
+    pass
+
 try:
     from zoneinfo import ZoneInfo
 except ImportError:
