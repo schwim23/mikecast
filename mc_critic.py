@@ -18,6 +18,7 @@ import logging
 import re
 
 from mc_config import OPENAI_API_KEY
+from mc_facts import prompt_block
 
 logger = logging.getLogger(__name__)
 
@@ -190,6 +191,7 @@ def _regenerate_html_section(cat: str, articles: list[dict], issue: str) -> str:
         "CRITICAL: Only write about the articles listed above. Do NOT add stories, facts, "
         "player names, scores, trades, or events that are not explicitly stated in those articles. "
         "If fewer than 4 articles are available, cover only those that exist — do not invent more.\n\n"
+        f"{prompt_block()}\n\n"
         "Write an improved HTML section that:\n"
         "  - Covers the available stories with deeper analysis\n"
         "  - Has 3-4 sentences of analysis per story\n"

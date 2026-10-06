@@ -33,6 +33,7 @@ from mc_deliver import (
     send_newsletter_broadcast,
 )
 from mc_dist_state import channel_sent, load_dist_state, record_send
+from mc_facts import fix_stale_titles_in_outputs
 from mc_metrics import submit_run_metrics
 from mc_tracing import init_tracing, shutdown_tracing, step_span
 from eval.dump import dump_fixture
@@ -426,6 +427,17 @@ def main() -> None:
                 html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics = _run_crew_steps_0_to_8b(trending_holder)
             else:
                 html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics = _run_legacy_steps_0_to_8b(trending_holder)
+
+            # Deterministic backstop for stale titles from the writers' training
+            # data ("former President Trump") — see mc_facts.py. Runs after the
+            # critic so patched/regenerated sections are covered too.
+            fixed = fix_stale_titles_in_outputs(
+                html=html, single_voice_script=single_voice_script,
+                conversational_script=conversational_script,
+            )
+            html = fixed["html"]
+            single_voice_script = fixed["single_voice_script"]
+            conversational_script = fixed["conversational_script"]
 
             trending = trending_holder[0] if trending_holder else []
             total = sum(len(v) for v in top_articles.values())

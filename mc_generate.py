@@ -14,6 +14,7 @@ import logging
 import re
 
 from mc_config import OPENAI_API_KEY, TODAY, TODAY_DISPLAY
+from mc_facts import prompt_block
 
 logger = logging.getLogger("mikecast")
 
@@ -266,6 +267,7 @@ def generate_html_briefing(
         "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
         "which team they play for, do NOT name their team. Do not use training knowledge to infer "
         "team affiliations, positions, or stats. Say only what the article says."
+        "\n\n" + prompt_block()
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. You have collected {total_articles} news articles across 4 categories.
@@ -468,6 +470,7 @@ def generate_podcast_script(
         "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
         "which team they play for, do NOT name their team. Do not use training knowledge to infer "
         "team affiliations, positions, or stats. Say only what the article says."
+        "\n\n" + prompt_block()
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write a full podcast script for today's MikeCast episode.
@@ -584,6 +587,7 @@ def generate_conversational_script(
         "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
         "which team they play for, Jesse must NOT name their team. Do not use training knowledge "
         "to infer team affiliations, positions, or stats. Say only what the article says."
+        "\n\n" + prompt_block()
     )
 
     user_prompt = f"""Today is {TODAY_DISPLAY}. Write the full MikeCast 3-host podcast script.
@@ -688,7 +692,7 @@ def generate_episode_description(podcast_script: str, episode_num: int) -> str:
                         "CRITICAL: Only mention stories and facts that are explicitly stated "
                         "in the podcast script below. Do not add details, events, or claims "
                         "from your training knowledge. If a topic is only vaguely mentioned, "
-                        "omit it rather than embellish it."
+                        "omit it rather than embellish it.\n\n" + prompt_block()
                     ),
                 },
                 {
