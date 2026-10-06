@@ -294,6 +294,15 @@ def _at_sentence_start(text: str, pos: int) -> bool:
     return not before or before[-1] in '.!?:\n"“]>'
 
 
+def _inside_longer_title(m: re.Match, titles: tuple[str, ...]) -> bool:
+    """True when the matched title is the tail of a longer one ("Chair" in "Fed Chair").
+    The regex already tried the longer title at its own start and a qualifier there
+    ("former Fed Chair Powell") rejected it — matching the tail would bypass that."""
+    title, before = m.group(1), m.string[:m.start()]
+    return any(t != title and t.endswith(" " + title) and before.endswith(t[: -len(title)])
+               for t in titles)
+
+
 def fix_stale_titles(text: str) -> tuple[str, list[str]]:
     """Rewrite known-stale titles. Returns (fixed_text, human-readable change list)."""
     if not text:
@@ -333,13 +342,16 @@ def fix_stale_titles(text: str) -> tuple[str, list[str]]:
             rf"\b({titles})\s+({_GIVEN}{prev_surname})\b"
         )
         if o.fix_former:
-            def _sub_former(m: re.Match) -> str:
+            def _sub_former(m: re.Match, o: Office = o) -> str:
+                if _inside_longer_title(m, o.titles):
+                    return m.group(0)
                 new = _cap(f"former {m.group(1)} {m.group(2)}", m)
                 changes.append(f"{m.group(0)!r} -> {new!r}")
                 return new
             text = pat.sub(_sub_former, text)
         else:
-            changes.extend(f"FLAGGED (not changed): {m.group(0)!r}" for m in pat.finditer(text))
+            changes.extend(f"FLAGGED (not changed): {m.group(0)!r}" for m in pat.finditer(text)
+                           if not _inside_longer_title(m, o.titles))
 
     return text, changes
 

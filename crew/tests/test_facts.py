@@ -178,6 +178,13 @@ class TestPreviousHolders:
         assert fixed("said Fed Chair Jerome Powell") == "said former Fed Chair Jerome Powell"
         assert fixed("Vice Chair Powell") == "Vice Chair Powell"
 
+    def test_already_former_with_multiword_title_untouched(self):
+        # Regression: "Chair" is also a title alternative, so this used to become
+        # "former Fed former Chair Powell" (caught by eval/fixtures/synthetic/bare-names).
+        for text in ("former Fed Chair Powell", "Former Fed Chair Jerome Powell",
+                     "former Federal Reserve Chair Powell", "the then-Fed Chair Powell"):
+            assert fix_stale_titles(text) == (text, []), text
+
     def test_pope_flagged_not_changed(self):
         text, changes = fix_stale_titles("Pope Francis said")
         assert text == "Pope Francis said"
