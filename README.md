@@ -86,6 +86,7 @@ Step 6   Enrich top 15       Fetch full body + "why it matters" via GPT-4o-mini
 Step 7   Mike's Picks        Process user-submitted URLs, PDFs, and text
 Step 8   Generate content    Parallel: HTML briefing + single-voice script + 3-voice script
 Step 8b  Critic pass         GPT-4o scores sections; regenerates weak ones (score < 7); NY Sports never patched
+Step 8c  Stale-title fix     Deterministic rewrite of out-of-date officeholder titles ("former President Trump" → "President Trump") in the HTML + both scripts
 Step 9   Generate audio      ElevenLabs 3-voice (preferred) + OpenAI TTS single-voice fallback; segments stitched into one clean MP3 via ffmpeg concat
 Step 10  Save & deliver      JSON → manifest → RSS feed → Gmail email → Resend newsletter broadcast (optional); all sends gated first-run-of-day
 Step 11  Social distribution Auto-post to X + Instagram with a deep link back to the episode (optional; skipped if creds unset)
@@ -235,6 +236,8 @@ Preventing LLM hallucinations in a fully automated pipeline requires defense at 
 - **Trending prompt label**: Topics injected into generation prompts are labeled as "suggested — verify before covering," not "confirmed present."
 - **Episode description guard**: The episode description prompt explicitly prohibits mentioning anything not stated in the podcast script.
 - **Grok grounding instruction**: Grok is instructed to omit any trending story it isn't highly confident actually occurred today.
+- **Current officeholder facts** (`mc_facts.py`, added 2026-10-06): writer models' training data is out of date on who holds office — on 2026-10-06 a headline said only "Trump" and the writer called him "former President Trump". Each run looks up the current and previous holders of key offices (President, Vice President, NY Governor, NYC Mayor, Fed Chair, Pope) live from Wikidata, keeping only real people, non-deprecated statements and exactly one current holder. If that fails, it uses the last good result cached in S3 (`facts/officeholders.json`), then a hardcoded fallback list. The facts, plus a rule to take titles only from the articles, are added to every writer, section-patcher and social-copy prompt on both the crew and legacy paths. Problems log as `Officeholder facts:` warnings: a fallback was used, Wikidata disagrees with the fallback list, or the fallback list hasn't been reviewed in 90+ days.
+- **Stale-title backstop** (`fix_stale_titles_in_outputs`, Step 8c): after the critic, known-stale titles are rewritten deterministically in the HTML and both scripts, e.g. "former President Trump" → "President Trump" and "Fed Chair Powell" → "former Fed Chair Powell". Each rewrite logs as `Stale title in ...`. "Pope Francis" is flagged, never rewritten. To track another office, add an `Office` and a `FALLBACK` entry in `mc_facts.py`.
 - **LLMs are never used as article sources**: Grok generates search queries only. All article content comes from real RSS feeds and APIs.
 
 ## Project Structure
@@ -247,6 +250,7 @@ mikecast/
 ├── mc_collect.py             # News collection, dedup, clustering, scoring, enrichment (Steps 1–6)
 ├── mc_generate.py            # GPT-4o content generation: HTML + podcast scripts (Step 8)
 ├── mc_critic.py              # Post-generation quality critic pass (Step 8b)
+├── mc_facts.py               # Live officeholder facts (Wikidata → S3 cache → fallback) for prompts + stale-title fixer (Step 8c)
 ├── mc_audio.py               # TTS audio: ElevenLabs 3-voice + OpenAI fallback (Step 9)
 ├── mc_deliver.py             # Save JSON, manifest, RSS feed, email + Resend newsletter (Step 10)
 ├── mc_dist_state.py          # Per-date distribution state; first-run-of-day send gating
