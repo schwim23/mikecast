@@ -1,0 +1,98 @@
+{
+  "_about": "Synthetic writer fixture (eval/fixtures/synthetic/bare-names). Every officeholder is named WITHOUT a title, so any title in the output comes from the writer. Scored by eval/score.py's stale_titles check: 'former President Trump', 'Fed Chair Powell', 'President Biden', 'Mayor Adams' etc. are regressions. Created 2026-10-06 after the 'former President Trump' episode.",
+  "input": {
+    "top_articles": {
+      "AI & Tech": [
+        {
+          "title": "Vance meets AI lab chiefs at the White House on compute export rules",
+          "url": "https://example.com/vance-ai",
+          "description": "Vance hosted executives from three AI labs on Monday to discuss proposed limits on exporting advanced compute. Attendees said Vance asked for industry input within 30 days.",
+          "source": "Reuters",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Trump says Intel will build chips for Apple in Ohio",
+          "url": "https://example.com/trump-intel",
+          "description": "Trump confirmed on Sunday that Intel will manufacture chips for Apple at its Ohio plant. Intel shares rose nearly 6% overnight.",
+          "source": "Stocktwits",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "Business & Markets": [
+        {
+          "title": "Warsh signals the Fed will hold rates steady through year-end",
+          "url": "https://example.com/warsh-rates",
+          "description": "Warsh told reporters on Monday that the Fed sees no need to cut rates again this year, citing sticky services inflation. Treasury yields rose after the remarks.",
+          "source": "CNBC",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Powell warns deficits are a long-term risk in Princeton speech",
+          "url": "https://example.com/powell-princeton",
+          "description": "Powell, speaking at Princeton on Monday, said federal deficits pose a long-run risk to growth. He declined to comment on current monetary policy.",
+          "source": "Bloomberg",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Biden-era chip subsidies face review in Senate hearing",
+          "url": "https://example.com/chips-review",
+          "description": "A Senate panel on Tuesday reviewed grants awarded under the CHIPS Act, which Biden signed in 2022. Senators questioned whether three projects are on schedule.",
+          "source": "Politico",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "Companies": [
+        {
+          "title": "Hochul announces $500 million tax credit for upstate chip fab",
+          "url": "https://example.com/hochul-fab",
+          "description": "Hochul said on Monday that New York will offer a $500 million tax credit to a semiconductor plant near Syracuse, tied to 2,000 jobs.",
+          "source": "Times Union",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Mamdani unveils plan for city-owned grocery pilot in the Bronx",
+          "url": "https://example.com/mamdani-grocery",
+          "description": "Mamdani announced a pilot for two city-owned grocery stores in the Bronx, opening in spring. Adams had opposed a similar proposal last year.",
+          "source": "NY1",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Leo XIV meets tech leaders on AI ethics at the Vatican",
+          "url": "https://example.com/leo-ai",
+          "description": "Leo XIV hosted a meeting with technology executives on Monday about AI and labor, the Vatican said.",
+          "source": "AP",
+          "published": "2026-10-06T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "NY Sports": []
+    },
+    "picks": [],
+    "trending": [],
+    "verified_sports_facts": {},
+    "ny_team_updates": []
+  }
+}

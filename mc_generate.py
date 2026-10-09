@@ -184,6 +184,16 @@ def _filter_trending_to_articles(
     return matched
 
 
+# Backfill of 9/30–10/09 (eval/grounding_backfill.py): the writers' most common unsupported
+# sentence was generic investor-reaction filler tacked onto the end of an item.
+_NO_INVENTED_REACTION_RULE = (
+    "NO INVENTED REACTION: Do not attribute reactions or views to investors, analysts, markets, "
+    "or observers (e.g. 'investors are watching closely', 'prompted investors to reassess its "
+    "strategy', 'the move is seen as a signal of…') unless an article reports that reaction. "
+    "When an item's sourced facts run out, end the item rather than adding a wrap-up line."
+)
+
+
 def _build_trending_prompt_block(trending: list[dict]) -> str:
     """
     Format trending items for podcast prompt injection.
@@ -264,6 +274,7 @@ def generate_html_briefing(
         "Do NOT add details, claims, trades, events, statistics, or context from your training knowledge. "
         "If a category has few or no articles, write only what the articles say — do not fill gaps with invented news. "
         "Every specific claim (names, numbers, events) must trace directly to an article in the input.\n\n"
+        + _NO_INVENTED_REACTION_RULE + "\n\n"
         "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
         "which team they play for, do NOT name their team. Do not use training knowledge to infer "
         "team affiliations, positions, or stats. Say only what the article says."
@@ -467,6 +478,7 @@ def generate_podcast_script(
         "CRITICAL RULE: Only discuss stories explicitly present in the provided articles. "
         "Do NOT mention trades, events, statistics, or facts from your training knowledge that aren't in the input. "
         "If a category has few articles, keep that segment short — never invent news to fill time.\n\n"
+        + _NO_INVENTED_REACTION_RULE + "\n\n"
         "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
         "which team they play for, do NOT name their team. Do not use training knowledge to infer "
         "team affiliations, positions, or stats. Say only what the article says."
@@ -584,6 +596,7 @@ def generate_conversational_script(
         "from your training knowledge that aren't in the input articles. "
         "If a category (especially NY Sports) has few or no articles, Jesse should say there's "
         "not much happening today and keep it brief — never fabricate news.\n\n"
+        + _NO_INVENTED_REACTION_RULE + "\n\n"
         "SPORTS TEAM RULE: If an article mentions a player's name but does NOT explicitly state "
         "which team they play for, Jesse must NOT name their team. Do not use training knowledge "
         "to infer team affiliations, positions, or stats. Say only what the article says."

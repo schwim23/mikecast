@@ -741,6 +741,7 @@ class ValidateClaimTool(BaseTool):
         "Ask the configured helper model (OPENAI_HELPER_MODEL — any provider) whether a "
         "specific factual claim is directly supported by the provided source articles. Returns "
         "{ok: bool, supported: 'yes'|'no'|'unclear', evidence: 'quoted snippet', reasoning: '...'}. "
+        "'n/a' means the sentence makes no factual claim (banter, hand-offs). "
         "Use for fact-checking writer output before it reaches the listener."
     )
 
@@ -750,12 +751,24 @@ class ValidateClaimTool(BaseTool):
             ...,
             description="The exhaustive list of source articles the claim must be backed by.",
         )
+        background: str = Field(
+            "",
+            description="Optional known-true context that also counts as support (e.g. current officeholders).",
+        )
+        model: str = Field("", description="Optional model override (default: OPENAI_HELPER_MODEL).")
+        allow_analysis: bool = Field(
+            False,
+            description="Offer an 'analysis' verdict for the writer's own interpretation of supported facts.",
+        )
 
     args_schema: type[BaseModel] = _Input
 
     def _run(self, *args, **kwargs) -> dict:  # type: ignore[override]
         claim = _arg(kwargs, "claim", "")
         articles = _arg(kwargs, "articles", []) or []
+        background = _arg(kwargs, "background", "") or ""
+        model = _arg(kwargs, "model", "") or OPENAI_HELPER_MODEL
+        allow_analysis = bool(_arg(kwargs, "allow_analysis", False))
         if not isinstance(claim, str) or not claim.strip():
             return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": "missing claim"}
         if not isinstance(articles, list):
@@ -765,7 +778,6 @@ class ValidateClaimTool(BaseTool):
 
         from crew.model_compat import api_key_for_model, supports_custom_temperature
 
-        model = OPENAI_HELPER_MODEL
         api_key = api_key_for_model(model)
         if not api_key:
             return {"ok": False, "supported": "unclear", "evidence": "", "reasoning": f"no API key configured for {model!r}"}
@@ -774,8 +786,10 @@ class ValidateClaimTool(BaseTool):
         lines: list[str] = []
         for i, art in enumerate(articles[:40], 1):
             title = (art.get("title") or "").replace("[Updated] ", "")
-            desc = (art.get("description") or "")[:300]
-            lines.append(f"[{i}] {title}\n     {desc}")
+            desc = (art.get("description") or "")[:500]  # same cap the writers see (mc_generate._build_articles_context)
+            source = art.get("source") or ""
+            # The source name lets "according to TechCrunch" count as supported.
+            lines.append(f"[{i}] {f'({source}) ' if source else ''}{title}\n     {desc}")
         article_block = "\n".join(lines)
 
         system = (
@@ -784,12 +798,37 @@ class ValidateClaimTool(BaseTool):
             "supported by at least one article. A claim is supported only if its specific "
             "subject, predicate, and any numeric or named details all appear in an article. "
             "Generic topical overlap is NOT support. "
-            "Return ONLY valid JSON, no markdown, no commentary: "
-            '{"supported": "yes" | "no" | "unclear", '
-            '"evidence": "<short snippet from the supporting article, or empty>", '
+            "If the sentence makes no factual claim about the world at all — a greeting, host "
+            "introduction, hand-off between hosts, sign-off, pure transition ('Let's shift to "
+            "markets'), or a line that only announces a topic coming up ('Energy is also a big "
+            "storyline', 'There's a wild one out of the chip world today') — answer \"n/a\" "
+            "instead. A sentence that attributes a reaction or view to someone (investors, "
+            "analysts, observers) IS a factual claim. "
+            + (
+                "If the sentence is the writer's own interpretation, synthesis, or forward-looking "
+                "framing — not presented as reported fact or as anyone else's reaction (e.g. 'This "
+                "highlights how energy has become a priority for Big Tech', 'Worth tracking as a "
+                "sign of…') — answer \"analysis\" if the facts it rests on are supported, \"no\" "
+                "if they aren't. "
+                if allow_analysis else ""
+            )
+            + "Return ONLY valid JSON, no markdown, no commentary: "
+            + '{"supported": "yes" | "no" | "unclear" | "n/a"'
+            + (' | "analysis"' if allow_analysis else "")
+            + ', "evidence": "<short snippet from the supporting article, or empty>", '
             '"reasoning": "<one sentence>"}'
         )
         user = f"CLAIM:\n{claim}\n\nSOURCE ARTICLES:\n{article_block}"
+        if background:
+            # Known-true context (e.g. mc_facts officeholders) — lets "President Trump"
+            # count as supported when the article only says "Trump", while a title the
+            # background contradicts ("former President Trump") stays unsupported.
+            user += (
+                "\n\nALSO KNOWN TRUE (counts as support, alongside the articles):\n"
+                f"{background}\n\nA person's title or description (e.g. 'former President', "
+                "'CEO of X') is a detail too: it must be supported by an article or the "
+                "known-true context above."
+            )
 
         usage: dict = {}  # populated as soon as the response arrives, kept even if parsing the JSON fails below
         try:

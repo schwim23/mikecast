@@ -260,7 +260,8 @@ TITLE_RULE = (
 )
 
 
-def prompt_block() -> str:
+def facts_lines() -> str:
+    """Bullet list of current/previous officeholders (no instructions) — also used as fact-checker context."""
     holders = get_officeholders()
     current, former = [], []
     for o in OFFICES:
@@ -274,10 +275,14 @@ def prompt_block() -> str:
                 f"If mentioned, say \"former {o.title} {prev.surname}\".")
         elif prev:
             former.append(f"- {prev.name} was the previous {o.role} (until {_long_date(prev.since)}).")
+    return "\n".join(current + former)
+
+
+def prompt_block() -> str:
     return (
         f"CURRENT FACTS (today is {TODAY_DISPLAY}). Your training data predates today and is out "
         "of date on who holds office. These facts override anything you remember:\n"
-        + "\n".join(current + former)
+        + facts_lines()
         + f"\n\n{TITLE_RULE}"
     )
 

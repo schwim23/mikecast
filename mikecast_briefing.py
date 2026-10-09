@@ -176,6 +176,7 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
     """CrewAI pipeline. Returns (html, single_script, conv_script, top_articles, picks,
     article_stats, critic_metrics) — the last two are for Datadog metrics."""
     from crew.critic_crew import run_critic_pass as crew_run_critic_pass
+    from crew.grounding_check import check_grounding
     from crew.picks_crew import run_picks
     from crew.planning_crew import run_planning
     from crew.research_crew import run_research
@@ -273,6 +274,13 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
                 "critic_metrics": critic_metrics,
             },
         })
+
+    with step_span("grounding_check", "crew"):
+        logger.info("Step 8c/10 [crew]: Grounding check (log-only)…")
+        critic_metrics["grounding"] = check_grounding(
+            html, conversational_script, top_articles, picks,
+            verified_sports_facts=verified_sports_facts, ny_team_updates=ny_team_updates,
+        )
 
     return html, single_voice_script, conversational_script, top_articles, picks, article_stats, critic_metrics
 

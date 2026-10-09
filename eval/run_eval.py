@@ -54,6 +54,9 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures" / "live"
+# Hand-built regression fixtures, committed to git (live/ is gitignored). Selected by
+# passing the directory name as --date, e.g. --date bare-names.
+SYNTHETIC_DIR = Path(__file__).parent / "fixtures" / "synthetic"
 OUT_DIR = Path(__file__).parent / "out"
 
 
@@ -63,6 +66,10 @@ OUT_DIR = Path(__file__).parent / "out"
 # ---------------------------------------------------------------------------
 
 def load_fixture(role: str, date: str) -> dict:
+    synthetic_path = SYNTHETIC_DIR / date / f"{role}.json"
+    if synthetic_path.exists():
+        with open(synthetic_path) as f:
+            return json.load(f)
     local_path = FIXTURES_DIR / date / f"{role}.json"
     if local_path.exists():
         with open(local_path) as f:
@@ -460,7 +467,8 @@ def _write_run(run_dir: Path, model: str, k_index: int, date: str, role: str, re
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--role", required=True, choices=sorted(REPLAY_FNS))
-    parser.add_argument("--date", required=True, help="Fixture date, YYYY-MM-DD")
+    parser.add_argument("--date", required=True,
+                        help="Fixture date, YYYY-MM-DD, or a synthetic fixture name (eval/fixtures/synthetic/<name>)")
     parser.add_argument("--baseline", required=True, help="Baseline model string, e.g. anthropic/claude-sonnet-4-6")
     parser.add_argument("--candidate", action="append", required=True, dest="candidates",
                          help="Candidate model string; repeatable")

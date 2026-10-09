@@ -45,6 +45,15 @@ _HALLUCINATION_GUARD = (
     "If a category has few articles, keep that segment short — never invent news to fill time."
 )
 
+# Backfill of 9/30–10/09 (eval/grounding_backfill.py): the writers' most common unsupported
+# sentence was generic investor-reaction filler tacked onto the end of an item.
+_NO_INVENTED_REACTION_RULE = (
+    "NO INVENTED REACTION: Do not attribute reactions or views to investors, analysts, markets, "
+    "or observers (e.g. 'investors are watching closely', 'prompted investors to reassess its "
+    "strategy', 'the move is seen as a signal of…') unless an article reports that reaction. "
+    "When an item's sourced facts run out, end the item rather than adding a wrap-up line."
+)
+
 # The Researcher's job is the OPPOSITE of the writers' guard above: its facts must come
 # from the ESPN tool responses, NOT from the articles. _HALLUCINATION_GUARD ("only discuss
 # stories in the provided articles… do NOT mention scores… not in the input articles")
@@ -271,7 +280,7 @@ def make_html_writer() -> Agent:
             "You are MikeCast, a sharp daily briefing writer for a New-York tech "
             "executive. Professional yet engaging — like a smart friend who reads "
             "everything so the executive doesn't have to.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_INVENTED_REACTION_RULE}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"
             f"{_TONE_RULE}\n\n"
             "Output the plain section text (no <html> wrapper) — the orchestrator "
             "wraps it in the styled template. Use section headers in ALL CAPS: "
@@ -297,7 +306,7 @@ def make_single_voice_writer() -> Agent:
         backstory=(
             "You write for MikeCast's solo host — smart, conversational, energetic, "
             "like a knowledgeable friend over coffee.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_INVENTED_REACTION_RULE}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"
             f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}"
         ),
         tools=[],
@@ -320,7 +329,7 @@ def make_conversational_writer() -> Agent:
             "You write for a 3-host news podcast. MIKE — warm, authoritative host. "
             "ELIZABETH — sharp tech/business correspondent. JESSE — quick-witted, "
             "NY-sports-obsessed.\n\n"
-            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"
+            f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_INVENTED_REACTION_RULE}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"
             f"{_TONE_RULE}\n\n{_TTS_FRIENDLY_RULE}\n\n"
             "JESSE in particular: enthusiasm yes, condescension at the listener no. "
             "If one of Mike's NY teams (Knicks, Devils, Yankees, Giants) is playing a big "
@@ -356,7 +365,7 @@ def make_social_copywriter() -> Agent:
             "You are a sharp social copywriter for MikeCast, a daily AI-and-news "
             "briefing. You write tight, specific, scroll-stopping copy — you name the "
             "real companies and stories, never vague hype.\n\n"
-            f"{_HALLUCINATION_GUARD}\n\n{prompt_block()}\n\n"
+            f"{_HALLUCINATION_GUARD}\n\n{_NO_INVENTED_REACTION_RULE}\n\n{prompt_block()}\n\n"
             "HARD CONSTRAINTS:\n"
             "  • X post: this is the daily news briefing, so the hook should read like "
             "today's headlines — tease the 1-2 biggest stories of the day, specific and "
@@ -414,7 +423,7 @@ def make_section_patcher() -> Agent:
         backstory=(
             "You write replacement HTML fragments when a section scores below 7. "
             "You must use only the article inputs given — no training knowledge.\n\n"
-            f"{_HALLUCINATION_GUARD}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}"
+            f"{_HALLUCINATION_GUARD}\n\n{_NO_INVENTED_REACTION_RULE}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}"
         ),
         tools=[],
         llm=claude_writer_llm(temperature=0.3),

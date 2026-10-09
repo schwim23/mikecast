@@ -7,7 +7,7 @@ that fixture's source articles, for the "writer" and "critic" roles (both produc
 html/podcast/conversational — same shape). "helper" isn't scored here — its output
 IS already a fact-check artifact, not prose to fact-check.
 
-Three checks per model:
+Four checks per model:
   - format_contract: HTML parses, all 7 required <h2> sections present, HTML isn't
     truncated, podcast script is 900-1000 words, conversational script has all
     three speaker tags. Deterministic, no API calls.
@@ -18,6 +18,9 @@ Three checks per model:
     _MAX_GROUNDING_CHECKS_PER_MODEL sentences to bound cost. A candidate with MORE
     unsupported claims than the baseline fails the hard gate (MODEL_EVAL_PLAN.md §4
     Phase 2 — "fail if candidate adds ANY net-new unsupported claim vs. baseline").
+  - stale_titles (HARD GATE): officeholder titles mc_facts.fix_stale_titles would
+    rewrite. Deterministic. Most useful on the synthetic bare-names fixture
+    (eval/fixtures/synthetic/bare-names), where no article supplies a title.
   - editorial: reuses crew/critic_crew.py's section scorer (1-10 per category)
     against each model's own HTML.
 
@@ -185,6 +188,17 @@ def score_grounding(html: str, top_articles: dict[str, list[dict]]) -> dict:
                     "reasoning": (result.get("reasoning") or "")[:200],
                 })
     return {"checked": checked, "unsupported": unsupported, "unsupported_claims": unsupported_claims}
+
+
+def score_stale_titles(html: str, single_script: str, conv_script: str) -> dict:
+    """Officeholder titles mc_facts.fix_stale_titles would rewrite ('former President Trump',
+    'Fed Chair Powell' after his term) — deterministic, no API calls beyond the facts lookup."""
+    from mc_facts import fix_stale_titles
+
+    found = []
+    for name, text in (("html", html), ("podcast", single_script), ("conversational", conv_script)):
+        found += [f"{name}: {c}" for c in fix_stale_titles(text or "")[1]]
+    return {"count": len(found), "found": found}
 
 
 def score_editorial(html: str, top_articles: dict[str, list[dict]]) -> dict:
@@ -433,6 +447,7 @@ def score_run(run_id: str) -> dict:
             "label": r["label"],
             "format_contract": score_format_contract(html, single, conv),
             "grounding": score_grounding(html, top_articles),
+            "stale_titles": score_stale_titles(html, single, conv),
             "editorial": score_editorial(html, top_articles),
         }
 
@@ -446,6 +461,7 @@ def score_run(run_id: str) -> dict:
         s["hard_gate_passed"] = (
             baseline_unsupported is not None
             and s["grounding"]["unsupported"] <= baseline_unsupported
+            and s["stale_titles"]["count"] <= scores["models"][baseline_model]["stale_titles"]["count"]
         )
 
     return scores
@@ -476,13 +492,16 @@ def main() -> None:
         print(f"\nFull scores: {out_path}")
         return
 
-    print(f"\n{'model':<32} {'gate':<6} {'fmt':<5} {'grounded':<12} {'editorial':<10}")
+    print(f"\n{'model':<32} {'gate':<6} {'fmt':<5} {'grounded':<12} {'stale':<6} {'editorial':<10}")
     for model, s in scores["models"].items():
         gate = "PASS" if s["hard_gate_passed"] else "FAIL"
         fmt = "OK" if s["format_contract"]["passed"] else "FAIL"
         grounded = f'{s["grounding"]["unsupported"]}/{s["grounding"]["checked"]} unsupported'
         editorial = s["editorial"]["mean_score"]
-        print(f"{model:<32} {gate:<6} {fmt:<5} {grounded:<12} {editorial}")
+        stale = s["stale_titles"]["count"]
+        print(f"{model:<32} {gate:<6} {fmt:<5} {grounded:<12} {stale:<6} {editorial}")
+        for f in s["stale_titles"]["found"]:
+            print(f"    stale title -> {f}")
     print(f"\nFull scores: {out_path}")
 
 
