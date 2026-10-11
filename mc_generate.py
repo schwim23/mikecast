@@ -185,11 +185,17 @@ def _filter_trending_to_articles(
 
 
 # Backfill of 9/30–10/09 (eval/grounding_backfill.py): the writers' most common unsupported
-# sentence was generic investor-reaction filler tacked onto the end of an item.
+# sentence was generic investor-reaction filler tacked onto the end of an item. Once that
+# rule shipped, the first prod runs (10/10–10/11) swapped it for invented outlet framing
+# ("TechCrunch frames this as…", "analysts describe…") — 6 of 15 flags — hence the second half.
 _NO_INVENTED_REACTION_RULE = (
     "NO INVENTED REACTION: Do not attribute reactions or views to investors, analysts, markets, "
     "or observers (e.g. 'investors are watching closely', 'prompted investors to reassess its "
     "strategy', 'the move is seen as a signal of…') unless an article reports that reaction. "
+    "NO INVENTED ATTRIBUTION: Do not say how an outlet, report, or analyst frames, describes, "
+    "characterizes, or sees a story (e.g. 'TechCrunch frames this as a direct response to…', "
+    "'Scripps News frames the controversy as…', 'analysts describe the deal as…') unless the "
+    "article itself says so. Name a source only for the facts it states. "
     "When an item's sourced facts run out, end the item rather than adding a wrap-up line."
 )
 

@@ -143,6 +143,16 @@ class TestValidateClaimPrompt:
             validate_claim_tool._run(claim="c", articles=[{"title": "t"}], model="openai/x")
         assert comp.call_args.kwargs["model"] == "openai/x"
 
+    def test_multi_article_support_banter_and_framing(self):
+        # 10/10–10/11 prod flags: summaries combining stories, host color, and invented
+        # outlet framing. The first two were checker strictness; the third must stay "no".
+        _, msgs = self._messages()
+        system = msgs[0]["content"]
+        assert "at least one article" not in system
+        assert "EACH part is supported by some article" in system
+        assert "Big Sunday coming up for Big Blue" in system
+        assert "TechCrunch frames this as" in system
+
     def test_background_included(self):
         _, msgs = self._messages(background="- Donald Trump is the current President")
         assert "ALSO KNOWN TRUE" in msgs[1]["content"] and "Donald Trump" in msgs[1]["content"]
@@ -165,3 +175,13 @@ class TestBareNamesFixture:
         r = score_stale_titles("<p>former President Trump met Fed Chair Powell.</p>",
                                "President Biden spoke.", "former Fed Chair Powell spoke.")
         assert r["count"] == 3
+
+
+class TestWriterRule:
+
+    def test_attribution_rule_in_both_paths(self):
+        # The rule is duplicated in the legacy and crew prompt modules; keep them in step.
+        import mc_generate
+        from crew import agents
+        assert mc_generate._NO_INVENTED_REACTION_RULE == agents._NO_INVENTED_REACTION_RULE
+        assert "NO INVENTED ATTRIBUTION" in agents._NO_INVENTED_REACTION_RULE
