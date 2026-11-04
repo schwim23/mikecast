@@ -358,7 +358,7 @@ def _rss_document(items: list[str]) -> str:
   <channel>
     <title>MikeCast — Daily Briefing</title>
     <link>{SITE_BASE_URL}</link>
-    <description>Your daily AI-powered news briefing. Personalized news across AI &amp; Tech, Business &amp; Markets, Companies, and NY Sports.</description>
+    <description>Your daily AI-powered news briefing. Personalized news across AI &amp; Tech, Business &amp; Markets, Companies, Payments &amp; Commerce, and NY Sports.</description>
     <language>en-us</language>
     <atom:link href="{feed_url}" rel="self" type="application/rss+xml"/>
     <itunes:author>MikeCast</itunes:author>

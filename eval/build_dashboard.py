@@ -341,7 +341,7 @@ def render(runs: list[dict]) -> str:
         definition.</dd>
       <dt>Format</dt>
       <dd>OK/FAIL on the format contract — HTML parses, all 7 required sections present, not
-        truncated, podcast script in the 900-1000 word target, all 3 speaker tags present in
+        truncated, podcast script in the 1150-1250 word target, all 3 speaker tags present in
         the conversational script.</dd>
       <dt>Grounding</dt>
       <dd><code>X/Y unsupported</code> — of <code>Y</code> sentences checked against source

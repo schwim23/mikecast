@@ -27,11 +27,11 @@ from mc_config import TODAY_DISPLAY, XAI_API_KEY
 
 logger = logging.getLogger(__name__)
 
-_CATEGORIES = ["AI & Tech", "Business & Markets", "Companies", "NY Sports"]
+_CATEGORIES = ["AI & Tech", "Business & Markets", "Companies", "Payments & Commerce", "NY Sports"]
 
 _SYSTEM_PROMPT = (
     "You are a news research assistant with live web search and direct access to X (Twitter) posts. "
-    "Identify the most important breaking stories happening RIGHT NOW across four categories. "
+    "Identify the most important breaking stories happening RIGHT NOW across five categories. "
     "Return ONLY valid JSON — no preamble, no markdown, no explanation outside the JSON object."
 )
 
@@ -39,12 +39,14 @@ _USER_PROMPT = (
     f"Today is {TODAY_DISPLAY}. Search the web right now.\n\n"
     "For each category below, identify the top 3-5 most important BREAKING stories "
     "happening today — things that have genuinely moved or matter in the last 24 hours.\n\n"
-    "Categories: AI & Tech, Business & Markets, Companies, NY Sports\n\n"
+    "Categories: AI & Tech, Business & Markets, Companies, Payments & Commerce "
+    "(Stripe, Adyen, payment networks, agentic commerce, payment methods), NY Sports\n\n"
     'Return ONLY this JSON structure:\n'
     '{\n'
     '  "AI & Tech": ["query1", "query2", ...],\n'
     '  "Business & Markets": ["query1", "query2", ...],\n'
     '  "Companies": ["query1", "query2", ...],\n'
+    '  "Payments & Commerce": ["query1", "query2", ...],\n'
     '  "NY Sports": ["query1", "query2", ...],\n'
     '  "trending_stories": [\n'
     '    {"topic": "short phrase describing the story", "x_url": "https://x.com/...", "x_query": "keyword1 keyword2 keyword3"}\n'

@@ -154,7 +154,7 @@ def make_planner() -> Agent:
         role="Daily Search Planner",
         goal=(
             "Identify today's most important breaking stories across AI & Tech, "
-            "Business & Markets, Companies, and NY Sports, and generate targeted "
+            "Business & Markets, Companies, Payments & Commerce, and NY Sports, and generate targeted "
             "search queries the Research Crews can use to find primary coverage."
         ),
         backstory=(
@@ -290,7 +290,8 @@ def make_html_writer() -> Agent:
             f"{_TONE_RULE}\n\n"
             "Output the plain section text (no <html> wrapper) — the orchestrator "
             "wraps it in the styled template. Use section headers in ALL CAPS: "
-            "EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS, "
+            "EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, "
+            "PAYMENTS & COMMERCE, NY SPORTS, "
             "KEY TRENDS & INSIGHTS, WHAT TO WATCH."
         ),
         tools=[],
@@ -304,9 +305,9 @@ def make_single_voice_writer() -> Agent:
     return Agent(
         role="Single-Voice Podcast Writer",
         goal=(
-            "Write a 10–14 minute single-host podcast script (target 1800–2000 words) "
+            "Write an ~8 minute single-host podcast script (target 1150–1250 words) "
             "in natural spoken language. Intro, AI & Tech, Business & Markets, "
-            "Companies, NY Sports, Mike's Picks (if any), outro. No stage directions, "
+            "Companies, Payments & Commerce, NY Sports, Mike's Picks (if any), outro. No stage directions, "
             "no URLs."
         ),
         backstory=(
@@ -326,13 +327,15 @@ def make_conversational_writer() -> Agent:
     return Agent(
         role="3-Voice Conversational Podcast Writer",
         goal=(
-            "Write a 10–14 minute 3-host script tagged with [MIKE], [ELIZABETH], [JESSE]. "
-            "MIKE intro + sign-off only. ELIZABETH covers AI & Tech, Business & Markets, "
+            "Write an ~8 minute 3-host script (target 1150–1250 words) tagged with "
+            "[MIKE], [ELIZABETH], [JESSE]. MIKE does the intro, the Payments & Commerce "
+            "segment, and the sign-off. ELIZABETH covers AI & Tech, Business & Markets, "
             "Companies. JESSE covers NY Sports only. Hand-offs are explicit. "
             "Every speaker tag on its own line."
         ),
         backstory=(
-            "You write for a 3-host news podcast. MIKE — warm, authoritative host. "
+            "You write for a 3-host news podcast. MIKE — warm, authoritative host who "
+            "also covers payments (Stripe, Adyen, agentic commerce, payment methods). "
             "ELIZABETH — sharp tech/business correspondent. JESSE — quick-witted, "
             "NY-sports-obsessed.\n\n"
             f"{_STORYTELLING_RULE}\n\n{_HALLUCINATION_GUARD}\n\n{_NO_INVENTED_REACTION_RULE}\n\n{_NO_STALE_CONTEXT_RULE}\n\n{_TEAM_RULE}\n\n{prompt_block()}\n\n"

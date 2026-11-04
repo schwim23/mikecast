@@ -27,7 +27,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from mc_config import (
-    CATEGORIES, CATEGORY_SCORER_PROMPTS, CNBC_RSS_FEEDS, ESPN_RSS_FEEDS,
+    CATEGORIES, CATEGORY_SCORER_PROMPTS, CNBC_RSS_FEEDS, ESPN_RSS_FEEDS, PAYMENTS_RSS_FEEDS,
     HISTORY_FILE, NYT_API_KEY, NYT_SEARCH_QUERIES, NYT_SECTION_TO_CATEGORY,
     NYT_SECTIONS, OPENAI_API_KEY, OPENAI_HELPER_MODEL, OPENAI_SCORER_MODEL, PICKS_FILE, REDDIT_FEEDS, REDDIT_USER_AGENT,
     SCORE_BATCH_SIZE, SOURCE_TIERS, TECH_RSS_FEEDS, TODAY, WIRE_RSS_FEEDS,
@@ -386,11 +386,12 @@ def collect_all_news(dynamic_queries: dict[str, list[str]] | None = None) -> dic
         "tech": lambda: ("cat_dict", _fetch_rss_source_list(TECH_RSS_FEEDS, "Tech RSS")),
         "wire": lambda: ("cat_dict", _fetch_rss_source_list(WIRE_RSS_FEEDS, "Wire RSS")),
         "cnbc": lambda: ("cat_dict", _fetch_rss_source_list(CNBC_RSS_FEEDS, "CNBC RSS")),
+        "payments": lambda: ("cat_dict", _fetch_rss_source_list(PAYMENTS_RSS_FEEDS, "Payments RSS")),
         "reddit": lambda: ("cat_dict", fetch_reddit_rss()),
         "espn":  lambda: ("espn",   fetch_espn_rss_feeds()),
     }
 
-    with ThreadPoolExecutor(max_workers=6) as ex:
+    with ThreadPoolExecutor(max_workers=7) as ex:
         futures = {ex.submit(fn): name for name, fn in parallel_sources.items()}
         for fut in as_completed(futures):
             try:

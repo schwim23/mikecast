@@ -21,6 +21,7 @@ from __future__ import annotations
 import logging
 
 from mc_facts import filter_resurfaced_leadership_news
+from mc_config import TOP_ARTICLES_TOTAL
 
 from mc_collect import (
     cluster_articles,
@@ -40,7 +41,7 @@ def run_research(
     dynamic_queries: dict[str, list[str]] | None = None,
     trending_context: str = "",
     *,
-    total_target: int = 25,
+    total_target: int = TOP_ARTICLES_TOTAL,
     enrich_top_n: int = 15,
 ) -> tuple[dict[str, list[dict]], dict[str, int]]:
     """

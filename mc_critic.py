@@ -15,6 +15,7 @@ or if any unhandled exception occurs.
 
 import json
 import logging
+import html as _html
 import re
 
 from mc_config import OPENAI_API_KEY
@@ -40,7 +41,7 @@ def _extract_html_summary(html: str, categorised: dict[str, list[dict]]) -> str:
     # Extract h2 headers
     headers = re.findall(r"<h2[^>]*>(.*?)</h2>", html, re.DOTALL | re.IGNORECASE)
     for header in headers:
-        clean_header = re.sub(r"<[^>]+>", "", header).strip()
+        clean_header = _html.unescape(re.sub(r"<[^>]+>", "", header)).strip()
         # Skip non-category headers (e.g. "Mike's Picks", "Today's Briefing")
         for cat, articles in categorised.items():
             if cat.lower() in clean_header.lower():
@@ -266,7 +267,9 @@ def patch_weak_sections(
 
             # Find the h2 header for this category in the HTML
             # Match pattern: <h2 ...>...category...</h2> followed by section content
-            header_pattern = rf'(<h2[^>]*>[^<]*{re.escape(cat)}[^<]*</h2>)(.*?)(?=<h2|<div\s[^>]*text-align\s*:\s*center)'
+            # Match the escaped form too ("AI &amp; TECH") — see crew/critic_crew.py.
+            cat_re = f"(?:{re.escape(cat)}|{re.escape(_html.escape(cat, quote=False))})"
+            header_pattern = rf'(<h2[^>]*>[^<]*{cat_re}[^<]*</h2>)(.*?)(?=<h2|<div\s[^>]*text-align\s*:\s*center)'
             match = re.search(header_pattern, improved_html, re.DOTALL | re.IGNORECASE)
 
             if match:

@@ -1,0 +1,120 @@
+{
+  "_about": "Synthetic writer fixture (eval/fixtures/synthetic/payments). Exercises the Payments & Commerce section added 2026-11-04: Stripe + Adyen company news, agentic commerce, a payment-methods stat, and a Visa story deliberately duplicated in Business & Markets (it should be written ONCE, under PAYMENTS & COMMERCE). All articles are fictional (example.com).",
+  "input": {
+    "top_articles": {
+      "AI & Tech": [
+        {
+          "title": "Lab releases open-weight coding model that tops internal benchmarks",
+          "url": "https://example.com/open-model",
+          "description": "An AI lab released an open-weight coding model on Tuesday. The company said it beat its previous model by 12 points on its internal coding benchmark and is free for commercial use.",
+          "source": "Reuters",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Chipmaker unveils inference accelerator with 2x memory bandwidth",
+          "url": "https://example.com/chip-accel",
+          "description": "A chipmaker announced a data-center inference accelerator with twice the memory bandwidth of its prior generation, shipping to cloud customers in the first quarter.",
+          "source": "Reuters",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "Business & Markets": [
+        {
+          "title": "Stocks edge higher as Treasury yields slip ahead of jobs report",
+          "url": "https://example.com/stocks-yields",
+          "description": "The S&P 500 rose 0.4% on Tuesday as the 10-year Treasury yield fell to 4.1%. Investors are awaiting Friday's jobs report.",
+          "source": "Reuters",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Visa beats quarterly estimates on cross-border volume",
+          "url": "https://example.com/visa-earnings-biz",
+          "description": "Visa reported fiscal fourth-quarter revenue of $10.9 billion, above analyst estimates, as cross-border volume grew 13%. The company said tokenized transactions rose 40% year over year.",
+          "source": "CNBC",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "Companies": [
+        {
+          "title": "Retailer cuts 1,200 corporate jobs in restructuring",
+          "url": "https://example.com/retailer-cuts",
+          "description": "A large US retailer said it will cut 1,200 corporate roles as part of a restructuring aimed at saving $400 million a year.",
+          "source": "Reuters",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Streaming service raises ad-tier price by $2",
+          "url": "https://example.com/streaming-price",
+          "description": "A streaming service said its ad-supported tier will rise to $9.99 a month starting December 1.",
+          "source": "Reuters",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "Payments & Commerce": [
+        {
+          "title": "Stripe launches agent payments toolkit letting AI assistants check out on behalf of users",
+          "url": "https://example.com/stripe-agents",
+          "description": "Stripe on Tuesday released a toolkit that lets developers give AI agents single-use payment credentials scoped to a merchant and a spending limit. Stripe said 300 businesses tested it in beta.",
+          "source": "Payments Dive",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Adyen third-quarter net revenue rises 21% to EUR 620 million",
+          "url": "https://example.com/adyen-q3",
+          "description": "Adyen reported third-quarter net revenue of EUR 620 million, up 21% from a year earlier, on processed volume of EUR 370 billion. The company reiterated its medium-term growth target.",
+          "source": "Finextra",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Visa beats quarterly estimates on cross-border volume",
+          "url": "https://example.com/visa-earnings",
+          "description": "Visa reported fiscal fourth-quarter revenue of $10.9 billion, above analyst estimates, as cross-border volume grew 13%. The company said tokenized transactions rose 40% year over year.",
+          "source": "CNBC",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        },
+        {
+          "title": "Bank group says account-to-account payments reached 8% of US e-commerce checkouts",
+          "url": "https://example.com/a2a-share",
+          "description": "A payments industry group said account-to-account (pay-by-bank) payments made up 8% of US e-commerce checkouts in the third quarter, up from 5% a year earlier.",
+          "source": "PYMNTS",
+          "published": "2026-11-04T08:00:00Z",
+          "score": 8,
+          "score_reason": "synthetic",
+          "why_it_matters": ""
+        }
+      ],
+      "NY Sports": []
+    },
+    "picks": [],
+    "trending": [],
+    "verified_sports_facts": {},
+    "ny_team_updates": []
+  }
+}

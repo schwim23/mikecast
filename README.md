@@ -1,6 +1,6 @@
 # MikeCast: Daily AI-Powered News Briefing
 
-MikeCast is an automated daily news briefing system. It runs an 11-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, and NY Sports — as an HTML email, a subscriber newsletter, a podcast, a web dashboard, a YouTube episode, and automatic daily posts to X and Instagram.
+MikeCast is an automated daily news briefing system. It runs an 11-step pipeline each morning to collect, score, and deliver a personalized news package covering AI/Tech, Business & Markets, key Companies, Payments & Commerce (Stripe, Adyen, agentic commerce, payment methods), and NY Sports — as an HTML email, a subscriber newsletter, a podcast, a web dashboard, a YouTube episode, and automatic daily posts to X and Instagram.
 
 ## Architecture
 

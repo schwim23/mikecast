@@ -151,6 +151,16 @@ CATEGORIES: dict[str, list[str]] = {
         "Microsoft news today", "Google Alphabet news",
         "Uber news today", "Anthropic news today",
     ],
+    # Payments industry: Stripe/Adyen company news + agentic commerce + payment
+    # methods. Payments-company stories belong HERE, not in Companies/Business
+    # (both of those scorer prompts say so) so a story isn't written twice.
+    "Payments & Commerce": [
+        "Adyen", "Stripe payments", "agentic commerce",
+        "AI agent payments Visa Mastercard", "PayPal news",
+        "Block Square Cash App", "stablecoin payments",
+        "real-time payments FedNow", "buy now pay later Klarna Affirm",
+        "Checkout.com payments",
+    ],
     "NY Sports": [
         "New York Yankees", "New York Knicks",
         "New York Giants NFL", "New Jersey Devils NHL",
@@ -171,6 +181,7 @@ NYT_SEARCH_QUERIES: dict[str, list[str]] = {
     "AI & Tech":          ["artificial intelligence", "OpenAI Anthropic"],
     "Business & Markets": ["stock market economy", "venture capital AI"],
     "Companies":          ["Apple Meta Amazon Nvidia Tesla Anthropic", "Uber Netflix Microsoft Google"],
+    "Payments & Commerce": ["Stripe Adyen PayPal payments", "Visa Mastercard digital payments"],
     "NY Sports":          ["Yankees Knicks Giants Devils", "NBA MLB NFL sports"],
 }
 
@@ -184,6 +195,7 @@ SOURCE_TIERS: dict[str, int] = {
     "The Verge": 1, "Ars Technica": 1, "MIT Technology Review": 1, "Wired": 1,
     # Tier 2
     "TechCrunch": 2, "VentureBeat": 2, "CNBC": 2, "ESPN": 2, "Hacker News": 2,
+    "Payments Dive": 2, "Finextra": 2, "PYMNTS": 2, "Stripe": 2,
     # Tier 3
     "Reddit": 3, "Google News": 3,
 }
@@ -214,6 +226,17 @@ CNBC_RSS_FEEDS: list[tuple[str, str, str, int]] = [
     ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=100003114", "Business & Markets", 6),
     ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=19854910",  "AI & Tech",          6),
     ("CNBC", "https://search.cnbc.com/rs/search/combinedcms/view.xml?partnerId=wrss01&id=10000664",  "Business & Markets", 6),
+]
+
+# Payments trade press + Stripe's own blog. URLs verified 2026-11-04 (The Paypers,
+# Adyen press RSS and FinTech Futures had no working feed — Adyen is covered by the
+# Google News "Adyen" query). Stripe's blog posts ~weekly; filter_stale_articles
+# drops anything older than 3 days.
+PAYMENTS_RSS_FEEDS: list[tuple[str, str, str, int]] = [
+    ("Payments Dive", "https://www.paymentsdive.com/feeds/news/",     "Payments & Commerce", 8),
+    ("Finextra",      "https://www.finextra.com/rss/headlines.aspx",  "Payments & Commerce", 8),
+    ("PYMNTS",        "https://www.pymnts.com/feed/",                 "Payments & Commerce", 6),
+    ("Stripe",        "https://stripe.com/blog/feed.rss",             "Payments & Commerce", 3),
 ]
 
 # ESPN news feeds. We switched from www.espn.com/espn/rss/* (RSS XML, blocked
@@ -251,6 +274,10 @@ REDDIT_USER_AGENT = (
     "MikeCast/2.0 (personal news briefing bot; contact: prometheusagent23@gmail.com)"
 )
 
+# Articles kept after scoring, across all categories (each category gets >=3).
+# 25 -> 30 on 2026-11-04 when Payments & Commerce became the 5th category.
+TOP_ARTICLES_TOTAL = 30
+
 # Max articles per scoring batch sent to a single GPT-4o call
 SCORE_BATCH_SIZE = 40
 
@@ -271,14 +298,32 @@ CATEGORY_SCORER_PROMPTS: dict[str, str] = {
         "Prioritize: Fed/monetary policy, market-moving macro data, earnings surprises from major tech companies, "
         "M&A activity, IPOs, large VC rounds, economic indicators. "
         "Bonus: direct investment implications +10, unusual market moves +10. "
-        "Penalty: generic 'markets up/down' with no analysis -20, non-US markets with no US impact -10."
+        "Penalty: generic 'markets up/down' with no analysis -20, non-US markets with no US impact -10. "
+        "Stories whose subject is a payments company or payments trend (Stripe, Adyen, PayPal, Visa, "
+        "Mastercard, BNPL, agentic commerce) belong in the Payments & Commerce section: score them 20 or lower here."
     ),
     "Companies": (
         "You score company-specific news for Mike, who closely follows Apple, Meta, Amazon, Nvidia, Tesla, "
         "Microsoft, Google, Netflix, Uber, Anthropic. Prioritize: product announcements, earnings, leadership changes, "
         "strategic pivots, regulatory actions, major partnerships. "
         "Bonus: stories about those specific companies +15. "
-        "Penalty: minor product updates with no strategic significance -10, obscure companies -15."
+        "Penalty: minor product updates with no strategic significance -10, obscure companies -15. "
+        "Payments companies (Stripe, Adyen, PayPal, Block, Visa, Mastercard, Klarna, Affirm, "
+        "Checkout.com) belong in the separate Payments & Commerce section: score them 20 or lower here."
+    ),
+    "Payments & Commerce": (
+        "You score payments-industry news for Mike, who closely follows the payments industry, "
+        "especially Adyen and Stripe. Prioritize: Stripe and Adyen product launches, earnings, processed "
+        "volume (TPV) figures, funding/valuation, leadership changes, and partnerships with real "
+        "numbers; agentic commerce (AI agents that shop and pay — agent payment protocols, "
+        "network agent programs from Visa/Mastercard, checkout inside AI assistants); new "
+        "payment methods and rail adoption (wallets, account-to-account / real-time payments, "
+        "BNPL, stablecoin settlement); payments regulation (CFPB, PSD3, interchange); major M&A "
+        "among PayPal, Block, Fiserv, FIS, Global Payments, Checkout.com, Klarna, Affirm. "
+        "Bonus: Stripe or Adyen is the subject +20; agentic commerce +10. "
+        "Penalty: press-release fluff or vendor 'partnership' announcements with no numbers -15, "
+        "crypto price chatter -20, small-fintech funding rounds under $50M -10, "
+        "general banking/lending news with no payments angle -15."
     ),
     "NY Sports": (
         "You score sports news for Mike, a devoted New York sports fan. "

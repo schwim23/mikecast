@@ -75,7 +75,7 @@ def _kickoff_single_task(agent, description: str, expected_output: str) -> str:
 
 _SECTION_HEADERS = [
     "EXECUTIVE SUMMARY", "AI & TECH", "BUSINESS & MARKETS",
-    "COMPANIES", "NY SPORTS", "KEY TRENDS & INSIGHTS", "WHAT TO WATCH",
+    "COMPANIES", "PAYMENTS & COMMERCE", "NY SPORTS", "KEY TRENDS & INSIGHTS", "WHAT TO WATCH",
 ]
 
 
@@ -267,6 +267,25 @@ _MIN_TURN_RULE = (
 )
 
 
+# Payments & Commerce section rules (added 2026-11-04). Shared by the three
+# writers so the HTML and both scripts frame the section the same way.
+_PAYMENTS_WRITTEN_RULE = (
+    "   - PAYMENTS & COMMERCE: cover 3-4 stories. Lead with Stripe or Adyen news when an "
+    "article covers them; then agentic commerce (AI agents that shop and pay), payment "
+    "methods and rails (wallets, real-time / account-to-account, BNPL, stablecoins), "
+    "networks and other payments companies. A payments-company story goes in THIS section "
+    "only — if the same story (same headline or URL) is listed under BUSINESS & MARKETS or "
+    "COMPANIES too, write it ONLY here and leave it out of those sections. Explain jargon (TPV, "
+    "interchange, A2A, tokenization) in a few words the first time it appears.\n"
+)
+_PAYMENTS_SPOKEN_RULE = (
+    "top 2-3 payments stories; lead with Stripe or Adyen if an article covers them, then "
+    "agentic commerce, payment methods and networks. Explain jargon (TPV, interchange, "
+    "agentic commerce) in plain spoken English. If a payments story is also listed under "
+    "Business & Markets or Companies, tell it ONLY here — skip it in those earlier segments."
+)
+
+
 def _html_task(
     categorised: dict[str, list[dict]],
     picks: list[dict],
@@ -280,16 +299,18 @@ def _html_task(
     total = sum(len(v) for v in categorised.values())
 
     desc = (
-        f"Today is {TODAY_DISPLAY}. You have {total} news articles across 4 categories.\n\n"
+        f"Today is {TODAY_DISPLAY}. You have {total} news articles across {len(categorised)} categories.\n\n"
         f"{sports_facts}\n\n"
         f"Here are today's articles:\n{articles_context}{picks_ctx}\n\n"
-        "Write a 1200-1800 word briefing with these EXACT plain-text sections "
+        "Write a 1500-2200 word briefing with these EXACT plain-text sections "
         "(no HTML, no markdown headers — just the ALL CAPS section name on its own line):\n\n"
         "1. EXECUTIVE SUMMARY — 2-3 sentences on the day's themes.\n"
-        "2. TOP STORIES — organized by AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS.\n"
+        "2. TOP STORIES — organized by AI & TECH, BUSINESS & MARKETS, COMPANIES, "
+        "PAYMENTS & COMMERCE, NY SPORTS.\n"
         "   - At least 80 words per story (full substance — what happened, who, numbers, why it matters).\n"
         "   - Cover 3-4 stories per category that has content.\n"
         "   - End EVERY story paragraph with a clickable link: [Source Name](URL)\n"
+        f"{_PAYMENTS_WRITTEN_RULE}"
         "   - NY SPORTS: cover the Knicks, Devils, Yankees, and NY Giants ONLY, leading "
         "     with each team's news from the LAST 24 HOURS (a game result, trade, signing, "
         "     coaching/roster move, or injury). Any team marked [MANDATORY-INCLUDE] in the "
@@ -333,14 +354,15 @@ def _single_voice_task(
         f"{trending_block}\n"
         f"{sports_facts}\n\n"
         f"Here are today's articles:\n{articles_context}{picks_ctx}\n\n"
-        "TARGET LENGTH: 6–7 minutes of spoken audio at a natural ~150 wpm pace. "
-        "That means a TOTAL of 900–1000 words — not a word longer. Brevity matters.\n\n"
-        "Segments with approximate word targets (sum ≈ 950):\n"
+        "TARGET LENGTH: about 8 minutes of spoken audio at a natural ~150 wpm pace. "
+        "That means a TOTAL of 1150–1250 words — not a word longer. Brevity matters.\n\n"
+        "Segments with approximate word targets (sum ≈ 1200):\n"
         "  1. INTRO (~60w) — warm welcome, tease top 2-3 stories.\n"
         "  2. AI & TECH (~300w) — top 3 stories. Substance over completeness.\n"
         "  3. BUSINESS & MARKETS (~180w) — top 2 stories with the why-it-matters.\n"
         "  4. COMPANIES (~220w) — top 2-3 stories with personality.\n"
-        "  5. NY SPORTS (~100w) — Knicks / Devils / Yankees / NY Giants ONLY, leading with "
+        f"  5. PAYMENTS & COMMERCE (~220w) — {_PAYMENTS_SPOKEN_RULE}\n"
+        "  6. NY SPORTS (~100w) — Knicks / Devils / Yankees / NY Giants ONLY, leading with "
         "     each team's news from the LAST 24 HOURS. "
         "     MANDATORY: every team marked [MANDATORY-INCLUDE] in the RESULTS & UPCOMING "
         "     GAMES block is in season and MUST get at least one sentence with the score of "
@@ -353,15 +375,15 @@ def _single_voice_task(
         "     result, Doncic-to-Lakers-tier trade, career-altering injury to an all-time-"
         "     great). Routine non-NY recaps and 'fun bar conversation' items DO NOT belong "
         "     here.\n"
-        "  6. MIKE'S PICKS (~100w) — only if picks exist; \"Big Mike's hand-picked reads\".\n"
-        "  7. OUTRO (~40w) — wrap-up, sign-off.\n\n"
+        "  7. MIKE'S PICKS (~100w) — only if picks exist; \"Big Mike's hand-picked reads\".\n"
+        "  8. OUTRO (~40w) — wrap-up, sign-off.\n\n"
         "Cut anything that isn't moving the listener forward. Prefer one specific "
         "fact over two vague ones. Natural spoken language — contractions, transitions, "
         "rhetorical questions. No stage directions. No URLs.\n\n"
         f"{_ANTI_SKIP_RULE}\n\n"
         f"{_TONE_TTS_REMINDER}"
     )
-    expected = "Spoken-form podcast script, 900–1000 words total."
+    expected = "Spoken-form podcast script, 1150–1250 words total."
     return desc, expected
 
 
@@ -384,15 +406,17 @@ def _conversational_task(
         f"Here are today's articles:\n{articles_context}{picks_ctx}\n\n"
         "Tag every line with [MIKE], [ELIZABETH], or [JESSE] on its OWN LINE, e.g.:\n"
         "[MIKE]\nHey everyone, welcome to MikeCast...\n\n"
-        "TARGET LENGTH: 6–7 minutes of spoken audio at ~150 wpm. "
-        "TOTAL 900–1000 words across all hosts — not a word longer. Brevity matters.\n\n"
-        "Structure with approximate word targets (sum ≈ 950):\n"
+        "TARGET LENGTH: about 8 minutes of spoken audio at ~150 wpm. "
+        "TOTAL 1150–1250 words across all hosts — not a word longer. Brevity matters.\n\n"
+        "Structure with approximate word targets (sum ≈ 1200):\n"
         "1. [MIKE] INTRO (~60w) — welcome, tease top 2-3 stories.\n"
         "2. [ELIZABETH] AI & TECH (~300w) — top 3 stories with substance.\n"
         "3. [ELIZABETH] BUSINESS & MARKETS (~180w) — top 2 stories in depth.\n"
         "4. [ELIZABETH] COMPANIES (~210w) — top 2-3 with personality. "
+        "End with: \"Mike, what's happening in payments?\"\n"
+        f"5. [MIKE] PAYMENTS & COMMERCE (~220w) — {_PAYMENTS_SPOKEN_RULE} "
         "End with: \"Alright Jesse, take it away with sports...\"\n"
-        "5. [JESSE] NY SPORTS (~100w) — Knicks / Devils / Yankees / NY Giants ONLY, leading "
+        "6. [JESSE] NY SPORTS (~100w) — Knicks / Devils / Yankees / NY Giants ONLY, leading "
         "with each team's news from the LAST 24 HOURS. "
         "MANDATORY: every team marked [MANDATORY-INCLUDE] in the RESULTS & UPCOMING GAMES "
         "block is in season and MUST get at least one sentence with the score of its last "
@@ -405,14 +429,14 @@ def _conversational_task(
         "MVP / Cy Young / Heisman / Coach of the Year, Doncic-to-Lakers-tier trade, "
         "career-altering injury to an all-time-great). Routine non-NY recaps and 'fun bar "
         "conversation' items DO NOT belong here. End with: \"Back to you, Mike.\"\n"
-        "6. [MIKE] SIGN-OFF (~40w).\n\n"
+        "7. [MIKE] SIGN-OFF (~40w).\n\n"
         "Cut anything that isn't moving the listener forward. Prefer one specific "
         "fact over two vague ones. No URLs. No stage directions. Only spoken words.\n\n"
         f"{_MIN_TURN_RULE}\n\n"
         f"{_ANTI_SKIP_RULE}\n\n"
         f"{_TONE_TTS_REMINDER}"
     )
-    expected = "Tagged 3-host script with [MIKE]/[ELIZABETH]/[JESSE] on own lines, 900–1000 words total."
+    expected = "Tagged 3-host script with [MIKE]/[ELIZABETH]/[JESSE] on own lines, 1150–1250 words total."
     return desc, expected
 
 

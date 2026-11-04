@@ -23,7 +23,7 @@ import sys
 import time
 from concurrent.futures import ThreadPoolExecutor
 
-from mc_config import DATA_DIR, ELEVENLABS_API_KEY, TODAY, TODAY_DISPLAY
+from mc_config import DATA_DIR, ELEVENLABS_API_KEY, TODAY, TODAY_DISPLAY, TOP_ARTICLES_TOTAL
 from mc_audio import generate_elevenlabs_audio, generate_podcast_audio
 from mc_deliver import (
     generate_manifest,
@@ -118,7 +118,7 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
         scored = score_and_rank_articles(clustered, trending_context=trending_context)
 
         logger.info("Step 5/10: Selecting top articles…")
-        top_articles = select_top_articles(scored, total=25)
+        top_articles = select_top_articles(scored, total=TOP_ARTICLES_TOTAL)
         total = sum(len(v) for v in top_articles.values())
         logger.info("Selected %d articles across %d categories.", total, len(top_articles))
         if total == 0:
@@ -195,7 +195,7 @@ def _run_crew_steps_0_to_8b(trending_holder: list):
         top_articles, article_stats = run_research(
             dynamic_queries=dynamic_queries,
             trending_context=trending_context,
-            total_target=25,
+            total_target=TOP_ARTICLES_TOTAL,
             enrich_top_n=15,
         )
         total = sum(len(v) for v in top_articles.values())

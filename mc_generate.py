@@ -287,22 +287,27 @@ def generate_html_briefing(
         "\n\n" + prompt_block()
     )
 
-    user_prompt = f"""Today is {TODAY_DISPLAY}. You have collected {total_articles} news articles across 4 categories.
+    user_prompt = f"""Today is {TODAY_DISPLAY}. You have collected {total_articles} news articles across {len(categorised)} categories.
 
 Here are today's articles:
 {articles_context}
 {picks_context}
 
-Write a professional daily briefing (1200-1800 words) with these exact sections:
+Write a professional daily briefing (1500-2200 words) with these exact sections:
 
 1. EXECUTIVE SUMMARY (2-3 sentences capturing the most important themes of the day)
 
-2. TOP STORIES — organized by category (AI & Tech, Business & Markets, Companies, NY Sports). For each story:
+2. TOP STORIES — organized by category (AI & Tech, Business & Markets, Companies, Payments & Commerce, NY Sports). For each story:
    - Write a substantive paragraph of AT LEAST 80 words per story. Explain what happened, who was involved,
      what the key details are (numbers, decisions, outcomes), and why it matters.
    - Do NOT summarize in one line. Do NOT use a vague teaser. Tell the full story as the article presents it.
    - Include the clickable source URL at the end of each story item
    - Cover at least 3-4 stories per category that has content
+
+   PAYMENTS & COMMERCE rules: lead with Stripe or Adyen news when an article covers them, then
+   agentic commerce, payment methods/rails, networks and other payments companies. A payments-company
+   story goes in this section only — if the same story is also listed under Companies or
+   Business & Markets, write it ONLY here and leave it out of those sections.
 
    NY SPORTS rules (apply these exactly):
    - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
@@ -318,13 +323,13 @@ Write a professional daily briefing (1200-1800 words) with these exact sections:
 
 Format rules:
 - Return ONLY the briefing text sections (no HTML, no markdown headers with #)
-- Use plain section headers like: EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, NY SPORTS, KEY TRENDS & INSIGHTS, WHAT TO WATCH
+- Use plain section headers like: EXECUTIVE SUMMARY, AI & TECH, BUSINESS & MARKETS, COMPANIES, PAYMENTS & COMMERCE, NY SPORTS, KEY TRENDS & INSIGHTS, WHAT TO WATCH
 - Each story should be on its own paragraph
 - IMPORTANT: End every story paragraph with a clickable source link in this exact format: [Source Name](URL)
   Use the exact URL provided in the article data above — do not make up or omit URLs"""
 
     try:
-        briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=3500)
+        briefing_text = _gpt_call(system_prompt, user_prompt, max_tokens=4500)
     except Exception as exc:
         logger.error("HTML briefing GPT call failed: %s", exc)
         briefing_text = "Unable to generate GPT briefing. See articles below."
@@ -335,7 +340,7 @@ Format rules:
     def text_to_html_sections(text: str) -> str:
         section_headers = [
             "EXECUTIVE SUMMARY", "AI & TECH", "BUSINESS & MARKETS",
-            "COMPANIES", "NY SPORTS", "KEY TRENDS & INSIGHTS", "WHAT TO WATCH",
+            "COMPANIES", "PAYMENTS & COMMERCE", "NY SPORTS", "KEY TRENDS & INSIGHTS", "WHAT TO WATCH",
         ]
         html_parts = []
         current_section = None
@@ -508,15 +513,17 @@ Script requirements:
      then cover the full substance of each from the articles.
   3. BUSINESS & MARKETS segment — cover top 2-3 stories in depth, explain what it means for listeners (~400 words)
   4. COMPANIES segment — cover top 3-4 company stories with personality and substance (~400 words)
-  5. NY SPORTS segment (~100-150 words):
+  5. PAYMENTS & COMMERCE segment — top 2-3 payments stories, Stripe/Adyen first if covered, then agentic
+     commerce and payment methods; explain jargon in plain English (~250 words)
+  6. NY SPORTS segment (~100-150 words):
      - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
        say the final score and opponent, and mention when their next game is. If there is a notable
        story or highlight beyond the game result, include it briefly. Keep it to 1-2 sentences per team.
        Skip a team entirely if nothing noteworthy happened — do not pad with filler.
      - For major national sports stories unrelated to NY teams: 1-2 sentences.
      - Do NOT mention any team, player, or event not explicitly named in the articles above.
-  6. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads" (~150 words)
-  7. OUTRO — brief wrap-up, call to action, sign-off (~50 words)
+  7. MIKE'S PICKS segment (only if picks exist) — introduce as "Big Mike's hand-picked reads" (~150 words)
+  8. OUTRO — brief wrap-up, call to action, sign-off (~50 words)
 
 - Write in natural spoken language — use contractions, rhetorical questions, transitions
 - For each major story, include the actual facts: numbers, names, outcomes, decisions — not vague commentary
@@ -624,8 +631,11 @@ Script structure:
    For each story: explain what happened, who's involved, what the specific numbers/outcomes are.
 3. [ELIZABETH] BUSINESS & MARKETS — Cover top 2-3 stories in depth, explain what it means for listeners.
 4. [ELIZABETH] COMPANIES — Cover top 3-4 company stories with personality and substance.
+   End with a handoff: "Mike, what's happening in payments?"
+5. [MIKE] PAYMENTS & COMMERCE — Top 2-3 payments stories, Stripe/Adyen first if covered, then agentic
+   commerce and payment methods; explain jargon in plain English (~250 words).
    End with a handoff: "Alright Jesse, take it away with sports..."
-5. [JESSE] NY SPORTS (~100-150 words total):
+6. [JESSE] NY SPORTS (~100-150 words total):
    - For each NY team (Yankees, Knicks, Giants, Devils): if they played a game in the last 24 hours,
      say the final score and opponent, and mention when their next game is. If there's a notable
      story or highlight, include it too. Keep it to 1-2 sentences per team.
@@ -633,7 +643,7 @@ Script structure:
    - For major national sports stories unrelated to NY teams: 1-2 sentences.
    - Do NOT mention any team, player, coach, or event not explicitly named in the articles above.
    End with: "Back to you, Mike."
-6. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
+7. [MIKE] SIGN-OFF — Brief wrap-up, thank listeners, sign off (~20 seconds).
 
 Total length: 10-14 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
 that means a MINIMUM of 1400 words and a TARGET of 1800-2000 words. Do not stop short.

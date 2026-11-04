@@ -9,7 +9,7 @@ IS already a fact-check artifact, not prose to fact-check.
 
 Four checks per model:
   - format_contract: HTML parses, all 7 required <h2> sections present, HTML isn't
-    truncated, podcast script is 900-1000 words, conversational script has all
+    truncated, podcast script is 1150-1250 words, conversational script has all
     three speaker tags. Deterministic, no API calls.
   - grounding (HARD GATE): every substantive sentence in each HTML section is
     checked against that section's source articles via the existing
@@ -61,7 +61,12 @@ _REQUIRED_H2_SECTIONS = [
     "COMPANIES", "NY SPORTS", "KEY TRENDS & INSIGHTS", "WHAT TO WATCH",
 ]
 _SYNTHESIS_SECTIONS = {"executive summary", "key trends & insights", "what to watch"}
-_PODCAST_WORD_MIN, _PODCAST_WORD_MAX = 900, 1000
+# Required only when the fixture actually has Payments articles — fixtures recorded
+# before the section existed (2026-11-04) have none, and the anti-skip rule lets the
+# writer omit an empty category.
+_CONDITIONAL_H2_SECTIONS = {"PAYMENTS & COMMERCE": "Payments & Commerce"}
+# 900-1000 -> 1150-1250 on 2026-11-04 (Payments & Commerce segment added, nothing cut).
+_PODCAST_WORD_MIN, _PODCAST_WORD_MAX = 1150, 1250
 _MAX_GROUNDING_CHECKS_PER_MODEL = 40
 _SCORABLE_ROLES = {"writer", "critic", "sports_researcher", "article_scorer", "article_enricher"}
 
@@ -115,7 +120,9 @@ def _articles_for_section(header: str, top_articles: dict[str, list[dict]]) -> l
     return union
 
 
-def score_format_contract(html: str, single_script: str, conv_script: str) -> dict:
+def score_format_contract(
+    html: str, single_script: str, conv_script: str, top_articles: dict | None = None,
+) -> dict:
     try:
         soup = BeautifulSoup(html, "html.parser")
         html_parses = True
@@ -124,7 +131,11 @@ def score_format_contract(html: str, single_script: str, conv_script: str) -> di
         html_parses = False
 
     found_headers = [h2.get_text(strip=True).upper() for h2 in soup.find_all("h2")] if soup else []
-    missing = [h for h in _REQUIRED_H2_SECTIONS if not any(h in fh for fh in found_headers)]
+    required = list(_REQUIRED_H2_SECTIONS)
+    for header, cat in _CONDITIONAL_H2_SECTIONS.items():
+        if (top_articles or {}).get(cat):
+            required.append(header)
+    missing = [h for h in required if not any(h in fh for fh in found_headers)]
     html_truncated = bool(html) and not html.rstrip().endswith(("</html>", "</p>", "</ul>", "</div>"))
 
     podcast_words = len(single_script.split()) if single_script else 0
@@ -307,8 +318,9 @@ def _flat(scored: dict) -> dict[str, dict]:
 def score_article_scorer(scored: dict, baseline: dict | None) -> dict:
     """Coverage (real score with a reason, vs the default-50 fallback), spread, and — vs the
     baseline model — Spearman rank agreement and overlap of the actual downstream selection
-    (select_top_articles, total=25)."""
+    (select_top_articles, total=TOP_ARTICLES_TOTAL)."""
     from mc_collect import select_top_articles
+    from mc_config import TOP_ARTICLES_TOTAL
 
     flat = _flat(scored)
     vals = [a["score"] for a in flat.values() if isinstance(a.get("score"), (int, float))]
@@ -326,7 +338,7 @@ def score_article_scorer(scored: dict, baseline: dict | None) -> dict:
         out["spearman_vs_baseline"] = _spearman([flat[u]["score"] for u in common], [bflat[u]["score"] for u in common])
 
         def picks(sc):
-            sel = select_top_articles({c: sorted(a, key=lambda x: x.get("score", 50), reverse=True) for c, a in sc.items()}, total=25)
+            sel = select_top_articles({c: sorted(a, key=lambda x: x.get("score", 50), reverse=True) for c, a in sc.items()}, total=TOP_ARTICLES_TOTAL)
             return {a["url"] for arts in sel.values() for a in arts}
         mine, theirs = picks(scored), picks(baseline)
         out["top25_jaccard_vs_baseline"] = round(len(mine & theirs) / len(mine | theirs), 3) if mine | theirs else None
@@ -445,7 +457,7 @@ def score_run(run_id: str) -> dict:
         print(f"Scoring {model} ({r['label']})...", file=sys.stderr)
         scores["models"][model] = {
             "label": r["label"],
-            "format_contract": score_format_contract(html, single, conv),
+            "format_contract": score_format_contract(html, single, conv, top_articles),
             "grounding": score_grounding(html, top_articles),
             "stale_titles": score_stale_titles(html, single, conv),
             "editorial": score_editorial(html, top_articles),

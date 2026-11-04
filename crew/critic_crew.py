@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import json
 import logging
+import html as _html
 import re
 
 from crewai import Crew, Process, Task
@@ -282,8 +283,13 @@ def run_critic_pass(
             new_section = _run_patcher(cat, articles, issue)
             if not new_section:
                 continue
+            # Headers are HTML-escaped in the page ("AI &amp; TECH"), but the scorer
+            # echoes them unescaped ("AI & TECH") — match either form, or every
+            # "&" section (AI & Tech, Business & Markets, Payments & Commerce)
+            # silently "could not locate" and is never patched.
+            cat_re = f"(?:{re.escape(cat)}|{re.escape(_html.escape(cat, quote=False))})"
             header_pattern = (
-                rf'(<h2[^>]*>[^<]*{re.escape(cat)}[^<]*</h2>)(.*?)'
+                rf'(<h2[^>]*>[^<]*{cat_re}[^<]*</h2>)(.*?)'
                 r'(?=<h2|<div\s[^>]*text-align\s*:\s*center)'
             )
             match = re.search(header_pattern, improved_html, re.DOTALL | re.IGNORECASE)
