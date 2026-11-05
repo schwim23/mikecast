@@ -20,6 +20,8 @@ from __future__ import annotations
 
 import logging
 
+from mc_facts import filter_resurfaced_leadership_news
+
 from mc_collect import (
     cluster_articles,
     collect_all_news,
@@ -62,6 +64,7 @@ def run_research(
 
     logger.info("[Research Crew] Step 2b: filter_stale_articles (max_age_days=3)")
     deduped = filter_stale_articles(deduped, max_age_days=3)
+    deduped = filter_resurfaced_leadership_news(deduped)
 
     logger.info("[Research Crew] Step 2c: filter_sports_by_trusted_sources")
     deduped = filter_sports_by_trusted_sources(deduped)

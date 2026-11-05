@@ -244,6 +244,231 @@ def get_officeholders() -> dict[str, tuple[Holder, Holder | None]]:
 
 
 # ---------------------------------------------------------------------------
+# Company CEOs (added 2026-11-05)
+# ---------------------------------------------------------------------------
+# Incident 2026-11-05: Google News surfaced ABC's April 20 "Tim Cook is stepping
+# down, John Ternus set to replace him" with no usable date, and every writer ran it
+# as breaking news — two months after Ternus took over. Writers can't tell old
+# leadership news from new without knowing who runs the company TODAY, so the
+# CEOs of the companies MikeCast follows go in CURRENT FACTS next to the offices.
+# Prompt-only: fix_stale_titles never rewrites company titles (too many legit
+# "former Apple CEO" / "co-CEO" phrasings to do it deterministically).
+
+COMPANIES: tuple[tuple[str, str], ...] = (
+    ("Q312", "Apple"), ("Q380", "Meta"), ("Q3884", "Amazon"), ("Q182477", "Nvidia"),
+    ("Q478214", "Tesla"), ("Q2283", "Microsoft"), ("Q20800404", "Alphabet (Google)"),
+    ("Q116452644", "Netflix"), ("Q780442", "Uber"), ("Q116758847", "Anthropic"),
+    ("Q21708200", "OpenAI"),
+)
+
+# (current CEO(s) — Holder.since = start date or "" — , previous CEO or None).
+# Hand-maintained last resort, reviewed with FALLBACK_REVIEWED. Netflix's co-CEO
+# Greg Peters is missing from Wikidata.
+CompanyCEOs = tuple[tuple[Holder, ...], Holder | None]
+COMPANY_FALLBACK: dict[str, CompanyCEOs] = {
+    "Q312":       ((Holder("John Ternus", "2026-09-01"),), Holder("Tim Cook", "2026-08-31")),
+    "Q380":       ((Holder("Mark Zuckerberg", ""),), None),
+    "Q3884":      ((Holder("Andy Jassy", "2021-07-05"),), None),
+    "Q182477":    ((Holder("Jensen Huang", ""),), None),
+    "Q478214":    ((Holder("Elon Musk", ""),), None),
+    "Q2283":      ((Holder("Satya Nadella", "2014-02-04"),), None),
+    "Q20800404":  ((Holder("Sundar Pichai", "2019-12-03"),), None),
+    "Q116452644": ((Holder("Ted Sarandos", ""), Holder("Greg Peters", "")), None),
+    "Q780442":    ((Holder("Dara Khosrowshahi", "2017-08-28"),), None),
+    "Q116758847": ((Holder("Dario Amodei", ""),), None),
+    "Q21708200":  ((Holder("Sam Altman", ""),), None),
+}
+# A predecessor is only worth naming if they left recently and weren't a stopgap
+# (OpenAI's 2-day interim CEO in 2023 would just confuse the writer).
+PREV_CEO_MAX_AGE_DAYS = 3 * 365
+PREV_CEO_MIN_TENURE_DAYS = 90
+
+
+def _company_sparql_query() -> str:
+    values = " ".join(f"wd:{qid}" for qid, _ in COMPANIES)
+    return f"""
+SELECT ?co ?ceoLabel ?start ?end WHERE {{
+  VALUES ?co {{ {values} }}
+  ?co p:P169 ?st . ?st ps:P169 ?ceo ; wikibase:rank ?rank .
+  ?ceo wdt:P31 wd:Q5 .
+  OPTIONAL {{ ?st pq:P580 ?start }} OPTIONAL {{ ?st pq:P582 ?end }}
+  FILTER(?rank != wikibase:DeprecatedRank)
+  SERVICE wikibase:label {{ bd:serviceParam wikibase:language "en,mul". }}
+}}"""
+
+
+def _fetch_company_rows() -> list[dict]:
+    from mc_utils import _safe_request
+    resp = _safe_request(
+        WIKIDATA_SPARQL_URL,
+        params={"query": _company_sparql_query(), "format": "json"},
+        headers={"User-Agent": "MikeCast/1.0 (https://mikecast.io; daily news briefing)"},
+        timeout=20,
+    )
+    if resp is None:
+        raise RuntimeError("no response")
+    resp.raise_for_status()
+    return [
+        {
+            "co": b["co"]["value"].rsplit("/", 1)[-1],
+            "name": b["ceoLabel"]["value"],
+            "start": b.get("start", {}).get("value", "")[:10] or None,
+            "end": b.get("end", {}).get("value", "")[:10] or None,
+        }
+        for b in resp.json()["results"]["bindings"]
+    ]
+
+
+def _resolve_companies(rows: list[dict], today: str) -> dict[str, CompanyCEOs]:
+    """Current CEO(s) + recent predecessor per company; omit companies that fail sanity checks."""
+    t = date.fromisoformat(today)
+    out: dict[str, CompanyCEOs] = {}
+    for qid, name in COMPANIES:
+        mine = [r for r in rows if r["co"] == qid and not re.fullmatch(r"Q\d+", r["name"])]
+        cur_rows = [r for r in mine
+                    if (r["start"] is None or r["start"] <= today)
+                    and (r["end"] is None or r["end"] > today)]
+        names = sorted({r["name"] for r in cur_rows})
+        if not 1 <= len(names) <= 2:   # 2 = co-CEOs
+            logger.warning("Company facts: Wikidata has %d current CEOs for %s (%s) — not using it",
+                           len(names), name, names or "none")
+            continue
+        current = tuple(
+            Holder(n, min((r["start"] for r in cur_rows if r["name"] == n and r["start"]), default=""))
+            for n in names)
+
+        def _worth_naming(r: dict) -> bool:
+            end = date.fromisoformat(r["end"])
+            if (t - end).days > PREV_CEO_MAX_AGE_DAYS:
+                return False
+            return not r["start"] or (end - date.fromisoformat(r["start"])).days >= PREV_CEO_MIN_TENURE_DAYS
+
+        ended = [r for r in mine if r["end"] and r["end"] <= today and r["name"] not in names
+                 and _worth_naming(r)]
+        prev = max(ended, key=lambda r: r["end"], default=None)
+        out[qid] = (current, Holder(prev["name"], prev["end"]) if prev else None)
+    return out
+
+
+@lru_cache(maxsize=1)
+def get_company_ceos() -> dict[str, CompanyCEOs]:
+    """Current CEO(s) per company QID — Wikidata, else COMPANY_FALLBACK. Never raises."""
+    resolved: dict[str, CompanyCEOs] = {}
+    if os.environ.get("MIKECAST_FACTS_OFFLINE") != "1":
+        try:
+            resolved = _resolve_companies(_fetch_company_rows(), date.today().isoformat())
+            logger.info("Company facts: %d/%d companies from Wikidata", len(resolved), len(COMPANIES))
+        except Exception as exc:
+            logger.warning("Company facts: Wikidata lookup failed (%s) — using COMPANY_FALLBACK", exc)
+    for qid, name in COMPANIES:
+        fb_names = {h.name for h in COMPANY_FALLBACK[qid][0]}
+        if qid in resolved and {h.name for h in resolved[qid][0]} < fb_names:
+            # Wikidata lists only some of the co-CEOs (Netflix: Peters is missing).
+            resolved[qid] = (COMPANY_FALLBACK[qid][0], resolved[qid][1])
+        if qid not in resolved:
+            resolved[qid] = COMPANY_FALLBACK[qid]
+            logger.warning("Company facts: %s CEO from hardcoded COMPANY_FALLBACK", name)
+        elif resolved[qid][0][0].name not in {h.name for h in COMPANY_FALLBACK[qid][0]}:
+            logger.warning(
+                "Company facts: live data says %s CEO is %s but COMPANY_FALLBACK says %s — update it",
+                name, " & ".join(h.name for h in resolved[qid][0]),
+                " & ".join(h.name for h in COMPANY_FALLBACK[qid][0]))
+    return resolved
+
+
+def company_facts_lines() -> str:
+    ceos = get_company_ceos()
+    lines = []
+    for qid, name in COMPANIES:
+        current, prev = ceos[qid]
+        if len(current) > 1:
+            line = f"- {' and '.join(h.name for h in current)} are the current co-CEOs of {name}."
+        else:
+            cur = current[0]
+            since = f" (since {_long_date(cur.since)})" if cur.since else ""
+            line = f"- {cur.name} is the current CEO of {name}{since}."
+        if prev:
+            line += f" {prev.name} is the PREVIOUS {name} CEO (stepped down {_long_date(prev.since)})."
+        lines.append(line)
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# Resurfaced-leadership-news filter (deterministic; added 2026-11-05)
+# ---------------------------------------------------------------------------
+# The OLD-NEWS RULE in the prompt was not enough on its own: replaying the 11/05
+# articles, the HTML and 3-host writers still ran "Tim Cook is stepping down" as
+# news. This drops such articles before scoring/writing. It fires only when an
+# article names BOTH a known predecessor and their successor, uses present/future
+# transition wording, and the handover is more than RESURFACE_MIN_AGE_DAYS old —
+# so announcement-day news passes, and "Cook, who stepped down in August, ..." in a
+# genuinely new story is untouched (past tense).
+
+RESURFACE_MIN_AGE_DAYS = 14
+_TRANSITION_RE = re.compile(
+    r"\b(?:is|are|will|to)\s+step(?:ping)?\s+down\b|\bsteps\s+down\b|\bstepping\s+down\b"
+    r"|\b(?:set\s+to|will|to)\s+(?:replace|succeed)\b|\bsuccessor\s+(?:named|picked|chosen)\b"
+    r"|\b(?:names|taps|picks)\b[^.]{0,60}\b(?:CEO|chief executive|successor)\b",
+    re.IGNORECASE,
+)
+
+
+def _transitions() -> list[tuple[str, str, str, str]]:
+    """(label, predecessor, successor, handover ISO date) for every known completed handover."""
+    out = []
+    holders = get_officeholders()
+    for o in OFFICES:
+        cur, prev = holders[o.qid]
+        if prev:
+            out.append((o.role, prev.name, cur.name, prev.since))
+    ceos = get_company_ceos()
+    for qid, name in COMPANIES:
+        current, prev = ceos[qid]
+        if prev and len(current) == 1:
+            out.append((f"{name} CEO", prev.name, current[0].name, prev.since))
+    return out
+
+
+def _surname(name: str) -> str:
+    return Holder(name, "").surname
+
+
+def resurfaced_leadership_reason(article: dict, today: date | None = None) -> str | None:
+    """Why *article* is a resurfaced old leadership-change story, or None if it isn't."""
+    today = today or date.today()
+    text = f"{article.get('title', '')} {article.get('description', '')}"
+    if not _TRANSITION_RE.search(text):
+        return None
+    for label, prev, cur, since in _transitions():
+        try:
+            age = (today - date.fromisoformat(since)).days
+        except ValueError:
+            continue
+        if age < RESURFACE_MIN_AGE_DAYS:
+            continue
+        if re.search(rf"\b{re.escape(_surname(prev))}\b", text) and \
+           re.search(rf"\b{re.escape(_surname(cur))}\b", text):
+            return f"{label} handover {prev} -> {cur} happened {since} ({age} days ago)"
+    return None
+
+
+def filter_resurfaced_leadership_news(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
+    """Drop articles that present an already-completed leadership change as news."""
+    out: dict[str, list[dict]] = {}
+    for cat, arts in categorised.items():
+        kept = []
+        for art in arts:
+            reason = resurfaced_leadership_reason(art)
+            if reason:
+                logger.warning("Dropping resurfaced old news [%s]: %r — %s",
+                               cat, art.get("title", "")[:100], reason)
+                continue
+            kept.append(art)
+        out[cat] = kept
+    return out
+
+
+# ---------------------------------------------------------------------------
 # Prompt text
 # ---------------------------------------------------------------------------
 
@@ -275,15 +500,25 @@ def facts_lines() -> str:
                 f"If mentioned, say \"former {o.title} {prev.surname}\".")
         elif prev:
             former.append(f"- {prev.name} was the previous {o.role} (until {_long_date(prev.since)}).")
-    return "\n".join(current + former)
+    return "\n".join(current + former) + "\n" + company_facts_lines()
+
+
+OLD_NEWS_RULE = (
+    "OLD-NEWS RULE: Search results sometimes resurface stories that are months old. If an "
+    "article reports as new a change that CURRENT FACTS shows already happened — e.g. it says "
+    "someone 'is stepping down' or 'will replace' a leader, but CURRENT FACTS already lists the "
+    "successor as the current holder — it is old news. Leave it out entirely; never present it "
+    "as today's news. (For co-CEOs or anyone CURRENT FACTS doesn't cover, use the article's wording.)"
+)
 
 
 def prompt_block() -> str:
     return (
         f"CURRENT FACTS (today is {TODAY_DISPLAY}). Your training data predates today and is out "
-        "of date on who holds office. These facts override anything you remember:\n"
+        "of date on who holds office and who runs major companies. These facts override anything "
+        "you remember:\n"
         + facts_lines()
-        + f"\n\n{TITLE_RULE}"
+        + f"\n\n{TITLE_RULE}\n\n{OLD_NEWS_RULE}"
     )
 
 

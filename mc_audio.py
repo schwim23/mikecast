@@ -352,6 +352,36 @@ def generate_podcast_audio(script: str, output_path: Path) -> bool:
 # ElevenLabs TTS (3-voice — preferred for RSS podcast feed)
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# ElevenLabs short-segment guard (added 2026-11-05)
+# ---------------------------------------------------------------------------
+# ElevenLabs hallucinates on very short inputs. 2026-11-05: the 14-char [MIKE]
+# interjection "End of an era." came back as ~7s of invented babble ("I need to go
+# to work, I need to go to work...") and shipped in the episode. Normal speech is
+# ~0.065 s/char (that day's 663-char segment ran 43s), so a clip much longer than
+# its text allows is a hallucination: retry once, then drop it if it's short.
+_TTS_MAX_SECS_PER_CHAR = 0.12
+_TTS_DURATION_SLACK_SECS = 2.0
+_TTS_DROPPABLE_MAX_CHARS = 80    # only ever drop throwaway lines, never real content
+_TTS_CONTEXT_CHARS = 300         # previous_text / next_text sent to ElevenLabs
+
+
+def _mp3_blob_duration_secs(blob: bytes) -> float | None:
+    try:
+        import io
+        from mutagen.mp3 import MP3
+        return float(MP3(io.BytesIO(blob)).info.length)
+    except Exception:
+        return None
+
+
+def _tts_duration_suspicious(text: str, blob: bytes) -> tuple[bool, float | None, float]:
+    """(suspicious, actual secs, max allowed secs) for one TTS clip."""
+    limit = len(text) * _TTS_MAX_SECS_PER_CHAR + _TTS_DURATION_SLACK_SECS
+    dur = _mp3_blob_duration_secs(blob)
+    return (dur is not None and dur > limit), dur, limit
+
+
 def generate_elevenlabs_audio(
     conversational_script: str,
     output_path: Path,
@@ -383,36 +413,67 @@ def generate_elevenlabs_audio(
         logger.warning("No segments parsed from conversational script.")
         return False
 
-    def _tts_segment(speaker: str, text: str) -> list[bytes]:
+    def _tts_request(voice_id: str, chunk: str, prev_text: str, next_text: str) -> bytes:
+        url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+        headers = {
+            "xi-api-key": ELEVENLABS_API_KEY,
+            "Content-Type": "application/json",
+            "Accept": "audio/mpeg",
+        }
+        payload = {
+            "text": chunk,
+            "model_id": "eleven_multilingual_v2",
+            "voice_settings": {
+                "stability": 0.55,
+                "similarity_boost": 0.75,
+                "style": 0.20,
+                "use_speaker_boost": True,
+            },
+        }
+        # Surrounding script text steadies prosody and, above all, short lines.
+        if prev_text:
+            payload["previous_text"] = prev_text
+        if next_text:
+            payload["next_text"] = next_text
+        resp = requests.post(url, json=payload, headers=headers, timeout=90)
+        resp.raise_for_status()
+        return resp.content
+
+    def _tts_segment(idx: int, speaker: str, text: str, prev_text: str, next_text: str) -> list[bytes]:
         """
         Call ElevenLabs for one speaker segment, returning one MP3 blob per
         chunk. Returning the chunks separately (rather than raw-joining them)
         lets the caller hand every blob to the ffmpeg concat step, so even a
         long, multi-chunk segment produces a single cleanly-framed stream.
+
+        Each clip is length-checked against its text (see _tts_duration_suspicious):
+        a too-long clip is retried once; if it's still too long and the text is a
+        short throwaway line it is dropped, otherwise kept with a WARNING.
         """
         voice_id = voice_map[speaker]
         chunks = _split_text_for_tts(_tts_normalize(text), max_chunk=4500)
         audio_parts: list[bytes] = []
-        for chunk in chunks:
-            url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
-            headers = {
-                "xi-api-key": ELEVENLABS_API_KEY,
-                "Content-Type": "application/json",
-                "Accept": "audio/mpeg",
-            }
-            payload = {
-                "text": chunk,
-                "model_id": "eleven_multilingual_v2",
-                "voice_settings": {
-                    "stability": 0.55,
-                    "similarity_boost": 0.75,
-                    "style": 0.20,
-                    "use_speaker_boost": True,
-                },
-            }
-            resp = requests.post(url, json=payload, headers=headers, timeout=90)
-            resp.raise_for_status()
-            audio_parts.append(resp.content)
+        for j, chunk in enumerate(chunks):
+            p = prev_text if j == 0 else chunks[j - 1][-_TTS_CONTEXT_CHARS:]
+            n = next_text if j == len(chunks) - 1 else chunks[j + 1][:_TTS_CONTEXT_CHARS]
+            blob = _tts_request(voice_id, chunk, p, n)
+            bad, dur, limit = _tts_duration_suspicious(chunk, blob)
+            if bad:
+                logger.warning(
+                    "ElevenLabs segment %d [%s] is %.1fs for %d chars (max %.1fs) — likely "
+                    "hallucinated audio, retrying once: %r", idx, speaker, dur, len(chunk), limit, chunk[:80])
+                blob = _tts_request(voice_id, chunk, p, n)
+                bad, dur, limit = _tts_duration_suspicious(chunk, blob)
+            if bad and len(chunk) <= _TTS_DROPPABLE_MAX_CHARS:
+                logger.warning(
+                    "ElevenLabs segment %d [%s] still %.1fs for %d chars after retry — DROPPING "
+                    "this line from the audio: %r", idx, speaker, dur, len(chunk), chunk)
+                continue
+            if bad:
+                logger.warning(
+                    "ElevenLabs segment %d [%s] still %.1fs for %d chars after retry — keeping it "
+                    "(too long to drop); listen to this episode", idx, speaker, dur, len(chunk))
+            audio_parts.append(blob)
         return audio_parts
 
     audio_segments: list[bytes] = []
@@ -421,12 +482,17 @@ def generate_elevenlabs_audio(
             "ElevenLabs TTS segment %d/%d [%s] (%d chars)…",
             i + 1, len(segments), speaker, len(text),
         )
+        prev_text = _tts_normalize(segments[i - 1][1])[-_TTS_CONTEXT_CHARS:] if i > 0 else ""
+        next_text = _tts_normalize(segments[i + 1][1])[:_TTS_CONTEXT_CHARS] if i + 1 < len(segments) else ""
         try:
-            audio_segments.extend(_tts_segment(speaker, text))
+            audio_segments.extend(_tts_segment(i + 1, speaker, text, prev_text, next_text))
             time.sleep(0.3)  # gentle rate-limit buffer between segments
         except Exception as exc:
             logger.error("ElevenLabs segment %d [%s] failed: %s", i + 1, speaker, exc)
             return False
+    if not audio_segments:
+        logger.error("ElevenLabs produced no usable segments.")
+        return False
 
     try:
         if not _concat_mp3_segments(audio_segments, output_path):

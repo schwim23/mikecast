@@ -311,9 +311,17 @@ def fetch_nyt_top_stories(section: str) -> list[dict]:
 def search_news_web(query: str, max_results: int = 5) -> list[dict]:
     """
     Fetch Google News RSS for a query and return article dicts.
-    Uses the publisher's domain URL (from <source url='...'>) as the article link
-    because Google News redirect URLs hit a consent wall server-side.
-    Restricts results to the past 24 hours via the 'when:1d' modifier.
+
+    The article URL is Google's per-article link (news.google.com/rss/articles/...),
+    which redirects to the story in a reader's browser. It used to be the publisher's
+    HOMEPAGE (<source url>), which gave every story from one outlet the same URL:
+    dedup then treated a new ABC story as an "[Updated]" copy of an old one, and
+    readers clicking the link landed on abcnews.com. The homepage is kept as
+    "source_url". Enrichment skips news.google.com links (they hit a consent wall
+    server-side).
+
+    'when:1d' asks Google for the past 24 hours, but it is not reliable on its own;
+    filter_stale_articles enforces the age limit on the parsed pubDate.
     """
     resp = _safe_request(
         "https://news.google.com/rss/search",
@@ -330,10 +338,14 @@ def search_news_web(query: str, max_results: int = 5) -> list[dict]:
             link_tag   = item.find("link")
             desc_tag   = item.find("description")
             source_tag = item.find("source")
-            pub_tag    = item.find("pubdate")
+            # The "xml" parser is case-sensitive: the tag is <pubDate>. Looking for
+            # "pubdate" (pre-2026-11-05) never matched, so every Google News article
+            # was undated and filter_stale_articles let all of them through.
+            pub_tag    = item.find("pubDate")
 
             source_url  = source_tag.get("url", "") if source_tag else ""
-            article_url = source_url or (link_tag.get_text(strip=True) if link_tag else "")
+            link_url    = link_tag.get_text(strip=True) if link_tag else ""
+            article_url = link_url or source_url
 
             articles.append({
                 "title":       title_tag.get_text(strip=True) if title_tag else "",
@@ -343,6 +355,7 @@ def search_news_web(query: str, max_results: int = 5) -> list[dict]:
                     if desc_tag else ""
                 ),
                 "source":    source_tag.get_text(strip=True) if source_tag else "Google News",
+                "source_url": source_url,
                 "published": pub_tag.get_text(strip=True) if pub_tag else "",
             })
     except Exception as exc:
@@ -786,6 +799,17 @@ def score_and_rank_articles(
     scorer_input = ({"categorised": copy.deepcopy(categorised), "trending_context": trending_context}
                     if _dump_enabled() else None)
 
+    # Who holds office / runs the tracked companies TODAY, so the scorer can sink
+    # resurfaced old news (2026-11-05: ABC's April "Tim Cook is stepping down" scored
+    # 100 and led the Companies section, two months after Ternus became CEO).
+    from mc_facts import facts_lines
+    old_news_block = (
+        "\n\nCURRENT FACTS (override your training data):\n" + facts_lines() + "\n"
+        "OLD NEWS: if an article reports as new a change these facts show already happened "
+        "(e.g. a CEO 'is stepping down' / 'will be replaced' but the successor is already the "
+        "current CEO above), it is a resurfaced old story — score it 5 or lower and say so."
+    )
+
     # Appended to every category's system prompt to enforce JSON output format
     scorer_suffix = (
         "\n\nReturn ONLY a JSON array with no markdown, no explanation outside JSON:\n"
@@ -809,7 +833,7 @@ def score_and_rank_articles(
         system_prompt = context_prefix + CATEGORY_SCORER_PROMPTS.get(cat, (
             "You are a news relevance scorer. Score each article 1-100 based on "
             "newsworthiness, credibility, and relevance to a tech executive."
-        )) + scorer_suffix
+        )) + old_news_block + scorer_suffix
 
         def score_batch(batch: list[dict]) -> None:
             resp = client.chat.completions.create(
@@ -908,6 +932,8 @@ def enrich_top_stories(articles: dict[str, list[dict]], top_n: int = 8) -> dict[
 
     def fetch_body(url: str) -> str:
         """Fetch and strip the article body (first ~1500 chars of visible text)."""
+        if not url or "news.google.com/" in url:
+            return ""   # consent wall server-side — the body would be Google's interstitial
         try:
             resp = requests.get(url, timeout=10, headers={"User-Agent": "MikeCast/2.0 (enrichment)"})
             soup = BeautifulSoup(resp.text, "html.parser")

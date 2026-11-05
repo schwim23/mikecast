@@ -105,6 +105,8 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
         logger.info("Step 2/10: Deduplicating…")
         deduped = deduplicate(raw_news)
         deduped = filter_stale_articles(deduped, max_age_days=3)
+        from mc_facts import filter_resurfaced_leadership_news
+        deduped = filter_resurfaced_leadership_news(deduped)
         deduped = filter_sports_by_trusted_sources(deduped)
         deduped_total = sum(len(v) for v in deduped.values())
 

@@ -637,6 +637,8 @@ Script structure:
 
 Total length: 10-14 minutes of spoken audio. At a natural podcast pace of 140 words per minute,
 that means a MINIMUM of 1400 words and a TARGET of 1800-2000 words. Do not stop short.
+Every tagged turn must be at least one full sentence of 10+ words — no one-line reactions
+or interjections ("End of an era.", "Wow.") because the text-to-speech engine garbles very short lines.
 Write the COMPLETE script with all tags. No outline, no placeholders."""
 
     try:

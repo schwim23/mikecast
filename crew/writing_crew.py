@@ -257,6 +257,16 @@ _TONE_TTS_REMINDER = (
 )
 
 
+# Very short speaker turns make ElevenLabs hallucinate (2026-11-05: "[MIKE] End of
+# an era." became 7s of babble). mc_audio also guards this; the rule keeps it rare.
+_MIN_TURN_RULE = (
+    "SPEAKER TURNS: every tagged turn must be at least one full sentence of 10+ words. No "
+    "one-line reactions or interjections ('End of an era.', 'Wow.', 'That's a real pivot.') — "
+    "the text-to-speech engine garbles very short lines. Fold reactions into the next speaker's "
+    "opening sentence instead."
+)
+
+
 def _html_task(
     categorised: dict[str, list[dict]],
     picks: list[dict],
@@ -398,6 +408,7 @@ def _conversational_task(
         "6. [MIKE] SIGN-OFF (~40w).\n\n"
         "Cut anything that isn't moving the listener forward. Prefer one specific "
         "fact over two vague ones. No URLs. No stage directions. Only spoken words.\n\n"
+        f"{_MIN_TURN_RULE}\n\n"
         f"{_ANTI_SKIP_RULE}\n\n"
         f"{_TONE_TTS_REMINDER}"
     )
