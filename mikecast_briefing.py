@@ -62,6 +62,7 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
         deduplicate,
         enrich_top_stories,
         filter_stale_articles,
+        merge_duplicate_stories,
         filter_sports_by_trusted_sources,
         process_picks,
         score_and_rank_articles,
@@ -116,6 +117,8 @@ def _run_legacy_steps_0_to_8b(trending_holder: list):
     with step_span("score_select_enrich", "legacy"):
         logger.info("Step 4/10: Scoring and ranking articles…")
         scored = score_and_rank_articles(clustered, trending_context=trending_context)
+
+        scored = merge_duplicate_stories(scored, total=TOP_ARTICLES_TOTAL)
 
         logger.info("Step 5/10: Selecting top articles…")
         top_articles = select_top_articles(scored, total=TOP_ARTICLES_TOTAL)

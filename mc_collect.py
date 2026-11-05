@@ -590,23 +590,26 @@ def filter_stale_articles(
     max_age_days: int = 3,
 ) -> dict[str, list[dict]]:
     """
-    Drop articles whose parsed publication date is older than *max_age_days*.
-    Articles with unparseable or missing dates are kept (benefit of the doubt).
-    This prevents old recirculated content (e.g. from AOL) from entering the pipeline.
+    Drop articles whose parsed publication date is older than *max_age_days*,
+    and articles whose date is missing or unparseable.
+
+    Undated articles used to be kept (benefit of the doubt). That let the April
+    "Tim Cook stepping down" story into the 2026-11-05 episode: Google News dates
+    were never parsed, so every Google News article was undated and nothing was
+    age-checked. A source that stops sending dates now loses its articles
+    (logged per source as a warning) instead of letting old news through.
     """
     from email.utils import parsedate_to_datetime
 
     cutoff = datetime.now(timezone.utc) - timedelta(days=max_age_days)
     filtered: dict[str, list[dict]] = {}
     total_dropped = 0
+    undated_by_source: dict[str, int] = {}
 
     for cat, arts in categorised.items():
         kept: list[dict] = []
         for art in arts:
-            pub = art.get("published", "").strip()
-            if not pub:
-                kept.append(art)
-                continue
+            pub = (art.get("published") or "").strip()
             parsed_dt = None
             for parse_fn in (
                 lambda s: parsedate_to_datetime(s),            # RFC 2822 (RSS pubDate)
@@ -619,8 +622,14 @@ def filter_stale_articles(
                     break
                 except Exception:
                     continue
+            if not pub:
+                parsed_dt = None
 
-            if parsed_dt is not None and parsed_dt < cutoff:
+            if parsed_dt is None:
+                src = art.get("source") or "unknown"
+                undated_by_source[src] = undated_by_source.get(src, 0) + 1
+                continue
+            if parsed_dt < cutoff:
                 logger.debug("Dropping stale article (%s): %s", pub[:10], art.get("title", "")[:60])
                 total_dropped += 1
                 continue
@@ -629,6 +638,12 @@ def filter_stale_articles(
 
     if total_dropped:
         logger.info("Stale article filter: dropped %d articles older than %d days.", total_dropped, max_age_days)
+    if undated_by_source:
+        logger.warning(
+            "Stale article filter: dropped %d undated/unparseable articles by source: %s",
+            sum(undated_by_source.values()),
+            ", ".join(f"{k}={v}" for k, v in sorted(undated_by_source.items(), key=lambda kv: -kv[1])),
+        )
     return filtered
 
 
@@ -681,6 +696,127 @@ def select_top_articles(categorised: dict[str, list[dict]], total: int = 25) -> 
         share = max(3, int(total * len(arts) / total_available))
         selected[cat] = arts[:share]
     return selected
+
+
+# Categories excluded from cross-story merging. NY Sports has its own
+# ESPN-verified facts flow, and recap + preview of the same team are intentional.
+_MERGE_EXCLUDED_CATEGORIES = {"NY Sports"}
+# Extra candidates per category beyond its selection share, so a dropped
+# duplicate is replaced by the next-best story when select_top_articles runs.
+_MERGE_BUFFER = 4
+
+
+def _merge_model() -> str:
+    """One call per run, so it uses the scorer model, not the helper: on the
+    2026-11-05 articles gpt-4o-mini missed same-event pairs that gpt-5.6-terra
+    caught 3/3 (two Stripe stablecoin write-ups, two Google school lawsuits).
+    Override with MIKECAST_MERGE_MODEL."""
+    return os.environ.get("MIKECAST_MERGE_MODEL") or OPENAI_SCORER_MODEL
+
+
+def merge_duplicate_stories(
+    scored: dict[str, list[dict]], total: int = 25,
+) -> dict[str, list[dict]]:
+    """
+    Second-pass duplicate merge, run after scoring and before select_top_articles.
+
+    cluster_articles works on titles alone, one category at a time, and misses
+    the same story from two outlets when the headlines differ ("Block reaches
+    $964M DOJ pact" / "Block faces $765m DoJ settlement" on 2026-11-05), and it
+    can't see a story that landed in two categories (Visa earnings in both
+    Business & Markets and Payments & Commerce). This pass sends the selection
+    candidates from every category (title, source, description) to the scorer
+    model in one call and asks for groups covering the same specific event.
+    Uses the scorer model (see _merge_model).
+    In each group the highest-scored article is kept; the others are removed.
+    Fails open: any error returns the input unchanged.
+    """
+    if not OPENAI_API_KEY:
+        return scored
+
+    total_available = sum(len(a) for a in scored.values())
+    if total_available == 0:
+        return scored
+
+    # Candidate window: what select_top_articles would take, plus a buffer.
+    candidates: list[tuple[str, int, dict]] = []
+    for cat, arts in scored.items():
+        if cat in _MERGE_EXCLUDED_CATEGORIES:
+            continue
+        share = max(3, int(total * len(arts) / total_available))
+        for idx, art in enumerate(arts[: share + _MERGE_BUFFER]):
+            candidates.append((cat, idx, art))
+    if len(candidates) < 2:
+        return scored
+
+    lines = []
+    for i, (cat, _, art) in enumerate(candidates):
+        desc = re.sub(r"\s+", " ", art.get("description", "") or "")[:200]
+        lines.append(
+            f"{i}: [{cat}] {art.get('title', '')[:140]} — {art.get('source', '')} — {desc}"
+        )
+
+    try:
+        resp = _LLMClient().chat.completions.create(
+            model=_merge_model(),
+            messages=[{
+                "role": "user",
+                "content": (
+                    "Below are news articles (id: [category] title — source — description). "
+                    "Find groups of articles that report the SAME specific event or "
+                    "announcement, even when the headlines are worded differently or the "
+                    "figures differ (e.g. two outlets on one settlement, one earnings "
+                    "report, one product launch). Different events about the same company "
+                    "or topic are NOT duplicates.\n\n"
+                    + "\n".join(lines)
+                    + "\n\nReturn ONLY a JSON array of groups, each an array of 2+ ids, "
+                    "e.g. [[3, 17], [5, 6, 22]]. Return [] if there are no duplicates. "
+                    "No explanation."
+                ),
+            }],
+            max_tokens=400,
+            temperature=0.0,
+        )
+        raw = resp.choices[0].message.content.strip()
+        raw = re.sub(r"^```(?:json)?\s*", "", raw)
+        raw = re.sub(r"\s*```$", "", raw)
+        groups = json.loads(raw)
+        if not isinstance(groups, list):
+            raise ValueError(f"expected a list, got {type(groups).__name__}")
+    except Exception as exc:
+        logger.warning("Duplicate-story merge failed: %s — keeping all", exc)
+        return scored
+
+    drop: set[int] = set()  # id() of articles to remove
+    merged_groups = 0
+    for group in groups:
+        if not isinstance(group, list):
+            continue
+        ids = sorted({i for i in group if isinstance(i, int) and 0 <= i < len(candidates)})
+        if len(ids) < 2:
+            continue
+        # Keep the highest score; ties go to the earlier (higher-ranked) candidate.
+        keep = max(ids, key=lambda i: (candidates[i][2].get("score", 0), -i))
+        kept_art = candidates[keep][2]
+        for i in ids:
+            if i == keep:
+                continue
+            cat, _, art = candidates[i]
+            drop.add(id(art))
+            logger.info(
+                "Duplicate-story merge: dropped [%s] %r (%s, score %s) — same story as [%s] %r (%s, score %s)",
+                cat, art.get("title", "")[:70], art.get("source", ""), art.get("score"),
+                candidates[keep][0], kept_art.get("title", "")[:70], kept_art.get("source", ""),
+                kept_art.get("score"),
+            )
+        merged_groups += 1
+
+    if not drop:
+        logger.info("Duplicate-story merge: no duplicates among %d candidates", len(candidates))
+        return scored
+
+    logger.info("Duplicate-story merge: %d groups, %d articles dropped", merged_groups, len(drop))
+    return {cat: [a for a in arts if id(a) not in drop] for cat, arts in scored.items()}
 
 
 # ============================================================
