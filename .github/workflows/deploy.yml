@@ -5,6 +5,15 @@ on:
     branches:
       - main
 
+# One deploy at a time, in push order. Without this, two pushes a minute apart
+# (2026-11-05: fa4df5b then f055933) deployed in parallel and whichever finished
+# last decided which image the scheduler ran. With cancel-in-progress: false a
+# running deploy always finishes; if several pushes queue up behind it, GitHub
+# keeps only the newest pending run — which contains every earlier commit.
+concurrency:
+  group: deploy-ecs
+  cancel-in-progress: false
+
 env:
   AWS_REGION: us-east-1
   ECR_REGISTRY: 602039469166.dkr.ecr.us-east-1.amazonaws.com
