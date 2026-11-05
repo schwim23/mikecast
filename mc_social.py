@@ -327,12 +327,29 @@ def _truncate_words(text: str, limit: int) -> str:
     return cut.rstrip() + "…"
 
 
+# twitter-text v3 weighting: code points in these ranges weigh 1, everything else
+# (emoji, "…", CJK, most symbols) weighs 2. Until 2026-11-05 this counted every
+# character as 1, so the 🎙️/📰/🎧 template + a trailing "…" came in ~3 over the
+# real limit on long-copy days. X's API rejects an over-length tweet with a bare
+# 403 "You are not permitted to perform this action" — 4 of 8 days 10/28–11/05
+# failed exactly when the true length was 281-283.
+_X_WEIGHT1_RANGES = ((0, 4351), (8192, 8205), (8208, 8223), (8242, 8247))
+
+
+def _x_char_weight(ch: str) -> int:
+    cp = ord(ch)
+    return 1 if any(lo <= cp <= hi for lo, hi in _X_WEIGHT1_RANGES) else 2
+
+
 def _weighted_len(s: str) -> int:
-    """Length as X counts it: every URL weighs 23 chars (t.co), everything else 1."""
-    w = len(s)
-    for u in re.findall(r"https?://\S+", s):
-        w += X_LINK_WEIGHT - len(u)
-    return w
+    """Length as X counts it: every URL weighs 23 (t.co), weight-2 characters count
+    double. Emoji modifiers (U+FE0F, ZWJ) are counted too, which can only OVER-count
+    vs X — the safe direction for fitting under the limit."""
+    import unicodedata
+    s = unicodedata.normalize("NFC", s)
+    urls = re.findall(r"https?://\S+", s)
+    rest = re.sub(r"https?://\S+", "", s)
+    return X_LINK_WEIGHT * len(urls) + sum(_x_char_weight(c) for c in rest)
 
 
 def _fit_x(text: str, link: str, date_display: str | None = None,

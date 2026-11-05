@@ -191,7 +191,7 @@ NYT_SEARCH_QUERIES: dict[str, list[str]] = {
 # ---------------------------------------------------------------------------
 SOURCE_TIERS: dict[str, int] = {
     # Tier 1
-    "The New York Times": 1, "Reuters": 1, "Associated Press": 1,
+    "The New York Times": 1, "Reuters": 1, "Associated Press": 1, "AP News": 1,
     "The Verge": 1, "Ars Technica": 1, "MIT Technology Review": 1, "Wired": 1,
     # Tier 2
     "TechCrunch": 2, "VentureBeat": 2, "CNBC": 2, "ESPN": 2, "Hacker News": 2,
@@ -213,13 +213,20 @@ TECH_RSS_FEEDS: list[tuple[str, str, str, int]] = [
     ("MIT Technology Review", "https://www.technologyreview.com/feed/",          "AI & Tech", 5),
 ]
 
-WIRE_RSS_FEEDS: list[tuple[str, str, str, int]] = [
-    ("Reuters",          "https://feeds.reuters.com/reuters/topNews",        "Business & Markets", 6),
-    ("Reuters",          "https://feeds.reuters.com/reuters/businessNews",   "Business & Markets", 6),
-    ("Reuters",          "https://feeds.reuters.com/reuters/technologyNews", "AI & Tech",          5),
-    ("Associated Press", "https://feeds.apnews.com/rss/apf-topnews",        "Business & Markets", 5),
-    ("Associated Press", "https://feeds.apnews.com/rss/apf-technology",     "AI & Tech",          5),
-    ("Associated Press", "https://feeds.apnews.com/rss/apf-business",       "Business & Markets", 5),
+# Reuters and AP wire coverage, via Google News site-restricted searches.
+# The old direct feeds (feeds.reuters.com, feeds.apnews.com) stopped resolving —
+# every run since at least 2026-10-01 logged "Wire RSS [...]: 0" — and the sites'
+# own RSS/sitemaps 401/403 automated clients. Google News returns dated items with
+# per-article links (see mc_collect.search_news_web). AP's "technology" query was
+# dropped: it returns state-by-state election-results pages.
+# Each entry: (label, google_news_query, category, max_articles)
+WIRE_GNEWS_QUERIES: list[tuple[str, str, str, int]] = [
+    ("Reuters",          "site:reuters.com markets stocks",          "Business & Markets", 6),
+    ("Reuters",          "site:reuters.com business",                "Business & Markets", 6),
+    ("Reuters",          "site:reuters.com artificial intelligence", "AI & Tech",          5),
+    ("Reuters",          "site:reuters.com technology",              "AI & Tech",          5),
+    ("Associated Press", "site:apnews.com stocks economy",           "Business & Markets", 5),
+    ("Associated Press", "site:apnews.com artificial intelligence",  "AI & Tech",          5),
 ]
 
 CNBC_RSS_FEEDS: list[tuple[str, str, str, int]] = [
@@ -264,7 +271,7 @@ REDDIT_FEEDS: list[tuple[str, str, int]] = [
 # NY Sports category are dropped before generation to prevent stale aggregator
 # content (e.g. AOL.com) from entering the pipeline.
 SPORTS_TRUSTED_SOURCES: set[str] = {
-    "ESPN", "The New York Times", "Associated Press", "Reuters",
+    "ESPN", "The New York Times", "Associated Press", "AP News", "Reuters",
     "CBS Sports", "NBC Sports", "Sports Illustrated", "The Athletic",
     "Bleacher Report", "MLB.com", "NBA.com", "NFL.com", "NHL.com",
     "New York Post", "New York Daily News", "NJ.com",

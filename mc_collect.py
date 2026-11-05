@@ -30,7 +30,7 @@ from mc_config import (
     CATEGORIES, CATEGORY_SCORER_PROMPTS, CNBC_RSS_FEEDS, ESPN_RSS_FEEDS, PAYMENTS_RSS_FEEDS,
     HISTORY_FILE, NYT_API_KEY, NYT_SEARCH_QUERIES, NYT_SECTION_TO_CATEGORY,
     NYT_SECTIONS, OPENAI_API_KEY, OPENAI_HELPER_MODEL, OPENAI_SCORER_MODEL, PICKS_FILE, REDDIT_FEEDS, REDDIT_USER_AGENT,
-    SCORE_BATCH_SIZE, SOURCE_TIERS, TECH_RSS_FEEDS, TODAY, WIRE_RSS_FEEDS,
+    SCORE_BATCH_SIZE, SOURCE_TIERS, TECH_RSS_FEEDS, TODAY, WIRE_GNEWS_QUERIES,
 )
 from mc_utils import _atomic_write_json, _safe_request, title_similarity, url_fingerprint
 from eval.dump import dump_fixture, enabled as _dump_enabled
@@ -363,6 +363,17 @@ def search_news_web(query: str, max_results: int = 5) -> list[dict]:
     return articles
 
 
+def fetch_wire_via_google_news() -> dict[str, list[dict]]:
+    """Reuters + AP via Google News site: searches (their direct feeds are dead)."""
+    results: dict[str, list[dict]] = {}
+    for label, query, category, max_results in WIRE_GNEWS_QUERIES:
+        arts = search_news_web(query, max_results=max_results)
+        results.setdefault(category, []).extend(arts)
+        logger.info("Wire [%s] '%s': %d articles", label, query, len(arts))
+        time.sleep(0.3)
+    return results
+
+
 def collect_all_news(dynamic_queries: dict[str, list[str]] | None = None) -> dict[str, list[dict]]:
     """
     Collect articles from all configured sources.
@@ -384,7 +395,7 @@ def collect_all_news(dynamic_queries: dict[str, list[str]] | None = None) -> dic
     parallel_sources = {
         "hn":   lambda: ("hn",      fetch_hacker_news_top()),
         "tech": lambda: ("cat_dict", _fetch_rss_source_list(TECH_RSS_FEEDS, "Tech RSS")),
-        "wire": lambda: ("cat_dict", _fetch_rss_source_list(WIRE_RSS_FEEDS, "Wire RSS")),
+        "wire": lambda: ("cat_dict", fetch_wire_via_google_news()),
         "cnbc": lambda: ("cat_dict", _fetch_rss_source_list(CNBC_RSS_FEEDS, "CNBC RSS")),
         "payments": lambda: ("cat_dict", _fetch_rss_source_list(PAYMENTS_RSS_FEEDS, "Payments RSS")),
         "reddit": lambda: ("cat_dict", fetch_reddit_rss()),
