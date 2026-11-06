@@ -354,14 +354,16 @@ def _single_voice_task(
         f"{trending_block}\n"
         f"{sports_facts}\n\n"
         f"Here are today's articles:\n{articles_context}{picks_ctx}\n\n"
-        "TARGET LENGTH: about 8 minutes of spoken audio at a natural ~150 wpm pace. "
-        "That means a TOTAL of 1150–1250 words — not a word longer. Brevity matters.\n\n"
+        "TARGET LENGTH: about 8 minutes of spoken audio. Aim for ~1200 words; the "
+        "1150-word FLOOR is as firm as the 1250-word ceiling — a short script is a failed "
+        "script. Fill the length with substance from the articles (numbers, who, why it "
+        "matters), never with filler or invented detail.\n\n"
         "Segments with approximate word targets (sum ≈ 1200):\n"
         "  1. INTRO (~60w) — warm welcome, tease top 2-3 stories.\n"
-        "  2. AI & TECH (~300w) — top 3 stories. Substance over completeness.\n"
-        "  3. BUSINESS & MARKETS (~180w) — top 2 stories with the why-it-matters.\n"
-        "  4. COMPANIES (~220w) — top 2-3 stories with personality.\n"
-        f"  5. PAYMENTS & COMMERCE (~220w) — {_PAYMENTS_SPOKEN_RULE}\n"
+        "  2. AI & TECH (~300w, at least 260) — top 3 stories. Substance over completeness.\n"
+        "  3. BUSINESS & MARKETS (~180w, at least 160) — top 2 stories with the why-it-matters.\n"
+        "  4. COMPANIES (~220w, at least 190) — top 2-3 stories with personality.\n"
+        f"  5. PAYMENTS & COMMERCE (~220w, at least 190) — {_PAYMENTS_SPOKEN_RULE}\n"
         "  6. NY SPORTS (~100w) — Knicks / Devils / Yankees / NY Giants ONLY, leading with "
         "     each team's news from the LAST 24 HOURS. "
         "     MANDATORY: every team marked [MANDATORY-INCLUDE] in the RESULTS & UPCOMING "
@@ -377,8 +379,7 @@ def _single_voice_task(
         "     here.\n"
         "  7. MIKE'S PICKS (~100w) — only if picks exist; \"Big Mike's hand-picked reads\".\n"
         "  8. OUTRO (~40w) — wrap-up, sign-off.\n\n"
-        "Cut anything that isn't moving the listener forward. Prefer one specific "
-        "fact over two vague ones. Natural spoken language — contractions, transitions, "
+        "Prefer one specific fact over two vague ones. Natural spoken language — contractions, transitions, "
         "rhetorical questions. No stage directions. No URLs.\n\n"
         f"{_ANTI_SKIP_RULE}\n\n"
         f"{_TONE_TTS_REMINDER}"
@@ -406,15 +407,17 @@ def _conversational_task(
         f"Here are today's articles:\n{articles_context}{picks_ctx}\n\n"
         "Tag every line with [MIKE], [ELIZABETH], or [JESSE] on its OWN LINE, e.g.:\n"
         "[MIKE]\nHey everyone, welcome to MikeCast...\n\n"
-        "TARGET LENGTH: about 8 minutes of spoken audio at ~150 wpm. "
-        "TOTAL 1150–1250 words across all hosts — not a word longer. Brevity matters.\n\n"
+        "TARGET LENGTH: about 8 minutes of spoken audio. Aim for ~1200 words across all hosts; the "
+        "1150-word FLOOR is as firm as the 1250-word ceiling — a short script is a failed "
+        "script. Fill the length with substance from the articles (numbers, who, why it "
+        "matters), never with filler or invented detail.\n\n"
         "Structure with approximate word targets (sum ≈ 1200):\n"
         "1. [MIKE] INTRO (~60w) — welcome, tease top 2-3 stories.\n"
-        "2. [ELIZABETH] AI & TECH (~300w) — top 3 stories with substance.\n"
-        "3. [ELIZABETH] BUSINESS & MARKETS (~180w) — top 2 stories in depth.\n"
-        "4. [ELIZABETH] COMPANIES (~210w) — top 2-3 with personality. "
+        "2. [ELIZABETH] AI & TECH (~300w, at least 260) — top 3 stories with substance.\n"
+        "3. [ELIZABETH] BUSINESS & MARKETS (~180w, at least 160) — top 2 stories in depth.\n"
+        "4. [ELIZABETH] COMPANIES (~210w, at least 190) — top 2-3 with personality. "
         "End with: \"Mike, what's happening in payments?\"\n"
-        f"5. [MIKE] PAYMENTS & COMMERCE (~220w) — {_PAYMENTS_SPOKEN_RULE} "
+        f"5. [MIKE] PAYMENTS & COMMERCE (~220w, at least 190) — {_PAYMENTS_SPOKEN_RULE} "
         "End with: \"Alright Jesse, take it away with sports...\"\n"
         "6. [JESSE] NY SPORTS (~100w) — Knicks / Devils / Yankees / NY Giants ONLY, leading "
         "with each team's news from the LAST 24 HOURS. "
@@ -430,14 +433,70 @@ def _conversational_task(
         "career-altering injury to an all-time-great). Routine non-NY recaps and 'fun bar "
         "conversation' items DO NOT belong here. End with: \"Back to you, Mike.\"\n"
         "7. [MIKE] SIGN-OFF (~40w).\n\n"
-        "Cut anything that isn't moving the listener forward. Prefer one specific "
-        "fact over two vague ones. No URLs. No stage directions. Only spoken words.\n\n"
+        "Prefer one specific fact over two vague ones. No URLs. No stage directions. Only spoken words.\n\n"
         f"{_MIN_TURN_RULE}\n\n"
         f"{_ANTI_SKIP_RULE}\n\n"
         f"{_TONE_TTS_REMINDER}"
     )
     expected = "Tagged 3-host script with [MIKE]/[ELIZABETH]/[JESSE] on own lines, 1150–1250 words total."
     return desc, expected
+
+
+# ---------------------------------------------------------------------------
+# Podcast length backstop
+# ---------------------------------------------------------------------------
+
+# 2026-11-06: first payments-era episode came in at 1004/1105 words (target 1150-1250)
+# → 5.5 min. One expansion pass when a script is clearly short.
+PODCAST_MIN_WORDS = 1150
+PODCAST_MAX_WORDS = 1250
+_EXPAND_BELOW_WORDS = 1100
+_EXPAND_ACCEPT_MAX_WORDS = 1350
+
+_SPEAKER_TAG_RE = re.compile(r"\[(?:MIKE|ELIZABETH|JESSE)\]")
+
+
+def spoken_word_count(script: str) -> int:
+    """Words that will actually be read aloud (speaker tags excluded)."""
+    return len(_SPEAKER_TAG_RE.sub(" ", script or "").split())
+
+
+def _expand_if_short(agent, task_desc: str, draft: str, kind: str, conversational: bool) -> str:
+    """If `draft` is under _EXPAND_BELOW_WORDS, ask the same writer to lengthen it once.
+
+    The retry keeps the original task (articles included) so it can only add depth from
+    the same inputs. The result is accepted only if it is longer, not runaway-long, and —
+    for the 3-host script — keeps all three speakers. Otherwise the draft is kept."""
+    n = spoken_word_count(draft)
+    if not draft or n >= _EXPAND_BELOW_WORDS:
+        return draft
+    logger.info("[Writing Crew] %s script is short (%d words < %d) — one expansion pass",
+                kind, n, _EXPAND_BELOW_WORDS)
+    desc = (
+        f"{task_desc}\n\n"
+        f"=== YOUR DRAFT ({n} words — TOO SHORT) ===\n{draft}\n=== END DRAFT ===\n\n"
+        f"Rewrite the draft to {PODCAST_MIN_WORDS}-{PODCAST_MAX_WORDS} words total (~1200). "
+        f"It needs about {1200 - n} more words. Add depth to the AI & TECH, BUSINESS & MARKETS, "
+        "COMPANIES and PAYMENTS & COMMERCE segments — more of each story's numbers, names and "
+        "why-it-matters, or one more story from that category's articles above. Every added "
+        "fact must come from the articles above. Do NOT add anything to the NY SPORTS segment "
+        "— keep it exactly as drafted. Keep the same structure, speaker tags, hand-off lines "
+        "and sign-off. Return ONLY the full rewritten script."
+    )
+    out = _kickoff_single_task(agent, desc, "The full rewritten script, 1150-1250 words.")
+    if conversational and out:
+        out = re.sub(r'(\[(?:MIKE|ELIZABETH|JESSE)\])', r'\n\1\n', out)
+        out = re.sub(r'\n{3,}', '\n\n', out).strip()
+    m = spoken_word_count(out)
+    ok = n < m <= _EXPAND_ACCEPT_MAX_WORDS
+    if ok and conversational:
+        ok = all(t in out for t in ("[MIKE]", "[ELIZABETH]", "[JESSE]"))
+    if not ok:
+        logger.warning("[Writing Crew] %s expansion rejected (%d → %d words) — keeping draft",
+                       kind, n, m)
+        return draft
+    logger.info("[Writing Crew] %s script expanded %d → %d words", kind, n, m)
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -494,6 +553,19 @@ def run_writing(
     if conv_script:
         conv_script = re.sub(r'(\[(?:MIKE|ELIZABETH|JESSE)\])', r'\n\1\n', conv_script)
         conv_script = re.sub(r'\n{3,}', '\n\n', conv_script).strip()
+
+    # Length backstop — both scripts in parallel (each is at most one extra writer call).
+    with ThreadPoolExecutor(max_workers=2) as ex:
+        f_s = ex.submit(_expand_if_short, single_agent, single_desc, single_script, "single-voice", False)
+        f_c = ex.submit(_expand_if_short, conv_agent, conv_desc, conv_script, "conversational", True)
+        try:
+            single_script = f_s.result(timeout=600)
+        except Exception as exc:
+            logger.warning("[Writing Crew] single-voice expansion failed: %s", exc)
+        try:
+            conv_script = f_c.result(timeout=600)
+        except Exception as exc:
+            logger.warning("[Writing Crew] conversational expansion failed: %s", exc)
 
     # Wrap HTML body in the styled template
     if html_body:

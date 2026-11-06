@@ -33,6 +33,7 @@ from crew.writing_crew import _kickoff_single_task
 from eval.dump import dump_fixture
 from mc_config import TODAY
 from mc_critic import _extract_html_summary  # reuse the legacy HTML summariser
+from mc_critic import PATCH_LINK_RULE, enforce_patch_links, patch_article_lines
 
 logger = logging.getLogger("mikecast.crew.critic")
 
@@ -155,15 +156,7 @@ def _run_patcher(cat: str, articles: list[dict], issue: str) -> str:
     """Ask Claude to rewrite the HTML body for a single weak section."""
     patcher = make_section_patcher()
 
-    article_lines: list[str] = []
-    for i, art in enumerate(articles[:8], 1):
-        title = art.get("title", "")
-        desc = (art.get("description") or "")[:200]
-        why = art.get("why_it_matters", "")
-        block = f"{i}. {title}\n   Description: {desc}"
-        if why:
-            block += f"\n   Why it matters: {why}"
-        article_lines.append(block)
+    article_lines = patch_article_lines(articles)
 
     desc = (
         f"You are rewriting the '{cat}' section of an HTML briefing.\n\n"
@@ -174,6 +167,7 @@ def _run_patcher(cat: str, articles: list[dict], issue: str) -> str:
         "  - Has 3-4 sentences of analysis per story.\n"
         "  - Includes specific facts (numbers, names, decisions) from the articles above.\n"
         "  - Uses <h3> for story headlines and <p> for analysis.\n"
+        + PATCH_LINK_RULE +
         "  - Does NOT include an <h2> header — it will be added separately.\n\n"
         "Return ONLY the HTML fragment — no markdown, no explanation, no <html> wrapper. "
         "Do NOT add stories, facts, or events not explicitly stated in those articles."
@@ -280,8 +274,10 @@ def run_critic_pass(
             continue
         logger.info("[Critic Crew] patching weak section: %s — %s", cat, issue)
         try:
-            new_section = _run_patcher(cat, articles, issue)
+            new_section = enforce_patch_links(_run_patcher(cat, articles, issue), articles)
             if not new_section:
+                logger.warning("[Critic Crew] patch for '%s' has no valid source links — "
+                               "keeping the original section.", cat)
                 continue
             # Headers are HTML-escaped in the page ("AI &amp; TECH"), but the scorer
             # echoes them unescaped ("AI & TECH") — match either form, or every

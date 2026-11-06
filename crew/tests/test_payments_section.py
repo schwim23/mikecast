@@ -94,7 +94,7 @@ class TestWriterPrompts:
     def test_podcast_length_targets(self):
         for fn in (writing_crew._single_voice_task, writing_crew._conversational_task):
             desc, expected = fn(*self._args())
-            assert "1150–1250 words" in desc and "1150–1250 words" in expected
+            assert "1150-word FLOOR" in desc and "1250-word ceiling" in desc and "1150–1250 words" in expected
 
     def test_mike_voices_payments_in_3host(self):
         desc, _ = writing_crew._conversational_task(*self._args())
@@ -116,7 +116,7 @@ class TestCriticEscapedAmpersand:
         critique = {"category_scores": {"PAYMENTS & COMMERCE": 4}, "issues": {}, "overall_passed": False}
         articles = {PAY: [{"title": "Stripe toolkit", "url": "https://e.com", "description": "d"}]}
         with patch("crew.critic_crew._run_scorer", return_value=(critique, {})), \
-             patch("crew.critic_crew._run_patcher", return_value="<p>Patched payments.</p>"), \
+             patch("crew.critic_crew._run_patcher", return_value='<p>Patched payments. <a href="https://e.com">E</a></p>'), \
              patch("crew.critic_crew.fact_check_ny_sports"):
             html, _, _, metrics = run_critic_pass(self._HTML, "", "", articles, [], [])
         assert "Patched payments." in html and "Thin." not in html

@@ -163,6 +163,64 @@ def critique_briefing(html: str, categorised: dict[str, list[dict]]) -> dict:
 # Patch weak sections
 # ---------------------------------------------------------------------------
 
+# Same style the writer's [Source](URL) → <a> conversion uses (crew/writing_crew.py).
+PATCH_LINK_STYLE = "color:#81d4fa;text-decoration:none;"
+
+PATCH_LINK_RULE = (
+    "  - End EVERY story paragraph with its source link, using that article's exact URL "
+    f'from the list above: <a href="URL" style="{PATCH_LINK_STYLE}">Source Name</a>\n'
+    "  - Never invent, shorten, or edit a URL — copy it exactly.\n"
+)
+
+
+def patch_article_lines(articles: list[dict], limit: int = 8) -> list[str]:
+    """Numbered article list for a section patcher — includes source + URL so the
+    rewritten section keeps its source links (2026-11-06: patched sections had none)."""
+    lines: list[str] = []
+    for i, art in enumerate(articles[:limit], 1):
+        block = f"{i}. {art.get('title', '')}\n   Description: {(art.get('description') or '')[:200]}"
+        if art.get("why_it_matters"):
+            block += f"\n   Why it matters: {art['why_it_matters']}"
+        if art.get("source"):
+            block += f"\n   Source: {art['source']}"
+        if art.get("url"):
+            block += f"\n   URL: {art['url']}"
+        lines.append(block)
+    return lines
+
+
+_A_TAG_RE = re.compile(r'<a\s[^>]*href\s*=\s*"([^"]*)"[^>]*>(.*?)</a>', re.IGNORECASE | re.DOTALL)
+_MD_LINK_RE = re.compile(r'\[([^\]]+)\]\((https?://[^)\s]+)\)')
+
+
+def enforce_patch_links(fragment: str, articles: list[dict]) -> str | None:
+    """Validate a patcher's HTML fragment's links against the section's articles.
+
+    Markdown links are converted to <a>; links whose href is not one of the articles'
+    URLs are unwrapped to plain text (no hallucinated URLs). Returns None when no valid
+    source link is left — the caller then keeps the original (linked) section rather
+    than shipping an unsourced rewrite."""
+    if not fragment:
+        return None
+    allowed = {a.get("url") for a in articles if a.get("url")}
+    fragment = _MD_LINK_RE.sub(
+        lambda m: f'<a href="{m.group(2)}" style="{PATCH_LINK_STYLE}">{m.group(1)}</a>', fragment)
+
+    kept = 0
+
+    def _check(m: re.Match) -> str:
+        nonlocal kept
+        href = _html.unescape(m.group(1))
+        if href in allowed:
+            kept += 1
+            return m.group(0)
+        logger.warning("Critic patch: dropping link not in section articles: %s", href[:120])
+        return m.group(2)
+
+    fragment = _A_TAG_RE.sub(_check, fragment)
+    return fragment if kept else None
+
+
 def _regenerate_html_section(cat: str, articles: list[dict], issue: str) -> str:
     """
     Ask GPT-4o to write an improved HTML section for a weak category.
@@ -171,17 +229,7 @@ def _regenerate_html_section(cat: str, articles: list[dict], issue: str) -> str:
     from openai import OpenAI
     client = OpenAI()
 
-    # Build compact article list for the prompt
-    article_lines: list[str] = []
-    for i, art in enumerate(articles[:8], 1):
-        title = art.get("title", "")
-        desc  = art.get("description", "")
-        why   = art.get("why_it_matters", "")
-        article_lines.append(
-            f"{i}. {title}\n"
-            f"   Description: {desc[:200]}\n"
-            + (f"   Why it matters: {why}\n" if why else "")
-        )
+    article_lines = patch_article_lines(articles)
 
     articles_text = "\n".join(article_lines)
 
@@ -198,6 +246,7 @@ def _regenerate_html_section(cat: str, articles: list[dict], issue: str) -> str:
         "  - Has 3-4 sentences of analysis per story\n"
         "  - Includes specific facts from the articles above\n"
         "  - Uses <h3> for story headlines and <p> for analysis\n"
+        + PATCH_LINK_RULE +
         "  - Does NOT include an <h2> header (it will be added separately)\n"
         "Return ONLY the HTML fragment — no markdown, no explanation."
     )
@@ -263,7 +312,12 @@ def patch_weak_sections(
         logger.info("Patching weak section: %s — %s", cat, issue)
 
         try:
-            new_section_html = _regenerate_html_section(cat, articles, issue)
+            new_section_html = enforce_patch_links(
+                _regenerate_html_section(cat, articles, issue), articles)
+            if new_section_html is None:
+                logger.warning("Patch for '%s' has no valid source links — keeping the "
+                               "original section.", cat)
+                continue
 
             # Find the h2 header for this category in the HTML
             # Match pattern: <h2 ...>...category...</h2> followed by section content
