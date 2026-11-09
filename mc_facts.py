@@ -32,10 +32,10 @@ import logging
 import os
 import re
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from functools import lru_cache
 
-from mc_config import TODAY_DISPLAY
+from mc_config import _ET, TODAY_DISPLAY
 
 logger = logging.getLogger(__name__)
 
@@ -512,13 +512,106 @@ OLD_NEWS_RULE = (
 )
 
 
+def _nth_weekday(year: int, month: int, weekday: int, n: int) -> date:
+    """n-th (1-based) weekday of a month; n=-1 is the last one. Monday is 0."""
+    if n > 0:
+        first = date(year, month, 1)
+        return first + timedelta(days=(weekday - first.weekday()) % 7 + 7 * (n - 1))
+    next_month = date(year + (month == 12), month % 12 + 1, 1)
+    last = next_month - timedelta(days=1)
+    return last - timedelta(days=(last.weekday() - weekday) % 7)
+
+
+def _easter(year: int) -> date:
+    """Gregorian Easter Sunday (anonymous/Meeus algorithm)."""
+    a, b, c = year % 19, year // 100, year % 100
+    d, e = b // 4, b % 4
+    g = (8 * b + 13) // 25
+    h = (19 * a + b - d - g + 15) % 30
+    i, k = c // 4, c % 4
+    l = (32 + 2 * e + 2 * i - h - k) % 7
+    m = (a + 11 * h + 19 * l) // 433
+    month = (h + l - 7 * m + 90) // 25
+    day = (h + l - 7 * m + 33 * month + 19) % 32
+    return date(year, month, day)
+
+
+def _observed(day: date) -> date:
+    """NYSE closes the Friday before a Saturday holiday, the Monday after a Sunday one."""
+    if day.weekday() == 5:
+        return day - timedelta(days=1)
+    if day.weekday() == 6:
+        return day + timedelta(days=1)
+    return day
+
+
+def nyse_holidays(year: int) -> set[date]:
+    """Regular NYSE full-day closures. Unscheduled closures (e.g. a national day of
+    mourning) aren't predictable and aren't included."""
+    holidays = {
+        _nth_weekday(year, 1, 0, 3),               # MLK Day
+        _nth_weekday(year, 2, 0, 3),               # Presidents' Day
+        _easter(year) - timedelta(days=2),         # Good Friday
+        _nth_weekday(year, 5, 0, -1),              # Memorial Day
+        _observed(date(year, 6, 19)),              # Juneteenth
+        _observed(date(year, 7, 4)),               # Independence Day
+        _nth_weekday(year, 9, 0, 1),               # Labor Day
+        _nth_weekday(year, 11, 3, 4),              # Thanksgiving
+        _observed(date(year, 12, 25)),             # Christmas
+    }
+    # New Year's Day on a Saturday is NOT observed on the prior Friday (NYSE Rule 7.2).
+    new_year = date(year, 1, 1)
+    if new_year.weekday() != 5:
+        holidays.add(_observed(new_year))
+    return holidays
+
+
+def is_us_trading_day(day: date) -> bool:
+    return day.weekday() < 5 and day not in nyse_holidays(day.year)
+
+
+def last_completed_us_session(now: datetime | None = None) -> date:
+    """Most recent NYSE session that has closed (regular close, 4 PM ET)."""
+    now_et = (now or datetime.now(_ET)).astimezone(_ET)
+    day = now_et.date()
+    if is_us_trading_day(day) and now_et.time() >= time(16, 0):
+        return day
+    day -= timedelta(days=1)
+    while not is_us_trading_day(day):
+        day -= timedelta(days=1)
+    return day
+
+
+def market_calendar_line(now: datetime | None = None) -> str:
+    """Today's market status and the last closed session — computed, never guessed."""
+    now_et = (now or datetime.now(_ET)).astimezone(_ET)
+    last = last_completed_us_session(now_et)
+    status = "a trading day" if is_us_trading_day(now_et.date()) else "NOT a trading day (US stock markets are closed)"
+    return (
+        f"MARKET CALENDAR: Today, {now_et:%A}, is {status}. The most recent completed US "
+        f"stock-market session was {last:%A}, {_long_date(last.isoformat())}."
+    )
+
+
+DATE_RULE = (
+    "DATE RULE: An article's Published line is when it was posted, NOT when the event happened; "
+    "a recap posted this morning can describe something from days ago. Say today, yesterday, "
+    "last night, this morning or a named day ONLY when the article or a verified facts block "
+    "states when it happened. Never work the day out from the Published line. A market-close "
+    "headline that names no day may be about an earlier session than the one in MARKET "
+    "CALENDAR, so never attach that session or any other day to it (WRONG: \"Friday was "
+    "rough.\" RIGHT: \"In a recent session, the Nasdaq fell five percent.\"), and never "
+    "present it as the latest market news."
+)
+
+
 def prompt_block() -> str:
     return (
         f"CURRENT FACTS (today is {TODAY_DISPLAY}). Your training data predates today and is out "
         "of date on who holds office and who runs major companies. These facts override anything "
         "you remember:\n"
         + facts_lines()
-        + f"\n\n{TITLE_RULE}\n\n{OLD_NEWS_RULE}"
+        + f"\n\n{TITLE_RULE}\n\n{OLD_NEWS_RULE}\n\n{market_calendar_line()}\n\n{DATE_RULE}"
     )
 
 

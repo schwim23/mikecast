@@ -5,7 +5,8 @@ Replaces the procedural pipeline in mc_collect.py:
 
     collect_all_news → deduplicate → filter_stale → filter_sports_trusted
                      → cluster_articles → score_and_rank_articles
-                     → merge_duplicate_stories → select_top_articles → enrich_top_stories
+                     → merge_duplicate_stories → filter_repeat_events
+                     → select_top_articles → enrich_top_stories
 
 We keep the dict-transformation plumbing in Python and only invoke real
 CrewAI agents where they add judgment value. The legacy functions are
@@ -29,6 +30,7 @@ from mc_collect import (
     deduplicate,
     enrich_top_stories,
     filter_sports_by_trusted_sources,
+    filter_repeat_events,
     filter_stale_articles,
     merge_duplicate_stories,
     score_and_rank_articles,
@@ -80,6 +82,9 @@ def run_research(
 
     logger.info("[Research Crew] Step 4b: merge_duplicate_stories")
     scored = merge_duplicate_stories(scored, total=total_target)
+
+    logger.info("[Research Crew] Step 4c: filter_repeat_events")
+    scored = filter_repeat_events(scored, total=total_target)
 
     logger.info("[Research Crew] Step 5: select_top_articles (target=%d)", total_target)
     selected = select_top_articles(scored, total=total_target)

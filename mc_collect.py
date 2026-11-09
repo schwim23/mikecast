@@ -19,6 +19,7 @@ import os
 import re
 import time
 import concurrent.futures
+from collections import Counter
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeoutError, as_completed
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -28,11 +29,14 @@ from bs4 import BeautifulSoup
 
 from mc_config import (
     CATEGORIES, CATEGORY_SCORER_PROMPTS, CNBC_RSS_FEEDS, ESPN_RSS_FEEDS, PAYMENTS_RSS_FEEDS,
-    HISTORY_FILE, NYT_API_KEY, NYT_SEARCH_QUERIES, NYT_SECTION_TO_CATEGORY,
-    NYT_SECTIONS, OPENAI_API_KEY, OPENAI_HELPER_MODEL, OPENAI_SCORER_MODEL, PICKS_FILE, REDDIT_FEEDS, REDDIT_USER_AGENT,
+    DATA_DIR, HISTORY_FILE, NYT_API_KEY, NYT_SEARCH_QUERIES, NYT_SECTION_TO_CATEGORY,
+    NYT_SECTIONS, OPENAI_API_KEY, OPENAI_HELPER_MODEL, OPENAI_SCORER_MODEL, PICKS_FILE, REDDIT_FEEDS, REDDIT_USER_AGENT, S3_BUCKET,
     SCORE_BATCH_SIZE, SOURCE_TIERS, TECH_RSS_FEEDS, TODAY, WIRE_GNEWS_QUERIES,
 )
-from mc_utils import _atomic_write_json, _safe_request, title_similarity, url_fingerprint
+from mc_utils import (
+    _atomic_write_json, _safe_request, format_published_et, parse_published,
+    s3_load_json, title_similarity, url_fingerprint,
+)
 from eval.dump import dump_fixture, enabled as _dump_enabled
 
 logger = logging.getLogger("mikecast")
@@ -585,13 +589,19 @@ def deduplicate(categorised: dict[str, list[dict]]) -> dict[str, list[dict]]:
     return deduped
 
 
+# Far-future dates are bad feed data; a few hours can be a mislabeled timezone.
+MAX_FUTURE_SKEW = timedelta(hours=24)
+
+
 def filter_stale_articles(
     categorised: dict[str, list[dict]],
     max_age_days: int = 3,
 ) -> dict[str, list[dict]]:
     """
-    Drop articles whose parsed publication date is older than *max_age_days*,
-    and articles whose date is missing or unparseable.
+    Drop articles whose parsed publication date is older than *max_age_days*
+    or more than MAX_FUTURE_SKEW ahead of now, and articles whose date is
+    missing or unparseable. A small skew is allowed because some feeds mislabel
+    their timezone.
 
     Undated articles used to be kept (benefit of the doubt). That let the April
     "Tim Cook stepping down" story into the 2026-11-05 episode: Google News dates
@@ -599,31 +609,19 @@ def filter_stale_articles(
     age-checked. A source that stops sending dates now loses its articles
     (logged per source as a warning) instead of letting old news through.
     """
-    from email.utils import parsedate_to_datetime
-
-    cutoff = datetime.now(timezone.utc) - timedelta(days=max_age_days)
+    now = datetime.now(timezone.utc)
+    cutoff = now - timedelta(days=max_age_days)
+    latest_allowed = now + MAX_FUTURE_SKEW
     filtered: dict[str, list[dict]] = {}
     total_dropped = 0
+    future_dropped = 0
     undated_by_source: dict[str, int] = {}
 
     for cat, arts in categorised.items():
         kept: list[dict] = []
         for art in arts:
             pub = (art.get("published") or "").strip()
-            parsed_dt = None
-            for parse_fn in (
-                lambda s: parsedate_to_datetime(s),            # RFC 2822 (RSS pubDate)
-                lambda s: datetime.fromisoformat(s.replace("Z", "+00:00")),  # ISO 8601
-            ):
-                try:
-                    parsed_dt = parse_fn(pub)
-                    if parsed_dt.tzinfo is None:
-                        parsed_dt = parsed_dt.replace(tzinfo=timezone.utc)
-                    break
-                except Exception:
-                    continue
-            if not pub:
-                parsed_dt = None
+            parsed_dt = parse_published(pub)
 
             if parsed_dt is None:
                 src = art.get("source") or "unknown"
@@ -633,11 +631,17 @@ def filter_stale_articles(
                 logger.debug("Dropping stale article (%s): %s", pub[:10], art.get("title", "")[:60])
                 total_dropped += 1
                 continue
+            if parsed_dt > latest_allowed:
+                logger.debug("Dropping future-dated article (%s): %s", pub[:30], art.get("title", "")[:60])
+                future_dropped += 1
+                continue
             kept.append(art)
         filtered[cat] = kept
 
     if total_dropped:
         logger.info("Stale article filter: dropped %d articles older than %d days.", total_dropped, max_age_days)
+    if future_dropped:
+        logger.warning("Stale article filter: dropped %d future-dated articles.", future_dropped)
     if undated_by_source:
         logger.warning(
             "Stale article filter: dropped %d undated/unparseable articles by source: %s",
@@ -714,6 +718,22 @@ def _merge_model() -> str:
     return os.environ.get("MIKECAST_MERGE_MODEL") or OPENAI_SCORER_MODEL
 
 
+def _selection_candidates(
+    scored: dict[str, list[dict]], total: int, buffer: int,
+) -> list[tuple[str, int, dict]]:
+    """Articles select_top_articles could take, plus *buffer* per category so a
+    dropped story is replaced by one that was also checked. NY Sports excluded."""
+    total_available = sum(len(a) for a in scored.values())
+    candidates: list[tuple[str, int, dict]] = []
+    for cat, arts in scored.items():
+        if cat in _MERGE_EXCLUDED_CATEGORIES:
+            continue
+        share = max(3, int(total * len(arts) / total_available))
+        for idx, art in enumerate(arts[: share + buffer]):
+            candidates.append((cat, idx, art))
+    return candidates
+
+
 def merge_duplicate_stories(
     scored: dict[str, list[dict]], total: int = 25,
 ) -> dict[str, list[dict]]:
@@ -738,14 +758,7 @@ def merge_duplicate_stories(
     if total_available == 0:
         return scored
 
-    # Candidate window: what select_top_articles would take, plus a buffer.
-    candidates: list[tuple[str, int, dict]] = []
-    for cat, arts in scored.items():
-        if cat in _MERGE_EXCLUDED_CATEGORIES:
-            continue
-        share = max(3, int(total * len(arts) / total_available))
-        for idx, art in enumerate(arts[: share + _MERGE_BUFFER]):
-            candidates.append((cat, idx, art))
+    candidates = _selection_candidates(scored, total, _MERGE_BUFFER)
     if len(candidates) < 2:
         return scored
 
@@ -817,6 +830,176 @@ def merge_duplicate_stories(
 
     logger.info("Duplicate-story merge: %d groups, %d articles dropped", merged_groups, len(drop))
     return {cat: [a for a in arts if id(a) not in drop] for cat, arts in scored.items()}
+
+
+# How many previous days of episodes a new story is compared against. Matches
+# the 3-day age limit in filter_stale_articles.
+REPEAT_LOOKBACK_DAYS = 3
+# More than merge's buffer: a bad news day can drop several stories per category,
+# and every article that can backfill a slot must have been checked.
+_REPEAT_BUFFER = 8
+# The scorer model doesn't accept temperature=0 and flips on borderline stories
+# from run to run (2026-11-08 replay: the Nasdaq repeat caught in 2 of 3 single
+# calls, and "SpaceX, Tesla extend losses" wrongly dropped in 1 of 2). Drop a
+# story only when a majority of independent calls agree.
+_REPEAT_VOTES = 3
+_REPEAT_VOTES_NEEDED = 2
+
+
+def _load_recent_episode_articles(days: int = REPEAT_LOOKBACK_DAYS) -> list[dict]:
+    """Non-sports articles from the previous *days* episodes (never today's, so a
+    --force rerun doesn't match itself). A missing or unreadable day is skipped."""
+    today = datetime.strptime(TODAY, "%Y-%m-%d").date()
+    prior: list[dict] = []
+    for back in range(1, days + 1):
+        day = (today - timedelta(days=back)).isoformat()
+        try:
+            if S3_BUCKET:
+                episode = s3_load_json(S3_BUCKET, f"data/{day}.json")
+            else:
+                path = DATA_DIR / f"{day}.json"
+                episode = json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+        except Exception as exc:
+            logger.warning("Repeat-event filter: could not load %s episode: %s", day, exc)
+            continue
+        for cat, arts in ((episode or {}).get("articles") or {}).items():
+            if cat in _MERGE_EXCLUDED_CATEGORIES:
+                continue
+            prior.extend(dict(a, _episode_date=day) for a in arts)
+    return prior
+
+
+def filter_repeat_events(
+    scored: dict[str, list[dict]], total: int = 25,
+) -> dict[str, list[dict]]:
+    """
+    Drop stories that repeat an event an earlier episode already covered and add
+    nothing new. Runs after merge_duplicate_stories, before select_top_articles.
+
+    The stale filter sees publication time and deduplicate() needs a URL or a
+    near-identical title, so a recap with a fresh timestamp and a new headline
+    passes both. On 2026-11-08 (a Sunday) TradingView's "Nasdaq ends -5.5%, S&P
+    500 sees worst day since April 2025", dated that morning, ran as the market
+    news; the session was Thursday 11/05, covered on 11/06, and Friday's rebound
+    went unmentioned. Real follow-ups are kept. Three calls vote and a story is
+    dropped only on a majority. Fails open on any error.
+    Disable with MIKECAST_REPEAT_FILTER=0.
+    """
+    if os.environ.get("MIKECAST_REPEAT_FILTER") == "0" or not OPENAI_API_KEY:
+        return scored
+    if sum(len(a) for a in scored.values()) == 0:
+        return scored
+
+    candidates = _selection_candidates(scored, total, _REPEAT_BUFFER)
+    prior = _load_recent_episode_articles()
+    if not candidates or not prior:
+        return scored
+
+    def describe(art: dict) -> str:
+        desc = re.sub(r"\s+", " ", art.get("description", "") or "")[:200]
+        return f"{art.get('title', '')[:140]} — {art.get('source', '')} — {desc}"
+
+    prior_lines = [f"P{i} ({a['_episode_date']}): {describe(a)}" for i, a in enumerate(prior)]
+    candidate_lines = [
+        f"{i}: [{cat}] (posted {format_published_et(art.get('published')) or 'unknown'}) {describe(art)}"
+        for i, (cat, _, art) in enumerate(candidates)
+    ]
+
+    from mc_facts import market_calendar_line
+
+    prompt = (
+        "List A is stories a daily news briefing already covered in recent "
+        "episodes. List B is candidates for today's episode.\n\n"
+        + market_calendar_line() + "\n\n"
+        "Mark a candidate in B as a REPEAT only if it reports the same specific "
+        "event as a story in A AND adds no material new development: a recap or "
+        "re-report of the same market session, earnings report, deal, ruling or "
+        "announcement, even when the headline is worded differently or the "
+        "posting time is today. Posting time does not show when an event "
+        "happened. A market-close headline that names no day and reports a "
+        "plunge or rally of the scale already in A is a repeat unless it shows "
+        "it is about a later session.\n\n"
+        "NOT a repeat: a follow-up with something new since (the next market "
+        "session, a stock extending its move on a later day, a new decision, new "
+        "figures, a response, a resignation); a new opinion or forecast from a "
+        "named person; a different event about the same company or topic. If "
+        "unsure, it is not a repeat.\n\n"
+        "LIST A:\n" + "\n".join(prior_lines)
+        + "\n\nLIST B:\n" + "\n".join(candidate_lines)
+        + '\n\nReturn ONLY a JSON array of objects, one per repeat, like '
+        '[{"id": 3, "prior": "P12"}]. Return [] if there are none. No explanation.'
+    )
+
+    def ask() -> dict[int, int] | None:
+        """One model opinion as {candidate index: prior index}; None if it failed."""
+        try:
+            resp = _LLMClient().chat.completions.create(
+                model=_merge_model(),
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=2000,
+                temperature=0.0,
+            )
+            raw = resp.choices[0].message.content.strip()
+            raw = re.sub(r"^```(?:json)?\s*", "", raw)
+            raw = re.sub(r"\s*```$", "", raw)
+            flagged = json.loads(raw)
+            if not isinstance(flagged, list):
+                raise ValueError(f"expected a list, got {type(flagged).__name__}")
+        except Exception as exc:
+            logger.warning("Repeat-event filter: vote failed: %s", exc)
+            return None
+        vote: dict[int, int] = {}
+        for item in flagged:
+            if not isinstance(item, dict):
+                continue
+            cand_id, prior_ref = item.get("id"), str(item.get("prior", ""))
+            if not isinstance(cand_id, int) or not 0 <= cand_id < len(candidates):
+                continue
+            if re.fullmatch(r"P\d+", prior_ref) and int(prior_ref[1:]) < len(prior):
+                vote[cand_id] = int(prior_ref[1:])  # a repeat has to name a real earlier story
+        return vote
+
+    with ThreadPoolExecutor(_REPEAT_VOTES) as pool:
+        votes = [v for v in pool.map(lambda _: ask(), range(_REPEAT_VOTES)) if v is not None]
+    if len(votes) < _REPEAT_VOTES_NEEDED:
+        logger.warning("Repeat-event filter: only %d votes returned — keeping all", len(votes))
+        return scored
+
+    tally = Counter(cand_id for vote in votes for cand_id in vote)
+    # The first vote that flagged the candidate names the prior story for the log.
+    drop = {
+        cand_id: (cand_id, next(v[cand_id] for v in votes if cand_id in v))
+        for cand_id, count in tally.items() if count >= _REPEAT_VOTES_NEEDED
+    }
+    for cand_id, count in tally.items():
+        if count < _REPEAT_VOTES_NEEDED:
+            logger.info(
+                "Repeat-event filter: kept [%s] %r — only %d of %d votes",
+                candidates[cand_id][0], candidates[cand_id][2].get("title", "")[:70], count, len(votes),
+            )
+
+    if len(drop) > len(candidates) / 2:
+        logger.warning(
+            "Repeat-event filter: flagged %d of %d candidates, which is implausible — keeping all",
+            len(drop), len(candidates),
+        )
+        return scored
+    if not drop:
+        logger.info("Repeat-event filter: no repeats among %d candidates", len(candidates))
+        return scored
+
+    drop_ids: set[int] = set()
+    for cand_id, prior_id in drop.values():
+        cat, _, art = candidates[cand_id]
+        drop_ids.add(id(art))
+        logger.info(
+            "Repeat-event filter: dropped [%s] %r (%s) — already covered %s: %r (%s)",
+            cat, art.get("title", "")[:70], art.get("source", ""),
+            prior[prior_id]["_episode_date"], prior[prior_id].get("title", "")[:70],
+            prior[prior_id].get("source", ""),
+        )
+    logger.info("Repeat-event filter: dropped %d of %d candidates", len(drop_ids), len(candidates))
+    return {cat: [a for a in arts if id(a) not in drop_ids] for cat, arts in scored.items()}
 
 
 # ============================================================
@@ -914,9 +1097,11 @@ def _build_scoring_prompt(batch: list[dict]) -> str:
             f" | HN score={item['hn_score']} comments={item['hn_comments']}"
             if item.get("hn_score") else ""
         )
+        published = format_published_et(item.get("published")) or "unknown"
         lines.append(
             f"[{score_id}] {title}\n"
             f"  Source: {source} (tier {tier}){hn_info}\n"
+            f"  Published: {published}\n"
             f"  Desc: {desc}"
         )
     return "\n\n".join(lines)
@@ -950,12 +1135,15 @@ def score_and_rank_articles(
     # Who holds office / runs the tracked companies TODAY, so the scorer can sink
     # resurfaced old news (2026-11-05: ABC's April "Tim Cook is stepping down" scored
     # 100 and led the Companies section, two months after Ternus became CEO).
-    from mc_facts import facts_lines
+    from mc_facts import facts_lines, market_calendar_line
     old_news_block = (
         "\n\nCURRENT FACTS (override your training data):\n" + facts_lines() + "\n"
         "OLD NEWS: if an article reports as new a change these facts show already happened "
         "(e.g. a CEO 'is stepping down' / 'will be replaced' but the successor is already the "
-        "current CEO above), it is a resurfaced old story — score it 5 or lower and say so."
+        "current CEO above), it is a resurfaced old story — score it 5 or lower and say so.\n\n"
+        + market_calendar_line() + "\n"
+        "Published is when an article was posted, not when the event happened. A recap of a "
+        "market session earlier than the most recent one above is old news — score it 10 or lower."
     )
 
     # Appended to every category's system prompt to enforce JSON output format

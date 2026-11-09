@@ -9,9 +9,12 @@ import json
 import logging
 import re
 import time
+from datetime import datetime, timezone
 from difflib import SequenceMatcher
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -79,6 +82,34 @@ def _atomic_write_json(path: Path, data, **json_kwargs) -> None:
     except Exception:
         tmp.unlink(missing_ok=True)
         raise
+
+
+def parse_published(value: str | None) -> datetime | None:
+    """Parse an article's `published` string (RFC 2822 pubDate or ISO 8601) into an
+    aware datetime; naive values are taken as UTC. None if missing or unparseable."""
+    text = (value or "").strip()
+    if not text:
+        return None
+    for parse_fn in (
+        parsedate_to_datetime,
+        lambda s: datetime.fromisoformat(s.replace("Z", "+00:00")),
+    ):
+        try:
+            parsed = parse_fn(text)
+        except Exception:
+            continue
+        return parsed if parsed.tzinfo else parsed.replace(tzinfo=timezone.utc)
+    return None
+
+
+def format_published_et(value: str | None) -> str:
+    """`Sun Nov 8, 4:05 AM ET` for prompts; "" if the date can't be parsed."""
+    parsed = parse_published(value)
+    if parsed is None:
+        return ""
+    local = parsed.astimezone(ZoneInfo("America/New_York"))
+    hour = local.hour % 12 or 12
+    return f"{local:%a %b} {local.day}, {hour}:{local:%M %p} ET"
 
 
 def title_similarity(a: str, b: str) -> float:

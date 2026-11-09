@@ -15,6 +15,7 @@ import re
 
 from mc_config import OPENAI_API_KEY, TODAY, TODAY_DISPLAY
 from mc_facts import prompt_block
+from mc_utils import format_published_et
 
 logger = logging.getLogger("mikecast")
 
@@ -48,6 +49,9 @@ def _build_articles_context(categorised: dict[str, list[dict]]) -> str:
                 lines.append(f"   Summary: {desc[:500]}")
             if source:
                 lines.append(f"   Source: {source}")
+            published = format_published_et(art.get("published"))
+            if published:
+                lines.append(f"   Published: {published}")
             if url:
                 lines.append(f"   URL: {url}")
     return "\n".join(lines)
