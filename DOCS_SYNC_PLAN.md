@@ -1,6 +1,15 @@
 # Docs Sync Plan — keeping README.md and CLAUDE.md true after every deploy
 
-Status: DESIGN (2026-11-10). Nothing below is built yet.
+Status (2026-11-10): **layers 1 + 2 and `paths-ignore` are BUILT** on branch
+`docs/sync-readme-claude`: `scripts/gen_docs.py` (blocks: `env` + `numbers` in CLAUDE.md,
+`models` in README), `crew/tests/test_docs_in_sync.py`, `crew/tests/test_docs_drift.py`,
+`deploy.yml` `paths-ignore: **/*.md` + `workflow_dispatch` (deploy job guarded to `main`),
+and a "docs ship with the change" rule in CLAUDE.md Key Constraints. Deviation from the
+design below: the `tree`, `flags` and separate `schedule` blocks were not built (the tree
+churns on every new file and the module lint covers it; the schedule is a row of
+`numbers`). **Layer 3 (post-deploy LLM review) is deliberately deferred** — add it only if
+prose drift recurs despite the rule + lint. Backtest: run against `main`'s docs, the lint
+flags `WIRE_RSS_FEEDS` and all 12 module-map/README gaps from the audit.
 
 ## Problem
 

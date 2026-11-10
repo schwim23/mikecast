@@ -39,32 +39,40 @@ Other flags: `--resend` (with `--force`, bypass the first-run-of-day send gate),
 
 ## Environment Variables (locally in `~/.profile`, except `ANTHROPIC_API_KEY` — see below; in prod, secrets come from SSM via the ECS task def)
 
-| Variable | Required | Purpose |
-|---|---|---|
-| `OPENAI_API_KEY` | Yes | OpenAI scorer/helper models (scoring, clustering, enrichment, merge/repeat filters, grounding) + OpenAI TTS fallback |
-| `NYTAPIKEY` | Yes | NYT Top Stories + Article Search |
-| `GMAIL_APP_PASSWORD` | Yes | Gmail SMTP (16-digit app password) |
-| `GMAIL_FROM` | Yes | Sender address |
-| `GMAIL_TO` | Yes | Recipient address |
-| `ANTHROPIC_API_KEY` | Crew only | Claude for the writing crew (HTML + both podcast scripts). Locally lives in git-ignored `mikecast/.env` (loaded by `mc_config.py` via python-dotenv), NOT `~/.profile` — a globally exported key forces Claude Code onto API-key auth. Prod gets it from SSM via the task def. |
-| `ELEVENLABS_API_KEY` | No | 3-voice audio (Mike/Elizabeth/Jesse) |
-| `ELEVENLABS_VOICE_MIKE` | No | ElevenLabs voice ID |
-| `ELEVENLABS_VOICE_ELIZABETH` | No | ElevenLabs voice ID |
-| `ELEVENLABS_VOICE_JESSE` | No | ElevenLabs voice ID |
-| `XAI_API_KEY` | No | Grok adaptive search planning (Step 0) |
-| `RESEND_API_KEY` | No | Resend key — enables the daily email newsletter broadcast |
-| `RESEND_AUDIENCE_ID` | No | Resend "MikeCast Daily" audience id (required with the key) |
-| `RESEND_FROM` | No | Newsletter sender (default `MikeCast <mike@mikecast.io>`) |
-| `RESEND_REPLY_TO` | No | Newsletter reply-to (default `michael.schwimmer@gmail.com`) |
-| `X_API_KEY` / `X_API_SECRET` / `X_ACCESS_TOKEN` / `X_ACCESS_TOKEN_SECRET` | No | X auto-post (OAuth 1.0a, Step 11) |
-| `META_ACCESS_TOKEN` / `IG_USER_ID` | No | Instagram auto-post (Graph API, Step 11) |
-| `SOCIAL_MEDIA_KIND` | No | `card` (code default) or `reel` (set in the prod task def) |
-| `S3_BUCKET` | Prod | `mikecast-io-data`; enables S3 output mode (set in the task def, not locally) |
-| `DD_API_KEY` / `DD_SITE` | No | Datadog OTLP tracing (`mc_tracing.py`) + run metrics (`mc_metrics.py`); both no-op when the key is unset. `DD_SITE` defaults to `datadoghq.com` |
-| `CLAUDE_WRITER_MODEL` | No | LiteLLM model string for writers, patcher, social copywriter (default `anthropic/claude-sonnet-5`) |
-| `OPENAI_SCORER_MODEL` | No | LiteLLM model string for article scorer, duplicate/repeat filters, grounding check (default `openai/gpt-5.6-terra`) |
-| `OPENAI_CRITIC_MODEL` | No | LiteLLM model string for the section-quality critic scorer (default `anthropic/claude-sonnet-5` despite the name) |
-| `OPENAI_HELPER_MODEL` | No | LiteLLM model string for helpers: clustering, enrichment, picks (default `openai/gpt-4o-mini`) |
+<!-- BEGIN GENERATED: env (scripts/gen_docs.py — do not edit by hand) -->
+| Variable | Required | Default | Purpose |
+|---|---|---|---|
+| `NYTAPIKEY` | Yes | — | NYT Top Stories + Article Search |
+| `OPENAI_API_KEY` | Yes | — | OpenAI scorer/helper models (scoring, clustering, enrichment, merge/repeat filters, grounding) + OpenAI TTS fallback |
+| `GMAIL_APP_PASSWORD` | Yes | — | Gmail SMTP (16-digit app password) |
+| `GMAIL_FROM` | Yes | (set in code) | Sender address |
+| `GMAIL_TO` | Yes | (set in code) | Recipient address |
+| `RESEND_API_KEY` | No | — | Resend key — enables the daily email newsletter broadcast |
+| `RESEND_AUDIENCE_ID` | No | — | Resend "MikeCast Daily" audience id (required with the key) |
+| `RESEND_FROM` | No | `MikeCast <mike@mikecast.io>` | Newsletter sender |
+| `RESEND_REPLY_TO` | No | (set in code) | Newsletter reply-to |
+| `ELEVENLABS_API_KEY` | No | — | 3-voice audio (Mike/Elizabeth/Jesse) |
+| `ELEVENLABS_VOICE_MIKE` | No | — | ElevenLabs voice ID |
+| `ELEVENLABS_VOICE_ELIZABETH` | No | — | ElevenLabs voice ID |
+| `ELEVENLABS_VOICE_JESSE` | No | — | ElevenLabs voice ID |
+| `XAI_API_KEY` | No | — | Grok adaptive search planning (Step 0) |
+| `X_API_KEY` | No | — | X auto-post (OAuth 1.0a, Step 11) |
+| `X_API_SECRET` | No | — | X auto-post |
+| `X_ACCESS_TOKEN` | No | — | X auto-post |
+| `X_ACCESS_TOKEN_SECRET` | No | — | X auto-post |
+| `META_ACCESS_TOKEN` | No | — | Instagram auto-post (Graph API, Step 11) |
+| `IG_USER_ID` | No | — | Instagram Business account id |
+| `DD_API_KEY` | No | — | Datadog OTLP tracing (`mc_tracing.py`) + run metrics (`mc_metrics.py`); both no-op when unset |
+| `DD_SITE` | No | `datadoghq.com` | Datadog site |
+| `SOCIAL_MEDIA_KIND` | No | `card` | `card` or `reel` (the prod task def sets `reel`) |
+| `CLOUDFRONT_DIST_ID` | No | (set in code) | CloudFront distribution invalidated by `mc_edit.py` after a republish |
+| `ANTHROPIC_API_KEY` | Crew only | — | Claude for the writing crew, patcher and social copywriter. Locally lives in git-ignored `mikecast/.env` (loaded by `mc_config.py` via python-dotenv), NOT `~/.profile` — a globally exported key forces Claude Code onto API-key auth. Prod gets it from SSM via the task def. |
+| `CLAUDE_WRITER_MODEL` | No | `anthropic/claude-sonnet-5` | LiteLLM model for writers, section patcher, social copywriter |
+| `OPENAI_SCORER_MODEL` | No | `openai/gpt-5.6-terra` | LiteLLM model for article scorer, duplicate-merge/repeat-event filters, grounding check |
+| `OPENAI_CRITIC_MODEL` | No | `anthropic/claude-sonnet-5` | LiteLLM model for the section-quality critic scorer (despite the name, defaults to Claude) |
+| `OPENAI_HELPER_MODEL` | No | `openai/gpt-4o-mini` | LiteLLM model for helpers: clustering, enrichment, picks, NY Sports fact-checker |
+| `S3_BUCKET` | Prod | — | Enables S3 output mode; set in the task def (`mikecast-io-data`), unset locally |
+<!-- END GENERATED: env -->
 
 ## Module Map
 
@@ -105,6 +113,24 @@ Other flags: `--resend` (with `--force`, bypass the first-run-of-day send gate),
 | `crew/tests/` | pytest suite — CI gate for every deploy |
 | `eval/` | Model-eval harness (fixture dump, replay, scoring, blind review, dashboard, grounding backfill) — see `MODEL_EVAL_PLAN.md` |
 
+## Key Numbers
+
+Generated from source — edit the code, then run `python scripts/gen_docs.py`. Generation fails if two files that must agree (e.g. both critics' thresholds, writer prompts vs. `eval/score.py` word targets) disagree.
+
+<!-- BEGIN GENERATED: numbers (scripts/gen_docs.py — do not edit by hand) -->
+| Setting | Value | Source of truth |
+|---|---|---|
+| Daily schedule (EventBridge) | `cron(30 6 * * ? *)` America/New_York | `.github/workflows/deploy.yml` (re-applied every deploy) |
+| Article budget | 30 (each category ≥3) | `TOP_ARTICLES_TOTAL` in `mc_config.py` |
+| Articles enriched with full text | top 15 | `run_research(enrich_top_n=)` / legacy `enrich_top_stories(top_n=)` |
+| Stale-article cutoff | 3 days | `filter_stale_articles(max_age_days=)` calls (crew + legacy) |
+| Max future-dated skew | 24h | `MAX_FUTURE_SKEW` in `mc_collect.py` |
+| Repeat-event lookback | 3 episodes | `REPEAT_LOOKBACK_DAYS` in `mc_collect.py` |
+| Podcast script target | 1150–1250 words (~8 min) | `_PODCAST_WORD_MIN/MAX` in `eval/score.py`; must match `crew/writing_crew.py` + `crew/agents.py` |
+| Expansion pass | below 1100 words; kept if ≤1350 | `_EXPAND_BELOW_WORDS` / `_EXPAND_ACCEPT_MAX_WORDS` in `crew/writing_crew.py` |
+| Critic patch threshold | below 7/10 | `_WEAK_THRESHOLD` in `mc_critic.py` + `crew/critic_crew.py` |
+<!-- END GENERATED: numbers -->
+
 ## Key Constraints — Do Not Violate
 
 - **NY Sports is NEVER auto-patched by the critic** (`NEVER_PATCH_NORMALIZED = {"ny sports"}` in both `mc_critic.py` and `crew/critic_crew.py`). Patching sports sections causes GPT to hallucinate scores, players, and trades.
@@ -123,6 +149,7 @@ Other flags: `--resend` (with `--force`, bypass the first-run-of-day send gate),
 - **The critic matches section headers in escaped AND unescaped form**: the page renders `AI &amp; TECH` but the scorer echoes `AI & TECH`; both critics build `(?:cat|html.escape(cat))` into the patch regex. Before 2026-11-04 every `&` section (AI & Tech, Business & Markets) logged `could not locate HTML section` and was never patched. Pinned by `crew/tests/test_payments_section.py`.
 - **Critic patches must keep source links**: both patchers get each article's Source + URL (`mc_critic.patch_article_lines`) and `PATCH_LINK_RULE`; `enforce_patch_links` unwraps any href not in the section's articles and returns None (keep the original section) if no valid link is left. Before 2026-11-06 patched sections shipped to the email with zero links. Pinned by `crew/tests/test_patch_links_and_length.py`.
 - **The critic resolves category names case-insensitively and never patches a section to empty**: the GPT scorer echoes ALL-CAPS section headers (`COMPANIES`) while `top_articles`/`categorised` are title-cased (`Companies`). Both `crew/critic_crew.py` and `mc_critic.py` build a lowercased lookup and skip the patch when no articles resolve — otherwise the patcher is handed 0 articles and emits a "No Companies News Available" placeholder over a section that had real stories. Don't go back to a plain `.get(cat)`.
+- **Docs ship in the same commit as the change.** Any change to behavior, config, models, env vars, schedule, CLI flags, pipeline steps, or files (added/moved/removed) must update README.md and CLAUDE.md in that commit; a new guard or incident gets a bullet in this Key Constraints section, in the existing style (what, why/incident date, how to apply, pinning test). Then run `python scripts/gen_docs.py` (rewrites the `<!-- BEGIN GENERATED -->` blocks — never hand-edit inside them) and `pytest crew/tests/`. Two tests back this up and block the deploy: `test_docs_in_sync.py` (generated blocks current; every env var `mc_config.py` reads has an `ENV_DOCS` entry; files that must agree do) and `test_docs_drift.py` (every backticked path/identifier in both docs exists in tracked code; every `mc_*.py`/`crew/*.py` is in the Module Map and README). Docs-only pushes don't redeploy (`paths-ignore: **/*.md`); use the workflow's manual "Run workflow" button to redeploy without a code change. Design: `DOCS_SYNC_PLAN.md`.
 - **GitHub Actions gates `deploy` on `test`**: `.github/workflows/deploy.yml` runs `pytest crew/tests/` in a `test` job before the `deploy` job (Docker build → ECR push → new ECS task-def revision → EventBridge Scheduler update) is allowed to run. A push to `main` that fails the test suite never reaches ECR/prod. Don't remove the `needs: test` dependency on the `deploy` job, and don't merge/push code you haven't run `pytest crew/tests/` against locally first.
 - **Env-flag-gated code paths need a test that turns the flag on** — normal dev/test runs won't exercise them otherwise. Incident (2026-09-22, commit 0052e69): commit 097c30b added `dump_fixture()` calls in `mc_collect.py` referencing `TODAY` without importing it. `dump_fixture()` is a no-op unless `MIKECAST_DUMP_EVAL_FIXTURE=1` — but that's exactly what the prod Docker image's default `CMD ["--dump-eval-fixture"]` sets, so it crashed the real 6:30 AM run mid-scoring (no briefing generated, published, or emailed that day) while every local/dev run stayed silent. `crew/tests/test_eval_fixture_dump.py` now sets the flag and forces both `dump_fixture()` call sites (`score_and_rank_articles`, `enrich_top_stories`) to execute in CI; `crew/tests/test_smoke_imports.py` additionally import-checks every `mc_*.py`/`crew/*.py` module as a cheap catch-all for the separate class of bug (bad imports, module-level typos) an import-only check *can* catch. When you add a new `--flag`-gated or env-var-gated branch (eval dumps, `--legacy`, `--dump-eval-fixture`, future ones), add a test that sets the flag and executes that branch — don't rely on it only ever running for the first time in prod.
 - **Writers' training data is stale on who holds office** (2026-10-06: podcast said "former President Trump"). `mc_facts.prompt_block()` is appended to every writer/patcher/copywriter prompt (crew + legacy), and `fix_stale_titles_in_outputs` rewrites stale titles in the HTML + both scripts after the critic in `mikecast_briefing.py` (logged as `Stale title in ...`). Officeholders come from a live Wikidata SPARQL lookup each run (filtered to real humans, non-deprecated, exactly one current holder), falling back to the last good result in `s3://mikecast-io-data/facts/officeholders.json`, then the hardcoded `FALLBACK`. Grep logs for `Officeholder facts:` — it warns on fallback use, Wikidata/FALLBACK disagreement, and a `FALLBACK_REVIEWED` older than 90 days. `crew/tests/conftest.py` sets `MIKECAST_FACTS_OFFLINE=1` so tests never hit the network. To track a new office, add an `Office` + `FALLBACK` entry.
@@ -169,7 +196,7 @@ Every `git push` to `main` triggers the GitHub Actions workflow (`.github/workfl
 3. Registers a new ECS task definition revision pointing to that image
 4. Updates the EventBridge Scheduler to use the new task definition ARN
 
-The `deploy` job only runs after the `test` job (`pytest crew/tests/`) passes, and a `deploy-ecs` concurrency group serializes deploys in push order. Every push to `main` deploys — including docs-only pushes. The next scheduled run (6:30 AM ET) will use the updated image automatically. No manual ECS steps needed.
+The `deploy` job only runs after the `test` job (`pytest crew/tests/`) passes, and a `deploy-ecs` concurrency group serializes deploys in push order. Pushes that change only `*.md` files skip the workflow; `workflow_dispatch` (Actions → "Deploy to ECS" → Run workflow, on `main`) redeploys manually. The next scheduled run (6:30 AM ET) will use the updated image automatically. No manual ECS steps needed.
 
 ### Required GitHub Actions secrets
 

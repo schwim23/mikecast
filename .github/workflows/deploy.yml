@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - main
+    # A push that changes ONLY Markdown (README/CLAUDE.md/plans) doesn't rebuild or
+    # redeploy the image. A push mixing code + docs still deploys. Docs are still
+    # checked: crew/tests/test_docs_*.py run on every code push via the test job.
+    paths-ignore:
+      - "**/*.md"
+  # Manual "Run workflow" button (Actions tab) — redeploy main with no code change.
+  workflow_dispatch:
 
 # One deploy at a time, in push order. Without this, two pushes a minute apart
 # (2026-11-05: fa4df5b then f055933) deployed in parallel and whichever finished
@@ -46,6 +53,8 @@ jobs:
   deploy:
     name: Build and Deploy
     needs: test
+    # workflow_dispatch can be started from any branch; only main ever reaches prod.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:

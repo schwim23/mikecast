@@ -110,12 +110,15 @@ Planning Crew  →  Research Crew (non-sports)  →  Picks Crew  →  Writing Cr
 
 **Models used (LiteLLM strings, all overridable via env):**
 
+<!-- BEGIN GENERATED: models (scripts/gen_docs.py — do not edit by hand) -->
 | Role | Default model | Env var |
 |---|---|---|
 | HTML / single-voice / 3-voice writers + section patcher + social copywriter | `anthropic/claude-sonnet-5` | `CLAUDE_WRITER_MODEL` |
 | Per-category article scorer, duplicate-merge + repeat-event filters, grounding check | `openai/gpt-5.6-terra` | `OPENAI_SCORER_MODEL` |
 | Section quality scorer (critic) | `anthropic/claude-sonnet-5` | `OPENAI_CRITIC_MODEL` |
 | Clustering, enrichment, picks, planner orchestration, NY Sports fact-checker | `openai/gpt-4o-mini` | `OPENAI_HELPER_MODEL` |
+| Search planning (Step 0, xAI live search) | `grok-3` | — (hardcoded in `mc_plan.py`) |
+<!-- END GENERATED: models -->
 
 **The NY Sports specialist crew** has tools no other crew can call:
 - `fetch_sports_box_score(team)` — most-recent completed game from `site.api.espn.com/.../teams/{team}/schedule`
@@ -280,7 +283,8 @@ mikecast/
 ├── make_crew_diagram.py      # Generates mikecast_crewai_architecture.png
 ├── run_mikecast.sh           # LEGACY local cron wrapper (disabled; production runs on ECS)
 ├── Dockerfile                # python:3.11-slim + ffmpeg; ENTRYPOINT mikecast_briefing.py
-├── .github/workflows/deploy.yml  # CI/CD: pytest gate → ECR → ECS task def → Scheduler
+├── .github/workflows/deploy.yml  # CI/CD: pytest gate → ECR → ECS task def → Scheduler (skips *.md-only pushes)
+├── scripts/gen_docs.py       # Regenerates the code-derived tables in README.md + CLAUDE.md (DOCS_SYNC_PLAN.md)
 ├── mikes_picks.json          # Queue for user-submitted content
 ├── briefing_history.json     # Rolling 7-day history of processed articles
 ├── requirements.txt          # Python dependencies
@@ -463,7 +467,7 @@ Where to get API keys:
 .venv/bin/python -m pytest crew/tests/
 ```
 
-CI runs the same suite and blocks the deploy if it fails, so run it before pushing to `main`.
+CI runs the same suite and blocks the deploy if it fails, so run it before pushing to `main`. The suite includes doc checks: if you changed a model default, env var, threshold, article budget or the schedule, run `python scripts/gen_docs.py` to refresh the generated tables in this README and `CLAUDE.md`.
 
 ### 6. Test a Manual Run
 
@@ -511,7 +515,7 @@ Push to `main` — that's it. The GitHub Actions workflow (`.github/workflows/de
 3. Registers a new ECS task definition revision (the current one with only the image swapped)
 4. Updates the EventBridge Scheduler to use the new task definition
 
-Deploys are serialized by a `deploy-ecs` concurrency group. The next 6:30 AM run will use the updated image. No manual AWS steps needed.
+Deploys are serialized by a `deploy-ecs` concurrency group. Pushes that change only Markdown files skip the workflow entirely; to redeploy without a code change, use **Actions → Deploy to ECS → Run workflow** on `main`. The next 6:30 AM run will use the updated image. No manual AWS steps needed.
 
 **Prerequisite:** GitHub Actions secrets must be set at `Settings → Secrets → Actions`:
 - `AWS_ACCESS_KEY_ID`
