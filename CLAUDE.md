@@ -2,18 +2,19 @@
 
 ## What This Is
 
-MikeCast is an automated daily news briefing system. Every morning at 6:45 AM ET, it:
-1. Collects news from NYT, RSS feeds, Reddit, Hacker News, Google News
-2. Deduplicates, clusters, scores, and ranks articles
-3. Generates an HTML briefing + 2 podcast scripts via GPT-4o
-4. Runs a quality critic pass (regenerates weak sections)
+MikeCast is an automated daily news briefing system. Every morning at 6:30 AM ET (EventBridge Scheduler → ECS Fargate), it:
+1. Collects news from NYT, RSS feeds, Reddit, Hacker News, Google News (incl. Reuters/AP via `site:` searches)
+2. Deduplicates, drops stale/undated/resurfaced articles, clusters, scores, merges same-event duplicates, drops repeat events, selects and enriches the top articles
+3. Generates an HTML briefing + 2 podcast scripts (Claude writers on the default crew path)
+4. Runs a quality critic pass (regenerates weak sections), a log-only grounding check, and a stale-title fix
 5. Generates audio via ElevenLabs (3-voice) or OpenAI TTS (fallback)
-6. Saves JSON/RSS, sends an email, commits + pushes to GitHub Pages
+6. Saves JSON/manifest/RSS to S3 (served by CloudFront at mikecast.io), sends the Gmail email + Resend newsletter
+7. Auto-posts to X + Instagram (Step 11)
 
 ## How to Run
 
 ```bash
-# CrewAI pipeline (default after cutover — what cron runs now)
+# CrewAI pipeline (default after cutover)
 source ~/.profile && .venv/bin/python3 mikecast_briefing.py
 
 # Legacy procedural pipeline — reachable for fast rollback / debugging
@@ -30,15 +31,17 @@ tail -f mikecast.log
 .venv/bin/python3 server.py  # → http://localhost:8080
 ```
 
-The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_history.json` and pushes to GitHub after each run.
+Other flags: `--resend` (with `--force`, bypass the first-run-of-day send gate), `--dump-eval-fixture` (capture eval fixtures; the prod image's default CMD), `--eval-only` (capture fixtures without publishing/sending anything).
+
+`run_mikecast.sh` (local cron wrapper that commits `data/` and pushes to GitHub) is **legacy and disabled** — its crontab entry is commented out. Production is ECS only.
 
 `--crew` and `--legacy` are mutually exclusive. Both paths produce the same on-disk output shape (data/`YYYY-MM-DD.json`, audio file, RSS feed) and use the same Steps 9–10 for audio + delivery. Default is `--crew` after the cutover; `--legacy` remains available as a fast rollback.
 
-## Environment Variables (in `~/.profile`, except `ANTHROPIC_API_KEY` — see below)
+## Environment Variables (locally in `~/.profile`, except `ANTHROPIC_API_KEY` — see below; in prod, secrets come from SSM via the ECS task def)
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `OPENAI_API_KEY` | Yes | GPT-4o for scoring + critic (legacy + crew) |
+| `OPENAI_API_KEY` | Yes | OpenAI scorer/helper models (scoring, clustering, enrichment, merge/repeat filters, grounding) + OpenAI TTS fallback |
 | `NYTAPIKEY` | Yes | NYT Top Stories + Article Search |
 | `GMAIL_APP_PASSWORD` | Yes | Gmail SMTP (16-digit app password) |
 | `GMAIL_FROM` | Yes | Sender address |
@@ -53,39 +56,54 @@ The cron wrapper `run_mikecast.sh` also auto-commits `data/` and `briefing_histo
 | `RESEND_AUDIENCE_ID` | No | Resend "MikeCast Daily" audience id (required with the key) |
 | `RESEND_FROM` | No | Newsletter sender (default `MikeCast <mike@mikecast.io>`) |
 | `RESEND_REPLY_TO` | No | Newsletter reply-to (default `michael.schwimmer@gmail.com`) |
-| `CLAUDE_WRITER_MODEL` | No | LiteLLM model string for writers (default `anthropic/claude-sonnet-5`) |
-| `OPENAI_SCORER_MODEL` | No | LiteLLM model string for scorers (default `openai/gpt-4o`) |
-| `OPENAI_CRITIC_MODEL` | No | LiteLLM model string for critic (default `anthropic/claude-sonnet-5`) |
-| `OPENAI_HELPER_MODEL` | No | LiteLLM model string for helpers (default `openai/gpt-4o-mini`) |
+| `X_API_KEY` / `X_API_SECRET` / `X_ACCESS_TOKEN` / `X_ACCESS_TOKEN_SECRET` | No | X auto-post (OAuth 1.0a, Step 11) |
+| `META_ACCESS_TOKEN` / `IG_USER_ID` | No | Instagram auto-post (Graph API, Step 11) |
+| `SOCIAL_MEDIA_KIND` | No | `card` (code default) or `reel` (set in the prod task def) |
+| `S3_BUCKET` | Prod | `mikecast-io-data`; enables S3 output mode (set in the task def, not locally) |
+| `DD_API_KEY` / `DD_SITE` | No | Datadog OTLP tracing (`mc_tracing.py`) + run metrics (`mc_metrics.py`); both no-op when the key is unset. `DD_SITE` defaults to `datadoghq.com` |
+| `CLAUDE_WRITER_MODEL` | No | LiteLLM model string for writers, patcher, social copywriter (default `anthropic/claude-sonnet-5`) |
+| `OPENAI_SCORER_MODEL` | No | LiteLLM model string for article scorer, duplicate/repeat filters, grounding check (default `openai/gpt-5.6-terra`) |
+| `OPENAI_CRITIC_MODEL` | No | LiteLLM model string for the section-quality critic scorer (default `anthropic/claude-sonnet-5` despite the name) |
+| `OPENAI_HELPER_MODEL` | No | LiteLLM model string for helpers: clustering, enrichment, picks (default `openai/gpt-4o-mini`) |
 
 ## Module Map
 
 | File | Owns |
 |---|---|
-| `mikecast_briefing.py` | Entry point — orchestrates all 10 steps; dispatches to legacy or crew path |
+| `mikecast_briefing.py` | Entry point — orchestrates all 11 steps; dispatches to legacy or crew path |
 | `mc_config.py` | All constants, env vars, categories, RSS feeds, scoring prompts, CrewAI model strings |
 | `mc_plan.py` | Step 0 (legacy): xAI Grok generates dynamic search queries |
 | `mc_collect.py` | Steps 1–6 (legacy): collect, dedupe, cluster, score, merge duplicate stories, filter repeat events, select, enrich |
 | `mc_generate.py` | Step 8 (legacy): HTML briefing + single-voice + 3-voice scripts |
-| `mc_critic.py` | Step 8b (legacy): GPT-4o quality critic; patches weak sections |
+| `mc_critic.py` | Step 8b (legacy): quality critic; patches weak sections |
 | `mc_facts.py` | Live (Wikidata) current officeholders injected into every writer prompt + `fix_stale_titles` post-pass (both paths) |
 | `mc_audio.py` | Step 9: ElevenLabs 3-voice + OpenAI TTS fallback; `_concat_mp3_segments` stitches segments into one clean MP3 via ffmpeg (shared) |
 | `mc_deliver.py` | Step 10: JSON, manifest.json, feed.xml, Gmail email + Resend newsletter broadcast (shared) |
-| `lambda/newsletter_signup/` | Function-URL Lambda for double-opt-in email signup (POST /signup, GET /confirm) — bridges the static form and Resend |
-| `mc_utils.py` | Shared helpers: HTTP (browser UA default), JSON I/O, text similarity, URL fingerprinting |
+| `mc_dist_state.py` | Per-date send state (`data/dist/YYYY-MM-DD.json`) — first-run-of-day gating for email/newsletter/X/IG |
+| `mc_social.py` | Step 11: X + Instagram posting (card or reel), weighted tweet length, standalone CLI |
+| `mc_video.py` | 9:16 captioned reel renderer shared by `mc_social` and `mc_ad` |
+| `mc_edit.py` | Edit/republish a past episode; delete/repost its social posts |
+| `mc_metrics.py` / `mc_tracing.py` | Datadog run metrics (one batched POST) + OTLP tracing spans; no-ops without `DD_API_KEY` |
+| `mc_ad.py` / `mc_youtube.py` | Standalone promo-video CLI / YouTube upload (not part of the daily run) |
+| `lambda/newsletter_signup/` | Lambda for double-opt-in email signup (POST /signup, GET /confirm), reached via the API Gateway custom domain `https://api.mikecast.io` (the endpoint in `signup.js`) — bridges the static form and Resend. Public Lambda Function URLs are blocked in this AWS account |
+| `mc_utils.py` | Shared helpers: HTTP (browser UA default), JSON I/O, S3 I/O, text similarity, URL fingerprinting, CloudFront invalidation |
 | `mikes_picks_ingest.py` | CLI to add URLs/PDFs/text to the picks queue |
 | `server.py` | Flask server for local dashboard |
 | `crew/tools.py` | Pydantic-typed CrewAI tools — wrap mc_collect/mc_plan + ESPN site-api + fact-checker |
-| `crew/llm.py` | CrewAI `LLM` factory (Claude writers + GPT-4o scorers/critic + GPT-4o-mini helpers) |
+| `crew/llm.py` | CrewAI `LLM` factory (writer / scorer / critic / helper, models from the env vars above) |
+| `crew/model_compat.py` | Cross-model rules: which models accept custom `temperature`, API key by provider |
 | `crew/agents.py` | Agent personas; backstories pull verbatim from `mc_config` + `mc_generate` guardrails |
 | `crew/planning_crew.py` | Step 0 (crew): wraps `xai_grok_search` tool |
 | `crew/research_crew.py` | Steps 1–6 (crew, non-sports): drives the legacy collect→dedup→cluster→score→enrich pipeline |
 | `crew/sports_research_crew.py` | Steps 1–6 (crew, NY Sports): Gatekeeper + Researcher with ESPN tools, Fact-Checker reserved for critic stage |
 | `crew/picks_crew.py` | Step 7 (crew): thin pass-through to `mc_collect.process_picks` |
 | `crew/writing_crew.py` | Step 8 (crew): three Claude writers in parallel, HTML template wrapping |
-| `crew/critic_crew.py` | Step 8b (crew): GPT-4o scorer + Claude patcher; max_iter=1; NY Sports never auto-patched |
+| `crew/critic_crew.py` | Step 8b (crew): critic scorer (`OPENAI_CRITIC_MODEL`, plain LiteLLM call) + Claude patcher; NY Sports never auto-patched |
 | `crew/grounding_check.py` | Step 8c (crew): log-only fact-check of every non-sports HTML + 3-voice-script sentence against the articles + officeholder facts |
 | `crew/context.py` | Re-exports legacy prompt helpers so writers/critic share `_build_articles_context`, `_filter_trending_to_articles`, etc. |
+| `crew/distribution_crew.py` | Step 11 (crew): Claude social copywriter (X post + IG caption) |
+| `crew/tests/` | pytest suite — CI gate for every deploy |
+| `eval/` | Model-eval harness (fixture dump, replay, scoring, blind review, dashboard, grounding backfill) — see `MODEL_EVAL_PLAN.md` |
 
 ## Key Constraints — Do Not Violate
 
@@ -151,7 +169,7 @@ Every `git push` to `main` triggers the GitHub Actions workflow (`.github/workfl
 3. Registers a new ECS task definition revision pointing to that image
 4. Updates the EventBridge Scheduler to use the new task definition ARN
 
-The next scheduled run (6:30 AM ET) will use the updated image automatically. No manual ECS steps needed.
+The `deploy` job only runs after the `test` job (`pytest crew/tests/`) passes, and a `deploy-ecs` concurrency group serializes deploys in push order. Every push to `main` deploys — including docs-only pushes. The next scheduled run (6:30 AM ET) will use the updated image automatically. No manual ECS steps needed.
 
 ### Required GitHub Actions secrets
 
@@ -162,7 +180,9 @@ These must be set at https://github.com/schwim23/mikecast/settings/secrets/actio
 ### To deploy a change manually (without waiting for cron)
 
 ```bash
-# Trigger an immediate ECS run with the latest task definition (uses --legacy default)
+# Trigger an immediate ECS run with the latest task definition (default CMD: crew path +
+# --dump-eval-fixture). The "already exists" guard only checks LOCAL disk, which is empty
+# on Fargate — so this REGENERATES and overwrites today's episode JSON/MP3/feed in S3.
 aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
@@ -170,9 +190,8 @@ aws ecs run-task \
   --network-configuration 'awsvpcConfiguration={subnets=[<SUBNET_ID>],securityGroups=[<SECURITY_GROUP_ID>],assignPublicIp=ENABLED}' \
   --region us-east-1
 
-# Same task, but force the CrewAI path. Required after a fresh deploy to shake out
-# Fargate-only issues (network egress to anthropic.com, IAM, etc.) before flipping
-# the default.
+# Force-regenerate today's episode on the crew path (sends stay deduped per date
+# unless you also pass --resend).
 aws ecs run-task \
   --cluster mikecast \
   --task-definition mikecast \
@@ -197,7 +216,7 @@ aws ecs run-task \
 - **Default path is `--crew`** after cutover. The 6:30 AM ET scheduled run uses the CrewAI pipeline.
 - `--legacy` is the rollback flag. Trigger a one-shot legacy run with `aws ecs run-task ... --overrides '{"containerOverrides":[{"name":"mikecast","command":["--legacy","--force"]}]}'` if today's crew run misbehaves.
 - To revert the cutover entirely, change the default branch in `main()` in `mikecast_briefing.py` from `use_crew = True` back to `use_legacy = True` and merge. The next GH Actions deploy returns the scheduler to legacy automatically.
-- `ANTHROPIC_API_KEY` must be in SSM Parameter Store (`/mikecast/ANTHROPIC_API_KEY`, SecureString) and referenced from the ECS task definition's `containerDefinitions[0].secrets`.
+- `ANTHROPIC_API_KEY` must be in SSM Parameter Store (`/mikecast/ANTHROPIC_API_KEY`, SecureString) and referenced from the ECS task definition's `containerDefinitions[0].secrets`. The task def's `secrets` currently carry all API keys/creds (NYT, OpenAI, Gmail, ElevenLabs, xAI, Anthropic, Resend, X, Meta/IG, Datadog); `environment` carries `S3_BUCKET`, `SOCIAL_MEDIA_KIND=reel`, `RESEND_FROM`, `RESEND_REPLY_TO`. CI copies the current task def forward and only swaps the image, so env/secret changes are made on the task def directly.
 
 ### To check the status of the ECS task
 
@@ -218,7 +237,8 @@ aws logs tail /ecs/mikecast --follow --region us-east-1
 | ECS task family | `mikecast` |
 | EventBridge Scheduler | `mikecast-daily` |
 | S3 bucket | `mikecast-io-data` |
-| CloudFront distribution | serves `mikecast.io` |
+| CloudFront distribution | serves `mikecast.io` (`CLOUDFRONT_DIST_ID`) |
+| API Gateway custom domain | `api.mikecast.io` → newsletter signup Lambda |
 | Scheduler IAM role | `mikecast-scheduler-role` |
 | VPC subnet | `<SUBNET_ID>` |
 | Security group | `<SECURITY_GROUP_ID>` |
