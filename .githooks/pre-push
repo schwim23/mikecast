@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Pre-push: refuse to push a commit whose README/CLAUDE.md generated blocks or README
+# diagrams are stale, or whose docs fail the drift lint. Same checks CI runs, ~1-2s,
+# so a stale push is caught here instead of as a failed deploy.
+#
+# Enable once per clone:  git config core.hooksPath .githooks
+# Bypass (emergencies):   git push --no-verify
+#
+# Checks the commit being PUSHED (in a temporary worktree), not the working tree, so
+# uncommitted edits can neither hide a stale commit nor block a clean one.
+set -euo pipefail
+
+REPO=$(git rev-parse --show-toplevel)
+cd "$REPO"
+# Git may export these to hooks; they'd make git inside the temp worktree (the drift
+# lint calls `git ls-files`) read the main checkout's index instead.
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE
+PY="$REPO/.venv/bin/python"
+[ -x "$PY" ] || PY=python3
+ZERO=0000000000000000000000000000000000000000
+fail=0
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  [ "$local_sha" = "$ZERO" ] && continue                      # branch deletion
+  # Commits predating the sync tooling have nothing to check.
+  git cat-file -e "$local_sha:scripts/gen_docs.py" 2>/dev/null || continue
+
+  wt=$(mktemp -d "${TMPDIR:-/tmp}/mikecast-prepush.XXXXXX")
+  git worktree add -q --detach "$wt" "$local_sha"
+  echo "pre-push: checking docs + diagrams for ${local_ref#refs/heads/} @ ${local_sha:0:7}"
+  (
+    cd "$wt"
+    "$PY" scripts/gen_docs.py --check >/dev/null || { "$PY" scripts/gen_docs.py --check | tail -1; exit 1; }
+    if [ -f scripts/make_diagrams.py ]; then
+      "$PY" scripts/make_diagrams.py --check >/dev/null || { "$PY" scripts/make_diagrams.py --check; exit 1; }
+    fi
+    "$PY" -m pytest -q -p no:cacheprovider crew/tests/test_docs_in_sync.py crew/tests/test_docs_drift.py \
+      >"$wt.log" 2>&1 || { grep -E "^E  |AssertionError" "$wt.log" | head -15; exit 1; }
+  ) || fail=1
+  git worktree remove --force "$wt"
+  rm -f "$wt.log"
+done
+
+if [ "$fail" -ne 0 ]; then
+  cat >&2 <<'EOF'
+
+pre-push: BLOCKED — docs or diagrams are out of sync with the code being pushed.
+  python scripts/gen_docs.py && python scripts/make_diagrams.py
+  then fix any drift-lint errors above, commit, and push again.
+  (If a pipeline stage or AWS resource changed, update the layout in scripts/make_diagrams.py.)
+EOF
+  exit 1
+fi

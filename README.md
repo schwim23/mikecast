@@ -291,6 +291,7 @@ mikecast/
 ├── .github/workflows/deploy.yml  # CI/CD: pytest gate → ECR → ECS task def → Scheduler (skips *.md-only pushes)
 ├── scripts/gen_docs.py       # Regenerates the code-derived tables in README.md + CLAUDE.md (DOCS_SYNC_PLAN.md)
 ├── scripts/make_diagrams.py  # Generates docs/diagrams/*.svg (README diagrams) from code
+├── .githooks/pre-push        # Refuses a push whose docs/diagrams are stale (enable: git config core.hooksPath .githooks)
 ├── docs/diagrams/            # pipeline.svg + aws.svg — generated, don't hand-edit
 ├── mikes_picks.json          # Queue for user-submitted content
 ├── briefing_history.json     # Rolling 7-day history of processed articles
@@ -474,7 +475,15 @@ Where to get API keys:
 .venv/bin/python -m pytest crew/tests/
 ```
 
-CI runs the same suite and blocks the deploy if it fails, so run it before pushing to `main`. The suite includes doc checks: if you changed a model default, env var, threshold, article budget or the schedule, run `python scripts/gen_docs.py` to refresh the generated tables in this README and `CLAUDE.md`.
+CI runs the same suite and blocks the deploy if it fails, so run it before pushing to `main`.
+
+Enable the pre-push hook once per clone, so a push with stale docs or diagrams is refused locally (in about a second) instead of failing the deploy:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+`.githooks/pre-push` runs `gen_docs.py --check`, `make_diagrams.py --check` and the doc tests against each commit being pushed. `git push --no-verify` bypasses it in an emergency. The suite includes doc checks: if you changed a model default, env var, threshold, article budget or the schedule, run `python scripts/gen_docs.py` to refresh the generated tables in this README and `CLAUDE.md`.
 
 ### 6. Test a Manual Run
 
