@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 704" width="1400" height="704" role="img" aria-label="MikeCast on AWS: a push to main is tested and deployed to ECS; EventBridge starts the Fargate task daily, which calls external APIs, writes to S3 behind CloudFront, and reports to CloudWatch and Datadog; newsletter signups go through API Gateway and a Lambda to Resend.">
+<title>MikeCast on AWS: a push to main is tested and deployed to ECS; EventBridge starts the Fargate task daily, which calls external APIs, writes to S3 behind CloudFront, and reports to CloudWatch and Datadog; newsletter signups go through API Gateway and a Lambda to Resend.</title>
+<style>
+.bg{fill:#ffffff}.band{fill:#f6f8fa}.box{fill:#ffffff;stroke:#d0d7de;stroke-width:1.2}
+.guard{stroke:#bf8700;stroke-width:1.8}.dash{stroke-dasharray:5 4}
+.t{fill:#1f2328;font-weight:600}.s{fill:#59636e}.h{fill:#1f2328;font-weight:700}
+.k{fill:#59636e;font-weight:600;letter-spacing:.08em}.lbl{fill:#59636e;font-style:italic}
+.edge{stroke:#8c959f;stroke-width:1.4;fill:none}.ah{fill:#8c959f}
+.chip{fill:#ddf4ff;stroke:#54aeff;stroke-width:.8}.chipt{fill:#0969da}
+.amber{fill:#9a6700}
+@media (prefers-color-scheme: dark){
+.bg{fill:#0d1117}.band{fill:#161b22}.box{fill:#0d1117;stroke:#3d444d}
+.guard{stroke:#d29922}.t{fill:#e6edf3}.s{fill:#9198a1}.h{fill:#f0f6fc}.k{fill:#9198a1}
+.lbl{fill:#9198a1}.edge{stroke:#6e7681}.ah{fill:#6e7681}
+.chip{fill:#0c2d6b;stroke:#1f6feb}.chipt{fill:#79c0ff}.amber{fill:#d29922}}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+<rect width="1400" height="704" class="bg"/>
+<text x="24" y="38" font-size="22" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">MikeCast on AWS</text>
+<text x="24" y="60" font-size="12" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">us-east-1 · how code reaches prod, what the daily task touches, and how failures surface</text>
+<rect x="12" y="82" width="1376" height="108" rx="12" class="band"/>
+<text x="28" y="108" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">ON PUSH TO MAIN</text>
+<text x="28" y="127" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Deploy</text>
+<rect x="176" y="96" width="189" height="80" rx="8" class="box"/>
+<text x="188" y="117" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">GitHub</text>
+<text x="188" y="134" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">push to main</text>
+<text x="188" y="149" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">(*.md-only: skipped)</text>
+<rect x="379" y="96" width="189" height="80" rx="8" class="box"/>
+<text x="391" y="117" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Test job</text>
+<text x="391" y="134" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">pytest crew/tests/</text>
+<text x="391" y="149" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">+ doc and diagram sync</text>
+<rect x="582" y="96" width="189" height="80" rx="8" class="box"/>
+<text x="594" y="117" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Build job</text>
+<text x="594" y="134" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">docker build</text>
+<text x="594" y="149" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">python:3.11 + ffmpeg</text>
+<rect x="785" y="96" width="189" height="80" rx="8" class="box"/>
+<text x="797" y="117" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Amazon ECR</text>
+<text x="797" y="134" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">mikecast:&lt;commit sha&gt;</text>
+<text x="797" y="149" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">+ :latest</text>
+<rect x="988" y="96" width="189" height="80" rx="8" class="box"/>
+<text x="1000" y="117" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">ECS task def</text>
+<text x="1000" y="134" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">new revision: only</text>
+<text x="1000" y="149" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">the image changes</text>
+<rect x="1191" y="96" width="189" height="80" rx="8" class="box"/>
+<text x="1203" y="117" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Scheduler update</text>
+<text x="1203" y="134" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">mikecast-daily → new</text>
+<text x="1203" y="149" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">task-def revision</text>
+<path d="M366,136 L378,136" class="edge" marker-end="url(#ah)"/>
+<path d="M569,136 L581,136" class="edge" marker-end="url(#ah)"/>
+<path d="M772,136 L784,136" class="edge" marker-end="url(#ah)"/>
+<path d="M975,136 L987,136" class="edge" marker-end="url(#ah)"/>
+<path d="M1178,136 L1190,136" class="edge" marker-end="url(#ah)"/>
+<rect x="12" y="212" width="1376" height="216" rx="12" class="band"/>
+<text x="28" y="238" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">DAILY</text>
+<text x="28" y="257" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Run + serve</text>
+<rect x="176" y="230" width="196" height="82" rx="8" class="box"/>
+<text x="188" y="251" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">EventBridge Scheduler</text>
+<text x="188" y="268" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">cron(30 6 * * ? *)</text>
+<text x="188" y="283" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">America/New_York</text>
+<rect x="176" y="332" width="196" height="82" rx="8" class="box"/>
+<text x="188" y="353" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">SSM Parameter Store</text>
+<text x="188" y="370" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">API keys + creds as</text>
+<text x="188" y="385" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">task-def secrets</text>
+<rect x="428" y="230" width="196" height="184" rx="8" class="box"/>
+<text x="440" y="251" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">ECS Fargate task</text>
+<text x="440" y="268" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">mikecast_briefing.py</text>
+<text x="440" y="283" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">~20 min, then exits</text>
+<text x="440" y="298" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start"></text>
+<text x="440" y="313" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">ephemeral disk: all</text>
+<text x="440" y="328" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">state lives in S3</text>
+<path d="M373,260 L427,260" class="edge" marker-end="url(#ah)"/>
+<text x="400" y="254" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">starts</text>
+<path d="M373,372 L427,372" class="edge" marker-end="url(#ah)"/>
+<text x="400" y="366" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">secrets</text>
+<path d="M879.5,177 L879.5,204 L565.2,204 L565.2,229" class="edge" marker-end="url(#ah)"/>
+<text x="573.2" y="224" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="start">pulls image</text>
+<rect x="680" y="230" width="196" height="82" rx="8" class="box"/>
+<text x="692" y="251" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">S3 · mikecast-io-data</text>
+<text x="692" y="268" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">episode JSON, MP3,</text>
+<text x="692" y="283" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">manifest.json, feed.xml</text>
+<rect x="932" y="230" width="196" height="82" rx="8" class="box"/>
+<text x="944" y="251" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">CloudFront</text>
+<text x="944" y="268" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">mikecast.io</text>
+<text x="944" y="283" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">(Route 53 alias)</text>
+<rect x="1184" y="230" width="196" height="82" rx="8" class="box"/>
+<text x="1196" y="251" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Listeners</text>
+<text x="1196" y="268" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">browsers · Apple Podcasts</text>
+<text x="1196" y="283" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">Spotify (poll feed.xml)</text>
+<path d="M625,260 L679,260" class="edge" marker-end="url(#ah)"/>
+<text x="652" y="254" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">writes</text>
+<path d="M877,260 L931,260" class="edge" marker-end="url(#ah)"/>
+<text x="904" y="254" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">origin</text>
+<path d="M1129,260 L1183,260" class="edge" marker-end="url(#ah)"/>
+<text x="1156" y="254" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">serves</text>
+<rect x="680" y="332" width="700" height="82" rx="8" class="box"/>
+<text x="692" y="353" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">External APIs (HTTPS, public egress)</text>
+<text x="692" y="370" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">News: NYT, RSS, Google News, ESPN</text>
+<text x="1030" y="370" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">LLMs: Anthropic, OpenAI, xAI</text>
+<text x="692" y="385" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">TTS: ElevenLabs, OpenAI</text>
+<text x="1030" y="385" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">Send: Gmail SMTP, Resend, X, Instagram</text>
+<path d="M625,372 L679,372" class="edge" marker-end="url(#ah)"/>
+<text x="652" y="366" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">calls</text>
+<rect x="12" y="450" width="1376" height="108" rx="12" class="band"/>
+<text x="28" y="476" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">ALWAYS</text>
+<text x="28" y="495" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Observe</text>
+<rect x="176" y="464" width="196" height="80" rx="8" class="box"/>
+<text x="188" y="485" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Datadog</text>
+<text x="188" y="502" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">traces, metrics, logs</text>
+<text x="188" y="517" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">(no-op w/o DD_API_KEY)</text>
+<rect x="428" y="464" width="196" height="80" rx="8" class="box"/>
+<text x="440" y="485" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">CloudWatch Logs</text>
+<text x="440" y="502" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">/ecs/mikecast</text>
+<rect x="680" y="464" width="196" height="80" rx="8" class="box"/>
+<text x="692" y="485" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Alarm MikeCastErrors</text>
+<text x="692" y="502" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">≥3 ERROR lines</text>
+<text x="692" y="517" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">in 1 hour</text>
+<rect x="932" y="464" width="196" height="80" rx="8" class="box"/>
+<text x="944" y="485" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">SNS mikecast-alerts</text>
+<text x="944" y="502" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">email to Mike</text>
+<path d="M526,415 L526,463" class="edge" marker-end="url(#ah)"/>
+<text x="534" y="432" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="start">stdout logs</text>
+<path d="M458,415 L458,450 L274,450 L274,463" class="edge" marker-end="url(#ah)"/>
+<text x="188" y="444" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="start">OTLP traces + metrics</text>
+<path d="M625,504 L679,504" class="edge" marker-end="url(#ah)"/>
+<text x="652" y="498" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">filter</text>
+<path d="M877,504 L931,504" class="edge" marker-end="url(#ah)"/>
+<text x="904" y="498" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">notifies</text>
+<path d="M427,526 L373,526" class="edge" marker-end="url(#ah)"/>
+<text x="400" y="540" font-size="11" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="lbl" text-anchor="middle">forwarder</text>
+<text x="1184" y="494" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">No dashboards to watch:</text>
+<text x="1184" y="510" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">a failed run pages by email,</text>
+<text x="1184" y="526" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">Datadog is for digging in.</text>
+<rect x="12" y="580" width="1376" height="108" rx="12" class="band"/>
+<text x="28" y="606" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">ON DEMAND</text>
+<text x="28" y="625" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Newsletter signup</text>
+<rect x="176" y="594" width="196" height="80" rx="8" class="box"/>
+<text x="188" y="615" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Signup form</text>
+<text x="188" y="632" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">mikecast.io, signup.js</text>
+<rect x="428" y="594" width="196" height="80" rx="8" class="box"/>
+<text x="440" y="615" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">API Gateway (HTTP)</text>
+<text x="440" y="632" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">api.mikecast.io</text>
+<text x="440" y="647" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">POST /signup, GET /confirm</text>
+<rect x="680" y="594" width="196" height="80" rx="8" class="box"/>
+<text x="692" y="615" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Lambda</text>
+<text x="692" y="632" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">mikecast-newsletter-signup</text>
+<text x="692" y="647" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">HMAC-signed 24h token</text>
+<rect x="932" y="594" width="196" height="80" rx="8" class="box"/>
+<text x="944" y="615" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Resend</text>
+<text x="944" y="632" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">confirm email, then</text>
+<text x="944" y="647" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">add to audience</text>
+<path d="M373,634 L427,634" class="edge" marker-end="url(#ah)"/>
+<path d="M625,634 L679,634" class="edge" marker-end="url(#ah)"/>
+<path d="M877,634 L931,634" class="edge" marker-end="url(#ah)"/>
+<text x="1184" y="624" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">Lambda Function URLs are</text>
+<text x="1184" y="640" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">blocked in this account,</text>
+<text x="1184" y="656" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">hence API Gateway.</text>
+</svg>

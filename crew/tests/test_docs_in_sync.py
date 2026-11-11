@@ -24,6 +24,15 @@ def _load_gen_docs():
 gen_docs = _load_gen_docs()
 
 
+def _load_make_diagrams():
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    spec = importlib.util.spec_from_file_location("make_diagrams", ROOT / "scripts" / "make_diagrams.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
 def test_generated_doc_blocks_are_current():
     stale = gen_docs.stale_docs()
     assert not stale, (
@@ -45,3 +54,9 @@ def test_missing_marker_is_an_error():
 def test_disagreeing_sources_are_an_error():
     with pytest.raises(gen_docs.DocsGenError):
         gen_docs.same("threshold", {"a.py": 7, "b.py": 6})
+
+
+def test_readme_diagrams_are_current():
+    # docs/diagrams/*.svg embed model names + numbers read from code.
+    stale = _load_make_diagrams().stale()
+    assert not stale, f"Stale diagrams: {stale} — run: python scripts/make_diagrams.py"
