@@ -82,10 +82,15 @@ class Svg:
         self.text(28, y + 26, step, 10.5, "k")
         self.text(28, y + 45, name, 15, "h")
 
-    def box(self, x, y, w, h, title, sub=(), chip=None, kind=""):
-        """kind: '' | 'guard' (amber outline) | 'dash' (observes only)."""
+    def box(self, x, y, w, h, title, sub=(), chip=None, kind="", stage=None):
+        """kind: '' | 'guard' (amber outline) | 'dash' (observes only).
+
+        stage: the mikecast_briefing.py step_span() name this box depicts. Rendered as
+        data-stage; test_docs_in_sync.py fails if a span in the code has no box (or a
+        box names a span that no longer exists)."""
         cls = "box" + (" guard" if kind == "guard" else "") + (" dash" if kind == "dash" else "")
-        self.add(f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" rx="8" class="{cls}"/>')
+        tag = f' data-stage="{stage}"' if stage else ""
+        self.add(f'<rect x="{x:g}" y="{y:g}" width="{w:g}" height="{h:g}" rx="8" class="{cls}"{tag}/>')
         pad, inner = 12, w - 24
         chip_w = _w(chip, 10.5) + 14 if chip else 0
         chip_inline = chip and _w(title, 13, True) + 10 + chip_w <= inner
@@ -193,7 +198,7 @@ def pipeline() -> str:
     h = 74
     s.band(y, h, "STEP 0", "Plan")
     s.box(X0, y + 10, 330, 54, "Search planner", ["live web + X search → queries per category"],
-          chip=f["grok"])
+          chip=f["grok"], stage="plan")
     s.text(X0 + 350, y + 41, "Grok writes search queries and a trending-topics list; it is never "
                              "used as a news source.", 11.5, "s")
     flow(y + h, "dynamic queries + trending topics")
@@ -209,14 +214,15 @@ def pipeline() -> str:
     ra, rb = y + 34, y + 34 + bh + 24
     xs = [X0 + i * (bw + gx) for i in range(4)]
     a = [
-        s.box(xs[0], ra, bw, bh, "Collect", ["NYT, RSS, HN, Reddit", "Google News · wires"]),
+        s.box(xs[0], ra, bw, bh, "Collect", ["NYT, RSS, HN, Reddit", "Google News · wires"], stage="collect"),
         s.box(xs[1], ra, bw, bh, "Dedupe", ["URLs + titles seen in", "the last 7 days"]),
         s.box(xs[2], ra, bw, bh, "Drop old news", [f"stale >{f['stale']}d · undated", "future · resurfaced"],
               kind="guard"),
         s.box(xs[3], ra, bw, bh, "Cluster", ["group near-duplicates"], chip=f["helper"]),
     ]
     b = [
-        s.box(xs[0], rb, bw, bh, "Score & rank", ["per category, with", "trending boost"], chip=f["scorer"]),
+        s.box(xs[0], rb, bw, bh, "Score & rank", ["per category, with", "trending boost"], chip=f["scorer"],
+              stage="score_select_enrich"),
         s.box(xs[1], rb, bw, bh, "Merge duplicates", ["same event in two", "sections → keep best"],
               chip=f["scorer"], kind="guard"),
         s.box(xs[2], rb, bw, bh, "Drop re-reports", [f"vs last {f['lookback']} episodes,", "2-of-3 vote"],
@@ -236,7 +242,7 @@ def pipeline() -> str:
     g1 = s.box(sx, ra, sw, bh, "Gatekeeper", ["SPORTS_TRUSTED_SOURCES allowlist", "drops aggregators (e.g. AOL)"],
                kind="guard")
     g2 = s.box(sx, rb, sw, bh, "NY Sports Researcher", ["ESPN box scores, standings,", "injuries (max 15 steps / 180s)"],
-               chip=f["scorer"])
+               chip=f["scorer"], stage="sports_research")
     s.arrow([(sx + sw / 2, ra + bh), (sx + sw / 2, rb - 1)])
     flow(y + h, f"{f['top']} articles + verified ESPN facts")
     y += h + GAP
@@ -245,7 +251,8 @@ def pipeline() -> str:
     h = 96
     s.band(y, h, "STEP 7 + FACTS", "Prompt inputs")
     w3 = (CW - 2 * 16) / 3
-    s.box(X0, y + 12, w3, 72, "Mike's Picks", ["queued URLs, PDFs, pasted text"], chip=f["helper"])
+    s.box(X0, y + 12, w3, 72, "Mike's Picks", ["queued URLs, PDFs, pasted text"], chip=f["helper"],
+          stage="picks")
     s.box(X0 + w3 + 16, y + 12, w3, 72, "Officeholder + CEO facts",
           ["live Wikidata → S3 cache → fallback", "added to every writer prompt"], kind="guard")
     s.box(X0 + 2 * (w3 + 16), y + 12, w3, 72, "Dates + market calendar",
@@ -257,7 +264,7 @@ def pipeline() -> str:
     h = 104
     s.band(y, h, "STEP 8", "Write")
     s.text(X0, y + 20, "Three Claude writers run in parallel", 11.5, "k")
-    s.box(X0, y + 28, w3, 66, "HTML briefing", ["email body + web page"], chip=f["writer"])
+    s.box(X0, y + 28, w3, 66, "HTML briefing", ["email body + web page"], chip=f["writer"], stage="generate")
     s.box(X0 + w3 + 16, y + 28, w3, 66, "Single-host script",
           [f"{f['wmin']}–{f['wmax']} words · one expansion", f"pass if under {f['expand']} words"], chip=f["writer"])
     s.box(X0 + 2 * (w3 + 16), y + 28, w3, 66, "3-host script",
@@ -269,7 +276,8 @@ def pipeline() -> str:
     h = 196
     s.band(y, h, "STEPS 8b–8d", "Check")
     cw = 300
-    c1 = s.box(X0, y + 12, cw, 82, "Critic scorer", ["grades each section 1–10"], chip=f["critic"])
+    c1 = s.box(X0, y + 12, cw, 82, "Critic scorer", ["grades each section 1–10"], chip=f["critic"],
+               stage="critic")
     c2x = X0 + cw + 120
     c2 = s.box(c2x, y + 12, cw, 82, "Section patcher", ["rewrites a weak section once,", "keeps source links"],
                chip=f["writer"])
@@ -283,7 +291,7 @@ def pipeline() -> str:
     half = (CW - 16) / 2
     s.box(X0, y + 106, half, 78, "Grounding check", ["every non-sports sentence vs today's articles",
                                                      "logs [Grounding] UNSUPPORTED, rewrites nothing"],
-          chip=f["scorer"], kind="dash")
+          chip=f["scorer"], kind="dash", stage="grounding_check")
     s.box(X0 + half + 16, y + 106, half, 78, "NY Sports fact-checker",
           ["NY Sports HTML + [JESSE] lines vs articles", "logs a WARNING, never patches"],
           chip=f["helper"], kind="dash")
@@ -294,7 +302,7 @@ def pipeline() -> str:
     h = 96
     s.band(y, h, "STEP 9", "Audio")
     a1 = s.box(X0, y + 12, 330, 72, "ElevenLabs · 3 voices", ["neighbouring lines sent as context;",
-                                                            "suspiciously long clips retried / dropped"])
+                                                            "suspiciously long clips retried / dropped"], stage="audio")
     a2x = X0 + 330 + 60
     s.box(a2x, y + 12, 300, 72, "ffmpeg stitch", ["re-encode one stream: CBR 128 kbps,", "−16 LUFS, duration saved in JSON"])
     s.arrow([(X0 + 331, y + 48), (a2x - 1, y + 48)], "segments", X0 + 360, y + 42, "middle")
@@ -307,7 +315,7 @@ def pipeline() -> str:
     h = 96
     s.band(y, h, "STEP 10", "Deliver")
     s.box(X0, y + 12, 400, 72, "Publish to S3 → CloudFront",
-          ["episode JSON + MP3, manifest.json, feed.xml", "(feed.xml no-cache) → mikecast.io, Apple, Spotify"])
+          ["episode JSON + MP3, manifest.json, feed.xml", "(feed.xml no-cache) → mikecast.io, Apple, Spotify"], stage="deliver")
     s.box(X0 + 416, y + 12, 280, 72, "Gmail email", ["HTML briefing + audio", "to the personal inbox"])
     s.box(X0 + 712, y + 12, X1 - (X0 + 712), 72, "Resend newsletter", ["broadcast to confirmed", "subscribers"])
     flow(y + h, "episode URL · every send (email, newsletter, X, IG) fires once per date")
@@ -317,7 +325,8 @@ def pipeline() -> str:
     h = 112
     s.band(y, h, "STEP 11", "Social")
     s.box(X0, y + 12, 330, 72, "Social copywriter", ["hook + deep link to ?date=<day>",
-                                                     "code adds headers and fallbacks"], chip=f["writer"])
+                                                     "code adds headers and fallbacks"], chip=f["writer"],
+          stage="distribute")
     sx2 = X0 + 330 + 60
     xw = (X1 - sx2 - 16) / 2
     s.arrow([(X0 + 331, y + 48), (sx2 - 1, y + 48)], "copy", X0 + 352, y + 42)

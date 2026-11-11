@@ -60,3 +60,32 @@ def test_readme_diagrams_are_current():
     # docs/diagrams/*.svg embed model names + numbers read from code.
     stale = _load_make_diagrams().stale()
     assert not stale, f"Stale diagrams: {stale} — run: python scripts/make_diagrams.py"
+
+
+def test_every_pipeline_stage_is_drawn():
+    """Each step_span() name in the pipeline code must be a box in pipeline.svg.
+
+    The diagram's numbers are generated, but its boxes are hand-written layout; this
+    catches a stage added to (or removed from) mikecast_briefing.py without the diagram
+    following. Map a new stage with box(..., stage="<name>") in scripts/make_diagrams.py.
+    """
+    import re
+    import subprocess
+
+    tracked = subprocess.run(["git", "ls-files", "*.py"], cwd=ROOT, capture_output=True,
+                             text=True, check=True).stdout.split()
+    spans = set()
+    for rel in tracked:
+        if rel.startswith("crew/tests/") or not (ROOT / rel).exists():
+            continue
+        spans |= set(re.findall(r'step_span\(\s*"([^"]+)"', (ROOT / rel).read_text()))
+    assert spans, "found no step_span() calls — did the tracing helper get renamed?"
+    drawn = set(re.findall(r'data-stage="([^"]+)"', (ROOT / "docs/diagrams/pipeline.svg").read_text()))
+    assert not spans - drawn, (
+        f"pipeline stage(s) {sorted(spans - drawn)} have no box in docs/diagrams/pipeline.svg — "
+        'add box(..., stage="<name>") in scripts/make_diagrams.py and run it'
+    )
+    assert not drawn - spans, (
+        f"pipeline.svg draws stage(s) {sorted(drawn - spans)} that no step_span() uses any more — "
+        "update scripts/make_diagrams.py and run it"
+    )

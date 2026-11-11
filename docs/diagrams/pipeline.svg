@@ -29,7 +29,7 @@
 <rect x="12" y="108" width="1176" height="74" rx="12" class="band"/>
 <text x="28" y="134" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEP 0</text>
 <text x="28" y="153" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Plan</text>
-<rect x="176" y="118" width="330" height="54" rx="8" class="box"/>
+<rect x="176" y="118" width="330" height="54" rx="8" class="box" data-stage="plan"/>
 <text x="188" y="139" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Search planner</text>
 <rect x="445.35" y="126" width="48.65" height="17" rx="8.5" class="chip"/>
 <text x="469.675" y="138.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">grok-3</text>
@@ -42,7 +42,7 @@
 <text x="28" y="267" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Research</text>
 <text x="176" y="244" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">Non-sports · procedural pipeline (crew/research_crew.py)</text>
 <text x="900" y="244" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">NY Sports · CrewAI agents</text>
-<rect x="176" y="256" width="164" height="88" rx="8" class="box"/>
+<rect x="176" y="256" width="164" height="88" rx="8" class="box" data-stage="collect"/>
 <text x="188" y="277" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Collect</text>
 <text x="188" y="294" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">NYT, RSS, HN, Reddit</text>
 <text x="188" y="309" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">Google News · wires</text>
@@ -59,7 +59,7 @@
 <text x="728" y="294" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">group near-duplicates</text>
 <rect x="728" y="303" width="77.525" height="17" rx="8.5" class="chip"/>
 <text x="766.763" y="315.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">gpt-4o-mini</text>
-<rect x="176" y="368" width="164" height="88" rx="8" class="box"/>
+<rect x="176" y="368" width="164" height="88" rx="8" class="box" data-stage="score_select_enrich"/>
 <text x="188" y="389" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Score &amp; rank</text>
 <text x="188" y="406" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">per category, with</text>
 <text x="188" y="421" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">trending boost</text>
@@ -94,7 +94,7 @@
 <text x="912" y="277" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Gatekeeper</text>
 <text x="912" y="294" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">SPORTS_TRUSTED_SOURCES allowlist</text>
 <text x="912" y="309" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">drops aggregators (e.g. AOL)</text>
-<rect x="900" y="368" width="280" height="88" rx="8" class="box"/>
+<rect x="900" y="368" width="280" height="88" rx="8" class="box" data-stage="sports_research"/>
 <text x="912" y="389" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">NY Sports Researcher</text>
 <rect x="1078.92" y="376" width="89.075" height="17" rx="8.5" class="chip"/>
 <text x="1123.46" y="388.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">gpt-5.6-terra</text>
@@ -106,7 +106,7 @@
 <rect x="12" y="514" width="1176" height="96" rx="12" class="band"/>
 <text x="28" y="540" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEP 7 + FACTS</text>
 <text x="28" y="559" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Prompt inputs</text>
-<rect x="176" y="526" width="324" height="72" rx="8" class="box"/>
+<rect x="176" y="526" width="324" height="72" rx="8" class="box" data-stage="picks"/>
 <text x="188" y="547" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Mike&#x27;s Picks</text>
 <rect x="410.475" y="534" width="77.525" height="17" rx="8.5" class="chip"/>
 <text x="449.238" y="546.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">gpt-4o-mini</text>
@@ -125,7 +125,7 @@
 <text x="28" y="676" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEP 8</text>
 <text x="28" y="695" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Write</text>
 <text x="176" y="670" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">Three Claude writers run in parallel</text>
-<rect x="176" y="678" width="324" height="66" rx="8" class="box"/>
+<rect x="176" y="678" width="324" height="66" rx="8" class="box" data-stage="generate"/>
 <text x="188" y="699" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">HTML briefing</text>
 <rect x="387.375" y="686" width="100.625" height="17" rx="8.5" class="chip"/>
 <text x="437.688" y="698.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">claude-sonnet-5</text>
@@ -147,7 +147,7 @@
 <rect x="12" y="794" width="1176" height="196" rx="12" class="band"/>
 <text x="28" y="820" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEPS 8b–8d</text>
 <text x="28" y="839" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Check</text>
-<rect x="176" y="806" width="300" height="82" rx="8" class="box"/>
+<rect x="176" y="806" width="300" height="82" rx="8" class="box" data-stage="critic"/>
 <text x="188" y="827" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Critic scorer</text>
 <rect x="363.375" y="814" width="100.625" height="17" rx="8.5" class="chip"/>
 <text x="413.688" y="826.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">claude-sonnet-5</text>
@@ -166,7 +166,7 @@
 <text x="928" y="827" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Stale-title fix</text>
 <text x="928" y="844" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">deterministic rewrite, no LLM:</text>
 <text x="928" y="859" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">&quot;former President X&quot; → &quot;President X&quot;</text>
-<rect x="176" y="900" width="494" height="78" rx="8" class="box dash"/>
+<rect x="176" y="900" width="494" height="78" rx="8" class="box dash" data-stage="grounding_check"/>
 <text x="188" y="921" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Grounding check</text>
 <rect x="568.925" y="908" width="89.075" height="17" rx="8.5" class="chip"/>
 <text x="613.462" y="920.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">gpt-5.6-terra</text>
@@ -183,7 +183,7 @@
 <rect x="12" y="1030" width="1176" height="96" rx="12" class="band"/>
 <text x="28" y="1056" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEP 9</text>
 <text x="28" y="1075" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Audio</text>
-<rect x="176" y="1042" width="330" height="72" rx="8" class="box"/>
+<rect x="176" y="1042" width="330" height="72" rx="8" class="box" data-stage="audio"/>
 <text x="188" y="1063" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">ElevenLabs · 3 voices</text>
 <text x="188" y="1080" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">neighbouring lines sent as context;</text>
 <text x="188" y="1095" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">suspiciously long clips retried / dropped</text>
@@ -202,7 +202,7 @@
 <rect x="12" y="1166" width="1176" height="96" rx="12" class="band"/>
 <text x="28" y="1192" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEP 10</text>
 <text x="28" y="1211" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Deliver</text>
-<rect x="176" y="1178" width="400" height="72" rx="8" class="box"/>
+<rect x="176" y="1178" width="400" height="72" rx="8" class="box" data-stage="deliver"/>
 <text x="188" y="1199" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Publish to S3 → CloudFront</text>
 <text x="188" y="1216" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">episode JSON + MP3, manifest.json, feed.xml</text>
 <text x="188" y="1231" font-size="11.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="s" text-anchor="start">(feed.xml no-cache) → mikecast.io, Apple, Spotify</text>
@@ -219,7 +219,7 @@
 <rect x="12" y="1302" width="1176" height="112" rx="12" class="band"/>
 <text x="28" y="1328" font-size="10.5" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="k" text-anchor="start">STEP 11</text>
 <text x="28" y="1347" font-size="15" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="h" text-anchor="start">Social</text>
-<rect x="176" y="1314" width="330" height="72" rx="8" class="box"/>
+<rect x="176" y="1314" width="330" height="72" rx="8" class="box" data-stage="distribute"/>
 <text x="188" y="1335" font-size="13" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" class="t" text-anchor="start">Social copywriter</text>
 <rect x="393.375" y="1322" width="100.625" height="17" rx="8.5" class="chip"/>
 <text x="443.688" y="1334.3" font-size="10.5" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" class="chipt" text-anchor="middle">claude-sonnet-5</text>
