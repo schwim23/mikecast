@@ -255,6 +255,7 @@ def render_numbers() -> str:
         f"| Stale-article cutoff | {stale} days | `filter_stale_articles(max_age_days=)` calls (crew + legacy) |",
         f"| Max future-dated skew | {module_const('mc_collect.py', 'MAX_FUTURE_SKEW')} | `MAX_FUTURE_SKEW` in `mc_collect.py` |",
         f"| Repeat-event lookback | {module_const('mc_collect.py', 'REPEAT_LOOKBACK_DAYS')} episodes | `REPEAT_LOOKBACK_DAYS` in `mc_collect.py` |",
+        f"| Repeat-event deep lookback | {module_const('mc_collect.py', 'REPEAT_DEEP_LOOKBACK_DAYS')} days (similar titles only) | `REPEAT_DEEP_LOOKBACK_DAYS` in `mc_collect.py` |",
         f"| Podcast script target | {wmin}–{wmax} words (~8 min) | `_PODCAST_WORD_MIN/MAX` in `eval/score.py`; must match `crew/writing_crew.py` + `crew/agents.py` |",
         f"| Expansion pass | below {module_const('crew/writing_crew.py', '_EXPAND_BELOW_WORDS')} words; kept if ≤{module_const('crew/writing_crew.py', '_EXPAND_ACCEPT_MAX_WORDS')} | `_EXPAND_BELOW_WORDS` / `_EXPAND_ACCEPT_MAX_WORDS` in `crew/writing_crew.py` |",
         f"| Critic patch threshold | below {threshold}/10 | `_WEAK_THRESHOLD` in `mc_critic.py` + `crew/critic_crew.py` |",

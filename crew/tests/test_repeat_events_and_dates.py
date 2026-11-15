@@ -58,13 +58,14 @@ def _scored():
     }
 
 
-def _run(content, prior=None, total=2):
+def _run(content, prior=None, total=2, older=None, scored=None):
     _llm.calls = []
     with patch.object(mc_collect, "OPENAI_API_KEY", "k"), \
             patch.object(mc_collect, "_LLMClient", _llm(content)), \
             patch.object(mc_collect, "_load_recent_episode_articles",
-                         return_value=PRIOR if prior is None else prior):
-        return mc_collect.filter_repeat_events(_scored(), total=total)
+                         return_value=PRIOR if prior is None else prior), \
+            patch.object(mc_collect, "_load_older_episode_articles", return_value=older or []):
+        return mc_collect.filter_repeat_events(scored or _scored(), total=total)
 
 
 def _titles(result, cat=BIZ):
@@ -130,7 +131,8 @@ class TestFilterRepeatEvents:
         client = SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=create)))
         with patch.object(mc_collect, "OPENAI_API_KEY", "k"), \
                 patch.object(mc_collect, "_LLMClient", lambda: client), \
-                patch.object(mc_collect, "_load_recent_episode_articles", return_value=PRIOR):
+                patch.object(mc_collect, "_load_recent_episode_articles", return_value=PRIOR), \
+                patch.object(mc_collect, "_load_older_episode_articles", return_value=[]):
             return _titles(mc_collect.filter_repeat_events(_scored(), total=2))
 
     REPEAT = json.dumps([{"id": 0, "prior": "P0"}])
@@ -153,6 +155,86 @@ class TestFilterRepeatEvents:
         for name in ("mikecast_briefing.py", os.path.join("crew", "research_crew.py")):
             with open(os.path.join(_ROOT, name), encoding="utf-8") as fh:
                 assert "filter_repeat_events(scored" in fh.read(), name
+
+
+COMPANIES = "Companies"
+IPHONE_TODAY = "Apple announces first-ever foldable iPhone, starting at $1,999"
+IPHONE_SEPT = {"title": "Apple unveils $1,999 iPhone Duo, its first foldable phone",
+               "source": "TechCrunch", "description": "", "_episode_date": "2026-09-10"}
+OLDER = [
+    {"title": "Apple shares slip as investors shrug at Ternus's first event", "source": "CNBC",
+     "description": "", "_episode_date": "2026-09-11"},
+    IPHONE_SEPT,
+    {"title": "Tesla recalls 10,000 Cybertrucks", "source": "Reuters",
+     "description": "", "_episode_date": "2026-10-02"},
+]
+
+
+def _iphone_scored():
+    return {
+        COMPANIES: [
+            {"title": IPHONE_TODAY, "source": "ABC News", "score": 80,
+             "published": "Sat, 14 Nov 2026 18:00:00 GMT"},
+            {"title": "Meta fined $887 million in Italy", "source": "Spectrum News", "score": 70},
+            {"title": "Backfill story", "source": "Wire", "score": 20},
+        ],
+    }
+
+
+class TestDeepLookback:
+    """2026-11-15: ABC's Sept 9 foldable-iPhone launch story came back with a fresh
+    Google News date, passed the 3-day stale filter and led Companies."""
+
+    def test_event_words_normalise_prices_plurals_and_stopwords(self):
+        words = mc_collect._event_words(IPHONE_TODAY)
+        assert {"apple", "first", "foldable", "iphone", "1999"} <= words
+        assert "ever" not in words and "at" not in words
+        assert "cybertruck" in mc_collect._event_words("Tesla recalls Cybertrucks")
+
+    def test_only_similar_older_stories_are_picked(self):
+        cands = [(COMPANIES, 0, a) for a in _iphone_scored()[COMPANIES]]
+        picked = mc_collect._similar_older_stories(cands, OLDER)
+        assert picked == [IPHONE_SEPT]
+
+    def test_per_candidate_cap_prefers_most_shared_then_oldest(self):
+        older = [dict(IPHONE_SEPT, _episode_date=d) for d in ("2026-10-23", "2026-09-10", "2026-10-16")]
+        cands = [(COMPANIES, 0, {"title": IPHONE_TODAY})]
+        picked = mc_collect._similar_older_stories(cands, older)
+        assert [a["_episode_date"] for a in picked] == ["2026-09-10", "2026-10-16"]
+
+    def test_resurfaced_launch_is_shown_with_its_date_and_dropped(self, caplog):
+        with caplog.at_level("INFO", logger="mikecast"):
+            result = _run(json.dumps([{"id": 0, "prior": "P1"}]), older=OLDER, scored=_iphone_scored())
+        prompt = _llm.calls[0]["messages"][0]["content"]
+        assert "P1 (2026-09-10): Apple unveils $1,999 iPhone Duo" in prompt
+        assert "Tesla recalls" not in prompt
+        assert "resurface with a fresh date" in prompt
+        assert IPHONE_TODAY not in _titles(result, COMPANIES)
+        assert "already covered 2026-09-10" in caplog.text
+
+    def test_older_matches_alone_are_enough_to_run(self):
+        _run("[]", prior=[], older=OLDER, scored=_iphone_scored())
+        assert _llm.calls, "deep-lookback matches should trigger the check with no recent episodes"
+
+    def test_deep_lookback_failure_falls_back_to_recent_episodes(self):
+        _llm.calls = []
+        with patch.object(mc_collect, "OPENAI_API_KEY", "k"), \
+                patch.object(mc_collect, "_LLMClient", _llm("[]")), \
+                patch.object(mc_collect, "_load_recent_episode_articles", return_value=PRIOR), \
+                patch.object(mc_collect, "_load_older_episode_articles", side_effect=RuntimeError("s3")):
+            result = mc_collect.filter_repeat_events(_scored(), total=2)
+        assert len(_titles(result)) == 4
+        assert "P0 (2026-11-06)" in _llm.calls[0]["messages"][0]["content"]
+
+    def test_older_loader_covers_days_after_the_recent_window(self):
+        with patch.object(mc_collect, "TODAY", "2026-11-15"), \
+                patch.object(mc_collect, "S3_BUCKET", "bucket"), \
+                patch.object(mc_collect, "s3_load_json", return_value=None) as load:
+            assert mc_collect._load_older_episode_articles() == []
+        keys = sorted(c.args[1] for c in load.call_args_list)
+        assert len(keys) == mc_collect.REPEAT_DEEP_LOOKBACK_DAYS - mc_collect.REPEAT_LOOKBACK_DAYS
+        assert keys[-1] == "data/2026-11-11.json"   # day 4 back; days 1-3 are the recent window
+        assert keys[0] == "data/2026-08-17.json"    # day 90 back
 
 
 class TestLoadRecentEpisodes:

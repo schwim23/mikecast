@@ -846,27 +846,102 @@ _REPEAT_VOTES = 3
 _REPEAT_VOTES_NEEDED = 2
 
 
-def _load_recent_episode_articles(days: int = REPEAT_LOOKBACK_DAYS) -> list[dict]:
-    """Non-sports articles from the previous *days* episodes (never today's, so a
-    --force rerun doesn't match itself). A missing or unreadable day is skipped."""
+# Older episodes searched for the same event. A recirculated old article can carry
+# a fresh feed date: on 2026-11-15 ABC's Sept 9 "Apple announces first-ever
+# foldable iPhone, starting at $1,999" passed the 3-day stale filter (Google News
+# dated it that week) and led Companies, 9 weeks after MikeCast led with the
+# launch. Only older stories that share _DEEP_MIN_SHARED distinctive title words
+# with a candidate go into the prompt, so it stays small.
+REPEAT_DEEP_LOOKBACK_DAYS = 90
+_DEEP_MIN_SHARED = 3
+_DEEP_MAX_PER_CANDIDATE = 2
+_DEEP_MAX_TOTAL = 40
+_DEEP_STOPWORDS = frozenset("""
+    the and for with its from after over into onto than that this these those then
+    says said say will would could should may might has have had was were are been
+    being not but out off about amid as at by in of on or to up via vs new news
+    report reports reported according what why how who when where which while more
+    most just now first-ever ever year years week weeks day days today tonight
+    live update updates latest here your you our they their them his her
+""".split())
+
+
+def _event_words(text: str) -> set[str]:
+    """Distinctive lowercase words of a headline: "$1,999" → "1999", plural -s dropped."""
+    words = re.findall(r"[a-z0-9]+", (text or "").lower().replace(",", ""))
+    out: set[str] = set()
+    for w in words:
+        if w in _DEEP_STOPWORDS or (len(w) < 3 and not w.isdigit()):
+            continue
+        if len(w) > 4 and w.endswith("s") and not w.endswith("ss"):
+            w = w[:-1]
+        out.add(w)
+    return out
+
+
+def _load_episode_articles(first_back: int, last_back: int) -> list[dict]:
+    """Non-sports articles from the episodes *first_back*..*last_back* days before
+    TODAY (never today's, so a --force rerun doesn't match itself), newest first.
+    A missing or unreadable day is skipped."""
     today = datetime.strptime(TODAY, "%Y-%m-%d").date()
-    prior: list[dict] = []
-    for back in range(1, days + 1):
-        day = (today - timedelta(days=back)).isoformat()
+    days = [(today - timedelta(days=back)).isoformat() for back in range(max(first_back, 1), last_back + 1)]
+
+    def load(day: str) -> dict | None:
         try:
             if S3_BUCKET:
-                episode = s3_load_json(S3_BUCKET, f"data/{day}.json")
-            else:
-                path = DATA_DIR / f"{day}.json"
-                episode = json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
+                return s3_load_json(S3_BUCKET, f"data/{day}.json")
+            path = DATA_DIR / f"{day}.json"
+            return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
         except Exception as exc:
             logger.warning("Repeat-event filter: could not load %s episode: %s", day, exc)
-            continue
+            return None
+
+    if len(days) > 4:
+        with ThreadPoolExecutor(16) as pool:
+            episodes = list(pool.map(load, days))
+    else:
+        episodes = [load(day) for day in days]
+
+    prior: list[dict] = []
+    for day, episode in zip(days, episodes):
         for cat, arts in ((episode or {}).get("articles") or {}).items():
             if cat in _MERGE_EXCLUDED_CATEGORIES:
                 continue
-            prior.extend(dict(a, _episode_date=day) for a in arts)
+            prior.extend(dict(a, _episode_date=day) for a in arts if isinstance(a, dict))
     return prior
+
+
+def _load_recent_episode_articles(days: int = REPEAT_LOOKBACK_DAYS) -> list[dict]:
+    """Non-sports articles from the previous *days* episodes."""
+    return _load_episode_articles(1, days)
+
+
+def _load_older_episode_articles(days: int = REPEAT_DEEP_LOOKBACK_DAYS) -> list[dict]:
+    """Non-sports articles from the episodes after the recent window, up to *days* back."""
+    return _load_episode_articles(REPEAT_LOOKBACK_DAYS + 1, days)
+
+
+def _similar_older_stories(candidates: list[tuple], older: list[dict]) -> list[dict]:
+    """The older stories that share at least _DEEP_MIN_SHARED distinctive title words
+    with some candidate: up to _DEEP_MAX_PER_CANDIDATE per candidate (the most shared
+    words first, then the oldest, since the original report is the one that shows
+    the event is old), _DEEP_MAX_TOTAL in all."""
+    older_words = [(_event_words(a.get("title", "")), a) for a in older]
+    picked: list[dict] = []
+    seen: set[int] = set()
+    for _, _, art in candidates:
+        words = _event_words(art.get("title", ""))
+        if len(words) < _DEEP_MIN_SHARED:
+            continue
+        matches = [
+            (len(words & ow), a) for ow, a in older_words
+            if len(words & ow) >= _DEEP_MIN_SHARED and id(a) not in seen
+        ]
+        matches.sort(key=lambda m: (-m[0], m[1].get("_episode_date", "")))
+        for _, a in matches[:_DEEP_MAX_PER_CANDIDATE]:
+            seen.add(id(a))
+            picked.append(a)
+    return picked[:_DEEP_MAX_TOTAL]
 
 
 def filter_repeat_events(
@@ -891,8 +966,21 @@ def filter_repeat_events(
         return scored
 
     candidates = _selection_candidates(scored, total, _REPEAT_BUFFER)
+    if not candidates:
+        return scored
     prior = _load_recent_episode_articles()
-    if not candidates or not prior:
+    try:
+        older = _similar_older_stories(candidates, _load_older_episode_articles())
+    except Exception as exc:
+        logger.warning("Repeat-event filter: deep lookback failed: %s", exc)
+        older = []
+    if older:
+        logger.info(
+            "Repeat-event filter: %d similar stories from episodes %d-%d days back added",
+            len(older), REPEAT_LOOKBACK_DAYS + 1, REPEAT_DEEP_LOOKBACK_DAYS,
+        )
+    prior = prior + older
+    if not prior:
         return scored
 
     def describe(art: dict) -> str:
@@ -908,8 +996,10 @@ def filter_repeat_events(
     from mc_facts import market_calendar_line
 
     prompt = (
-        "List A is stories a daily news briefing already covered in recent "
-        "episodes. List B is candidates for today's episode.\n\n"
+        "List A is stories a daily news briefing already covered in earlier "
+        "episodes (episode date in parentheses: the last few days, plus older "
+        "stories that look similar to a candidate). List B is candidates for "
+        "today's episode.\n\n"
         + market_calendar_line() + "\n\n"
         "Mark a candidate in B as a REPEAT only if it reports the same specific "
         "event as a story in A AND adds no material new development: a recap or "
@@ -918,7 +1008,10 @@ def filter_repeat_events(
         "posting time is today. Posting time does not show when an event "
         "happened. A market-close headline that names no day and reports a "
         "plunge or rally of the scale already in A is a repeat unless it shows "
-        "it is about a later session.\n\n"
+        "it is about a later session. An old article can resurface with a fresh "
+        "date: a candidate that reports a launch, unveiling, price, deal or "
+        "announcement as if it just happened, when A shows it was already "
+        "covered weeks earlier, is a repeat.\n\n"
         "NOT a repeat: a follow-up with something new since (the next market "
         "session, a stock extending its move on a later day, a new decision, new "
         "figures, a response, a resignation); a new opinion or forecast from a "
